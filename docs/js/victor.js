@@ -10088,7 +10088,7 @@ var _merivale$victor$Interface_Factors$pivot = F2(
 					_0: _merivale$victor$Interface_Input$text(
 						{
 							value: ingredients.pivot,
-							placeholder: 'pivot',
+							placeholder: 'e.g. be, eat, like',
 							signal: _merivale$victor$Interface_Types$SetPivot(index)
 						}),
 					_1: {
