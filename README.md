@@ -4,11 +4,11 @@ A partial model the English language, thought of as a code for processing `messa
 
 The overarching hypothesis behind this model is that every atomic English message is made up out of a series of zero or more `elaborations` applied to a core `nucleus`. The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.
 
-A major selling point - both of this particular model, and more generally of the idea to model natural languages as codes in this way - is that it enables us to explain the widespread phenomenon of ambiguity in semantic terms (contrary to cuurent mainstream thought in philosophical semantics, which treats it as either a syntactic or a pragmatic phenomenon). The explanation of ambiguity in general is that the encoding function is not one-to-one, but many-to-one. Furthermore, by articulating the English encoding function, we can see precisely how and why various English ambiguities arise. In some cases it is simply because elaboration leaves no mark on the output sentence, but more often it is because multiple elaborations (or multiple sequences of elaborations) happen to coincide in the same output. Examples below.
+A major selling point - both of this particular model, and more generally of the idea to model natural languages as codes in this way - is that it enables us to explain the widespread phenomenon of ambiguity in semantic terms (contrary to cuurent mainstream thought in philosophical semantics, which treats it as either a syntactic or a pragmatic phenomenon). The explanation of ambiguity in general is that the encoding function is not one-to-one, but many-to-one. Furthermore, by articulating the English encoding function, we can see precisely how and why various English ambiguities arise. In some cases it is simply because an elaboration leaves no mark on the output sentence, but more often it is because multiple elaborations (or multiple sequences of elaborations) happen to coincide in the same output. Examples will be given in section 2 below.
 
 ## 1. The Nucleus
 
-The nuclei of atomic English messages are made up of just two or three items: an `object`, a `pivot`, and (optionally) a `balance`. The `object` is whatever the message is about, and may take any one of the following values:
+The nucleus of an atomic English message is made up of just two or three items: an `object`, a `pivot`, and (optionally) a `balance`. The `object` is whatever the message is about, and may take any one of the following values:
 
     type Object
         = Speaker
@@ -29,11 +29,11 @@ The `pivot` and optional `balance` together make up the `condition` that is pred
         | DifferentObject Object
         | CustomBalance String
 
-A plain, unelaborated English message (1) affirms (2) the present satisfaction of (3) the `condition` by (4) the `object`. More elaborate messages may alter any of these four things, by (1) turning an affirmation into a denial, (2) changing the present for some other point or region of time, (3) modifying the `condition`, or (4) modifying or overriding the `object`.
+A plain, unelaborated English message affirms the present satisfaction of the `condition` by the `object`. More elaborate messages may alter any of these three things, by (1) replacing the present for some other point or region of time, (2) modifying the `condition`, or (3) modifying or overriding the `object`.
 
 ## 2. The Elaborations
 
-There are currently 17 elaborations posited by my model. This list is obviously incomplete, but should I hope be enough for a decent start. Details on what these various elaborations do will be added to this document soon.
+There are currently 17 elaborations posited by my model. This list is obviously incomplete, but represents - or so I hope - a decent start. Details on what these various elaborations do will be added to this document soon.
 
 ### 2.1. Negative
 
