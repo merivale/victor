@@ -1,0 +1,77 @@
+@import "icons";
+@import "palette";
+@import "inputs";
+
+.victor {
+    margin: 0 auto;
+    max-width: 80em;
+    padding: 1em;
+    .output {
+        background: @lightgreen;
+        border: 1px solid @green;
+        color: @green;
+        margin-bottom: 1em;
+        padding: 1em;
+        text-align: center;
+        &.error {
+            background: @lightred;
+            border-color: @red;
+            color: @red;
+        }
+    }
+    .input {
+        border: 1px solid @blue;
+        .heading {
+            background: @lightblue;
+            border-bottom: 1px solid @blue;
+            color: @blue;
+            display: flex;
+            font-weight: bold;
+            .button {
+                flex: 0 0 3em;
+            }
+            .title {
+                padding: .5em;
+                flex: 1;
+            }
+        }
+        .elaborations {
+            border-bottom: 1px solid @blue;
+            display: none;
+            padding: .25em;
+            div {
+                display: flex;
+                .button {
+                    flex: 1;
+                    margin: .25em;
+                    &:hover {
+                        background: @darkgray;
+                        color: #fff;
+                    }
+                }
+            }
+            &.active {
+                display: block;
+            }
+        }
+        .body {
+            .factor,
+            .input {
+                margin: .25em;
+            }
+            .factor {
+                display: flex;
+                .label {
+                    flex: 0 0 9em;
+                }
+                .checkbox,
+                .radio,
+                .select,
+                .text {
+                    flex: 1;
+                    margin-left: .25em;
+                }
+            }
+        }
+    }
+}

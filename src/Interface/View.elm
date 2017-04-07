@@ -1,0 +1,182 @@
+module Interface.View exposing (root)
+
+{-| HTML for displaying the current state of the application.
+-}
+
+import Array
+import Char
+import Html
+import Html.Attributes as Attr
+import Html.Events as Events
+import Result exposing (andThen)
+import Interface.Types exposing (..)
+import Interface.Factors as Factors
+import Interface.Input as Input
+import Interface.State as State
+import Interface.Messages as Messages
+import Theory.Types exposing (..)
+import Theory.Sentences as Sentences
+
+
+{-| The root display for export.
+-}
+root : Model -> Html.Html Signal
+root model =
+    Html.div
+        [ Attr.class "victor" ]
+        [ output model
+        , input 0 Nothing Nothing model
+        ]
+
+
+output : Model -> Html.Html Signal
+output model =
+    case Messages.message 0 model |> andThen Sentences.sentence of
+        Err error ->
+            Html.div
+                [ Attr.class "output error" ]
+                [ Html.text error ]
+
+        Ok sentence ->
+            Html.div
+                [ Attr.class "output" ]
+                [ Html.text (format sentence) ]
+
+
+format : String -> String
+format sentence =
+    let
+        ucFirst =
+            case String.uncons sentence of
+                Nothing ->
+                    String.toUpper sentence
+
+                Just ( firstLetter, rest ) ->
+                    String.cons (Char.toUpper firstLetter) rest
+    in
+        String.append ucFirst "."
+
+
+input : Int -> Maybe Override -> Maybe Override -> Model -> Html.Html Signal
+input index mainOverride balanceOverride model =
+    case Array.get index model of
+        Nothing ->
+            Html.div
+                [ Attr.class "input error" ]
+                [ Html.text "recipe index out of range" ]
+
+        Just recipe ->
+            case recipe of
+                MakePlain ingredients ->
+                    nucleus index mainOverride balanceOverride ingredients
+
+                MakeElaborate elaborationRecipe subIndex ingredients ->
+                    elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingredients model
+
+
+nucleus : Int -> Maybe Override -> Maybe Override -> Ingredients -> Html.Html Signal
+nucleus index mainOverride balanceOverride ingredients =
+    Input.input
+        { elaborationRecipe = Nothing
+        , showElaborations = ingredients.showElaborations
+        , index = index
+        , body =
+            [ Factors.object index mainOverride ingredients
+            , Factors.pivot index ingredients
+            , Factors.balance index balanceOverride ingredients
+            ]
+        }
+
+
+elaboration : Int -> Maybe Override -> Maybe Override -> ElaborationRecipe -> Int -> Ingredients -> Model -> Html.Html Signal
+elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingredients model =
+    Input.input
+        { elaborationRecipe = Just elaborationRecipe
+        , showElaborations = ingredients.showElaborations
+        , index = index
+        , body =
+            case elaborationRecipe of
+                MakePractical ->
+                    [ Factors.limitedModality index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeProjective ->
+                    [ Factors.unlimitedModality index ingredients
+                    , Factors.time index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeEvasive ->
+                    [ Factors.limitedModality index ingredients
+                    , Factors.frequency index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakePreordained ->
+                    [ Factors.time index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeRegular ->
+                    [ Factors.frequency index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeExtended ->
+                    [ Factors.duration index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeScattered ->
+                    [ Factors.tally index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeDetermined ->
+                    [ Factors.time index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeApparent ->
+                    [ Factors.apparentStyle index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeIndirect ->
+                    [ Factors.target index ingredients
+                    , Factors.pointer index ingredients
+                    , Factors.indirectCategory index ingredients
+                    , Factors.categoryFlanks index ingredients
+                    , inputWithOverride ingredients.target IndirectOverride subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeEnumerated ->
+                    [ Factors.target index ingredients
+                    , Factors.enumeratedQuantifier index ingredients
+                    , Factors.enumeratedCategory index ingredients
+                    , Factors.categoryFlanks index ingredients
+                    , inputWithOverride ingredients.target EnumeratedOverride subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeAmassed ->
+                    [ Factors.target index ingredients
+                    , Factors.amassedQuantifier index ingredients
+                    , Factors.amassedCategory index ingredients
+                    , Factors.categoryFlanks index ingredients
+                    , inputWithOverride ingredients.target AmassedOverride subIndex mainOverride balanceOverride model
+                    ]
+
+                a ->
+                    [ input subIndex mainOverride balanceOverride model ]
+        }
+
+
+inputWithOverride : Target -> Override -> Int -> Maybe Override -> Maybe Override -> Model -> Html.Html Signal
+inputWithOverride target override index mainOverride balanceOverride model =
+    case target of
+        MainObject ->
+            input index (Just override) balanceOverride model
+
+        BalancingObject ->
+            input index mainOverride (Just override) model
