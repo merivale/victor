@@ -10,25 +10,26 @@ module Theory.Words
 {-| Functions for generating the plural form of a noun (given its singular), and
 the various forms of verbs (given the base form, e.g. "have", "do", "go").
 
-These functions don't get the present and past forms of "be", because this verb
-is uniquely awkward in these forms, and best handled as a special case. Also
-these functions cannot distinguish different verbs that have the same base form
-but differ in other forms - e.g. "hang/hung" vs "hang/hanged", "lie/lied" vs
-"lie/lay". There's nothing very satisfactory I can do about this until I start
-encoding root conditions for myself. In the meantime, using the ordinary base
-will default to the regular verb ("hang/hanged", "lie/lied"). If you want the
-irregular verb, input "hang*" or "lie*" into the system; this will trigger a
-match in the dictionary of irregularities.
+These functions don't generate the finite forms of "be", because this verb is
+uniquely awkward (having two more finite forms than every other verb), and
+consequently is best handled as a special case. Also these functions cannot
+distinguish different verbs that have the same base form but differ in other
+forms - e.g. "hang/hung" vs "hang/hanged", "lie/lied" vs "lie/lay". There's
+nothing very satisfactory I can do about this until I start encoding pivots for
+myself. In the meantime, using the ordinary base form will default to the
+regular verb ("hang/hanged", "lie/lied"). If you want the irregular verb, input
+"hang*" or "lie*" into the system; this will trigger a match in the dictionary
+of irregularities.
 -}
 
 import Dict
 
 
-{-| The exposed functions. In each case they first look the word up in one of
-two dictionaries (below). These dictionaries contain words that my guessing
-functions are known to get wrong, either because they are irregular or because
-my guessing functions can't handle the kind of regularity they instantiate. If
-there is no match, they attempt to guess.
+{-| The exposed functions. In each case they try to guess the appropriate form,
+unless an exception has been written explicitly into one of the two dictionaries
+below. These dictionaries contain words that my guessing functions are known to
+get wrong, either because they are irregular or because my guessing functions
+can't handle the kind of regularity they instantiate.
 
 In case anyone is wondering, the kind of regularity that my guessing functions
 cannot handle concerns whether or not to double the consonant at the end of a
@@ -37,52 +38,37 @@ regular - on where the stress falls.
 -}
 plural : String -> String
 plural noun =
-    case Dict.get noun nouns of
-        Nothing ->
-            guessPlural noun
-
-        Just plural ->
-            plural
+    Maybe.withDefault
+        (guessPlural noun)
+        (Dict.get noun nouns)
 
 
 present : String -> String
 present base =
-    case Dict.get base verbs of
-        Nothing ->
-            guessPresent base
-
-        Just verb ->
-            verb.present
+    Maybe.withDefault
+        (guessPresent base)
+        (Maybe.map (\x -> x.present) (Dict.get base verbs))
 
 
 past : String -> String
 past base =
-    case Dict.get base verbs of
-        Nothing ->
-            guessPastPrior base
-
-        Just verb ->
-            verb.past
+    Maybe.withDefault
+        (guessPastPrior base)
+        (Maybe.map (\x -> x.past) (Dict.get base verbs))
 
 
 prior : String -> String
 prior base =
-    case Dict.get base verbs of
-        Nothing ->
-            guessPastPrior base
-
-        Just verb ->
-            verb.prior
+    Maybe.withDefault
+        (guessPastPrior base)
+        (Maybe.map (\x -> x.prior) (Dict.get base verbs))
 
 
 ongoing : String -> String
 ongoing base =
-    case Dict.get base verbs of
-        Nothing ->
-            guessOngoing base
-
-        Just verb ->
-            verb.ongoing
+    Maybe.withDefault
+        (guessOngoing base)
+        (Maybe.map (\x -> x.ongoing) (Dict.get base verbs))
 
 
 {-| Functions for guessing regular forms.

@@ -7,101 +7,12 @@ module Theory.Fulcrums
         )
 
 {-| Functions for generating/modifying fulcrums (i.e. the verb or modal at the
-heart of every clause.
+heart of every clause. Relies on the Words module for getting the appropriate
+form of the verb.
 -}
 
-import Dict
 import Theory.Types exposing (..)
 import Theory.Words as Words
-
-
-{-| Negate a fulcrum.
--}
-negate : String -> Bool -> String
-negate fulcrum abbreviateNot =
-    if abbreviateNot then
-        if ntAble fulcrum then
-            fulcrum ++ "n't"
-        else if fulcrum == "will" then
-            "won't"
-        else if fulcrum == "can" then
-            "can't"
-        else if fulcrum == "shall" then
-            "shan't"
-        else
-            fulcrum ++ " not"
-    else
-        fulcrum ++ " not"
-
-
-ntAble : String -> Bool
-ntAble fulcrum =
-    List.member fulcrum
-        [ "is"
-        , "are"
-        , "was"
-        , "were"
-        , "have"
-        , "has"
-        , "had"
-        , "do"
-        , "does"
-        , "did"
-        , "would"
-        , "could"
-        , "should"
-        , "must"
-        , "need"
-        , "dare"
-        ]
-
-
-
-{- Abbreviate a fulcrum. This function is a little more involved that it might
-   otherwise be, because the fulcrum might previously have been negated, in which
-   case it might consist of two words (the second being "not"). Thus we need to be
-   sure we are only abbreviating the first word.
--}
-
-
-abbreviate : String -> String
-abbreviate fulcrum =
-    let
-        ( head, tail ) =
-            case String.words fulcrum of
-                head :: tail ->
-                    case head of
-                        "am" ->
-                            ( "'m", tail )
-
-                        "is" ->
-                            ( "'s", tail )
-
-                        "are" ->
-                            ( "'re", tail )
-
-                        "have" ->
-                            ( "'ve", tail )
-
-                        "has" ->
-                            ( "'s", tail )
-
-                        "had" ->
-                            ( "'d", tail )
-
-                        "will" ->
-                            ( "'ll", tail )
-
-                        "would" ->
-                            ( "'d", tail )
-
-                        _ ->
-                            ( " " ++ head, tail )
-
-                [] ->
-                    ( "", [] )
-    in
-        String.join " " (head :: tail)
 
 
 {-| Get the appropriate form of a modal from a modality.
@@ -155,7 +66,8 @@ modal modality past negated =
             "dare"
 
 
-{-| Conjugate a verb.
+{-| Conjugate a verb. The verb itself is not encoded by my system, but must be
+entered directly by the user.
 -}
 verb : String -> Bool -> Bool -> Bool -> String
 verb fulcrum past amNeeded isNeeded =
@@ -177,3 +89,89 @@ verb fulcrum past amNeeded isNeeded =
         Words.present fulcrum
     else
         fulcrum
+
+
+{-| Negate a fulcrum, optionally with abbreviation of "not" to "n't".
+-}
+negate : String -> Bool -> String
+negate fulcrum abbreviateNot =
+    if abbreviateNot then
+        if ntAble fulcrum then
+            fulcrum ++ "n't"
+        else if fulcrum == "will" then
+            "won't"
+        else if fulcrum == "can" then
+            "can't"
+        else if fulcrum == "shall" then
+            "shan't"
+        else
+            fulcrum ++ " not"
+    else
+        fulcrum ++ " not"
+
+
+ntAble : String -> Bool
+ntAble fulcrum =
+    List.member fulcrum
+        [ "is"
+        , "are"
+        , "was"
+        , "were"
+        , "have"
+        , "has"
+        , "had"
+        , "do"
+        , "does"
+        , "did"
+        , "would"
+        , "could"
+        , "should"
+        , "must"
+        , "need"
+        , "dare"
+        ]
+
+
+{-| Abbreviate a fulcrum. This function is a little more involved that it might
+otherwise be, because the fulcrum might previously have been negated, in which
+case it might consist of two words (the second being "not"). Thus we need to be
+sure we are only abbreviating the first word.
+-}
+abbreviate : String -> String
+abbreviate fulcrum =
+    let
+        ( head, tail ) =
+            case String.words fulcrum of
+                head :: tail ->
+                    case head of
+                        "am" ->
+                            ( "'m", tail )
+
+                        "is" ->
+                            ( "'s", tail )
+
+                        "are" ->
+                            ( "'re", tail )
+
+                        "have" ->
+                            ( "'ve", tail )
+
+                        "has" ->
+                            ( "'s", tail )
+
+                        "had" ->
+                            ( "'d", tail )
+
+                        "will" ->
+                            ( "'ll", tail )
+
+                        "would" ->
+                            ( "'d", tail )
+
+                        _ ->
+                            ( " " ++ head, tail )
+
+                [] ->
+                    ( "", [] )
+    in
+        String.join " " (head :: tail)

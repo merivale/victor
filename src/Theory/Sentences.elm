@@ -11,7 +11,11 @@ import Theory.Fulcrums as Fulcrums
 import Theory.Words as Words
 
 
-{-| Entry point for encoding a message.
+{-| The entry point for encoding a message. The encoding process is split into
+two stages. In the first "exploding" stage, the message is validated, and the
+several variables that determine the eventually output sentence are gathered. In
+the second "imploding" stage, these variables are then used to generate the
+sentence itself. Stage one is by far the more complicated of the two.
 -}
 sentence : Message -> Result String String
 sentence message =

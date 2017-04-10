@@ -7,19 +7,18 @@ module Theory.Nouns
         , quantifierPhrase
         )
 
-{-| Functions for generating simple pronouns or names out of notional subjects,
-and noun phrases with determiners (e.g. "most other people") out of sets of
-general factors.
+{-| Functions for generating nouns or pronouns from objects, and noun phrases
+with determiners (e.g. "the red balloon", "most other people") out of the
+additional variables required by indirect, enumerated, and amassed elaborations.
 -}
 
-import Dict
 import Maybe
 import Theory.Types exposing (..)
 import Theory.Words as Words
 
 
-{-| Convert a notional subject to a pronoun or name. In the latter case, my
-model relies on the user doing the work, and simply returns their input string.
+{-| Convert an object to a pronoun or name. In the latter case, my model relies
+on the user doing the work, and simply returns their input string.
 -}
 subject : Object -> String
 subject object =
@@ -49,6 +48,8 @@ subject object =
             Maybe.withDefault "they" string
 
 
+{-| Convert an object to a reflexive pronoun.
+-}
 reflexiveObject : Object -> String
 reflexiveObject object =
     case object of
@@ -77,6 +78,9 @@ reflexiveObject object =
             "themselves"
 
 
+{-| Convert an object to an accusative pronoun or name. In the latter case, my
+model relies on the user doing the work, and simply returns their input string.
+-}
 independentObject : Object -> String
 independentObject object =
     case object of
@@ -105,6 +109,10 @@ independentObject object =
             Maybe.withDefault "them" string
 
 
+{-| Convert an object to a relative pronoun, or the relative form of a name.
+This is used by the pointerPhrase function below, to generate phrases like "my
+red balloon" or "her friends".
+-}
 relativeObject : Object -> String
 relativeObject object =
     case object of
@@ -115,13 +123,13 @@ relativeObject object =
             "your"
 
         Male string ->
-            Maybe.withDefault "his" (Maybe.map relativeName string)
+            Maybe.withDefault "his" (Maybe.map (\x -> x ++ "'s") string)
 
         Female string ->
-            Maybe.withDefault "her" (Maybe.map relativeName string)
+            Maybe.withDefault "her" (Maybe.map (\x -> x ++ "'s") string)
 
         Thing string ->
-            Maybe.withDefault "its" (Maybe.map relativeName string)
+            Maybe.withDefault "its" (Maybe.map (\x -> x ++ "'s") string)
 
         Speakers ->
             "our"
@@ -130,12 +138,7 @@ relativeObject object =
             "your"
 
         PeopleOrThings string ->
-            Maybe.withDefault "their" (Maybe.map relativeName string)
-
-
-relativeName : String -> String
-relativeName string =
-    string ++ "'s"
+            Maybe.withDefault "their" (Maybe.map (\x -> x ++ "'s") string)
 
 
 {-| Convert a set of general factors into a noun phrase with a determiner (e.g.

@@ -13837,44 +13837,54 @@ var _merivale$victor$Theory_Words$guessPlural = function (singular) {
 		'ices') : A2(_elm_lang$core$Basics_ops['++'], singular, 's'))))))));
 };
 var _merivale$victor$Theory_Words$ongoing = function (base) {
-	var _p0 = A2(_elm_lang$core$Dict$get, base, _merivale$victor$Theory_Words$verbs);
-	if (_p0.ctor === 'Nothing') {
-		return _merivale$victor$Theory_Words$guessOngoing(base);
-	} else {
-		return _p0._0.ongoing;
-	}
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		_merivale$victor$Theory_Words$guessOngoing(base),
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (x) {
+				return x.ongoing;
+			},
+			A2(_elm_lang$core$Dict$get, base, _merivale$victor$Theory_Words$verbs)));
 };
 var _merivale$victor$Theory_Words$prior = function (base) {
-	var _p1 = A2(_elm_lang$core$Dict$get, base, _merivale$victor$Theory_Words$verbs);
-	if (_p1.ctor === 'Nothing') {
-		return _merivale$victor$Theory_Words$guessPastPrior(base);
-	} else {
-		return _p1._0.prior;
-	}
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		_merivale$victor$Theory_Words$guessPastPrior(base),
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (x) {
+				return x.prior;
+			},
+			A2(_elm_lang$core$Dict$get, base, _merivale$victor$Theory_Words$verbs)));
 };
 var _merivale$victor$Theory_Words$past = function (base) {
-	var _p2 = A2(_elm_lang$core$Dict$get, base, _merivale$victor$Theory_Words$verbs);
-	if (_p2.ctor === 'Nothing') {
-		return _merivale$victor$Theory_Words$guessPastPrior(base);
-	} else {
-		return _p2._0.past;
-	}
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		_merivale$victor$Theory_Words$guessPastPrior(base),
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (x) {
+				return x.past;
+			},
+			A2(_elm_lang$core$Dict$get, base, _merivale$victor$Theory_Words$verbs)));
 };
 var _merivale$victor$Theory_Words$present = function (base) {
-	var _p3 = A2(_elm_lang$core$Dict$get, base, _merivale$victor$Theory_Words$verbs);
-	if (_p3.ctor === 'Nothing') {
-		return _merivale$victor$Theory_Words$guessPresent(base);
-	} else {
-		return _p3._0.present;
-	}
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		_merivale$victor$Theory_Words$guessPresent(base),
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (x) {
+				return x.present;
+			},
+			A2(_elm_lang$core$Dict$get, base, _merivale$victor$Theory_Words$verbs)));
 };
 var _merivale$victor$Theory_Words$plural = function (noun) {
-	var _p4 = A2(_elm_lang$core$Dict$get, noun, _merivale$victor$Theory_Words$nouns);
-	if (_p4.ctor === 'Nothing') {
-		return _merivale$victor$Theory_Words$guessPlural(noun);
-	} else {
-		return _p4._0;
-	}
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		_merivale$victor$Theory_Words$guessPlural(noun),
+		A2(_elm_lang$core$Dict$get, noun, _merivale$victor$Theory_Words$nouns));
 };
 
 var _merivale$victor$Theory_Nouns$oneOrBody = F2(
@@ -14035,9 +14045,6 @@ var _merivale$victor$Theory_Nouns$quantifierPhrase = F5(
 			A4(_merivale$victor$Theory_Nouns$quantifierToString, false, quantifier, other, haystack.category),
 			A2(_merivale$victor$Theory_Nouns$haystackToString, haystack, plural));
 	});
-var _merivale$victor$Theory_Nouns$relativeName = function (string) {
-	return A2(_elm_lang$core$Basics_ops['++'], string, '\'s');
-};
 var _merivale$victor$Theory_Nouns$relativeObject = function (object) {
 	var _p3 = object;
 	switch (_p3.ctor) {
@@ -14049,17 +14056,32 @@ var _merivale$victor$Theory_Nouns$relativeObject = function (object) {
 			return A2(
 				_elm_lang$core$Maybe$withDefault,
 				'his',
-				A2(_elm_lang$core$Maybe$map, _merivale$victor$Theory_Nouns$relativeName, _p3._0));
+				A2(
+					_elm_lang$core$Maybe$map,
+					function (x) {
+						return A2(_elm_lang$core$Basics_ops['++'], x, '\'s');
+					},
+					_p3._0));
 		case 'Female':
 			return A2(
 				_elm_lang$core$Maybe$withDefault,
 				'her',
-				A2(_elm_lang$core$Maybe$map, _merivale$victor$Theory_Nouns$relativeName, _p3._0));
+				A2(
+					_elm_lang$core$Maybe$map,
+					function (x) {
+						return A2(_elm_lang$core$Basics_ops['++'], x, '\'s');
+					},
+					_p3._0));
 		case 'Thing':
 			return A2(
 				_elm_lang$core$Maybe$withDefault,
 				'its',
-				A2(_elm_lang$core$Maybe$map, _merivale$victor$Theory_Nouns$relativeName, _p3._0));
+				A2(
+					_elm_lang$core$Maybe$map,
+					function (x) {
+						return A2(_elm_lang$core$Basics_ops['++'], x, '\'s');
+					},
+					_p3._0));
 		case 'Speakers':
 			return 'our';
 		case 'Hearers':
@@ -14068,7 +14090,12 @@ var _merivale$victor$Theory_Nouns$relativeObject = function (object) {
 			return A2(
 				_elm_lang$core$Maybe$withDefault,
 				'their',
-				A2(_elm_lang$core$Maybe$map, _merivale$victor$Theory_Nouns$relativeName, _p3._0));
+				A2(
+					_elm_lang$core$Maybe$map,
+					function (x) {
+						return A2(_elm_lang$core$Basics_ops['++'], x, '\'s');
+					},
+					_p3._0));
 	}
 };
 var _merivale$victor$Theory_Nouns$pointerToString = F3(
@@ -14281,63 +14308,35 @@ var _merivale$victor$Theory_Vars$initial = function (_p4) {
 	};
 };
 
-var _merivale$victor$Theory_Fulcrums$verb = F4(
-	function (fulcrum, past, amNeeded, isNeeded) {
-		return _elm_lang$core$Native_Utils.eq(fulcrum, 'be') ? (past ? ((amNeeded || isNeeded) ? 'was' : 'were') : (amNeeded ? 'am' : (isNeeded ? 'is' : 'are'))) : (past ? _merivale$victor$Theory_Words$past(fulcrum) : (isNeeded ? _merivale$victor$Theory_Words$present(fulcrum) : fulcrum));
-	});
-var _merivale$victor$Theory_Fulcrums$modal = F3(
-	function (modality, past, negated) {
-		var _p0 = modality;
-		switch (_p0.ctor) {
-			case 'SoftYes':
-				return past ? 'would' : 'will';
-			case 'HardYes':
-				return negated ? 'need' : 'must';
-			case 'SoftMaybe':
-				return past ? 'might' : 'may';
-			case 'HardMaybe':
-				return past ? 'could' : 'can';
-			case 'SoftYesIsh':
-				return 'should';
-			case 'HardYesIsh':
-				return 'ought';
-			case 'Permission':
-				return past ? 'might' : 'may';
-			case 'Command':
-				return past ? 'should' : 'shall';
-			default:
-				return 'dare';
-		}
-	});
 var _merivale$victor$Theory_Fulcrums$abbreviate = function (fulcrum) {
-	var _p1 = function () {
-		var _p2 = _elm_lang$core$String$words(fulcrum);
-		if (_p2.ctor === '::') {
-			var _p5 = _p2._1;
-			var _p4 = _p2._0;
-			var _p3 = _p4;
-			switch (_p3) {
+	var _p0 = function () {
+		var _p1 = _elm_lang$core$String$words(fulcrum);
+		if (_p1.ctor === '::') {
+			var _p4 = _p1._1;
+			var _p3 = _p1._0;
+			var _p2 = _p3;
+			switch (_p2) {
 				case 'am':
-					return {ctor: '_Tuple2', _0: '\'m', _1: _p5};
+					return {ctor: '_Tuple2', _0: '\'m', _1: _p4};
 				case 'is':
-					return {ctor: '_Tuple2', _0: '\'s', _1: _p5};
+					return {ctor: '_Tuple2', _0: '\'s', _1: _p4};
 				case 'are':
-					return {ctor: '_Tuple2', _0: '\'re', _1: _p5};
+					return {ctor: '_Tuple2', _0: '\'re', _1: _p4};
 				case 'have':
-					return {ctor: '_Tuple2', _0: '\'ve', _1: _p5};
+					return {ctor: '_Tuple2', _0: '\'ve', _1: _p4};
 				case 'has':
-					return {ctor: '_Tuple2', _0: '\'s', _1: _p5};
+					return {ctor: '_Tuple2', _0: '\'s', _1: _p4};
 				case 'had':
-					return {ctor: '_Tuple2', _0: '\'d', _1: _p5};
+					return {ctor: '_Tuple2', _0: '\'d', _1: _p4};
 				case 'will':
-					return {ctor: '_Tuple2', _0: '\'ll', _1: _p5};
+					return {ctor: '_Tuple2', _0: '\'ll', _1: _p4};
 				case 'would':
-					return {ctor: '_Tuple2', _0: '\'d', _1: _p5};
+					return {ctor: '_Tuple2', _0: '\'d', _1: _p4};
 				default:
 					return {
 						ctor: '_Tuple2',
-						_0: A2(_elm_lang$core$Basics_ops['++'], ' ', _p4),
-						_1: _p5
+						_0: A2(_elm_lang$core$Basics_ops['++'], ' ', _p3),
+						_1: _p4
 					};
 			}
 		} else {
@@ -14348,8 +14347,8 @@ var _merivale$victor$Theory_Fulcrums$abbreviate = function (fulcrum) {
 			};
 		}
 	}();
-	var head = _p1._0;
-	var tail = _p1._1;
+	var head = _p0._0;
+	var tail = _p0._1;
 	return A2(
 		_elm_lang$core$String$join,
 		' ',
@@ -14428,6 +14427,34 @@ var _merivale$victor$Theory_Fulcrums$ntAble = function (fulcrum) {
 var _merivale$victor$Theory_Fulcrums$negate = F2(
 	function (fulcrum, abbreviateNot) {
 		return abbreviateNot ? (_merivale$victor$Theory_Fulcrums$ntAble(fulcrum) ? A2(_elm_lang$core$Basics_ops['++'], fulcrum, 'n\'t') : (_elm_lang$core$Native_Utils.eq(fulcrum, 'will') ? 'won\'t' : (_elm_lang$core$Native_Utils.eq(fulcrum, 'can') ? 'can\'t' : (_elm_lang$core$Native_Utils.eq(fulcrum, 'shall') ? 'shan\'t' : A2(_elm_lang$core$Basics_ops['++'], fulcrum, ' not'))))) : A2(_elm_lang$core$Basics_ops['++'], fulcrum, ' not');
+	});
+var _merivale$victor$Theory_Fulcrums$verb = F4(
+	function (fulcrum, past, amNeeded, isNeeded) {
+		return _elm_lang$core$Native_Utils.eq(fulcrum, 'be') ? (past ? ((amNeeded || isNeeded) ? 'was' : 'were') : (amNeeded ? 'am' : (isNeeded ? 'is' : 'are'))) : (past ? _merivale$victor$Theory_Words$past(fulcrum) : (isNeeded ? _merivale$victor$Theory_Words$present(fulcrum) : fulcrum));
+	});
+var _merivale$victor$Theory_Fulcrums$modal = F3(
+	function (modality, past, negated) {
+		var _p5 = modality;
+		switch (_p5.ctor) {
+			case 'SoftYes':
+				return past ? 'would' : 'will';
+			case 'HardYes':
+				return negated ? 'need' : 'must';
+			case 'SoftMaybe':
+				return past ? 'might' : 'may';
+			case 'HardMaybe':
+				return past ? 'could' : 'can';
+			case 'SoftYesIsh':
+				return 'should';
+			case 'HardYesIsh':
+				return 'ought';
+			case 'Permission':
+				return past ? 'might' : 'may';
+			case 'Command':
+				return past ? 'should' : 'shall';
+			default:
+				return 'dare';
+		}
 	});
 
 var _merivale$victor$Theory_Sentences$fulcrum = F2(
