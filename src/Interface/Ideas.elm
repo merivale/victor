@@ -47,7 +47,7 @@ balances : List (Maybe Balance)
 balances =
     [ Nothing
     , Just SameObject
-    , Just (DifferentObject Speaker)
+    , Just (IndependentObject Speaker)
     , Just (CustomBalance "")
     ]
 
@@ -63,8 +63,8 @@ balanceToString balance =
                 SameObject ->
                     "Same Object"
 
-                DifferentObject object ->
-                    "Different Object"
+                IndependentObject object ->
+                    "Independent Object"
 
                 CustomBalance string ->
                     "Custom"

@@ -49,10 +49,14 @@ plain ingredients =
 nucleus : Ingredients -> Nucleus
 nucleus ingredients =
     { object = object ingredients.object ingredients.objectString
-    , pivot = ingredients.pivot
-    , balance = Maybe.map (balance ingredients) ingredients.balance
-    , abbreviateFulcrum = ingredients.multiPurposeStyle1
-    , abbreviateNot = ingredients.multiPurposeStyle2
+    , condition =
+        { pivot = ingredients.pivot
+        , balance = Maybe.map (balance ingredients) ingredients.balance
+        }
+    , style =
+        { abbreviateFulcrum = ingredients.multiPurposeStyle1
+        , abbreviateNot = ingredients.multiPurposeStyle2
+        }
     }
 
 
@@ -81,8 +85,8 @@ balance ingredients balance =
         SameObject ->
             SameObject
 
-        DifferentObject differentObject ->
-            DifferentObject (object ingredients.balanceObject ingredients.balanceObjectString)
+        IndependentObject independentObject ->
+            IndependentObject (object ingredients.balanceObject ingredients.balanceObjectString)
 
         CustomBalance string ->
             CustomBalance ingredients.balanceString
@@ -158,7 +162,6 @@ elaborate elaborationRecipe ingredients message =
                 Err "please enter a category for your amassed elaboration"
             else
                 Ok (Amassed ingredients.target ingredients.amassedQuantifier ingredients.other (haystack ingredients) ingredients.plural message)
-
 
 
 pointer : Ingredients -> Pointer

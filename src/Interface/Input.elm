@@ -30,6 +30,7 @@ input { elaborationRecipe, showElaborations, index, body } =
             case elaborationRecipe of
                 Nothing ->
                     Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ]
+
                 Just simpleRecipe ->
                     Html.div [ Attr.class "title" ] [ Html.text (elaborationRecipeToString simpleRecipe) ]
 
@@ -38,7 +39,7 @@ input { elaborationRecipe, showElaborations, index, body } =
                 button { label = "-", signal = ToggleShowElaborations index, customClass = Just "green" }
             else
                 button { label = "+", signal = ToggleShowElaborations index, customClass = Just "green" }
-        
+
         deleteElaborationButton =
             button { label = "×", signal = RemoveElaborationRecipe index, customClass = Just "red" }
     in

@@ -8260,183 +8260,132 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _merivale$victor$Theory_Types$Nucleus = F3(
-	function (a, b, c) {
-		return {object: a, condition: b, style: c};
+var _merivale$victor$Theory_Messages$Nucleus = F5(
+	function (a, b, c, d, e) {
+		return {object: a, pivot: b, balance: c, abbreviateFulcrum: d, abbreviateNot: e};
 	});
-var _merivale$victor$Theory_Types$Condition = F2(
-	function (a, b) {
-		return {pivot: a, balance: b};
-	});
-var _merivale$victor$Theory_Types$Style = F2(
-	function (a, b) {
-		return {abbreviateFulcrum: a, abbreviateNot: b};
-	});
-var _merivale$victor$Theory_Types$Haystack = F3(
+var _merivale$victor$Theory_Messages$Haystack = F3(
 	function (a, b, c) {
 		return {category: a, description: b, restriction: c};
 	});
-var _merivale$victor$Theory_Types$Vars = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return function (n) {
-														return function (o) {
-															return function (p) {
-																return function (q) {
-																	return function (r) {
-																		return function (s) {
-																			return function (t) {
-																				return function (u) {
-																					return {past: a, prior: b, ongoing: c, projective: d, negateObject: e, objectOverride: f, balanceObject: g, balanceOverride: h, subject: i, modality: j, negatedModality: k, negatedFulcrum: l, abbreviateNot: m, abbreviateFulcrum: n, amNeeded: o, isNeeded: p, verb: q, pre1: r, pre2: s, counter: t, post: u};
-																				};
-																			};
-																		};
-																	};
-																};
-															};
-														};
-													};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var _merivale$victor$Theory_Types$Amassed = F6(
+var _merivale$victor$Theory_Messages$Amassed = F6(
 	function (a, b, c, d, e, f) {
 		return {ctor: 'Amassed', _0: a, _1: b, _2: c, _3: d, _4: e, _5: f};
 	});
-var _merivale$victor$Theory_Types$Enumerated = F5(
+var _merivale$victor$Theory_Messages$Enumerated = F5(
 	function (a, b, c, d, e) {
 		return {ctor: 'Enumerated', _0: a, _1: b, _2: c, _3: d, _4: e};
 	});
-var _merivale$victor$Theory_Types$Indirect = F6(
+var _merivale$victor$Theory_Messages$Indirect = F6(
 	function (a, b, c, d, e, f) {
 		return {ctor: 'Indirect', _0: a, _1: b, _2: c, _3: d, _4: e, _5: f};
 	});
-var _merivale$victor$Theory_Types$Apparent = F2(
+var _merivale$victor$Theory_Messages$Apparent = F2(
 	function (a, b) {
 		return {ctor: 'Apparent', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Types$Imminent = function (a) {
+var _merivale$victor$Theory_Messages$Imminent = function (a) {
 	return {ctor: 'Imminent', _0: a};
 };
-var _merivale$victor$Theory_Types$Determined = F2(
+var _merivale$victor$Theory_Messages$Determined = F2(
 	function (a, b) {
 		return {ctor: 'Determined', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Types$Ongoing = function (a) {
+var _merivale$victor$Theory_Messages$Ongoing = function (a) {
 	return {ctor: 'Ongoing', _0: a};
 };
-var _merivale$victor$Theory_Types$Scattered = F2(
+var _merivale$victor$Theory_Messages$Scattered = F2(
 	function (a, b) {
 		return {ctor: 'Scattered', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Types$Extended = F2(
+var _merivale$victor$Theory_Messages$Extended = F2(
 	function (a, b) {
 		return {ctor: 'Extended', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Types$Regular = F2(
+var _merivale$victor$Theory_Messages$Regular = F2(
 	function (a, b) {
 		return {ctor: 'Regular', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Types$Preordained = F2(
+var _merivale$victor$Theory_Messages$Preordained = F2(
 	function (a, b) {
 		return {ctor: 'Preordained', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Types$Evasive = F2(
+var _merivale$victor$Theory_Messages$Evasive = F2(
 	function (a, b) {
 		return {ctor: 'Evasive', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Types$Projective = F3(
+var _merivale$victor$Theory_Messages$Projective = F3(
 	function (a, b, c) {
 		return {ctor: 'Projective', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Types$Practical = F2(
+var _merivale$victor$Theory_Messages$Practical = F2(
 	function (a, b) {
 		return {ctor: 'Practical', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Types$Prior = function (a) {
+var _merivale$victor$Theory_Messages$Prior = function (a) {
 	return {ctor: 'Prior', _0: a};
 };
-var _merivale$victor$Theory_Types$Past = function (a) {
+var _merivale$victor$Theory_Messages$Past = function (a) {
 	return {ctor: 'Past', _0: a};
 };
-var _merivale$victor$Theory_Types$Negative = function (a) {
+var _merivale$victor$Theory_Messages$Negative = function (a) {
 	return {ctor: 'Negative', _0: a};
 };
-var _merivale$victor$Theory_Types$Plain = function (a) {
+var _merivale$victor$Theory_Messages$Plain = function (a) {
 	return {ctor: 'Plain', _0: a};
 };
-var _merivale$victor$Theory_Types$PeopleOrThings = function (a) {
-	return {ctor: 'PeopleOrThings', _0: a};
-};
-var _merivale$victor$Theory_Types$Hearers = {ctor: 'Hearers'};
-var _merivale$victor$Theory_Types$Speakers = {ctor: 'Speakers'};
-var _merivale$victor$Theory_Types$Thing = function (a) {
-	return {ctor: 'Thing', _0: a};
-};
-var _merivale$victor$Theory_Types$Female = function (a) {
-	return {ctor: 'Female', _0: a};
-};
-var _merivale$victor$Theory_Types$Male = function (a) {
-	return {ctor: 'Male', _0: a};
-};
-var _merivale$victor$Theory_Types$Hearer = {ctor: 'Hearer'};
-var _merivale$victor$Theory_Types$Speaker = {ctor: 'Speaker'};
-var _merivale$victor$Theory_Types$CustomBalance = function (a) {
+var _merivale$victor$Theory_Messages$CustomBalance = function (a) {
 	return {ctor: 'CustomBalance', _0: a};
 };
-var _merivale$victor$Theory_Types$IndependentObject = function (a) {
-	return {ctor: 'IndependentObject', _0: a};
+var _merivale$victor$Theory_Messages$DifferentObject = function (a) {
+	return {ctor: 'DifferentObject', _0: a};
 };
-var _merivale$victor$Theory_Types$SameObject = {ctor: 'SameObject'};
-var _merivale$victor$Theory_Types$Command = {ctor: 'Command'};
-var _merivale$victor$Theory_Types$Permission = {ctor: 'Permission'};
-var _merivale$victor$Theory_Types$Dare = {ctor: 'Dare'};
-var _merivale$victor$Theory_Types$HardYesIsh = {ctor: 'HardYesIsh'};
-var _merivale$victor$Theory_Types$SoftYesIsh = {ctor: 'SoftYesIsh'};
-var _merivale$victor$Theory_Types$HardMaybe = {ctor: 'HardMaybe'};
-var _merivale$victor$Theory_Types$SoftMaybe = {ctor: 'SoftMaybe'};
-var _merivale$victor$Theory_Types$HardYes = {ctor: 'HardYes'};
-var _merivale$victor$Theory_Types$SoftYes = {ctor: 'SoftYes'};
-var _merivale$victor$Theory_Types$BalancingObject = {ctor: 'BalancingObject'};
-var _merivale$victor$Theory_Types$MainObject = {ctor: 'MainObject'};
-var _merivale$victor$Theory_Types$RelatedTo = function (a) {
+var _merivale$victor$Theory_Messages$SameObject = {ctor: 'SameObject'};
+var _merivale$victor$Theory_Messages$PeopleOrThings = function (a) {
+	return {ctor: 'PeopleOrThings', _0: a};
+};
+var _merivale$victor$Theory_Messages$Hearers = {ctor: 'Hearers'};
+var _merivale$victor$Theory_Messages$Speakers = {ctor: 'Speakers'};
+var _merivale$victor$Theory_Messages$Thing = function (a) {
+	return {ctor: 'Thing', _0: a};
+};
+var _merivale$victor$Theory_Messages$Female = function (a) {
+	return {ctor: 'Female', _0: a};
+};
+var _merivale$victor$Theory_Messages$Male = function (a) {
+	return {ctor: 'Male', _0: a};
+};
+var _merivale$victor$Theory_Messages$Hearer = {ctor: 'Hearer'};
+var _merivale$victor$Theory_Messages$Speaker = {ctor: 'Speaker'};
+var _merivale$victor$Theory_Messages$Command = {ctor: 'Command'};
+var _merivale$victor$Theory_Messages$Permission = {ctor: 'Permission'};
+var _merivale$victor$Theory_Messages$Dare = {ctor: 'Dare'};
+var _merivale$victor$Theory_Messages$HardYesIsh = {ctor: 'HardYesIsh'};
+var _merivale$victor$Theory_Messages$SoftYesIsh = {ctor: 'SoftYesIsh'};
+var _merivale$victor$Theory_Messages$HardMaybe = {ctor: 'HardMaybe'};
+var _merivale$victor$Theory_Messages$SoftMaybe = {ctor: 'SoftMaybe'};
+var _merivale$victor$Theory_Messages$HardYes = {ctor: 'HardYes'};
+var _merivale$victor$Theory_Messages$SoftYes = {ctor: 'SoftYes'};
+var _merivale$victor$Theory_Messages$BalancingObject = {ctor: 'BalancingObject'};
+var _merivale$victor$Theory_Messages$MainObject = {ctor: 'MainObject'};
+var _merivale$victor$Theory_Messages$RelatedTo = function (a) {
 	return {ctor: 'RelatedTo', _0: a};
 };
-var _merivale$victor$Theory_Types$That = {ctor: 'That'};
-var _merivale$victor$Theory_Types$This = {ctor: 'This'};
-var _merivale$victor$Theory_Types$The = {ctor: 'The'};
-var _merivale$victor$Theory_Types$Enough = {ctor: 'Enough'};
-var _merivale$victor$Theory_Types$Most = {ctor: 'Most'};
-var _merivale$victor$Theory_Types$Much = {ctor: 'Much'};
-var _merivale$victor$Theory_Types$All = {ctor: 'All'};
-var _merivale$victor$Theory_Types$Any = {ctor: 'Any'};
-var _merivale$victor$Theory_Types$Some = {ctor: 'Some'};
-var _merivale$victor$Theory_Types$Both = {ctor: 'Both'};
-var _merivale$victor$Theory_Types$Every = {ctor: 'Every'};
-var _merivale$victor$Theory_Types$Each = {ctor: 'Each'};
-var _merivale$victor$Theory_Types$Many = {ctor: 'Many'};
-var _merivale$victor$Theory_Types$Several = {ctor: 'Several'};
-var _merivale$victor$Theory_Types$A = {ctor: 'A'};
+var _merivale$victor$Theory_Messages$That = {ctor: 'That'};
+var _merivale$victor$Theory_Messages$This = {ctor: 'This'};
+var _merivale$victor$Theory_Messages$The = {ctor: 'The'};
+var _merivale$victor$Theory_Messages$Enough = {ctor: 'Enough'};
+var _merivale$victor$Theory_Messages$Most = {ctor: 'Most'};
+var _merivale$victor$Theory_Messages$Much = {ctor: 'Much'};
+var _merivale$victor$Theory_Messages$All = {ctor: 'All'};
+var _merivale$victor$Theory_Messages$Any = {ctor: 'Any'};
+var _merivale$victor$Theory_Messages$Some = {ctor: 'Some'};
+var _merivale$victor$Theory_Messages$Both = {ctor: 'Both'};
+var _merivale$victor$Theory_Messages$Every = {ctor: 'Every'};
+var _merivale$victor$Theory_Messages$Each = {ctor: 'Each'};
+var _merivale$victor$Theory_Messages$Many = {ctor: 'Many'};
+var _merivale$victor$Theory_Messages$Several = {ctor: 'Several'};
+var _merivale$victor$Theory_Messages$A = {ctor: 'A'};
 
 var _merivale$victor$Interface_Types$Ingredients = function (a) {
 	return function (b) {
@@ -8638,22 +8587,22 @@ var _merivale$victor$Interface_Ideas$amassedQuantifiers = {
 	_0: _elm_lang$core$Maybe$Nothing,
 	_1: {
 		ctor: '::',
-		_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Some),
+		_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Some),
 		_1: {
 			ctor: '::',
-			_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Any),
+			_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Any),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$All),
+				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$All),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Much),
+					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Much),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Most),
+						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Most),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Enough),
+							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Enough),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -8664,28 +8613,28 @@ var _merivale$victor$Interface_Ideas$amassedQuantifiers = {
 };
 var _merivale$victor$Interface_Ideas$enumeratedQuantifiers = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Types$A,
+	_0: _merivale$victor$Theory_Messages$A,
 	_1: {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Types$Several,
+		_0: _merivale$victor$Theory_Messages$Several,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Types$Many,
+			_0: _merivale$victor$Theory_Messages$Many,
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Types$Each,
+				_0: _merivale$victor$Theory_Messages$Each,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Types$Every,
+					_0: _merivale$victor$Theory_Messages$Every,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Types$Both,
+						_0: _merivale$victor$Theory_Messages$Both,
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Some,
+							_0: _merivale$victor$Theory_Messages$Some,
 							_1: {
 								ctor: '::',
-								_0: _merivale$victor$Theory_Types$Any,
+								_0: _merivale$victor$Theory_Messages$Any,
 								_1: {ctor: '[]'}
 							}
 						}
@@ -8705,16 +8654,16 @@ var _merivale$victor$Interface_Ideas$pointerToString = function (pointer) {
 };
 var _merivale$victor$Interface_Ideas$pointers = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Types$The,
+	_0: _merivale$victor$Theory_Messages$The,
 	_1: {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Types$This,
+		_0: _merivale$victor$Theory_Messages$This,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Types$That,
+			_0: _merivale$victor$Theory_Messages$That,
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Types$RelatedTo(_merivale$victor$Theory_Types$Speaker),
+				_0: _merivale$victor$Theory_Messages$RelatedTo(_merivale$victor$Theory_Messages$Speaker),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -8745,25 +8694,25 @@ var _merivale$victor$Interface_Ideas$modalityToString = function (modality) {
 };
 var _merivale$victor$Interface_Ideas$limitedModalities = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Types$SoftYes,
+	_0: _merivale$victor$Theory_Messages$SoftYes,
 	_1: {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Types$HardYes,
+		_0: _merivale$victor$Theory_Messages$HardYes,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Types$SoftMaybe,
+			_0: _merivale$victor$Theory_Messages$SoftMaybe,
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Types$HardMaybe,
+				_0: _merivale$victor$Theory_Messages$HardMaybe,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Types$SoftYesIsh,
+					_0: _merivale$victor$Theory_Messages$SoftYesIsh,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Types$HardYesIsh,
+						_0: _merivale$victor$Theory_Messages$HardYesIsh,
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Dare,
+							_0: _merivale$victor$Theory_Messages$Dare,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -8777,10 +8726,10 @@ var _merivale$victor$Interface_Ideas$unlimitedModalities = A2(
 	_merivale$victor$Interface_Ideas$limitedModalities,
 	{
 		ctor: '::',
-		_0: _merivale$victor$Theory_Types$Permission,
+		_0: _merivale$victor$Theory_Messages$Permission,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Types$Command,
+			_0: _merivale$victor$Theory_Messages$Command,
 			_1: {ctor: '[]'}
 		}
 	});
@@ -8793,8 +8742,8 @@ var _merivale$victor$Interface_Ideas$balanceToString = function (balance) {
 		switch (_p3.ctor) {
 			case 'SameObject':
 				return 'Same Object';
-			case 'IndependentObject':
-				return 'Independent Object';
+			case 'DifferentObject':
+				return 'Different Object';
 			default:
 				return 'Custom';
 		}
@@ -8805,15 +8754,15 @@ var _merivale$victor$Interface_Ideas$balances = {
 	_0: _elm_lang$core$Maybe$Nothing,
 	_1: {
 		ctor: '::',
-		_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$SameObject),
+		_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$SameObject),
 		_1: {
 			ctor: '::',
 			_0: _elm_lang$core$Maybe$Just(
-				_merivale$victor$Theory_Types$IndependentObject(_merivale$victor$Theory_Types$Speaker)),
+				_merivale$victor$Theory_Messages$DifferentObject(_merivale$victor$Theory_Messages$Speaker)),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$core$Maybe$Just(
-					_merivale$victor$Theory_Types$CustomBalance('')),
+					_merivale$victor$Theory_Messages$CustomBalance('')),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -8841,19 +8790,19 @@ var _merivale$victor$Interface_Ideas$objectGroups = {
 		_0: 'Singular',
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Types$Speaker,
+			_0: _merivale$victor$Theory_Messages$Speaker,
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Types$Hearer,
+				_0: _merivale$victor$Theory_Messages$Hearer,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Types$Male(_elm_lang$core$Maybe$Nothing),
+					_0: _merivale$victor$Theory_Messages$Male(_elm_lang$core$Maybe$Nothing),
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Types$Female(_elm_lang$core$Maybe$Nothing),
+						_0: _merivale$victor$Theory_Messages$Female(_elm_lang$core$Maybe$Nothing),
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Thing(_elm_lang$core$Maybe$Nothing),
+							_0: _merivale$victor$Theory_Messages$Thing(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -8868,13 +8817,13 @@ var _merivale$victor$Interface_Ideas$objectGroups = {
 			_0: 'Plural',
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Types$Speakers,
+				_0: _merivale$victor$Theory_Messages$Speakers,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Types$Hearers,
+					_0: _merivale$victor$Theory_Messages$Hearers,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Types$PeopleOrThings(_elm_lang$core$Maybe$Nothing),
+						_0: _merivale$victor$Theory_Messages$PeopleOrThings(_elm_lang$core$Maybe$Nothing),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -8885,28 +8834,28 @@ var _merivale$victor$Interface_Ideas$objectGroups = {
 };
 var _merivale$victor$Interface_Ideas$objects = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Types$Speaker,
+	_0: _merivale$victor$Theory_Messages$Speaker,
 	_1: {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Types$Hearer,
+		_0: _merivale$victor$Theory_Messages$Hearer,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Types$Male(_elm_lang$core$Maybe$Nothing),
+			_0: _merivale$victor$Theory_Messages$Male(_elm_lang$core$Maybe$Nothing),
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Types$Female(_elm_lang$core$Maybe$Nothing),
+				_0: _merivale$victor$Theory_Messages$Female(_elm_lang$core$Maybe$Nothing),
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Types$Thing(_elm_lang$core$Maybe$Nothing),
+					_0: _merivale$victor$Theory_Messages$Thing(_elm_lang$core$Maybe$Nothing),
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Types$Speakers,
+						_0: _merivale$victor$Theory_Messages$Speakers,
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Hearers,
+							_0: _merivale$victor$Theory_Messages$Hearers,
 							_1: {
 								ctor: '::',
-								_0: _merivale$victor$Theory_Types$PeopleOrThings(_elm_lang$core$Maybe$Nothing),
+								_0: _merivale$victor$Theory_Messages$PeopleOrThings(_elm_lang$core$Maybe$Nothing),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -8932,8 +8881,8 @@ var _merivale$victor$Interface_Input$fromId = function (options) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Interface.Input',
 				{
-					start: {line: 220, column: 13},
-					end: {line: 225, column: 22}
+					start: {line: 219, column: 13},
+					end: {line: 224, column: 22}
 				},
 				_p0)('select element is broken :(');
 		} else {
@@ -9897,8 +9846,8 @@ var _merivale$victor$Interface_Factors$target = F2(
 								'targetMainObject',
 								_elm_lang$core$Basics$toString(index)),
 							label: 'Main Object',
-							checked: _elm_lang$core$Native_Utils.eq(ingredients.target, _merivale$victor$Theory_Types$MainObject),
-							signal: A2(_merivale$victor$Interface_Types$SetTarget, index, _merivale$victor$Theory_Types$MainObject)
+							checked: _elm_lang$core$Native_Utils.eq(ingredients.target, _merivale$victor$Theory_Messages$MainObject),
+							signal: A2(_merivale$victor$Interface_Types$SetTarget, index, _merivale$victor$Theory_Messages$MainObject)
 						}),
 					_1: {
 						ctor: '::',
@@ -9914,8 +9863,8 @@ var _merivale$victor$Interface_Factors$target = F2(
 									'targetBalancingObject',
 									_elm_lang$core$Basics$toString(index)),
 								label: 'Balancing Object',
-								checked: _elm_lang$core$Native_Utils.eq(ingredients.target, _merivale$victor$Theory_Types$BalancingObject),
-								signal: A2(_merivale$victor$Interface_Types$SetTarget, index, _merivale$victor$Theory_Types$BalancingObject)
+								checked: _elm_lang$core$Native_Utils.eq(ingredients.target, _merivale$victor$Theory_Messages$BalancingObject),
+								signal: A2(_merivale$victor$Interface_Types$SetTarget, index, _merivale$victor$Theory_Messages$BalancingObject)
 							}),
 						_1: {ctor: '[]'}
 					}
@@ -10206,7 +10155,7 @@ var _merivale$victor$Interface_Factors$balance = F3(
 								_1: {ctor: '[]'}
 							}
 						});
-				case 'IndependentObject':
+				case 'DifferentObject':
 					var _p5 = override;
 					if (_p5.ctor === 'Nothing') {
 						return A2(
@@ -10475,16 +10424,16 @@ var _merivale$victor$Interface_Messages$object = F2(
 		var _p0 = baseObject;
 		switch (_p0.ctor) {
 			case 'Male':
-				return _merivale$victor$Theory_Types$Male(
+				return _merivale$victor$Theory_Messages$Male(
 					_merivale$victor$Interface_Messages$maybeString(objectString));
 			case 'Female':
-				return _merivale$victor$Theory_Types$Female(
+				return _merivale$victor$Theory_Messages$Female(
 					_merivale$victor$Interface_Messages$maybeString(objectString));
 			case 'Thing':
-				return _merivale$victor$Theory_Types$Thing(
+				return _merivale$victor$Theory_Messages$Thing(
 					_merivale$victor$Interface_Messages$maybeString(objectString));
 			case 'PeopleOrThings':
-				return _merivale$victor$Theory_Types$PeopleOrThings(
+				return _merivale$victor$Theory_Messages$PeopleOrThings(
 					_merivale$victor$Interface_Messages$maybeString(objectString));
 			default:
 				return _p0;
@@ -10495,18 +10444,18 @@ var _merivale$victor$Interface_Messages$balance = F2(
 		var _p1 = balance;
 		switch (_p1.ctor) {
 			case 'SameObject':
-				return _merivale$victor$Theory_Types$SameObject;
-			case 'IndependentObject':
-				return _merivale$victor$Theory_Types$IndependentObject(
+				return _merivale$victor$Theory_Messages$SameObject;
+			case 'DifferentObject':
+				return _merivale$victor$Theory_Messages$DifferentObject(
 					A2(_merivale$victor$Interface_Messages$object, ingredients.balanceObject, ingredients.balanceObjectString));
 			default:
-				return _merivale$victor$Theory_Types$CustomBalance(ingredients.balanceString);
+				return _merivale$victor$Theory_Messages$CustomBalance(ingredients.balanceString);
 		}
 	});
 var _merivale$victor$Interface_Messages$pointer = function (ingredients) {
 	var _p2 = ingredients.pointer;
 	if (_p2.ctor === 'RelatedTo') {
-		return _merivale$victor$Theory_Types$RelatedTo(
+		return _merivale$victor$Theory_Messages$RelatedTo(
 			A2(_merivale$victor$Interface_Messages$object, ingredients.pointerObject, ingredients.pointerObjectString));
 	} else {
 		return ingredients.pointer;
@@ -10518,69 +10467,69 @@ var _merivale$victor$Interface_Messages$elaborate = F3(
 		switch (_p3.ctor) {
 			case 'MakeNegative':
 				return _elm_lang$core$Result$Ok(
-					_merivale$victor$Theory_Types$Negative(message));
+					_merivale$victor$Theory_Messages$Negative(message));
 			case 'MakePast':
 				return _elm_lang$core$Result$Ok(
-					_merivale$victor$Theory_Types$Past(message));
+					_merivale$victor$Theory_Messages$Past(message));
 			case 'MakePrior':
 				return _elm_lang$core$Result$Ok(
-					_merivale$victor$Theory_Types$Prior(message));
+					_merivale$victor$Theory_Messages$Prior(message));
 			case 'MakePractical':
 				return _elm_lang$core$Result$Ok(
-					A2(_merivale$victor$Theory_Types$Practical, ingredients.modality, message));
+					A2(_merivale$victor$Theory_Messages$Practical, ingredients.modality, message));
 			case 'MakeProjective':
 				return _elm_lang$core$Result$Ok(
 					A3(
-						_merivale$victor$Theory_Types$Projective,
+						_merivale$victor$Theory_Messages$Projective,
 						ingredients.modality,
 						_merivale$victor$Interface_Messages$maybeString(ingredients.multiPurposeString),
 						message));
 			case 'MakeEvasive':
 				return _elm_lang$core$Result$Ok(
-					A2(_merivale$victor$Theory_Types$Evasive, ingredients.modality, message));
+					A2(_merivale$victor$Theory_Messages$Evasive, ingredients.modality, message));
 			case 'MakePreordained':
 				return _elm_lang$core$Result$Ok(
 					A2(
-						_merivale$victor$Theory_Types$Preordained,
+						_merivale$victor$Theory_Messages$Preordained,
 						_merivale$victor$Interface_Messages$maybeString(ingredients.multiPurposeString),
 						message));
 			case 'MakeRegular':
 				return _elm_lang$core$Result$Ok(
 					A2(
-						_merivale$victor$Theory_Types$Regular,
+						_merivale$victor$Theory_Messages$Regular,
 						_merivale$victor$Interface_Messages$maybeString(ingredients.multiPurposeString),
 						message));
 			case 'MakeExtended':
 				return _elm_lang$core$Native_Utils.eq(
 					_elm_lang$core$String$length(ingredients.multiPurposeString),
 					0) ? _elm_lang$core$Result$Err('please enter a value for the duration') : _elm_lang$core$Result$Ok(
-					A2(_merivale$victor$Theory_Types$Extended, ingredients.multiPurposeString, message));
+					A2(_merivale$victor$Theory_Messages$Extended, ingredients.multiPurposeString, message));
 			case 'MakeScattered':
 				return _elm_lang$core$Native_Utils.eq(
 					_elm_lang$core$String$length(ingredients.multiPurposeString),
 					0) ? _elm_lang$core$Result$Err('please enter a value for the tally') : _elm_lang$core$Result$Ok(
-					A2(_merivale$victor$Theory_Types$Scattered, ingredients.multiPurposeString, message));
+					A2(_merivale$victor$Theory_Messages$Scattered, ingredients.multiPurposeString, message));
 			case 'MakeOngoing':
 				return _elm_lang$core$Result$Ok(
-					_merivale$victor$Theory_Types$Ongoing(message));
+					_merivale$victor$Theory_Messages$Ongoing(message));
 			case 'MakeDetermined':
 				return _elm_lang$core$Result$Ok(
 					A2(
-						_merivale$victor$Theory_Types$Determined,
+						_merivale$victor$Theory_Messages$Determined,
 						_merivale$victor$Interface_Messages$maybeString(ingredients.multiPurposeString),
 						message));
 			case 'MakeImminent':
 				return _elm_lang$core$Result$Ok(
-					_merivale$victor$Theory_Types$Imminent(message));
+					_merivale$victor$Theory_Messages$Imminent(message));
 			case 'MakeApparent':
 				return _elm_lang$core$Result$Ok(
-					A2(_merivale$victor$Theory_Types$Apparent, ingredients.multiPurposeStyle1, message));
+					A2(_merivale$victor$Theory_Messages$Apparent, ingredients.multiPurposeStyle1, message));
 			case 'MakeIndirect':
 				return _elm_lang$core$Native_Utils.eq(
 					_elm_lang$core$String$length(ingredients.category),
 					0) ? _elm_lang$core$Result$Err('please enter a category for your indirect elaboration') : _elm_lang$core$Result$Ok(
 					A6(
-						_merivale$victor$Theory_Types$Indirect,
+						_merivale$victor$Theory_Messages$Indirect,
 						ingredients.target,
 						_merivale$victor$Interface_Messages$pointer(ingredients),
 						ingredients.other,
@@ -10592,7 +10541,7 @@ var _merivale$victor$Interface_Messages$elaborate = F3(
 					_elm_lang$core$String$length(ingredients.category),
 					0) ? _elm_lang$core$Result$Err('please enter a category for your enumerated elaboration') : _elm_lang$core$Result$Ok(
 					A5(
-						_merivale$victor$Theory_Types$Enumerated,
+						_merivale$victor$Theory_Messages$Enumerated,
 						ingredients.target,
 						ingredients.enumeratedQuantifier,
 						ingredients.other,
@@ -10603,7 +10552,7 @@ var _merivale$victor$Interface_Messages$elaborate = F3(
 					_elm_lang$core$String$length(ingredients.category),
 					0) ? _elm_lang$core$Result$Err('please enter a category for your amassed elaboration') : _elm_lang$core$Result$Ok(
 					A6(
-						_merivale$victor$Theory_Types$Amassed,
+						_merivale$victor$Theory_Messages$Amassed,
 						ingredients.target,
 						ingredients.amassedQuantifier,
 						ingredients.other,
@@ -10615,14 +10564,13 @@ var _merivale$victor$Interface_Messages$elaborate = F3(
 var _merivale$victor$Interface_Messages$nucleus = function (ingredients) {
 	return {
 		object: A2(_merivale$victor$Interface_Messages$object, ingredients.object, ingredients.objectString),
-		condition: {
-			pivot: ingredients.pivot,
-			balance: A2(
-				_elm_lang$core$Maybe$map,
-				_merivale$victor$Interface_Messages$balance(ingredients),
-				ingredients.balance)
-		},
-		style: {abbreviateFulcrum: ingredients.multiPurposeStyle1, abbreviateNot: ingredients.multiPurposeStyle2}
+		pivot: ingredients.pivot,
+		balance: A2(
+			_elm_lang$core$Maybe$map,
+			_merivale$victor$Interface_Messages$balance(ingredients),
+			ingredients.balance),
+		abbreviateFulcrum: ingredients.multiPurposeStyle1,
+		abbreviateNot: ingredients.multiPurposeStyle2
 	};
 };
 var _merivale$victor$Interface_Messages$plain = function (ingredients) {
@@ -10636,11 +10584,11 @@ var _merivale$victor$Interface_Messages$plain = function (ingredients) {
 			return _elm_lang$core$Native_Utils.eq(
 				_elm_lang$core$String$length(ingredients.balanceString),
 				0) ? _elm_lang$core$Result$Err('please enter some text for your custom balance') : _elm_lang$core$Result$Ok(
-				_merivale$victor$Theory_Types$Plain(
+				_merivale$victor$Theory_Messages$Plain(
 					_merivale$victor$Interface_Messages$nucleus(ingredients)));
 		} else {
 			return _elm_lang$core$Result$Ok(
-				_merivale$victor$Theory_Types$Plain(
+				_merivale$victor$Theory_Messages$Plain(
 					_merivale$victor$Interface_Messages$nucleus(ingredients)));
 		}
 	}
@@ -10834,20 +10782,20 @@ var _merivale$victor$Interface_State$replaceRecipe = F3(
 	});
 var _merivale$victor$Interface_State$ingredients = {
 	showElaborations: false,
-	object: _merivale$victor$Theory_Types$Speaker,
+	object: _merivale$victor$Theory_Messages$Speaker,
 	objectString: '',
 	pivot: 'be',
 	balance: _elm_lang$core$Maybe$Just(
-		_merivale$victor$Theory_Types$IndependentObject(_merivale$victor$Theory_Types$Speaker)),
+		_merivale$victor$Theory_Messages$DifferentObject(_merivale$victor$Theory_Messages$Speaker)),
 	balanceString: '',
-	balanceObject: _merivale$victor$Theory_Types$Male(_elm_lang$core$Maybe$Nothing),
+	balanceObject: _merivale$victor$Theory_Messages$Male(_elm_lang$core$Maybe$Nothing),
 	balanceObjectString: 'Victor',
-	modality: _merivale$victor$Theory_Types$SoftYes,
-	target: _merivale$victor$Theory_Types$MainObject,
-	pointer: _merivale$victor$Theory_Types$The,
-	pointerObject: _merivale$victor$Theory_Types$Speaker,
+	modality: _merivale$victor$Theory_Messages$SoftYes,
+	target: _merivale$victor$Theory_Messages$MainObject,
+	pointer: _merivale$victor$Theory_Messages$The,
+	pointerObject: _merivale$victor$Theory_Messages$Speaker,
 	pointerObjectString: '',
-	enumeratedQuantifier: _merivale$victor$Theory_Types$A,
+	enumeratedQuantifier: _merivale$victor$Theory_Messages$A,
 	amassedQuantifier: _elm_lang$core$Maybe$Nothing,
 	other: false,
 	category: '',
@@ -13888,13 +13836,13 @@ var _merivale$victor$Theory_Nouns$oneOrBody = F2(
 				_p0._0,
 				{
 					ctor: '::',
-					_0: _merivale$victor$Theory_Types$Every,
+					_0: _merivale$victor$Theory_Messages$Every,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Types$Some,
+						_0: _merivale$victor$Theory_Messages$Some,
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Any,
+							_0: _merivale$victor$Theory_Messages$Any,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -14104,7 +14052,7 @@ var _merivale$victor$Theory_Nouns$pointerPhrase = F4(
 			_1: A2(_merivale$victor$Theory_Nouns$haystackToString, haystack, plural)
 		};
 	});
-var _merivale$victor$Theory_Nouns$independentObject = function (object) {
+var _merivale$victor$Theory_Nouns$normalObject = function (object) {
 	var _p5 = object;
 	switch (_p5.ctor) {
 		case 'Speaker':
@@ -14168,81 +14116,7 @@ var _merivale$victor$Theory_Nouns$subject = function (object) {
 	}
 };
 
-var _merivale$victor$Theory_Vars$displaceVerb = F4(
-	function (vars, newVerb, inter, oldTransformation) {
-		var extendedPre2 = A2(
-			_elm_lang$core$Basics_ops['++'],
-			vars.pre1,
-			{
-				ctor: '::',
-				_0: oldTransformation(vars.verb),
-				_1: vars.pre2
-			});
-		var _p0 = inter;
-		if (_p0.ctor === 'Nothing') {
-			return _elm_lang$core$Native_Utils.update(
-				vars,
-				{
-					verb: newVerb,
-					pre1: {ctor: '[]'},
-					pre2: extendedPre2
-				});
-		} else {
-			return _elm_lang$core$Native_Utils.update(
-				vars,
-				{
-					verb: newVerb,
-					pre1: {ctor: '[]'},
-					pre2: {ctor: '::', _0: _p0._0, _1: extendedPre2}
-				});
-		}
-	});
-var _merivale$victor$Theory_Vars$counter = F2(
-	function (object, balance) {
-		var _p1 = balance;
-		switch (_p1.ctor) {
-			case 'SameObject':
-				return {
-					ctor: '::',
-					_0: _merivale$victor$Theory_Nouns$reflexiveObject(object),
-					_1: {ctor: '[]'}
-				};
-			case 'IndependentObject':
-				return {
-					ctor: '::',
-					_0: _merivale$victor$Theory_Nouns$independentObject(_p1._0),
-					_1: {ctor: '[]'}
-				};
-			default:
-				return _elm_lang$core$String$words(_p1._0);
-		}
-	});
-var _merivale$victor$Theory_Vars$isThirdPersonSingular = function (object) {
-	var _p2 = object;
-	switch (_p2.ctor) {
-		case 'Male':
-			return true;
-		case 'Female':
-			return true;
-		case 'Thing':
-			return true;
-		default:
-			return false;
-	}
-};
-var _merivale$victor$Theory_Vars$isDifferentObject = function (balance) {
-	var _p3 = balance;
-	if (_p3.ctor === 'IndependentObject') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var _merivale$victor$Theory_Vars$initial = function (_p4) {
-	var _p5 = _p4;
-	var _p8 = _p5.style;
-	var _p7 = _p5.object;
-	var _p6 = _p5.condition;
+var _merivale$victor$Theory_Plain$unpack = function (nucleus) {
 	return {
 		past: false,
 		prior: false,
@@ -14250,34 +14124,115 @@ var _merivale$victor$Theory_Vars$initial = function (_p4) {
 		projective: false,
 		negateObject: false,
 		objectOverride: false,
-		balanceObject: A2(
-			_elm_lang$core$Maybe$withDefault,
-			false,
-			A2(_elm_lang$core$Maybe$map, _merivale$victor$Theory_Vars$isDifferentObject, _p6.balance)),
+		balanceObject: function () {
+			var _p0 = nucleus.balance;
+			if (_p0.ctor === 'Nothing') {
+				return false;
+			} else {
+				var _p1 = _p0._0;
+				if (_p1.ctor === 'DifferentObject') {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}(),
 		balanceOverride: false,
 		subject: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Nouns$subject(_p7),
+			_0: _merivale$victor$Theory_Nouns$subject(nucleus.object),
 			_1: {ctor: '[]'}
 		},
 		modality: _elm_lang$core$Maybe$Nothing,
 		negatedModality: false,
 		negatedFulcrum: false,
-		abbreviateFulcrum: _p8.abbreviateFulcrum,
-		abbreviateNot: _p8.abbreviateNot,
-		amNeeded: _elm_lang$core$Native_Utils.eq(_p7, _merivale$victor$Theory_Types$Speaker),
-		isNeeded: _merivale$victor$Theory_Vars$isThirdPersonSingular(_p7),
-		verb: _p6.pivot,
+		abbreviateFulcrum: nucleus.abbreviateFulcrum,
+		abbreviateNot: nucleus.abbreviateNot,
+		amNeeded: _elm_lang$core$Native_Utils.eq(nucleus.object, _merivale$victor$Theory_Messages$Speaker),
+		isNeeded: function () {
+			var _p2 = nucleus.object;
+			switch (_p2.ctor) {
+				case 'Male':
+					return true;
+				case 'Female':
+					return true;
+				case 'Thing':
+					return true;
+				default:
+					return false;
+			}
+		}(),
+		verb: nucleus.pivot,
 		pre1: {ctor: '[]'},
 		pre2: {ctor: '[]'},
-		counter: A2(
-			_elm_lang$core$Maybe$withDefault,
-			{ctor: '[]'},
-			A2(
-				_elm_lang$core$Maybe$map,
-				_merivale$victor$Theory_Vars$counter(_p7),
-				_p6.balance)),
+		counter: function () {
+			var _p3 = nucleus.balance;
+			if (_p3.ctor === 'Nothing') {
+				return {ctor: '[]'};
+			} else {
+				var _p4 = _p3._0;
+				switch (_p4.ctor) {
+					case 'SameObject':
+						return {
+							ctor: '::',
+							_0: _merivale$victor$Theory_Nouns$reflexiveObject(nucleus.object),
+							_1: {ctor: '[]'}
+						};
+					case 'DifferentObject':
+						return {
+							ctor: '::',
+							_0: _merivale$victor$Theory_Nouns$normalObject(_p4._0),
+							_1: {ctor: '[]'}
+						};
+					default:
+						return _elm_lang$core$String$words(_p4._0);
+				}
+			}
+		}(),
 		post: {ctor: '[]'}
+	};
+};
+var _merivale$victor$Theory_Plain$Vars = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return function (s) {
+																			return function (t) {
+																				return function (u) {
+																					return {past: a, prior: b, ongoing: c, projective: d, negateObject: e, objectOverride: f, balanceObject: g, balanceOverride: h, subject: i, modality: j, negatedModality: k, negatedFulcrum: l, abbreviateNot: m, abbreviateFulcrum: n, amNeeded: o, isNeeded: p, verb: q, pre1: r, pre2: s, counter: t, post: u};
+																				};
+																			};
+																		};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
 	};
 };
 
@@ -14430,6 +14385,706 @@ var _merivale$victor$Theory_Fulcrums$negate = F2(
 		return abbreviateNot ? (_merivale$victor$Theory_Fulcrums$ntAble(fulcrum) ? A2(_elm_lang$core$Basics_ops['++'], fulcrum, 'n\'t') : (_elm_lang$core$Native_Utils.eq(fulcrum, 'will') ? 'won\'t' : (_elm_lang$core$Native_Utils.eq(fulcrum, 'can') ? 'can\'t' : (_elm_lang$core$Native_Utils.eq(fulcrum, 'shall') ? 'shan\'t' : A2(_elm_lang$core$Basics_ops['++'], fulcrum, ' not'))))) : A2(_elm_lang$core$Basics_ops['++'], fulcrum, ' not');
 	});
 
+var _merivale$victor$Theory_Elaborations$displaceVerb = F4(
+	function (vars, newVerb, inter, oldTransformation) {
+		var extendedPre2 = A2(
+			_elm_lang$core$Basics_ops['++'],
+			vars.pre1,
+			{
+				ctor: '::',
+				_0: oldTransformation(vars.verb),
+				_1: vars.pre2
+			});
+		var _p0 = inter;
+		if (_p0.ctor === 'Nothing') {
+			return _elm_lang$core$Native_Utils.update(
+				vars,
+				{
+					verb: newVerb,
+					pre1: {ctor: '[]'},
+					pre2: extendedPre2
+				});
+		} else {
+			return _elm_lang$core$Native_Utils.update(
+				vars,
+				{
+					verb: newVerb,
+					pre1: {ctor: '[]'},
+					pre2: {ctor: '::', _0: _p0._0, _1: extendedPre2}
+				});
+		}
+	});
+var _merivale$victor$Theory_Elaborations$amassed = F6(
+	function (target, quantifier, other, haystack, countable, vars) {
+		if (!A2(
+			_elm_lang$core$List$member,
+			A2(_elm_lang$core$Maybe$withDefault, _merivale$victor$Theory_Messages$All, quantifier),
+			{
+				ctor: '::',
+				_0: _merivale$victor$Theory_Messages$Some,
+				_1: {
+					ctor: '::',
+					_0: _merivale$victor$Theory_Messages$Any,
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Theory_Messages$All,
+						_1: {
+							ctor: '::',
+							_0: _merivale$victor$Theory_Messages$Much,
+							_1: {
+								ctor: '::',
+								_0: _merivale$victor$Theory_Messages$Most,
+								_1: {
+									ctor: '::',
+									_0: _merivale$victor$Theory_Messages$Enough,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			})) {
+			return _elm_lang$core$Result$Err('this quantifier cannot be used in amassed elaborations');
+		} else {
+			if (_elm_lang$core$Native_Utils.eq(
+				quantifier,
+				_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Much)) && countable) {
+				return _elm_lang$core$Result$Err('the MUCH quantifier cannot be used with countable categories');
+			} else {
+				var quantifierPhrase = A5(_merivale$victor$Theory_Nouns$quantifierPhrase, false, quantifier, other, haystack, countable);
+				var _p1 = target;
+				if (_p1.ctor === 'MainObject') {
+					if (vars.objectOverride) {
+						return _elm_lang$core$Result$Err('the main object cannot be overridden twice');
+					} else {
+						var newVars = A2(
+							_elm_lang$core$List$member,
+							quantifier,
+							{
+								ctor: '::',
+								_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Some),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Any),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$All),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Much),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Enough),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}) ? _elm_lang$core$Native_Utils.update(
+							vars,
+							{negateObject: true}) : vars;
+						return _elm_lang$core$Result$Ok(
+							_elm_lang$core$Native_Utils.update(
+								newVars,
+								{objectOverride: true, amNeeded: false, isNeeded: !countable, subject: quantifierPhrase}));
+					}
+				} else {
+					return (!vars.balanceObject) ? _elm_lang$core$Result$Err('there is no balancing object to override') : (vars.balanceOverride ? _elm_lang$core$Result$Err('the balancing object cannot be overridden twice') : _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							vars,
+							{negateObject: false, balanceOverride: true, counter: quantifierPhrase})));
+				}
+			}
+		}
+	});
+var _merivale$victor$Theory_Elaborations$enumerated = F5(
+	function (target, quantifier, other, haystack, vars) {
+		if (!A2(
+			_elm_lang$core$List$member,
+			quantifier,
+			{
+				ctor: '::',
+				_0: _merivale$victor$Theory_Messages$A,
+				_1: {
+					ctor: '::',
+					_0: _merivale$victor$Theory_Messages$Several,
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Theory_Messages$Many,
+						_1: {
+							ctor: '::',
+							_0: _merivale$victor$Theory_Messages$Each,
+							_1: {
+								ctor: '::',
+								_0: _merivale$victor$Theory_Messages$Every,
+								_1: {
+									ctor: '::',
+									_0: _merivale$victor$Theory_Messages$Both,
+									_1: {
+										ctor: '::',
+										_0: _merivale$victor$Theory_Messages$Some,
+										_1: {
+											ctor: '::',
+											_0: _merivale$victor$Theory_Messages$Any,
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			})) {
+			return _elm_lang$core$Result$Err('this quantifier cannot be used in enumerated elaborations');
+		} else {
+			var plural = A2(
+				_elm_lang$core$List$member,
+				quantifier,
+				{
+					ctor: '::',
+					_0: _merivale$victor$Theory_Messages$Several,
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Theory_Messages$Many,
+						_1: {
+							ctor: '::',
+							_0: _merivale$victor$Theory_Messages$Both,
+							_1: {ctor: '[]'}
+						}
+					}
+				});
+			var quantifierPhrase = A5(
+				_merivale$victor$Theory_Nouns$quantifierPhrase,
+				true,
+				_elm_lang$core$Maybe$Just(quantifier),
+				other,
+				haystack,
+				plural);
+			var _p2 = target;
+			if (_p2.ctor === 'MainObject') {
+				if (vars.objectOverride) {
+					return _elm_lang$core$Result$Err('the main object cannot be overridden twice');
+				} else {
+					var newVars = A2(
+						_elm_lang$core$List$member,
+						quantifier,
+						{
+							ctor: '::',
+							_0: _merivale$victor$Theory_Messages$Many,
+							_1: {
+								ctor: '::',
+								_0: _merivale$victor$Theory_Messages$Every,
+								_1: {
+									ctor: '::',
+									_0: _merivale$victor$Theory_Messages$Both,
+									_1: {
+										ctor: '::',
+										_0: _merivale$victor$Theory_Messages$Some,
+										_1: {
+											ctor: '::',
+											_0: _merivale$victor$Theory_Messages$Any,
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}) ? _elm_lang$core$Native_Utils.update(
+						vars,
+						{negateObject: true}) : vars;
+					return _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							newVars,
+							{objectOverride: true, amNeeded: false, isNeeded: !plural, subject: quantifierPhrase}));
+				}
+			} else {
+				return (!vars.balanceObject) ? _elm_lang$core$Result$Err('there is no balancing object to override') : (vars.balanceOverride ? _elm_lang$core$Result$Err('the balancing object cannot be overridden twice') : _elm_lang$core$Result$Ok(
+					_elm_lang$core$Native_Utils.update(
+						vars,
+						{negateObject: false, balanceOverride: true, counter: quantifierPhrase})));
+			}
+		}
+	});
+var _merivale$victor$Theory_Elaborations$indirect = F6(
+	function (target, pointer, other, haystack, plural, vars) {
+		var _p3 = target;
+		if (_p3.ctor === 'MainObject') {
+			return vars.objectOverride ? _elm_lang$core$Result$Err('the main object cannot be overridden twice') : _elm_lang$core$Result$Ok(
+				_elm_lang$core$Native_Utils.update(
+					vars,
+					{
+						objectOverride: true,
+						amNeeded: false,
+						isNeeded: !plural,
+						subject: A4(_merivale$victor$Theory_Nouns$pointerPhrase, pointer, other, haystack, plural)
+					}));
+		} else {
+			return (!vars.balanceObject) ? _elm_lang$core$Result$Err('there is no balancing object to override') : (vars.balanceOverride ? _elm_lang$core$Result$Err('the balancing object cannot be overridden twice') : _elm_lang$core$Result$Ok(
+				_elm_lang$core$Native_Utils.update(
+					vars,
+					{
+						balanceOverride: true,
+						counter: A4(_merivale$victor$Theory_Nouns$pointerPhrase, pointer, other, haystack, plural)
+					})));
+		}
+	});
+var _merivale$victor$Theory_Elaborations$apparent = F2(
+	function (preferSeem, vars) {
+		if (vars.past) {
+			return _elm_lang$core$Result$Err('past messages cannot be made apparent');
+		} else {
+			if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
+				return _elm_lang$core$Result$Err('messages with a modality cannot be made apparent');
+			} else {
+				var newVerb = preferSeem ? 'seem' : 'appear';
+				var newVars = A4(
+					_merivale$victor$Theory_Elaborations$displaceVerb,
+					vars,
+					newVerb,
+					_elm_lang$core$Maybe$Just('to'),
+					_elm_lang$core$Basics$identity);
+				return _elm_lang$core$Result$Ok(
+					_elm_lang$core$Native_Utils.update(
+						newVars,
+						{prior: false, ongoing: false, negateObject: false}));
+			}
+		}
+	});
+var _merivale$victor$Theory_Elaborations$imminent = function (vars) {
+	if (vars.past) {
+		return _elm_lang$core$Result$Err('past messages cannot be made imminent');
+	} else {
+		if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
+			return _elm_lang$core$Result$Err('messages with a modality cannot be made imminent');
+		} else {
+			var newVars = A4(
+				_merivale$victor$Theory_Elaborations$displaceVerb,
+				vars,
+				'be',
+				_elm_lang$core$Maybe$Just('about to'),
+				_elm_lang$core$Basics$identity);
+			return _elm_lang$core$Result$Ok(
+				_elm_lang$core$Native_Utils.update(
+					newVars,
+					{prior: false, ongoing: false, negateObject: false}));
+		}
+	}
+};
+var _merivale$victor$Theory_Elaborations$determined = F2(
+	function (time, vars) {
+		if (vars.past) {
+			return _elm_lang$core$Result$Err('past messages cannot be made determined');
+		} else {
+			if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
+				return _elm_lang$core$Result$Err('messages with a modality cannot be made determined');
+			} else {
+				var newVars = A4(
+					_merivale$victor$Theory_Elaborations$displaceVerb,
+					vars,
+					'be',
+					_elm_lang$core$Maybe$Just('going to'),
+					_elm_lang$core$Basics$identity);
+				var _p4 = time;
+				if (_p4.ctor === 'Nothing') {
+					return _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							newVars,
+							{prior: false, ongoing: true, negateObject: false}));
+				} else {
+					return _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							newVars,
+							{
+								prior: false,
+								ongoing: true,
+								negateObject: false,
+								post: A2(
+									_elm_lang$core$Basics_ops['++'],
+									vars.post,
+									{
+										ctor: '::',
+										_0: _p4._0,
+										_1: {ctor: '[]'}
+									})
+							}));
+				}
+			}
+		}
+	});
+var _merivale$victor$Theory_Elaborations$ongoing = function (vars) {
+	if (vars.past) {
+		return _elm_lang$core$Result$Err('past messages cannot be made ongoing');
+	} else {
+		if (vars.prior) {
+			return _elm_lang$core$Result$Err('prior messages cannot be made ongoing');
+		} else {
+			if (vars.ongoing) {
+				return _elm_lang$core$Result$Err('ongoing messages cannot be made ongoing');
+			} else {
+				if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
+					return _elm_lang$core$Result$Err('messages with a modality cannot be made ongoing');
+				} else {
+					var newVars = A4(_merivale$victor$Theory_Elaborations$displaceVerb, vars, 'be', _elm_lang$core$Maybe$Nothing, _merivale$victor$Theory_Words$ongoing);
+					return _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							newVars,
+							{ongoing: true, negateObject: false}));
+				}
+			}
+		}
+	}
+};
+var _merivale$victor$Theory_Elaborations$scattered = F2(
+	function (tally, vars) {
+		return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made scattered') : ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) ? _elm_lang$core$Result$Err('messages with a modality cannot be made scattered') : _elm_lang$core$Result$Ok(
+			_elm_lang$core$Native_Utils.update(
+				vars,
+				{
+					negateObject: false,
+					post: A2(
+						_elm_lang$core$Basics_ops['++'],
+						vars.post,
+						{
+							ctor: '::',
+							_0: tally,
+							_1: {ctor: '[]'}
+						})
+				})));
+	});
+var _merivale$victor$Theory_Elaborations$extended = F2(
+	function (duration, vars) {
+		return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made extended') : (vars.prior ? _elm_lang$core$Result$Err('prior messages cannot be made extended') : ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) ? _elm_lang$core$Result$Err('messages with a modality cannot be made extended') : _elm_lang$core$Result$Ok(
+			_elm_lang$core$Native_Utils.update(
+				vars,
+				{
+					negateObject: false,
+					post: A2(
+						_elm_lang$core$Basics_ops['++'],
+						vars.post,
+						{
+							ctor: '::',
+							_0: duration,
+							_1: {ctor: '[]'}
+						})
+				}))));
+	});
+var _merivale$victor$Theory_Elaborations$regular = F2(
+	function (frequency, vars) {
+		if (vars.past) {
+			return _elm_lang$core$Result$Err('past messages cannot be made regular');
+		} else {
+			if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
+				return _elm_lang$core$Result$Err('messages with a modality cannot be made regular');
+			} else {
+				var _p5 = frequency;
+				if (_p5.ctor === 'Nothing') {
+					return _elm_lang$core$Result$Ok(vars);
+				} else {
+					return _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							vars,
+							{
+								negateObject: false,
+								pre1: {ctor: '::', _0: _p5._0, _1: vars.pre1}
+							}));
+				}
+			}
+		}
+	});
+var _merivale$victor$Theory_Elaborations$preordained = F2(
+	function (time, vars) {
+		if (vars.past) {
+			return _elm_lang$core$Result$Err('past messages cannot be made preordained');
+		} else {
+			if (vars.prior) {
+				return _elm_lang$core$Result$Err('prior messages cannot be made preordained');
+			} else {
+				if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
+					return _elm_lang$core$Result$Err('messages with a modality cannot be made preordained');
+				} else {
+					var _p6 = time;
+					if (_p6.ctor === 'Nothing') {
+						return _elm_lang$core$Result$Ok(vars);
+					} else {
+						return _elm_lang$core$Result$Ok(
+							_elm_lang$core$Native_Utils.update(
+								vars,
+								{
+									negateObject: false,
+									post: A2(
+										_elm_lang$core$Basics_ops['++'],
+										vars.post,
+										{
+											ctor: '::',
+											_0: _p6._0,
+											_1: {ctor: '[]'}
+										})
+								}));
+					}
+				}
+			}
+		}
+	});
+var _merivale$victor$Theory_Elaborations$evasive = F2(
+	function (modality, vars) {
+		return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made evasive') : ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) ? _elm_lang$core$Result$Err('messages with a modality cannot be elaborated with another modality') : _elm_lang$core$Result$Ok(
+			_elm_lang$core$Native_Utils.update(
+				vars,
+				{
+					negateObject: false,
+					modality: _elm_lang$core$Maybe$Just(modality)
+				})));
+	});
+var _merivale$victor$Theory_Elaborations$projective = F3(
+	function (modality, time, vars) {
+		if (vars.past) {
+			return _elm_lang$core$Result$Err('past messages cannot be made projective');
+		} else {
+			if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
+				return _elm_lang$core$Result$Err('messages with a modality cannot be elaborated with another modality');
+			} else {
+				var _p7 = time;
+				if (_p7.ctor === 'Nothing') {
+					return _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							vars,
+							{
+								projective: true,
+								negateObject: false,
+								modality: _elm_lang$core$Maybe$Just(modality)
+							}));
+				} else {
+					return _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							vars,
+							{
+								projective: true,
+								negateObject: false,
+								modality: _elm_lang$core$Maybe$Just(modality),
+								post: A2(
+									_elm_lang$core$Basics_ops['++'],
+									vars.post,
+									{
+										ctor: '::',
+										_0: _p7._0,
+										_1: {ctor: '[]'}
+									})
+							}));
+				}
+			}
+		}
+	});
+var _merivale$victor$Theory_Elaborations$practical = F2(
+	function (modality, vars) {
+		return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made practical') : ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) ? _elm_lang$core$Result$Err('messages with a modality cannot be elaborated with another modality') : _elm_lang$core$Result$Ok(
+			_elm_lang$core$Native_Utils.update(
+				vars,
+				{
+					negateObject: false,
+					modality: _elm_lang$core$Maybe$Just(modality)
+				})));
+	});
+var _merivale$victor$Theory_Elaborations$prior = function (vars) {
+	if (vars.prior) {
+		return _elm_lang$core$Result$Err('prior messages cannot be made more prior');
+	} else {
+		if ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && (vars.projective && (!vars.past))) {
+			return _elm_lang$core$Result$Err('only past projective messages can be prior');
+		} else {
+			if ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && (!vars.projective)) {
+				return _elm_lang$core$Result$Err('practical and evasive messages cannot be prior');
+			} else {
+				var newVars = A4(_merivale$victor$Theory_Elaborations$displaceVerb, vars, 'have', _elm_lang$core$Maybe$Nothing, _merivale$victor$Theory_Words$prior);
+				return _elm_lang$core$Result$Ok(
+					_elm_lang$core$Native_Utils.update(
+						newVars,
+						{prior: true, ongoing: false}));
+			}
+		}
+	}
+};
+var _merivale$victor$Theory_Elaborations$past = function (vars) {
+	return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made more past') : (_elm_lang$core$Native_Utils.eq(
+		vars.modality,
+		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$HardYes)) ? _elm_lang$core$Result$Err('messages with the HARD YES modality (MUST/NEED) cannot be made past') : (_elm_lang$core$Native_Utils.eq(
+		vars.modality,
+		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$SoftYesIsh)) ? _elm_lang$core$Result$Err('messages with the SOFT YES-ISH modality (SHOULD) cannot be made past') : (_elm_lang$core$Native_Utils.eq(
+		vars.modality,
+		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$HardYesIsh)) ? _elm_lang$core$Result$Err('messages with the HARD YES-ISH modality (OUGHT) cannot be made past') : (_elm_lang$core$Native_Utils.eq(
+		vars.modality,
+		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Messages$Dare)) ? _elm_lang$core$Result$Err('messages with the DARE modality (DARE) cannot be made past') : _elm_lang$core$Result$Ok(
+		_elm_lang$core$Native_Utils.update(
+			vars,
+			{past: true}))))));
+};
+var _merivale$victor$Theory_Elaborations$negative = function (vars) {
+	if (vars.negateObject) {
+		var _p8 = vars.subject;
+		_v8_3:
+		do {
+			if (_p8.ctor === '::') {
+				switch (_p8._0) {
+					case 'some':
+						return _elm_lang$core$Result$Ok(
+							_elm_lang$core$Native_Utils.update(
+								vars,
+								{
+									subject: {ctor: '::', _0: 'no', _1: _p8._1}
+								}));
+					case 'someone':
+						return _elm_lang$core$Result$Ok(
+							_elm_lang$core$Native_Utils.update(
+								vars,
+								{
+									subject: {ctor: '::', _0: 'no one', _1: _p8._1}
+								}));
+					case 'somebody':
+						return _elm_lang$core$Result$Ok(
+							_elm_lang$core$Native_Utils.update(
+								vars,
+								{
+									subject: {ctor: '::', _0: 'nobody', _1: _p8._1}
+								}));
+					default:
+						break _v8_3;
+				}
+			} else {
+				break _v8_3;
+			}
+		} while(false);
+		return _elm_lang$core$Result$Ok(
+			_elm_lang$core$Native_Utils.update(
+				vars,
+				{
+					subject: {ctor: '::', _0: 'not', _1: vars.subject}
+				}));
+	} else {
+		var _p9 = vars.modality;
+		if (_p9.ctor === 'Nothing') {
+			return _elm_lang$core$Result$Ok(
+				_elm_lang$core$Native_Utils.update(
+					vars,
+					{
+						pre1: {ctor: '::', _0: 'not', _1: vars.pre1}
+					}));
+		} else {
+			var _p10 = _p9._0;
+			switch (_p10.ctor) {
+				case 'SoftYes':
+					return _elm_lang$core$Result$Err('the SOFT YES modality (WILL) cannot be negated');
+				case 'SoftMaybe':
+					return _elm_lang$core$Result$Err('the SOFT MAYBE modality (MAY) cannot be negated');
+				case 'SoftYesIsh':
+					return _elm_lang$core$Result$Err('the SOFT YES-ISH modality (SHOULD) cannot be negated');
+				case 'HardYesIsh':
+					return _elm_lang$core$Result$Err('the HARD YES-ISH modality (OUGHT) cannot be negated');
+				case 'Command':
+					return _elm_lang$core$Result$Err('the COMMAND modality (SHALL) cannot be negated');
+				default:
+					return _elm_lang$core$Result$Ok(
+						_elm_lang$core$Native_Utils.update(
+							vars,
+							{
+								negatedModality: true,
+								pre1: {ctor: '::', _0: 'not', _1: vars.pre1}
+							}));
+			}
+		}
+	}
+};
+var _merivale$victor$Theory_Elaborations$explode = function (message) {
+	var _p11 = message;
+	switch (_p11.ctor) {
+		case 'Plain':
+			return _elm_lang$core$Result$Ok(
+				_merivale$victor$Theory_Plain$unpack(_p11._0));
+		case 'Negative':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$negative,
+				_merivale$victor$Theory_Elaborations$explode(_p11._0));
+		case 'Past':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$past,
+				_merivale$victor$Theory_Elaborations$explode(_p11._0));
+		case 'Prior':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$prior,
+				_merivale$victor$Theory_Elaborations$explode(_p11._0));
+		case 'Practical':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$practical(_p11._0),
+				_merivale$victor$Theory_Elaborations$explode(_p11._1));
+		case 'Projective':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				A2(_merivale$victor$Theory_Elaborations$projective, _p11._0, _p11._1),
+				_merivale$victor$Theory_Elaborations$explode(_p11._2));
+		case 'Evasive':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$evasive(_p11._0),
+				_merivale$victor$Theory_Elaborations$explode(_p11._1));
+		case 'Preordained':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$preordained(_p11._0),
+				_merivale$victor$Theory_Elaborations$explode(_p11._1));
+		case 'Regular':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$regular(_p11._0),
+				_merivale$victor$Theory_Elaborations$explode(_p11._1));
+		case 'Extended':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$extended(_p11._0),
+				_merivale$victor$Theory_Elaborations$explode(_p11._1));
+		case 'Scattered':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$scattered(_p11._0),
+				_merivale$victor$Theory_Elaborations$explode(_p11._1));
+		case 'Ongoing':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$ongoing,
+				_merivale$victor$Theory_Elaborations$explode(_p11._0));
+		case 'Determined':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$determined(_p11._0),
+				_merivale$victor$Theory_Elaborations$explode(_p11._1));
+		case 'Imminent':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$imminent,
+				_merivale$victor$Theory_Elaborations$explode(_p11._0));
+		case 'Apparent':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				_merivale$victor$Theory_Elaborations$apparent(_p11._0),
+				_merivale$victor$Theory_Elaborations$explode(_p11._1));
+		case 'Indirect':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				A5(_merivale$victor$Theory_Elaborations$indirect, _p11._0, _p11._1, _p11._2, _p11._3, _p11._4),
+				_merivale$victor$Theory_Elaborations$explode(_p11._5));
+		case 'Enumerated':
+			return A2(
+				_elm_lang$core$Result$andThen,
+				A4(_merivale$victor$Theory_Elaborations$enumerated, _p11._0, _p11._1, _p11._2, _p11._3),
+				_merivale$victor$Theory_Elaborations$explode(_p11._4));
+		default:
+			return A2(
+				_elm_lang$core$Result$andThen,
+				A5(_merivale$victor$Theory_Elaborations$amassed, _p11._0, _p11._1, _p11._2, _p11._3, _p11._4),
+				_merivale$victor$Theory_Elaborations$explode(_p11._5));
+	}
+};
+
 var _merivale$victor$Theory_Sentences$fulcrum = F2(
 	function (vars, negate) {
 		var defaultFulcrum = function () {
@@ -14519,590 +15174,13 @@ var _merivale$victor$Theory_Sentences$rejigPre = function (vars) {
 		vars.pre1,
 		{ctor: '::', _0: vars.verb, _1: vars.pre2}) : {ctor: '_Tuple2', _0: vars.pre1, _1: vars.pre2}));
 };
-var _merivale$victor$Theory_Sentences$amassed = F6(
-	function (target, quantifier, other, haystack, countable, vars) {
-		if (!A2(
-			_elm_lang$core$List$member,
-			A2(_elm_lang$core$Maybe$withDefault, _merivale$victor$Theory_Types$All, quantifier),
-			{
-				ctor: '::',
-				_0: _merivale$victor$Theory_Types$Some,
-				_1: {
-					ctor: '::',
-					_0: _merivale$victor$Theory_Types$Any,
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Theory_Types$All,
-						_1: {
-							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Much,
-							_1: {
-								ctor: '::',
-								_0: _merivale$victor$Theory_Types$Most,
-								_1: {
-									ctor: '::',
-									_0: _merivale$victor$Theory_Types$Enough,
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			})) {
-			return _elm_lang$core$Result$Err('this quantifier cannot be used in amassed elaborations');
-		} else {
-			if (_elm_lang$core$Native_Utils.eq(
-				quantifier,
-				_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Much)) && countable) {
-				return _elm_lang$core$Result$Err('the MUCH quantifier cannot be used with countable categories');
-			} else {
-				var quantifierPhrase = A5(_merivale$victor$Theory_Nouns$quantifierPhrase, false, quantifier, other, haystack, countable);
-				var _p3 = target;
-				if (_p3.ctor === 'MainObject') {
-					if (vars.objectOverride) {
-						return _elm_lang$core$Result$Err('the main object cannot be overridden twice');
-					} else {
-						var newVars = A2(
-							_elm_lang$core$List$member,
-							quantifier,
-							{
-								ctor: '::',
-								_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Some),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Any),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$All),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Much),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Enough),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}) ? _elm_lang$core$Native_Utils.update(
-							vars,
-							{negateObject: true}) : vars;
-						return _elm_lang$core$Result$Ok(
-							_elm_lang$core$Native_Utils.update(
-								newVars,
-								{objectOverride: true, amNeeded: false, isNeeded: !countable, subject: quantifierPhrase}));
-					}
-				} else {
-					return (!vars.balanceObject) ? _elm_lang$core$Result$Err('there is no balancing object to override') : (vars.balanceOverride ? _elm_lang$core$Result$Err('the balancing object cannot be overridden twice') : _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							vars,
-							{negateObject: false, balanceOverride: true, counter: quantifierPhrase})));
-				}
-			}
-		}
-	});
-var _merivale$victor$Theory_Sentences$enumerated = F5(
-	function (target, quantifier, other, haystack, vars) {
-		if (!A2(
-			_elm_lang$core$List$member,
-			quantifier,
-			{
-				ctor: '::',
-				_0: _merivale$victor$Theory_Types$A,
-				_1: {
-					ctor: '::',
-					_0: _merivale$victor$Theory_Types$Several,
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Theory_Types$Many,
-						_1: {
-							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Each,
-							_1: {
-								ctor: '::',
-								_0: _merivale$victor$Theory_Types$Every,
-								_1: {
-									ctor: '::',
-									_0: _merivale$victor$Theory_Types$Both,
-									_1: {
-										ctor: '::',
-										_0: _merivale$victor$Theory_Types$Some,
-										_1: {
-											ctor: '::',
-											_0: _merivale$victor$Theory_Types$Any,
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			})) {
-			return _elm_lang$core$Result$Err('this quantifier cannot be used in enumerated elaborations');
-		} else {
-			var plural = A2(
-				_elm_lang$core$List$member,
-				quantifier,
-				{
-					ctor: '::',
-					_0: _merivale$victor$Theory_Types$Several,
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Theory_Types$Many,
-						_1: {
-							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Both,
-							_1: {ctor: '[]'}
-						}
-					}
-				});
-			var quantifierPhrase = A5(
-				_merivale$victor$Theory_Nouns$quantifierPhrase,
-				true,
-				_elm_lang$core$Maybe$Just(quantifier),
-				other,
-				haystack,
-				plural);
-			var _p4 = target;
-			if (_p4.ctor === 'MainObject') {
-				if (vars.objectOverride) {
-					return _elm_lang$core$Result$Err('the main object cannot be overridden twice');
-				} else {
-					var newVars = A2(
-						_elm_lang$core$List$member,
-						quantifier,
-						{
-							ctor: '::',
-							_0: _merivale$victor$Theory_Types$Many,
-							_1: {
-								ctor: '::',
-								_0: _merivale$victor$Theory_Types$Every,
-								_1: {
-									ctor: '::',
-									_0: _merivale$victor$Theory_Types$Both,
-									_1: {
-										ctor: '::',
-										_0: _merivale$victor$Theory_Types$Some,
-										_1: {
-											ctor: '::',
-											_0: _merivale$victor$Theory_Types$Any,
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}) ? _elm_lang$core$Native_Utils.update(
-						vars,
-						{negateObject: true}) : vars;
-					return _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							newVars,
-							{objectOverride: true, amNeeded: false, isNeeded: !plural, subject: quantifierPhrase}));
-				}
-			} else {
-				return (!vars.balanceObject) ? _elm_lang$core$Result$Err('there is no balancing object to override') : (vars.balanceOverride ? _elm_lang$core$Result$Err('the balancing object cannot be overridden twice') : _elm_lang$core$Result$Ok(
-					_elm_lang$core$Native_Utils.update(
-						vars,
-						{negateObject: false, balanceOverride: true, counter: quantifierPhrase})));
-			}
-		}
-	});
-var _merivale$victor$Theory_Sentences$indirect = F6(
-	function (target, pointer, other, haystack, plural, vars) {
-		var _p5 = target;
-		if (_p5.ctor === 'MainObject') {
-			return vars.objectOverride ? _elm_lang$core$Result$Err('the main object cannot be overridden twice') : _elm_lang$core$Result$Ok(
-				_elm_lang$core$Native_Utils.update(
-					vars,
-					{
-						objectOverride: true,
-						amNeeded: false,
-						isNeeded: !plural,
-						subject: A4(_merivale$victor$Theory_Nouns$pointerPhrase, pointer, other, haystack, plural)
-					}));
-		} else {
-			return (!vars.balanceObject) ? _elm_lang$core$Result$Err('there is no balancing object to override') : (vars.balanceOverride ? _elm_lang$core$Result$Err('the balancing object cannot be overridden twice') : _elm_lang$core$Result$Ok(
-				_elm_lang$core$Native_Utils.update(
-					vars,
-					{
-						balanceOverride: true,
-						counter: A4(_merivale$victor$Theory_Nouns$pointerPhrase, pointer, other, haystack, plural)
-					})));
-		}
-	});
-var _merivale$victor$Theory_Sentences$apparent = F2(
-	function (preferSeem, vars) {
-		if (vars.past) {
-			return _elm_lang$core$Result$Err('past messages cannot be made apparent');
-		} else {
-			if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
-				return _elm_lang$core$Result$Err('messages with a modality cannot be made apparent');
-			} else {
-				var newVerb = preferSeem ? 'seem' : 'appear';
-				var newVars = A4(
-					_merivale$victor$Theory_Vars$displaceVerb,
-					vars,
-					newVerb,
-					_elm_lang$core$Maybe$Just('to'),
-					_elm_lang$core$Basics$identity);
-				return _elm_lang$core$Result$Ok(
-					_elm_lang$core$Native_Utils.update(
-						newVars,
-						{prior: false, ongoing: false, negateObject: false}));
-			}
-		}
-	});
-var _merivale$victor$Theory_Sentences$imminent = function (vars) {
-	if (vars.past) {
-		return _elm_lang$core$Result$Err('past messages cannot be made imminent');
-	} else {
-		if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
-			return _elm_lang$core$Result$Err('messages with a modality cannot be made imminent');
-		} else {
-			var newVars = A4(
-				_merivale$victor$Theory_Vars$displaceVerb,
-				vars,
-				'be',
-				_elm_lang$core$Maybe$Just('about to'),
-				_elm_lang$core$Basics$identity);
-			return _elm_lang$core$Result$Ok(
-				_elm_lang$core$Native_Utils.update(
-					newVars,
-					{prior: false, ongoing: false, negateObject: false}));
-		}
-	}
-};
-var _merivale$victor$Theory_Sentences$determined = F2(
-	function (time, vars) {
-		if (vars.past) {
-			return _elm_lang$core$Result$Err('past messages cannot be made determined');
-		} else {
-			if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
-				return _elm_lang$core$Result$Err('messages with a modality cannot be made determined');
-			} else {
-				var newVars = A4(
-					_merivale$victor$Theory_Vars$displaceVerb,
-					vars,
-					'be',
-					_elm_lang$core$Maybe$Just('going to'),
-					_elm_lang$core$Basics$identity);
-				var _p6 = time;
-				if (_p6.ctor === 'Nothing') {
-					return _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							newVars,
-							{prior: false, ongoing: true, negateObject: false}));
-				} else {
-					return _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							newVars,
-							{
-								prior: false,
-								ongoing: true,
-								negateObject: false,
-								post: A2(
-									_elm_lang$core$Basics_ops['++'],
-									vars.post,
-									{
-										ctor: '::',
-										_0: _p6._0,
-										_1: {ctor: '[]'}
-									})
-							}));
-				}
-			}
-		}
-	});
-var _merivale$victor$Theory_Sentences$ongoing = function (vars) {
-	if (vars.past) {
-		return _elm_lang$core$Result$Err('past messages cannot be made ongoing');
-	} else {
-		if (vars.prior) {
-			return _elm_lang$core$Result$Err('prior messages cannot be made ongoing');
-		} else {
-			if (vars.ongoing) {
-				return _elm_lang$core$Result$Err('ongoing messages cannot be made ongoing');
-			} else {
-				if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
-					return _elm_lang$core$Result$Err('messages with a modality cannot be made ongoing');
-				} else {
-					var newVars = A4(_merivale$victor$Theory_Vars$displaceVerb, vars, 'be', _elm_lang$core$Maybe$Nothing, _merivale$victor$Theory_Words$ongoing);
-					return _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							newVars,
-							{ongoing: true, negateObject: false}));
-				}
-			}
-		}
-	}
-};
-var _merivale$victor$Theory_Sentences$scattered = F2(
-	function (tally, vars) {
-		return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made scattered') : ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) ? _elm_lang$core$Result$Err('messages with a modality cannot be made scattered') : _elm_lang$core$Result$Ok(
-			_elm_lang$core$Native_Utils.update(
-				vars,
-				{
-					negateObject: false,
-					post: A2(
-						_elm_lang$core$Basics_ops['++'],
-						vars.post,
-						{
-							ctor: '::',
-							_0: tally,
-							_1: {ctor: '[]'}
-						})
-				})));
-	});
-var _merivale$victor$Theory_Sentences$extended = F2(
-	function (duration, vars) {
-		return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made extended') : (vars.prior ? _elm_lang$core$Result$Err('prior messages cannot be made extended') : ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) ? _elm_lang$core$Result$Err('messages with a modality cannot be made extended') : _elm_lang$core$Result$Ok(
-			_elm_lang$core$Native_Utils.update(
-				vars,
-				{
-					negateObject: false,
-					post: A2(
-						_elm_lang$core$Basics_ops['++'],
-						vars.post,
-						{
-							ctor: '::',
-							_0: duration,
-							_1: {ctor: '[]'}
-						})
-				}))));
-	});
-var _merivale$victor$Theory_Sentences$regular = F2(
-	function (frequency, vars) {
-		if (vars.past) {
-			return _elm_lang$core$Result$Err('past messages cannot be made regular');
-		} else {
-			if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
-				return _elm_lang$core$Result$Err('messages with a modality cannot be made regular');
-			} else {
-				var _p7 = frequency;
-				if (_p7.ctor === 'Nothing') {
-					return _elm_lang$core$Result$Ok(vars);
-				} else {
-					return _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							vars,
-							{
-								negateObject: false,
-								pre1: {ctor: '::', _0: _p7._0, _1: vars.pre1}
-							}));
-				}
-			}
-		}
-	});
-var _merivale$victor$Theory_Sentences$preordained = F2(
-	function (time, vars) {
-		if (vars.past) {
-			return _elm_lang$core$Result$Err('past messages cannot be made preordained');
-		} else {
-			if (vars.prior) {
-				return _elm_lang$core$Result$Err('prior messages cannot be made preordained');
-			} else {
-				if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
-					return _elm_lang$core$Result$Err('messages with a modality cannot be made preordained');
-				} else {
-					var _p8 = time;
-					if (_p8.ctor === 'Nothing') {
-						return _elm_lang$core$Result$Ok(vars);
-					} else {
-						return _elm_lang$core$Result$Ok(
-							_elm_lang$core$Native_Utils.update(
-								vars,
-								{
-									negateObject: false,
-									post: A2(
-										_elm_lang$core$Basics_ops['++'],
-										vars.post,
-										{
-											ctor: '::',
-											_0: _p8._0,
-											_1: {ctor: '[]'}
-										})
-								}));
-					}
-				}
-			}
-		}
-	});
-var _merivale$victor$Theory_Sentences$evasive = F2(
-	function (modality, vars) {
-		return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made evasive') : ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) ? _elm_lang$core$Result$Err('messages with a modality cannot be elaborated with another modality') : _elm_lang$core$Result$Ok(
-			_elm_lang$core$Native_Utils.update(
-				vars,
-				{
-					negateObject: false,
-					modality: _elm_lang$core$Maybe$Just(modality)
-				})));
-	});
-var _merivale$victor$Theory_Sentences$projective = F3(
-	function (modality, time, vars) {
-		if (vars.past) {
-			return _elm_lang$core$Result$Err('past messages cannot be made projective');
-		} else {
-			if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
-				return _elm_lang$core$Result$Err('messages with a modality cannot be elaborated with another modality');
-			} else {
-				var _p9 = time;
-				if (_p9.ctor === 'Nothing') {
-					return _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							vars,
-							{
-								projective: true,
-								negateObject: false,
-								modality: _elm_lang$core$Maybe$Just(modality)
-							}));
-				} else {
-					return _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							vars,
-							{
-								projective: true,
-								negateObject: false,
-								modality: _elm_lang$core$Maybe$Just(modality),
-								post: A2(
-									_elm_lang$core$Basics_ops['++'],
-									vars.post,
-									{
-										ctor: '::',
-										_0: _p9._0,
-										_1: {ctor: '[]'}
-									})
-							}));
-				}
-			}
-		}
-	});
-var _merivale$victor$Theory_Sentences$practical = F2(
-	function (modality, vars) {
-		return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made practical') : ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) ? _elm_lang$core$Result$Err('messages with a modality cannot be elaborated with another modality') : _elm_lang$core$Result$Ok(
-			_elm_lang$core$Native_Utils.update(
-				vars,
-				{
-					negateObject: false,
-					modality: _elm_lang$core$Maybe$Just(modality)
-				})));
-	});
-var _merivale$victor$Theory_Sentences$prior = function (vars) {
-	if (vars.prior) {
-		return _elm_lang$core$Result$Err('prior messages cannot be made more prior');
-	} else {
-		if ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && (vars.projective && (!vars.past))) {
-			return _elm_lang$core$Result$Err('only past projective messages can be prior');
-		} else {
-			if ((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && (!vars.projective)) {
-				return _elm_lang$core$Result$Err('practical and evasive messages cannot be prior');
-			} else {
-				var newVars = A4(_merivale$victor$Theory_Vars$displaceVerb, vars, 'have', _elm_lang$core$Maybe$Nothing, _merivale$victor$Theory_Words$prior);
-				return _elm_lang$core$Result$Ok(
-					_elm_lang$core$Native_Utils.update(
-						newVars,
-						{prior: true, ongoing: false}));
-			}
-		}
-	}
-};
-var _merivale$victor$Theory_Sentences$past = function (vars) {
-	return vars.past ? _elm_lang$core$Result$Err('past messages cannot be made more past') : (_elm_lang$core$Native_Utils.eq(
-		vars.modality,
-		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$HardYes)) ? _elm_lang$core$Result$Err('messages with the HARD YES modality (MUST/NEED) cannot be made past') : (_elm_lang$core$Native_Utils.eq(
-		vars.modality,
-		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$SoftYesIsh)) ? _elm_lang$core$Result$Err('messages with the SOFT YES-ISH modality (SHOULD) cannot be made past') : (_elm_lang$core$Native_Utils.eq(
-		vars.modality,
-		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$HardYesIsh)) ? _elm_lang$core$Result$Err('messages with the HARD YES-ISH modality (OUGHT) cannot be made past') : (_elm_lang$core$Native_Utils.eq(
-		vars.modality,
-		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Types$Dare)) ? _elm_lang$core$Result$Err('messages with the DARE modality (DARE) cannot be made past') : _elm_lang$core$Result$Ok(
-		_elm_lang$core$Native_Utils.update(
-			vars,
-			{past: true}))))));
-};
-var _merivale$victor$Theory_Sentences$negative = function (vars) {
-	if (vars.negateObject) {
-		var _p10 = vars.subject;
-		_v13_3:
-		do {
-			if (_p10.ctor === '::') {
-				switch (_p10._0) {
-					case 'some':
-						return _elm_lang$core$Result$Ok(
-							_elm_lang$core$Native_Utils.update(
-								vars,
-								{
-									subject: {ctor: '::', _0: 'no', _1: _p10._1}
-								}));
-					case 'someone':
-						return _elm_lang$core$Result$Ok(
-							_elm_lang$core$Native_Utils.update(
-								vars,
-								{
-									subject: {ctor: '::', _0: 'no one', _1: _p10._1}
-								}));
-					case 'somebody':
-						return _elm_lang$core$Result$Ok(
-							_elm_lang$core$Native_Utils.update(
-								vars,
-								{
-									subject: {ctor: '::', _0: 'nobody', _1: _p10._1}
-								}));
-					default:
-						break _v13_3;
-				}
-			} else {
-				break _v13_3;
-			}
-		} while(false);
-		return _elm_lang$core$Result$Ok(
-			_elm_lang$core$Native_Utils.update(
-				vars,
-				{
-					subject: {ctor: '::', _0: 'not', _1: vars.subject}
-				}));
-	} else {
-		var _p11 = vars.modality;
-		if (_p11.ctor === 'Nothing') {
-			return _elm_lang$core$Result$Ok(
-				_elm_lang$core$Native_Utils.update(
-					vars,
-					{
-						pre1: {ctor: '::', _0: 'not', _1: vars.pre1}
-					}));
-		} else {
-			var _p12 = _p11._0;
-			switch (_p12.ctor) {
-				case 'SoftYes':
-					return _elm_lang$core$Result$Err('the SOFT YES modality (WILL) cannot be negated');
-				case 'SoftMaybe':
-					return _elm_lang$core$Result$Err('the SOFT MAYBE modality (MAY) cannot be negated');
-				case 'SoftYesIsh':
-					return _elm_lang$core$Result$Err('the SOFT YES-ISH modality (SHOULD) cannot be negated');
-				case 'HardYesIsh':
-					return _elm_lang$core$Result$Err('the HARD YES-ISH modality (OUGHT) cannot be negated');
-				case 'Command':
-					return _elm_lang$core$Result$Err('the COMMAND modality (SHALL) cannot be negated');
-				default:
-					return _elm_lang$core$Result$Ok(
-						_elm_lang$core$Native_Utils.update(
-							vars,
-							{
-								negatedModality: true,
-								pre1: {ctor: '::', _0: 'not', _1: vars.pre1}
-							}));
-			}
-		}
-	}
-};
 var _merivale$victor$Theory_Sentences$implode = function (vars) {
-	var _p13 = _merivale$victor$Theory_Sentences$rejigPre(vars);
-	var pre1 = _p13._0;
-	var tempPre2 = _p13._1;
-	var _p14 = _merivale$victor$Theory_Sentences$shiftNotToBool(tempPre2);
-	var negateFulcrum = _p14._0;
-	var pre2 = _p14._1;
+	var _p3 = _merivale$victor$Theory_Sentences$rejigPre(vars);
+	var pre1 = _p3._0;
+	var tempPre2 = _p3._1;
+	var _p4 = _merivale$victor$Theory_Sentences$shiftNotToBool(tempPre2);
+	var negateFulcrum = _p4._0;
+	var pre2 = _p4._1;
 	return _elm_lang$core$List$isEmpty(pre1) ? _elm_lang$core$Result$Ok(
 		A2(
 			_elm_lang$core$String$join,
@@ -15139,104 +15217,11 @@ var _merivale$victor$Theory_Sentences$implode = function (vars) {
 							pre2,
 							A2(_elm_lang$core$Basics_ops['++'], vars.counter, vars.post)))))));
 };
-var _merivale$victor$Theory_Sentences$explode = function (message) {
-	var _p15 = message;
-	switch (_p15.ctor) {
-		case 'Plain':
-			return _elm_lang$core$Result$Ok(
-				_merivale$victor$Theory_Vars$initial(_p15._0));
-		case 'Negative':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$negative,
-				_merivale$victor$Theory_Sentences$explode(_p15._0));
-		case 'Past':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$past,
-				_merivale$victor$Theory_Sentences$explode(_p15._0));
-		case 'Prior':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$prior,
-				_merivale$victor$Theory_Sentences$explode(_p15._0));
-		case 'Practical':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$practical(_p15._0),
-				_merivale$victor$Theory_Sentences$explode(_p15._1));
-		case 'Projective':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				A2(_merivale$victor$Theory_Sentences$projective, _p15._0, _p15._1),
-				_merivale$victor$Theory_Sentences$explode(_p15._2));
-		case 'Evasive':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$evasive(_p15._0),
-				_merivale$victor$Theory_Sentences$explode(_p15._1));
-		case 'Preordained':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$preordained(_p15._0),
-				_merivale$victor$Theory_Sentences$explode(_p15._1));
-		case 'Regular':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$regular(_p15._0),
-				_merivale$victor$Theory_Sentences$explode(_p15._1));
-		case 'Extended':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$extended(_p15._0),
-				_merivale$victor$Theory_Sentences$explode(_p15._1));
-		case 'Scattered':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$scattered(_p15._0),
-				_merivale$victor$Theory_Sentences$explode(_p15._1));
-		case 'Ongoing':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$ongoing,
-				_merivale$victor$Theory_Sentences$explode(_p15._0));
-		case 'Determined':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$determined(_p15._0),
-				_merivale$victor$Theory_Sentences$explode(_p15._1));
-		case 'Imminent':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$imminent,
-				_merivale$victor$Theory_Sentences$explode(_p15._0));
-		case 'Apparent':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Sentences$apparent(_p15._0),
-				_merivale$victor$Theory_Sentences$explode(_p15._1));
-		case 'Indirect':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				A5(_merivale$victor$Theory_Sentences$indirect, _p15._0, _p15._1, _p15._2, _p15._3, _p15._4),
-				_merivale$victor$Theory_Sentences$explode(_p15._5));
-		case 'Enumerated':
-			return A2(
-				_elm_lang$core$Result$andThen,
-				A4(_merivale$victor$Theory_Sentences$enumerated, _p15._0, _p15._1, _p15._2, _p15._3),
-				_merivale$victor$Theory_Sentences$explode(_p15._4));
-		default:
-			return A2(
-				_elm_lang$core$Result$andThen,
-				A5(_merivale$victor$Theory_Sentences$amassed, _p15._0, _p15._1, _p15._2, _p15._3, _p15._4),
-				_merivale$victor$Theory_Sentences$explode(_p15._5));
-	}
-};
 var _merivale$victor$Theory_Sentences$sentence = function (message) {
 	return A2(
 		_elm_lang$core$Result$andThen,
 		_merivale$victor$Theory_Sentences$implode,
-		_merivale$victor$Theory_Sentences$explode(message));
+		_merivale$victor$Theory_Elaborations$explode(message));
 };
 
 var _merivale$victor$Interface_View$nucleus = F4(

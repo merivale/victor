@@ -2,7 +2,7 @@ module Theory.Nouns
     exposing
         ( subject
         , reflexiveObject
-        , normalObject
+        , independentObject
         , pointerPhrase
         , quantifierPhrase
         )
@@ -77,8 +77,8 @@ reflexiveObject object =
             "themselves"
 
 
-normalObject : Object -> String
-normalObject object =
+independentObject : Object -> String
+independentObject object =
     case object of
         Speaker ->
             "me"
@@ -191,23 +191,21 @@ quantifierToString oneOrBody quantifier other category =
         Just A ->
             if other then
                 [ "another" ]
+            else if List.member (String.left 1 category) [ "a", "e", "i", "o", "u" ] then
+                [ "an" ]
             else
-                if List.member (String.left 1 category) [ "a", "e", "i", "o", "u" ] then
-                    [ "an" ]
-                else
-                    [ "a" ]
+                [ "a" ]
 
         Just q ->
-            if oneOrBody then 
+            if oneOrBody then
                 if other then
                     [ (String.toLower (toString q)) ++ category, "else" ]
                 else
                     [ (String.toLower (toString q)) ++ category ]
+            else if other then
+                [ String.toLower (toString q), "other" ]
             else
-                if other then
-                    [ String.toLower (toString q), "other" ]
-                else
-                    [ String.toLower (toString q) ]
+                [ String.toLower (toString q) ]
 
 
 haystackToString : Haystack -> Bool -> List String
@@ -237,4 +235,5 @@ oneOrBody quantifier haystack =
         Just q ->
             List.member q [ Every, Some, Any ]
                 && List.member haystack.category [ "one", "body" ]
-                && haystack.description == Nothing
+                && haystack.description
+                == Nothing

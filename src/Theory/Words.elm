@@ -22,7 +22,6 @@ match in the dictionary of irregularities.
 -}
 
 import Dict
-import Theory.Types exposing (..)
 
 
 {-| The exposed functions. In each case they first look the word up in one of

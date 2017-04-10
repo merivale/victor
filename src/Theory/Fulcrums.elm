@@ -56,11 +56,14 @@ ntAble fulcrum =
         ]
 
 
+
 {- Abbreviate a fulcrum. This function is a little more involved that it might
-otherwise be, because the fulcrum might previously have been negated, in which
-case it might consist of two words (the second being "not"). Thus we need to be
-sure we are only abbreviating the first word.
+   otherwise be, because the fulcrum might previously have been negated, in which
+   case it might consist of two words (the second being "not"). Thus we need to be
+   sure we are only abbreviating the first word.
 -}
+
+
 abbreviate : String -> String
 abbreviate fulcrum =
     let
@@ -162,18 +165,15 @@ verb fulcrum past amNeeded isNeeded =
                 "was"
             else
                 "were"
+        else if amNeeded then
+            "am"
+        else if isNeeded then
+            "is"
         else
-            if amNeeded then
-                "am"
-            else if isNeeded then
-                "is"
-            else
-                "are"
+            "are"
+    else if past then
+        Words.past fulcrum
+    else if isNeeded then
+        Words.present fulcrum
     else
-        if past then
-            Words.past fulcrum
-        else
-            if isNeeded then
-                Words.present fulcrum
-            else
-                fulcrum
+        fulcrum

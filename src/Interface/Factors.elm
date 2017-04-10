@@ -186,7 +186,7 @@ balance index override ingredients =
                             , balanceSelect
                             ]
 
-                    DifferentObject object ->
+                    IndependentObject object ->
                         case override of
                             Nothing ->
                                 Html.div
