@@ -10,13 +10,6 @@ module Interface.Input
         , selectGroup
         )
 
-{-| HTML for gathering the inputs for message content. Note that the select
-dropdown menu isn't a native HTML select element. This is partly to enable a
-greater level of custom CSS styling, but mainly because getting input from
-native select menus in Elm is a pain (you have to encode the values as strings,
-then decode them again, and deal with possible errors...).
--}
-
 import Html
 import Html.Attributes as Attr
 import Html.Events as Events
