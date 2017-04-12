@@ -20,7 +20,7 @@ The nucleus of every atomic English message in my model is made up of two items,
         , style : Style
         }
 
-The `object` is whatever the message is about, and may take any one of the following values:
+A plain, unelaborated English message affirms the present satisfaction of the `condition` by the `object`. The `object` may take any one of the following values:
 
     type Object
         = Speaker
@@ -46,23 +46,20 @@ The `condition` is whatever is predicated of this object, and it breaks down fur
         | IndependentObject Object
         | CustomBalance String
 
-The plainest of English sentences comprises a `subject` and a `predicate`, where the object is encoded in the former, and the condition is encoded in the latter. The predicate can be broken down further into the `fulcrum` (which encodes the pivot) and an optional `counter` (which encodes the balance). Consider for example the following message:
+The plainest of English sentences comprises a `subject` and a `predicate`, where the object is encoded in the former, and the condition is encoded in the latter. The predicate can be broken down further into the `fulcrum` (which encodes the pivot) and an optional `counter` (which encodes the balance). Consider for example a plain message with the following nucleus:
 
-    Plain
-        { object = Speaker
-        , condition =
-            { pivot = "be"
-            , balance = DifferentObject (Male "Victor")
-            }
-        , style =
-            { abbreviateFulcrum = False
-            , abbreviateNot = False
-            }
+    { object = Speaker
+    , condition =
+        { pivot = "be"
+        , balance = DifferentObject (Male "Victor")
         }
+    , style =
+        { abbreviateFulcrum = False
+        , abbreviateNot = False
+        }
+    }
 
 When fed through my encoding function, this produces the string `"I am Victor"`. If the `abbreviateFulcrum` flag is set to true, the result would instead be `"I'm Victor"`. The `abbreviateNot` flag should be self-explanatory, though it is only relevant when the message is negated (see section 3.1).
-
-A plain, unelaborated English message affirms the present satisfaction of the condition by the object. Most of the elaborating functions in English modify the underlying condition, but there are a few that modify - or rather *override* - the object (see section 3.7), and one very particular elaboration that turns a claim about the present into the corresponding claim about the past. I should advertise right away that I posit no analogous elaboration for turning claims about the present into corresponding claims about the future; rather, I maintain that talk about the future is achieved through modifying the conditions instead (see section 3.6).
 
 ## 3. The Elaborations
 
@@ -73,9 +70,22 @@ There are currently 17 elaborations posited by my model. This list is obviously 
         | Negative Message
         | Past Message
         | Prior Message
-        ...
+        | Practical Modality Message
+        | Projective Modality (Maybe Time) Message
+        | Evasive Modality Message
+        | Preordained (Maybe Time) Message
+        | Regular (Maybe Frequency) Message
+        | Extended Duration Message
+        | Scattered Tally Message
+        | Ongoing Message
+        | Determined (Maybe Time) Message
+        | Imminent Message
+        | Apparent Bool Message
+        | Indirect Target Pointer Bool Haystack Bool Message
+        | Enumerated Target Quantifier Bool Haystack Message
+        | Amassed Target (Maybe Quantifier) Bool Haystack Bool Message
 
-
+The type definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details below). Rather than try to write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself. The function returns an error in cases of such invalid input.
 
 ### 3.1. Negative Messages
 
@@ -91,17 +101,19 @@ My model posits a `Negative` elaboration, which has the semantic effect of conve
 
 The `Negative` elaboration is the most semantically versatile of those posited by my model. While its effect, as I have said, is always to turn an affirmative message into its corresponding denial, there are different components of messages that can be the focus of a denial. What exactly is being denied in a `Negative` message depends on the elaboration to which the negation itself is applied, and hence discussion of the other elaborations below will include details on what happens when you negate them.
 
-### 3.2. Past and Prior Messages
+### 3.2. Past, Prior, and Ongoing Messages
 
-Plain English messages affirm the *present* satisfaction of the `condition` by the `object`. That the present is the default tense for English messages is suggested by the fact that, with the exception of the highly irregular verb `"be"` and the third person singular form of other verbs, the present form is simply the base form: `"have"`, `"do"`, `"eat"`, `"walk"`, etc. It is also suggested by the so-called "timeless" use of the present for abstract, mathematical, or logical claims for which time is irrelevant: `"Two plus two equals four"`, `"A vixen is a female fox"`, etc. It also accords nicely with our tendency to *update* state reports to the present, even when our evidence supports only the claim that they held in the past: `"My car is parked outside"`, `"Fred is in his office"`. Ultimately, however, the evidence for this assumption is holistic, arising from the overall power of the theory in which it is embedded.
+Plain English messages, as I said at the outset, affirm the *present* satisfaction of the condition by the object. That the present is the default tense for English messages is suggested by the fact that, with the exception of the highly irregular verb `"be"` and the third person singular form of other verbs, the present form is simply the base form: `"have"`, `"do"`, `"eat"`, `"walk"`, etc. It is also suggested by the so-called "timeless" use of the present for abstract, mathematical, or logical claims for which time is irrelevant: `"Two plus two equals four"`, `"A vixen is a female fox"`, etc. It also accords nicely with our tendency to *update* state reports to the present, even when our evidence supports only the claim that they held in the past: `"My car is parked outside"` (presumably it hasn't been stolen), `"Fred is in his office"` (assuming he hasn't left early). Ultimately, however, the evidence for this assumption is holistic, arising from the overall power of the theory in which it is embedded.
 
 If the present is the default tense for plain English messages, past tense messages can only arise through some `Past` elaboration, and this is precisely what I maintain. Semantically, this elaboration turns any message about the present into its corresponding message about the past. Grammatically, its effect is to change the form of the verb or modal at the `fulcrum` of the sentence: `"I am Victor"` becomes `"I was Victor"`, and so on.
 
-English also has a `Prior` elaboration, whose semantic effect is to locate the `condition`'s satisfaction in some point or region of time prior to some other point in time. By default, the other point in time is the present, in which case the semantic difference between `Past` and `Prior` is only very slight. In any case, the grammatical upshot of this elaboration is to displace the fulcrum with the corresponding finite form of the verb `"have"`, and convert the previous fulcrum to its prior participle form: `"I am Victor"` becomes `"I have been Victor"`, while `"I was Victor"` becomes `"I had been Victor"`. Though the semantic similarity between `Past` and `Prior` is anyway obvious, it is worth noting that for the regular English verbs the past form and the prior participle form are identical; e.g. `"He walked to work"`, `"He has walked to work"`.
+English also has a `Prior` elaboration, whose semantic effect is to locate the underlying condition's satisfaction in some point or region of time prior to some other point in time. By default, the other point in time is the present, in which case the semantic difference between `Past` and `Prior` is only very slight. In any case, the grammatical upshot of this elaboration is to displace the fulcrum with the corresponding finite form of the verb `"have"`, and convert the previous fulcrum to its prior participle form: `"I am Victor"` becomes `"I have been Victor"`, while `"I was Victor"` becomes `"I had been Victor"`. Though the semantic similarity between `Past` and `Prior` is anyway obvious, it is worth noting that for the regular English verbs the past form and the prior participle form are identical; e.g. `"He walked to work"`, `"He has walked to work"`.
 
 What I am calling a `Prior` message will be familiar to grammarians under the guise of the "perfective". I do not much care for that term, which doesn't seem to me to capture the essence of this elaboration's semantic effect as precisely as does the label "prior". Standard English grammars also acknowledge a "past past" tense, encoded with `"had"` + the prior participle. Consequently they discover an ambituity in sentences like `"He had walked to work"`, which admit of a "past past" interpretation as well as a "past perfective". I agree with the observations, but account for them rather differently: it is all a matter of the order in which the `Past` and `Prior` elaborations are applied. A `Prior` message is "perfective" in the terminology I shun, and a `Past Prior` message is a "past perfective". I diagnose the "past past" tense, meanwhile, as a `Prior Past` message. The order in which the elaborations is applied has no effect on the output sentence, leading to the ambiguity we observe.
 
-Negating a `Past` or `Prior` message does nothing special. More precisely, a `Negative Past` message is semantically identical to a `Past Negative` message, and likewise for `Negative Prior` and `Prior Negative` messages. To put it another way, the `Past` and `Prior` elaborations are entirely independent of the `Negative` elaboration. This reflects a general point in my model: while the order in which elaborations are applied typically makes a semantic difference, this need not always be so. Sometimes all that matters is *that* an elaboration has been applied, not *when* it was applied.
+[ongoing messages...]
+
+Negating a `Past`, `Prior`, or `Ongoing` message does nothing special. More precisely, a `Negative Past` message is semantically identical to a `Past Negative` message, and likewise for `Prior` and `Ongoing` messages with and without negation. To put it another way, the `Past`, `Prior`, and `Ongoing` elaborations are entirely independent of the `Negative` elaboration. This reflects a general point in my model: while the order in which elaborations are applied typically makes a semantic difference, this need not always be so. Sometimes all that matters is *that* an elaboration has been applied, not *when* it was applied.
 
 ### 3.3. Extended and Scattered Messages
 
@@ -181,12 +193,11 @@ The four invisible elaborations not only result in ambiguties when they interact
 
 By my count, this sentence is accessible to no fewer than *five* distinct interpretations: a simple claim about when the film started (a past plain nucleus), a claim about when it was scheduled to start (a past preordained message), a claim about when showings of started (a past regular message), a claim about when showings of it were scheduled to start (a past preordained regular message), and finally a claim about the time at which the management, when drawing up their plans, generally scheduled showings of it to start (a past regular preordained message). (It may be hard to envisage a use for this last message. To aid your imaginations, suppose the management had to fix the timetable anew each morning, and typically ended up placing the film in question in the 8 o'clock slot. This in contrast to the more likely fourth interpretation, in which they settle once and for all on a regular 8 o'clock position.)
 
-### 3.5. Ongoing, Determined, Imminent, and Apparent Messages
+### 3.5. Determined, Imminent, and Apparent Messages
 
 Unlike the elaborations of the previous section, the elaborations discussed in this section are all visible. Specifically, they all displace the fulcrum in the output sentence. Examples all at once:
 
     Plain:      "He is silly."
-    Ongoing:    "He is being silly."
     Determined: "He is going to be silly (tomorrow)."
     Imminent:   "He is about to be silly."
     Apparent:   "He appears/seems to be silly."
