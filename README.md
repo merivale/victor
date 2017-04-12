@@ -1,6 +1,6 @@
 # Victor
 
-A partial model the English language, thought of as a code for processing `messages` (structured arrangements of informational and stylistic choices) into `sentences` (strings of words). Inspired by the work of logician and grammarian Victor Howard Dudman.
+A model the English language, thought of as a code for processing `messages` (structured arrangements of informational and stylistic choices) into `sentences` (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman.
 
 The algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the `docs` folder, for easy integration with [GitHub Pages](https://pages.github.com/); thus you can play around with the current version at [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
 
@@ -8,7 +8,7 @@ The algorithm is written in [Elm](http://elm-lang.org/), with the styles written
 
 The overarching hypothesis behind this model is that every atomic English message is made up out of a series of zero or more `elaborations` applied to a core `nucleus`. The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.
 
-A major selling point of the model, and more generally of the idea to treat natural languages as codes in this way, is that it enables us to explain the widespread phenomenon of ambiguity in semantic terms (contrary to current mainstream thought in philosophical semantics, which treats it as either a syntactic or a pragmatic phenomenon). The explanation of ambiguity in general is that the encoding function is not one-to-one, but many-to-one. Furthermore, by articulating the English function, we can see precisely how and why various English ambiguities arise. In some cases it is simply because an elaboration leaves no mark on the output sentence, but more often it is because multiple elaborations (or multiple sequences of elaborations) happen to coincide in the same output. Examples will be given in section 3 below. In computational terms, English is a *lossy* code, which does not preserve in its output strings all of the information in its originating messages.
+A major selling point of the model, and more generally of the idea to treat natural languages as codes in this way, is its ability to explain a large number of ambiguities in semantic terms (contrary to current mainstream thought in philosophical semantics, which treats ambiguity as either a syntactic or a pragmatic phenomenon). The explanation of ambiguity in general is that the encoding function is not one-to-one, but many-to-one. Furthermore, by articulating the English function, we can see precisely how and why various English ambiguities arise. In some cases it is simply because an elaboration leaves no mark on the output sentence, but more often it is because multiple elaborations (or multiple sequences of elaborations) coincide in the same output. Examples will be given in section 3 below. In computational terms, what this means is that English is a *lossy* code, which does not preserve in its output strings all of the information in its originating messages.
 
 ## 2. The Nucleus
 
@@ -34,7 +34,7 @@ The `object` is whatever the message is about, and may take any one of the follo
 
 The optional string argument in four of these cases is intended to house a proper name; otherwise English defaults to the appropriate pronoun (`"he"`, `"she"`, `"it"`, `"they"`). In the other cases only the pronoun is available (`"I"`, `"you"`, `"we"`).
 
-The `condition` is whatever is predicated of this `object`, and it breaks down further into a `pivot` and an optional `balance`. My model does not yet handle these `conditions` with any great precision. Users are obliged to encode the `pivot` for themselves (into a verb), and will often need to encode the `balance` for themselves as well. The exceptions to the latter rule are when the `balance` is another `object`, either identical to the main `object` (as in, `"He likes himself"`), or distinct (as in, `"He likes her"`). Thus:
+The `condition` is whatever is predicated of this object, and it breaks down further into a `pivot` and an optional `balance`. My model does not yet handle these conditions with any great precision. Users are obliged to encode the pivot for themselves (into a verb), and will often need to encode the balance for themselves as well. The exceptions to the latter rule are when the balance is another object, either identical to the main object (as in, `"He likes himself"`), or independent (as in, `"He likes her"`). Thus:
 
     type alias Condition =
         { pivot : String
@@ -43,10 +43,10 @@ The `condition` is whatever is predicated of this `object`, and it breaks down f
     
     type Balance
         = SameObject
-        | DifferentObject Object
+        | IndependentObject Object
         | CustomBalance String
 
-The plainest of English sentences comprises a `subject` and a `predicate`, where the `object` is encoded in the former, and the `condition` is encoded in the latter. The `predicate` can be broken down further into the `fulcrum` (which encodes the `pivot`) and an optional `counter` (which encodes the `balance`). Consider for example the following message:
+The plainest of English sentences comprises a `subject` and a `predicate`, where the object is encoded in the former, and the condition is encoded in the latter. The predicate can be broken down further into the `fulcrum` (which encodes the pivot) and an optional `counter` (which encodes the balance). Consider for example the following message:
 
     Plain
         { object = Speaker
@@ -60,13 +60,22 @@ The plainest of English sentences comprises a `subject` and a `predicate`, where
             }
         }
 
-When fed through my encoding function, this produces the string `"I am Victor"`. If the `abbreviateFulcrum` flag is set to true, the result would instead be `"I'm Victor"`. The `abbreviateNot` flag should be self-explanatory, though it is only relevant when the message is negated (see section 3.1 below).
+When fed through my encoding function, this produces the string `"I am Victor"`. If the `abbreviateFulcrum` flag is set to true, the result would instead be `"I'm Victor"`. The `abbreviateNot` flag should be self-explanatory, though it is only relevant when the message is negated (see section 3.1).
 
-A plain, unelaborated English message affirms the present satisfaction of the `condition` by the `object`. More elaborate messages may alter any of these three things, by (1) replacing the present for some other point or region of time, (2) modifying the `condition`, or (3) modifying or overriding the `object`.
+A plain, unelaborated English message affirms the present satisfaction of the condition by the object. Most of the elaborating functions in English modify the underlying condition, but there are a few that modify - or rather *override* - the object (see section 3.7), and one very particular elaboration that turns a claim about the present into the corresponding claim about the past. I should advertise right away that I posit no analogous elaboration for turning claims about the present into corresponding claims about the future; rather, I maintain that talk about the future is achieved through modifying the conditions instead (see section 3.6).
 
 ## 3. The Elaborations
 
-There are currently 17 elaborations posited by my model. This list is obviously incomplete, but represents - or so I hope - a decent start.
+There are currently 17 elaborations posited by my model. This list is obviously incomplete, but represents - or so I hope - a decent start. Though it will not make much sense up front, here is the type definition for messages (details of the individual elaborations to follow):
+
+    type Message
+        = Plain Nucleus
+        | Negative Message
+        | Past Message
+        | Prior Message
+        ...
+
+
 
 ### 3.1. Negative Messages
 
