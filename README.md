@@ -1,16 +1,48 @@
 # Victor
 
-A model the English language, thought of as a code for processing `messages` (structured arrangements of informational and stylistic choices) into `sentences` (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman.
+A model of the English language, thought of as a code for processing `messages` (structured arrangements of informational and stylistic choices) into `sentences` (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman. Read on for an outline of the theory, or play around with the current version at  [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
 
-The algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the `docs` folder, for easy integration with [GitHub Pages](https://pages.github.com/); thus you can play around with the current version at [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
+Modern philosophical semantics treats languages as functions from strings to messages, routinely enquiring after the rules that determine the meaning of a sentence. This forces them into an uncomfortable theoretical position, in which ambiguous sentences are, from the semantic point of view, impossible. This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* accounts of ambiguity.
 
-## 1. Overview
+By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in its input messages. More than this, however, by articulating the English function, we should be able to see precisely how and why various English ambiguities arise. See below for examples.
 
-The overarching hypothesis behind this model is that every atomic English message is made up out of a series of zero or more `elaborations` applied to a core `nucleus`. The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.
+## 1. The Source
 
-A major selling point of the model, and more generally of the idea to treat natural languages as codes in this way, is its ability to explain a large number of ambiguities in semantic terms (contrary to current mainstream thought in philosophical semantics, which treats ambiguity as either a syntactic or a pragmatic phenomenon). The explanation of ambiguity in general is that the encoding function is not one-to-one, but many-to-one. Furthermore, by articulating the English function, we can see precisely how and why various English ambiguities arise. In some cases it is simply because an elaboration leaves no mark on the output sentence, but more often it is because multiple elaborations (or multiple sequences of elaborations) coincide in the same output. Examples will be given in section 3 below. In computational terms, what this means is that English is a *lossy* code, which does not preserve in its output strings all of the information in its originating messages.
+My algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the gh-pages branch, for easy integration with [GitHub Pages](https://pages.github.com/). The `src` directory contains the main program module, which simply pulls everything together (nothing to see there), and two subdirectories, `Interface` and `Theory`. The former directory contains all the modules responsible for generating the web page users see, for keeping track of user input, and for piecing that input together into a `Message` variable. It is the modules in the latter directory that are potentially of theoretical interest, since they describe what a `Message` variable looks like on my model, and define the encoding functions that convert these variables into strings.
 
-## 2. The Nucleus
+There is no need to go into detail about these modules here. Anyone interested in the nuts and bolts should simply read the code. It is internally documented with fairly substantial comments, and is intended to be intelligible to anyone of a suitably logical turn of mind (though obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then look at the `Sentences` module to see how these variables are encoded into strings. The latter module outsources some leg work to the various other modules, which may be consulted in any order for information about the finer details.
+
+I have not yet written any tests, but there is a stub `test` directory as a placeholder for later development in this direction. From the point of view of the theory (rather than the interface), it would be helpful to run various `Message` variables through my encoding function, and check the results are as they should be.
+
+## 2. The Theory
+
+The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more `elaborations` applied to a core `nucleus`. The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.
+
+There are currently 17 elaborations posited by my model. This list is obviously incomplete, but represents - or so I hope - a decent start. Though it will not make much sense up front, here is the type definition for messages (details of the individual elaborations to follow):
+
+    type Message
+        = Plain Nucleus
+        | Negative Message
+        | Past Message
+        | Prior Message
+        | Practical Modality Message
+        | Projective Modality (Maybe Time) Message
+        | Evasive Modality Message
+        | Preordained (Maybe Time) Message
+        | Regular (Maybe Frequency) Message
+        | Extended Duration Message
+        | Scattered Tally Message
+        | Ongoing Message
+        | Determined (Maybe Time) Message
+        | Imminent Message
+        | Apparent Bool Message
+        | Indirect Target Pointer Bool Haystack Bool Message
+        | Enumerated Target Quantifier Bool Haystack Message
+        | Amassed Target (Maybe Quantifier) Bool Haystack Bool Message
+
+The type definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details below). Rather than try to write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself. The function returns an error in cases of such invalid input.
+
+### 2.1. The Nucleus
 
 The nucleus of every atomic English message in my model is made up of two items, plus a couple of (theoretically uninteresting) stlylistic choices:
 
@@ -61,33 +93,7 @@ The plainest of English sentences comprises a `subject` and a `predicate`, where
 
 When fed through my encoding function, this produces the string `"I am Victor"`. If the `abbreviateFulcrum` flag is set to true, the result would instead be `"I'm Victor"`. The `abbreviateNot` flag should be self-explanatory, though it is only relevant when the message is negated (see section 3.1).
 
-## 3. The Elaborations
-
-There are currently 17 elaborations posited by my model. This list is obviously incomplete, but represents - or so I hope - a decent start. Though it will not make much sense up front, here is the type definition for messages (details of the individual elaborations to follow):
-
-    type Message
-        = Plain Nucleus
-        | Negative Message
-        | Past Message
-        | Prior Message
-        | Practical Modality Message
-        | Projective Modality (Maybe Time) Message
-        | Evasive Modality Message
-        | Preordained (Maybe Time) Message
-        | Regular (Maybe Frequency) Message
-        | Extended Duration Message
-        | Scattered Tally Message
-        | Ongoing Message
-        | Determined (Maybe Time) Message
-        | Imminent Message
-        | Apparent Bool Message
-        | Indirect Target Pointer Bool Haystack Bool Message
-        | Enumerated Target Quantifier Bool Haystack Message
-        | Amassed Target (Maybe Quantifier) Bool Haystack Bool Message
-
-The type definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details below). Rather than try to write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself. The function returns an error in cases of such invalid input.
-
-### 3.1. Negative Messages
+### 2.2. Negative Messages
 
 The chief puzzle facing any theory of negation in English is posed by the related ambiguities discovered, for example, in the following two sentences:
 
@@ -101,7 +107,7 @@ My model posits a `Negative` elaboration, which has the semantic effect of conve
 
 The `Negative` elaboration is the most semantically versatile of those posited by my model. While its effect, as I have said, is always to turn an affirmative message into its corresponding denial, there are different components of messages that can be the focus of a denial. What exactly is being denied in a `Negative` message depends on the elaboration to which the negation itself is applied, and hence discussion of the other elaborations below will include details on what happens when you negate them.
 
-### 3.2. Past, Prior, and Ongoing Messages
+### 2.3. Past, Prior, and Ongoing Messages
 
 Plain English messages, as I said at the outset, affirm the *present* satisfaction of the condition by the object. That the present is the default tense for English messages is suggested by the fact that, with the exception of the highly irregular verb `"be"` and the third person singular form of other verbs, the present form is simply the base form: `"have"`, `"do"`, `"eat"`, `"walk"`, etc. It is also suggested by the so-called "timeless" use of the present for abstract, mathematical, or logical claims for which time is irrelevant: `"Two plus two equals four"`, `"A vixen is a female fox"`, etc. It also accords nicely with our tendency to *update* state reports to the present, even when our evidence supports only the claim that they held in the past: `"My car is parked outside"` (presumably it hasn't been stolen), `"Fred is in his office"` (assuming he hasn't left early). Ultimately, however, the evidence for this assumption is holistic, arising from the overall power of the theory in which it is embedded.
 
@@ -115,7 +121,7 @@ What I am calling a `Prior` message will be familiar to grammarians under the gu
 
 Negating a `Past`, `Prior`, or `Ongoing` message does nothing special. More precisely, a `Negative Past` message is semantically identical to a `Past Negative` message, and likewise for `Prior` and `Ongoing` messages with and without negation. To put it another way, the `Past`, `Prior`, and `Ongoing` elaborations are entirely independent of the `Negative` elaboration. This reflects a general point in my model: while the order in which elaborations are applied typically makes a semantic difference, this need not always be so. Sometimes all that matters is *that* an elaboration has been applied, not *when* it was applied.
 
-### 3.3. Extended and Scattered Messages
+### 2.4. Extended and Scattered Messages
 
 The elaborations examined in this section share the interesting property of being "invisible", in the sense that they have, in and of themselves, no effect on the output sentence. They each take an additional argument alongside their input message, and this argument does have a visible effect. Even with this extra argument, however, these elaborations are the source of some striking English ambiguities when they interact with other elaborations.
 
@@ -141,7 +147,7 @@ I diagnose the first reading, in which the speaker is affirming that she was fre
 
 The very same ambiguity arises through the interaction of the `Negative` elaboration with the `Scattered` elaboration, though typically the `Negative Scattered` interpretation will seem more natural than the `Scattered Negative`, because it may often be hard to make sense of an occasion on which something *didn't* happen. Typically, English speakers will likely read `"Grannie didn't fall downstairs fifteen times"` as a precusor to saying, for example, that she took only *fourteen* tumbles that day. Suppose, however, that she attempted the stairs fifteen times last Thursday, faltering each time but always remaining on her feet. Then one would have a natural use for the `Past Scattered Negative` as well as the more common `Past Negative Scattered`.
 
-### 3.4. Preordained and Regular Messages
+### 2.5. Preordained and Regular Messages
 
 The two elaborations discussed in this section have a lot in common with those discussed in the previous section. They are likewise invisible, though they also both take an additional argument that is not invisible. Unlike the previous two elaborations, however, this additional argument is optional; and when it is absent, even more potential ambiguity arises.
 
@@ -193,7 +199,7 @@ The four invisible elaborations not only result in ambiguties when they interact
 
 By my count, this sentence is accessible to no fewer than *five* distinct interpretations: a simple claim about when the film started (a past plain nucleus), a claim about when it was scheduled to start (a past preordained message), a claim about when showings of started (a past regular message), a claim about when showings of it were scheduled to start (a past preordained regular message), and finally a claim about the time at which the management, when drawing up their plans, generally scheduled showings of it to start (a past regular preordained message). (It may be hard to envisage a use for this last message. To aid your imaginations, suppose the management had to fix the timetable anew each morning, and typically ended up placing the film in question in the 8 o'clock slot. This in contrast to the more likely fourth interpretation, in which they settle once and for all on a regular 8 o'clock position.)
 
-### 3.5. Determined, Imminent, and Apparent Messages
+### 2.6. Determined, Imminent, and Apparent Messages
 
 Unlike the elaborations of the previous section, the elaborations discussed in this section are all visible. Specifically, they all displace the fulcrum in the output sentence. Examples all at once:
 
@@ -210,7 +216,7 @@ But these represent questions for another day.)
 
 [...]
 
-### 3.6. Practical, Projective, and Evasive Messages
+### 2.7. Practical, Projective, and Evasive Messages
 
 There is no `Future` elaboration in my model, and this is not simply because I haven't got around to including it: on the contrary, I positively deny that any such elaboration exists in English. There are many reasons for this, and I do not propose to go into them at length here. Instead, I will simply outline my alternative, in the hopes that its elegance and predictive power will speak for itself.
 
@@ -218,6 +224,6 @@ In addition to its copious verbs, English boasts a small handful of modals, whic
 
 [...]
 
-### 3.7. Indirect, Enumerated, and Amassed Messages
+### 2.8. Indirect, Enumerated, and Amassed Messages
 
 [...]

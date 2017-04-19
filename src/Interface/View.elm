@@ -22,10 +22,27 @@ import Theory.Sentences as Sentences
 -}
 root : Model -> Html.Html Signal
 root model =
-    Html.div
-        [ Attr.class "victor" ]
-        [ output model
-        , input 0 Nothing Nothing model
+    Html.div []
+        [ Html.header []
+            [ Html.h1 []
+                [ Html.text "Victor: A Model of the English Code" ]
+            ]
+        , Html.main_ []
+            [ output model
+            , input 0 Nothing Nothing model
+            ]
+        , Html.footer []
+            [ Html.ul []
+                [ Html.li []
+                    [ Html.a [ Attr.href "http://www.merivale.uk/" ]
+                        [ Html.text "Amyas Merivale" ]
+                    ]
+                , Html.li []
+                    [ Html.a [ Attr.href "https://github.com/merivale/victor" ]
+                        [ Html.text "View Source on GitHub" ]
+                    ]
+                ]
+            ]
         ]
 
 

@@ -8932,8 +8932,8 @@ var _merivale$victor$Interface_Input$fromId = function (options) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Interface.Input',
 				{
-					start: {line: 220, column: 13},
-					end: {line: 225, column: 22}
+					start: {line: 213, column: 13},
+					end: {line: 218, column: 22}
 				},
 				_p0)('select element is broken :(');
 		} else {
@@ -15567,18 +15567,97 @@ var _merivale$victor$Interface_View$output = function (model) {
 var _merivale$victor$Interface_View$root = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
+		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('victor'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _merivale$victor$Interface_View$output(model),
+			_0: A2(
+				_elm_lang$html$Html$header,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h1,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Victor: A Model of the English Code'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
 			_1: {
 				ctor: '::',
-				_0: A4(_merivale$victor$Interface_View$input, 0, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, model),
-				_1: {ctor: '[]'}
+				_0: A2(
+					_elm_lang$html$Html$main_,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _merivale$victor$Interface_View$output(model),
+						_1: {
+							ctor: '::',
+							_0: A4(_merivale$victor$Interface_View$input, 0, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, model),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$footer,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$ul,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$href('http://www.merivale.uk/'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Amyas Merivale'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$li,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$a,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$href('https://github.com/merivale/victor'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('View Source on GitHub'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
