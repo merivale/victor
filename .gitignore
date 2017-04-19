@@ -4,5 +4,3 @@ elm-stuff/
 repl-temp-*
 /dist
 /.shake
-# notepad ++ workspace file
-workspace.txt
