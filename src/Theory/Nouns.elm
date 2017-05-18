@@ -3,8 +3,9 @@ module Theory.Nouns
         ( subject
         , reflexiveObject
         , independentObject
-        , pointerPhrase
-        , quantifierPhrase
+        , indirect
+        , enumerated
+        , amassed
         )
 
 {-| Functions for generating nouns or pronouns from objects, and noun phrases
@@ -144,20 +145,25 @@ relativeObject object =
 {-| Convert a set of general factors into a noun phrase with a determiner (e.g.
 "most other people", "someone in the room", "several things from Spain").
 -}
-pointerPhrase : Pointer -> Bool -> Haystack -> Bool -> List String
-pointerPhrase pointer other haystack plural =
+indirect : Pointer -> Bool -> Haystack -> Bool -> List String
+indirect pointer other haystack plural =
     if other then
         [ pointerToString pointer plural other, "other" ] ++ (haystackToString haystack plural)
     else
         (pointerToString pointer plural other) :: (haystackToString haystack plural)
 
 
-quantifierPhrase : Bool -> Maybe Quantifier -> Bool -> Haystack -> Bool -> List String
-quantifierPhrase enumerated quantifier other haystack plural =
-    if enumerated && oneOrBody quantifier haystack then
-        (quantifierToString True quantifier other haystack.category) ++ (Maybe.withDefault [] (Maybe.map String.words haystack.restriction))
+enumerated : Quantifier -> Bool -> Haystack -> Bool -> List String
+enumerated quantifier other haystack plural =
+    if canAbbreviate quantifier haystack then
+        (quantifierToString True (Just quantifier) other haystack.category) ++ (Maybe.withDefault [] (Maybe.map String.words haystack.restriction))
     else
-        (quantifierToString False quantifier other haystack.category) ++ (haystackToString haystack plural)
+        (quantifierToString False (Just quantifier) other haystack.category) ++ (haystackToString haystack plural)
+
+
+amassed : Maybe Quantifier -> Bool -> Haystack -> Bool -> List String
+amassed quantifier other haystack countable =
+    (quantifierToString False quantifier other haystack.category) ++ (haystackToString haystack plural)
 
 
 pointerToString : Pointer -> Bool -> Bool -> String
@@ -183,7 +189,7 @@ pointerToString pointer plural other =
 
 
 quantifierToString : Bool -> Maybe Quantifier -> Bool -> String -> List String
-quantifierToString oneOrBody quantifier other category =
+quantifierToString canAbbreviate quantifier other category =
     case quantifier of
         Nothing ->
             if other then
@@ -200,7 +206,7 @@ quantifierToString oneOrBody quantifier other category =
                 [ "a" ]
 
         Just q ->
-            if oneOrBody then
+            if canAbbreviate then
                 if other then
                     [ (String.toLower (toString q)) ++ category, "else" ]
                 else
@@ -229,14 +235,8 @@ haystackToString haystack plural =
         description ++ [ category ] ++ restriction
 
 
-oneOrBody : Maybe Quantifier -> Haystack -> Bool
-oneOrBody quantifier haystack =
-    case quantifier of
-        Nothing ->
-            False
-
-        Just q ->
-            List.member q [ Every, Some, Any ]
-                && List.member haystack.category [ "one", "body" ]
-                && haystack.description
-                == Nothing
+canAbbreviate : Quantifier -> Haystack -> Bool
+canAbbreviate quantifier haystack =
+    List.member quantifier [ Every, Some, Any ]
+        && List.member haystack.category [ "one", "body", "thing" ]
+        && haystack.description == Nothing

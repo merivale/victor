@@ -23,33 +23,29 @@ type Message
     | Negative Message
     | Past Message
     | Prior Message
+    | Expanded Pivot Message
     | Practical Modality Message
-    | Projective Modality (Maybe Time) Message
     | Evasive Modality Message
+    | Projective Modality (Maybe Time) Message
     | Preordained (Maybe Time) Message
     | Regular (Maybe Frequency) Message
     | Extended Duration Message
     | Scattered Tally Message
-    | Ongoing Message
-    | Determined (Maybe Time) Message
-    | Imminent Message
-    | Apparent Bool Message
     | Indirect Target Pointer Bool Haystack Bool Message
     | Enumerated Target Quantifier Bool Haystack Message
     | Amassed Target (Maybe Quantifier) Bool Haystack Bool Message
 
 
-{-| The nucleus of an English message consists of an object and a condition, and
-a couple of uninteresting stylistic choices. A plain message affirms the present
-satisfaction of the condition by the object. A condition comprises a pivot
-(encoded in a verb) and - optionally - a balance. My model does not (yet) handle
-conditions with any degree of precision. Users must encode their pivots for
-themselves, and also their balances, unless the balance is another object.
+{-| The nucleus of an English message consists of an object and a condition. A
+plain message affirms the present satisfaction of the condition by the object.
+A condition comprises a pivot (encoded in a verb) and - optionally - a balance.
+My model does not (yet) handle conditions with any degree of precision. Users
+must encode their pivots for themselves, and also their balances, unless the
+balance is another object.
 -}
 type alias Nucleus =
     { object : Object
     , condition : Condition
-    , style : Style
     }
 
 
@@ -65,9 +61,14 @@ type Object
 
 
 type alias Condition =
-    { pivot : String
+    { pivot : Pivot
     , balance : Maybe Balance
     }
+
+
+type Pivot
+    = Be (Maybe String) Bool
+    | Do String Bool Bool
 
 
 type Balance
@@ -76,18 +77,12 @@ type Balance
     | CustomBalance String
 
 
-type alias Style =
-    { abbreviateFulcrum : Bool
-    , abbreviateNot : Bool
-    }
-
-
 {-| This is not the place to explain the nature of the various elaborations
 posited by my model. Nor is it the place to go into detail about the additional
 arguments that (some of) these elaborations take. See the README file for
 details. Note that many of these arguments are currently just aliases for
 strings, which means that users are obliged to encode them for themselves. These
-represent facets of my model that await further development.
+represent parts of my model that await further development.
 -}
 type Modality
     = SoftYes
@@ -161,18 +156,39 @@ down are direct determiners of the output string.
 type alias Vars =
     { past : Bool
     , prior : Bool
-    , ongoing : Bool
     , projective : Bool
     , negateObject : Bool
-    , objectOverride : Bool
+    , object : MetaObject
+    , modality : Maybe Modality
+    , pivot : Pivot
+    , pre1 : List String
+    , pre2 : List String
+    , balance : MetaBalance
+    , post : List String
+    }
+
+
+type MetaObject
+    = RealObject Object
+    | PseudoObject ObjectOverride
+
+
+type MetaBalance
+    = RealBalance Balance
+    | PseudoBalance ObjectOverride
+
+
+type ObjectOverride
+    = IndirectOverride Pointer Bool Haystack Bool
+    | EnumeratedOverride Quantifier Bool Haystack
+    | AmassedOverride (Maybe Quantifier) Bool Haystack Bool
+
+{-    , objectOverride : Bool
     , balanceObject : Bool
     , balanceOverride : Bool
     , subject : List String
     , modality : Maybe Modality
     , negatedModality : Bool
-    , negatedFulcrum : Bool
-    , abbreviateNot : Bool
-    , abbreviateFulcrum : Bool
     , amNeeded : Bool
     , isNeeded : Bool
     , verb : String
@@ -181,3 +197,4 @@ type alias Vars =
     , counter : List String
     , post : List String
     }
+-}

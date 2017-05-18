@@ -10,48 +10,44 @@ By modelling languages as codes, i.e. as functions in precisely the *opposite* d
 
 ## 2. The Source
 
-My algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the gh-pages branch, for easy integration with [GitHub Pages](https://pages.github.com/). The `src` directory contains the main program module, which simply pulls everything together (nothing to see there), and two subdirectories, `Interface` and `Theory`. The former directory contains all the modules responsible for generating the web page users see, for keeping track of user input, and for piecing that input together into a `Message` variable. It is the modules in the latter directory that are potentially of theoretical interest, since they describe what a `Message` variable looks like on my model, and define the encoding functions that convert these variables into strings.
+My algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the gh-pages branch, for easy integration with [GitHub Pages](https://pages.github.com/). The `src` directory contains the main program module, which simply pulls everything together (nothing to see there), and two subdirectories, `Interface` and `Theory`. The former directory contains all the modules responsible for generating the web page users see, for keeping track of user input, and for piecing that input together into a `Message` variable. It is the modules in the latter directory that are potentially of theoretical interest, since they describe what a `Message` variable looks like, and define the encoding functions that convert these variables into strings.
 
-There is no need to go into detail about these modules here. Anyone interested in the nuts and bolts should simply read the code. It is internally documented with fairly substantial comments, and is intended to be intelligible to anyone of a suitably logical turn of mind (though obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then look at the `Sentences` module to see how these variables are encoded into strings. The latter module outsources some leg work to the various other modules, which may be consulted in any order for information about the finer details.
+There is no need to go into detail about the `Theory` modules here. Anyone interested in the nuts and bolts should simply read the code itself. It is internally documented with fairly substantial comments (or where it isn't, it will be soon), and is intended to be intelligible to anyone of a suitably logical turn of mind (though obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then look at the `Sentences` module to see how these variables are encoded into strings. The latter module outsources some leg work to the various other modules, which may be consulted in any order for information about the finer details.
 
-I have not yet written any tests, but there is a stub `test` directory as a placeholder for later development in this direction. From the point of view of the theory (rather than the interface), it would be helpful to run various `Message` variables through my encoding function, and check the results are as they should be.
+I have not yet written any tests, but there is a stub `test` directory as a placeholder for later development in this direction. From the point of view of the theory (never mind the interface), it would be helpful to have tests that run various `Message` variables through my encoding function, and check that the results are as they should be.
 
 ## 3. The Theory
 
 The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more `elaborations` applied to a core `nucleus`. The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.
 
-There are currently 17 elaborations posited by my model. This list is obviously incomplete, but represents - or so I hope - a decent start. Though it will not make much sense up front, here is the type definition for messages (details of the individual elaborations to follow):
+There are currently 14 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a decent start. Though it will not make much sense up front, here is the type definition for messages (details of the individual elaborations to follow):
 
     type Message
         = Plain Nucleus
         | Negative Message
         | Past Message
         | Prior Message
+        | Expanded Pivot Message
         | Practical Modality Message
-        | Projective Modality (Maybe Time) Message
         | Evasive Modality Message
+        | Projective Modality (Maybe Time) Message
         | Preordained (Maybe Time) Message
         | Regular (Maybe Frequency) Message
         | Extended Duration Message
         | Scattered Tally Message
-        | Ongoing Message
-        | Determined (Maybe Time) Message
-        | Imminent Message
-        | Apparent Bool Message
         | Indirect Target Pointer Bool Haystack Bool Message
         | Enumerated Target Quantifier Bool Haystack Message
         | Amassed Target (Maybe Quantifier) Bool Haystack Bool Message
 
-The type definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than try to write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself. The function returns an error in cases of such invalid input.
+The type definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself. The function returns an error in cases of such invalid input.
 
 ### 3.1. The Nucleus
 
-The nucleus of every atomic English message in my model is made up of two items, plus a couple of (theoretically uninteresting) stlylistic choices:
+The nucleus of every atomic English message in my model is made up of two items, an `object` and a `condition`:
 
     type alias Nucleus =
         { object : Object
         , condition : Condition
-        , style : Style
         }
 
 A plain, unelaborated English message affirms the present satisfaction of the `condition` by the `object`. The `object` may take any one of the following values:
@@ -84,12 +80,8 @@ The plainest of English sentences comprises a `subject` and a `predicate`, where
 
     { object = Speaker
     , condition =
-        { pivot = "be"
-        , balance = DifferentObject (Male "Victor")
-        }
-    , style =
-        { abbreviateFulcrum = False
-        , abbreviateNot = False
+        { pivot = Be Nothing False
+        , balance = IndependentObject (Male "Victor")
         }
     }
 

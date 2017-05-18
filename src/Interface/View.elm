@@ -29,7 +29,7 @@ root model =
             ]
         , Html.main_ []
             [ output model
-            , input 0 Nothing Nothing model
+            , input 0 False False model
             ]
         , Html.footer []
             [ Html.ul []
@@ -74,7 +74,7 @@ format sentence =
         String.append ucFirst "."
 
 
-input : Int -> Maybe Override -> Maybe Override -> Model -> Html.Html Signal
+input : Int -> Bool -> Bool -> Model -> Html.Html Signal
 input index mainOverride balanceOverride model =
     case Array.get index model of
         Nothing ->
@@ -91,7 +91,7 @@ input index mainOverride balanceOverride model =
                     elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingredients model
 
 
-nucleus : Int -> Maybe Override -> Maybe Override -> Ingredients -> Html.Html Signal
+nucleus : Int -> Bool -> Bool -> Ingredients -> Html.Html Signal
 nucleus index mainOverride balanceOverride ingredients =
     Input.input
         { elaborationRecipe = Nothing
@@ -99,13 +99,13 @@ nucleus index mainOverride balanceOverride ingredients =
         , index = index
         , body =
             [ Factors.object index mainOverride ingredients
-            , Factors.pivot index ingredients
+            , Factors.pivot index ingredients False
             , Factors.balance index balanceOverride ingredients
             ]
         }
 
 
-elaboration : Int -> Maybe Override -> Maybe Override -> ElaborationRecipe -> Int -> Ingredients -> Model -> Html.Html Signal
+elaboration : Int -> Bool -> Bool -> ElaborationRecipe -> Int -> Ingredients -> Model -> Html.Html Signal
 elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingredients model =
     Input.input
         { elaborationRecipe = Just elaborationRecipe
@@ -113,20 +113,25 @@ elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingred
         , index = index
         , body =
             case elaborationRecipe of
-                MakePractical ->
-                    [ Factors.limitedModality index ingredients
+                MakeExpanded ->
+                    [ Factors.pivot index ingredients True
                     , input subIndex mainOverride balanceOverride model
                     ]
 
-                MakeProjective ->
-                    [ Factors.unlimitedModality index ingredients
-                    , Factors.time index ingredients
+                MakePractical ->
+                    [ Factors.limitedModality index ingredients
                     , input subIndex mainOverride balanceOverride model
                     ]
 
                 MakeEvasive ->
                     [ Factors.limitedModality index ingredients
                     , Factors.frequency index ingredients
+                    , input subIndex mainOverride balanceOverride model
+                    ]
+
+                MakeProjective ->
+                    [ Factors.unlimitedModality index ingredients
+                    , Factors.time index ingredients
                     , input subIndex mainOverride balanceOverride model
                     ]
 
@@ -150,22 +155,12 @@ elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingred
                     , input subIndex mainOverride balanceOverride model
                     ]
 
-                MakeDetermined ->
-                    [ Factors.time index ingredients
-                    , input subIndex mainOverride balanceOverride model
-                    ]
-
-                MakeApparent ->
-                    [ Factors.apparentStyle index ingredients
-                    , input subIndex mainOverride balanceOverride model
-                    ]
-
                 MakeIndirect ->
                     [ Factors.target index ingredients
                     , Factors.pointer index ingredients
                     , Factors.indirectCategory index ingredients
                     , Factors.categoryFlanks index ingredients
-                    , inputWithOverride ingredients.target IndirectOverride subIndex mainOverride balanceOverride model
+                    , inputWithOverride ingredients.target subIndex mainOverride balanceOverride model
                     ]
 
                 MakeEnumerated ->
@@ -173,7 +168,7 @@ elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingred
                     , Factors.enumeratedQuantifier index ingredients
                     , Factors.enumeratedCategory index ingredients
                     , Factors.categoryFlanks index ingredients
-                    , inputWithOverride ingredients.target EnumeratedOverride subIndex mainOverride balanceOverride model
+                    , inputWithOverride ingredients.target subIndex mainOverride balanceOverride model
                     ]
 
                 MakeAmassed ->
@@ -181,7 +176,7 @@ elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingred
                     , Factors.amassedQuantifier index ingredients
                     , Factors.amassedCategory index ingredients
                     , Factors.categoryFlanks index ingredients
-                    , inputWithOverride ingredients.target AmassedOverride subIndex mainOverride balanceOverride model
+                    , inputWithOverride ingredients.target subIndex mainOverride balanceOverride model
                     ]
 
                 a ->
@@ -189,11 +184,11 @@ elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingred
         }
 
 
-inputWithOverride : Target -> Override -> Int -> Maybe Override -> Maybe Override -> Model -> Html.Html Signal
-inputWithOverride target override index mainOverride balanceOverride model =
+inputWithOverride : Target -> Int -> Bool -> Bool -> Model -> Html.Html Signal
+inputWithOverride target index mainOverride balanceOverride model =
     case target of
         MainObject ->
-            input index (Just override) balanceOverride model
+            input index True balanceOverride model
 
         BalancingObject ->
-            input index mainOverride (Just override) model
+            input index mainOverride True model

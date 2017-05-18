@@ -23,32 +23,32 @@ type ElaborationRecipe
     = MakeNegative
     | MakePast
     | MakePrior
+    | MakeExpanded
     | MakePractical
-    | MakeProjective
     | MakeEvasive
+    | MakeProjective
     | MakePreordained
     | MakeRegular
     | MakeExtended
     | MakeScattered
-    | MakeOngoing
-    | MakeDetermined
-    | MakeImminent
-    | MakeApparent
     | MakeIndirect
     | MakeEnumerated
     | MakeAmassed
 
 
-{-| It makes life much easier to bundle all the ingredients needed for every
-elaboration together. For each instance of this record, only a few fields will
-be needed, but this is a negligible memory price to pay - and as I say, it makes
-the code simpler.
+{-| It makes the code much simpler if we bundle all the ingredients needed for
+the nucleus and every elaboration together. For each instance of this record,
+only a few fields will be needed, but this is a negligible memory price to pay.
 -}
 type alias Ingredients =
     { showElaborations : Bool
     , object : Object
     , objectString : String
-    , pivot : String
+    , pivot : Pivot
+    , pivotProperty : String
+    , pivotVerb : String
+    , ongoing : Bool
+    , passive : Bool
     , balance : Maybe Balance
     , balanceString : String
     , balanceObject : Object
@@ -66,8 +66,6 @@ type alias Ingredients =
     , description : String
     , restriction : String
     , multiPurposeString : String
-    , multiPurposeStyle1 : Bool
-    , multiPurposeStyle2 : Bool
     }
 
 
@@ -79,7 +77,11 @@ type Signal
     | ToggleShowElaborations Int
     | SetObject Int Object
     | SetObjectString Int String
-    | SetPivot Int String
+    | SetPivot Int Pivot
+    | SetPivotProperty Int String
+    | SetPivotVerb Int String
+    | ToggleOngoing Int
+    | TogglePassive Int
     | SetBalance Int (Maybe Balance)
     | SetBalanceString Int String
     | SetBalanceObject Int Object
@@ -97,19 +99,6 @@ type Signal
     | SetDescription Int String
     | SetRestriction Int String
     | SetMultiPurposeString Int String
-    | ToggleMultiPurposeStyle1 Int
-    | ToggleMultiPurposeStyle2 Int
-
-
-{-| When an Indirect, Enumerated, or Amassed elaboration is applied, the view
-module shouldn't show the main or balancing object that is overridden by that
-elaboration. To this end, two maybe variables of this type are passed around
-the recursive View.input function (one for each object).
--}
-type Override
-    = IndirectOverride
-    | EnumeratedOverride
-    | AmassedOverride
 
 
 {-| Some convenient type shorthands for input element properties (used in the

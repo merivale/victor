@@ -9,7 +9,6 @@ module Interface.Factors
         , time
         , duration
         , tally
-        , apparentStyle
         , target
         , pointer
         , enumeratedQuantifier
@@ -28,194 +27,266 @@ import Interface.Input as Input
 import Theory.Types exposing (..)
 
 
-object : Int -> Maybe Override -> Ingredients -> Html.Html Signal
+{-| Select an object.
+-}
+object : Int -> Bool -> Ingredients -> Html.Html Signal
 object index override ingredients =
-    case override of
-        Nothing ->
-            let
-                select =
-                    Input.selectGroup Ideas.objectGroups
-                        { value = ingredients.object
-                        , options = Ideas.objects
-                        , signal = SetObject index
-                        , toLabel = Ideas.objectToString
-                        }
-
-                text =
-                    Input.text
-                        { value = ingredients.objectString
-                        , placeholder = "name (optional)"
-                        , signal = SetObjectString index
-                        }
-            in
-                case ingredients.object of
-                    Male string ->
-                        Html.div
-                            [ Attr.class "factor object" ]
-                            [ Input.label "Object"
-                            , select
-                            , text
-                            ]
-
-                    Female string ->
-                        Html.div
-                            [ Attr.class "factor object" ]
-                            [ Input.label "Object"
-                            , select
-                            , text
-                            ]
-
-                    Thing string ->
-                        Html.div
-                            [ Attr.class "factor object" ]
-                            [ Input.label "Object"
-                            , select
-                            , text
-                            ]
-
-                    PeopleOrThings string ->
-                        Html.div
-                            [ Attr.class "factor object" ]
-                            [ Input.label "Object"
-                            , select
-                            , text
-                            ]
-
-                    a ->
-                        Html.div
-                            [ Attr.class "factor object" ]
-                            [ Input.label "Object"
-                            , select
-                            ]
-
-        Just override ->
-            Html.div
-                [ Attr.class "factor object" ]
-                [ Input.label "Object"
-                , Html.div
+    let
+        content =
+            if override then
+                [ Html.div
                     [ Attr.class "text override" ]
-                    [ Html.text ("main object has been overridden by an " ++ (overrideToString override) ++ " elaboration") ]
+                    [ Html.text ("main object has been overridden") ]
                 ]
+            else if objectHasText ingredients.object then
+                [ objectSelect index ingredients.object
+                , objectText index ingredients.objectString
+                ]
+            else
+                [ objectSelect index ingredients.object ]
+    in
+        Html.div
+            [ Attr.class "factor" ]
+            ((Input.label "Object") :: content)
 
 
-overrideToString : Override -> String
-overrideToString override =
-    case override of
-        IndirectOverride ->
-            "indirect"
+objectHasText : Object -> Bool
+objectHasText object =
+    case object of
+        Male string ->
+            True
 
-        EnumeratedOverride ->
-            "enumerated"
+        Female string ->
+            True
 
-        AmassedOverride ->
-            "amassed"
+        Thing string ->
+            True
+
+        PeopleOrThings string ->
+            True
+
+        _ ->
+            False
 
 
-pivot : Int -> Ingredients -> Html.Html Signal
-pivot index ingredients =
-    Html.div
-        [ Attr.class "factor pivot" ]
-        [ Input.label "Pivot"
-        , Input.text
-            { value = ingredients.pivot
-            , placeholder = "e.g. be, eat, like"
-            , signal = SetPivot index
+objectSelect : Int -> Object -> Html.Html Signal
+objectSelect index object =
+    Input.selectGroup Ideas.objectGroups
+        { value = object
+        , options = Ideas.objects
+        , signal = SetObject index
+        , toLabel = Ideas.objectToString
+        }
+
+
+objectText : Int -> String -> Html.Html Signal
+objectText index objectString =
+    Input.text
+        { value = objectString
+        , placeholder = "name (optional)"
+        , signal = SetObjectString index
+        }
+
+
+{-| Select a pivot.
+-}
+pivot : Int -> Ingredients -> Bool -> Html.Html Signal
+pivot index ingredients expanded =
+    let
+        content =
+            case ingredients.pivot of
+                Be string ongoing ->
+                    if expanded then
+                        [ pivotSelect index ingredients.pivot
+                        , pivotProperty index ingredients.pivotProperty True
+                        ]
+                    else if ingredients.balance == Nothing then
+                        [ pivotSelect index ingredients.pivot
+                        , pivotProperty index ingredients.pivotProperty False
+                        , pivotOngoing index ingredients.ongoing
+                        ]
+                    else
+                        [ pivotSelect index ingredients.pivot
+                        , pivotOngoing index ingredients.ongoing
+                        ]
+
+                Do string ongoing passive ->
+                    [ pivotSelect index ingredients.pivot
+                    , pivotVerb index ingredients.pivotVerb expanded
+                    , pivotOngoing index ingredients.ongoing
+                    , pivotPassive index ingredients.passive
+                    ]
+    in
+        Html.div
+            [ Attr.class "factor" ]
+            ((Input.label "Pivot") :: content)
+
+
+pivotSelect : Int -> Pivot -> Html.Html Signal
+pivotSelect index pivot =
+    Input.select
+        { value = pivot
+        , options = Ideas.pivots
+        , signal = SetPivot index
+        , toLabel = Ideas.pivotToString
+        }
+
+
+pivotProperty : Int -> String -> Bool -> Html.Html Signal
+pivotProperty index pivotString expanded =
+    let
+        placeholder =
+            if expanded then
+                "e.g. able, eager, likely (optional)"
+            else
+                "e.g. happy, healthy, hungry (optional)"
+    in
+        Input.text
+            { value = pivotString
+            , placeholder = placeholder
+            , signal = SetPivotProperty index
             }
-        , Input.checkbox
-            { id = "abbreviateFulcrum" ++ (toString index)
-            , label = "Abbreviate Fulcrum"
-            , checked = ingredients.multiPurposeStyle1
-            , signal = ToggleMultiPurposeStyle1 index
-            }
-        , Input.checkbox
-            { id = "abbreviateNot" ++ (toString index)
-            , label = "Abbreviate 'Not'"
-            , checked = ingredients.multiPurposeStyle2
-            , signal = ToggleMultiPurposeStyle2 index
-            }
-        ]
 
 
-balance : Int -> Maybe Override -> Ingredients -> Html.Html Signal
+pivotVerb : Int -> String -> Bool -> Html.Html Signal
+pivotVerb index pivotVerb expanded =
+    let
+        placeholder =
+            if expanded then
+                "e.g. have, need, want"
+            else
+                "e.g. dance, eat, sing"
+    in
+        Input.text
+            { value = pivotVerb
+            , placeholder = placeholder
+            , signal = SetPivotVerb index
+            }
+
+
+pivotOngoing : Int -> Bool -> Html.Html Signal
+pivotOngoing index ongoing =
+    Input.checkbox
+        { id = "ongoing" ++ (toString index)
+        , label = "Ongoing"
+        , checked = ongoing
+        , signal = ToggleOngoing index
+        }
+
+
+pivotPassive : Int -> Bool -> Html.Html Signal
+pivotPassive index passive =
+    Input.checkbox
+        { id = "passive" ++ (toString index)
+        , label = "Passive"
+        , checked = passive
+        , signal = TogglePassive index
+        }
+
+
+{-| Select a balance.
+-}
+balance : Int -> Bool -> Ingredients -> Html.Html Signal
 balance index override ingredients =
     let
-        balanceSelect =
-            Input.select
-                { value = ingredients.balance
-                , options = Ideas.balances
-                , signal = SetBalance index
-                , toLabel = Ideas.balanceToString
-                }
+        content =
+            if pivotIsBeSomething ingredients then
+                [ Html.div
+                    [ Attr.class "text override" ]
+                    [ Html.text ("Nothing") ]
+                ]
+            else
+                case ingredients.balance of
+                    Nothing ->
+                        [ balanceSelect index ingredients ]
 
-        objectSelect =
-            Input.select
-                { value = ingredients.balanceObject
-                , options = Ideas.objects
-                , signal = SetBalanceObject index
-                , toLabel = Ideas.objectToString
-                }
+                    Just balance ->
+                        case balance of
+                            SameObject ->
+                                [ balanceSelect index ingredients ]
 
-        objectText =
-            Input.text
-                { value = ingredients.balanceObjectString
-                , placeholder = "name (optional)"
-                , signal = SetBalanceObjectString index
-                }
-
-        customText =
-            Input.text
-                { value = ingredients.balanceString
-                , placeholder = "custom balance"
-                , signal = SetBalanceString index
-                }
-    in
-        case ingredients.balance of
-            Nothing ->
-                Html.div
-                    [ Attr.class "factor balance" ]
-                    [ Input.label "Balance"
-                    , balanceSelect
-                    ]
-
-            Just balance ->
-                case balance of
-                    SameObject ->
-                        Html.div
-                            [ Attr.class "factor balance" ]
-                            [ Input.label "Balance"
-                            , balanceSelect
-                            ]
-
-                    IndependentObject object ->
-                        case override of
-                            Nothing ->
-                                Html.div
-                                    [ Attr.class "factor balance" ]
-                                    [ Input.label "Balance"
-                                    , balanceSelect
-                                    , objectSelect
-                                    , objectText
-                                    ]
-
-                            Just override ->
-                                Html.div
-                                    [ Attr.class "factor object" ]
-                                    [ Input.label "Balance"
-                                    , balanceSelect
+                            IndependentObject object ->
+                                if override then
+                                    [ balanceSelect index ingredients
                                     , Html.div
                                         [ Attr.class "text override" ]
-                                        [ Html.text ("balancing object has been overridden by an " ++ (overrideToString override) ++ " elaboration") ]
+                                        [ Html.text ("balancing object has been overridden") ]
+                                    ]
+                                else
+                                    [ balanceSelect index ingredients
+                                    , balanceObjectSelect index ingredients.balanceObject
+                                    , balanceObjectText index ingredients.balanceObjectString
                                     ]
 
-                    CustomBalance string ->
-                        Html.div
-                            [ Attr.class "factor balance" ]
-                            [ Input.label "Balance"
-                            , balanceSelect
-                            , customText
-                            ]
+                            CustomBalance string ->
+                                [ balanceSelect index ingredients
+                                , customBalanceText index ingredients.balanceString
+                                ]
+    in
+        Html.div
+            [ Attr.class "factor" ]
+            ((Input.label "Balance") :: content)
 
 
+pivotIsBeSomething : Ingredients -> Bool
+pivotIsBeSomething ingredients =
+    case ingredients.pivot of
+        Be property ongoing ->
+            String.length ingredients.pivotProperty > 0
+
+        Do verb ongoing passive ->
+            False
+
+
+balanceSelect : Int -> Ingredients -> Html.Html Signal
+balanceSelect index ingredients =
+    let
+        options =
+            case ingredients.pivot of
+                Be property ongoing ->
+                    Ideas.balancesWithoutCustom
+
+                Do verb ongoing passive ->
+                    Ideas.balancesWithCustom
+    in
+        Input.select
+            { value = ingredients.balance
+            , options = options
+            , signal = SetBalance index
+            , toLabel = Ideas.balanceToString
+            }
+
+
+balanceObjectSelect : Int -> Object -> Html.Html Signal
+balanceObjectSelect index balanceObject =
+    Input.select
+        { value = balanceObject
+        , options = Ideas.objects
+        , signal = SetBalanceObject index
+        , toLabel = Ideas.objectToString
+        }
+
+
+balanceObjectText : Int -> String -> Html.Html Signal
+balanceObjectText index balanceObjectString =
+    Input.text
+        { value = balanceObjectString
+        , placeholder = "name (optional)"
+        , signal = SetBalanceObjectString index
+        }
+
+
+customBalanceText : Int -> String -> Html.Html Signal
+customBalanceText index balanceString =
+    Input.text
+        { value = balanceString
+        , placeholder = "custom balance"
+        , signal = SetBalanceString index
+        }
+
+
+{-| Select a modality.
+-}
 limitedModality : Int -> Ingredients -> Html.Html Signal
 limitedModality index ingredients =
     modality Ideas.limitedModalities index ingredients
@@ -229,7 +300,7 @@ unlimitedModality index ingredients =
 modality : List Modality -> Int -> Ingredients -> Html.Html Signal
 modality options index ingredients =
     Html.div
-        [ Attr.class "factor modality" ]
+        [ Attr.class "factor" ]
         [ Input.label "Modality"
         , Input.select
             { value = ingredients.modality
@@ -240,76 +311,63 @@ modality options index ingredients =
         ]
 
 
+{-| Set multipurpose string factors.
+-}
 frequency : Int -> Ingredients -> Html.Html Signal
 frequency index ingredients =
-    Html.div
-        [ Attr.class "factor frequency" ]
-        [ Input.label "Frequency"
-        , Input.text
-            { value = ingredients.multiPurposeString
-            , placeholder = "e.g. usually, sometimes, occasionally"
-            , signal = SetMultiPurposeString index
-            }
-        ]
+    multiPurposeString
+        index
+        ingredients.multiPurposeString
+        "Frequency"
+        "e.g. usually, sometimes, occasionally"
 
 
 time : Int -> Ingredients -> Html.Html Signal
 time index ingredients =
-    Html.div
-        [ Attr.class "factor time" ]
-        [ Input.label "Time"
-        , Input.text
-            { value = ingredients.multiPurposeString
-            , placeholder = "e.g. tomorrow, next week"
-            , signal = SetMultiPurposeString index
-            }
-        ]
+    multiPurposeString
+        index
+        ingredients.multiPurposeString
+        "Time"
+        "e.g. tomorrow, next week"
 
 
 duration : Int -> Ingredients -> Html.Html Signal
 duration index ingredients =
-    Html.div
-        [ Attr.class "factor duration" ]
-        [ Input.label "Duration"
-        , Input.text
-            { value = ingredients.multiPurposeString
-            , placeholder = "e.g. for a while, for two hours, all day"
-            , signal = SetMultiPurposeString index
-            }
-        ]
+    multiPurposeString
+        index
+        ingredients.multiPurposeString
+        "Duration"
+        "e.g. for a while, for two hours, all day"
 
 
 tally : Int -> Ingredients -> Html.Html Signal
 tally index ingredients =
+    multiPurposeString
+        index
+        ingredients.multiPurposeString
+        "Tally"
+        "e.g. once, twice, several times"
+
+
+multiPurposeString : Int -> String -> String -> String -> Html.Html Signal
+multiPurposeString index value label placeholder =
     Html.div
-        [ Attr.class "factor tally" ]
-        [ Input.label "Tally"
+        [ Attr.class "factor" ]
+        [ Input.label label
         , Input.text
-            { value = ingredients.multiPurposeString
-            , placeholder = "e.g. once, twice, several times"
+            { value = value
+            , placeholder = placeholder
             , signal = SetMultiPurposeString index
             }
         ]
 
 
-apparentStyle : Int -> Ingredients -> Html.Html Signal
-apparentStyle index ingredients =
-    Html.div
-        [ Attr.class "factor apparentStyle" ]
-        [ Input.label "Style"
-        , Input.checkbox
-            { id = "apparentStyle" ++ (toString index)
-            , label = "Use 'Seem' instead of 'Appear'"
-            , checked = ingredients.multiPurposeStyle1
-            , signal = ToggleMultiPurposeStyle1 index
-            }
-        ]
-
-
+{-| Select target for indirect/enumerated/amassed elaboration.
+-}
 target : Int -> Ingredients -> Html.Html Signal
 target index ingredients =
     Html.div
-        [ Attr.class "factor target" ]
+        [ Attr.class "factor" ]
         [ Input.label "Target"
         , Input.radio ("target" ++ (toString index))
             { id = "targetMainObject" ++ (toString index)
@@ -326,6 +384,8 @@ target index ingredients =
         ]
 
 
+{-| Select a pointer for indirect elaborations.
+-}
 pointer : Int -> Ingredients -> Html.Html Signal
 pointer index ingredients =
     let
@@ -365,7 +425,7 @@ pointer index ingredients =
                 case ingredients.pointerObject of
                     Male string ->
                         Html.div
-                            [ Attr.class "factor pointer" ]
+                            [ Attr.class "factor" ]
                             [ Input.label "Pointer"
                             , pointerSelect
                             , objectSelect
@@ -375,7 +435,7 @@ pointer index ingredients =
 
                     Female string ->
                         Html.div
-                            [ Attr.class "factor pointer" ]
+                            [ Attr.class "factor" ]
                             [ Input.label "Pointer"
                             , pointerSelect
                             , objectSelect
@@ -385,7 +445,7 @@ pointer index ingredients =
 
                     Thing string ->
                         Html.div
-                            [ Attr.class "factor pointer" ]
+                            [ Attr.class "factor" ]
                             [ Input.label "Pointer"
                             , pointerSelect
                             , objectSelect
@@ -395,7 +455,7 @@ pointer index ingredients =
 
                     PeopleOrThings string ->
                         Html.div
-                            [ Attr.class "factor pointer" ]
+                            [ Attr.class "factor" ]
                             [ Input.label "Pointer"
                             , pointerSelect
                             , objectSelect
@@ -405,7 +465,7 @@ pointer index ingredients =
 
                     _ ->
                         Html.div
-                            [ Attr.class "factor pointer" ]
+                            [ Attr.class "factor" ]
                             [ Input.label "Pointer"
                             , pointerSelect
                             , objectSelect
@@ -414,17 +474,19 @@ pointer index ingredients =
 
             _ ->
                 Html.div
-                    [ Attr.class "factor pointer" ]
+                    [ Attr.class "factor" ]
                     [ Input.label "Pointer"
                     , pointerSelect
                     , other
                     ]
 
 
+{-| Select a quantifier for enumerated elaborations.
+-}
 enumeratedQuantifier : Int -> Ingredients -> Html.Html Signal
 enumeratedQuantifier index ingredients =
     Html.div
-        [ Attr.class "factor quantifier" ]
+        [ Attr.class "factor" ]
         [ Input.label "Quantifier"
         , Input.select
             { value = ingredients.enumeratedQuantifier
@@ -441,10 +503,12 @@ enumeratedQuantifier index ingredients =
         ]
 
 
+{-| Select a quantifier for amassed elaborations.
+-}
 amassedQuantifier : Int -> Ingredients -> Html.Html Signal
 amassedQuantifier index ingredients =
     Html.div
-        [ Attr.class "factor quantifier" ]
+        [ Attr.class "factor" ]
         [ Input.label "Quantifier"
         , Input.select
             { value = ingredients.amassedQuantifier
@@ -461,10 +525,12 @@ amassedQuantifier index ingredients =
         ]
 
 
+{-| Set categories for indirect/enumerated/amassed elaborations.
+-}
 indirectCategory : Int -> Ingredients -> Html.Html Signal
 indirectCategory index ingredients =
     Html.div
-        [ Attr.class "factor category" ]
+        [ Attr.class "factor" ]
         [ Input.label "Category"
         , Input.text
             { value = ingredients.category
@@ -483,7 +549,7 @@ indirectCategory index ingredients =
 enumeratedCategory : Int -> Ingredients -> Html.Html Signal
 enumeratedCategory index ingredients =
     Html.div
-        [ Attr.class "factor category" ]
+        [ Attr.class "factor" ]
         [ Input.label "Category"
         , Input.text
             { value = ingredients.category
@@ -503,7 +569,7 @@ amassedCategory index ingredients =
                 "e.g. air, water"
     in
         Html.div
-            [ Attr.class "factor category" ]
+            [ Attr.class "factor" ]
             [ Input.label "Category"
             , Input.text
                 { value = ingredients.category
@@ -522,7 +588,7 @@ amassedCategory index ingredients =
 categoryFlanks : Int -> Ingredients -> Html.Html Signal
 categoryFlanks index ingredients =
     Html.div
-        [ Attr.class "factor description" ]
+        [ Attr.class "factor" ]
         [ Input.label "Flanks"
         , Input.text
             { value = ingredients.description

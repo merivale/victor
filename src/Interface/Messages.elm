@@ -21,7 +21,8 @@ message index model =
         Just recipe ->
             case recipe of
                 MakePlain ingredients ->
-                    plain ingredients
+                    nucleus ingredients
+                        |> andThen plain
 
                 MakeElaborate elaborationRecipe subIndex ingredients ->
                     message subIndex model
@@ -30,34 +31,74 @@ message index model =
 
 {-| Functions for making plain (base) ingredients.
 -}
-plain : Ingredients -> Result String Message
-plain ingredients =
-    if String.length ingredients.pivot == 0 then
-        Err "please enter a verb for your pivot"
-    else
-        case ingredients.balance of
-            Just (CustomBalance string) ->
-                if String.length ingredients.balanceString == 0 then
-                    Err "please enter some text for your custom balance"
-                else
-                    Ok (Plain (nucleus ingredients))
-
-            _ ->
-                Ok (Plain (nucleus ingredients))
+plain : Nucleus -> Result String Message
+plain nucleus =
+    Ok (Plain nucleus)
 
 
-nucleus : Ingredients -> Nucleus
+nucleus : Ingredients -> Result String Nucleus
 nucleus ingredients =
-    { object = object ingredients.object ingredients.objectString
-    , condition =
-        { pivot = ingredients.pivot
-        , balance = Maybe.map (balance ingredients) ingredients.balance
-        }
-    , style =
-        { abbreviateFulcrum = ingredients.multiPurposeStyle1
-        , abbreviateNot = ingredients.multiPurposeStyle2
-        }
+    condition ingredients
+        |> andThen (addObject ingredients)
+
+
+condition : Ingredients -> Result String Condition
+condition ingredients =
+    Result.map2 combinePivotBalance (pivot ingredients) (balance ingredients)
+
+
+combinePivotBalance : Pivot -> Maybe Balance -> Condition
+combinePivotBalance pivot balance =
+    { pivot = pivot
+    , balance = balance
     }
+
+
+pivot : Ingredients -> Result String Pivot
+pivot ingredients =
+    case ingredients.pivot of
+        Be property ongoing ->
+            if String.length ingredients.pivotProperty == 0 then
+                Ok (Be Nothing ingredients.ongoing)
+            else
+                Ok (Be (Just ingredients.pivotProperty) ingredients.ongoing)
+
+        Do verb ongoing passive ->
+            if String.length ingredients.pivotVerb == 0 then
+                Err "please enter a verb for your pivot"
+            else if ingredients.pivotVerb == "be" then
+                Err "please enter a verb other than 'be' for your pivot"
+            else
+                Ok (Do ingredients.pivotVerb ingredients.ongoing ingredients.passive)
+
+
+balance : Ingredients -> Result String (Maybe Balance)
+balance ingredients =
+    case ingredients.balance of
+        Nothing ->
+            Ok Nothing
+
+        Just b ->
+            case b of
+                SameObject ->
+                    Ok (Just SameObject)
+
+                IndependentObject independentObject ->
+                    Ok (Just (IndependentObject (object ingredients.balanceObject ingredients.balanceObjectString)))
+
+                CustomBalance string ->
+                    if String.length ingredients.balanceString == 0 then
+                        Err "please enter some text for your custom balance"
+                    else
+                        Ok (Just (CustomBalance ingredients.balanceString))
+
+
+addObject : Ingredients -> Condition -> Result String Nucleus
+addObject ingredients condition =
+    Ok
+        { object = object ingredients.object ingredients.objectString
+        , condition = condition
+        }
 
 
 object : Object -> String -> Object
@@ -79,19 +120,6 @@ object baseObject objectString =
             a
 
 
-balance : Ingredients -> Balance -> Balance
-balance ingredients balance =
-    case balance of
-        SameObject ->
-            SameObject
-
-        IndependentObject independentObject ->
-            IndependentObject (object ingredients.balanceObject ingredients.balanceObjectString)
-
-        CustomBalance string ->
-            CustomBalance ingredients.balanceString
-
-
 {-| Functions for elaborating messages.
 -}
 elaborate : ElaborationRecipe -> Ingredients -> Message -> Result String Message
@@ -106,14 +134,18 @@ elaborate elaborationRecipe ingredients message =
         MakePrior ->
             Ok (Prior message)
 
+        MakeExpanded ->
+            pivot ingredients
+                |> andThen (makeExpanded message)
+
         MakePractical ->
             Ok (Practical ingredients.modality message)
 
-        MakeProjective ->
-            Ok (Projective ingredients.modality (maybeString ingredients.multiPurposeString) message)
-
         MakeEvasive ->
             Ok (Evasive ingredients.modality message)
+
+        MakeProjective ->
+            Ok (Projective ingredients.modality (maybeString ingredients.multiPurposeString) message)
 
         MakePreordained ->
             Ok (Preordained (maybeString ingredients.multiPurposeString) message)
@@ -133,18 +165,6 @@ elaborate elaborationRecipe ingredients message =
             else
                 Ok (Scattered ingredients.multiPurposeString message)
 
-        MakeOngoing ->
-            Ok (Ongoing message)
-
-        MakeDetermined ->
-            Ok (Determined (maybeString ingredients.multiPurposeString) message)
-
-        MakeImminent ->
-            Ok (Imminent message)
-
-        MakeApparent ->
-            Ok (Apparent ingredients.multiPurposeStyle1 message)
-
         MakeIndirect ->
             if String.length ingredients.category == 0 then
                 Err "please enter a category for your indirect elaboration"
@@ -162,6 +182,11 @@ elaborate elaborationRecipe ingredients message =
                 Err "please enter a category for your amassed elaboration"
             else
                 Ok (Amassed ingredients.target ingredients.amassedQuantifier ingredients.other (haystack ingredients) ingredients.plural message)
+
+
+makeExpanded : Message -> Pivot -> Result String Message
+makeExpanded message pivot =
+    Ok (Expanded pivot message)
 
 
 pointer : Ingredients -> Pointer

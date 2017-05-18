@@ -43,13 +43,34 @@ objectToString object =
             toString a
 
 
-balances : List (Maybe Balance)
-balances =
+pivots : List Pivot
+pivots =
+    [ Be Nothing False
+    , Do "" False False
+    ]
+
+
+pivotToString : Pivot -> String
+pivotToString pivot =
+    case pivot of
+        Be string ongoing ->
+            "Be"
+
+        Do string ongoing passive ->
+            "Do"
+
+
+balancesWithoutCustom : List (Maybe Balance)
+balancesWithoutCustom =
     [ Nothing
     , Just SameObject
     , Just (IndependentObject Speaker)
-    , Just (CustomBalance "")
     ]
+
+
+balancesWithCustom : List (Maybe Balance)
+balancesWithCustom =
+    balancesWithoutCustom ++ [ Just (CustomBalance "") ]
 
 
 balanceToString : Maybe Balance -> String

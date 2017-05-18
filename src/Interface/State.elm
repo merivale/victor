@@ -22,7 +22,11 @@ ingredients =
     { showElaborations = False
     , object = Speaker
     , objectString = ""
-    , pivot = "be"
+    , pivot = Be Nothing False
+    , pivotProperty = ""
+    , pivotVerb = "like"
+    , ongoing = False
+    , passive = False
     , balance = Just (IndependentObject Speaker)
     , balanceString = ""
     , balanceObject = Male Nothing
@@ -40,8 +44,6 @@ ingredients =
     , description = ""
     , restriction = ""
     , multiPurposeString = ""
-    , multiPurposeStyle1 = False
-    , multiPurposeStyle2 = False
     }
 
 
@@ -90,8 +92,20 @@ update signal model =
         SetObjectString index string ->
             setIngredient index model (setObjectString string)
 
-        SetPivot index string ->
-            setIngredient index model (setPivot string)
+        SetPivot index pivot ->
+            setIngredient index model (setPivot pivot)
+
+        SetPivotProperty index string ->
+            setIngredient index model (setPivotProperty string)
+
+        SetPivotVerb index string ->
+            setIngredient index model (setPivotVerb string)
+
+        ToggleOngoing index ->
+            setIngredient index model toggleOngoing
+
+        TogglePassive index ->
+            setIngredient index model togglePassive
 
         SetBalance index balance ->
             setIngredient index model (setBalance balance)
@@ -144,12 +158,6 @@ update signal model =
         SetMultiPurposeString index string ->
             setIngredient index model (setMultiPurposeString string)
 
-        ToggleMultiPurposeStyle1 index ->
-            setIngredient index model toggleMultiPurposeStyle1
-
-        ToggleMultiPurposeStyle2 index ->
-            setIngredient index model toggleMultiPurposeStyle2
-
 
 {-| Function for replacing one recipe with another.
 -}
@@ -195,9 +203,32 @@ setObjectString string ingredients =
     { ingredients | objectString = string }
 
 
-setPivot : String -> Ingredients -> Ingredients
-setPivot string ingredients =
-    { ingredients | pivot = string }
+setPivot : Pivot -> Ingredients -> Ingredients
+setPivot pivot ingredients =
+    { ingredients | pivot = pivot }
+
+
+setPivotProperty : String -> Ingredients -> Ingredients
+setPivotProperty string ingredients =
+    if String.length string > 0 then
+        { ingredients | pivotProperty = string, balance = Nothing }
+    else
+        { ingredients | pivotProperty = string }
+
+
+setPivotVerb : String -> Ingredients -> Ingredients
+setPivotVerb string ingredients =
+    { ingredients | pivotVerb = string }
+
+
+toggleOngoing : Ingredients -> Ingredients
+toggleOngoing ingredients =
+    { ingredients | ongoing = not ingredients.ongoing }
+
+
+togglePassive : Ingredients -> Ingredients
+togglePassive ingredients =
+    { ingredients | passive = not ingredients.passive }
 
 
 setBalance : Maybe Balance -> Ingredients -> Ingredients
@@ -283,13 +314,3 @@ setRestriction string ingredients =
 setMultiPurposeString : String -> Ingredients -> Ingredients
 setMultiPurposeString string ingredients =
     { ingredients | multiPurposeString = string }
-
-
-toggleMultiPurposeStyle1 : Ingredients -> Ingredients
-toggleMultiPurposeStyle1 ingredients =
-    { ingredients | multiPurposeStyle1 = not ingredients.multiPurposeStyle1 }
-
-
-toggleMultiPurposeStyle2 : Ingredients -> Ingredients
-toggleMultiPurposeStyle2 ingredients =
-    { ingredients | multiPurposeStyle2 = not ingredients.multiPurposeStyle2 }
