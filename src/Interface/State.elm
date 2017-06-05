@@ -24,14 +24,17 @@ ingredients =
     , objectString = ""
     , pivot = Be Nothing False
     , pivotProperty = ""
-    , pivotVerb = "like"
+    , pivotVerb = ""
     , ongoing = False
     , passive = False
     , balance = Just (IndependentObject Speaker)
     , balanceString = ""
     , balanceObject = Male Nothing
     , balanceObjectString = "Victor"
+    , displacement = Secondary SoftYes
+    , maybeDisplacement = Nothing
     , modality = SoftYes
+    , multiPurposeString = ""
     , target = MainObject
     , pointer = The
     , pointerObject = Speaker
@@ -40,10 +43,8 @@ ingredients =
     , amassedQuantifier = Nothing
     , other = False
     , category = ""
-    , plural = False
     , description = ""
     , restriction = ""
-    , multiPurposeString = ""
     }
 
 
@@ -119,8 +120,17 @@ update signal model =
         SetBalanceObjectString index string ->
             setIngredient index model (setBalanceObjectString string)
 
+        SetDisplacement index displacement ->
+            setIngredient index model (setDisplacement displacement)
+
+        SetMaybeDisplacement index displacement ->
+            setIngredient index model (setMaybeDisplacement displacement)
+
         SetModality index modality ->
             setIngredient index model (setModality modality)
+
+        SetMultiPurposeString index string ->
+            setIngredient index model (setMultiPurposeString string)
 
         SetTarget index target ->
             setIngredient index model (setTarget target)
@@ -146,17 +156,11 @@ update signal model =
         SetCategory index string ->
             setIngredient index model (setCategory string)
 
-        TogglePlural index ->
-            setIngredient index model togglePlural
-
         SetDescription index string ->
             setIngredient index model (setDescription string)
 
         SetRestriction index string ->
             setIngredient index model (setRestriction string)
-
-        SetMultiPurposeString index string ->
-            setIngredient index model (setMultiPurposeString string)
 
 
 {-| Function for replacing one recipe with another.
@@ -233,7 +237,10 @@ togglePassive ingredients =
 
 setBalance : Maybe Balance -> Ingredients -> Ingredients
 setBalance balance ingredients =
-    { ingredients | balance = balance }
+    if balance == Nothing then
+        { ingredients | balance = balance }
+    else
+        { ingredients | balance = balance, pivotProperty = "" }
 
 
 setBalanceString : String -> Ingredients -> Ingredients
@@ -251,9 +258,24 @@ setBalanceObjectString string ingredients =
     { ingredients | balanceObjectString = string }
 
 
+setDisplacement : Displacement -> Ingredients -> Ingredients
+setDisplacement displacement ingredients =
+    { ingredients | displacement = displacement }
+
+
+setMaybeDisplacement : Maybe Displacement -> Ingredients -> Ingredients
+setMaybeDisplacement displacement ingredients =
+    { ingredients | maybeDisplacement = displacement }
+
+
 setModality : Modality -> Ingredients -> Ingredients
 setModality modality ingredients =
     { ingredients | modality = modality }
+
+
+setMultiPurposeString : String -> Ingredients -> Ingredients
+setMultiPurposeString string ingredients =
+    { ingredients | multiPurposeString = string }
 
 
 setTarget : Target -> Ingredients -> Ingredients
@@ -296,11 +318,6 @@ setCategory string ingredients =
     { ingredients | category = string }
 
 
-togglePlural : Ingredients -> Ingredients
-togglePlural ingredients =
-    { ingredients | plural = not ingredients.plural }
-
-
 setDescription : String -> Ingredients -> Ingredients
 setDescription string ingredients =
     { ingredients | description = string }
@@ -309,8 +326,3 @@ setDescription string ingredients =
 setRestriction : String -> Ingredients -> Ingredients
 setRestriction string ingredients =
     { ingredients | restriction = string }
-
-
-setMultiPurposeString : String -> Ingredients -> Ingredients
-setMultiPurposeString string ingredients =
-    { ingredients | multiPurposeString = string }

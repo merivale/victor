@@ -110,11 +110,11 @@ object baseObject objectString =
         Female string ->
             Female (maybeString objectString)
 
-        Thing string ->
-            Thing (maybeString objectString)
+        Other string ->
+            Other (maybeString objectString)
 
-        PeopleOrThings string ->
-            PeopleOrThings (maybeString objectString)
+        Others string ->
+            Others (maybeString objectString)
 
         a ->
             a
@@ -134,24 +134,17 @@ elaborate elaborationRecipe ingredients message =
         MakePrior ->
             Ok (Prior message)
 
-        MakeExpanded ->
-            pivot ingredients
-                |> andThen (makeExpanded message)
-
-        MakePractical ->
-            Ok (Practical ingredients.modality message)
+        MakeDirect ->
+            displacement ingredients
+                |> andThen (makeDirect message)
 
         MakeEvasive ->
-            Ok (Evasive ingredients.modality message)
+            maybeDisplacement ingredients
+                |> andThen (makeEvasive message ingredients.multiPurposeString)
 
-        MakeProjective ->
-            Ok (Projective ingredients.modality (maybeString ingredients.multiPurposeString) message)
-
-        MakePreordained ->
-            Ok (Preordained (maybeString ingredients.multiPurposeString) message)
-
-        MakeRegular ->
-            Ok (Regular (maybeString ingredients.multiPurposeString) message)
+        MakeFuture ->
+            maybeDisplacement ingredients
+                |> andThen (makeFuture message ingredients.multiPurposeString)
 
         MakeExtended ->
             if String.length ingredients.multiPurposeString == 0 then
@@ -169,7 +162,7 @@ elaborate elaborationRecipe ingredients message =
             if String.length ingredients.category == 0 then
                 Err "please enter a category for your indirect elaboration"
             else
-                Ok (Indirect ingredients.target (pointer ingredients) ingredients.other (haystack ingredients) ingredients.plural message)
+                Ok (Indirect ingredients.target (pointer ingredients) ingredients.other (haystack ingredients) message)
 
         MakeEnumerated ->
             if String.length ingredients.category == 0 then
@@ -181,12 +174,57 @@ elaborate elaborationRecipe ingredients message =
             if String.length ingredients.category == 0 then
                 Err "please enter a category for your amassed elaboration"
             else
-                Ok (Amassed ingredients.target ingredients.amassedQuantifier ingredients.other (haystack ingredients) ingredients.plural message)
+                Ok (Amassed ingredients.target ingredients.amassedQuantifier ingredients.other (haystack ingredients) message)
 
 
-makeExpanded : Message -> Pivot -> Result String Message
-makeExpanded message pivot =
-    Ok (Expanded pivot message)
+displacement : Ingredients -> Result String Displacement
+displacement ingredients =
+    case ingredients.displacement of
+        Primary pvt ->
+            pivot ingredients
+                |> andThen primary
+
+        Secondary modality ->
+            Ok (Secondary ingredients.modality)
+
+
+primary : Pivot -> Result String Displacement
+primary pivot =
+    Ok (Primary pivot)
+
+
+maybeDisplacement : Ingredients -> Result String (Maybe Displacement)
+maybeDisplacement ingredients =
+    case ingredients.maybeDisplacement of
+        Nothing ->
+            Ok Nothing
+
+        Just (Primary pvt) ->
+            pivot ingredients
+                |> andThen maybePrimary
+
+        Just (Secondary modality) ->
+            Ok (Just (Secondary ingredients.modality))
+
+
+maybePrimary : Pivot -> Result String (Maybe Displacement)
+maybePrimary pivot =
+    Ok (Just (Primary pivot))
+
+
+makeDirect : Message -> Displacement -> Result String Message
+makeDirect message displacement =
+    Ok (Direct displacement message)
+
+
+makeEvasive : Message -> String -> Maybe Displacement -> Result String Message
+makeEvasive message frequency displacement =
+    Ok (Evasive displacement (maybeString frequency) message)
+
+
+makeFuture : Message -> String -> Maybe Displacement -> Result String Message
+makeFuture message time displacement =
+    Ok (Future displacement (maybeString time) message)
 
 
 pointer : Ingredients -> Pointer

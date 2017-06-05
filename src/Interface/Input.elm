@@ -70,17 +70,14 @@ elaborations index show =
                     [ MakeNegative
                     , MakePast
                     , MakePrior
-                    , MakeExpanded
-                    , MakePractical
+                    , MakeDirect
                     , MakeEvasive
-                    , MakeProjective
+                    , MakeFuture
                     ]
                 )
             , Html.div []
                 (List.map (elaborationButton index)
-                    [ MakePreordained
-                    , MakeRegular
-                    , MakeExtended
+                    [ MakeExtended
                     , MakeScattered
                     , MakeIndirect
                     , MakeEnumerated

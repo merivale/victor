@@ -23,17 +23,14 @@ type Message
     | Negative Message
     | Past Message
     | Prior Message
-    | Expanded Pivot Message
-    | Practical Modality Message
-    | Evasive Modality Message
-    | Projective Modality (Maybe Time) Message
-    | Preordained (Maybe Time) Message
-    | Regular (Maybe Frequency) Message
+    | Direct Displacement Message
+    | Evasive (Maybe Displacement) (Maybe Frequency) Message
+    | Future (Maybe Displacement) (Maybe Time) Message
     | Extended Duration Message
     | Scattered Tally Message
-    | Indirect Target Pointer Bool Haystack Bool Message
+    | Indirect Target Pointer Bool Haystack Message
     | Enumerated Target Quantifier Bool Haystack Message
-    | Amassed Target (Maybe Quantifier) Bool Haystack Bool Message
+    | Amassed Target (Maybe Quantifier) Bool Haystack Message
 
 
 {-| The nucleus of an English message consists of an object and a condition. A
@@ -54,10 +51,10 @@ type Object
     | Hearer
     | Male (Maybe String)
     | Female (Maybe String)
-    | Thing (Maybe String)
+    | Other (Maybe String)
     | Speakers
     | Hearers
-    | PeopleOrThings (Maybe String)
+    | Others (Maybe String)
 
 
 type alias Condition =
@@ -84,6 +81,11 @@ details. Note that many of these arguments are currently just aliases for
 strings, which means that users are obliged to encode them for themselves. These
 represent parts of my model that await further development.
 -}
+type Displacement
+    = Primary Pivot
+    | Secondary Modality
+
+
 type Modality
     = SoftYes
     | HardYes
@@ -96,11 +98,11 @@ type Modality
     | Command
 
 
-type alias Time =
+type alias Frequency =
     String
 
 
-type alias Frequency =
+type alias Time =
     String
 
 
@@ -148,53 +150,34 @@ type alias Haystack =
 
 {-| To keep track of the effect the nucleus and any subsequent elaboration has
 on the sentence, and to check that the message is valid, the encoding function
-needs to pass around a lot of variables. For convenience, these variables are
+needs to pass around several variables. For convenience, these variables are
 collected together here into a single record. The Booleans at the start are
 for the most part flags required for message validation; the properties further
 down are direct determiners of the output string.
 -}
 type alias Vars =
     { past : Bool
-    , prior : Bool
     , projective : Bool
+    , passive : Bool
+    , object : Object
     , negateObject : Bool
-    , object : MetaObject
+    , objectOverride : Maybe ObjectOverride
     , modality : Maybe Modality
-    , pivot : Pivot
-    , pre1 : List String
-    , pre2 : List String
-    , balance : MetaBalance
+    , longPivot : LongPivot
+    , longPivots : List LongPivot
+    , balance : Maybe Balance
+    , balanceOverride : Maybe ObjectOverride
     , post : List String
     }
 
 
-type MetaObject
-    = RealObject Object
-    | PseudoObject ObjectOverride
-
-
-type MetaBalance
-    = RealBalance Balance
-    | PseudoBalance ObjectOverride
+type alias LongPivot =
+    { pivot : Pivot
+    , prior : Bool
+    , pre : List String
+    }
 
 
 type ObjectOverride
-    = IndirectOverride Pointer Bool Haystack Bool
-    | EnumeratedOverride Quantifier Bool Haystack
-    | AmassedOverride (Maybe Quantifier) Bool Haystack Bool
-
-{-    , objectOverride : Bool
-    , balanceObject : Bool
-    , balanceOverride : Bool
-    , subject : List String
-    , modality : Maybe Modality
-    , negatedModality : Bool
-    , amNeeded : Bool
-    , isNeeded : Bool
-    , verb : String
-    , pre1 : List String
-    , pre2 : List String
-    , counter : List String
-    , post : List String
-    }
--}
+    = PointerOverride Pointer Bool Haystack
+    | QuantifierOverride Bool (Maybe Quantifier) Bool Haystack

@@ -10,17 +10,17 @@ objects =
     , Hearer
     , Male Nothing
     , Female Nothing
-    , Thing Nothing
+    , Other Nothing
     , Speakers
     , Hearers
-    , PeopleOrThings Nothing
+    , Others Nothing
     ]
 
 
 objectGroups : List ( String, List Object )
 objectGroups =
-    [ ( "Singular", [ Speaker, Hearer, Male Nothing, Female Nothing, Thing Nothing ] )
-    , ( "Plural", [ Speakers, Hearers, PeopleOrThings Nothing ] )
+    [ ( "Singular", [ Speaker, Hearer, Male Nothing, Female Nothing, Other Nothing ] )
+    , ( "Plural", [ Speakers, Hearers, Others Nothing ] )
     ]
 
 
@@ -33,11 +33,11 @@ objectToString object =
         Female string ->
             "Female"
 
-        Thing string ->
-            "Thing"
+        Other string ->
+            "Other"
 
-        PeopleOrThings string ->
-            "People/Things"
+        Others string ->
+            "Others"
 
         a ->
             toString a
@@ -60,17 +60,13 @@ pivotToString pivot =
             "Do"
 
 
-balancesWithoutCustom : List (Maybe Balance)
-balancesWithoutCustom =
+balances : List (Maybe Balance)
+balances =
     [ Nothing
     , Just SameObject
     , Just (IndependentObject Speaker)
+    , Just (CustomBalance "")
     ]
-
-
-balancesWithCustom : List (Maybe Balance)
-balancesWithCustom =
-    balancesWithoutCustom ++ [ Just (CustomBalance "") ]
 
 
 balanceToString : Maybe Balance -> String
@@ -89,6 +85,36 @@ balanceToString balance =
 
                 CustomBalance string ->
                     "Custom"
+
+
+displacements : List Displacement
+displacements =
+    [ Primary (Be Nothing False)
+    , Secondary SoftYes
+    ]
+
+
+maybeDisplacements : List (Maybe Displacement)
+maybeDisplacements =
+    [ Nothing
+    , Just (Primary (Be Nothing False))
+    , Just (Secondary SoftYes)
+    ]
+
+
+displacementToString : Displacement -> String
+displacementToString displacement =
+    case displacement of
+        Primary pivot ->
+            "Primary"
+
+        Secondary modality ->
+            "Secondary"
+
+
+maybeDisplacementToString : Maybe Displacement -> String
+maybeDisplacementToString displacement =
+    Maybe.withDefault "Nothing" (Maybe.map displacementToString displacement)
 
 
 limitedModalities : List Modality

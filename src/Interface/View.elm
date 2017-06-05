@@ -29,7 +29,7 @@ root model =
             ]
         , Html.main_ []
             [ output model
-            , input 0 False False model
+            , input 0 model
             ]
         , Html.footer []
             [ Html.ul []
@@ -74,8 +74,8 @@ format sentence =
         String.append ucFirst "."
 
 
-input : Int -> Bool -> Bool -> Model -> Html.Html Signal
-input index mainOverride balanceOverride model =
+input : Int -> Model -> Html.Html Signal
+input index model =
     case Array.get index model of
         Nothing ->
             Html.div
@@ -85,110 +85,82 @@ input index mainOverride balanceOverride model =
         Just recipe ->
             case recipe of
                 MakePlain ingredients ->
-                    nucleus index mainOverride balanceOverride ingredients
+                    nucleus index ingredients
 
                 MakeElaborate elaborationRecipe subIndex ingredients ->
-                    elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingredients model
+                    elaboration index elaborationRecipe subIndex ingredients model
 
 
-nucleus : Int -> Bool -> Bool -> Ingredients -> Html.Html Signal
-nucleus index mainOverride balanceOverride ingredients =
+nucleus : Int -> Ingredients -> Html.Html Signal
+nucleus index ingredients =
     Input.input
         { elaborationRecipe = Nothing
         , showElaborations = ingredients.showElaborations
         , index = index
         , body =
-            [ Factors.object index mainOverride ingredients
-            , Factors.pivot index ingredients False
-            , Factors.balance index balanceOverride ingredients
+            [ Factors.object index ingredients
+            , Factors.pivot index ingredients
+            , Factors.balance index ingredients
             ]
         }
 
 
-elaboration : Int -> Bool -> Bool -> ElaborationRecipe -> Int -> Ingredients -> Model -> Html.Html Signal
-elaboration index mainOverride balanceOverride elaborationRecipe subIndex ingredients model =
+elaboration : Int -> ElaborationRecipe -> Int -> Ingredients -> Model -> Html.Html Signal
+elaboration index elaborationRecipe subIndex ingredients model =
     Input.input
         { elaborationRecipe = Just elaborationRecipe
         , showElaborations = ingredients.showElaborations
         , index = index
         , body =
             case elaborationRecipe of
-                MakeExpanded ->
-                    [ Factors.pivot index ingredients True
-                    , input subIndex mainOverride balanceOverride model
-                    ]
-
-                MakePractical ->
-                    [ Factors.limitedModality index ingredients
-                    , input subIndex mainOverride balanceOverride model
+                MakeDirect ->
+                    [ Factors.displacement False index ingredients
+                    , input subIndex model
                     ]
 
                 MakeEvasive ->
-                    [ Factors.limitedModality index ingredients
+                    [ Factors.maybeDisplacement True index ingredients
                     , Factors.frequency index ingredients
-                    , input subIndex mainOverride balanceOverride model
+                    , input subIndex model
                     ]
 
-                MakeProjective ->
-                    [ Factors.unlimitedModality index ingredients
+                MakeFuture ->
+                    [ Factors.maybeDisplacement False index ingredients
                     , Factors.time index ingredients
-                    , input subIndex mainOverride balanceOverride model
-                    ]
-
-                MakePreordained ->
-                    [ Factors.time index ingredients
-                    , input subIndex mainOverride balanceOverride model
-                    ]
-
-                MakeRegular ->
-                    [ Factors.frequency index ingredients
-                    , input subIndex mainOverride balanceOverride model
+                    , input subIndex model
                     ]
 
                 MakeExtended ->
                     [ Factors.duration index ingredients
-                    , input subIndex mainOverride balanceOverride model
+                    , input subIndex model
                     ]
 
                 MakeScattered ->
                     [ Factors.tally index ingredients
-                    , input subIndex mainOverride balanceOverride model
+                    , input subIndex model
                     ]
 
                 MakeIndirect ->
                     [ Factors.target index ingredients
                     , Factors.pointer index ingredients
-                    , Factors.indirectCategory index ingredients
-                    , Factors.categoryFlanks index ingredients
-                    , inputWithOverride ingredients.target subIndex mainOverride balanceOverride model
+                    , Factors.haystack index ingredients
+                    , input subIndex model
                     ]
 
                 MakeEnumerated ->
                     [ Factors.target index ingredients
                     , Factors.enumeratedQuantifier index ingredients
-                    , Factors.enumeratedCategory index ingredients
-                    , Factors.categoryFlanks index ingredients
-                    , inputWithOverride ingredients.target subIndex mainOverride balanceOverride model
+                    , Factors.haystack index ingredients
+                    , input subIndex model
                     ]
 
                 MakeAmassed ->
                     [ Factors.target index ingredients
                     , Factors.amassedQuantifier index ingredients
-                    , Factors.amassedCategory index ingredients
-                    , Factors.categoryFlanks index ingredients
-                    , inputWithOverride ingredients.target subIndex mainOverride balanceOverride model
+                    , Factors.haystack index ingredients
+                    , input subIndex model
                     ]
 
                 a ->
-                    [ input subIndex mainOverride balanceOverride model ]
+                    [ input subIndex model ]
         }
-
-
-inputWithOverride : Target -> Int -> Bool -> Bool -> Model -> Html.Html Signal
-inputWithOverride target index mainOverride balanceOverride model =
-    case target of
-        MainObject ->
-            input index True balanceOverride model
-
-        BalancingObject ->
-            input index mainOverride True model

@@ -23,12 +23,9 @@ type ElaborationRecipe
     = MakeNegative
     | MakePast
     | MakePrior
-    | MakeExpanded
-    | MakePractical
+    | MakeDirect
     | MakeEvasive
-    | MakeProjective
-    | MakePreordained
-    | MakeRegular
+    | MakeFuture
     | MakeExtended
     | MakeScattered
     | MakeIndirect
@@ -53,7 +50,10 @@ type alias Ingredients =
     , balanceString : String
     , balanceObject : Object
     , balanceObjectString : String
+    , displacement : Displacement
+    , maybeDisplacement : Maybe Displacement
     , modality : Modality
+    , multiPurposeString : String
     , target : Target
     , pointer : Pointer
     , pointerObject : Object
@@ -62,10 +62,8 @@ type alias Ingredients =
     , amassedQuantifier : Maybe Quantifier
     , other : Bool
     , category : String
-    , plural : Bool
     , description : String
     , restriction : String
-    , multiPurposeString : String
     }
 
 
@@ -86,7 +84,10 @@ type Signal
     | SetBalanceString Int String
     | SetBalanceObject Int Object
     | SetBalanceObjectString Int String
+    | SetDisplacement Int Displacement
+    | SetMaybeDisplacement Int (Maybe Displacement)
     | SetModality Int Modality
+    | SetMultiPurposeString Int String
     | SetTarget Int Target
     | SetPointer Int Pointer
     | SetPointerObject Int Object
@@ -95,10 +96,8 @@ type Signal
     | SetAmassedQuantifier Int (Maybe Quantifier)
     | ToggleOther Int
     | SetCategory Int String
-    | TogglePlural Int
     | SetDescription Int String
     | SetRestriction Int String
-    | SetMultiPurposeString Int String
 
 
 {-| Some convenient type shorthands for input element properties (used in the
