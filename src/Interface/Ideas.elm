@@ -1,181 +1,408 @@
 module Interface.Ideas exposing (..)
 
+{-| Module for creating lists of input options, and custom equivalence and
+toString functions. Used by the Interface.Nucleus and Interface.Elaborations
+modules, mainly in the generation of select dropdown menus. 
+-}
+
 import Maybe
 import Theory.Types exposing (..)
 
 
-objects : List Object
-objects =
-    [ Speaker
-    , Hearer
-    , Male Nothing
-    , Female Nothing
-    , Other Nothing
-    , Speakers
-    , Hearers
-    , Others Nothing
+{-| Objects.
+-}
+listObjects : List Object
+listObjects =
+    [ Speaker False
+    , Hearer False
+    , Other False (Just Male) Nothing
+    , Other False (Just Female) Nothing
+    , Other False Nothing Nothing
+    , Speaker True
+    , Hearer True
+    , Other True Nothing Nothing
     ]
 
 
-objectGroups : List ( String, List Object )
-objectGroups =
-    [ ( "Singular", [ Speaker, Hearer, Male Nothing, Female Nothing, Other Nothing ] )
-    , ( "Plural", [ Speakers, Hearers, Others Nothing ] )
+listObjectGroups : List ( String, List Object )
+listObjectGroups =
+    [ ( "Singular"
+      , [ Speaker False
+        , Hearer False
+        , Other False (Just Male) Nothing
+        , Other False (Just Female) Nothing
+        , Other False Nothing Nothing
+        ]
+      )
+    , ( "Plural"
+      , [ Speaker True
+        , Hearer True
+        , Other True Nothing Nothing
+        ]
+      )
     ]
 
 
-objectToString : Object -> String
-objectToString object =
+equateObjects : Object -> Object -> Bool
+equateObjects object1 object2 =
+    case ( object1, object2 ) of
+        ( Speaker plural1, Speaker plural2 ) ->
+            plural1 == plural2
+
+        ( Hearer plural1, Hearer plural2 ) ->
+            plural1 == plural2
+
+        ( Other plural1 sex1 string1, Other plural2 sex2 string2 ) ->
+            plural1 == plural2 && sex1 == sex2
+
+        _ ->
+            False
+
+
+displayObject : Object -> String
+displayObject object =
     case object of
-        Male string ->
-            "Male"
+        Speaker plural ->
+            if plural then
+                "Speakers"
+            else
+                "Speaker"
 
-        Female string ->
-            "Female"
+        Hearer plural ->
+            if plural then
+                "Hearers"
+            else
+                "Hearer"
 
-        Other string ->
-            "Other"
+        Other plural sex string ->
+            if plural then
+                "Others"
+            else
+                case sex of
+                    Nothing ->
+                        "Other (thing)"
 
-        Others string ->
-            "Others"
+                    Just Male ->
+                        "Other (male)"
 
-        a ->
-            toString a
+                    Just Female ->
+                        "Other (female)"
 
 
-pivots : List Pivot
-pivots =
-    [ Be Nothing False
+objectString : Object -> Maybe String
+objectString object =
+    case object of
+        Other plural sex string ->
+            string
+
+        _ ->
+            Nothing
+
+
+objectHasString : Object -> Bool
+objectHasString object =
+    case object of
+        Other plural sex string ->
+            True
+
+        _ ->
+            False
+
+
+{-| Pivots.
+-}
+listPivots : List Pivot
+listPivots =
+    [ Be False Nothing
+    , Seem Nothing False Nothing
     , Do "" False False
     ]
 
 
-pivotToString : Pivot -> String
-pivotToString pivot =
+equatePivots : Pivot -> Pivot -> Bool
+equatePivots pivot1 pivot2 =
+    case ( pivot1, pivot2 ) of
+        ( Be property1 ongoing1, Be property2 ongoing2 ) ->
+            True
+
+        ( Seem sense1 property1 ongoing1, Seem sense2 property2 ongoing2 ) ->
+            True
+
+        ( Do verbality1 ongoing1 passive1, Do verbality2 ongoing2 passive2 ) ->
+            True
+
+        _ ->
+            False
+
+
+displayPivot : Pivot -> String
+displayPivot pivot =
     case pivot of
-        Be string ongoing ->
+        Be property ongoing ->
             "Be"
 
-        Do string ongoing passive ->
+        Seem sense property ongoing ->
+            "Seem"
+
+        Do verbality ongoing passive ->
             "Do"
 
 
-balances : List (Maybe Balance)
-balances =
+{-| Senses.
+-}
+listSenses : List (Maybe Sense)
+listSenses =
+    [ Nothing
+    , Just Sight
+    , Just Smell
+    , Just Sound
+    , Just Taste
+    , Just Touch
+    ]
+
+
+displaySense : Maybe Sense -> String
+displaySense sense =
+    Maybe.withDefault "-- No Sense --" (Maybe.map toString sense)
+
+
+{-| Counters.
+-}
+listCounters : List (Maybe Counter)
+listCounters =
+    [ Nothing
+    , Just About
+    , Just Above
+    , Just After
+    , Just Against
+    , Just At
+    , Just Before
+    , Just Behind
+    , Just Below
+    , Just Beyond
+    , Just By
+    , Just Down
+    , Just For
+    , Just From
+    , Just In
+    , Just Inside
+    , Just Into
+    , Just Like
+    , Just Of
+    , Just Off
+    , Just On
+    , Just Opposite
+    , Just Out
+    , Just Outside
+    , Just Over
+    , Just Through
+    , Just To
+    , Just Towards
+    , Just Under
+    , Just Up
+    , Just With
+    , Just Without
+    ]
+
+
+displayCounter : Maybe Counter -> String
+displayCounter counter =
+    Maybe.withDefault "-- No Counter --" (Maybe.map toString counter)
+
+
+{-| Weights.
+-}
+listWeights : List (Maybe Weight)
+listWeights =
     [ Nothing
     , Just SameObject
-    , Just (IndependentObject Speaker)
-    , Just (CustomBalance "")
+    , Just (Different (Speaker False))
     ]
 
 
-balanceToString : Maybe Balance -> String
-balanceToString balance =
-    case balance of
+equateWeights : Maybe Weight -> Maybe Weight -> Bool
+equateWeights weight1 weight2 =
+    case ( weight1, weight2 ) of
+        ( Nothing, Nothing ) ->
+            True
+
+        ( Just SameObject, Just SameObject ) ->
+            True
+
+        ( Just (Different object1), Just (Different object2) ) ->
+            True
+
+        _ ->
+            False
+
+
+displayWeight : Maybe Weight -> String
+displayWeight weight =
+    case weight of
         Nothing ->
-            "Nothing"
+            "-- No Weight --"
 
-        Just b ->
-            case b of
-                SameObject ->
-                    "Same Object"
+        Just SameObject ->
+            "Same Object"
 
-                IndependentObject object ->
-                    "Independent Object"
-
-                CustomBalance string ->
-                    "Custom"
+        Just (Different object) ->
+            "Different Object"
 
 
-displacements : List Displacement
-displacements =
-    [ Primary (Be Nothing False)
-    , Secondary SoftYes
-    ]
+{-| Displacers.
+-}
+listDisplacers : Bool -> List (Maybe Displacer)
+listDisplacers optional =
+    if optional then
+        [ Nothing
+        , Just (Primary (Be False Nothing))
+        , Just (Secondary SoftYes)
+        ]
+    else
+        [ Just (Primary (Be False Nothing))
+        , Just (Secondary SoftYes)
+        ]
 
 
-maybeDisplacements : List (Maybe Displacement)
-maybeDisplacements =
-    [ Nothing
-    , Just (Primary (Be Nothing False))
-    , Just (Secondary SoftYes)
-    ]
+equateDisplacers : Maybe Displacer -> Maybe Displacer -> Bool
+equateDisplacers displacer1 displacer2 =
+    case ( displacer1, displacer2 ) of
+        ( Nothing, Nothing ) ->
+            True
+
+        ( Just (Primary pivot1), Just (Primary pivot2) ) ->
+            True
+
+        ( Just (Secondary modality1), Just (Secondary modality2) ) ->
+            True
+
+        _ ->
+            False
 
 
-displacementToString : Displacement -> String
-displacementToString displacement =
-    case displacement of
-        Primary pivot ->
-            "Primary"
+displayDisplacer : Maybe Displacer -> String
+displayDisplacer displacer =
+    case displacer of
+        Nothing ->
+            "-- No Displacer --"
 
-        Secondary modality ->
-            "Secondary"
+        Just (Primary pivot) ->
+            "Primary Displacer"
 
-
-maybeDisplacementToString : Maybe Displacement -> String
-maybeDisplacementToString displacement =
-    Maybe.withDefault "Nothing" (Maybe.map displacementToString displacement)
+        Just (Secondary modality) ->
+            "Secondary Displacer"
 
 
-limitedModalities : List Modality
-limitedModalities =
-    [ SoftYes
-    , HardYes
-    , SoftMaybe
-    , HardMaybe
-    , SoftYesIsh
-    , HardYesIsh
-    , Dare
-    ]
+{-| Modalities.
+-}
+listModalities : Bool -> List Modality
+listModalities limited =
+    if limited then
+        [ SoftYes
+        , HardYes
+        , SoftMaybe
+        , HardMaybe
+        , SoftYesIsh
+        , HardYesIsh
+        , Dare
+        ]
+    else
+        [ SoftYes
+        , HardYes
+        , SoftMaybe
+        , HardMaybe
+        , SoftYesIsh
+        , HardYesIsh
+        , Dare
+        , Permission
+        , Command
+        ]
 
 
-unlimitedModalities : List Modality
-unlimitedModalities =
-    limitedModalities ++ [ Permission, Command ]
-
-
-modalityToString : Modality -> String
-modalityToString modality =
+displayModality : Modality -> String
+displayModality modality =
     case modality of
         SoftYes ->
-            "Soft Yes -- WILL"
+            "Soft Yes ('will')"
 
         HardYes ->
-            "Hard Yes -- MUST"
+            "Hard Yes ('must')"
 
         SoftMaybe ->
-            "Soft Maybe -- MAY"
+            "Soft Maybe ('may')"
 
         HardMaybe ->
-            "Hard Maybe -- CAN"
+            "Hard Maybe ('can')"
 
         SoftYesIsh ->
-            "Soft Yes-ish -- SHOULD"
+            "Soft Yes-ish ('should')"
 
         HardYesIsh ->
-            "Hard Yes-ish -- OUGHT"
+            "Hard Yes-ish ('ought')"
 
         Permission ->
-            "Permission -- MAY"
+            "Permission ('may')"
 
         Command ->
-            "Command -- SHALL"
+            "Command ('shall')"
 
         Dare ->
-            "Dare -- DARE"
+            "Dare ('dare')"
 
 
-pointers : List Pointer
-pointers =
+{-| Targets.
+-}
+listTargets : Int -> List Target
+listTargets balanceCount =
+    let
+        balancingObjects =
+            List.map (\x -> BalancingObject x) (List.range 0 (balanceCount - 1))
+    in
+        MainObject :: balancingObjects
+
+
+displayTarget : Target -> String
+displayTarget target =
+    case target of
+        MainObject ->
+            "Main Object"
+
+        BalancingObject int ->
+            "Balancing Object " ++ (toString (int + 1))
+
+
+{-| Pointers.
+-}
+listPointers : List Pointer
+listPointers =
     [ The
     , This
     , That
-    , RelatedTo Speaker
+    , RelatedTo (Speaker False)
     ]
 
 
-pointerToString : Pointer -> String
-pointerToString pointer =
+equatePointers : Pointer -> Pointer -> Bool
+equatePointers pointer1 pointer2 =
+    case ( pointer1, pointer2 ) of
+        ( The, The ) ->
+            True
+
+        ( This, This ) ->
+            True
+
+        ( That, That ) ->
+            True
+
+        ( RelatedTo object1, RelatedTo object2 ) ->
+            True
+
+        _ ->
+            False
+
+
+displayPointer : Pointer -> String
+displayPointer pointer =
     case pointer of
         RelatedTo object ->
             "Related to Object"
@@ -184,31 +411,31 @@ pointerToString pointer =
             toString a
 
 
-enumeratedQuantifiers : List Quantifier
-enumeratedQuantifiers =
-    [ A
-    , Several
-    , Many
-    , Each
-    , Every
-    , Both
-    , Some
-    , Any
-    ]
+{-| Quantifiers.
+-}
+listQuantifiers : Bool -> List (Maybe Quantifier)
+listQuantifiers amassed =
+    if amassed then
+        [ Nothing
+        , Just Some
+        , Just Any
+        , Just All
+        , Just Much
+        , Just Most
+        , Just Enough
+        ]
+    else
+        [ Just A
+        , Just Several
+        , Just Many
+        , Just Each
+        , Just Every
+        , Just Both
+        , Just Some
+        , Just Any
+        ]
 
 
-amassedQuantifiers : List (Maybe Quantifier)
-amassedQuantifiers =
-    [ Nothing
-    , Just Some
-    , Just Any
-    , Just All
-    , Just Much
-    , Just Most
-    , Just Enough
-    ]
-
-
-maybeQuantifierToString : Maybe Quantifier -> String
-maybeQuantifierToString quantifier =
-    Maybe.withDefault "No Quantifier" (Maybe.map toString quantifier)
+displayQuantifier : Maybe Quantifier -> String
+displayQuantifier quantifier =
+    Maybe.withDefault "-- No Quantifier --" (Maybe.map toString quantifier)

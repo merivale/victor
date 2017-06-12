@@ -1,14 +1,17 @@
 module Interface.Input
     exposing
-        ( input
-        , button
+        ( button
+        , iconButton
         , label
         , text
-        , radio
         , checkbox
         , select
         , selectGroup
+        , emptyInput
         )
+
+{-| Module for creating HTML elements for gathering user input.
+-}
 
 import Html
 import Html.Attributes as Attr
@@ -16,141 +19,47 @@ import Html.Events as Events
 import Interface.Types exposing (..)
 
 
-input : PanelProperties -> Html.Html Signal
-input { elaborationRecipe, showElaborations, index, body } =
-    let
-        heading =
-            case elaborationRecipe of
-                Nothing ->
-                    Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ]
-
-                Just simpleRecipe ->
-                    Html.div [ Attr.class "title" ] [ Html.text (elaborationRecipeToString simpleRecipe) ]
-
-        showElaborationsButton =
-            if showElaborations then
-                button { label = "-", signal = ToggleShowElaborations index, customClass = Just "green" }
-            else
-                button { label = "+", signal = ToggleShowElaborations index, customClass = Just "green" }
-
-        deleteElaborationButton =
-            button { label = "×", signal = RemoveElaborationRecipe index, customClass = Just "red" }
-    in
-        case elaborationRecipe of
-            Nothing ->
-                Html.div
-                    [ Attr.class "input" ]
-                    [ Html.div [ Attr.class "heading" ] [ showElaborationsButton, heading ]
-                    , elaborations index showElaborations
-                    , Html.div [ Attr.class "body" ] body
-                    ]
-
-            Just simpleRecipe ->
-                Html.div
-                    [ Attr.class "input" ]
-                    [ Html.div [ Attr.class "heading" ] [ showElaborationsButton, heading, deleteElaborationButton ]
-                    , elaborations index showElaborations
-                    , Html.div [ Attr.class "body" ] body
-                    ]
-
-
-elaborations : Int -> Bool -> Html.Html Signal
-elaborations index show =
-    let
-        elaborationsClass =
-            if show then
-                "elaborations active"
-            else
-                "elaborations"
-    in
-        Html.div
-            [ Attr.class elaborationsClass ]
-            [ Html.div []
-                (List.map (elaborationButton index)
-                    [ MakeNegative
-                    , MakePast
-                    , MakePrior
-                    , MakeDirect
-                    , MakeEvasive
-                    , MakeFuture
-                    ]
-                )
-            , Html.div []
-                (List.map (elaborationButton index)
-                    [ MakeExtended
-                    , MakeScattered
-                    , MakeIndirect
-                    , MakeEnumerated
-                    , MakeAmassed
-                    ]
-                )
-            ]
-
-
-elaborationButton : Int -> ElaborationRecipe -> Html.Html Signal
-elaborationButton index elaborationRecipe =
-    button
-        { label = elaborationRecipeToString elaborationRecipe
-        , signal = AddElaborationRecipe index elaborationRecipe
-        , customClass = Nothing
-        }
-
-
-elaborationRecipeToString : ElaborationRecipe -> String
-elaborationRecipeToString elaborationRecipe =
-    String.dropLeft 4 (toString elaborationRecipe)
-
-
 button : ButtonProperties -> Html.Html Signal
-button { label, signal, customClass } =
-    let
-        classes =
-            case customClass of
-                Nothing ->
-                    "button"
+button { label, signal, title } =
+    Html.button
+        [ Events.onClick signal
+        , Attr.class "button"
+        , Attr.title title
+        ]
+        [ Html.text label ]
 
-                Just a ->
-                    "button " ++ a
-    in
-        Html.button
-            [ Events.onClick signal, Attr.class classes ]
-            [ Html.text label ]
+
+iconButton : ButtonProperties -> Html.Html Signal
+iconButton { label, signal, title } =
+    Html.button
+        [ Events.onClick signal
+        , Attr.class ("button " ++ label)
+        , Attr.title title
+        ]
+        []
 
 
 label : String -> Html.Html Signal
 label text =
-    Html.label [ Attr.class "label" ] [ Html.text text ]
+    Html.label
+        [ Attr.class "label" ]
+        [ Html.text text ]
 
 
 text : TextProperties -> Html.Html Signal
-text { value, placeholder, signal } =
+text { value, placeholder, signal, disabled } =
     Html.input
         [ Attr.type_ "text"
         , Attr.class "text"
         , Attr.value value
         , Attr.placeholder placeholder
         , Events.onInput signal
+        , Attr.disabled disabled
         ]
         []
 
 
-radio : String -> RadioCheckboxProperties -> Html.Html Signal
-radio name { id, label, checked, signal } =
-    Html.label
-        [ Attr.for id, Attr.class "radio" ]
-        [ Html.input
-            [ Attr.type_ "radio"
-            , Attr.name name
-            , Attr.checked checked
-            , Attr.id id
-            , Events.onClick signal
-            ]
-            []
-        , Html.text label
-        ]
-
-
-checkbox : RadioCheckboxProperties -> Html.Html Signal
+checkbox : CheckboxProperties -> Html.Html Signal
 checkbox { id, label, checked, signal } =
     Html.label
         [ Attr.for id, Attr.class "checkbox" ]
@@ -166,34 +75,37 @@ checkbox { id, label, checked, signal } =
 
 
 select : SelectProperties a -> Html.Html Signal
-select { value, options, signal, toLabel } =
+select { value, options, equivalent, signal, toLabel } =
     Html.select
-        [ Attr.class "select", Events.onInput (signal << fromId options) ]
-        (List.map (option toLabel value) options)
+        [ Attr.class "select"
+        , Events.onInput (signal << fromId options)
+        ]
+        (List.map (option toLabel value equivalent) options)
 
 
 selectGroup : List ( String, List a ) -> SelectProperties a -> Html.Html Signal
-selectGroup groups { value, options, signal, toLabel } =
+selectGroup groups { value, options, equivalent, signal, toLabel } =
     Html.select
-        [ Attr.class "select", Events.onInput (signal << fromId options) ]
-        (List.map (optionGroup toLabel value) groups)
+        [ Attr.class "select"
+        , Events.onInput (signal << fromId options)
+        ]
+        (List.map (optionGroup toLabel value equivalent) groups)
 
 
-optionGroup : (a -> String) -> a -> ( String, List a ) -> Html.Html Signal
-optionGroup toLabel value ( label, options ) =
-    Html.optgroup [ Attr.attribute "label" label ] (List.map (option toLabel value) options)
+optionGroup : (a -> String) -> a -> (a -> a -> Bool) -> ( String, List a ) -> Html.Html Signal
+optionGroup toLabel value equivalent ( label, options ) =
+    Html.optgroup
+        [ Attr.attribute "label" label ]
+        (List.map (option toLabel value equivalent) options)
 
 
-option : (a -> String) -> a -> a -> Html.Html Signal
-option toLabel current value =
-    let
-        attributes =
-            if current == value then
-                [ Attr.value (toString value), Attr.selected True ]
-            else
-                [ Attr.value (toString value) ]
-    in
-        Html.option attributes [ Html.text (toLabel value) ]
+option : (a -> String) -> a -> (a -> a -> Bool) -> a -> Html.Html Signal
+option toLabel current equivalent value =
+    Html.option
+        [ Attr.value (toString value)
+        , Attr.selected (equivalent current value)
+        ]
+        [ Html.text (toLabel value) ]
 
 
 fromId : List a -> (String -> a)
@@ -208,3 +120,12 @@ fromId options =
                     a
     in
         fromString
+
+
+emptyInput : Html.Html Signal
+emptyInput =
+    Html.input
+        [ Attr.type_ "text"
+        , Attr.class "text"
+        , Attr.disabled True ]
+        []

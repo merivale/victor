@@ -1,328 +1,525 @@
 module Interface.State exposing (initial, update)
 
-{-| The application state.
+{-| Module for initialising and updating the model (application state).
 -}
 
-import Array
 import Interface.Types exposing (..)
 import Theory.Types exposing (..)
 
 
-{-| The initial application state.
+{-| The initial application state. Results in my friendly welcome message,
+encoded as "I am Victor".
 -}
 initial : Model
 initial =
-    Array.fromList [ MakePlain ingredients ]
-
-
-{-| Default ingredients for new elaborations.
--}
-ingredients : Ingredients
-ingredients =
-    { showElaborations = False
-    , object = Speaker
-    , objectString = ""
-    , pivot = Be Nothing False
-    , pivotProperty = ""
-    , pivotVerb = ""
-    , ongoing = False
-    , passive = False
-    , balance = Just (IndependentObject Speaker)
-    , balanceString = ""
-    , balanceObject = Male Nothing
-    , balanceObjectString = "Victor"
-    , displacement = Secondary SoftYes
-    , maybeDisplacement = Nothing
-    , modality = SoftYes
-    , multiPurposeString = ""
-    , target = MainObject
-    , pointer = The
-    , pointerObject = Speaker
-    , pointerObjectString = ""
-    , enumeratedQuantifier = A
-    , amassedQuantifier = Nothing
-    , other = False
-    , category = ""
-    , description = ""
-    , restriction = ""
+    { plus = False
+    , object = Speaker False
+    , pivot = Be False Nothing
+    , balances = [ ( Nothing, Just (Different (Other False (Just Male) (Just "Victor"))) ) ]
+    , elaborations = []
     }
 
 
-{-| The update function.
+{-| Function for updating the applicated state in response to user input. Those
+familiar with Elm may note the use of "Signal" instead of the standard "Msg";
+this is to avoid confusion with "Message", a key term of art within my theory.
 -}
 update : Signal -> Model -> Model
 update signal model =
     case signal of
-        RemoveElaborationRecipe index ->
-            case Array.get index model of
-                Nothing ->
+        TogglePlus ->
+            let
+                allMinus =
+                    minusAll model
+            in
+                { allMinus | plus = not model.plus }
+
+        SetObject object ->
+            { model | object = object }
+
+        SetObjectString string ->
+            case model.object of
+                Other plural sex oldString ->
+                    { model | object = Other plural sex (maybe string) }
+
+                _ ->
                     model
 
-                Just recipe ->
-                    case recipe of
-                        MakePlain ingredients ->
-                            model
+        SetPivot pivot ->
+            { model | pivot = mergePivots pivot model.pivot }
 
-                        MakeElaborate elaborationRecipe oldIndex ingredients ->
-                            replaceRecipe index oldIndex model
+        SetPivotSense sense ->
+            case model.pivot of
+                Seem oldSense ongoing property ->
+                    { model | pivot = Seem sense ongoing property }
 
-        AddElaborationRecipe index elaborationRecipe ->
-            case Array.get index model of
-                Nothing ->
+                _ ->
                     model
 
-                Just oldRecipe ->
-                    let
-                        newRecipe =
-                            MakeElaborate elaborationRecipe (Array.length model) ingredients
+        SetPivotVerbality verbality ->
+            case model.pivot of
+                Do oldVerbality ongoing passive ->
+                    { model | pivot = Do verbality ongoing passive }
 
-                        extendedModel =
-                            Array.push oldRecipe model
+                _ ->
+                    model
 
-                        tweakedModel =
-                            setIngredient (Array.length model) extendedModel toggleShowElaborations
-                    in
-                        Array.set index newRecipe tweakedModel
+        TogglePivotOngoing ->
+            case model.pivot of
+                Be ongoing property ->
+                    { model | pivot = Be (not ongoing) property }
 
-        ToggleShowElaborations index ->
-            setIngredient index model toggleShowElaborations
+                Seem sense ongoing property ->
+                    { model | pivot = Seem sense (not ongoing) property }
 
-        SetObject index object ->
-            setIngredient index model (setObject object)
+                Do verbality ongoing passive ->
+                    { model | pivot = Do verbality (not ongoing) passive }
 
-        SetObjectString index string ->
-            setIngredient index model (setObjectString string)
+        TogglePivotPassive ->
+            case model.pivot of
+                Do verbality ongoing passive ->
+                    { model | pivot = Do verbality ongoing (not passive) }
 
-        SetPivot index pivot ->
-            setIngredient index model (setPivot pivot)
+                _ ->
+                    model
 
-        SetPivotProperty index string ->
-            setIngredient index model (setPivotProperty string)
+        SetPivotProperty property ->
+            case model.pivot of
+                Be ongoing oldProperty ->
+                    { model | pivot = Be ongoing (maybe property) }
 
-        SetPivotVerb index string ->
-            setIngredient index model (setPivotVerb string)
+                Seem sense ongoing oldProperty ->
+                    { model | pivot = Seem sense ongoing (maybe property) }
 
-        ToggleOngoing index ->
-            setIngredient index model toggleOngoing
+                _ ->
+                    model
 
-        TogglePassive index ->
-            setIngredient index model togglePassive
+        AddBalance ->
+            { model | balances = model.balances ++ [ ( Nothing, Nothing ) ] }
 
-        SetBalance index balance ->
-            setIngredient index model (setBalance balance)
+        RemoveBalance ->
+            let
+                lastIndex =
+                    (List.length model.balances) - 1
+            in
+            { model
+                | balances = List.take lastIndex model.balances
+                , elaborations = List.filter (doesNotTarget lastIndex) model.elaborations
+            }
 
-        SetBalanceString index string ->
-            setIngredient index model (setBalanceString string)
+        SetBalanceCounter index counter ->
+            { model | balances = modifyItem index (setCounter counter) model.balances }
+
+        SetBalanceWeight index weight ->
+            { model | balances = modifyItem index (setWeight weight) model.balances }
 
         SetBalanceObject index object ->
-            setIngredient index model (setBalanceObject object)
+            { model | balances = modifyItem index (setObject object) model.balances }
 
         SetBalanceObjectString index string ->
-            setIngredient index model (setBalanceObjectString string)
+            { model | balances = modifyItem index (setObjectString string) model.balances }
 
-        SetDisplacement index displacement ->
-            setIngredient index model (setDisplacement displacement)
+        AddElaboration index recipe ->
+            let
+                allMinus =
+                    minusAll model
+            in
+                { allMinus | elaborations = addElaboration index recipe allMinus.elaborations }
 
-        SetMaybeDisplacement index displacement ->
-            setIngredient index model (setMaybeDisplacement displacement)
+        RemoveElaboration index ->
+            { model | elaborations = removeFromList index model.elaborations }
 
-        SetModality index modality ->
-            setIngredient index model (setModality modality)
+        ToggleElaborationPlus index ->
+            { model | plus = False, elaborations = List.indexedMap (toggleOrMinus index) model.elaborations }
 
-        SetMultiPurposeString index string ->
-            setIngredient index model (setMultiPurposeString string)
+        SetDisplacer index displacer ->
+            { model | elaborations = modifyItem index (setDisplacer displacer) model.elaborations }
+
+        SetDisplacerPivot index pivot ->
+            { model | elaborations = modifyItem index (setDisplacerPivot pivot) model.elaborations }
+
+        SetDisplacerPivotProperty index property ->
+            { model | elaborations = modifyItem index (setDisplacerPivotProperty property) model.elaborations }
+
+        SetDisplacerPivotSense index sense ->
+            { model | elaborations = modifyItem index (setDisplacerPivotSense sense) model.elaborations }
+
+        SetDisplacerPivotVerbality index verbality ->
+            { model | elaborations = modifyItem index (setDisplacerPivotVerbality verbality) model.elaborations }
+
+        ToggleDisplacerPivotOngoing index ->
+            { model | elaborations = modifyItem index toggleDisplacerPivotOngoing model.elaborations }
+
+        ToggleDisplacerPivotPassive index ->
+            { model | elaborations = modifyItem index toggleDisplacerPivotPassive model.elaborations }
+
+        SetDisplacerModality index modality ->
+            { model | elaborations = modifyItem index (setDisplacerModality modality) model.elaborations }
+
+        SetString1 index string ->
+            { model | elaborations = modifyItem index (setString1 string) model.elaborations }
+
+        SetString2 index string ->
+            { model | elaborations = modifyItem index (setString2 string) model.elaborations }
+
+        SetString3 index string ->
+            { model | elaborations = modifyItem index (setString3 string) model.elaborations }
 
         SetTarget index target ->
-            setIngredient index model (setTarget target)
+            { model | elaborations = modifyItem index (setTarget target) model.elaborations }
+
+        SetTargetInt index balanceIndex ->
+            { model | elaborations = modifyItem index (setTargetInt balanceIndex) model.elaborations }
 
         SetPointer index pointer ->
-            setIngredient index model (setPointer pointer)
+            { model | elaborations = modifyItem index (setPointer pointer) model.elaborations }
 
         SetPointerObject index object ->
-            setIngredient index model (setPointerObject object)
+            { model | elaborations = modifyItem index (setPointerObject object) model.elaborations }
 
         SetPointerObjectString index string ->
-            setIngredient index model (setPointerObjectString string)
+            { model | elaborations = modifyItem index (setPointerObjectString string) model.elaborations }
 
-        SetEnumeratedQuantifier index quantifier ->
-            setIngredient index model (setEnumeratedQuantifier quantifier)
-
-        SetAmassedQuantifier index quantifier ->
-            setIngredient index model (setAmassedQuantifier quantifier)
+        SetQuantifier index quantifier ->
+            { model | elaborations = modifyItem index (setQuantifier quantifier) model.elaborations }
 
         ToggleOther index ->
-            setIngredient index model toggleOther
-
-        SetCategory index string ->
-            setIngredient index model (setCategory string)
-
-        SetDescription index string ->
-            setIngredient index model (setDescription string)
-
-        SetRestriction index string ->
-            setIngredient index model (setRestriction string)
+            { model | elaborations = modifyItem index toggleOther model.elaborations }
 
 
-{-| Function for replacing one recipe with another.
+{-| Set all pluses to False (i.e. collapse all expanded elaboration boxes). This
+is used to ensure that only one elaboration box is open at a time.
 -}
-replaceRecipe : Int -> Int -> Model -> Model
-replaceRecipe index oldIndex model =
-    case Array.get oldIndex model of
-        Nothing ->
-            model
-
-        Just oldRecipe ->
-            Array.set index oldRecipe model
+minusAll : Model -> Model
+minusAll model =
+    { model
+        | plus = False
+        , elaborations = List.map (\x -> { x | plus = False }) model.elaborations
+    }
 
 
-{-| Functions for updating ingredients.
+{-| Toggle the plus of a specific elaboration, and otherwise set it to False.
+Used to map the elaborations, to ensure that only one elaboration box is open at
+a time.
 -}
-setIngredient : Int -> Model -> (Ingredients -> Ingredients) -> Model
-setIngredient index model changed =
-    case Array.get index model of
-        Nothing ->
-            model
+toggleOrMinus : Int -> Int -> Elaboration -> Elaboration
+toggleOrMinus toggleIndex currentIndex elaboration =
+    if toggleIndex == currentIndex then
+        { elaboration | plus = not elaboration.plus }
+    else
+        { elaboration | plus = False }
 
-        Just recipe ->
+
+{-| Merge two pivots together. This is used to change the base type of pivot
+without losing the existing values of any common arguments.
+-}
+mergePivots : Pivot -> Pivot -> Pivot
+mergePivots pivot1 pivot2 =
+    case ( pivot1, pivot2 ) of
+        ( Be ongoing1 property1, Seem sense ongoing2 property2 ) ->
+            Be ongoing2 property2
+
+        ( Be ongoing1 property, Do verbality ongoing2 passive ) ->
+            Be ongoing2 property
+
+        ( Seem sense ongoing1 property1, Be ongoing2 property2 ) ->
+            Seem sense ongoing2 property2
+
+        ( Seem sense ongoing1 property, Do verbality ongoing2 passive ) ->
+            Seem sense ongoing2 property
+
+        ( Do verbality ongoing1 passive, Be ongoing2 property ) ->
+            Do verbality ongoing2 passive
+
+        ( Do verbality ongoing1 passive, Seem sense ongoing2 property ) ->
+            Do verbality ongoing2 passive
+
+        _ ->
+            pivot1
+
+
+{-| Check that an elaboration does not target the balancing object at the given
+index. Used to remove any elaboration that does, when the corresponding balance
+is deleted.
+-}
+doesNotTarget : Int -> Elaboration -> Bool
+doesNotTarget balanceIndex elaboration =
+    not (List.member elaboration.recipe [ MakeINDIRECT, MakeENUMERATED, MakeAMASSED ]
+        && elaboration.target == BalancingObject balanceIndex)
+
+
+{-| Remove an element from a list at the given index. Used for deleting
+elaborations.
+-}
+removeFromList : Int -> List a -> List a
+removeFromList index list =
+    (List.take index list) ++ (List.drop (index + 1) list)
+
+
+{-| Functions for adding a new elaboration, with appropriate default
+ingredients.
+-}
+addElaboration : Int -> Recipe -> List Elaboration -> List Elaboration
+addElaboration index recipe elaborations =
+    let
+        before =
+            List.take (index + 1) elaborations
+
+        after =
+            List.drop (index + 1) elaborations
+
+        elaboration =
             case recipe of
-                MakePlain ingredients ->
-                    Array.set index (MakePlain (changed ingredients)) model
+                MakeDISPLACED ->
+                    elaborationWithDisplacer recipe
 
-                MakeElaborate simpleRecipe subIndex ingredients ->
-                    Array.set index (MakeElaborate simpleRecipe subIndex (changed ingredients)) model
+                MakeENUMERATED ->
+                    elaborationWithQuantifier recipe
 
-
-toggleShowElaborations : Ingredients -> Ingredients
-toggleShowElaborations ingredients =
-    { ingredients | showElaborations = not ingredients.showElaborations }
-
-
-setObject : Object -> Ingredients -> Ingredients
-setObject object ingredients =
-    { ingredients | object = object }
+                _ ->
+                    elaborationDefault recipe
+    in
+        before ++ (elaboration :: after)
 
 
-setObjectString : String -> Ingredients -> Ingredients
-setObjectString string ingredients =
-    { ingredients | objectString = string }
+elaborationDefault : Recipe -> Elaboration
+elaborationDefault recipe =
+    { plus = False
+    , recipe = recipe
+    , displacer = Nothing
+    , string1 = Nothing
+    , string2 = Nothing
+    , string3 = Nothing
+    , target = MainObject
+    , pointer = The
+    , quantifier = Nothing
+    , other = False
+    }
 
 
-setPivot : Pivot -> Ingredients -> Ingredients
-setPivot pivot ingredients =
-    { ingredients | pivot = pivot }
+elaborationWithDisplacer : Recipe -> Elaboration
+elaborationWithDisplacer recipe =
+    { plus = False
+    , recipe = recipe
+    , displacer = Just (Primary (Be False Nothing))
+    , string1 = Nothing
+    , string2 = Nothing
+    , string3 = Nothing
+    , target = MainObject
+    , pointer = The
+    , quantifier = Nothing
+    , other = False
+    }
 
 
-setPivotProperty : String -> Ingredients -> Ingredients
-setPivotProperty string ingredients =
-    if String.length string > 0 then
-        { ingredients | pivotProperty = string, balance = Nothing }
+elaborationWithQuantifier : Recipe -> Elaboration
+elaborationWithQuantifier recipe =
+    { plus = False
+    , recipe = recipe
+    , displacer = Nothing
+    , string1 = Nothing
+    , string2 = Nothing
+    , string3 = Nothing
+    , target = MainObject
+    , pointer = The
+    , quantifier = Just Some
+    , other = False
+    }
+
+
+{-| Modify an item within a list at the given index, using the given modifying
+function. Used to change the components of balances and elaborations, which
+reside within lists in the model.
+-}
+modifyItem : Int -> (a -> a) -> List a -> List a
+modifyItem index modified list =
+    case List.head (List.drop index list) of
+        Nothing ->
+            list
+
+        Just item ->
+            (List.take index list)
+                ++ ((modified item) :: (List.drop (index + 1) list))
+
+
+{-| Functions for modifying the components of a balance, used as arguments to
+the modifyItem function above.
+-}
+setCounter : Maybe Counter -> Balance -> Balance
+setCounter counter ( oldCounter, weight ) =
+    ( counter, weight )
+
+
+setWeight : Maybe Weight -> Balance -> Balance
+setWeight weight ( counter, oldWeight ) =
+    ( counter, weight )
+
+
+setObject : Object -> Balance -> Balance
+setObject object ( counter, balance ) =
+    case balance of
+        Just (Different oldObject) ->
+            ( counter, Just (Different object) )
+
+        _ ->
+            ( counter, balance )
+
+
+setObjectString : String -> Balance -> Balance
+setObjectString string ( counter, weight ) =
+    case weight of
+        Just (Different (Other plural sex oldString)) ->
+            ( counter, Just (Different (Other plural sex (maybe string))) )
+
+        _ ->
+            ( counter, weight )
+
+
+{-| Functions for modifying the components of an elaboration, used as arguments
+to the modifyItem function above.
+-}
+togglePlus : Elaboration -> Elaboration
+togglePlus elaboration =
+    { elaboration | plus = not elaboration.plus }
+
+
+setDisplacer : Maybe Displacer -> Elaboration -> Elaboration
+setDisplacer displacer elaboration =
+    { elaboration | displacer = displacer }
+
+
+setDisplacerPivot : Pivot -> Elaboration -> Elaboration
+setDisplacerPivot pivot1 elaboration =
+    case elaboration.displacer of
+        Just (Primary pivot2) ->
+            { elaboration | displacer = Just (Primary (mergePivots pivot1 pivot2)) }
+
+        _ ->
+            elaboration
+
+
+setDisplacerPivotSense : Maybe Sense -> Elaboration -> Elaboration
+setDisplacerPivotSense sense elaboration =
+    case elaboration.displacer of
+        Just (Primary (Seem oldSense ongoing property)) ->
+            { elaboration | displacer = Just (Primary (Seem sense ongoing property)) }
+
+        _ ->
+            elaboration
+
+
+setDisplacerPivotVerbality : Verbality -> Elaboration -> Elaboration
+setDisplacerPivotVerbality verbality elaboration =
+    case elaboration.displacer of
+        Just (Primary (Do oldVerbality ongoing passive)) ->
+            { elaboration | displacer = Just (Primary (Do verbality ongoing passive)) }
+
+        _ ->
+            elaboration
+
+
+toggleDisplacerPivotOngoing : Elaboration -> Elaboration
+toggleDisplacerPivotOngoing elaboration =
+    case elaboration.displacer of
+        Just (Primary (Be ongoing property)) ->
+            { elaboration | displacer = Just (Primary (Be (not ongoing) property)) }
+
+        Just (Primary (Seem sense ongoing property)) ->
+            { elaboration | displacer = Just (Primary (Seem sense (not ongoing) property)) }
+
+        Just (Primary (Do verbality ongoing passive)) ->
+            { elaboration | displacer = Just (Primary (Do verbality (not ongoing) passive)) }
+
+        _ ->
+            elaboration
+
+
+toggleDisplacerPivotPassive : Elaboration -> Elaboration
+toggleDisplacerPivotPassive elaboration =
+    case elaboration.displacer of
+        Just (Primary (Do verbality ongoing passive)) ->
+            { elaboration | displacer = Just (Primary (Do verbality ongoing (not passive))) }
+
+        _ ->
+            elaboration
+
+
+setDisplacerPivotProperty : Property -> Elaboration -> Elaboration
+setDisplacerPivotProperty property elaboration =
+    case elaboration.displacer of
+        Just (Primary (Be ongoing oldProperty)) ->
+            { elaboration | displacer = Just (Primary (Be ongoing (maybe property))) }
+
+        Just (Primary (Seem sense ongoing oldProperty)) ->
+            { elaboration | displacer = Just (Primary (Seem sense ongoing (maybe property))) }
+
+        _ ->
+            elaboration
+
+
+setDisplacerModality : Modality -> Elaboration -> Elaboration
+setDisplacerModality modality elaboration =
+    { elaboration | displacer = Just (Secondary modality) }
+
+
+setString1 : String -> Elaboration -> Elaboration
+setString1 string elaboration =
+    { elaboration | string1 = maybe string }
+
+
+setString2 : String -> Elaboration -> Elaboration
+setString2 string elaboration =
+    { elaboration | string2 = maybe string }
+
+
+setString3 : String -> Elaboration -> Elaboration
+setString3 string elaboration =
+    { elaboration | string3 = maybe string }
+
+
+maybe : String -> Maybe String
+maybe string =
+    if String.length string == 0 then
+        Nothing
     else
-        { ingredients | pivotProperty = string }
+        Just string
 
 
-setPivotVerb : String -> Ingredients -> Ingredients
-setPivotVerb string ingredients =
-    { ingredients | pivotVerb = string }
+setTarget : Target -> Elaboration -> Elaboration
+setTarget target elaboration =
+    { elaboration | target = target }
 
 
-toggleOngoing : Ingredients -> Ingredients
-toggleOngoing ingredients =
-    { ingredients | ongoing = not ingredients.ongoing }
+setTargetInt : Int -> Elaboration -> Elaboration
+setTargetInt balanceIndex elaboration =
+    { elaboration | target = BalancingObject balanceIndex }
 
 
-togglePassive : Ingredients -> Ingredients
-togglePassive ingredients =
-    { ingredients | passive = not ingredients.passive }
+setPointer : Pointer -> Elaboration -> Elaboration
+setPointer pointer elaboration =
+    { elaboration | pointer = pointer }
 
 
-setBalance : Maybe Balance -> Ingredients -> Ingredients
-setBalance balance ingredients =
-    if balance == Nothing then
-        { ingredients | balance = balance }
-    else
-        { ingredients | balance = balance, pivotProperty = "" }
+setPointerObject : Object -> Elaboration -> Elaboration
+setPointerObject object elaboration =
+    { elaboration | pointer = RelatedTo object }
 
 
-setBalanceString : String -> Ingredients -> Ingredients
-setBalanceString string ingredients =
-    { ingredients | balanceString = string }
+setPointerObjectString : String -> Elaboration -> Elaboration
+setPointerObjectString string elaboration =
+    case elaboration.pointer of
+        RelatedTo (Other plural sex oldString) ->
+            { elaboration | pointer = RelatedTo (Other plural sex (maybe string)) }
+
+        _ ->
+            elaboration
 
 
-setBalanceObject : Object -> Ingredients -> Ingredients
-setBalanceObject object ingredients =
-    { ingredients | balanceObject = object }
+setQuantifier : Maybe Quantifier -> Elaboration -> Elaboration
+setQuantifier quantifier elaboration =
+    { elaboration | quantifier = quantifier }
 
 
-setBalanceObjectString : String -> Ingredients -> Ingredients
-setBalanceObjectString string ingredients =
-    { ingredients | balanceObjectString = string }
-
-
-setDisplacement : Displacement -> Ingredients -> Ingredients
-setDisplacement displacement ingredients =
-    { ingredients | displacement = displacement }
-
-
-setMaybeDisplacement : Maybe Displacement -> Ingredients -> Ingredients
-setMaybeDisplacement displacement ingredients =
-    { ingredients | maybeDisplacement = displacement }
-
-
-setModality : Modality -> Ingredients -> Ingredients
-setModality modality ingredients =
-    { ingredients | modality = modality }
-
-
-setMultiPurposeString : String -> Ingredients -> Ingredients
-setMultiPurposeString string ingredients =
-    { ingredients | multiPurposeString = string }
-
-
-setTarget : Target -> Ingredients -> Ingredients
-setTarget target ingredients =
-    { ingredients | target = target }
-
-
-setPointer : Pointer -> Ingredients -> Ingredients
-setPointer pointer ingredients =
-    { ingredients | pointer = pointer }
-
-
-setPointerObject : Object -> Ingredients -> Ingredients
-setPointerObject object ingredients =
-    { ingredients | pointerObject = object }
-
-
-setPointerObjectString : String -> Ingredients -> Ingredients
-setPointerObjectString string ingredients =
-    { ingredients | pointerObjectString = string }
-
-
-setEnumeratedQuantifier : Quantifier -> Ingredients -> Ingredients
-setEnumeratedQuantifier quantifier ingredients =
-    { ingredients | enumeratedQuantifier = quantifier }
-
-
-setAmassedQuantifier : Maybe Quantifier -> Ingredients -> Ingredients
-setAmassedQuantifier quantifier ingredients =
-    { ingredients | amassedQuantifier = quantifier }
-
-
-toggleOther : Ingredients -> Ingredients
-toggleOther ingredients =
-    { ingredients | other = not ingredients.other }
-
-
-setCategory : String -> Ingredients -> Ingredients
-setCategory string ingredients =
-    { ingredients | category = string }
-
-
-setDescription : String -> Ingredients -> Ingredients
-setDescription string ingredients =
-    { ingredients | description = string }
-
-
-setRestriction : String -> Ingredients -> Ingredients
-setRestriction string ingredients =
-    { ingredients | restriction = string }
+toggleOther : Elaboration -> Elaboration
+toggleOther elaboration =
+    { elaboration | other = not elaboration.other }

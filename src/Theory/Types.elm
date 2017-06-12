@@ -17,71 +17,132 @@ way, rather than in the type definition itself. This is by design: one of the
 principles behind my model is that English is presumptively unrestrictive in its
 elaborating system, i.e. that every combination of elaborations is allowable
 unless there is some positive reason for ruling it out.
+
+Since elaborations are such a central part of the theory, I adopt the convention
+of writing them in ALLCAPS, so as to visibly distinct from other types and
+values.
 -}
 type Message
     = Plain Nucleus
-    | Negative Message
-    | Past Message
-    | Prior Message
-    | Direct Displacement Message
-    | Evasive (Maybe Displacement) (Maybe Frequency) Message
-    | Future (Maybe Displacement) (Maybe Time) Message
-    | Extended Duration Message
-    | Scattered Tally Message
-    | Indirect Target Pointer Bool Haystack Message
-    | Enumerated Target Quantifier Bool Haystack Message
-    | Amassed Target (Maybe Quantifier) Bool Haystack Message
+    | NEGATIVE Message  -- N
+    | PAST Message  -- P
+    | PRIOR Message  -- H
+    | DISPLACED Displacer Message  -- D
+    | REGULAR (Maybe Displacer) (Maybe Frequency) Message  -- R
+    | PREORDAINED (Maybe Displacer) (Maybe Time) Message  -- F
+    | EXTENDED Duration Message  -- X
+    | SCATTERED Tally Message  -- S
+    | INDIRECT Target Pointer Bool Haystack Message  -- T
+    | ENUMERATED Target Quantifier Bool Haystack Message  -- E
+    | AMASSED Target (Maybe Quantifier) Bool Haystack Message  -- A
 
 
-{-| The nucleus of an English message consists of an object and a condition. A
-plain message affirms the present satisfaction of the condition by the object.
-A condition comprises a pivot (encoded in a verb) and - optionally - a balance.
-My model does not (yet) handle conditions with any degree of precision. Users
-must encode their pivots for themselves, and also their balances, unless the
-balance is another object.
+{-| The nucleus of an English message consists of an object, a pivot, and a
+(potentially empty) array of balances. The pivot and balances together comprise
+a condition, and a plain message affirms the present satisfaction of this
+condition by the object.
 -}
 type alias Nucleus =
-    { object : Object
-    , condition : Condition
-    }
+    ( Object, Condition )
 
 
+{-| Objects take the following (hopefully self-explanatory) values. The optional
+string argument in some cases is intended to house a proper name; otherwise
+English defaults to the appropriate pronoun.
+-}
 type Object
-    = Speaker
-    | Hearer
-    | Male (Maybe String)
-    | Female (Maybe String)
-    | Other (Maybe String)
-    | Speakers
-    | Hearers
-    | Others (Maybe String)
+    = Speaker Bool
+    | Hearer Bool
+    | Other Bool (Maybe Sex) (Maybe String)
 
 
-type alias Condition =
-    { pivot : Pivot
-    , balance : Maybe Balance
-    }
+type Sex
+    = Male
+    | Female
+
+
+{-| The condition is encoded into the predicate of the sentence. The pivot is
+(approximately) encoded in the verb at the start of the predicate, with any
+balances fetching up in any subsequent words. Some pivots are encoded into more
+than one word, however, such as "be happy", "be being silly", or "be eaten".
+-}
+type alias Condition
+    = ( Pivot, List Balance )
 
 
 type Pivot
-    = Be (Maybe String) Bool
-    | Do String Bool Bool
+    = Be Bool (Maybe Property)
+    | Seem (Maybe Sense) Bool (Maybe Property)
+    | Do Verbality Bool Bool
 
 
-type Balance
+type Sense
+    = Sight
+    | Smell
+    | Sound
+    | Taste
+    | Touch
+
+
+{-| A balance consists of either a counter or a weight, or both. The weight is
+encoded in a pronoun, proper name, or noun phrase; it's essentially just another
+object, with a tweak to allow for reflexive pronouns like "myself", "herself",
+etc. The counter is encoded in a preposition.
+
+This aspect of the model is a considerable simplification, and there are a lot
+of plain messages that cannot be constructed (or encoded) within my system. But
+the simplification is still very powerful, perhaps surprisingly so.
+-}
+type alias Balance =
+    ( Maybe Counter, Maybe Weight )
+
+
+type Counter
+    = About
+    | Above
+    | After
+    | Against
+    | At
+    | Before
+    | Behind
+    | Below
+    | Beyond
+    | By
+    | Down
+    | For
+    | From
+    | In
+    | Inside
+    | Into
+    | Like
+    | Of
+    | Off
+    | On
+    | Opposite
+    | Out
+    | Outside
+    | Over
+    | Through
+    | To
+    | Towards
+    | Under
+    | Up
+    | With
+    | Without
+
+
+type Weight
     = SameObject
-    | IndependentObject Object
-    | CustomBalance String
+    | Different Object
 
 
 {-| This is not the place to explain the nature of the various elaborations
 posited by my model. Nor is it the place to go into detail about the additional
 arguments that (some of) these elaborations take. See the README file for
 details. Note that many of these arguments are currently just aliases for
-strings, which means that users are obliged to encode them for themselves. These
-represent parts of my model that await further development.
+strings, which means that users are obliged to encode them for themselves.
 -}
-type Displacement
+type Displacer
     = Primary Pivot
     | Secondary Modality
 
@@ -98,25 +159,9 @@ type Modality
     | Command
 
 
-type alias Frequency =
-    String
-
-
-type alias Time =
-    String
-
-
-type alias Duration =
-    String
-
-
-type alias Tally =
-    String
-
-
 type Target
     = MainObject
-    | BalancingObject
+    | BalancingObject Int
 
 
 type Pointer
@@ -142,10 +187,42 @@ type Quantifier
 
 
 type alias Haystack =
-    { category : String
-    , description : Maybe String
-    , restriction : Maybe String
-    }
+    ( Category, Maybe Property, Maybe Restriction )
+
+
+{-| Various types that (for now at least) are just aliases for strings; meaning
+that users must encode these for themselves.
+-}
+type alias Frequency
+    = String
+
+
+type alias Time
+    = String
+
+
+type alias Duration
+    = String
+
+
+type alias Tally
+    = String
+
+
+type alias Property
+    = String
+
+
+type alias Verbality
+    = String
+
+
+type alias Category
+    = String
+
+
+type alias Restriction
+    = String
 
 
 {-| To keep track of the effect the nucleus and any subsequent elaboration has
@@ -157,16 +234,13 @@ down are direct determiners of the output string.
 -}
 type alias Vars =
     { past : Bool
-    , projective : Bool
-    , passive : Bool
-    , object : Object
     , negateObject : Bool
-    , objectOverride : Maybe ObjectOverride
+    , object : Object
+    , objectOverride : Maybe PseudoObject
     , modality : Maybe Modality
     , longPivot : LongPivot
     , longPivots : List LongPivot
-    , balance : Maybe Balance
-    , balanceOverride : Maybe ObjectOverride
+    , balances : List PseudoBalance
     , post : List String
     }
 
@@ -178,6 +252,12 @@ type alias LongPivot =
     }
 
 
-type ObjectOverride
-    = PointerOverride Pointer Bool Haystack
-    | QuantifierOverride Bool (Maybe Quantifier) Bool Haystack
+type PseudoObject
+    = PointerObject Pointer Bool Haystack
+    | QuantifierObject Bool (Maybe Quantifier) Bool Haystack
+
+
+type PseudoBalance
+    = RealBalance Balance
+    | PointerBalance (Maybe Counter) Object Pointer Bool Haystack
+    | QuantifierBalance (Maybe Counter) Object Bool (Maybe Quantifier) Bool Haystack

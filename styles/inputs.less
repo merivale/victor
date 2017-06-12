@@ -15,6 +15,11 @@
         border-color: @blue;
         outline: 0;
     }
+    &[disabled] {
+        background: @lightred;
+        cursor: not-allowed;
+        opacity: .5;
+    }
 }
 
 .text {
@@ -43,7 +48,9 @@
     background: #e6e6e6;
     cursor: pointer;
     display: inline-block;
-    padding: .5em 1em;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+    padding: .5em .75em;
     &:active {
         box-shadow: 0 0 0 1px rgba(0, 0, 0, .15) inset, 0 0 6px rgba(0, 0, 0, .2) inset;
     }
@@ -51,12 +58,32 @@
     &:focus {
         outline: 0;
     }
-    &.green {
-        background: @green;
+    &.close,
+    &.plus,
+    &.minus {
         color: #fff;
+        font-family: FontAwesome;
+        font-size: .75em;
+        font-weight: normal;
     }
-    &.red {
+    &.plus,
+    &.minus {
+        background: @green;
+    }
+    &.close {
         background: @red;
-        color: #fff;
+        &:before {
+            content: @fa-var-close;
+        }
+    }
+    &.plus {
+        &:before {
+            content: @fa-var-plus;
+        }
+    }
+    &.minus {
+        &:before {
+            content: @fa-var-minus;
+        }
     }
 }

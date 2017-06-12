@@ -3,111 +3,90 @@ module Interface.Types exposing (..)
 {-| The type definitions for the interface.
 -}
 
-import Array
 import Html
 import Theory.Types exposing (..)
 
 
-{-| The application state - contains everything you need to make a message.
--}
 type alias Model =
-    Array.Array Recipe
-
-
-type Recipe
-    = MakePlain Ingredients
-    | MakeElaborate ElaborationRecipe Int Ingredients
-
-
-type ElaborationRecipe
-    = MakeNegative
-    | MakePast
-    | MakePrior
-    | MakeDirect
-    | MakeEvasive
-    | MakeFuture
-    | MakeExtended
-    | MakeScattered
-    | MakeIndirect
-    | MakeEnumerated
-    | MakeAmassed
-
-
-{-| It makes the code much simpler if we bundle all the ingredients needed for
-the nucleus and every elaboration together. For each instance of this record,
-only a few fields will be needed, but this is a negligible memory price to pay.
--}
-type alias Ingredients =
-    { showElaborations : Bool
+    { plus : Bool
     , object : Object
-    , objectString : String
     , pivot : Pivot
-    , pivotProperty : String
-    , pivotVerb : String
-    , ongoing : Bool
-    , passive : Bool
-    , balance : Maybe Balance
-    , balanceString : String
-    , balanceObject : Object
-    , balanceObjectString : String
-    , displacement : Displacement
-    , maybeDisplacement : Maybe Displacement
-    , modality : Modality
-    , multiPurposeString : String
-    , target : Target
-    , pointer : Pointer
-    , pointerObject : Object
-    , pointerObjectString : String
-    , enumeratedQuantifier : Quantifier
-    , amassedQuantifier : Maybe Quantifier
-    , other : Bool
-    , category : String
-    , description : String
-    , restriction : String
+    , balances : List Balance
+    , elaborations : List Elaboration
     }
 
 
-{-| Signals to modify the application state.
--}
+type alias Elaboration =
+    { plus : Bool
+    , recipe : Recipe
+    , displacer : Maybe Displacer
+    , string1 : Maybe String
+    , string2 : Maybe String
+    , string3 : Maybe String
+    , target : Target
+    , pointer : Pointer
+    , quantifier : Maybe Quantifier
+    , other : Bool
+    }
+
+
+type Recipe
+    = MakeNEGATIVE
+    | MakePAST
+    | MakePRIOR
+    | MakeDISPLACED
+    | MakeREGULAR
+    | MakePREORDAINED
+    | MakeEXTENDED
+    | MakeSCATTERED
+    | MakeINDIRECT
+    | MakeENUMERATED
+    | MakeAMASSED
+
+
 type Signal
-    = RemoveElaborationRecipe Int
-    | AddElaborationRecipe Int ElaborationRecipe
-    | ToggleShowElaborations Int
-    | SetObject Int Object
-    | SetObjectString Int String
-    | SetPivot Int Pivot
-    | SetPivotProperty Int String
-    | SetPivotVerb Int String
-    | ToggleOngoing Int
-    | TogglePassive Int
-    | SetBalance Int (Maybe Balance)
-    | SetBalanceString Int String
+    = TogglePlus
+    | SetObject Object
+    | SetObjectString String
+    | SetPivot Pivot
+    | SetPivotSense (Maybe Sense)
+    | SetPivotVerbality Verbality
+    | TogglePivotOngoing
+    | TogglePivotPassive
+    | SetPivotProperty Property
+    | AddBalance
+    | RemoveBalance
+    | SetBalanceCounter Int (Maybe Counter)
+    | SetBalanceWeight Int (Maybe Weight)
     | SetBalanceObject Int Object
     | SetBalanceObjectString Int String
-    | SetDisplacement Int Displacement
-    | SetMaybeDisplacement Int (Maybe Displacement)
-    | SetModality Int Modality
-    | SetMultiPurposeString Int String
+    | AddElaboration Int Recipe
+    | RemoveElaboration Int
+    | ToggleElaborationPlus Int
+    | SetDisplacer Int (Maybe Displacer)
+    | SetDisplacerPivot Int Pivot
+    | SetDisplacerPivotSense Int (Maybe Sense)
+    | SetDisplacerPivotVerbality Int Verbality
+    | ToggleDisplacerPivotOngoing Int
+    | ToggleDisplacerPivotPassive Int
+    | SetDisplacerPivotProperty Int Property
+    | SetDisplacerModality Int Modality
+    | SetString1 Int String
+    | SetString2 Int String
+    | SetString3 Int String
     | SetTarget Int Target
+    | SetTargetInt Int Int
     | SetPointer Int Pointer
     | SetPointerObject Int Object
     | SetPointerObjectString Int String
-    | SetEnumeratedQuantifier Int Quantifier
-    | SetAmassedQuantifier Int (Maybe Quantifier)
+    | SetQuantifier Int (Maybe Quantifier)
     | ToggleOther Int
-    | SetCategory Int String
-    | SetDescription Int String
-    | SetRestriction Int String
 
 
-{-| Some convenient type shorthands for input element properties (used in the
-Interface.Input module).
--}
-type alias PanelProperties =
-    { elaborationRecipe : Maybe ElaborationRecipe
-    , showElaborations : Bool
-    , index : Int
-    , body : List (Html.Html Signal)
+type alias ButtonProperties =
+    { label : String
+    , signal : Signal
+    , title : String
     }
 
 
@@ -115,10 +94,11 @@ type alias TextProperties =
     { value : String
     , placeholder : String
     , signal : String -> Signal
+    , disabled : Bool
     }
 
 
-type alias RadioCheckboxProperties =
+type alias CheckboxProperties =
     { id : String
     , label : String
     , checked : Bool
@@ -129,13 +109,7 @@ type alias RadioCheckboxProperties =
 type alias SelectProperties a =
     { value : a
     , options : List a
+    , equivalent : a -> a -> Bool
     , signal : a -> Signal
     , toLabel : a -> String
-    }
-
-
-type alias ButtonProperties =
-    { label : String
-    , signal : Signal
-    , customClass : Maybe String
     }

@@ -5,6 +5,7 @@ module Theory.Words
         , direct3
         , relative1
         , relative2
+        , preposition
         , article
         , determiner
         , plural
@@ -15,243 +16,219 @@ module Theory.Words
         , participle2
         )
 
-{-| Functions for generating the plural form of a noun (given its singular), and
-the various forms of standard verbs (given the base form, e.g. "have", "do",
-"go").
+{-| Functions for encoding ideas into words. This is the least interesting part
+of my model; it simply generates (the various forms of) prepositions, pronouns,
+articles, determiners, modals, and verbs. It may be of interest purely to
+solidify an understanding of the grammatical terminology I apply for these types
+of words and their different forms.
 
-These functions cannot distinguish different standard verbs that have the same
-base form but differ in other forms - e.g. "hang/hung" vs "hang/hanged",
-"lie/lied" vs "lie/lay". There's nothing very satisfactory I can do about this
-until I start encoding pivots for myself. In the meantime, using the ordinary
-base form will default to the regular verb ("hang/hanged", "lie/lied"). If you
-want the irregular verb, input "hang*" or "lie*" into the system; this will
-trigger a match in the dictionary of irregularities.
+Note that the functions for generating the various forms of verbs cannot
+distinguish verbs that have the same base form but differ in other forms - e.g.
+"hang/hung" vs "hang/hanged", "lie/lied" vs "lie/lay". There's nothing very
+satisfactory I can do about this until I start encoding verbalities for myself
+(which I don't intend to do any time soon). For now, using the ordinary base
+form will default to the regular verb ("hang/hanged", "lie/lied"). If you want
+the irregular verb, input "hang*" or "lie*" into the system; this will trigger a
+match in the dictionary of irregularities.
 -}
 
 import Dict
 import Theory.Types exposing (..)
 
 
+{-| The three direct forms of the pronouns, generated from their corresponding
+object. The first two can be overridden by a proper name in the case of third
+person objects.
+-}
 direct1 : Object -> String
 direct1 object =
     case object of
-        Speaker ->
+        Speaker False ->
             "I"
 
-        Hearer ->
-            "you"
-
-        Male string ->
-            Maybe.withDefault "he" string
-
-        Female string ->
-            Maybe.withDefault "she" string
-
-        Other string ->
-            Maybe.withDefault "it" string
-
-        Speakers ->
+        Speaker True ->
             "we"
 
-        Hearers ->
+        Hearer plural ->
             "you"
 
-        Others string ->
-            Maybe.withDefault "they" string
+        Other False Nothing Nothing ->
+            "it"
+
+        Other False (Just Male) Nothing ->
+            "he"
+
+        Other False (Just Female) Nothing ->
+            "she"
+
+        Other True sex Nothing ->
+            "they"
+
+        Other plural sex (Just string) ->
+            string
 
 
 direct2 : Object -> String
 direct2 object =
     case object of
-        Speaker ->
-            "myself"
+        Speaker False ->
+            "me"
 
-        Hearer ->
-            "yourself"
+        Speaker True ->
+            "us"
 
-        Male string ->
-            "himself"
+        Hearer plural ->
+            "you"
 
-        Female string ->
-            "herself"
+        Other False Nothing Nothing ->
+            "it"
 
-        Other string ->
-            "itself"
+        Other False (Just Male) Nothing ->
+            "him"
 
-        Speakers ->
-            "ourselves"
+        Other False (Just Female) Nothing ->
+            "her"
 
-        Hearers ->
-            "yourselves"
+        Other True sex Nothing ->
+            "them"
 
-        Others string ->
-            "themselves"
+        Other plural sex (Just string) ->
+            string
 
 
 direct3 : Object -> String
 direct3 object =
     case object of
-        Speaker ->
-            "me"
+        Speaker False ->
+            "myself"
 
-        Hearer ->
-            "you"
+        Speaker True ->
+            "ourselves"
 
-        Male string ->
-            Maybe.withDefault "him" string
+        Hearer False ->
+            "yourself"
 
-        Female string ->
-            Maybe.withDefault "her" string
+        Hearer True ->
+            "yourselves"
 
-        Other string ->
-            Maybe.withDefault "it" string
+        Other False Nothing string ->
+            "itself"
 
-        Speakers ->
-            "us"
+        Other False (Just Male) string ->
+            "himself"
 
-        Hearers ->
-            "you"
+        Other False (Just Female) string ->
+            "herself"
 
-        Others string ->
-            Maybe.withDefault "them" string
+        Other True sex string ->
+            "themselves"
 
 
+{-| The two relative forms of the pronouns, generated from their corresponding
+object. These can be overridden by a proper name in the case of third person
+objects.
+-}
 relative1 : Object -> String
 relative1 object =
     case object of
-        Speaker ->
+        Speaker False ->
             "my"
 
-        Hearer ->
-            "your"
-
-        Male string ->
-            Maybe.withDefault "his" (Maybe.map (\x -> x ++ "'s") string)
-
-        Female string ->
-            Maybe.withDefault "her" (Maybe.map (\x -> x ++ "'s") string)
-
-        Other string ->
-            Maybe.withDefault "its" (Maybe.map (\x -> x ++ "'s") string)
-
-        Speakers ->
+        Speaker True ->
             "our"
 
-        Hearers ->
+        Hearer plural ->
             "your"
 
-        Others string ->
-            Maybe.withDefault "their" (Maybe.map (\x -> x ++ "'s") string)
+        Other False Nothing Nothing ->
+            "its"
+
+        Other False (Just Male) Nothing ->
+            "his"
+
+        Other False (Just Female) Nothing ->
+            "her"
+
+        Other True sex Nothing ->
+            "their"
+
+        Other plural sex (Just string) ->
+            string ++ "'s"
 
 
 relative2 : Object -> String
 relative2 object =
     case object of
-        Speaker ->
+        Speaker False ->
             "mine"
 
-        Hearer ->
-            "yours"
-
-        Male string ->
-            Maybe.withDefault "his" (Maybe.map (\x -> x ++ "'s") string)
-
-        Female string ->
-            Maybe.withDefault "hers" (Maybe.map (\x -> x ++ "'s") string)
-
-        Other string ->
-            Maybe.withDefault "its" (Maybe.map (\x -> x ++ "'s") string)
-
-        Speakers ->
+        Speaker True ->
             "ours"
 
-        Hearers ->
+        Hearer plural ->
             "yours"
 
-        Others string ->
-            Maybe.withDefault "theirs" (Maybe.map (\x -> x ++ "'s") string)
+        Other False Nothing Nothing ->
+            "its"
+
+        Other False (Just Male) Nothing ->
+            "his"
+
+        Other False (Just Female) Nothing ->
+            "hers"
+
+        Other True sex Nothing ->
+            "theirs"
+
+        Other plural sex (Just string) ->
+            string ++ "'s"
 
 
+{-| Encode a counter in a preposition.
+-}
+preposition : Counter -> String
+preposition counter =
+    String.toLower (toString counter)
+
+
+{-| Encode a pointer in an article. Note that I distinguish articles from
+determiners, on the basis of my pointer/quantifier distinction. This does not
+correspond exactly to standard grammatical terminology. Uses the first relative
+form of the pronoun in the case of RelatedTo pointers.
+-}
 article : Bool -> Pointer -> String
 article plural pointer =
-    case pointer of
-        The ->
+    case ( pointer, plural ) of
+        ( The, _ ) ->
             "the"
 
-        This ->
-            if plural then
-                "these"
-            else
-                "this"
+        ( This, False ) ->
+            "this"
 
-        That ->
-            if plural then
-                "those"
-            else
-                "that"
+        ( This, True ) ->
+            "these"
 
-        RelatedTo object ->
+        ( That, False ) ->
+            "that"
+
+        ( That, True ) ->
+            "those"
+
+        ( RelatedTo object, _ ) ->
             relative1 object
 
 
+{-| Encode a quantifier in a determiner. Note that I distinguish articles from
+determiners, on the basis of my pointer/quantifier distinction. This does not
+correspond exactly to standard grammatical terminology.
+-}
 determiner : Quantifier -> String
 determiner quantifier =
-    case quantifier of
-        A ->
-            "a"
-
-        Several ->
-            "several"
-
-        Many ->
-            "many"
-
-        Each ->
-            "each"
-
-        Every ->
-            "every"
-
-        Both ->
-            "both"
-
-        Some ->
-            "some"
-
-        Any ->
-            "any"
-
-        All ->
-            "all"
-
-        Much ->
-            "much"
-
-        Most ->
-            "most"
-
-        Enough ->
-            "enough"
+    String.toLower (toString quantifier)
 
 
-{-| The exposed functions. In each case they try to guess the appropriate form,
-unless an exception has been written explicitly into one of the two dictionaries
-below. These dictionaries contain words that my guessing functions are known to
-get wrong, either because they are irregular or because my guessing functions
-can't handle the kind of regularity they instantiate.
-
-In case anyone is wondering, the kind of regularity that my guessing functions
-cannot handle concerns whether or not to double the consonant at the end of a
-verb in its past and ongoing forms, which depends - at least in so far as it is
-regular - on where the stress falls.
+{-| Encode a modality in a modal.
 -}
-plural : String -> String
-plural noun =
-    Maybe.withDefault
-        (guessPlural noun)
-        (Dict.get noun nouns)
-
-
 modal : Modality -> Bool -> String
 modal modality past =
     case modality of
@@ -298,6 +275,26 @@ modal modality past =
                 "shall"
 
 
+{-| Generate the plural form of a noun from its singular. This functions tries
+to guess the appropriate form, unless there is a match in the dictionary of
+nouns below. The dictionary contains nouns (maybe not all of them) that my
+guessing function gets wrong.
+-}
+plural : String -> String
+plural noun =
+    Maybe.withDefault
+        (guessPlural noun)
+        (Dict.get noun nouns)
+
+
+{-| Generate the finite and participle forms of a verb from its base form. Like
+the above, these functions all try to guess the appropriate form, unless there
+is a match in the dictionary of verbs below. This dictionary includes irregular
+verbs, and also some regular verbs whose regularity my guessing functions cannot
+predict. This predictive failure concerns whether or not to double the consonant
+at the end of a verb in its second finite and first participle forms, which
+depends - at least in so far as it is regular - on where the stress falls.
+-}
 finite1 : String -> String
 finite1 base =
     Maybe.withDefault
@@ -326,7 +323,10 @@ participle2 base =
         (Maybe.map (\x -> x.p2) (Dict.get base verbs))
 
 
-{-| Functions for guessing regular forms.
+{-| Functions for guessing regular forms, as used in the five functions above.
+Note that the second participle form, with regular verbs, is identical to the
+second finite form. Consequently no additional function is needed for the
+former.
 -}
 guessPlural : String -> String
 guessPlural singular =
@@ -455,8 +455,8 @@ nouns =
         ]
 
 
-{-| A dictionary of standard verbs that at least one of the guessing functions
-for verb forms gets wrong.
+{-| A dictionary of verbs that at least one of the guessing functions for verb
+forms gets wrong.
 -}
 verbs : Dict.Dict String { f1 : String, f2 : String, p1 : String, p2 : String }
 verbs =

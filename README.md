@@ -1,6 +1,6 @@
 # Victor
 
-A model of the English language, thought of as a code for processing `messages` (structured arrangements of informational and stylistic choices) into `sentences` (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman. Read on for an outline of the theory, or play around with the current version at  [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
+A model of the English language, thought of as a code for processing *messages* (structured arrangements of informational and stylistic choices) into *sentences* (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman. Read on for an outline of the theory, or play around with the current version at  [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
 
 ## 1. The Point
 
@@ -12,59 +12,135 @@ By modelling languages as codes, i.e. as functions in precisely the *opposite* d
 
 My algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the gh-pages branch, for easy integration with [GitHub Pages](https://pages.github.com/). The `src` directory contains the main program module, which simply pulls everything together (nothing to see there), and two subdirectories, `Interface` and `Theory`. The former directory contains all the modules responsible for generating the web page users see, for keeping track of user input, and for piecing that input together into a `Message` variable. It is the modules in the latter directory that are potentially of theoretical interest, since they describe what a `Message` variable looks like, and define the encoding functions that convert these variables into strings.
 
-There is no need to go into detail about the `Theory` modules here. Anyone interested in the nuts and bolts should simply read the code itself. It is internally documented with fairly substantial comments (or where it isn't, it will be soon), and is intended to be intelligible to anyone of a suitably logical turn of mind (though obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then look at the `Sentences` module to see how these variables are encoded into strings. The latter module outsources some leg work to the various other modules, which may be consulted in any order for information about the finer details.
+There is no need to go into detail about the `Theory` modules here. Anyone interested in the nuts and bolts should simply read the code itself. It is internally documented with fairly substantial comments (or where it isn't, it will be soon), and is intended to be intelligible to anyone of a suitably logical turn of mind (although obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then glance at the `Words` module. The latter contains a few essential but largely uninteresting functions, for generating words and their various forms, but is perhaps helpful in serving to solidify an understanding of the grammatical terminology that I use.
+
+Next, readers should look at the `Sentences` module, which contains the encoding function itself, the function for processing messages into sentences. This function divides into two stages. In the first stage, the message is validated, and the variables that have a bearing on the output sentence are extracted; in the second stage, those variables are used to generate the sentence itself. The second stage is implemented in the `Sentences` module itself (with help from the little functions exposed by the `Words` module). The first stage is separated out into the `Messages` module.
 
 I have not yet written any tests, but there is a stub `test` directory as a placeholder for later development in this direction. From the point of view of the theory (never mind the interface), it would be helpful to have tests that run various `Message` variables through my encoding function, and check that the results are as they should be.
 
-## 3. The Theory
+## 3. The Theory Part 1: The Nucleus
 
-The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more `elaborations` applied to a core `nucleus`. The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.
+The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more *elaborations* applied to a core *nucleus*. (The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.) Consequently my theory as a whole consists of two interlocking theories: a theory of *plain* English messages (i.e. those messages composed of an unelaborated nucleus), and a theory of English elaborations.
 
-There are currently 14 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a decent start. Though it will not make much sense up front, here is the type definition for messages (details of the individual elaborations to follow):
+- outline
+
+- objects
+
+- pivots (without balances)
+
+- balances (and pivots with balances)
+
+
+
+## 4. The Theory Part 2: The Elaborations
+
+The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the nucleus/elaboration terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. 
+
+...
+
+There are currently 11 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a decent start. Though it will not make much sense up front, here is the type definition for messages (details of the individual elaborations to follow):
 
     type Message
         = Plain Nucleus
-        | Negative Message
-        | Past Message
-        | Prior Message
-        | Expanded Pivot Message
-        | Practical Modality Message
-        | Evasive Modality Message
-        | Projective Modality (Maybe Time) Message
-        | Preordained (Maybe Time) Message
-        | Regular (Maybe Frequency) Message
-        | Extended Duration Message
-        | Scattered Tally Message
-        | Indirect Target Pointer Bool Haystack Bool Message
-        | Enumerated Target Quantifier Bool Haystack Message
-        | Amassed Target (Maybe Quantifier) Bool Haystack Bool Message
+        | NEGATIVE Message
+        | PAST Message
+        | PRIOR Message
+        | DISPLACED Displacer Message
+        | REGULAR (Maybe Displacer) (Maybe Frequency) Message
+        | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+        | EXTENDED Duration Message
+        | SCATTERED Tally Message
+        | INDIRECT Target Pointer Bool Haystack Message
+        | ENUMERATED Target Quantifier Bool Haystack Message
+        | AMASSED Target (Maybe Quantifier) Bool Haystack Message
 
-The type definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself. The function returns an error in cases of such invalid input.
+The type definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself (see the `Messages` module). The function returns an error in cases of such invalid input.
+
+
 
 ### 3.1. The Nucleus
 
-The nucleus of every atomic English message in my model is made up of two items, an `object` and a `condition`:
+The nucleus of every atomic English message in my model is made up of two items, an *object* and a *condition*:
 
     type alias Nucleus =
-        { object : Object
-        , condition : Condition
-        }
+        ( Object, Condition )
 
-A plain, unelaborated English message affirms the present satisfaction of the `condition` by the `object`. The `object` may take any one of the following values:
+A plain, unelaborated English message affirms the present satisfaction of the condition by the object. The object may take any one of the following values:
 
     type Object
-        = Speaker
-        | Hearer
-        | Male (Maybe String)
-        | Female (Maybe String)
-        | Thing (Maybe String)
-        | Speakers
-        | Hearers
-        | PeopleOrThings (Maybe String)
+        = Speaker Bool
+        | Hearer Bool
+        | Other Bool (Maybe Sex) (Maybe String)
+    
+    type Sex
+        = Male
+        | Female
 
-The optional string argument in four of these cases is intended to house a proper name; otherwise English defaults to the appropriate pronoun (`"he"`, `"she"`, `"it"`, `"they"`). In the other cases only the pronoun is available (`"I"`, `"you"`, `"we"`).
+The boolean argument represents the number of the object (`False` for singular, `True` for plural). The optional `Sex` argument, I trust, is self-explanatory. The optional string argument, finally, is intended to house a proper name; otherwise English defaults to the appropriate pronoun (`"he"`, `"she"`, `"it"`, `"they"`). In the first two cases only the pronoun is available (`"I"`, `"we"`, `"you"`).
 
-The `condition` is whatever is predicated of this object, and it breaks down further into a `pivot` and an optional `balance`. My model does not yet handle these conditions with any great precision. Users are obliged to encode the pivot for themselves (into a verb), and will often need to encode the balance for themselves as well. The exceptions to the latter rule are when the balance is another object, either identical to the main object (as in, `"He likes himself"`), or independent (as in, `"He likes her"`). Thus:
+The condition is whatever is predicated of the object, and it breaks down further into a *pivot* and a (possibly empty) list of *balances*:
+
+    type alias Condition =
+        ( Pivot, List Balance )
+
+My model of the conditions expressible in English is currently very approximate. It does not allow the formation of every coherent condition, and moreover it allows the formation of countless incoherent ones. The theory of English conditions is an enormous subject in its own right, and I have barely scratched the surface of it. For what it is worth, here is my simplified model (almost) in full:
+
+    type Pivot
+        = Be Bool (Maybe Property)
+        | Seem (Maybe Sense) Bool (Maybe Property)
+        | Do Verbality Bool Bool
+    
+    type Sense
+        = Sight
+        | Smell
+        | Sound
+        | Taste
+        | Touch
+    
+    type alias Property =
+        String
+    
+    type alias Verbality =
+        String
+    
+    type alias Balance =
+        ( Maybe Counter, Maybe Weight )
+    
+    type Counter
+        = About
+        | Above
+        | After
+        | Against
+        | At
+        | Before
+        | Behind
+        ...
+    
+    type Weight
+        = SameObject
+        | Different Object
+
+Before proceeding to unpack all of this, let me introduce some abbreviating conventions that will make life easier for all of us. I will want to refer to example nuclei throughout the discussion to follow, but writing them out in full would be tedious and difficult to read. To begin with, I will drop all unnecessary brackets, preserving only those that are needed to avoid any potential confusion or ambiguity. More significantly, I will write optional (`Maybe`) arguments as just `x` when they are present (instead of `Just x`), and sometimes omit them altogether when they are not (instead of writing `Nothing`). Sometimes I will include an explicit `Nothing`, however, when I feel it would be more confusing to leave it out. Similarly, I will omit when boolean arguments when they are `False`, and when they are present, instead of writing `True`, I will write something more meaningful about *what* is thereby flagged as true. For example, `Speaker` by itself means `Speaker False`, i.e. singular. `Speaker True`, meanwhile, I will write as `Speaker Plural`. I hope these conventions will all be commonsensical and easy to understand.
+
+To continue: The pivot, approximately for now, is what is encoded in the main verb at the start of the predicate. I will be more precise in a moment, but let me explain the notion of a balance first. A balance comprises either a *counter* or a *weight* (or both). A counter is the sort of thing encoded in a preposition, and I have 31 of them currently in my model (I didn't bother listing them all above). A weight, meanwhile, is an object, just like the object of the message already introduced above; where necessary, I distinguish the *main* object from any *balancing* objects. The `SameObject` value indicates that the balancing object in question is identical to the main object of the message, and results in reflexive pronouns like `"myself"`, `"himself"`, `"herself"`. The `Different` value indicates that the balancing object in question is distinct from the main object, and its argument specifies what that object is. For example, and approximating the pivot as a verb for now:
+
+    (Speaker, "like", [(Nothing, Hearer)]) -> "I like you."
+    (Speaker, "live", [(In, Other "France")]) -> "I live in France."
+    (Other Female, "is", [(Out, Nothing)]) -> "She is out."
+    (Other, "is", [(Over, Nothing)]) -> "It is over."
+    (Other Male, "looks", ([(By, Other Female), (With, Other Male "Fred")])) -> "He stands by her with Fred."
+
+Now let's break down the pivot itself. I divide English pivots into three base types, `Be`, `Seem`, and `Do`. The last of these, `Do`, takes as its first argument a *verbality*, which is an ugly term for the type of idea that is encoded into a verb. A look further down my type definitions reveals that, for now at least, this type is just an alias for a string. What this means, in practice, is that users must encode verbalities into verbs for themselves. The two boolean arguments following the verbality are for specifying, respectively, whether the pivot is *ongoing* and/or *passive*. For example:
+
+    (Speaker, Do "live", [(In, Other "France")]) -> "I live in France."
+    (Other Male, Do "talk" Ongoing, [(To, SameObject)]) -> "He is talking to himself."
+    (Other Plural, Do "laugh" Ongoing Passive, [(At, Nothing), (By, Other "Fred")]) -> "They are being laughed at by Fred."
+
+The first type of pivot, `Be`, 
+
+
+
+Users are obliged to encode the pivot for themselves (into a verb), and will often need to encode the balance for themselves as well. The exceptions to the latter rule are when the balance is another object, either identical to the main object (as in, `"He likes himself"`), or independent (as in, `"He likes her"`). Thus:
 
     type alias Condition =
         { pivot : String

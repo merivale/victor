@@ -24,12 +24,16 @@ sentence message =
 
 
 {-| As seen in the function below, the sentence is divided into four sections:
-(1) subject, (2) pre, (3) counter, and (4) post. The last of these is just a
+(1) subject, (2) pre, (3) middle, and (4) post. The last of these is just a
 list of words, already encoded.
 -}
 implode : Vars -> Result String String
 implode vars =
-    Ok (String.join " " ((subject vars) ++ (pre vars) ++ (counter vars) ++ vars.post))
+    let
+        post =
+            (List.map (middle vars.object) vars.balances) ++ vars.post
+    in
+        Ok (String.join " " ((subject vars) ++ (pre vars) ++ post))
 
 
 {-| The subject of the sentence, which is a function either of the object, or -
@@ -45,82 +49,67 @@ subject vars =
         Nothing ->
             [ Words.direct1 vars.object ]
 
-        Just objectOverride ->
-            nounPhrase vars.object objectOverride
+        Just (PointerObject pointer other haystack) ->
+            articlePhrase (isPlural vars.object) pointer other haystack
+
+        Just (QuantifierObject negated quantifier other haystack) ->
+            determinerPhrase (isPlural vars.object) negated quantifier other haystack
 
 
-{-| Much like the subject, the counter is a function either of the balance, or -
-in the case of indirect, enumerated, or amassed messages - some object override.
-No balance just returns an empty list; a custom balance is simply returned as it
-is; balancing objects are handled in much the same way as main objects or their
-overrides, in the latter case calling again on the nounPhrase function. If the
-nucleus of the message is passive, then the word "by" is added at the start, as
-in "He is liked *by* her".
+{-| ...
 -}
-counter : Vars -> List String
-counter vars =
-    case vars.balance of
+middle : Object -> PseudoBalance -> String
+middle mainObject balance =
+    case balance of
+        RealBalance ( counter, weight ) ->
+            String.join " " ((counterToString counter)
+                ++ (weightToString mainObject weight))
+
+        PointerBalance counter object pointer other haystack ->
+            String.join " " ((counterToString counter)
+                ++ (articlePhrase (isPlural object) pointer other haystack))
+
+        QuantifierBalance counter object negated quantifier other haystack ->
+            String.join " " ((counterToString counter)
+                ++ (determinerPhrase (isPlural object) negated quantifier other haystack))
+
+
+isPlural : Object -> Bool
+isPlural object =
+    case object of
+        Speaker plural ->
+            plural
+
+        Hearer plural ->
+            plural
+
+        Other plural sex string ->
+            plural
+
+
+counterToString : Maybe Counter -> List String
+counterToString counter =
+    case counter of
         Nothing ->
             []
 
-        Just SameObject ->
-            let
-                list =
-                    [ Words.direct2 vars.object ]
-            in
-                if vars.passive then
-                    "by" :: list
-                else
-                    list
-
-        Just (IndependentObject object) ->
-            let
-                list =
-                    case vars.balanceOverride of
-                        Nothing ->
-                            [ Words.direct3 object ]
-
-                        Just objectOverride ->
-                            nounPhrase object objectOverride
-            in
-                if vars.passive then
-                    "by" :: list
-                else
-                    list
-
-        Just (CustomBalance string) ->
-            String.words string
+        Just c ->
+            [ Words.preposition c ]
 
 
-{-| And now for the nounPhrase function itself, advertised above. Step one is
-just to divide into two cases, article phrases ("the F", "those Gs") and
-determiner phrases ("F", "all Gs", "every H"). Note that whether the noun phrase
-is singular or plural is determined by the object, not by anything in the
-override itself.
--}
-nounPhrase : Object -> ObjectOverride -> List String
-nounPhrase object objectOverride =
-    let
-        plural =
-            case object of
-                Speakers ->
-                    True
+weightToString : Object -> Maybe Weight -> List String
+weightToString mainObject weight =
+    case weight of
+        Nothing ->
+            []
 
-                Hearers ->
-                    True
+        Just w ->
+            case w of
+                SameObject ->
+                    [ Words.direct3 mainObject ]
 
-                Others string ->
-                    True
-
-                _ ->
-                    False
-    in
-        case objectOverride of
-            PointerOverride pointer other haystack ->
-                articlePhrase plural pointer other haystack
-
-            QuantifierOverride negated quantifier other haystack ->
-                determinerPhrase plural negated quantifier other haystack
+                Different object ->
+                    [ Words.direct2 object ]
 
 
 {-| Article phrases are straightforward; simply get the article from the
@@ -145,9 +134,12 @@ like "anybody", "everyone", "something" do not fit the general pattern.
 determinerPhrase : Bool -> Bool -> (Maybe Quantifier) -> Bool -> Haystack -> List String
 determinerPhrase plural negated quantifier other haystack =
     let
+        ( category, description, restriction ) =
+            haystack
+
         canAbbreviate =
             List.member quantifier [ Just Every, Just Some, Just Any ]
-                && List.member haystack.category [ "one", "body", "thing" ]
+                && List.member category [ "one", "body", "thing" ]
     in
         (determiner canAbbreviate quantifier other haystack)
             ++ (haystackToString canAbbreviate plural haystack)
@@ -160,31 +152,35 @@ necessary to deal with abbreviations ("someone", "everyone", etc.), and also
 -}
 determiner : Bool -> Maybe Quantifier -> Bool -> Haystack -> List String
 determiner canAbbreviate quantifier other haystack =
-    case quantifier of
-        Nothing ->
-            if other then
-                [ "other" ]
-            else
-                []
-
-        Just A ->
-            if other then
-                [ (Words.determiner A) ++ "nother" ]
-            else if List.member (String.left 1 haystack.category) [ "a", "e", "i", "o", "u" ] then
-                [ (Words.determiner A) ++ "n" ]
-            else
-                [ Words.determiner A ]
-
-        Just q ->
-            if canAbbreviate then
+    let
+        ( category, description, restriction ) =
+            haystack
+    in
+        case quantifier of
+            Nothing ->
                 if other then
-                    [ (Words.determiner q) ++ haystack.category, "else" ]
+                    [ "other" ]
                 else
-                    [ (Words.determiner q) ++ haystack.category ]
-            else if other then
-                [ Words.determiner q, "other" ]
-            else
-                [ Words.determiner q ]
+                    []
+
+            Just A ->
+                if other then
+                    [ (Words.determiner A) ++ "nother" ]
+                else if List.member (String.left 1 category) [ "a", "e", "i", "o", "u" ] then
+                    [ (Words.determiner A) ++ "n" ]
+                else
+                    [ Words.determiner A ]
+
+            Just q ->
+                if canAbbreviate then
+                    if other then
+                        [ (Words.determiner q) ++ category, "else" ]
+                    else
+                        [ (Words.determiner q) ++ category ]
+                else if other then
+                    [ Words.determiner q, "other" ]
+                else
+                    [ Words.determiner q ]
 
 
 {-| Encode the haystack. Essentially a simple matter, with just one slight
@@ -192,24 +188,24 @@ wrinkle: the category needs to be suppressed in the case of abbreviation, since
 it is already included in the determiner ("someone", "everything", etc.).
 -}
 haystackToString : Bool -> Bool -> Haystack -> List String
-haystackToString canAbbreviate plural haystack =
+haystackToString canAbbreviate plural ( category, description, restriction ) =
     let
-        description =
-            (Maybe.withDefault [] (Maybe.map String.words haystack.description))
+        d =
+            (Maybe.withDefault [] (Maybe.map String.words description))
 
-        restriction =
-            (Maybe.withDefault [] (Maybe.map String.words haystack.restriction))
+        r =
+            (Maybe.withDefault [] (Maybe.map String.words restriction))
 
-        category =
+        c =
             if plural then
-                Words.plural haystack.category
+                Words.plural category
             else
-                haystack.category
+                category
     in
         if canAbbreviate then
-            description ++ restriction
+            d ++ r
         else
-            description ++ [ category ] ++ restriction
+            d ++ [ c ] ++ r
 
 
 {-| That concludes the functions necessary for encoding subjects and counters.
@@ -285,28 +281,30 @@ splitAtNot index pre rest =
 conjugate : String -> Bool -> Object -> String
 conjugate base past object =
     let
+        firstSingular =
+            case object of
+                Speaker plural ->
+                    not plural
+
+                _ ->
+                    False
+
         thirdSingular =
             case object of
-                Male string ->
-                    True
-
-                Female string ->
-                    True
-
-                Other string ->
-                    True
+                Other plural sex string ->
+                    not plural
 
                 _ ->
                     False
     in
         if base == "be" then
             if past then
-                if thirdSingular || object == Speaker then
+                if firstSingular || thirdSingular then
                     "was"
                 else
                     "were"
             else
-                if object == Speaker then
+                if firstSingular then
                     "am"
                 else if thirdSingular then
                     "is"
@@ -326,8 +324,8 @@ verbBaseAndRest pivot prior =
     let
         ( verb, rest ) =
             case pivot of
-                Be string ongoing ->
-                    case ( string, ongoing ) of
+                Be ongoing property ->
+                    case ( property, ongoing ) of
                         ( Just str, True ) ->
                             ( "be", [ "being", str ] )
 
@@ -340,19 +338,54 @@ verbBaseAndRest pivot prior =
                         ( Nothing, False ) ->
                             ( "be", [] )
 
-                Do string ongoing passive ->
+                Seem sense ongoing property ->
+                    let
+                        verbality =
+                            case sense of
+                                Nothing ->
+                                    "seem"
+
+                                Just Sight ->
+                                    "look"
+
+                                Just Smell ->
+                                    "smell"
+
+                                Just Sound ->
+                                    "sound"
+
+                                Just Taste ->
+                                    "taste"
+
+                                Just Touch ->
+                                    "feel"
+                    in
+                        case ( property, ongoing ) of
+                            ( Just str, True ) ->
+                                ( "be", [ Words.participle1 verbality, str] )
+
+                            ( Just str, False ) ->
+                                ( verbality, [ str ] )
+
+                            ( Nothing, True ) ->
+                                ( "be", [ Words.participle1 verbality ] )
+
+                            ( Nothing, False ) ->
+                                ( verbality, [] )
+
+                Do verbality ongoing passive ->
                     case ( ongoing, passive ) of
                         ( True, True ) ->
-                            ( "be" , [ "being", Words.participle2 string ] )
+                            ( "be" , [ "being", Words.participle2 verbality ] )
 
                         ( True, False ) ->
-                            ( "be", [ Words.participle1 string ] )
+                            ( "be", [ Words.participle1 verbality ] )
 
                         ( False, True ) ->
-                            ( "be", [ Words.participle2 string ] )
+                            ( "be", [ Words.participle2 verbality ] )
 
                         ( False, False ) ->
-                            ( string, [] )
+                            ( verbality, [] )
     in
         if prior then
             ( "have", (Words.participle2 verb) :: rest )
