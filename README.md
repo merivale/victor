@@ -125,23 +125,104 @@ And now for some examples themselves, making use of these abbreviating conventio
     ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ), ( With, Female "Susan" ) ] ) )
         -> "Grannie lives at Cockroach Lane with Susan."
 
-At this point I must issue a major disclaimer. It should go without saying that my theory is incomplete and in need of further development and refinement. Nowhere is its partial nature more evident, however, than in its failure to provide *any kind of validation whatsoever* for conditions. In the construction of a balance, it allows users to combine any counter with any (or no) object; while in the construction of a condition itself, it allows any balances to be appended to any pivot. Consequently it is possible - let me not mince words - to generate complete and utter nonsense within my system. For instance:
+### 3.3. Conditions Part 2/2: Pivots
+
+I divide pivots into three main kinds, as follows:
+
+    type Pivot
+        = Be Bool (Maybe Property)
+        | Seem (Maybe Sense) Bool (Maybe Property)
+        | Do Verbality Bool Bool
+    
+    type alias Property =
+        String
+    
+    type Sense
+        = Sight
+        | Smell
+        | Sound
+        | Taste
+        | Touch
+    
+    
+    type alias Verbality =
+        String
+
+The `Be` pivot, as you would expect, is encoded in the verb `"be"`, and the boolean argument it takes marks whether the condition as a whole is *ongoing* or not; this is the difference between, for example, `"He is silly"` and `"He is being silly"`. The optional property argument is responsible for the output adjective (`"silly"` in the two examples just given). As you can see, the `Property` type at present is just an alias for a `String`, meaning that users are required to encode properties into their corresponding adjectives for themselves. I am not presently inclined to give my model a great dictionary of properties/adjectives.
+
+When a `Be` pivot has a property, typically no balances are required to make a complete condition. In some cases, however, with a suitable property and a suitable counter, a property can exist alongside a balancing object. For example, and adopting some abbreviating conventions along the same lines as those already laid out:
+
+    ( Male "Robert", ( Be "hungry", [] ) )
+        -> "Robert is hungry."
+    
+    ( Hearer, ( Be, [ Male "Robert" ] ) )
+        -> "You are Robert."
+    
+    ( Hearer, ( Be, [ Like, Male "Robert" ] ) )
+        -> "You are like Robert."
+    
+    ( Speakers, ( Be "happy", [ For, Hearers ] ) )
+        -> "We are happy for you."
+
+Some readers might be wondering why the property variable is attached to the pivot itself, instead of showing up in the list of balances. There are a few reasons for this. One is that the `Do` pivot - which I will come to shortly - can support balances but cannot support properties. The other is that balances, as I intend them, are predominantly meant for holding *objects*, and properties are fundamentally different kinds of things, belonging in a separate part of the code. The third reason depends on my theory of elaborations, and consequently I cannot explain it here; see section ?? below.
+
+The `Seem` pivot operates exactly like the `Be` pivot, taking a boolean argument specifying whether or not the condition is ongoing, and an optional property argument. It is for messages to the effect that things *seem* as the corresponding `Be` message says they *are*. The optional `Sense` argument specifies the sense to which these appearances present themselves. For example:
+
+    ( Female "Grannie", ( Seem "angry", [] ) )
+        -> "Grannie seems angry."
+    
+    ( Female "Grannie", ( Seem Sight "angry", [] ) )
+        -> "Grannie looks angry."
+    
+    ( Female "Grannie", ( Seem Sound "angry", [] ) )
+        -> "Grannie sounds angry."
+
+Finally, the `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language (of which there are probably tens of thousands). The `Verbality` variable is intended to capture the idea that gets encoded in the verb, but for now it is just an alias for a string, meaning that (as with the `Property` variable) users are obliged to encode these for themselves. My system should generate the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). Following the `Verbality`, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the other pivots; this underlies the difference between, for example, `"She lives"` and `"She is living"`.
+
+Despite the enormous variety of `Do` pivots, they all have two things in common, and which distinguish them from `Be` and `Seem` pivots. The first is that they cannot include a `Property`; one can *be* angry, *seem* angry, or *look* angry, but one cannot *jump* angry, or *smile* angry. The second is that, in addition to being ongoing or not, they can also be *passive* or not, and this is the point of the second boolean argument. This underlies the different between, for example, `"Grannie is eating"` and `"Grannie is being eaten"`.
+
+### 3.4. Limitations
+
+It should go without saying that my theory is incomplete, a work in progress that stands in need of significant development and refinement. My theory of plain messages in particular - more specifically my theory of English conditions - is the most strikingly incomplete aspect of the whole. My aim in this section is to get out in front of any criticisms on this score, by acknowledging the most egregious of these inadequacies, and explaining why I am in no great hurry to address them. The main point, by way of headline, is that I am more interested in the theory of elaborations, and I expect that any philosophers to take an interest in my work will share this bias. My theory of plain messages is not intended to make any very great headway into that field, but rather to provide just enough to serve as the basis for my main project, the theory of elaborations.
+
+The relatively minor inadequacy in my theory of plain messages is that it doesn't predict enough of the data. In other words, there are plain messages that my model can neither represent nor encode into their corresponding sentences. Here is a very simple example of a sentence I am unable to account for:
+
+    "I am here."
+
+For what it is worth, my current thinking is that the type definition for a `Weight` should be expanded to include options for *places* as well as objects. These options would include, at least, *here*, *there*, *home*, *abroad*, and *away*. By itself, this addition is not difficult to implement, although it would have implications in the implementation of my theory of elaborations that I am not yet sure how to handle. And in any case, quite simply, one has to stop somewhere. (`"Somewhere"`, incidentally, would be the result of elaborating a message with a place variable like *here* or *there* in its underlying condition; my model doesn't predict the uses of this word yet either.)
+
+I am also unable to generate phrases like `"in front of"` or `"over and above"`. And while I can generate `"up to"`, I need two balances to do it; for example:
+
+    ( Male, ( Do "look", [ Up, ( To, Female ) ] ) )
+        -> "He looks up to her."
+
+This just doesn't seem like the right structural diagnosis. Overall, it looks as though my treatment of counters is not only incomplete but also inaccurate. It is a rough and ready approximation at best.
+
+Rather more worrying is that there are ambiguities I am unable to account for. This is particularly worrying, because the ability to account for ambiguities is precisely the main selling point of my whole approach. As we will see, I can account for lots of ambiguities with my theory of elaborations. There are some, however, that need to be explained by the theory of plain messages, and my theory is not yet able to do this. The ambiguities in question concern how balances fit into the overall condition, informational differences that are not captured when we represent balances simply as a list. For example:
+
+    "He is looking at Grannie with Victor."
+
+This sentence is ambiguous: is he with Victor, both looking at Grannie, or is Grannie with Victor, both being looked at by him? There must be two distinct conditions here, and consequently two distinct messages, both of which fetch up in the same English sentence. But I have no way of representing the difference. On my model as it stands, I have room only for one message to correspond to this sentence:
+
+    ( Male, ( Do "look" Ongoing, [ ( At, Female "Grannie" ), ( With, Male "Victor" ) ] ) )
+
+Clearly there is more to a condition than just a pivot and a bare *list* of balances. To understand a condition fully, one must appreciate how each individual balance relates to the pivot, and that information is not always signalled in the output string.
+
+Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any counter with any (or no) object; while in constructing the condition itself, they may append any balance to any pivot. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
 
     ( Male "Victor", ( love, [ At, ( Behind, Female "Grannie" ), For ] ) )
         -> "Victor loves at behind Grannie for."
     
     ( Female "Grannie", ( live, [ Speaker, Hearer, ( Over, SameObject ) ] ) )
         -> "Grannie lives me you over herself."
+    
+    ( Female "Grannie", ( Be "red", [ Speakers ] ) )
+        -> "Grannie is red us."
+    
+    ( Others, ( Seem Taste "heavy", [ Hearer, ( With, Other ) ] ) )
+        -> "They taste heavy you with it."
 
-What this means, from an empirical point of view, is that my theory of plain English messages predicts whole swathes of messages that it shouldn't predict, messages that are incoherent and which - when fed through my encoding function - result in nonsensical or even ungrammatical sentences.
-
-Obviously this is a very serious inadequacy, and I make no attempt to shy away from this fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition. This is for two reasons. First, the task is quite simply an enormous one, requiring the collation of literally tens of thousands of pivots, noting - just for starters - how many balances each of these can accompany, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this - very rough and ready - theory of plain messages predominantly just so that I have a basis on which to build this latter theory. I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to my model of conditions.
-
-### 3.3. Conditions Part 2/2: Pivots
-
-...
-
-*[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]*
+Obviously this is a very serious inadequacy, and I make no attempt to shy away from this fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition. This is for two reasons. First, the task is quite simply an enormous one, requiring the collation of literally tens of thousands of pivots, noting - just for starters - how many balances each of these can accompany, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this crude theory of plain messages predominantly just so that I have a basis on which to build this latter theory. And I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to my model of conditions.
 
 ## 4. The Theory Part 2/2: The Elaborations
 
