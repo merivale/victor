@@ -71,11 +71,11 @@ English conditions, in my model, break down into a *pivot* and a (possibly empty
     type alias Condition =
         ( Pivot, List Balance )
 
-Very approximately, and just to set us of on the right foot, the pivot is what gets encoded in the verb at the start of the predicate, while the balances (if any) are what get encoded in the words following that verb. Balances typically are or include additional objects, which I will refer to as *balancing* objects, as opposed to the *main* object that resides next to the condition in the nucleus itself. Balancing objects are variables of exactly the same type as the main object, though in this position they fetch up in different forms of the corresponding pronoun: `"him"` instead of `"he"`, `"her"` instead of `"she"`, `"us"` instead of `"we"`, and so on.
+Very approximately, and just to set us off on the right foot, the pivot is what gets encoded in the verb at the start of the predicate, while the balances (if any) are what get encoded in the words following that verb. Balances typically are or include additional objects, which I will refer to as *balancing* objects (as opposed to the *main* object that resides next to the condition in the nucleus itself). Balancing objects are variables of exactly the same type as the main object, though in this position they fetch up in different forms of the corresponding pronoun: `"him"` instead of `"he"`, `"her"` instead of `"she"`, `"us"` instead of `"we"`, and so on.
 
 I will examine pivots more closely in the next section. For now, we can continue with the approximation that they are encoded in the verb at the start of the predicate, and I will restrict myself to examples for which this is true. Since objects are already familiar, it will perhaps be easier to unpack the notion of a balance first.
 
-A balance consists of either a *counter* or a *weight* (or both), where the counter is something encoded in a preposition, and a weight is either a pointer back to the main object of the nucleus, or a distinct object:
+A balance consists of either a *counter* or a *weight* (or both), where the counter is something encoded in a preposition, and a weight is either a repaet of the main object of the nucleus, or a distinct object:
 
     type alias Balance =
         ( Maybe Counter, Maybe Weight )
@@ -96,7 +96,7 @@ A balance consists of either a *counter* or a *weight* (or both), where the coun
 
 There are currently 31 counters in my model, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but accounts for the most common prepositions. When the weight has the `SameObject` value, the result is a reflexive pronoun like `"myself"`, `"yourself"`, `"yourselves"`, with the pronoun in question being determined by the main object of the nucleus. (It is in this context, as noted above, that the distinction between singular and plural `Hearer` objects reveals itself.) When it has the `Different` value, the additional object argument determines the pronoun, which shows up in a form like `"me"`, `"him"`, `"her"`, etc.
 
-When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a counter or a weight is absent, I will simply omit it, rather than explicitly write `Nothing`; and when it is present, I will simply write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a counter or only a weight (not both), I will drop the brackets around it. For example:
+When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a counter or a weight is absent, I will simply omit it, rather than explicitly writing `Nothing`; and when it is present, I will simply write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a counter or only a weight (i.e. not both), I will drop the brackets around it. For example:
 
 | Abbreviation                  | Full Meaning                                                                   |
 | ----------------------------- | ------------------------------------------------------------------------------ |
@@ -106,9 +106,9 @@ When referring to balances from now on, I will adopt - in addition to the abbrev
 | `( For, SameObject )`         | `( Just For, Just SameObject )`                                                |
 | `( With, Female "Grannie" )`  | `( Just With, Just (Different (Other False (Just Female) (Just "Grannie"))) )` |
 
-If it wasn't clear before, I trust this table illustrates the benefits of conventions like these. I adopt them not just to save space, but to make my examples easier to read and understand.
+If it wasn't clear before, I trust this table illustrates the benefits of conventions like these. I adopt them not just to save space, but to make my examples easier to read and understand. Brackets and `Just`s and `False`s all over the place are necessary for compilers, but for human readers they very often serve to obscure more than to illuminate.
 
-And now for some examples themselves, with a view to solidifying the understanding of balances:
+And now for some examples themselves, making use of these abbreviating conventions, and with a view to solidifying the understanding of balances:
 
     ( Speaker, ( be, [ Male "Victor" ] ) )
         -> "I am Victor."
@@ -125,7 +125,7 @@ And now for some examples themselves, with a view to solidifying the understandi
     ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ), ( With, Female "Susan" ) ] ) )
         -> "Grannie lives at Cockroach Lane with Susan."
 
-At this point I must issue a major disclaimer. It should go without saying that my theory is incomplete and in need of further development and refinement. Nowhere is its partial nature more evident, however, than in its failure to provide any kind of validation whatsoever for conditions. In the construction of a balance, it allows users to combine any counter with any (or no) object; while in the construction of a condition itself, it allows any balances to be appended to any pivot. Consequently it is possible - let me not mince words - to generate complete nonsense within my system. For instance:
+At this point I must issue a major disclaimer. It should go without saying that my theory is incomplete and in need of further development and refinement. Nowhere is its partial nature more evident, however, than in its failure to provide *any kind of validation whatsoever* for conditions. In the construction of a balance, it allows users to combine any counter with any (or no) object; while in the construction of a condition itself, it allows any balances to be appended to any pivot. Consequently it is possible - let me not mince words - to generate complete and utter nonsense within my system. For instance:
 
     ( Male "Victor", ( love, [ At, ( Behind, Female "Grannie" ), For ] ) )
         -> "Victor loves at behind Grannie for."
@@ -133,13 +133,15 @@ At this point I must issue a major disclaimer. It should go without saying that 
     ( Female "Grannie", ( live, [ Speaker, Hearer, ( Over, SameObject ) ] ) )
         -> "Grannie lives me you over herself."
 
-What this means, practically speaking, is that my theory of plain English messages predicts whole swathes of messages that an accurate theory should not predict, messages that are incoherent and which - when fed through my encoding function - result in strings of words that are not grammatical sentences of English.
+What this means, from an empirical point of view, is that my theory of plain English messages predicts whole swathes of messages that it shouldn't predict, messages that are incoherent and which - when fed through my encoding function - result in nonsensical or even ungrammatical sentences.
 
-Obviously this is a very serious inadequacy, and I make no attempt to shy away from that fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition, for two reasons. First, the task is quite simply an enormous one, requiring the collation of tens of thousands of pivots, noting - just for starters - how many balances each of these can accompany, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I would by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this - very rough and ready - theory of plain messages predominantly just so that I have a basis on which to build this latter theory. I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to the generation of conditions.
+Obviously this is a very serious inadequacy, and I make no attempt to shy away from this fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition. This is for two reasons. First, the task is quite simply an enormous one, requiring the collation of literally tens of thousands of pivots, noting - just for starters - how many balances each of these can accompany, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this - very rough and ready - theory of plain messages predominantly just so that I have a basis on which to build this latter theory. I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to my model of conditions.
 
 ### 3.3. Conditions Part 2/2: Pivots
 
-[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]
+...
+
+*[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]*
 
 ## 4. The Theory Part 2/2: The Elaborations
 
@@ -165,4 +167,6 @@ The definition is of course recursive, reflecting the fact that the elaborations
 
 * * *
 
-[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]
+...
+
+*[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]*
