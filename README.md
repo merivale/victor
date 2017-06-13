@@ -4,68 +4,42 @@ A model of the English language, thought of as a code for processing *messages* 
 
 ## 1. The Point
 
-Modern philosophical semantics treats languages as functions from strings to messages, routinely enquiring after the rules that determine the meaning of a sentence. This forces its practitioners into an uncomfortable theoretical position, in which ambiguous sentences are, from the semantic point of view, impossible. This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity.
+Modern philosophical semantics treats languages as functions from strings to messages, routinely enquiring after "the rules that determine the meaning of a sentence". This forces its practitioners into an uncomfortable theoretical position, in which ambiguous sentences are, from the semantic point of view, impossible (because functions, of course, can assign only one output to every input). This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity.
 
-By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English function, we should be able to see precisely how and why various English ambiguities arise. See section 3 below for examples.
+By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English function, we should be able to see precisely how and why various English ambiguities arise. See section 4 below for examples.
 
 ## 2. The Source
 
 My algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the gh-pages branch, for easy integration with [GitHub Pages](https://pages.github.com/). The `src` directory contains the main program module, which simply pulls everything together (nothing to see there), and two subdirectories, `Interface` and `Theory`. The former directory contains all the modules responsible for generating the web page users see, for keeping track of user input, and for piecing that input together into a `Message` variable. It is the modules in the latter directory that are potentially of theoretical interest, since they describe what a `Message` variable looks like, and define the encoding functions that convert these variables into strings.
 
-There is no need to go into detail about the `Theory` modules here. Anyone interested in the nuts and bolts should simply read the code itself. It is internally documented with fairly substantial comments (or where it isn't, it will be soon), and is intended to be intelligible to anyone of a suitably logical turn of mind (although obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then glance at the `Words` module. The latter contains a few essential but largely uninteresting functions, for generating words and their various forms, but is perhaps helpful in serving to solidify an understanding of the grammatical terminology that I use.
+There is no need to go into detail about the `Theory` modules here. Anyone interested in the nuts and bolts should simply read the code itself. It is internally documented, and is intended to be intelligible to anyone of a suitably logical turn of mind (although obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then glance at the `Words` module. This latter contains a few small functions for generating words and their various forms, not very interesting in itself, but perhaps helpful in serving to solidify an understanding of the grammatical terminology that I use.
 
-Next, readers should look at the `Sentences` module, which contains the encoding function itself, the function for processing messages into sentences. This function divides into two stages. In the first stage, the message is validated, and the variables that have a bearing on the output sentence are extracted; in the second stage, those variables are used to generate the sentence itself. The second stage is implemented in the `Sentences` module itself (with help from the little functions exposed by the `Words` module). The first stage is separated out into the `Messages` module.
+Next, readers should look at the `Sentences` module, which contains the encoding function itself, the function for processing messages into sentences. This function divides into two stages. In the first stage, the message is validated, and the variables that have a bearing on the output sentence are extracted; in the second stage, those variables are used to generate the sentence. The second stage is implemented in the `Sentences` module itself (with help from the little functions exposed by the `Words` module). The first stage is handled by the separate `Messages` module.
 
-I have not yet written any tests, but there is a stub `test` directory as a placeholder for later development in this direction. From the point of view of the theory (never mind the interface), it would be helpful to have tests that run various `Message` variables through my encoding function, and check that the results are as they should be.
+I have not yet written any tests, but there is a stub `test` directory as a placeholder for later development in this direction. From the point of view of the theory (never mind the interface), it would be helpful to have tests that run various `Message` variables through my encoding function, and check that the resulting strings are as they should be.
 
-## 3. The Theory Part 1: The Nucleus
+## 3. The Theory Part 1/2: The Nucleus
 
-The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more *elaborations* applied to a core *nucleus*. (The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.) Consequently my theory as a whole consists of two interlocking theories: a theory of *plain* English messages (i.e. those messages composed of an unelaborated nucleus), and a theory of English elaborations.
+The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more *elaborations* applied to a core *nucleus*. (The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.) Consequently my theory as a whole consists of two interlocking theories: a theory of plain English messages (i.e. those messages composed of an unelaborated nucleus), and a theory of English elaborations. Naturally enough, I will start with the first.
 
-- outline
-
-- objects
-
-- pivots (without balances)
-
-- balances (and pivots with balances)
-
-
-
-## 4. The Theory Part 2: The Elaborations
-
-The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the nucleus/elaboration terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. 
-
-...
-
-There are currently 11 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a decent start. Though it will not make much sense up front, here is the type definition for messages (details of the individual elaborations to follow):
-
-    type Message
-        = Plain Nucleus
-        | NEGATIVE Message
-        | PAST Message
-        | PRIOR Message
-        | DISPLACED Displacer Message
-        | REGULAR (Maybe Displacer) (Maybe Frequency) Message
-        | PREORDAINED (Maybe Displacer) (Maybe Time) Message
-        | EXTENDED Duration Message
-        | SCATTERED Tally Message
-        | INDIRECT Target Pointer Bool Haystack Message
-        | ENUMERATED Target Quantifier Bool Haystack Message
-        | AMASSED Target (Maybe Quantifier) Bool Haystack Message
-
-The type definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself (see the `Messages` module). The function returns an error in cases of such invalid input.
-
-
-
-### 3.1. The Nucleus
-
-The nucleus of every atomic English message in my model is made up of two items, an *object* and a *condition*:
+The nucleus of every English message is an ordered pair, containing an *object* and a *condition*, and a plain message affirms the present satisfaction of the condition by the object:
 
     type alias Nucleus =
         ( Object, Condition )
 
-A plain, unelaborated English message affirms the present satisfaction of the condition by the object. The object may take any one of the following values:
+For example, and using some very crude representations of objects and conditions for now:
+
+    ( Victor, love Grannie )
+        -> "Victor loves Grannie."
+    
+    ( Grannie, live at Cockroach Lane )
+        -> "Grannie lives at Cockroach Lane."
+
+There should be nothing surprising here. The object/condition distinction at the level of the message corresponds exactly to the familiar subject/predicate distinction at the level of the sentence. In this respect, my theory is positively boring. Things get more interesting as we start to chip away at the nature of objects and conditions themselves.
+
+### 3.1. Objects
+
+There are three types of objects available in English, each of which comes in either a singular or plural form (represented in my model by a boolean argument, `False` for singular and `True` for plural):
 
     type Object
         = Speaker Bool
@@ -76,33 +50,33 @@ A plain, unelaborated English message affirms the present satisfaction of the co
         = Male
         | Female
 
-The boolean argument represents the number of the object (`False` for singular, `True` for plural). The optional `Sex` argument, I trust, is self-explanatory. The optional string argument, finally, is intended to house a proper name; otherwise English defaults to the appropriate pronoun (`"he"`, `"she"`, `"it"`, `"they"`). In the first two cases only the pronoun is available (`"I"`, `"we"`, `"you"`).
+The `Speaker` and `Hearer` objects are encoded in the pronouns `"I"`, `"we"`, and `"you"`. (`"You"` is ambiguous between the singular and the plural, though the singular and plural `Hearer` objects do distinguish themselves in other contexts, when they show up as `"yourself"` and `"yourselves"` respectively.) By default, the `Other` object is encoded in the pronouns `"it"`, `"he"`, `"she"`, and `"they"` (I trust the influence of the optional `Sex` argument here is self-explanatory). In the case of `Other` objects only, English has room for an optional string argument. This argument is intended to house a proper name (`"Victor"`, `"Grannie"`, `"France"`, etc.), which overwrites the default pronoun. There is no restriction in the English code on what can count as a proper name; the only rule is that it should begin with a capital letter.
 
-The condition is whatever is predicated of the object, and it breaks down further into a *pivot* and a (possibly empty) list of *balances*:
+When referring to objects in what follows, I will adopt the following abbreviating conventions. Rather than write `Speaker False` and `Speaker True`, I will write `Speaker` and `Speakers` respectively; similarly for `Hearer(s)` and `Other(s)`. When the optional sex and string arguments are not present, I will simply omit them, instead of explicitly writing `Nothing`. And when they are present, I will simply write them on their own, as `Male` or `Female` instead of `Just Male` or `Just Female`. Finally, when the sex variable is present, I will not bother to write `Other` in front of it. For example:
+
+| Abbreviation       | Full Meaning                                 |
+| ------------------ | -------------------------------------------- |
+| `Speaker`          | `Speaker False`                              |
+| `Hearers`          | `Hearer True`                                |
+| `Male`             | `Other False (Just Male) Nothing`            |
+| `Female "Grannie"` | `Other False (Just Female) (Just "Grannie")` |
+| `Others`           | `Other True Nothing Nothing`                 |
+
+I hope these conventions are all intuitive and easy to understand. The point of adopting them is just to make the examples that follow easier on all of us. I will introduce similar conventions with regard to the writing out of conditions, once we have started unpacking their component parts.
+
+### 3.2. Conditions Part 1/2: Balances
+
+English conditions, in my model, break down into a *pivot* and a (possibly empty) list of *balances*:
 
     type alias Condition =
         ( Pivot, List Balance )
 
-My model of the conditions expressible in English is currently very approximate. It does not allow the formation of every coherent condition, and moreover it allows the formation of countless incoherent ones. The theory of English conditions is an enormous subject in its own right, and I have barely scratched the surface of it. For what it is worth, here is my simplified model (almost) in full:
+Very approximately, and just to set us of on the right foot, the pivot is what gets encoded in the verb at the start of the predicate, while the balances (if any) are what get encoded in the words following that verb. Balances typically are or include additional objects, which I will refer to as *balancing* objects, as opposed to the *main* object that resides next to the condition in the nucleus itself. Balancing objects are variables of exactly the same type as the main object, though in this position they fetch up in different forms of the corresponding pronoun: `"him"` instead of `"he"`, `"her"` instead of `"she"`, `"us"` instead of `"we"`, and so on.
 
-    type Pivot
-        = Be Bool (Maybe Property)
-        | Seem (Maybe Sense) Bool (Maybe Property)
-        | Do Verbality Bool Bool
-    
-    type Sense
-        = Sight
-        | Smell
-        | Sound
-        | Taste
-        | Touch
-    
-    type alias Property =
-        String
-    
-    type alias Verbality =
-        String
-    
+I will examine pivots more closely in the next section. For now, we can continue with the approximation that they are encoded in the verb at the start of the predicate, and I will restrict myself to examples for which this is true. Since objects are already familiar, it will perhaps be easier to unpack the notion of a balance first.
+
+A balance consists of either a *counter* or a *weight* (or both), where the counter is something encoded in a preposition, and a weight is either a pointer back to the main object of the nucleus, or a distinct object:
+
     type alias Balance =
         ( Maybe Counter, Maybe Weight )
     
@@ -120,187 +94,75 @@ My model of the conditions expressible in English is currently very approximate.
         = SameObject
         | Different Object
 
-Before proceeding to unpack all of this, let me introduce some abbreviating conventions that will make life easier for all of us. I will want to refer to example nuclei throughout the discussion to follow, but writing them out in full would be tedious and difficult to read. To begin with, I will drop all unnecessary brackets, preserving only those that are needed to avoid any potential confusion or ambiguity. More significantly, I will write optional (`Maybe`) arguments as just `x` when they are present (instead of `Just x`), and sometimes omit them altogether when they are not (instead of writing `Nothing`). Sometimes I will include an explicit `Nothing`, however, when I feel it would be more confusing to leave it out. Similarly, I will omit when boolean arguments when they are `False`, and when they are present, instead of writing `True`, I will write something more meaningful about *what* is thereby flagged as true. For example, `Speaker` by itself means `Speaker False`, i.e. singular. `Speaker True`, meanwhile, I will write as `Speaker Plural`. I hope these conventions will all be commonsensical and easy to understand.
+There are currently 31 counters in my model, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but accounts for the most common prepositions. When the weight has the `SameObject` value, the result is a reflexive pronoun like `"myself"`, `"yourself"`, `"yourselves"`, with the pronoun in question being determined by the main object of the nucleus. (It is in this context, as noted above, that the distinction between singular and plural `Hearer` objects reveals itself.) When it has the `Different` value, the additional object argument determines the pronoun, which shows up in a form like `"me"`, `"him"`, `"her"`, etc.
 
-To continue: The pivot, approximately for now, is what is encoded in the main verb at the start of the predicate. I will be more precise in a moment, but let me explain the notion of a balance first. A balance comprises either a *counter* or a *weight* (or both). A counter is the sort of thing encoded in a preposition, and I have 31 of them currently in my model (I didn't bother listing them all above). A weight, meanwhile, is an object, just like the object of the message already introduced above; where necessary, I distinguish the *main* object from any *balancing* objects. The `SameObject` value indicates that the balancing object in question is identical to the main object of the message, and results in reflexive pronouns like `"myself"`, `"himself"`, `"herself"`. The `Different` value indicates that the balancing object in question is distinct from the main object, and its argument specifies what that object is. For example, and approximating the pivot as a verb for now:
+When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a counter or a weight is absent, I will simply omit it, rather than explicitly write `Nothing`; and when it is present, I will simply write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a counter or only a weight (not both), I will drop the brackets around it. For example:
 
-    (Speaker, "like", [(Nothing, Hearer)]) -> "I like you."
-    (Speaker, "live", [(In, Other "France")]) -> "I live in France."
-    (Other Female, "is", [(Out, Nothing)]) -> "She is out."
-    (Other, "is", [(Over, Nothing)]) -> "It is over."
-    (Other Male, "looks", ([(By, Other Female), (With, Other Male "Fred")])) -> "He stands by her with Fred."
+| Abbreviation                  | Full Meaning                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------ |
+| `Out`                         | `( Just Out, Nothing )`                                                        |
+| `Others`                      | `( Nothing, Just (Different (Other True Nothing Nothing)) )`                   |
+| `( Behind, Hearer )`          | `( Just Behind, Just (Different (Hearer False)) )`                             |
+| `( For, SameObject )`         | `( Just For, Just SameObject )`                                                |
+| `( With, Female "Grannie" )`  | `( Just With, Just (Different (Other False (Just Female) (Just "Grannie"))) )` |
 
-Now let's break down the pivot itself. I divide English pivots into three base types, `Be`, `Seem`, and `Do`. The last of these, `Do`, takes as its first argument a *verbality*, which is an ugly term for the type of idea that is encoded into a verb. A look further down my type definitions reveals that, for now at least, this type is just an alias for a string. What this means, in practice, is that users must encode verbalities into verbs for themselves. The two boolean arguments following the verbality are for specifying, respectively, whether the pivot is *ongoing* and/or *passive*. For example:
+If it wasn't clear before, I trust this table illustrates the benefits of conventions like these. I adopt them not just to save space, but to make my examples easier to read and understand.
 
-    (Speaker, Do "live", [(In, Other "France")]) -> "I live in France."
-    (Other Male, Do "talk" Ongoing, [(To, SameObject)]) -> "He is talking to himself."
-    (Other Plural, Do "laugh" Ongoing Passive, [(At, Nothing), (By, Other "Fred")]) -> "They are being laughed at by Fred."
+And now for some examples themselves, with a view to solidifying the understanding of balances:
 
-The first type of pivot, `Be`, 
-
-
-
-Users are obliged to encode the pivot for themselves (into a verb), and will often need to encode the balance for themselves as well. The exceptions to the latter rule are when the balance is another object, either identical to the main object (as in, `"He likes himself"`), or independent (as in, `"He likes her"`). Thus:
-
-    type alias Condition =
-        { pivot : String
-        , balance : Maybe Balance
-        }
+    ( Speaker, ( be, [ Male "Victor" ] ) )
+        -> "I am Victor."
     
-    type Balance
-        = SameObject
-        | IndependentObject Object
-        | CustomBalance String
-
-The plainest of English sentences comprises a `subject` and a `predicate`, where the object is encoded in the former, and the condition is encoded in the latter. The predicate can be broken down further into the `fulcrum` (which encodes the pivot) and an optional `counter` (which encodes the balance). Consider for example a plain message with the following nucleus:
-
-    { object = Speaker
-    , condition =
-        { pivot = Be Nothing False
-        , balance = IndependentObject (Male "Victor")
-        }
-    }
-
-When fed through my encoding function, this produces the string `"I am Victor"`. If the `abbreviateFulcrum` flag is set to true, the result would instead be `"I'm Victor"`. The `abbreviateNot` flag should be self-explanatory, though it is only relevant when the message is negated. It is to negative messages that we now turn, with the first two examples below incidentally illustrating the result of toggling this flag.
-
-### 3.2. Negative Messages
-
-The chief puzzle facing any theory of negation in English is posed by the related ambiguities discovered, for example, in the following two sentences:
-
-    "Claire doesn't drink."
+    ( Male, ( be, [ Out ] ) )
+        -> "He is out."
     
-    "I was not busy all day."
-
-In the first case, the speaker might be maintaining that Claire is tee-totalled, or might instead be denying that she is an alcoholic. The latter reading is consistent with Claire enjoying a drink now and then, while the former is not. In the second case, the speaker might be affirming that she was free all day yesterday, or might rather be rejecting the claim that she was occupied all day. The latter interpretation is consistent with her having been busy at some point in the day, while the former is not. In sum, the first interpretation of each sentence is a positive message about something internally negative, whereas the second is a negative message about something internally positive. (The possibility of these two kinds of negation is also why double negation isn't always vacuous: `"Claire doesn't not drink"`, for example, can be used perfectly intelligibly to deny that she is tee-totalled.)
-
-My model posits a `Negative` elaboration, which has the semantic effect of converting any affirmative message into its corresponding denial. Its grammatical effect, meanwhile, is in most cases the introduction of the word `"not"` after the `fulcrum` (for the other cases, see section 3.7 below). The difference between the pairs of messages just noted is accounted for by the *order* in which this elaboration is applied, relative to other elaborations in the message. In the second of each pair, the `Negative` elaboration is the outermost one, whereas in the first of each pair it is closer to the `Nucleus`, with a further elaboration applied on top of it. For my account of these other elaborations, and hence my complete solution to this puzzle, see sections 3.4 and 3.5 below.
-
-The `Negative` elaboration is the most semantically versatile of those posited by my model. While its effect, as I have said, is always to turn an affirmative message into its corresponding denial, there are different components of messages that can be the focus of a denial. What exactly is being denied in a `Negative` message depends on the elaboration to which the negation itself is applied, and hence discussion of the other elaborations below will include details on what happens when you negate them.
-
-### 3.3. Past, Prior, and Ongoing Messages
-
-Plain English messages, as I said at the outset, affirm the *present* satisfaction of the condition by the object. That the present is the default tense for English messages is suggested by the fact that, with the exception of the highly irregular verb `"be"` and the third person singular form of other verbs, the present form is simply the base form: `"have"`, `"do"`, `"eat"`, `"walk"`, etc. It is also suggested by the so-called "timeless" use of the present for abstract, mathematical, or logical claims for which time is irrelevant: `"Two plus two equals four"`, `"A vixen is a female fox"`, etc. It also accords nicely with our tendency to *update* state reports to the present, even when our evidence supports only the claim that they held in the past: `"My car is parked outside"` (presumably it hasn't been stolen), `"Fred is in his office"` (assuming he hasn't left early). Ultimately, however, the evidence for this assumption is holistic, arising from the overall power of the theory in which it is embedded.
-
-If the present is the default tense for plain English messages, past tense messages can only arise through some `Past` elaboration, and this is precisely what I maintain. Semantically, this elaboration turns any message about the present into its corresponding message about the past. Grammatically, its effect is to change the form of the verb or modal at the `fulcrum` of the sentence: `"I am Victor"` becomes `"I was Victor"`, and so on.
-
-English also has a `Prior` elaboration, whose semantic effect is to locate the underlying condition's satisfaction in some point or region of time prior to some other point in time. By default, the other point in time is the present, in which case the semantic difference between `Past` and `Prior` is only very slight. In any case, the grammatical upshot of this elaboration is to displace the fulcrum with the corresponding finite form of the verb `"have"`, and convert the previous fulcrum to its prior participle form: `"I am Victor"` becomes `"I have been Victor"`, while `"I was Victor"` becomes `"I had been Victor"`. Though the semantic similarity between `Past` and `Prior` is anyway obvious, it is worth noting that for the regular English verbs the past form and the prior participle form are identical; e.g. `"He walked to work"`, `"He has walked to work"`.
-
-What I am calling a `Prior` message will be familiar to grammarians under the guise of the "perfective". I do not much care for that term, which doesn't seem to me to capture the essence of this elaboration's semantic effect as precisely as does the label "prior". Standard English grammars also acknowledge a "past past" tense, encoded with `"had"` + the prior participle. Consequently they discover an ambituity in sentences like `"He had walked to work"`, which admit of a "past past" interpretation as well as a "past perfective". I agree with the observations, but account for them rather differently: it is all a matter of the order in which the `Past` and `Prior` elaborations are applied. A `Prior` message is "perfective" in the terminology I shun, and a `Past Prior` message is a "past perfective". I diagnose the "past past" tense, meanwhile, as a `Prior Past` message. The order in which the elaborations is applied has no effect on the output sentence, leading to the ambiguity we observe.
-
-Structurally similar to the `Prior` elaboration in its grammatical effect, we have what I term the `Ongoing` elaboration, which displaces the fulcrum with the corresponding form of the verb `"be"`, following this with the ongoing participle of the original fulcrum: `"He walks to work"` becomes `"He is walking to work"`. Grammarians call this a change of "aspect". Semantically this elaboration entails that its underlying condition is *ongoing*, hence my choice of terminology. It may be noted that, while `Prior Ongoing` messages are perfectly possible (`"He has been walking to work"`), `Ongoing Prior` messages are not (`! "He is having walked to work"`). Presumably this is because there is no sense to be made out of the attempt to make a `Prior` condition `Ongoing`.
-
-Negating a `Past`, `Prior`, or `Ongoing` message does nothing special. More precisely, a `Negative Past` message is semantically identical to a `Past Negative` message, and likewise for `Prior` and `Ongoing` messages with and without negation. To put it another way, the `Past`, `Prior`, and `Ongoing` elaborations are entirely independent of the `Negative` elaboration. This reflects a general point in my model: while the order in which elaborations are applied typically makes a semantic difference, this need not always be so. Sometimes all that matters is *that* an elaboration has been applied, not *when* it was applied.
-
-### 3.4. Extended and Scattered Messages
-
-The elaborations examined in this section share the interesting property of being "invisible", in the sense that they have, in and of themselves, no effect on the output sentence. They each take an additional argument alongside their input message, and this argument does have a visible effect. Even with this extra argument, however, these elaborations are the source of some striking English ambiguities when they interact with other elaborations.
-
-The `Extended` elaboration, first, has the semantic effect of creating a message that entails the satisfaction of its input condition over an *extended* period of time, taking an additional argument specifying the `duration` of this period. The elaboration itself, as I have said, has no effect on the sentence. The `duration` argument, meanwhile, results in an adverbial string appended to the end of the predicate. For example:
-
-    "Susan studied in France for a year."
+    ( Male "Victor", ( love, [ Female "Grannie" ] ) )
+        -> "Victor loves Grannie."
     
-    "Grannie teased the cobra all day."
-
-The `Scattered` elaboration, second, has the semantic effect of producing a message that entails the satisfaction of its input condition on *multiple* occasions, and its grammatical effect is likewise the appending of an adverbial string, which in this case encodes the `tally` of individual satisfactions. For example:
-
-    "Susan went to France twice."
+    ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ) ] ) )
+        -> "Grannie lives at Cockroach Lane."
     
-    "Grannie fell downstairs fifteen times."
+    ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ), ( With, Female "Susan" ) ] ) )
+        -> "Grannie lives at Cockroach Lane with Susan."
 
-`Extended` and `Scattered` messages are not discovered in the wild except when they have been further modified with a `Past` elaboration (as above), or some other elaboration that prevents them from amounting to an affirmation of the *present* satisfaction of the `Extended` or `Scattered` condition. This is for the obvious reason that the present is an instant, and `Extended` and `Scattered` conditions necessarily require a *region* of time in which to be satisfied.
+At this point I must issue a major disclaimer. It should go without saying that my theory is incomplete and in need of further development and refinement. Nowhere is its partial nature more evident, however, than in its failure to provide any kind of validation whatsoever for conditions. In the construction of a balance, it allows users to combine any counter with any (or no) object; while in the construction of a condition itself, it allows any balances to be appended to any pivot. Consequently it is possible - let me not mince words - to generate complete nonsense within my system. For instance:
 
-When negating an `Extended` or a `Scattered` message, the result is a denial of the `duration` or `tally`, not of the underlying condition itself. In order to negate the underlying condition, the `Negative` elaboration must be applied *before* the `Extended` or `Scattered` elaboration. With this point in mind, I can now be clearer about my solution to the puzzle I posed about negation in section 3.2. Recall the ambiguous sentence:
-
-    "I was not busy all day."
-
-I diagnose the first reading, in which the speaker is affirming that she was free all day, as a `Past Extended Negative` message, where the idea of being busy is first negated, then extended to the whole day, and then that resulting message consigned to the past. The second reading, in which the speaker is denying that she was occupied all day, is instead a `Past Negative Extended` message. Needless to say, the order in which the `Negative` and `Extended` elaborations is applied has a notable semantic effect, but no grammatical effect: the output sentence is the same either way.
-
-The very same ambiguity arises through the interaction of the `Negative` elaboration with the `Scattered` elaboration, though typically the `Negative Scattered` interpretation will seem more natural than the `Scattered Negative`, because it may often be hard to make sense of an occasion on which something *didn't* happen. Typically, English speakers will likely read `"Grannie didn't fall downstairs fifteen times"` as a precusor to saying, for example, that she took only *fourteen* tumbles that day. Suppose, however, that she attempted the stairs fifteen times last Thursday, faltering each time but always remaining on her feet. Then one would have a natural use for the `Past Scattered Negative` as well as the more common `Past Negative Scattered`.
-
-### 3.5. Preordained and Regular Messages
-
-The two elaborations discussed in this section have a lot in common with those discussed in the previous section. They are likewise invisible, though they also both take an additional argument that is not invisible. Unlike the previous two elaborations, however, this additional argument is optional; and when it is absent, even more potential ambiguity arises.
-
-The `Preordained` elaboration is a particularly important one, since its presence - and moreover its *misdiagnosis* - has led to accounts of tense in English that are considerably more complicated than they should be. The semantic effect of this elaboration is a message affirming the *prearranged* or *predetermined* satsifaction of its underlying condition at some later time. The time in question constitutes an optional argument which, when present, results - just like the two elaborations examined in the previous section - in an adverbial string at the end of the predicate. For example:
-
-    "Terry and Julie are getting married next June."
+    ( Male "Victor", ( love, [ At, ( Behind, Female "Grannie" ), For ] ) )
+        -> "Victor loves at behind Grannie for."
     
-    "The sun sets at 7.22pm tomorrow."
+    ( Female "Grannie", ( live, [ Speaker, Hearer, ( Over, SameObject ) ] ) )
+        -> "Grannie lives me you over herself."
 
-The first message here illustrates the prearranged case, while the second illustrates the predetermined one. The `Preordained` terminology is intended to cover both. Grammarians will know these as "futurate" messages.
+What this means, practically speaking, is that my theory of plain English messages predicts whole swathes of messages that an accurate theory should not predict, messages that are incoherent and which - when fed through my encoding function - result in strings of words that are not grammatical sentences of English.
 
-The standard grammatical treatment of "futurate" messages takes them to be direct affirmations about the future. This is doubly unfortunate. In the first place, it means that the so-called "present" form of the verb is both badly labelled and ambiguous: sometimes it means the present, but sometimes (as here) it means the future. In the second place, it fails to accommodate *past* "futurate" messages:
+Obviously this is a very serious inadequacy, and I make no attempt to shy away from that fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition, for two reasons. First, the task is quite simply an enormous one, requiring the collation of tens of thousands of pivots, noting - just for starters - how many balances each of these can accompany, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I would by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this - very rough and ready - theory of plain messages predominantly just so that I have a basis on which to build this latter theory. I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to the generation of conditions.
 
-    "Terry and Julie were getting married next June"
-        - but then there was a double booking at the venue
-        - before her father objected
-        - until his previous marriage came to light
-        - ...
-    
-    "The sun set at 7.22pm tomorrow"
-        - but that was on the old timekeeping convention
-        - before the asteroid knocked us into our new orbit
-        - ...
+### 3.3. Conditions Part 2/2: Pivots
 
-In these cases, plainly enough, what is affirmed is the *past* existence of some prearrangement or predetermination, which is by implication no longer present. Just so, in the previous cases what is affirmed is the *present* existence of such a preordainment. This diagnosis better reflects the semantic and grammatical facts, and also saves us from the unwelcome conclusion that the present form of the verb is ambiguous: it always signals *something* as present, it is simply that the something in question may vary.
+[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]
 
-The `Regular` elaboration entails - I don't know how else to say it - the *regular* satisfaction of its underlying condition, and takes an optional additional argument specifying the `frequency` of this regularity. `Regular` messages come in a few different flavours: claims about the habits of such animals as are capable of forming them, claims about man-made regularities, and also claims about the reliable tendencies of the inaminate world. For example:
+## 4. The Theory Part 2/2: The Elaborations
 
-    "Grannie often teases the cobra."
-    
-    "The train to London invariably departs from platform 8."
-    
-    "Salt dissolves in water."
+The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the "nucleus"/"elaboration" terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. And this, in turn, is because my approach is so different. Always my aim is to *explain the sentences* that English speakers produce, rather than to capture the logical entailments of English messages in any formal system.
 
-In this case, notice, the optional `frequency` argument is most naturally placed just before the fulcrum, and that is where my encoding function currently places it. A fuller model, however, would provide some stylistic freedom here which I have not yet implemented, since the following sentences are also perfectly good English:
+There are currently 11 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a decent start. Though it will not make much sense up front, here is the full type definition for messages (details of the individual elaborations to follow):
 
-    "Often Grannie teases the cobra."
-    
-    "Grannie teases the cobra often."
+    type Message
+        = Plain Nucleus
+        | NEGATIVE Message
+        | PAST Message
+        | PRIOR Message
+        | DISPLACED Displacer Message
+        | REGULAR (Maybe Displacer) (Maybe Frequency) Message
+        | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+        | EXTENDED Duration Message
+        | SCATTERED Tally Message
+        | INDIRECT Target Pointer Bool Haystack Message
+        | ENUMERATED Target Quantifier Bool Haystack Message
+        | AMASSED Target (Maybe Quantifier) Bool Haystack Message
 
-The `Preordained` and the `Regular` elaborations both interact with the `Negative` elaboration in much the same way as we saw in the previous section with the `Extended` and `Scattered` elaborations. There is a crucial semantic difference between a `Preordained Negative` or `Regular Negative` message on the one hand, and a `Negative Preordained` or `Negative Regular` message on the other. In the case of `Regular` messages which do have the optional `frequency` argument, there need be no ambiguity, since the order in which the elaborations is applied is reflected in the order of `"not"` and the adverb:
+The definition is of course recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself (see the `Messages` module). The function returns an error in cases of such invalid input.
 
-    "Fred doesn't usually take the bus to work."
-    
-    "Fred usually doesn't take the bus to work."
+* * *
 
-When the frequency argument is absent, however, the now familiar ambiguity emerges. This is precisely the ambiguity in the other example I gave in section 3.2:
-
-    "Claire doesn't drink."
-
-This sentence, we can now see, sports both a `Regular Negative` interpretation (she is tee-totalled) and a `Negative Regular` interpretation (she isn't an alcoholic).
-
-The four invisible elaborations not only result in ambiguties when they interact with negation, but also when they interact with each other. Consider the following entertainingly ambiguous sentence:
-
-    "The film began at 8 o'clock."
-
-By my count, this sentence is accessible to no fewer than *five* distinct interpretations: a simple claim about when the film started (a past plain nucleus), a claim about when it was scheduled to start (a past preordained message), a claim about when showings of started (a past regular message), a claim about when showings of it were scheduled to start (a past preordained regular message), and finally a claim about the time at which the management, when drawing up their plans, generally scheduled showings of it to start (a past regular preordained message). (It may be hard to envisage a use for this last message. To aid your imaginations, suppose the management had to fix the timetable anew each morning, and typically ended up placing the film in question in the 8 o'clock slot. This in contrast to the more likely fourth interpretation, in which they settle once and for all on a regular 8 o'clock position.)
-
-### 3.6. Determined, Imminent, and Apparent Messages
-
-Unlike the elaborations of the previous section, the elaborations discussed in this section are all visible. Specifically, they all displace the fulcrum in the output sentence. Examples all at once:
-
-    Plain:      "He is silly."
-    Determined: "He is going to be silly (tomorrow)."
-    Imminent:   "He is about to be silly."
-    Apparent:   "He appears/seems to be silly."
-
-There are, I presume, quite a few English elaborations that have the effect of introducing a new verb and displacing the old one; thus what grammarians term "catenative" verbs. The three I have implemented so far are intended only as a representative sample. (For the record, I anticipate that a complete model of English would posit fewer elaborations of this nature than there are catenative verbs, since some such elaborations will take additional arguments, and be responsible for several of the verbs at once. For example, I suspect there is just one `Intentional` elaboration that generates all of:
-
-    "He wants/hopes/intends/wishes/plans/expects/... to be silly (tomorrow)."
-
-But these represent questions for another day.)
-
-[...]
-
-### 3.7. Practical, Projective, and Evasive Messages
-
-There is no `Future` elaboration in my model, and this is not simply because I haven't got around to including it: on the contrary, I positively deny that any such elaboration exists in English. There are many reasons for this, and I do not propose to go into them at length here. Instead, I will simply outline my alternative, in the hopes that its elegance and predictive power will speak for itself.
-
-In addition to its copious verbs, English boasts a small handful of modals, which distinguish themselves by having only finite forms (i.e. no base form and no participle forms). Half of them, moreover, have only one finite form, where the verbs all have two (present and past). They are: `"will/would"`, `"shall/should"`, `"may/might"`, `"can/could"`, `"must"`, `"ought"`, `"need"`, and `"dare"`. To explain the use of these curious words, I posit nine English `modalities`, and three elaborations that take these `modalities` as arguments.
-
-[...]
-
-### 3.8. Indirect, Enumerated, and Amassed Messages
-
-[...]
+[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]
