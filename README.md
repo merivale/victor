@@ -110,10 +110,10 @@ type alias Nucleus =
 
 For example, and using some very crude representations of objects and conditions for now:
 
-```
+```elm
 ( Victor, love Grannie )
     -> "Victor loves Grannie."
-    
+
 ( Grannie, live at Cockroach Lane )
     -> "Grannie lives at Cockroach Lane."
 ```
@@ -124,18 +124,20 @@ There should be nothing very surprising here. The object/condition distinction a
 
 There are three objects available in English, each of which comes in either a singular or a plural form (represented in my model by a boolean argument, `False` for singular and `True` for plural):
 
-    type Object
-        = Speaker Bool
-        | Hearer Bool
-        | Other Bool (Maybe Sex) (Maybe String)
-    
-    type Sex
-        = Male
-        | Female
+```elm
+type Object
+    = Speaker Bool
+    | Hearer Bool
+    | Other Bool (Maybe Sex) (Maybe String)
 
-The `Speaker` and `Hearer` objects are encoded in the pronouns `"I"`, `"we"`, and `"you"`. (`"You"` is ambiguous between the singular and the plural, though the singular and plural `Hearer` objects do distinguish themselves in other contexts, when they show up as `"yourself"` and `"yourselves"` respectively.) By default, the `Other` object is encoded in the pronouns `"it"`, `"he"`, `"she"`, and `"they"` (I trust the influence of the optional `Sex` argument here is self-explanatory). In the case of `Other` objects only, English has room for an optional string argument. This argument is intended to house a proper name (`"Victor"`, `"Grannie"`, `"France"`, etc.), which overwrites the default pronoun. There is no restriction in the English code on what can count as a proper name; the only rule is that it should begin with a capital letter.
+type Sex
+    = Male
+    | Female
+```
 
-When referring to objects in what follows, I will adopt the following abbreviating conventions. Rather than write `Speaker False` and `Speaker True`, I will write `Speaker` and `Speakers` respectively; similarly for `Hearer(s)` and `Other(s)`. When the optional sex and string arguments are not present, I will simply omit them, instead of explicitly writing `Nothing`. And when they are present, I will simply write them on their own, as `Male` or `Female` instead of `Just Male` or `Just Female`. Finally, when the sex variable is present, I will not bother to write `Other` in front of it. For example:
+The `Speaker` and `Hearer` objects are encoded in the first and second person pronouns respectively. By default, the `Other` object is encoded in the third person pronouns (I trust the influence of the optional `Sex` argument here is self-explanatory). However, English also has room for an optional string argument in this case, a proper name that overwrites the default pronoun. There is no restriction in the English code on what can count as a proper name; the only rule is that it should begin with a capital letter.
+
+When referring to objects in what follows, I will adopt the following abbreviating conventions. Rather than write `Speaker False` and `Speaker True`, I will write `Speaker` and `Speakers` respectively; similarly for `Hearer(s)` and `Other(s)`. When the optional sex and string arguments are not present, meanwhile, I will omit them, instead of explicitly writing `Nothing`. And when they are present, I will write them on their own, as `Male` or `Female` instead of `Just Male` or `Just Female`. Finally, when the sex variable is present, I will not bother to write `Other` in front of it. For example:
 
 | Abbreviation       | Full Meaning                                 |
 | ------------------ | -------------------------------------------- |
@@ -151,35 +153,39 @@ I hope these conventions are all intuitive and easy to understand. The point of 
 
 English conditions, in my model, break down into a *pivot* and a (possibly empty) list of *balances*:
 
-    type alias Condition =
-        ( Pivot, List Balance )
+```elm
+type alias Condition =
+    ( Pivot, List Balance )
+```
 
-Very approximately, and just to set us off on the right foot, the pivot is what gets encoded in the verb at the start of the predicate, while the balances (if any) are what get encoded in the words following that verb. Balances typically are or include additional objects, which I will refer to as *balancing* objects (as opposed to the *main* object that resides next to the condition in the nucleus itself). Balancing objects are variables of exactly the same type as the main object, though in this position they fetch up in different forms of the corresponding pronoun: `"him"` instead of `"he"`, `"her"` instead of `"she"`, `"us"` instead of `"we"`, and so on.
+Very approximately, and just to set us off on the right foot, the pivot is what gets encoded in the verb at the start of the predicate, while the balances (if any) are what get encoded in the words following that verb. Balances typically are or include additional objects, which I will refer to as *balancing* objects (as opposed to the *main* object that resides next to the condition in the nucleus itself). Balancing objects are variables of exactly the same type as the main object.
 
 I will examine pivots more closely in the next section. For now, we can continue with the approximation that they are encoded in the verb at the start of the predicate, and I will restrict myself to examples for which this is true. Since objects are already familiar, it will perhaps be easier to unpack the notion of a balance first.
 
-A balance consists of either a *counter* or a *weight* (or both), where the counter is something encoded in a preposition, and a weight is either a repaet of the main object of the nucleus, or a distinct object:
+A balance consists of either a *counter* or a *weight* (or both), where the counter is something encoded in a preposition, and a weight is either a repeat of the main object, or a distinct object of its own:
 
-    type alias Balance =
-        ( Maybe Counter, Maybe Weight )
-    
-    type Counter
-        = About
-        | Above
-        | After
-        | Against
-        | At
-        | Before
-        | Behind
-        ...
-    
-    type Weight
-        = SameObject
-        | Different Object
+```elm
+type alias Balance =
+    ( Maybe Counter, Maybe Weight )
 
-There are currently 31 counters in my model, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but accounts for the most common prepositions. When the weight has the `SameObject` value, the result is a reflexive pronoun like `"myself"`, `"yourself"`, `"yourselves"`, with the pronoun in question being determined by the main object of the nucleus. (It is in this context, as noted above, that the distinction between singular and plural `Hearer` objects reveals itself.) When it has the `Different` value, the additional object argument determines the pronoun, which shows up in a form like `"me"`, `"him"`, `"her"`, etc.
+type Counter
+    = About
+    | Above
+    | After
+    | Against
+    | At
+    | Before
+    | Behind
+    ...
 
-When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a counter or a weight is absent, I will simply omit it, rather than explicitly writing `Nothing`; and when it is present, I will simply write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a counter or only a weight (i.e. not both), I will drop the brackets around it. For example:
+type Weight
+    = SameObject
+    | Different Object
+```
+
+There are currently 31 counters in my model, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but accounts for the most common prepositions. When the weight has the `SameObject` value, the result is third direct form of the pronoun (`"myself"`, `"yourself"`, `"yourselves"`, etc.), with the pronoun in question being determined by the main object of the nucleus. (It is in this context, as noted in section 3 above, that the distinction between singular and plural `Hearer` objects reveals itself.) When it has the `Different` value, the additional object argument determines the pronoun, which shows up in the second direct form (`"me"`, `"him"`, `"her"`, etc.).
+
+When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a counter or a weight is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a counter or only a weight (i.e. not both), I will drop the brackets around it. For example:
 
 | Abbreviation                  | Full Meaning                                                                   |
 | ----------------------------- | ------------------------------------------------------------------------------ |
@@ -191,123 +197,143 @@ When referring to balances from now on, I will adopt - in addition to the abbrev
 
 If it wasn't clear before, I trust this table illustrates the benefits of conventions like these. I adopt them not just to save space, but to make my examples easier to read and understand. Brackets and `Just`s and `False`s all over the place are necessary for compilers, but for human readers they very often serve to obscure more than to illuminate.
 
-And now for some examples themselves, making use of these abbreviating conventions, and with a view to solidifying the understanding of balances:
+And now for some examples themselves, making use of these abbreviating conventions, and with a view to solidifying the understanding of balances built up in this section:
 
-    ( Speaker, ( be, [ Male "Victor" ] ) )
-        -> "I am Victor."
-    
-    ( Male, ( be, [ Out ] ) )
-        -> "He is out."
-    
-    ( Male "Victor", ( love, [ Female "Grannie" ] ) )
-        -> "Victor loves Grannie."
-    
-    ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ) ] ) )
-        -> "Grannie lives at Cockroach Lane."
-    
-    ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ), ( With, Female "Susan" ) ] ) )
-        -> "Grannie lives at Cockroach Lane with Susan."
+```elm
+( Speaker, ( be, [ Male "Victor" ] ) )
+    -> "I am Victor."
+
+( Male, ( be, [ Out ] ) )
+    -> "He is out."
+
+( Male "Victor", ( love, [ Female "Grannie" ] ) )
+    -> "Victor loves Grannie."
+
+( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ) ] ) )
+    -> "Grannie lives at Cockroach Lane."
+
+( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ), ( With, Female "Susan" ) ] ) )
+    -> "Grannie lives at Cockroach Lane with Susan."
+```
 
 ### 4.3. Conditions, part 2/2: Pivots
 
 I divide pivots into three main kinds, as follows:
 
-    type Pivot
-        = Be Bool (Maybe Property)
-        | Seem (Maybe Sense) Bool (Maybe Property)
-        | Do Verbality Bool Bool
-    
-    type alias Property =
-        String
-    
-    type Sense
-        = Sight
-        | Smell
-        | Sound
-        | Taste
-        | Touch
-    
-    
-    type alias Verbality =
-        String
+```elm
+type Pivot
+    = Be Bool (Maybe Property)
+    | Seem (Maybe Sense) Bool (Maybe Property)
+    | Do Verbality Bool Bool
 
-The `Be` pivot, as you would expect, is encoded in the verb `"be"`, and the boolean argument it takes marks whether the condition as a whole is *ongoing* or not; this is the difference between, for example, `"He is silly"` and `"He is being silly"`. The optional property argument is responsible for the output adjective (`"silly"` in the two examples just given). As you can see, the `Property` type at present is just an alias for a `String`, meaning that users are required to encode properties into their corresponding adjectives for themselves. I am not presently inclined to give my model a great dictionary of properties/adjectives.
+type alias Property =
+    String
 
-When a `Be` pivot has a property, typically no balances are required to make a complete condition. In some cases, however, with a suitable property and a suitable counter, a property can exist alongside a balancing object. For example, and adopting some abbreviating conventions along the same lines as those already laid out:
+type Sense
+    = Sight
+    | Smell
+    | Sound
+    | Taste
+    | Touch
 
-    ( Male "Robert", ( Be "hungry", [] ) )
-        -> "Robert is hungry."
-    
-    ( Hearer, ( Be, [ Male "Robert" ] ) )
-        -> "You are Robert."
-    
-    ( Hearer, ( Be, [ Like, Male "Robert" ] ) )
-        -> "You are like Robert."
-    
-    ( Speakers, ( Be "happy", [ For, Hearers ] ) )
-        -> "We are happy for you."
+type alias Verbality =
+    String
+```
 
-Some readers might be wondering why the property variable is attached to the pivot itself, instead of showing up in the list of balances. There are a few reasons for this. One is that the `Do` pivot - which I will come to shortly - can support balances but cannot support properties. The other is that balances, as I intend them, are predominantly meant for holding *objects*, and properties are fundamentally different kinds of things, belonging in a separate part of the code. The third reason depends on my theory of elaborations, and consequently I cannot explain it here; see section ?? below.
+The `Be` pivot, as you would expect, is encoded in the verb `"be"`, and the boolean argument it takes marks whether the condition as a whole is *ongoing* or not; this is the difference between, for example, `"He is silly"` and `"He is being silly"`. The optional *property* argument is responsible for the output adjective `"silly"` in the two examples just given. As you can see, the property type at present is just an alias for a string, meaning that users are required to encode properties into their corresponding adjectives for themselves. I am not presently inclined to give my model a great dictionary of properties/adjectives.
+
+When a `Be` pivot has a property, typically no balances are required to make a complete condition. In some cases, however, with a suitable property and a suitable counter, a balancing object can also be included. For example, and adopting some abbreviating conventions along the same lines as those already laid out (I trust by now I needn't spell out these conventions explicitly):
+
+```elm
+( Male "Robert", ( Be "hungry", [] ) )
+    -> "Robert is hungry."
+
+( Hearer, ( Be, [ Male "Robert" ] ) )
+    -> "You are Robert."
+
+( Hearer, ( Be, [ Like, Male "Robert" ] ) )
+    -> "You are like Robert."
+
+( Speakers, ( Be "happy", [ For, Hearers ] ) )
+    -> "We are happy for you."
+```
+
+Some readers might be wondering why the property variable is attached to the pivot itself, instead of showing up in the list of balances. There are a few reasons for this. One is that the `Do` pivot - which I will come to shortly - can support balances but cannot support properties. The other is that balances, as I intend them, are predominantly meant for holding *objects*, and properties are fundamentally different kinds of things, belonging in a separate part of the code. The third reason depends on my theory of elaborations, and consequently I cannot explain it here; see section 5.3 below.
 
 The `Seem` pivot operates exactly like the `Be` pivot, taking a boolean argument specifying whether or not the condition is ongoing, and an optional property argument. It is for messages to the effect that things *seem* as the corresponding `Be` message says they *are*. The optional `Sense` argument specifies the sense to which these appearances present themselves. For example:
 
-    ( Female "Grannie", ( Seem "angry", [] ) )
-        -> "Grannie seems angry."
-    
-    ( Female "Grannie", ( Seem Sight "angry", [] ) )
-        -> "Grannie looks angry."
-    
-    ( Female "Grannie", ( Seem Sound "angry", [] ) )
-        -> "Grannie sounds angry."
+```elm
+( Female "Grannie", ( Seem "angry", [] ) )
+    -> "Grannie seems angry."
 
-Finally, the `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language (of which there are probably tens of thousands). The `Verbality` variable is intended to capture the idea that gets encoded in the verb, but for now it is just an alias for a string, meaning that (as with the `Property` variable) users are obliged to encode these for themselves. My system should generate the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). Following the `Verbality`, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the other pivots; this underlies the difference between, for example, `"She lives"` and `"She is living"`.
+( Female "Grannie", ( Seem Sound "angry", [] ) )
+    -> "Grannie sounds angry."
 
-Despite the enormous variety of `Do` pivots, they all have two things in common, and which distinguish them from `Be` and `Seem` pivots. The first is that they cannot include a `Property`; one can *be* angry, *seem* angry, or *look* angry, but one cannot *jump* angry, or *smile* angry. The second is that, in addition to being ongoing or not, they can also be *passive* or not, and this is the point of the second boolean argument. This underlies the different between, for example, `"Grannie is eating"` and `"Grannie is being eaten"`.
+( Female "Grannie", ( Seem Sight "angry", [] ) )
+    -> "Grannie looks angry."
+
+( Female "Grannie", ( Seem Sight, [ ( Like, Hearer ) ] ) )
+    -> "Grannie looks like you."
+```
+
+Finally, the `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language (of which there are probably tens of thousands). The *verbality* variable is intended to capture the idea that gets encoded in the verb, but for now it is just an alias for a string, meaning that (as with the property variable for the other pivots) users are obliged to encode these for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). Following the verbality, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the other pivots; this underlies the difference between, for example, `"She lives"` and `"She is living"`.
+
+Despite the enormous variety of `Do` pivots, they all have two things in common, and which distinguish them from `Be` and `Seem` pivots. The first is that they cannot support a property; one can *be* angry, *seem* angry, or *look* angry, but one cannot *jump* angry, or *smile* angry. The second is that, in addition to being ongoing or not, they can also be *passive* or not, and this is the point of the second boolean argument these pivots take. This underlies the different between, for example, `"Grannie is eating"` and `"Grannie is being eaten"`.
 
 ### 4.4. Limitations
 
 It should go without saying that my theory is incomplete, a work in progress that stands in need of significant expansion and refinement. My theory of plain messages in particular - more specifically my theory of English *conditions* - is the most strikingly incomplete aspect of the whole. My aim in this section is to get out in front of any criticisms on this score, by acknowledging the most egregious of these inadequacies, and explaining why I am in no great hurry to address them. The main point, by way of headline, is that I am more interested in the theory of elaborations, and I expect that any philosophers who are likely to take an interest in my work will share this bias. My theory of plain messages is not intended to make any very great headway into that field, then, but rather to provide just enough to serve as the basis for my main project, the theory of elaborations.
 
-The relatively untroubling inadequacy in my theory of plain messages is that it doesn't predict enough of the data. In other words, there are plain messages that my model can neither represent nor encode into their corresponding sentences. This is relatively untroubling because it doesn't indicate that I am on the wrong track; it merely reminds us that - of course - I have yet to reach the end of it. Here is a very simple example of a sentence I am unable to account for:
+The first most obvious inadequacy in my theory of plain messages is that it doesn't predict all of the data. In other words, there are plain messages that my model can neither represent nor encode into their corresponding sentences. This is relatively untroubling. It doesn't indicate that I am on the wrong track; it merely reminds us that - of course - I have yet to reach the end of that track. Here is a very simple example of a sentence I am unable to account for:
 
-    "I am here."
+```elm
+"I am here."
+```
 
-For what it is worth, my current thinking is that this sentence should be accounted for by expanding the type definition for a `Weight`, to include options for *places* as well as objects. These options would include, at least, *here*, *there*, *home*, *abroad*, and *away*. By itself, this addition is not difficult to implement, although it would have implications in the implementation of my theory of elaborations that I am not yet sure how to handle. And in any case, quite simply, one has to stop somewhere. (`"Somewhere"`, incidentally, would be the result of elaborating a message with a place variable like *here* or *there* in its underlying condition; my model doesn't predict the uses of this word yet either.)
+For what it's worth, my current thinking is that this sentence should be accounted for by expanding the type definition for a weight, to include options for *places* as well as objects. These options would include, at least, *here*, *there*, *home*, *abroad*, and *away*. By itself, this addition is not difficult to implement, although it would have implications in the implementation of my theory of elaborations that I am not yet sure how to handle. And in any case, there will always be more to do, and one has to stop somewhere. (`"Somewhere"`, incidentally, would be the result of elaborating a message with a place variable like *here* or *there* in its underlying condition; my model doesn't predict the uses of this word yet either.)
 
 More worryingly, I am unable to generate compound prepositional phrases like `"in front of"` or `"over and above"`. And while I can generate `"up to"`, I need two balances to do it; for example:
 
-    ( Male, ( Do "look", [ Up, ( To, Female ) ] ) )
-        -> "He looks up to her."
+```elm
+( Male, ( Do "look", [ Up, ( To, Female ) ] ) )
+    -> "He looks up to her."
+```
 
 This just doesn't seem like the right structural diagnosis. Overall, it looks as though my treatment of counters is not only incomplete but also inaccurate. It is an approximation at best.
 
-More worrying still is that there are ambiguities I am unable to account for. This is particularly regrettable, because the ability to account for ambiguities is precisely the main selling point of my approach as a whole. In my defence, I can account for several ambiguities with my theory of elaborations, and that, as I advertised above, is where my main interests lie. There are some ambiguities, however, that need to be accounted for by the theory of plain messages, and my model is not yet able to do this. The ambiguities in question concern how balances fit into the overall condition, informational differences that are not captured when we represent balances simply as a list. For example:
+More worrying still is that there are ambiguities I am unable to account for. This is particularly regrettable, because the ability to account for ambiguities is precisely the main selling point of my approach as a whole. In my defence, I can account for several ambiguities with my theory of elaborations, and that, as I advertised above, is where my main interests lie. There are some ambiguities, however, that need to be accounted for by the theory of plain messages, and my model is not yet able to do this. The ambiguities in question concern how balances fit into the overall condition, informational differences that are not captured when we represent balances simply in a list. For example:
 
-    "He is looking at Grannie with Victor."
+```elm
+"He is looking at Grannie with Victor."
+```
 
 This sentence is ambiguous: is he with Victor, looking at Grannie, or is Grannie with Victor, both being looked at by him? There must be two distinct conditions here, and consequently two distinct messages, both of which fetch up in the same English sentence. But I have no way of representing the difference. On my model as it stands, I have room only for one message to correspond to this sentence:
 
-    ( Male, ( Do "look" Ongoing, [ ( At, Female "Grannie" ), ( With, Male "Victor" ) ] ) )
+```elm
+( Male, ( Do "look" Ongoing, [ ( At, Female "Grannie" ), ( With, Male "Victor" ) ] ) )
+```
 
-Evidently, then, there is more to a condition than just a pivot and a bare *list* of balances. To understand a condition fully, one must appreciate how each individual balance relates to the pivot, and that information is not always signalled in the output string. But this is a problem for another day.
+Evidently, then, there is more to a condition than just a pivot and a bare *list* of balances. To understand a condition fully, one also must appreciate how each individual balance relates to the pivot, and that information is not always signalled in the output string. But this is a problem for another day.
 
 Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any counter with any (or no) object; while in constructing the condition itself, they may append any balance to any pivot. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
 
-    ( Male "Victor", ( love, [ At, ( Behind, Female "Grannie" ), For ] ) )
-        -> "Victor loves at behind Grannie for."
-    
-    ( Female "Grannie", ( live, [ Speaker, Hearer, ( Over, SameObject ) ] ) )
-        -> "Grannie lives me you over herself."
-    
-    ( Female "Grannie", ( Be "red", [ Speakers ] ) )
-        -> "Grannie is red us."
-    
-    ( Others, ( Seem Taste "heavy", [ Hearer, ( With, Other ) ] ) )
-        -> "They taste heavy you with it."
+```elm
+( Male "Victor", ( love, [ At, ( Behind, Female "Grannie" ), For ] ) )
+    -> "Victor loves at behind Grannie for."
+
+( Female "Grannie", ( live, [ Speaker, Hearer, ( Over, SameObject ) ] ) )
+    -> "Grannie lives me you over herself."
+
+( Female "Grannie", ( Be "red", [ Speakers ] ) )
+    -> "Grannie is red us."
+
+( Others, ( Seem Taste "heavy", [ Hearer, ( With, Other ) ] ) )
+    -> "They taste heavy you with it."
+```
 
 Obviously this is a very serious inadequacy, and I make no attempt to shy away from this fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition. This is for two reasons. First, the task is quite simply an enormous one, requiring the collation of literally tens of thousands of pivots, noting - just for starters - how many balances each of these can support, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this crude theory of plain messages predominantly just so that I have a basis on which to build this latter theory. And I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to my rough and ready model of conditions.
 
-## 4. The Theory, part 2/2: The Elaborations
+## 5. The Theory, part 2/2: The Elaborations
 
 The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the "nucleus"/"elaboration" terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. And this, in turn, is because my approach is so different. Always my aim is to *explain the sentences* that English speakers produce, rather than to capture the logical entailments of English messages in any formal system.
 
@@ -315,106 +341,126 @@ Since elaborations are so central to my theory, I adopt the convention of writin
 
 Though it will not make much sense up front, here is the full type definition for messages (details of the individual elaborations to follow):
 
-    type Message
-        = Plain Nucleus
-        | NEGATIVE Message
-        | PAST Message
-        | PRIOR Message
-        | DISPLACED Displacer Message
-        | REGULAR (Maybe Displacer) (Maybe Frequency) Message
-        | PREORDAINED (Maybe Displacer) (Maybe Time) Message
-        | EXTENDED Duration Message
-        | SCATTERED Tally Message
-        | INDIRECT Target Pointer Bool Haystack Message
-        | ENUMERATED Target Quantifier Bool Haystack Message
-        | AMASSED Target (Maybe Quantifier) Bool Haystack Message
+```elm
+type Message
+    = Plain Nucleus
+    | NEGATIVE Message
+    | PAST Message
+    | PRIOR Message
+    | DISPLACED Displacer Message
+    | REGULAR (Maybe Displacer) (Maybe Frequency) Message
+    | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+    | EXTENDED Duration Message
+    | SCATTERED Tally Message
+    | INDIRECT Target Pointer Bool Haystack Message
+    | ENUMERATED Target Quantifier Bool Haystack Message
+    | AMASSED Target (Maybe Quantifier) Bool Haystack Message
+```
 
 The definition is of course recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself (see the `Messages` module). The function returns an error in cases of such invalid input.
 
 *[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, but in the meantime they are incomplete.]*
 
-### 4.1. NEGATIVE Messages
+### 5.1. NEGATIVE Messages
 
 The chief puzzle facing any theory of negation in English is posed by the related ambiguities discovered, for example, in the following two sentences:
 
-    "Claire doesn't drink."
-    
-    "I was not busy all day."
+```elm
+"Claire doesn't drink."
+
+"I was not busy all day."
+```
 
 In the first case, the speaker might be maintaining that Claire is tee-totalled, or might instead be denying that she is an alcoholic. The latter reading is consistent with Claire enjoying a drink now and then, while the former is not. In the second case, the speaker might be affirming that she was free all day yesterday, or might rather be rejecting the claim that she was occupied all day. The latter interpretation is consistent with her having been busy at some point in the day, while the former is not. In sum, the first interpretation of each sentence is a positive message about something internally negative, whereas the second is a negative message about something internally positive. (The possibility of these two kinds of negation is also why double negation isn't always vacuous: `"Claire doesn't not drink"`, for example, can be used perfectly intelligibly to deny that she is tee-totalled.)
 
-My model posits a NEGATIVE elaboration, which has the effect of converting any affirmative message into its corresponding denial. The difference between the pairs of messages just noted is accounted for by the *order* in which this elaboration is applied, relative to other elaborations in the message. In the second of each pair, the NEGATIVE elaboration is the outermost one, whereas in the first of each pair it is closer to the nucleus, with a further elaboration applied on top of it. For my account of these other elaborations, and hence my complete solution to this puzzle, see sections 4.4 and 4.5 below.
+My model posits a `NEGATIVE` elaboration, which has the effect of converting any affirmative message into its corresponding denial. The difference between the pairs of messages just noted is accounted for by the *order* in which this elaboration is applied, relative to other elaborations in the message. In the second of each pair, the `NEGATIVE` elaboration is the outermost one, whereas in the first of each pair it is closer to the nucleus, with a further elaboration applied on top of it. For my account of these other elaborations, and hence my complete solution to this puzzle, see sections 5.4 and 5.5 below.
 
-The NEGATIVE elaboration is the most semantically versatile of those posited by my model. While its effect, as I have said, is always to turn an affirmative message into its corresponding denial, there are different components of messages that can be the focus of a denial. What exactly is being denied in a NEGATIVE message depends on the elaboration to which the negation itself is applied, and hence discussion of the other elaborations below will include details on what happens when you negate them.
+The `NEGATIVE` elaboration is the most semantically versatile of those posited by my model. While its effect, as I have said, is always to turn an affirmative message into its corresponding denial, there are different components of messages that can be the focus of a denial. What exactly is being denied in a `NEGATIVE` message depends on the elaboration to which the negation itself is applied, and hence discussion of the other elaborations below will include details on what happens when you negate them.
 
-### 4.2. PAST and PRIOR Messages
+To start with, let me be clear on what happens when you negate a plain message. A plain message, recall, affirms the present satisfaction of the condition by the object. A `NEGATIVE` plain message, therefore, *denies* the present satisfaction of the condition by the object; or equivalently, affirms the present *non*-satisfaction of the condition by the object. Effectively, then, the `NEGATIVE` elaboration negates the underlying condition, turning it into its complement.
 
-*[...]*
-
-### 4.3. DISPLACED Messages
+### 5.2. PAST and PRIOR Messages
 
 *[...]*
 
-### 4.4. REGULAR and PREORDAINED Messages
+### 5.3. DISPLACED Messages
 
 *[...]*
 
-### 4.5. EXTENDED and SCATTERED Messages
+### 5.4. REGULAR and PREORDAINED Messages
 
-The elaborations examined in this section share the interesting property of being *invisible*, in the sense that they have, in and of themselves, no effect on the output sentence. They each take an additional argument alongside their input message, and this argument does have a visible effect. Even with this extra argument, however, these elaborations are the source of some striking English ambiguities when they interact with other elaborations, notably negation.
+*[...]*
 
-The EXTENDED elaboration, first, has the semantic effect of creating a message that entails the satisfaction of its input condition over an extended period of time, taking an additional argument specifying the *duration* of this period:
+### 5.5. EXTENDED and SCATTERED Messages
 
-    type Message
-        = ...
-        | EXTENDED Duration Message
-    
-    type alias Duration =
-        String
+The elaborations examined in this section share the interesting property of being *invisible*, in the sense that they have, in and of themselves, no effect on the output sentence. They each take an additional argument alongside their input message, and this argument does have a visible effect. Even with this extra argument, however, these invisible elaborations are the source of some striking English ambiguities when they interact with other elaborations, notably negation.
 
-The elaboration itself, as I have said, has no effect on the sentence. The duration argument, meanwhile, results in an adverbial string appended to the end of the predicate. My model is presently unable to encode durations into adverbial string; users must encode these for themselves. Thus here, as in several other places, the type is just an alias for a string. For example:
+The `EXTENDED` elaboration, first, has the semantic effect of creating a message that entails the satisfaction of its input condition *over an extended period of time*, taking an additional argument specifying the *duration* of this period:
 
-    PAST (EXTENDED "for a year" ( Female "Susan", ( Do "study", [ ( In, Other "France" ) ] )))
-        -> "Susan studied in France for a year."
-    
-    PAST (EXTENDED "all day" ( Female "Grannie", ( Do "berate", [ Male "Victor" ] )))
-        -> "Grannie berated Victor all day."
+```elm
+type Message
+    = ...
+    | EXTENDED Duration Message
 
-The SCATTERED elaboration, second, has the semantic effect of producing a message that entails the satisfaction of its input condition on multiple separate occasions, and its grammatical effect is likewise the appending of an adverbial string, which in this case encodes the *tally* of individual satisfactions:
+type alias Duration =
+    String
+```
 
-    type Message
-        = ...
-        | SCATTERED Tally Message
-    
-    type alias Tally =
-        String
+The elaboration itself, as I have said, has no effect on the sentence. The duration argument, meanwhile, results in an adverbial string appended to the end of the predicate. My model is presently unable to encode durations into adverbial strings; users must encode this argument for themselves. Thus here, as in several other places, the type is just an alias for a string. For example:
+
+```elm
+PAST (EXTENDED "for a year" ( Female "Susan", ( Do "study", [ ( In, Other "France" ) ] )))
+    -> "Susan studied in France for a year."
+
+PAST (EXTENDED "all day" ( Female "Grannie", ( Do "berate", [ Male "Victor" ] )))
+    -> "Grannie berated Victor all day."
+```
+
+The `SCATTERED` elaboration, second, has the semantic effect of producing a message that entails the satisfaction of its input condition *on multiple separate occasions*, and its grammatical effect is likewise the appending of an adverbial string, which in this case encodes the *tally* of individual satisfactions:
+
+```elm
+type Message
+    = ...
+    | SCATTERED Tally Message
+
+type alias Tally =
+    String
+```
 
 As with the duration argument, my model is not currently able to encode tallies. Some examples:
 
-    PAST (SCATTERED "twice" ( Female "Susan", ( Do "go", [ ( To, Other "France" ) ] ) ))
-        -> "Susan went to France twice."
-    
-    PAST (SCATTERED "fifteen times" ( Female "Grannie", ( Do "fall", [ Down ] ) ))
-        -> "Grannie fell down fifteen times."
+```elm
+PAST (SCATTERED "twice" ( Female "Susan", ( Do "go", [ ( To, Other "France" ) ] ) ))
+    -> "Susan went to France twice."
 
-EXTENDED and SCATTERED messages are not discovered in the wild except when they have been further modified with a PAST elaboration (as in the examples above), or some other elaboration that prevents them from amounting to an affirmation concerning the present. This is for the obvious reason that the present is an instant, and EXTENDED and SCATTERED conditions necessarily require a *region* of time in which to be satisfied.
+PAST (SCATTERED "fifteen times" ( Female "Grannie", ( Do "fall", [ Down ] ) ))
+    -> "Grannie fell down fifteen times."
+```
 
-When negating an EXTENDED or a SCATTERED message, the result is a negation of the duration or tally, not of the underlying condition itself. In order to negate the underlying condition, the NEGATIVE elaboration must be applied *before* the EXTENDED or SCATTERED elaboration. With this point in mind, I can now be clearer about my solution to the puzzle I posed about negation in section 4.1. Recall the ambiguous sentence:
+`EXTENDED` and `SCATTERED` messages are not discovered in the wild except when they have been further modified with a `PAST` elaboration (as in the examples above), or some other elaboration that prevents them from amounting to an affirmation concerning the present. This is for the obvious reason that the present is an instant, and `EXTENDED` and `SCATTERED` conditions necessarily require a *region* of time in which to be satisfied.
 
-    "I was not busy all day."
+When negating an `EXTENDED` or a `SCATTERED` message, the result is a negation of the duration or tally, not of the underlying condition itself. In order to negate the underlying condition, the `NEGATIVE` elaboration must be applied *before* the `EXTENDED` or `SCATTERED` elaboration. With this point in mind, I can now be clearer about my solution to the puzzle I posed about negation in section 4.1. Recall the ambiguous sentence:
 
-I diagnose the first reading, in which the speaker is affirming that she was free all day, as a PAST EXTENDED NEGATIVE message, where the idea of being busy is first negated, then extended to the whole day, and then that resulting message consigned to the past:
+```elm
+"I was not busy all day."
+```
 
-    PAST (EXTENDED "all day" (NEGATIVE ( Speaker, ( Be "busy" ) )))
+I diagnose the first reading, in which the speaker is affirming that she was free all day, as a `PAST EXTENDED NEGATIVE` message, where the idea of being busy is first negated, then extended to the whole day, and then that resulting message consigned to the past:
 
-The second reading, in which the speaker is denying that she was occupied all day, is instead a PAST NEGATIVE EXTENDED message:
+```elm
+PAST (EXTENDED "all day" (NEGATIVE ( Speaker, ( Be "busy" ) )))
+```
 
-    PAST (NEGATIVE (EXTENDED "all day" ( Speaker, ( Be "busy" ) )))
+The second reading, in which the speaker is denying that she was occupied all day, is instead a `PAST NEGATIVE EXTENDED` message:
 
-Needless to say, the order in which the NEGATIVE and EXTENDED elaborations is applied has a notable semantic effect. But it has no grammatical effect: the output sentence is the same either way.
+```elm
+PAST (NEGATIVE (EXTENDED "all day" ( Speaker, ( Be "busy" ) )))
+```
 
-The very same ambiguity arises through the interaction of the NEGATIVE elaboration with the SCATTERED elaboration, though typically the NEGATIVE SCATTERED interpretation will seem more natural than the SCATTERED NEGATIVE, because it may often be hard to make sense of an occasion on which something *didn't* happen. English speakers will likely read `"Grannie didn't fall down fifteen times"` as a precusor to saying, for example, that she took only *fourteen* tumbles that day. Suppose, however, that she went for a walk last Thursday, faltering fifteen times but always remaining on her feet. Then one would have a natural use for the PAST SCATTERED NEGATIVE as well as the more common PAST NEGATIVE SCATTERED.
+Needless to say, the order in which the `NEGATIVE` and `EXTENDED` elaborations is applied has a notable semantic effect. But it has no grammatical effect: the output sentence is the same either way.
 
-### 4.6. INDIRECT, ENUMERATED, and AMASSED Messages
+The very same ambiguity arises through the interaction of the `NEGATIVE` elaboration with the `SCATTERED` elaboration, though typically the `NEGATIVE SCATTERED` interpretation will seem more natural than the `SCATTERED NEGATIVE`, because it may often be hard to make sense of an occasion on which something *didn't* happen. English speakers will likely read `"Grannie didn't fall down fifteen times"` as a precusor to saying, for example, that she took only *fourteen* tumbles that day. Suppose, however, that she went for a walk last Thursday, faltering fifteen times but always remaining on her feet. Then one would have a natural use for the `PAST SCATTERED NEGATIVE` as well as the more common `PAST NEGATIVE SCATTERED`.
+
+### 5.6. INDIRECT, ENUMERATED, and AMASSED Messages
 
 *[...]*
