@@ -409,10 +409,10 @@ type alias Duration =
 The elaboration itself, as I have said, has no effect on the sentence. The duration argument, meanwhile, results in an adverbial string appended to the end of the predicate. My model is presently unable to encode durations into adverbial strings; users must encode this argument for themselves. Thus here, as in several other places, the type is just an alias for a string. For example:
 
 ```elm
-PAST (EXTENDED "for a year" ( Female "Susan", ( Do "study", [ ( In, Other "France" ) ] )))
+PAST (EXTENDED "for a year" ( Female "Susan", ( Do "study", [ ( In, Other "France" ) ] ) ))
     -> "Susan studied in France for a year."
 
-PAST (EXTENDED "all day" ( Female "Grannie", ( Do "berate", [ Male "Victor" ] )))
+PAST (EXTENDED "all day" ( Female "Grannie", ( Do "berate", [ Male "Victor" ] ) ))
     -> "Grannie berated Victor all day."
 ```
 
@@ -427,7 +427,7 @@ type alias Tally =
     String
 ```
 
-As with the duration argument, my model is not currently able to encode tallies. Some examples:
+As with the duration argument, my model is not currently able to encode tallies. The type is consequently just an alias for a string. Some examples:
 
 ```elm
 PAST (SCATTERED "twice" ( Female "Susan", ( Do "go", [ ( To, Other "France" ) ] ) ))
@@ -459,7 +459,7 @@ PAST (NEGATIVE (EXTENDED "all day" ( Speaker, ( Be "busy" ) )))
 
 Needless to say, the order in which the `NEGATIVE` and `EXTENDED` elaborations is applied has a notable semantic effect. But it has no grammatical effect: the output sentence is the same either way.
 
-The very same ambiguity arises through the interaction of the `NEGATIVE` elaboration with the `SCATTERED` elaboration, though typically the `NEGATIVE SCATTERED` interpretation will seem more natural than the `SCATTERED NEGATIVE`, because it may often be hard to make sense of an occasion on which something *didn't* happen. English speakers will likely read `"Grannie didn't fall down fifteen times"` as a precusor to saying, for example, that she took only *fourteen* tumbles that day. Suppose, however, that she went for a walk last Thursday, faltering fifteen times but always remaining on her feet. Then one would have a natural use for the `PAST SCATTERED NEGATIVE` as well as the more common `PAST NEGATIVE SCATTERED`.
+The very same ambiguity arises through the interaction of the `NEGATIVE` elaboration with the `SCATTERED` elaboration, though typically the `NEGATIVE SCATTERED` interpretation will seem more natural than the `SCATTERED NEGATIVE`, because it may often be hard to make sense of an occasion on which something *didn't* happen. English speakers will likely read `"Grannie didn't fall down fifteen times"` as a precusor to saying, for example, that she took only *fourteen* tumbles. Suppose, however, that she went for a walk last Thursday, faltering fifteen times but always remaining on her feet. Then one would have a natural use for the `PAST SCATTERED NEGATIVE` as well as the more common `PAST NEGATIVE SCATTERED`.
 
 ### 5.6. INDIRECT, ENUMERATED, and AMASSED Messages
 
