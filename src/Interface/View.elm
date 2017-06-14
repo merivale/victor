@@ -137,7 +137,8 @@ nucleusBody model =
     Html.div
         [ Attr.class "body" ]
         ([ Nucleus.object model.object, Nucleus.pivot model.pivot ]
-            ++ (List.indexedMap Nucleus.balance model.balances))
+            ++ (List.indexedMap Nucleus.balance model.balances)
+        )
 
 
 elaborationInput : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal

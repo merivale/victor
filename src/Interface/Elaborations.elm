@@ -13,7 +13,6 @@ module Interface.Elaborations
         , haystack
         )
 
-
 {-| Module for generating HTML for user input for the elaborations applied to a
 message.
 -}
@@ -130,7 +129,7 @@ tally index elaboration =
 
 target : Int -> Int -> Elaboration -> Html.Html Signal
 target balanceCount index elaboration =
-    Html.div 
+    Html.div
         [ Attr.class "factor" ]
         [ Input.label "Target"
         , targetSelect balanceCount index elaboration.target

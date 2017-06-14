@@ -79,9 +79,10 @@ plain ( object, ( pivot, balances ) ) =
         , modality = Nothing
         , longPivot = newLongPivot pivot
         , longPivots = []
-        , balances = List.map
-            (\x -> RealBalance x)
-            (List.filter (nonEmptyBalance) balances)
+        , balances =
+            List.map
+                (\x -> RealBalance x)
+                (List.filter (nonEmptyBalance) balances)
         , post = []
         }
 
@@ -106,56 +107,46 @@ sentence.
 negative : Vars -> Result String Vars
 negative vars =
     if vars.negateObject then
-        negateObject vars
+        case vars.objectOverride of
+            Nothing ->
+                Err "direct objects cannot be negated"
+
+            Just (PointerObject pointer other haystack) ->
+                Err "indirect objects cannot be negated"
+
+            Just (QuantifierObject negated quantifier other haystack) ->
+                if negated then
+                    Err "quantified objects cannot be negated twice"
+                else
+                    Ok
+                        { vars
+                            | negateObject = False
+                            , objectOverride = Just (QuantifierObject True quantifier other haystack)
+                        }
     else
-        negatePivot vars
+        case vars.modality of
+            Nothing ->
+                Ok { vars | longPivot = addToPre "not" vars.longPivot }
 
+            Just modality ->
+                case modality of
+                    SoftYes ->
+                        Err "the SOFT YES modality (WILL) cannot be negated"
 
-negateObject : Vars -> Result String Vars
-negateObject vars =
-    case vars.objectOverride of
-        Nothing ->
-            Err "direct objects cannot be negated"
+                    SoftMaybe ->
+                        Err "the SOFT MAYBE modality (MAY) cannot be negated"
 
-        Just (PointerObject pointer other haystack) ->
-            Err "indirect objects cannot be negated"
+                    SoftYesIsh ->
+                        Err "the SOFT YES-ISH modality (SHOULD) cannot be negated"
 
-        Just (QuantifierObject negated quantifier other haystack) ->
-            if negated then
-                Err "quantified objects cannot be negated twice"
-            else
-                Ok
-                    { vars
-                        | negateObject = False
-                        , objectOverride = Just (QuantifierObject True quantifier other haystack)
-                    }
+                    HardYesIsh ->
+                        Err "the HARD YES-ISH modality (OUGHT) cannot be negated"
 
+                    Command ->
+                        Err "the COMMAND modality (SHALL) cannot be negated"
 
-negatePivot : Vars -> Result String Vars
-negatePivot vars =
-    case vars.modality of
-        Nothing ->
-            Ok { vars | longPivot = addToPre "not" vars.longPivot }
-
-        Just modality ->
-            case modality of
-                SoftYes ->
-                    Err "the SOFT YES modality (WILL) cannot be negated"
-
-                SoftMaybe ->
-                    Err "the SOFT MAYBE modality (MAY) cannot be negated"
-
-                SoftYesIsh ->
-                    Err "the SOFT YES-ISH modality (SHOULD) cannot be negated"
-
-                HardYesIsh ->
-                    Err "the HARD YES-ISH modality (OUGHT) cannot be negated"
-
-                Command ->
-                    Err "the COMMAND modality (SHALL) cannot be negated"
-
-                _ ->
-                    Ok { vars | longPivot = addToPre "not" vars.longPivot }
+                    _ ->
+                        Ok { vars | longPivot = addToPre "not" vars.longPivot }
 
 
 {-| PAST messages.
@@ -182,10 +173,6 @@ prior : Vars -> Result String Vars
 prior vars =
     if vars.longPivot.prior then
         Err "prior messages cannot be made more prior"
-    --else if not (vars.modality == Nothing) && vars.projective && not vars.past then
-    --    Err "only past projective messages can be prior"
-    --else if not (vars.modality == Nothing) && not vars.projective then
-    --    Err "practical and evasive messages cannot be prior"
     else
         Ok { vars | longPivot = setPrior vars.longPivot }
 
@@ -201,24 +188,27 @@ displaced displacer vars =
     else
         case displacer of
             Primary pivot ->
-                Ok { vars
-                    | negateObject = False
-                    , longPivot = newLongPivot pivot
-                    , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
-                }
+                Ok
+                    { vars
+                        | negateObject = False
+                        , longPivot = newLongPivot pivot
+                        , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
+                    }
 
             Secondary modality ->
                 if modality == HardYesIsh then
-                    Ok { vars
-                        | negateObject = False
-                        , modality = Just modality
-                        , longPivot = (addToPre "to" vars.longPivot)
-                    }
+                    Ok
+                        { vars
+                            | negateObject = False
+                            , modality = Just modality
+                            , longPivot = (addToPre "to" vars.longPivot)
+                        }
                 else
-                    Ok { vars
-                        | negateObject = False
-                        , modality = Just modality
-                    }
+                    Ok
+                        { vars
+                            | negateObject = False
+                            , modality = Just modality
+                        }
 
 
 {-| REGULAR messages.
@@ -232,31 +222,35 @@ regular displacer frequency vars =
     else
         case displacer of
             Nothing ->
-                Ok { vars
-                    | negateObject = False
-                    , longPivot = maybeAddToPre frequency vars.longPivot
-                }
+                Ok
+                    { vars
+                        | negateObject = False
+                        , longPivot = maybeAddToPre frequency vars.longPivot
+                    }
 
             Just (Primary pivot) ->
-                Ok { vars
-                    | negateObject = False
-                    , longPivot = maybeAddToPre frequency (newLongPivot pivot)
-                    , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
-                }
+                Ok
+                    { vars
+                        | negateObject = False
+                        , longPivot = maybeAddToPre frequency (newLongPivot pivot)
+                        , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
+                    }
 
             Just (Secondary modality) ->
                 if modality == HardYesIsh then
-                    Ok { vars
-                        | negateObject = False
-                        , modality = Just modality
-                        , longPivot = addToPre "to" (maybeAddToPre frequency vars.longPivot)
-                    }
+                    Ok
+                        { vars
+                            | negateObject = False
+                            , modality = Just modality
+                            , longPivot = addToPre "to" (maybeAddToPre frequency vars.longPivot)
+                        }
                 else
-                    Ok { vars
-                        | negateObject = False
-                        , modality = Just modality
-                        , longPivot = maybeAddToPre frequency vars.longPivot
-                    }
+                    Ok
+                        { vars
+                            | negateObject = False
+                            , modality = Just modality
+                            , longPivot = maybeAddToPre frequency vars.longPivot
+                        }
 
 
 {-| PREORDAINED messages.
@@ -282,10 +276,11 @@ preordained displacer time vars =
                     Ok newVars
 
                 Just (Primary pivot) ->
-                    Ok { newVars
-                        | longPivot = newLongPivot pivot
-                        , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
-                    }
+                    Ok
+                        { newVars
+                            | longPivot = newLongPivot pivot
+                            , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
+                        }
 
                 Just (Secondary modality) ->
                     if modality == HardYesIsh then
@@ -329,10 +324,11 @@ indirect target pointer other haystack vars =
             if not (objectIsThirdPerson vars.object) then
                 Err "INDIRECT elaborations can only target third person (other) objects"
             else
-                Ok { vars
-                    | negateObject = False
-                    , objectOverride = Just (PointerObject pointer other haystack)
-                }
+                Ok
+                    { vars
+                        | negateObject = False
+                        , objectOverride = Just (PointerObject pointer other haystack)
+                    }
 
         BalancingObject balanceIndex ->
             case Array.get balanceIndex (Array.fromList vars.balances) of
@@ -340,10 +336,11 @@ indirect target pointer other haystack vars =
                     if not (objectIsThirdPerson object) then
                         Err "INDIRECT elaborations can only target third person (other) objects"
                     else
-                        Ok { vars
-                            | negateObject = False
-                            , balances = Array.toList (Array.set balanceIndex (PointerBalance counter object pointer other haystack) (Array.fromList vars.balances))
-                        }
+                        Ok
+                            { vars
+                                | negateObject = False
+                                , balances = Array.toList (Array.set balanceIndex (PointerBalance counter object pointer other haystack) (Array.fromList vars.balances))
+                            }
 
                 Just (PointerBalance counter object pointer bool haystack) ->
                     Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
@@ -352,95 +349,92 @@ indirect target pointer other haystack vars =
                     Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
 
                 _ ->
-                    Err ("balance " ++ (toString (balanceIndex + 1)) ++  " does not contain a target object")
+                    Err ("balance " ++ (toString (balanceIndex + 1)) ++ " does not contain a target object")
 
 
 {-| ENUMERATED messages.
 -}
 enumerated : Target -> Quantifier -> Bool -> Haystack -> Vars -> Result String Vars
 enumerated target quantifier other haystack vars =
-    Err "not yet implemented"
-    --let
-    --    enumerable =
-    --        List.member quantifier [ A, Several, Many, Each, Every, Both, Some, Any ]
+    case target of
+        MainObject ->
+            if not (objectIsThirdPerson vars.object) then
+                Err "ENUMERATED elaborations can only target third person (other) objects"
+            else
+                Ok
+                    { vars
+                        | negateObject = List.member quantifier [ Many, Every, Both, Some, Any ]
+                        , objectOverride = Just (QuantifierObject False (Just quantifier) other haystack)
+                    }
 
-    --    plural =
-    --        List.member quantifier [ Several, Many, Both ]
+        BalancingObject balanceIndex ->
+            case Array.get balanceIndex (Array.fromList vars.balances) of
+                Just (RealBalance ( counter, Just (Different object) )) ->
+                    if not (objectIsThirdPerson object) then
+                        Err "ENUMERATED elaborations can only target third person (other) objects"
+                    else if not (List.member quantifier [ A, Several, Many, Each, Every, Both, Some, Any ]) then
+                        Err "this quantifier cannot be used in ENUMERATED elaborations"
+                    else if List.member quantifier [ Several, Many, Both ] && not (objectIsPlural object) then
+                        Err "your ENUMERATED quantifier requires a plural target"
+                    else
+                        Ok
+                            { vars
+                                | negateObject = False
+                                , balances = Array.toList (Array.set balanceIndex (QuantifierBalance counter object False (Just quantifier) other haystack) (Array.fromList vars.balances))
+                            }
 
-    --    objectOverride =
-    --        QuantifierOverride False (Just quantifier) other haystack
+                Just (PointerBalance counter object pointer bool haystack) ->
+                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
 
-    --    negateObject =
-    --        List.member quantifier [ Many, Every, Both, Some, Any ]
-    --in
-    --    if not enumerable then
-    --        Err "this quantifier cannot be used in enumerated elaborations"
-    --    else if plural && not (targetIsPlural target vars) then
-    --        Err "this quantifier requires a plural object"
-    --    else if (not plural) && targetIsPlural target vars then
-    --        Err "this quantifier requires a singular object"
-    --    else
-    --        override vars target objectOverride negateObject
+                Just (QuantifierBalance counter object negated quantifier bool haystack) ->
+                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
+
+                _ ->
+                    Err ("balance " ++ (toString (balanceIndex + 1)) ++ " does not contain a target object")
 
 
 {-| AMASSED messages.
 -}
 amassed : Target -> Maybe Quantifier -> Bool -> Haystack -> Vars -> Result String Vars
 amassed target quantifier other haystack vars =
-    Err "not yet implemented"
-    --let
-    --    amassable =
-    --        List.member (Maybe.withDefault All quantifier) [ Some, Any, All, Much, Most, Enough ]
-
-    --    objectOverride =
-    --        QuantifierOverride False quantifier other haystack
-
-    --    negateObject =
-    --        List.member quantifier [ Just Some, Just Any, Just All, Just Much, Just Enough ]
-    --in
-    --    if not amassable then
-    --        Err "this quantifier cannot be used in amassed elaborations"
-    --    else if quantifier == Just Much && (targetIsPlural target vars) then
-    --        Err "the MUCH quantifier cannot be used with plural categories"
-    --    else
-    --        override vars target objectOverride negateObject
-
-
-{- Override function.
-override : Vars -> Target -> ObjectOverride -> Bool -> Result String Vars
-override vars target objectOverride negateObject =
     case target of
         MainObject ->
-            if vars.objectOverride /= Nothing then
-                Err "the main object cannot be overridden twice"
-            else if List.member vars.object [ Speaker, Hearer, Speakers, Hearers ] then
-                Err "only objects in the third person can be overriden"
+            if not (objectIsThirdPerson vars.object) then
+                Err "AMASSED elaborations can only target third person (other) objects"
             else
-                Ok { vars | negateObject = negateObject, objectOverride = Just objectOverride }
+                Ok
+                    { vars
+                        | negateObject = False
+                        , objectOverride = Just (QuantifierObject False quantifier other haystack)
+                    }
 
-        BalancingObject int ->
-            if vars.balanceOverride /= Nothing then
-                Err "the balancing object cannot be overridden twice"
-            else
-                case vars.balance of
-                    Nothing ->
-                        Err "there is no balancing object to override"
+        BalancingObject balanceIndex ->
+            case Array.get balanceIndex (Array.fromList vars.balances) of
+                Just (RealBalance ( counter, Just (Different object) )) ->
+                    if not (objectIsThirdPerson object) then
+                        Err "INDIRECT elaborations can only target third person (other) objects"
+                    else if not (List.member (Maybe.withDefault All quantifier) [ Some, Any, All, Much, Most, Enough ]) then
+                        Err "this quantifier cannot be used in AMASSED elaborations"
+                    else if quantifier == Just Much && (objectIsPlural object) then
+                        Err "the MUCH quantifier cannot be used with plural objects"
+                    else
+                        Ok
+                            { vars
+                                | negateObject = List.member quantifier [ Just Some, Just Any, Just All, Just Much, Just Enough ]
+                                , balances = Array.toList (Array.set balanceIndex (QuantifierBalance counter object False quantifier other haystack) (Array.fromList vars.balances))
+                            }
 
-                    Just SameObject ->
-                        Err "the reflexive balancing object cannot be overriden"
+                Just (PointerBalance counter object pointer bool haystack) ->
+                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
 
-                    Just (IndependentObject object) ->
-                        if List.member object [ Speaker, Hearer, Speakers, Hearers ] then
-                            Err "only objects in the third person can be overriden"
-                        else
-                            Ok { vars | negateObject = False, balanceOverride = Just objectOverride }
+                Just (QuantifierBalance counter object negated quantifier bool haystack) ->
+                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
 
-                    Just (CustomBalance string) ->
-                        Err "custom balances cannot be overriden"
--}
+                _ ->
+                    Err ("balance " ++ (toString (balanceIndex + 1)) ++ " does not contain a target object")
 
 
-{-| Bits and pieces.
+{-| USeful bits and pieces.
 -}
 newLongPivot : Pivot -> LongPivot
 newLongPivot pivot =

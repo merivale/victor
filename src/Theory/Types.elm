@@ -24,17 +24,17 @@ values.
 -}
 type Message
     = Plain Nucleus
-    | NEGATIVE Message  -- N
-    | PAST Message  -- P
-    | PRIOR Message  -- H
-    | DISPLACED Displacer Message  -- D
-    | REGULAR (Maybe Displacer) (Maybe Frequency) Message  -- R
-    | PREORDAINED (Maybe Displacer) (Maybe Time) Message  -- F
-    | EXTENDED Duration Message  -- X
-    | SCATTERED Tally Message  -- S
-    | INDIRECT Target Pointer Bool Haystack Message  -- T
-    | ENUMERATED Target Quantifier Bool Haystack Message  -- E
-    | AMASSED Target (Maybe Quantifier) Bool Haystack Message  -- A
+    | NEGATIVE Message
+    | PAST Message
+    | PRIOR Message
+    | DISPLACED Displacer Message
+    | REGULAR (Maybe Displacer) (Maybe Frequency) Message
+    | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+    | EXTENDED Duration Message
+    | SCATTERED Tally Message
+    | INDIRECT Target Pointer Bool Haystack Message
+    | ENUMERATED Target Quantifier Bool Haystack Message
+    | AMASSED Target (Maybe Quantifier) Bool Haystack Message
 
 
 {-| The nucleus of an English message consists of an object, a pivot, and a
@@ -66,8 +66,8 @@ type Sex
 balances fetching up in any subsequent words. Some pivots are encoded into more
 than one word, however, such as "be happy", "be being silly", or "be eaten".
 -}
-type alias Condition
-    = ( Pivot, List Balance )
+type alias Condition =
+    ( Pivot, List Balance )
 
 
 type Pivot
@@ -193,36 +193,36 @@ type alias Haystack =
 {-| Various types that (for now at least) are just aliases for strings; meaning
 that users must encode these for themselves.
 -}
-type alias Frequency
-    = String
+type alias Frequency =
+    String
 
 
-type alias Time
-    = String
+type alias Time =
+    String
 
 
-type alias Duration
-    = String
+type alias Duration =
+    String
 
 
-type alias Tally
-    = String
+type alias Tally =
+    String
 
 
-type alias Property
-    = String
+type alias Property =
+    String
 
 
-type alias Verbality
-    = String
+type alias Verbality =
+    String
 
 
-type alias Category
-    = String
+type alias Category =
+    String
 
 
-type alias Restriction
-    = String
+type alias Restriction =
+    String
 
 
 {-| To keep track of the effect the nucleus and any subsequent elaboration has

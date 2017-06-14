@@ -39,7 +39,7 @@ implode vars =
 {-| The subject of the sentence, which is a function either of the object, or -
 in the case of indirect, enumerated, or amassed messages - some object override.
 In the former case, it is generated very straightforwardly by the Words module.
-In the latter case (which gives rise to noun phrases like "the king", "all 
+In the latter case (which gives rise to noun phrases like "the king", "all
 people", "some cars") the process is more involved, calling on the nounPhrase
 function defined shortly.
 -}
@@ -62,16 +62,22 @@ middle : Object -> PseudoBalance -> String
 middle mainObject balance =
     case balance of
         RealBalance ( counter, weight ) ->
-            String.join " " ((counterToString counter)
-                ++ (weightToString mainObject weight))
+            String.join " "
+                ((counterToString counter)
+                    ++ (weightToString mainObject weight)
+                )
 
         PointerBalance counter object pointer other haystack ->
-            String.join " " ((counterToString counter)
-                ++ (articlePhrase (isPlural object) pointer other haystack))
+            String.join " "
+                ((counterToString counter)
+                    ++ (articlePhrase (isPlural object) pointer other haystack)
+                )
 
         QuantifierBalance counter object negated quantifier other haystack ->
-            String.join " " ((counterToString counter)
-                ++ (determinerPhrase (isPlural object) negated quantifier other haystack))
+            String.join " "
+                ((counterToString counter)
+                    ++ (determinerPhrase (isPlural object) negated quantifier other haystack)
+                )
 
 
 isPlural : Object -> Bool
@@ -131,7 +137,7 @@ articlePhrase plural pointer other haystack =
 {-| Determiner phrases would be similarly straightforward, except that things
 like "anybody", "everyone", "something" do not fit the general pattern.
 -}
-determinerPhrase : Bool -> Bool -> (Maybe Quantifier) -> Bool -> Haystack -> List String
+determinerPhrase : Bool -> Bool -> Maybe Quantifier -> Bool -> Haystack -> List String
 determinerPhrase plural negated quantifier other haystack =
     let
         ( category, description, restriction ) =
@@ -303,20 +309,18 @@ conjugate base past object =
                     "was"
                 else
                     "were"
-            else
-                if firstSingular then
-                    "am"
-                else if thirdSingular then
-                    "is"
-                else
-                    "are"
-        else
-            if past then
-                Words.finite2 base
+            else if firstSingular then
+                "am"
             else if thirdSingular then
-                Words.finite1 base
+                "is"
             else
-                base
+                "are"
+        else if past then
+            Words.finite2 base
+        else if thirdSingular then
+            Words.finite1 base
+        else
+            base
 
 
 verbBaseAndRest : Pivot -> Bool -> ( String, List String )
@@ -362,7 +366,7 @@ verbBaseAndRest pivot prior =
                     in
                         case ( property, ongoing ) of
                             ( Just str, True ) ->
-                                ( "be", [ Words.participle1 verbality, str] )
+                                ( "be", [ Words.participle1 verbality, str ] )
 
                             ( Just str, False ) ->
                                 ( verbality, [ str ] )
@@ -376,7 +380,7 @@ verbBaseAndRest pivot prior =
                 Do verbality ongoing passive ->
                     case ( ongoing, passive ) of
                         ( True, True ) ->
-                            ( "be" , [ "being", Words.participle2 verbality ] )
+                            ( "be", [ "being", Words.participle2 verbality ] )
 
                         ( True, False ) ->
                             ( "be", [ Words.participle1 verbality ] )

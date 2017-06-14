@@ -102,10 +102,10 @@ update signal model =
                 lastIndex =
                     (List.length model.balances) - 1
             in
-            { model
-                | balances = List.take lastIndex model.balances
-                , elaborations = List.filter (doesNotTarget lastIndex) model.elaborations
-            }
+                { model
+                    | balances = List.take lastIndex model.balances
+                    , elaborations = List.filter (doesNotTarget lastIndex) model.elaborations
+                }
 
         SetBalanceCounter index counter ->
             { model | balances = modifyItem index (setCounter counter) model.balances }
@@ -244,8 +244,11 @@ is deleted.
 -}
 doesNotTarget : Int -> Elaboration -> Bool
 doesNotTarget balanceIndex elaboration =
-    not (List.member elaboration.recipe [ MakeINDIRECT, MakeENUMERATED, MakeAMASSED ]
-        && elaboration.target == BalancingObject balanceIndex)
+    not
+        (List.member elaboration.recipe [ MakeINDIRECT, MakeENUMERATED, MakeAMASSED ]
+            && elaboration.target
+            == BalancingObject balanceIndex
+        )
 
 
 {-| Remove an element from a list at the given index. Used for deleting

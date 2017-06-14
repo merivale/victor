@@ -57,8 +57,8 @@ pivot pivot =
                 [ Input.label "Pivot"
                 , pivotSelect pivot
                 , pivotVerbality verbality
-                , pivotPassive passive
                 , pivotOngoing ongoing
+                , pivotPassive passive
                 ]
 
 

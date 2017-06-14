@@ -40,33 +40,29 @@ I refer to lexemes that have more than one form in **boldface**, using ordinary 
 
 Pronouns and their forms can be counted in various ways, no one way standing out as obviously correct. I count eight, and label them in the standard way: first, second, and third person, each either singular or plural (which makes six), and then an additional two in the third person singular, distinguishing male and female from neuter. Thus:
 
-| Number     | Person       | Pronoun      |
-| ---------- | ------------ | ------------ |
-| *Singular* | First        | **`"I"`**    |
-|            | Second       | **`"you"`**  |
-|            | Third Male   | **`"he"`**   |
-|            | Third Female | **`"she"`**  |
-|            | Third Neuter | **`"it"`**   |
-| *Plural*   | First        | **`"we"`**   |
-|            | Second       | **`"you"`**  |
-|            | Third        | **`"they"`** |
+| Number     | Person | Pronoun                             |
+| ---------- | ------ | ----------------------------------- |
+| *Singular* | First  | **`"I"`**                           |
+|            | Second | **`"you"`**                         |
+|            | Third  | **`"he"`**, **`"she"`**, **`"it"`** |
+| *Plural*   | First  | **`"we"`**                          |
+|            | Second | **`"you"`**                         |
+|            | Third  | **`"they"`**                        |
 
-Since the old second person singular **`"thou"`** was usurped by its corresponding plural pronoun **`"you"`**, the latter is no ambiguous. It is simplest to distinguish *two* pronouns here, both spelt the same. The distinction reveals itself in (what I call) the third direct form (`"yourself"` vs `"yourselves"`).
-
-The eight pronouns come in five different forms, three *direct* forms and two *relative* forms:
+Since the old second person singular **`"thou"`** was usurped by its corresponding plural pronoun **`"you"`**, the latter is now ambiguous. It is simplest to distinguish *two* pronouns here, both spelt the same. The distinction reveals itself in (what I call) the third direct form (`"yourself"` vs `"yourselves"`). For the eight pronouns come in five different forms, three *direct* and two *relative*:
 
 | Pronoun      | Direct 1 | Direct 2 | Direct 3       | Relative 1 | Relative 2 |
 | ------------ | -------- | -------- | -------------- | ---------- | ---------- |
 | **`"I"`**    | `"I"`    | `"me"`   | `"myself"`     | `"my"`     | `"mine"`   |
 | **`"you"`**  | `"you"`  | `"you"`  | `"yourself"`   | `"your"`   | `"yours"`  |
 | **`"he"`**   | `"he"`   | `"him"`  | `"himself"`    | `"his"`    | `"his"`    |
-| **`"she"`**  | `"she"`  | `"her"`  | `"herself"`    | `"her"`    | `"her"`    |
+| **`"she"`**  | `"she"`  | `"her"`  | `"herself"`    | `"her"`    | `"hers"`   |
 | **`"it"`**   | `"it"`   | `"it"`   | `"itself"`     | `"its"`    | `"its"`    |
 | **`"we"`**   | `"we"`   | `"us"`   | `"ourselves"`  | `"our"`    | `"ours"`   |
 | **`"you"`**  | `"you"`  | `"you"`  | `"yourselves"` | `"your"`   | `"yours"`  |
 | **`"they"`** | `"they"` | `"them"` | `"themselves"` | `"their"`  | `"theirs"` |
 
-My labels for these forms is idiosyncratic. People will likely know the third direct form as the *reflexive* form, for instance, and the first relative form as the *possessive* form. I dislike the second of these terms, since the first relative form does not signal the relation of possession in particular, but simply the idea of a relation more generally (see section 5.6 below). The first, however, seems harmless enough. Nevertheless, I have a general preference for bland terminology that doesn't assume or imply too much at the level of interpretation.
+My labels for these forms are idiosyncratic. People will likely know the third direct form as the *reflexive* form, for instance, and the first relative form as the *possessive* form. I dislike the second of these terms, since the first relative form does not signal the relation of possession in particular, but simply the idea of a relation more generally (see section 5.6 below). The first, however, seems harmless enough. Nevertheless, I have a general preference for bland terminology that doesn't assume or imply too much at the level of interpretation.
 
 This general preference extends itself to my labels for the various forms of the verbs. The English verbs (apart from **`"be"`**, which I will come to in a moment) all come in five forms, a *base* form, two *finite* forms, and two *participle* forms. For example:
 
@@ -78,10 +74,11 @@ This general preference extends itself to my labels for the various forms of the
 | **`"make"`**  | `"make"`  | `"makes"`   | `"made"`   | `"making"`   | `"made"`     |
 | **`"sing"`**  | `"sing"`  | `"sings"`   | `"sang"`   | `"singing"`  | `"sung"`     |
 | **`"teach"`** | `"teach"` | `"teaches"` | `"taught"` | `"teaching"` | `"taught"`   |
+| ...           |           |             |            |              |              |
 
-For regular verbs, and for some otherwise irregular ones as well, the second finite form and the second participle form are identical, a fact that must surely have some semantic significance. Nevertheless, it is convenient to draw the distinction for every verb.
+For regular verbs, and for some otherwise irregular ones as well, the second finite form and the second participle form are identical (a fact that must surely have some semantic significance). Nevertheless, it is convenient to draw the distinction for every verb.
 
-At first blush, readers may recognise the first and second finite forms as the "present tense" and "past tense" forms respectively. I strongly oppose this loaded terminology, since it is a matter of considerable controversy what these forms signify, and whether it is (or whether it is always) temporal information. It is better to settle at the outset on some semantically neutral labels. I said *at first blush*; in fact, the "present tense" standardly refers to a *dual* form, which (in my terms) sometimes looks like the base form, and sometimes looks like the first finite form. There is of course a very natural reason for this: `"I like you"` and `"He likes you"` encode messages that differ only in respect of who is doing the liking. But the fact that the base form can be used in this way, as informationally equivalent to the first finite form, is itself a very striking one, that demands its explanation. Talk of a dual "present tense" form serves only to hide this curious feature of English, as though the `"like"` in `"I like you"` was not really the base form of the verb at all, but a finite form that merely happens to look like the base form.
+At first blush, readers will recognise the first and second finite forms as the "present tense" and "past tense" forms respectively. I strongly oppose this loaded terminology, since it is a matter of considerable controversy what these forms signify, and whether it is (or whether it is always) temporal information. It is better to settle at the outset on some semantically neutral labels. I said *at first blush*, moreover; in fact, the "present tense" standardly refers to a *dual* form, which (in my terms) sometimes looks like the base form, and sometimes looks like the first finite form. There is of course a very natural reason for this grouping: `"I like you"` and `"He likes you"` encode messages that differ only in respect of who is doing the liking. But the fact that the base form can be used in this way, as informationally equivalent to the first finite form, is itself a very striking, and it demands an explanation. Talk of a dual "present tense" form serves only to hide this curious feature of English; as though the `"like"` in `"I like you"` was not really the base form of the verb at all, but a finite form that merely happens to look like the base form.
 
 The uniquely awkward verb **`"be"`** is like any other verb in its base form and participle forms (`"be"`, `"being"`, `"been"`), but instead of two finite forms it has five: `"am"`, `"is"`, `"are"`, `"was"`, and `"were"`. The first three of these correspond to the first finite form of other verbs, while the last two correspond to the second. I expect an explanation of this irregularity. In other words, I expect any account of the English code to locate the meaning of **`"be"`** alongside the meanings of the other verbs, but also somewhat distinct from them; there ought to be some underlying difference that sustains the irregularity.
 
@@ -98,9 +95,9 @@ The English modals, finally, each have one finite form, and half of them have tw
 | `"need"`      | `"need"`  | -          |
 | `"dare"`      | `"dare"`  | -          |
 
-While undeniably akin to the verbs, they have no participle forms and no base form. While most grammars treat them as special kinds of verbs, I prefer to place them in a distinct category of their own. As with the uniquely irregular verb **`"be"`**, but even more so in their case, I expect some explanation of the striking syntactic differences from the verbs. In other words, I expect the modals to show up in a closely related but nevertheless distinct part of the English code. If they were not somehow separated within the workings of the function, nothing would prevent them from acquiring all the usual five forms that the verbs enjoy. Or rather, that gets things back to front, since these lexemes seem to have started life as verbs like any other: if they had not migrated to a separate part of the function, then, nothing would explain why they each *lost* three or four of their forms.
+While undeniably akin to the verbs, the modals have no participle forms and no base form. While most grammars treat them as special kinds of verbs, I prefer to place them in a distinct category of their own. As with the uniquely irregular verb **`"be"`**, but even more so in their case, I expect some explanation of the striking syntactic differences from the verbs. In other words, I expect the modals to show up in a closely related but nevertheless distinct part of the English code. If they were not somehow separated within the workings of the function, nothing would prevent them from acquiring all the usual five forms that the verbs enjoy. Or rather, since these lexemes seem to have started life as verbs like any other: if they had not migrated to a separate part of the function, nothing would explain why they each *lost* three or four of their forms.
 
-## 4. The Theory Part 1/2: The Nucleus
+## 4. The Theory, part 1/2: The Nucleus
 
 The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more *elaborations* applied to a core *nucleus*. (The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.) Consequently my theory as a whole consists of two interlocking theories: a theory of plain English messages (i.e. those messages composed of an unelaborated nucleus), and a theory of English elaborations. I begin by describing the first of these.
 
@@ -146,7 +143,7 @@ When referring to objects in what follows, I will adopt the following abbreviati
 
 I hope these conventions are all intuitive and easy to understand. The point of adopting them is just to make the examples that follow easier on all of us. I will introduce similar conventions with regard to the writing out of conditions, once we have started unpacking their component parts.
 
-### 4.2. Conditions Part 1/2: Balances
+### 4.2. Conditions, part 1/2: Balances
 
 English conditions, in my model, break down into a *pivot* and a (possibly empty) list of *balances*:
 
@@ -207,7 +204,7 @@ And now for some examples themselves, making use of these abbreviating conventio
     ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ), ( With, Female "Susan" ) ] ) )
         -> "Grannie lives at Cockroach Lane with Susan."
 
-### 4.3. Conditions Part 2/2: Pivots
+### 4.3. Conditions, part 2/2: Pivots
 
 I divide pivots into three main kinds, as follows:
 
@@ -306,7 +303,7 @@ Finally, perhaps the most striking weakness in my theory of plain messages is th
 
 Obviously this is a very serious inadequacy, and I make no attempt to shy away from this fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition. This is for two reasons. First, the task is quite simply an enormous one, requiring the collation of literally tens of thousands of pivots, noting - just for starters - how many balances each of these can support, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this crude theory of plain messages predominantly just so that I have a basis on which to build this latter theory. And I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to my rough and ready model of conditions.
 
-## 4. The Theory Part 2/2: The Elaborations
+## 4. The Theory, part 2/2: The Elaborations
 
 The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the "nucleus"/"elaboration" terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. And this, in turn, is because my approach is so different. Always my aim is to *explain the sentences* that English speakers produce, rather than to capture the logical entailments of English messages in any formal system.
 

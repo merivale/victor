@@ -127,5 +127,6 @@ emptyInput =
     Html.input
         [ Attr.type_ "text"
         , Attr.class "text"
-        , Attr.disabled True ]
+        , Attr.disabled True
+        ]
         []
