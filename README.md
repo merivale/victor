@@ -4,9 +4,9 @@ A model of the English language, thought of as a code for processing *messages* 
 
 ## 1. The Point
 
-Modern philosophical semantics treats languages as functions from strings to messages, routinely enquiring after "the rules that determine the meaning of a sentence". This forces its practitioners into an uncomfortable theoretical position, in which ambiguous sentences are, from the semantic point of view, impossible (because functions, of course, can assign only one output to every input). This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity.
+Modern philosophical semantics treats languages as functions from strings to messages, routinely enquiring after "the rules that determine the meaning of a sentence". This forces its practitioners into an uncomfortable theoretical position, in which ambiguous sentences are, from the semantic point of view, quite simply impossible (because functions, of course, can assign only one output to every input). This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity.
 
-By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English function, we should be able to see precisely how and why various English ambiguities arise. See section 4 below for examples.
+By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English function, we should be able to see precisely how and why various English ambiguities arise. See section 5 below for examples.
 
 ## 2. The Source
 
@@ -20,9 +20,9 @@ I have not yet written any tests, but there is a stub `test` directory as a plac
 
 ## 3. Grammatical Terminology
 
-I deploy a small amount of grammatical terminology, some of which I expect to be familiar, but some of which is a little idiosyncratic. It is simplest to introduce this all up front. Semantic terminology will be introduced *in situ*.
+I deploy a small amount of grammatical terminology, some of which I expect to be familiar, but some of which is a little idiosyncratic. It is simplest to introduce this all up front. Semantic terminology will be introduced *in situ* in sections 4 and 5 below.
 
-First, I divide English lexemes into a handful of categories, mostly standard. There are just a couple of things to note: (i) I do not treat modals as a subset of verbs, but as belonging to a distinct category all of their own (more on this below); and (ii) I distinguish between articles and determiners, and in a somewhat unusual way (I classify the so-called "indefinite article" as a determiner, for example). Here are the categories I will be assuming, with some examples:
+First, I divide English lexemes into a handful of categories, mostly standard. There are just a couple of things to note: (i) I do not treat *modals* as a subset of *verbs*, but as belonging to a distinct category all of their own (more on this below); and (ii) I distinguish between *articles* and *determiners*, and in a somewhat unusual way (I classify the so-called "indefinite article" as a determiner). Here are the categories I will be assuming, with some examples:
 
 | Category    | Examples                                                                                           |
 | ----------- | -------------------------------------------------------------------------------------------------- |
@@ -36,9 +36,9 @@ First, I divide English lexemes into a handful of categories, mostly standard. T
 | Adjective   | `"angry"`, `"happy"`, `"hungry"`, `"green"`, `"red"`, `"silly"`, ...                               |
 | Adverb      | `"quickly"`, `"quietly"`, `"sometimes"`, `"occasionally"`, `"often"`, ...                          |
 
-I refer to lexemes that have more than one form in **boldface**, using ordinary weighting to refer to their individual forms. Thus the determiner **`"a"`** has the two (informationally equivalent) forms `"a"` and `"an"`. The article **`"this"`** has the two forms `"this"` (singular) and `"these"` (plural), and the article **`"that"`** has the two forms `"that"` (singular) and `"those"` (plural). The nouns likewise all have a singular and a plural form (`"car"`/`"cars"`, `"frog"`/`"frogs"`, etc.).
+I refer to lexemes that have more than one form in **boldface**, using ordinary weighting to refer to their individual forms. Thus the determiner **`"a"`** has the two (informationally equivalent) forms `"a"` and `"an"`. The article **`"this"`** has the two forms `"this"` (*singular*) and `"these"` (*plural*), and the article **`"that"`** has the two forms `"that"` (*singular*) and `"those"` (*plural*). The nouns likewise all have a *singular* and a *plural* form (`"car"`/`"cars"`, `"frog"`/`"frogs"`, etc.).
 
-Pronouns and their forms can be counted in various ways, no one way standing out as obviously correct. I count eight, and label them in the standard way: first, second, and third person, each either singular or plural (which makes six), and then an additional two in the third person singular, distinguishing male and female from neuter. Thus:
+Pronouns and their forms can be counted in various ways, with no one way standing out as obviously correct. I count eight, and label them in the standard way: *first*, *second*, and *third person*, each either *singular* or *plural* (which makes six), and then an additional two in the third person singular, distinguishing male and female from neuter. Thus:
 
 | Number     | Person | Pronoun                             |
 | ---------- | ------ | ----------------------------------- |
@@ -49,7 +49,7 @@ Pronouns and their forms can be counted in various ways, no one way standing out
 |            | Second | **`"you"`**                         |
 |            | Third  | **`"they"`**                        |
 
-Since the old second person singular **`"thou"`** was usurped by its corresponding plural pronoun **`"you"`**, the latter is now ambiguous. It is simplest to distinguish *two* pronouns here, both spelt the same. The distinction reveals itself in (what I call) the third direct form (`"yourself"` vs `"yourselves"`). For the eight pronouns come in five different forms, three *direct* and two *relative*:
+Since the old second person singular **`"thou"`** was usurped by its corresponding plural pronoun **`"you"`**, the latter is now ambiguous. It is simplest to distinguish *two* pronouns here, both spelt the same. The distinction reveals itself in (what I call) the *third direct* form (`"yourself"` vs `"yourselves"`). For the eight pronouns come in five different forms, three *direct* and two *relative*:
 
 | Pronoun      | Direct 1 | Direct 2 | Direct 3       | Relative 1 | Relative 2 |
 | ------------ | -------- | -------- | -------------- | ---------- | ---------- |
@@ -99,22 +99,26 @@ While undeniably akin to the verbs, the modals have no participle forms and no b
 
 ## 4. The Theory, part 1/2: The Nucleus
 
-The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more *elaborations* applied to a core *nucleus*. (The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.) Consequently my theory as a whole consists of two interlocking theories: a theory of plain English messages (i.e. those messages composed of an unelaborated nucleus), and a theory of English elaborations. I begin by describing the first of these.
+The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more *elaborations* applied to a core *nucleus*. (The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.) Consequently my theory as a whole consists of two interlocking theories: a theory of plain English messages (i.e. those messages composed of an unelaborated nucleus), and a theory of English elaborations. I begin with the former.
 
 The nucleus of every English message is an ordered pair, containing an *object* and a *condition*, and a plain message affirms the present satisfaction of the condition by the object:
 
-    type alias Nucleus =
-        ( Object, Condition )
+```elm
+type alias Nucleus =
+    ( Object, Condition )
+```
 
 For example, and using some very crude representations of objects and conditions for now:
 
-    ( Victor, love Grannie )
-        -> "Victor loves Grannie."
+```
+( Victor, love Grannie )
+    -> "Victor loves Grannie."
     
-    ( Grannie, live at Cockroach Lane )
-        -> "Grannie lives at Cockroach Lane."
+( Grannie, live at Cockroach Lane )
+    -> "Grannie lives at Cockroach Lane."
+```
 
-There should be nothing surprising here. The object/condition distinction at the level of the message corresponds exactly to the familiar subject/predicate distinction at the level of the sentence. In this respect, my theory is positively boring. Things get more interesting as we start to chip away at the nature of objects and conditions themselves.
+There should be nothing very surprising here. The object/condition distinction at the level of the message corresponds exactly to the familiar subject/predicate distinction at the level of the sentence. In this respect, my theory is positively boring. Things get more interesting as we start to chip away at the nature of objects and conditions themselves.
 
 ### 4.1. Objects
 
