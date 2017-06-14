@@ -146,9 +146,15 @@ determinerPhrase plural negated quantifier other haystack =
         canAbbreviate =
             List.member quantifier [ Just Every, Just Some, Just Any ]
                 && List.member category [ "one", "body", "thing" ]
+
+        positive =
+            (determiner canAbbreviate quantifier other haystack)
+                ++ (haystackToString canAbbreviate plural haystack)
     in
-        (determiner canAbbreviate quantifier other haystack)
-            ++ (haystackToString canAbbreviate plural haystack)
+        if negated then
+            negateDeterminer positive
+        else
+            positive
 
 
 {-| Encode the quantifier into a determiner. Although in general this function
@@ -212,6 +218,28 @@ haystackToString canAbbreviate plural ( category, description, restriction ) =
             d ++ r
         else
             d ++ [ c ] ++ r
+
+
+{-| Negate a determiner phrase. By default, just a matter of sticking a "not" in
+the front, but to complicate matters slightly, "some" goes to "none".
+-}
+negateDeterminer : List String -> List String
+negateDeterminer determinerPhrase =
+    case List.head determinerPhrase of
+        Just "some" ->
+            "no" :: (List.drop 1 determinerPhrase)
+
+        Just "someone" ->
+            "no one" :: (List.drop 1 determinerPhrase)
+
+        Just "somebody" ->
+            "nobody" :: (List.drop 1 determinerPhrase)
+
+        Just "something" ->
+            "nothing" :: (List.drop 1 determinerPhrase)
+
+        _ ->
+            "not" :: determinerPhrase
 
 
 {-| That concludes the functions necessary for encoding subjects and counters.
