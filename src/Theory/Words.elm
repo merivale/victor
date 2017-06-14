@@ -19,8 +19,7 @@ module Theory.Words
 {-| Functions for encoding ideas into words. This is the least interesting part
 of my model; it simply generates (the various forms of) prepositions, pronouns,
 articles, determiners, modals, and verbs. It may be of interest purely to
-solidify an understanding of the grammatical terminology I apply for these types
-of words and their different forms.
+solidify an understanding of the grammatical terminology that I use.
 
 Note that the functions for generating the various forms of verbs cannot
 distinguish verbs that have the same base form but differ in other forms - e.g.
