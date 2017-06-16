@@ -1,12 +1,24 @@
 # Victor
 
-A model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman. Read on for an outline of the theory, or play around with the current version at  [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
+A model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman, and with gracious nod to Claude Shannon, the founder of information theory. Read on for an outline of the algorithm and the philosophy behind it, and play around with the current version at  [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
 
 ## 1. The Point
 
-Modern philosophical semantics treats languages as functions from strings to messages, routinely enquiring after "the rules that determine the meaning of a sentence". This forces its practitioners into an uncomfortable theoretical position, in which ambiguous sentences are, from the semantic point of view, quite simply impossible (because functions, of course, can assign only one output to every input). This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity.
+My project does not fit neatly into existing intellectual paradigms. Indeed, it seeks to subvert them. Dudman presented his work as a contribution to philosophical semantics, urging that this subject needed to be approached grammatically. One might equally view it as a contribution to English grammar, with the insistence that this subject needs to be approched philosophically. The danger with both of these representations, however, is that they risk falling on deaf ears: grammarians tend to have little interest in philosophy, and philosophers often treat grammar with something scarcely short of scorn. I propose a more direct sales pitch: the code analogy offers us an entirely new methodology in the study of natural languages, a methodology which encompasses both philsophical semantics and empirical grammar, though now in a somewhat different form.
 
-By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English function, we should be able to see precisely how and why various English ambiguities arise. See section 5 below for examples.
+The standard picture in philosophical circles nowadays is that the science of language divides into three parts. The first, *syntax*, seeks to uncover the rules governing the construction of grammatical or well-formed sentences. The second and third, *semantics* and *pragmatics*, attempt to reveal the rules determining the meanings of the sentences thus constructed. Semantics is the study of the meanings of sentences *in general*, on the assumption that there are such things, and that they are related *functionally* to the sentences that convey them. Pragmatics is the study of the meanings of sentences *in context*, something that is observed to go above and beyond their semantic or *literal* meaning. It is generally assumed that this layer of meaning is not functionally determined, and consequently not susceptible to the sort of formal treatment that has dominated philosophical semantics for the past hundred years; the sentence determines a literal meaning, on this view, but that literal meaning then serves (together with other contextual information) as *evidence for* the pragmatically enriched information.
+
+When philosophers think of grammar, they think of syntax; grammar, to their minds, is the study of how sentences are formed. They are not far from the truth. Grammarians, however, are not in the habit of trying to specify formal rules of the sort philosophers routinely describe for their artificial languages (with the exception of practitioners of generative grammar, that is, who are in the habit of doing precisely this). Moreover, grammarians typically see their remit as extending beyond syntax; into morphology and phenology, for instance, and even into semantics as well. But the grammatical approach to semantics differs strikingly from the philosophical approach: where philosophers delight in general rules, and tend to downplay their exceptions (or perhaps shrug them off as problems for pragmatics), grammarians prefer to catalogue the several different uses of a given form, showing little interest in speculation about any deeper regularities that might underlie the surface variety.
+
+Nowhere is this lack of interest in underlying regularities more striking than in grammatical discussions of the meanings of the inflectional forms of the English verbs and modals. The so-called "present tense form", it is said, is used to talk about the present (`"I am hungry"`), the future (`"We are seeing him tomorrow"`), the past (`"He comes up to me this morning and just tells me, right to my face"`), all time (`"Salt dissolves in water"`), and even no time at all (`"Two plus two equals four"`). The so-called "past tense form", meanwhile, is observed in talk about the past (`"I was hungry"`), the future (`"We were seeing him tomorrow"`), and what is often diagnosed as "unreality", be it past, present, or future (`"If she had been here yesterday, ..."`/`"If she was here today, ..."`/`"If she came by here tomorrow, ..."`). This is all well and good, as far as it goes. But to the mind of a truly scientific enquirer, it does not go nearly far enough. What we want is a general theory that *predicts and explains* all of these different uses.
+
+When we turn to the philosophers, alas, we are no less disappointed. They love their general rules, but conversely show no interest in the tantalisingly varied data of English usage. Philosophical theories of tense and time achieve regularity simply by stipulation. And if these stipulations don't match the English language? Well, that just goes to show how messy natural languages are (more work for pragmatics, I suppose), and what a good thing it is that Frege set us on the track of developing clear and precise artificial languages in which to conduct our business instead.
+
+We can do better. And the way to do better is to embrace the code analogy. Philosophical semantics treats languages as functions from sentences to their interpretations, with the inputs to those functions coming from the quite separate field of grammar or syntax. I suggest that they are approaching the problem the wrong way around. Languages should be modelled as functions from messages to sentences. Syntax and semantics would then no longer be separate subjects, but one and the same: the function that connects sentences to their interpretations is also the function that generates sentences in the first place.
+
+Why does it matter which direction we model the function in? There are two answers to this question. The first is the one I have been hinting at thus far. By modelling the function in my preferred direction, we have a way of bringing semantic theories directly into contact with the observable data. These theories can no longer ignore or dismiss the words English speakers use to convey their messages, as problems for grammar or pragmatics. Consequently my approach promises the best of both worlds: the formal rigour and quest for general theory typical of modern philosophical semantics, but with the kind of attention to empirical detail discovered among grammarians. Nor is this an empty promise. Building on Dudman's groundbreaking work, I have developed a complete, unified theory of tense and time in English, which reduces all of the surface variety to the interplay of just four simple rules. If Dudman and I are right, then English is neither the complex system grammarians describe, nor the irregular mess philosophers assume, but an elegant, precise, and formally specifiable code.
+
+The second reason the direction of the language function matters is *ambiguity*. The decision to treat the message as a function of the sentence forces us into an uncomfortable theoretical position, whereby ambiguous sentences are, from the semantic point of view, quite simply impossible. This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity. By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English function, we should be able to see precisely how and why various English ambiguities arise.
 
 ## 2. The Source
 
@@ -337,7 +349,7 @@ Obviously this is a very serious inadequacy, and I make no attempt to shy away f
 
 The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the "nucleus"/"elaboration" terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. And this, in turn, is because my approach is so different. Always my aim is to *explain the sentences* that English speakers produce, rather than to capture the logical entailments of English messages in any formal system.
 
-Since elaborations are so central to my theory, I adopt the convention of writing them in ALLCAPS, so as to render them easily distinguishable from the other aspects of my system. There are currently eleven elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a substantial start. I am not yet in a position to say how many elaborations there are in English, but I would hazard something in the region of twenty.
+Since elaborations are so central to my theory, I adopt the convention of writing them in ALLCAPS, so as to render them easily distinguishable from the other aspects of my system. There are currently 11 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a substantial start. I am not yet in a position to say how many elaborations there are in English, but I would hazard something in the region of twenty.
 
 Though it will not make much sense up front, here is the full type definition for messages (details of the individual elaborations to follow):
 
@@ -359,6 +371,10 @@ type Message
 
 The definition is of course recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself (see the `Messages` module). The function returns an error in cases of such invalid input.
 
+The elaborations that I posit all have what I like to call *global scope*, but *local influence*. By this I mean that they all apply to messages as a whole (global scope), but that their semantic effect invariably applies only to one particular component of the message (local influence): sometimes the object, sometimes the condition, sometimes an extra-nuclear argument introduced by a previous elaboration, and in a few cases the time of the condition's satisfaction. Because of this, it is often convenient to refer to an elaborated *something*, where that something is the locally affected component, rather than the message as whole. It is an interesting question whether English has elaborating devices that are local in scope as well as influence. I should not like to say with any certainty that it does not; the hypothesis, it seems to me, certainly merits further investigation.
+
+However that may be, I insist that the elaborations I have diagnosed thus far really do have global scope, notwithstanding their local influence. There are two main reasons for this. First, one and the same elaboration may affect a *different* component of its input message, depending on how that message has been elaborated previously. Where I have one globally scoped elaboration with varying local influence, therefore, the alternative would not only require *multiple* locally scoped elaborations, but also a suite of additional validation rules restricting the use of these elaborations. Secondly, the order in which the elaborations are applied is typically a matter of considerable semantic significance, even when the elaborations target completely separate parts of the message. A `PAST INDIRECT` message, for example, is importantly distinct from its corresponding `INDIRECT PAST` message (see section 5.6 below). If we treat these elaborations as having local scope, we lose the ability to represent the order in which they are applied, and therefore have no way of representing this difference. It would of course be perfectly possible to represent the order in which locally scoped elaborations are applied in some other way. But again, that would introduce more complexity into the system. Overall, a model with globally scoped elaborations is simpler, covering the same ground with less convoluted machinery.
+
 *[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, but in the meantime they are incomplete.]*
 
 ### 5.1. NEGATIVE Messages
@@ -377,17 +393,68 @@ My model posits a `NEGATIVE` elaboration, which has the effect of converting any
 
 The `NEGATIVE` elaboration is the most semantically versatile of those posited by my model. While its effect, as I have said, is always to turn an affirmative message into its corresponding denial, there are different components of messages that can be the focus of a denial. What exactly is being denied in a `NEGATIVE` message depends on the elaboration to which the negation itself is applied, and hence discussion of the other elaborations below will include details on what happens when you negate them.
 
-To start with, let me be clear on what happens when you negate a plain message. A plain message, recall, affirms the present satisfaction of the condition by the object. A `NEGATIVE` plain message, therefore, *denies* the present satisfaction of the condition by the object; or equivalently, affirms the present *non*-satisfaction of the condition by the object. Effectively, then, the `NEGATIVE` elaboration negates the underlying condition, turning it into its complement.
+To start with, let me be clear on what happens when you negate a plain message. A plain message, recall, affirms the present satisfaction of the condition by the object. A `NEGATIVE` plain message, therefore, *denies* the present satisfaction of the condition by the object; or equivalently, affirms the present *non*-satisfaction of the condition by the object. Effectively, then, the `NEGATIVE` elaboration negates the underlying condition, turning it into its complement. As we will see, this is the most common local effect of this elaboration, but not the only one.
 
 ### 5.2. PAST and PRIOR Messages
 
+A plain English message, recall, affirms the present satisfaction of the condition by the object. With the `NEGATIVE` elaboration, we can generate affirmations of present *non*-satisfaction instead. But so far we are still stuck with affirmations, positive or negative, about the *present*. Of course English allows us to talk of the past and future as well. In accounting for all this talk, I posit three elaborations, `PAST`, `PRIOR`, and `PREORDAINED`. The nature of these elaborations, and the way in which they interact, is one of the most intriguing features of the English code. The semantic results are quite complex and sophisticated, but it is acheived - at least if my theory is correct - through the coordination of devices that are themselves beautifully simple. I can take only a fraction of the credit here: though I fancy I have made some small improvements to his model, the core insights here are all taken over from Dudman.
+
+The `PAST` elaboration always has the local effect of indicating that something is past, something that would otherwise (by default) be present. What that something is, as we shall see, varies from case to case. Typically, however, and at any rate in the case of plain messages, what it changes is the time of the condition's satisfaction by the object. For example:
+
+```elm
+PAST ( Female "Grannie", Do "leave", [ Speaker ] )
+    -> "Grannie left me."
+
+PAST ( Others, Do "go", [ To, Other "America" ] )
+    -> "They went to America."
+```
+
+(To be clear, I am adopting one more abbreviating convention here and hereafter: I do not bother to write `Plain` in front of the nucleus.) The grammatical effect, plainly enough, is to swap the base or first finite form of the main verb for its *second* finite form.
+
+Going by its grammatical effect, it is easy to distinguish the `PRIOR` elaboration from the `PAST` elaboration. Where the latter swaps the base or first finite form of the main verb for its second finite form, the former swaps it for the corresponding form of the verb **`"have"`**, followed by the second participle form of the original verb:
+
+```elm
+PRIOR ( Female "Grannie", Do "leave", [ Speaker ] )
+    -> "Grannie has left me."
+
+PRIOR ( Others, Do "go", [ To, Other "America" ] )
+    -> "They have gone to America."
+```
+
+Grammarians standardly call this the "perfect". While its effect on the sentence is easy to see, it is harder to say what the underlying informational trigger is, and how exactly this trigger differs from the `PAST` elaboration.
+
+The first semantic difference between these two elaborations, I suggest, is that, while the `PRIOR` elaboration indicates that something is past, it is not something that would otherwise be present. I will explain this claim in a moment. The second difference is that it indicates that something is past *with respect to something else*. Hence my choice of terminology: what is past is simply past, but what is prior is prior *to* something. More specifically, when applied to a plain message, the `PRIOR` elaboration doesn't *directly* produce a message concerning the past satisfaction of its underlying condition; rather, it produces a *new* condition, one whose satisfaction (at any given point in time) entails the satisfaction of the underlying condition *prior* to that point. Crudely put, it is one thing to go to America, and another thing to *have gone* to America.
+
+By default, of course, the satisfaction of any condition is present. And so by default a `PRIOR` message affirms the present satisfaction of its `PRIOR` condition. Thus, while `PAST` plain messages and `PRIOR` plain messages are alike in affirming the past satisfaction of their underlying conditions, they do this in different ways. The `PAST` elaboration does this directly, but the `PRIOR` elaboration does it indirectly, via affirming the present satisfaction of a new condition that in turn entails the prior satisfaction of the underlying one.
+
+The `PAST` and `PRIOR` elaborations by themselves are wonderfully simple. The `PAST` elaboration, moreover, operates on `PRIOR` messages in just the same way that it operates on plain ones. The `PRIOR` elaboration, after all, has effectively just modified the condition, so there is nothing else for the `PAST` elaboration to do except locate the otherwise present satisfaction of this condition in the past. Thus we have the so-called "past perfect", which I refer to as a `PAST PRIOR`:
+
+```elm
+PAST PRIOR ( Female "Grannie", Do "leave", [ Speaker ] )
+    -> "Grannie had left me."  -- But now, presumably, she has returned.
+```
+
+Things start to get rather more interesting, however, when the `PRIOR` elaboration is applied on top of the `PAST` elaboration. For in this case, it does not result in the generation of a new condition. Rather, the `PRIOR` elaboration now locates the satisfaction of the underlying condition *directly* at some point prior to the already past point of satisfaction set up by the `PAST` elaboration. (This is why I said that the `PRIOR` elaboration does not indicate the pastness of something that would otherwise be preset; in this case, the something in question would otherwise be past.) The overall effect is what grammarians call the "past past tense", but which I call the `PRIOR PAST`. Compare:
+
+```elm
+PAST PRIOR ( Speaker, Do "see", [ Male ] )
+    -> "I had [already] seen him [by the time you arrived]."
+
+PRIOR PAST ( Speaker, Do "see", [ Male ] )
+    -> "I had seen him [an hour before you arrived]."
+```
+
+Alas my model has not yet the means to predict the words in square brackets in these examples, and without including them it is difficult to illustrate the distinction here. But with the aid of these bracketed phrases we can drive it home by noting that, while `"I have already seen him"` is perfectly good English, `"I have seen him an hour ago"` is not. This is because the first example is a `PAST PRIOR` message that therefore has a corresponding `PRIOR` message (present by default), but the second is a `PRIOR PAST` message that has no `PRIOR` analogy. What the second has is a `PAST` analogue (arrived at by deleting the `PRIOR` elaboration), encoded as `"I saw him [an hour ago]"`.
+
+With plain messages (which are present by default), and with the `PAST` and `PRIOR` elaborations, I can now predict and explain a substantial portion of the uses of the finite forms of the verbs (more to come in the next two sections). I can predict and explain the ambiguity accessible to phrases like `"had seen"`, which encode both `PAST PRIOR` messages ("past perfect"), and `PRIOR PAST` messages ("past past"). And I can do all this without the need to posit a third "past past" tense. Two elaborations that can be applied in different orders are all that is needed.
+
+Before moving on to talk about the future, a note on how the `PAST` and `PRIOR` elaborations interact with the `NEGATIVE` elaboration: they don't. They operate entirely independently of it. In other words, a `PAST NEGATIVE` message is identical to a `NEGATIVE PAST` message, and likewise for `PRIOR NEGATIVE` and `NEGATIVE PRIOR` messages.
+
+### 5.3. PREORDAINED Messages
+
 *[...]*
 
-### 5.3. DISPLACED Messages
-
-*[...]*
-
-### 5.4. REGULAR and PREORDAINED Messages
+### 5.4. DISPLACED and REGULAR Messages
 
 *[...]*
 
