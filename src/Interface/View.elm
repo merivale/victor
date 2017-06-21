@@ -136,7 +136,7 @@ nucleusBody : Model -> Html.Html Signal
 nucleusBody model =
     Html.div
         [ Attr.class "body" ]
-        ([ Nucleus.object model.object, Nucleus.pivot model.pivot ]
+        ([ Nucleus.object model.object, Nucleus.pivot model.pivot, Nucleus.counter model.counter ]
             ++ (List.indexedMap Nucleus.balance model.balances)
         )
 
@@ -179,11 +179,12 @@ elaborationBody balanceCount index elaboration subContent =
                         , subContent
                         ]
 
-                Just (Primary pivot) ->
+                Just (Primary pivot counter) ->
                     Html.div
                         [ Attr.class "body" ]
                         [ Elaborations.displacer False index elaboration
                         , Elaborations.pivot index pivot
+                        , Elaborations.counter index counter
                         , subContent
                         ]
 
@@ -205,11 +206,12 @@ elaborationBody balanceCount index elaboration subContent =
                         , subContent
                         ]
 
-                Just (Primary pivot) ->
+                Just (Primary pivot counter) ->
                     Html.div
                         [ Attr.class "body" ]
                         [ Elaborations.displacer True index elaboration
                         , Elaborations.pivot index pivot
+                        , Elaborations.counter index counter
                         , Elaborations.frequency index elaboration
                         , subContent
                         ]
@@ -233,11 +235,12 @@ elaborationBody balanceCount index elaboration subContent =
                         , subContent
                         ]
 
-                Just (Primary pivot) ->
+                Just (Primary pivot counter) ->
                     Html.div
                         [ Attr.class "body" ]
                         [ Elaborations.displacer True index elaboration
                         , Elaborations.pivot index pivot
+                        , Elaborations.counter index counter
                         , Elaborations.time index elaboration
                         , subContent
                         ]

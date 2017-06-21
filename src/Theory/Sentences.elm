@@ -31,9 +31,22 @@ implode : Vars -> Result String String
 implode vars =
     let
         post =
-            (List.map (middle vars.object) vars.balances) ++ vars.post
+            (List.map (middle (object vars.object)) vars.balances) ++ vars.post
     in
         Ok (String.join " " ((subject vars) ++ (pre vars) ++ post))
+
+
+object : PseudoObject -> Object
+object pseudoObject =
+    case pseudoObject of
+        RealObject object ->
+            object
+
+        IndirectObject object indirection ->
+            object
+
+        AgglomeratedObject object negated agglomeration ->
+            object
 
 
 {-| The subject of the sentence, which is a function either of the object, or -
@@ -45,15 +58,15 @@ function defined shortly.
 -}
 subject : Vars -> List String
 subject vars =
-    case vars.objectOverride of
-        Nothing ->
-            [ Words.direct1 vars.object ]
+    case vars.object of
+        RealObject object ->
+            [ Words.direct1 object ]
 
-        Just (PointerObject pointer other haystack) ->
-            articlePhrase (isPlural vars.object) pointer other haystack
+        IndirectObject object indirection ->
+            articlePhrase (isPlural object) indirection
 
-        Just (QuantifierObject negated quantifier other haystack) ->
-            determinerPhrase (isPlural vars.object) negated quantifier other haystack
+        AgglomeratedObject object negated agglomeration ->
+            determinerPhrase (isPlural object) negated agglomeration
 
 
 {-| ...
@@ -61,22 +74,22 @@ subject vars =
 middle : Object -> PseudoBalance -> String
 middle mainObject balance =
     case balance of
-        RealBalance ( counter, weight ) ->
+        RealBalance ( relator, weight ) ->
             String.join " "
-                ((counterToString counter)
+                ((relatorToString relator)
                     ++ (weightToString mainObject weight)
                 )
 
-        PointerBalance counter object pointer other haystack ->
+        IndirectBalance relator object indirection ->
             String.join " "
-                ((counterToString counter)
-                    ++ (articlePhrase (isPlural object) pointer other haystack)
+                ((relatorToString relator)
+                    ++ (articlePhrase (isPlural object) indirection)
                 )
 
-        QuantifierBalance counter object negated quantifier other haystack ->
+        AgglomeratedBalance relator object negated agglomeration ->
             String.join " "
-                ((counterToString counter)
-                    ++ (determinerPhrase (isPlural object) negated quantifier other haystack)
+                ((relatorToString relator)
+                    ++ (determinerPhrase (isPlural object) negated agglomeration)
                 )
 
 
@@ -93,38 +106,36 @@ isPlural object =
             plural
 
 
-counterToString : Maybe Counter -> List String
-counterToString counter =
-    case counter of
+relatorToString : Maybe Relator -> List String
+relatorToString relator =
+    case relator of
         Nothing ->
             []
 
-        Just c ->
-            [ Words.preposition c ]
+        Just r ->
+            [ Words.preposition r ]
 
 
-weightToString : Object -> Maybe Weight -> List String
+weightToString : Object -> Weight -> List String
 weightToString mainObject weight =
     case weight of
-        Nothing ->
-            []
+        SameAsMain ->
+            [ Words.direct3 mainObject ]
 
-        Just w ->
-            case w of
-                SameObject ->
-                    [ Words.direct3 mainObject ]
-
-                Different object ->
-                    [ Words.direct2 object ]
+        Different object ->
+            [ Words.direct2 object ]
 
 
 {-| Article phrases are straightforward; simply get the article from the
 pointer, get a list of words from the haystack, and combine them - optionally
 with "other" inserted in between.
 -}
-articlePhrase : Bool -> Pointer -> Bool -> Haystack -> List String
-articlePhrase plural pointer other haystack =
+articlePhrase : Bool -> Indirection -> List String
+articlePhrase plural indirection =
     let
+        ( pointer, other, haystack ) =
+            indirection
+
         article =
             Words.article plural pointer
     in
@@ -137,15 +148,19 @@ articlePhrase plural pointer other haystack =
 {-| Determiner phrases would be similarly straightforward, except that things
 like "anybody", "everyone", "something" do not fit the general pattern.
 -}
-determinerPhrase : Bool -> Bool -> Maybe Quantifier -> Bool -> Haystack -> List String
-determinerPhrase plural negated quantifier other haystack =
+determinerPhrase : Bool -> Bool -> Agglomeration -> List String
+determinerPhrase plural negated agglomeration =
     let
+        ( quantifier, other, haystack ) =
+            agglomeration
+
         ( category, description, restriction ) =
             haystack
 
         canAbbreviate =
             List.member quantifier [ Just Every, Just Some, Just Any ]
-                && List.member category [ "one", "body", "thing" ]
+                && List.member category [ "one", "body", "thing", "where" ]
+                && not plural
 
         positive =
             (determiner canAbbreviate quantifier other haystack)
@@ -256,7 +271,7 @@ pre : Vars -> List String
 pre vars =
     case vars.modality of
         Nothing ->
-            (finiteVerbPhrase vars.past vars.object vars.longPivot) :: (List.map baseVerbPhrase vars.longPivots)
+            (finiteVerbPhrase vars.past (object vars.object) vars.longPivot) :: (List.map baseVerbPhrase vars.longPivots)
 
         Just m ->
             (Words.modal m vars.past) :: (List.map baseVerbPhrase (vars.longPivot :: vars.longPivots))
@@ -268,7 +283,7 @@ finiteVerbPhrase : Bool -> Object -> LongPivot -> String
 finiteVerbPhrase past object longPivot =
     let
         ( verbBase, rest ) =
-            verbBaseAndRest longPivot.pivot longPivot.prior
+            verbBaseAndRest longPivot
 
         fulcrum =
             conjugate verbBase past object
@@ -280,7 +295,7 @@ baseVerbPhrase : LongPivot -> String
 baseVerbPhrase longPivot =
     let
         ( verbBase, rest ) =
-            verbBaseAndRest longPivot.pivot longPivot.prior
+            verbBaseAndRest longPivot
     in
         String.join " " (longPivot.pre ++ (verbBase :: rest))
 
@@ -351,73 +366,41 @@ conjugate base past object =
             base
 
 
-verbBaseAndRest : Pivot -> Bool -> ( String, List String )
-verbBaseAndRest pivot prior =
+verbBaseAndRest : LongPivot -> ( String, List String )
+verbBaseAndRest { pivot, counter, prior, pre } =
     let
-        ( verb, rest ) =
+        end =
+            case counter of
+                Nothing ->
+                    []
+
+                Just (CounterProperty property) ->
+                    [ property ]
+
+                Just (CounterRelator relator) ->
+                    [ Words.preposition relator ]
+
+        ( verbality, ongoing, passive ) =
             case pivot of
-                Be ongoing property ->
-                    case ( property, ongoing ) of
-                        ( Just str, True ) ->
-                            ( "be", [ "being", str ] )
-
-                        ( Just str, False ) ->
-                            ( "be", [ str ] )
-
-                        ( Nothing, True ) ->
-                            ( "be", [ "being" ] )
-
-                        ( Nothing, False ) ->
-                            ( "be", [] )
-
-                Seem sense ongoing property ->
-                    let
-                        verbality =
-                            case sense of
-                                Nothing ->
-                                    "seem"
-
-                                Just Sight ->
-                                    "look"
-
-                                Just Smell ->
-                                    "smell"
-
-                                Just Sound ->
-                                    "sound"
-
-                                Just Taste ->
-                                    "taste"
-
-                                Just Touch ->
-                                    "feel"
-                    in
-                        case ( property, ongoing ) of
-                            ( Just str, True ) ->
-                                ( "be", [ Words.participle1 verbality, str ] )
-
-                            ( Just str, False ) ->
-                                ( verbality, [ str ] )
-
-                            ( Nothing, True ) ->
-                                ( "be", [ Words.participle1 verbality ] )
-
-                            ( Nothing, False ) ->
-                                ( verbality, [] )
+                Be ongoing ->
+                    ( "be", ongoing, False )
 
                 Do verbality ongoing passive ->
-                    case ( ongoing, passive ) of
-                        ( True, True ) ->
-                            ( "be", [ "being", Words.participle2 verbality ] )
+                    ( verbality, ongoing, passive )
 
-                        ( True, False ) ->
-                            ( "be", [ Words.participle1 verbality ] )
+        ( verb, rest ) =
+            case ( ongoing, passive ) of
+                ( True, True ) ->
+                    ( "be", [ "being", Words.participle2 verbality ] ++ end )
 
-                        ( False, True ) ->
-                            ( "be", [ Words.participle2 verbality ] )
+                ( True, False ) ->
+                    ( "be", [ Words.participle1 verbality ] ++ end )
 
-                        ( False, False ) ->
-                            ( verbality, [] )
+                ( False, True ) ->
+                    ( "be", [ Words.participle2 verbality ] ++ end )
+
+                ( False, False ) ->
+                    ( verbality, end )
     in
         if prior then
             ( "have", (Words.participle2 verb) :: rest )

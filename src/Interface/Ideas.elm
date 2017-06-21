@@ -113,8 +113,7 @@ objectHasString object =
 -}
 listPivots : List Pivot
 listPivots =
-    [ Be False Nothing
-    , Seem Nothing False Nothing
+    [ Be False
     , Do "" False False
     ]
 
@@ -122,10 +121,7 @@ listPivots =
 equatePivots : Pivot -> Pivot -> Bool
 equatePivots pivot1 pivot2 =
     case ( pivot1, pivot2 ) of
-        ( Be property1 ongoing1, Be property2 ongoing2 ) ->
-            True
-
-        ( Seem sense1 property1 ongoing1, Seem sense2 property2 ongoing2 ) ->
+        ( Be ongoing1, Be ongoing2 ) ->
             True
 
         ( Do verbality1 ongoing1 passive1, Do verbality2 ongoing2 passive2 ) ->
@@ -138,32 +134,11 @@ equatePivots pivot1 pivot2 =
 displayPivot : Pivot -> String
 displayPivot pivot =
     case pivot of
-        Be property ongoing ->
+        Be ongoing ->
             "Be"
-
-        Seem sense property ongoing ->
-            "Seem"
 
         Do verbality ongoing passive ->
             "Do"
-
-
-{-| Senses.
--}
-listSenses : List (Maybe Sense)
-listSenses =
-    [ Nothing
-    , Just Sight
-    , Just Smell
-    , Just Sound
-    , Just Taste
-    , Just Touch
-    ]
-
-
-displaySense : Maybe Sense -> String
-displaySense sense =
-    Maybe.withDefault "-- No Sense --" (Maybe.map toString sense)
 
 
 {-| Counters.
@@ -171,81 +146,119 @@ displaySense sense =
 listCounters : List (Maybe Counter)
 listCounters =
     [ Nothing
-    , Just About
-    , Just Above
-    , Just After
-    , Just Against
-    , Just At
-    , Just Before
-    , Just Behind
-    , Just Below
-    , Just Beyond
-    , Just By
-    , Just Down
-    , Just For
-    , Just From
-    , Just In
-    , Just Inside
-    , Just Into
-    , Just Like
-    , Just Of
-    , Just Off
-    , Just On
-    , Just Opposite
-    , Just Out
-    , Just Outside
-    , Just Over
-    , Just Through
-    , Just To
-    , Just Towards
-    , Just Under
-    , Just Up
-    , Just With
-    , Just Without
+    , Just (CounterProperty "")
+    , Just (CounterRelator About)
     ]
 
 
 displayCounter : Maybe Counter -> String
 displayCounter counter =
-    Maybe.withDefault "-- No Counter --" (Maybe.map toString counter)
+    case counter of
+        Nothing ->
+            "-- No Counter --"
+
+        Just (CounterProperty property) ->
+            "Property"
+
+        Just (CounterRelator relator) ->
+            "Relator"
 
 
-{-| Weights.
--}
-listWeights : List (Maybe Weight)
-listWeights =
-    [ Nothing
-    , Just SameObject
-    , Just (Different (Speaker False))
-    ]
-
-
-equateWeights : Maybe Weight -> Maybe Weight -> Bool
-equateWeights weight1 weight2 =
-    case ( weight1, weight2 ) of
+equateCounters : Maybe Counter -> Maybe Counter -> Bool
+equateCounters counter1 counter2 =
+    case ( counter1, counter2 ) of
         ( Nothing, Nothing ) ->
             True
 
-        ( Just SameObject, Just SameObject ) ->
+        ( Just (CounterProperty property1), Just (CounterProperty property2) ) ->
             True
 
-        ( Just (Different object1), Just (Different object2) ) ->
+        ( Just (CounterRelator relator1), Just (CounterRelator relator2) ) ->
             True
 
         _ ->
             False
 
 
-displayWeight : Maybe Weight -> String
+{-| Relators (used in counters).
+-}
+listRelators : List Relator
+listRelators =
+    [ About
+    , Above
+    , After
+    , Against
+    , At
+    , Before
+    , Behind
+    , Below
+    , Beyond
+    , By
+    , Down
+    , For
+    , From
+    , In
+    , Inside
+    , Into
+    , Like
+    , Of
+    , Off
+    , On
+    , Opposite
+    , Out
+    , Outside
+    , Over
+    , Through
+    , To
+    , Towards
+    , Under
+    , Up
+    , With
+    , Without
+    ]
+
+
+{-| Maybe relators (used in balances).
+-}
+listMaybeRelators : List (Maybe Relator)
+listMaybeRelators =
+    Nothing :: (List.map (\x -> Just x) listRelators)
+
+
+displayMaybeRelator : Maybe Relator -> String
+displayMaybeRelator relator =
+    Maybe.withDefault "-- No Relator --" (Maybe.map toString relator)
+
+
+{-| Weights.
+-}
+listWeights : List Weight
+listWeights =
+    [ SameAsMain
+    , Different (Speaker False)
+    ]
+
+
+equateWeights : Weight -> Weight -> Bool
+equateWeights weight1 weight2 =
+    case ( weight1, weight2 ) of
+        ( SameAsMain, SameAsMain ) ->
+            True
+
+        ( Different object1, Different object2 ) ->
+            True
+
+        _ ->
+            False
+
+
+displayWeight : Weight -> String
 displayWeight weight =
     case weight of
-        Nothing ->
-            "-- No Weight --"
+        SameAsMain ->
+            "Same as Main Object"
 
-        Just SameObject ->
-            "Same Object"
-
-        Just (Different object) ->
+        Different object ->
             "Different Object"
 
 
@@ -255,11 +268,11 @@ listDisplacers : Bool -> List (Maybe Displacer)
 listDisplacers optional =
     if optional then
         [ Nothing
-        , Just (Primary (Be False Nothing))
+        , Just (Primary (Be False) Nothing)
         , Just (Secondary SoftYes)
         ]
     else
-        [ Just (Primary (Be False Nothing))
+        [ Just (Primary (Be False) Nothing)
         , Just (Secondary SoftYes)
         ]
 
@@ -270,7 +283,7 @@ equateDisplacers displacer1 displacer2 =
         ( Nothing, Nothing ) ->
             True
 
-        ( Just (Primary pivot1), Just (Primary pivot2) ) ->
+        ( Just (Primary pivot1 counter1), Just (Primary pivot2 counter2) ) ->
             True
 
         ( Just (Secondary modality1), Just (Secondary modality2) ) ->
@@ -286,7 +299,7 @@ displayDisplacer displacer =
         Nothing ->
             "-- No Displacer --"
 
-        Just (Primary pivot) ->
+        Just (Primary pivot counter) ->
             "Primary Displacer"
 
         Just (Secondary modality) ->
@@ -352,23 +365,17 @@ displayModality modality =
 
 {-| Targets.
 -}
-listTargets : Int -> List Target
+listTargets : Int -> List Int
 listTargets balanceCount =
-    let
-        balancingObjects =
-            List.map (\x -> BalancingObject x) (List.range 0 (balanceCount - 1))
-    in
-        MainObject :: balancingObjects
+    List.range -1 (balanceCount - 1)
 
 
-displayTarget : Target -> String
+displayTarget : Int -> String
 displayTarget target =
-    case target of
-        MainObject ->
-            "Main Object"
-
-        BalancingObject int ->
-            "Balancing Object " ++ (toString (int + 1))
+    if target < 0 then
+        "Main Object"
+    else
+        "Balancing Object " ++ (toString (target + 1))
 
 
 {-| Pointers.

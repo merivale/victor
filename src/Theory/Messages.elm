@@ -53,48 +53,34 @@ explode message =
             explode subMessage
                 |> andThen (scattered tally)
 
-        INDIRECT target pointer other haystack subMessage ->
+        INDIRECT target indirection subMessage ->
             explode subMessage
-                |> andThen (indirect target pointer other haystack)
+                |> andThen (indirect target indirection)
 
-        ENUMERATED target quantifier other haystack subMessage ->
+        ENUMERATED target agglomeration subMessage ->
             explode subMessage
-                |> andThen (enumerated target quantifier other haystack)
+                |> andThen (enumerated target agglomeration)
 
-        AMASSED target quantifier other haystack subMessage ->
+        AMASSED target agglomeration subMessage ->
             explode subMessage
-                |> andThen (amassed target quantifier other haystack)
+                |> andThen (amassed target agglomeration)
 
 
 {-| Generate the initial variables to be passed on to any elaborating functions.
 Note that I do not currently validate the nucleus of any message. ...
 -}
 plain : Nucleus -> Result String Vars
-plain ( object, ( pivot, balances ) ) =
+plain ( object, ( pivot, counter, balances ) ) =
     Ok
         { past = False
         , negateObject = False
-        , object = object
-        , objectOverride = Nothing
+        , object = RealObject object
         , modality = Nothing
-        , longPivot = newLongPivot pivot
+        , longPivot = newLongPivot pivot counter
         , longPivots = []
-        , balances =
-            List.map
-                (\x -> RealBalance x)
-                (List.filter (nonEmptyBalance) balances)
+        , balances = List.map (\x -> RealBalance x) balances
         , post = []
         }
-
-
-nonEmptyBalance : Balance -> Bool
-nonEmptyBalance ( counter, weight ) =
-    case ( counter, weight ) of
-        ( Nothing, Nothing ) ->
-            False
-
-        _ ->
-            True
 
 
 {-| Negating a message typically has the effect of negating its underlying
@@ -107,21 +93,21 @@ sentence.
 negative : Vars -> Result String Vars
 negative vars =
     if vars.negateObject then
-        case vars.objectOverride of
-            Nothing ->
+        case vars.object of
+            RealObject object ->
                 Err "direct objects cannot be negated"
 
-            Just (PointerObject pointer other haystack) ->
+            IndirectObject object indirection ->
                 Err "indirect objects cannot be negated"
 
-            Just (QuantifierObject negated quantifier other haystack) ->
+            AgglomeratedObject object negated agglomeration ->
                 if negated then
-                    Err "quantified objects cannot be negated twice"
+                    Err "agglomerated objects cannot be negated twice"
                 else
                     Ok
                         { vars
                             | negateObject = False
-                            , objectOverride = Just (QuantifierObject True quantifier other haystack)
+                            , object = AgglomeratedObject object True agglomeration
                         }
     else
         case vars.modality of
@@ -187,11 +173,11 @@ displaced displacer vars =
         Err "messages with a modality cannot be made DISPLACED"
     else
         case displacer of
-            Primary pivot ->
+            Primary pivot beam ->
                 Ok
                     { vars
                         | negateObject = False
-                        , longPivot = newLongPivot pivot
+                        , longPivot = newLongPivot pivot beam
                         , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
                     }
 
@@ -228,11 +214,11 @@ regular displacer frequency vars =
                         , longPivot = maybeAddToPre frequency vars.longPivot
                     }
 
-            Just (Primary pivot) ->
+            Just (Primary pivot counter) ->
                 Ok
                     { vars
                         | negateObject = False
-                        , longPivot = maybeAddToPre frequency (newLongPivot pivot)
+                        , longPivot = maybeAddToPre frequency (newLongPivot pivot counter)
                         , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
                     }
 
@@ -275,10 +261,10 @@ preordained displacer time vars =
                 Nothing ->
                     Ok newVars
 
-                Just (Primary pivot) ->
+                Just (Primary pivot counter) ->
                     Ok
                         { newVars
-                            | longPivot = newLongPivot pivot
+                            | longPivot = newLongPivot pivot counter
                             , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
                         }
 
@@ -317,128 +303,142 @@ scattered tally vars =
 
 {-| INDIRECT messages.
 -}
-indirect : Target -> Pointer -> Bool -> Haystack -> Vars -> Result String Vars
-indirect target pointer other haystack vars =
-    case target of
-        MainObject ->
-            if not (objectIsThirdPerson vars.object) then
-                Err "INDIRECT elaborations can only target third person (other) objects"
-            else
-                Ok
-                    { vars
-                        | negateObject = False
-                        , objectOverride = Just (PointerObject pointer other haystack)
-                    }
+indirect : Int -> Indirection -> Vars -> Result String Vars
+indirect target indirection vars =
+    if target < 0 then
+        case vars.object of
+            RealObject object ->
+                if not (objectIsThirdPerson object) then
+                    Err "only third person (other) objects can be overridden"
+                else
+                    Ok (overrideMainObject False (IndirectObject object indirection) vars)
 
-        BalancingObject balanceIndex ->
-            case Array.get balanceIndex (Array.fromList vars.balances) of
-                Just (RealBalance ( counter, Just (Different object) )) ->
-                    if not (objectIsThirdPerson object) then
-                        Err "INDIRECT elaborations can only target third person (other) objects"
-                    else
-                        Ok
-                            { vars
-                                | negateObject = False
-                                , balances = Array.toList (Array.set balanceIndex (PointerBalance counter object pointer other haystack) (Array.fromList vars.balances))
-                            }
+            _ ->
+                Err "main object cannot be overridden twice"
+    else
+        case Array.get target (Array.fromList vars.balances) of
+            Nothing ->
+                Err "target index out of range"
 
-                Just (PointerBalance counter object pointer bool haystack) ->
-                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
+            Just (RealBalance ( relator, SameAsMain )) ->
+                Err "only different balancing objects can be overridden"
 
-                Just (QuantifierBalance counter object negated quantifier bool haystack) ->
-                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
+            Just (RealBalance ( relator, Different object )) ->
+                if not (objectIsThirdPerson object) then
+                    Err "only third person (other) objects can be overridden"
+                else
+                    Ok (overrideBalancingObject target (IndirectBalance relator object indirection) vars)
 
-                _ ->
-                    Err ("balance " ++ (toString (balanceIndex + 1)) ++ " does not contain a target object")
+            _ ->
+                Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
 
 
 {-| ENUMERATED messages.
 -}
-enumerated : Target -> Quantifier -> Bool -> Haystack -> Vars -> Result String Vars
-enumerated target quantifier other haystack vars =
-    case target of
-        MainObject ->
-            if not (objectIsThirdPerson vars.object) then
-                Err "ENUMERATED elaborations can only target third person (other) objects"
+enumerated : Int -> Agglomeration -> Vars -> Result String Vars
+enumerated target agglomeration vars =
+    let
+        ( quantifier, other, haystack) =
+            agglomeration
+    in
+        if not (List.member quantifier enumeratedQuantifiers) then
+            Err "this quantifier cannot be used in ENUMERATED elaborations"
+        else
+            if target < 0 then
+                case vars.object of
+                    RealObject object ->
+                        if not (objectIsThirdPerson object) then
+                            Err "only third person (other) objects can be overridden"
+                        else if List.member quantifier pluralQuantifiers && not (objectIsPlural object) then
+                            Err "your ENUMERATED quantifier requires a plural balancing object"
+                        else
+                            let
+                                negateObject =
+                                    List.member quantifier negatableQuantifiers
+
+                                pseudoObject =
+                                    AgglomeratedObject object False agglomeration
+                            in
+                                Ok (overrideMainObject negateObject pseudoObject vars)
+
+                    _ ->
+                        Err "main object cannot be overridden twice"
+
             else
-                Ok
-                    { vars
-                        | negateObject = List.member quantifier [ Many, Every, Both, Some, Any ]
-                        , objectOverride = Just (QuantifierObject False (Just quantifier) other haystack)
-                    }
+                case Array.get target (Array.fromList vars.balances) of
+                    Nothing ->
+                        Err "target index out of range"
 
-        BalancingObject balanceIndex ->
-            case Array.get balanceIndex (Array.fromList vars.balances) of
-                Just (RealBalance ( counter, Just (Different object) )) ->
-                    if not (objectIsThirdPerson object) then
-                        Err "ENUMERATED elaborations can only target third person (other) objects"
-                    else if not (List.member quantifier [ A, Several, Many, Each, Every, Both, Some, Any ]) then
-                        Err "this quantifier cannot be used in ENUMERATED elaborations"
-                    else if List.member quantifier [ Several, Many, Both ] && not (objectIsPlural object) then
-                        Err "your ENUMERATED quantifier requires a plural target"
-                    else
-                        Ok
-                            { vars
-                                | negateObject = False
-                                , balances = Array.toList (Array.set balanceIndex (QuantifierBalance counter object False (Just quantifier) other haystack) (Array.fromList vars.balances))
-                            }
+                    Just (RealBalance ( relator, SameAsMain )) ->
+                        Err "only different balancing objects can be overridden"
 
-                Just (PointerBalance counter object pointer bool haystack) ->
-                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
+                    Just (RealBalance ( relator, Different object )) ->
+                        if not (objectIsThirdPerson object) then
+                            Err "only third person (other) objects can be overridden"
+                        else if List.member quantifier pluralQuantifiers && not (objectIsPlural object) then
+                            Err "your ENUMERATED quantifier requires a plural balancing object"
+                        else
+                            Ok (overrideBalancingObject target (AgglomeratedBalance relator object False agglomeration) vars)
 
-                Just (QuantifierBalance counter object negated quantifier bool haystack) ->
-                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
-
-                _ ->
-                    Err ("balance " ++ (toString (balanceIndex + 1)) ++ " does not contain a target object")
+                    _ ->
+                        Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
 
 
 {-| AMASSED messages.
 -}
-amassed : Target -> Maybe Quantifier -> Bool -> Haystack -> Vars -> Result String Vars
-amassed target quantifier other haystack vars =
-    case target of
-        MainObject ->
-            if not (objectIsThirdPerson vars.object) then
-                Err "AMASSED elaborations can only target third person (other) objects"
+amassed : Int -> Agglomeration -> Vars -> Result String Vars
+amassed target agglomeration vars =
+    let
+        ( quantifier, other, haystack) =
+            agglomeration
+    in
+        if not (List.member quantifier amassedQuantifiers) then
+            Err "this quantifier cannot be used in AMASSED elaborations"
+        else
+            if target < 0 then
+                case vars.object of
+                    RealObject object ->
+                        if not (objectIsThirdPerson object) then
+                            Err "only third person (other) objects can be overridden"
+                        else if quantifier == Just Much && (objectIsPlural object) then
+                            Err "this quantifier cannot be used with plural objects"
+                        else
+                            let
+                                negateObject =
+                                    List.member quantifier negatableQuantifiers
+
+                                pseudoObject =
+                                    AgglomeratedObject object False agglomeration
+                            in
+                                Ok (overrideMainObject negateObject pseudoObject vars)
+
+                    _ ->
+                        Err "main object cannot be overridden twice"
             else
-                Ok
-                    { vars
-                        | negateObject = False
-                        , objectOverride = Just (QuantifierObject False quantifier other haystack)
-                    }
+                case Array.get target (Array.fromList vars.balances) of
+                    Nothing ->
+                        Err "target index out of range"
 
-        BalancingObject balanceIndex ->
-            case Array.get balanceIndex (Array.fromList vars.balances) of
-                Just (RealBalance ( counter, Just (Different object) )) ->
-                    if not (objectIsThirdPerson object) then
-                        Err "INDIRECT elaborations can only target third person (other) objects"
-                    else if not (List.member (Maybe.withDefault All quantifier) [ Some, Any, All, Much, Most, Enough ]) then
-                        Err "this quantifier cannot be used in AMASSED elaborations"
-                    else if quantifier == Just Much && (objectIsPlural object) then
-                        Err "the MUCH quantifier cannot be used with plural objects"
-                    else
-                        Ok
-                            { vars
-                                | negateObject = List.member quantifier [ Just Some, Just Any, Just All, Just Much, Just Enough ]
-                                , balances = Array.toList (Array.set balanceIndex (QuantifierBalance counter object False quantifier other haystack) (Array.fromList vars.balances))
-                            }
+                    Just (RealBalance ( relator, SameAsMain )) ->
+                        Err "only different balancing objects can be overridden"
 
-                Just (PointerBalance counter object pointer bool haystack) ->
-                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
+                    Just (RealBalance ( relator, Different object )) ->
+                        if not (objectIsThirdPerson object) then
+                            Err "only third person (other) objects can be overridden"
+                        else if quantifier == Just Much && (objectIsPlural object) then
+                            Err "this quantifier cannot be used with plural objects"
+                        else
+                            Ok (overrideBalancingObject target (AgglomeratedBalance relator object False agglomeration) vars)
 
-                Just (QuantifierBalance counter object negated quantifier bool haystack) ->
-                    Err ("balancing object " ++ (toString (balanceIndex + 1)) ++ " cannot be targeted twice")
-
-                _ ->
-                    Err ("balance " ++ (toString (balanceIndex + 1)) ++ " does not contain a target object")
+                    _ ->
+                        Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
 
 
-{-| USeful bits and pieces.
+{-| Some functions for modifying LongPivots.
 -}
-newLongPivot : Pivot -> LongPivot
-newLongPivot pivot =
-    { pivot = pivot, prior = False, pre = [] }
+newLongPivot : Pivot -> Maybe Counter -> LongPivot
+newLongPivot pivot counter =
+    { pivot = pivot, counter = counter, prior = False, pre = [] }
 
 
 addToPre : String -> LongPivot -> LongPivot
@@ -461,6 +461,29 @@ setPrior longPivot =
     { longPivot | prior = True }
 
 
+{-| Some functions for overriding objects (used by INDIRECT/ENUMERATED/AMASSED
+elaborations).
+-}
+overrideMainObject : Bool -> PseudoObject -> Vars -> Vars
+overrideMainObject negateObject pseudoObject vars =
+    { vars | negateObject = negateObject, object = pseudoObject }
+
+
+overrideBalancingObject : Int -> PseudoBalance -> Vars -> Vars
+overrideBalancingObject target pseudoBalance vars =
+    let
+        oldArray =
+            Array.fromList vars.balances
+
+        newArray =
+            Array.set target pseudoBalance oldArray
+    in
+        { vars | balances = Array.toList newArray }
+
+
+{-| Check Object properties (used for validating INDIRECT/ENUMERATED/AMASSED
+elaborations).
+-}
 objectIsThirdPerson : Object -> Bool
 objectIsThirdPerson object =
     case object of
@@ -482,3 +505,53 @@ objectIsPlural object =
 
         Other plural sex string ->
             plural
+
+
+{-| Lists of Quantifiers (used for validating INDIRECT/ENUMERATED/AMASSED
+elaborations).
+-}
+enumeratedQuantifiers : List (Maybe Quantifier)
+enumeratedQuantifiers =
+    [ Just A
+    , Just Several
+    , Just Many
+    , Just Each
+    , Just Every
+    , Just Both
+    , Just Some
+    , Just Any
+    ]
+
+
+amassedQuantifiers : List (Maybe Quantifier)
+amassedQuantifiers =
+    [ Nothing
+    , Just Some
+    , Just Any
+    , Just All
+    , Just Much
+    , Just Most
+    , Just Enough
+    ]
+
+
+negatableQuantifiers : List (Maybe Quantifier)
+negatableQuantifiers =
+    [ Just Many
+    , Just Every
+    , Just Both
+    , Just Some
+    , Just Any
+    , Just All
+    , Just Much
+    , Just Most
+    , Just Enough
+    ]
+
+
+pluralQuantifiers : List (Maybe Quantifier)
+pluralQuantifiers =
+    [ Just Several
+    , Just Many
+    , Just Both
+    ]

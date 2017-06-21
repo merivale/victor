@@ -14,8 +14,9 @@ initial : Model
 initial =
     { plus = False
     , object = Speaker False
-    , pivot = Be False Nothing
-    , balances = [ ( Nothing, Just (Different (Other False (Just Male) (Just "Victor"))) ) ]
+    , pivot = Be False
+    , counter = Nothing
+    , balances = [ ( Nothing, Different (Other False (Just Male) (Just "Victor")) ) ]
     , elaborations = []
     }
 
@@ -46,15 +47,7 @@ update signal model =
                     model
 
         SetPivot pivot ->
-            { model | pivot = mergePivots pivot model.pivot }
-
-        SetPivotSense sense ->
-            case model.pivot of
-                Seem oldSense ongoing property ->
-                    { model | pivot = Seem sense ongoing property }
-
-                _ ->
-                    model
+            { model | pivot = pivot }
 
         SetPivotVerbality verbality ->
             case model.pivot of
@@ -66,11 +59,8 @@ update signal model =
 
         TogglePivotOngoing ->
             case model.pivot of
-                Be ongoing property ->
-                    { model | pivot = Be (not ongoing) property }
-
-                Seem sense ongoing property ->
-                    { model | pivot = Seem sense (not ongoing) property }
+                Be ongoing ->
+                    { model | pivot = Be (not ongoing) }
 
                 Do verbality ongoing passive ->
                     { model | pivot = Do verbality (not ongoing) passive }
@@ -83,19 +73,17 @@ update signal model =
                 _ ->
                     model
 
-        SetPivotProperty property ->
-            case model.pivot of
-                Be ongoing oldProperty ->
-                    { model | pivot = Be ongoing (maybe property) }
+        SetCounter counter ->
+            { model | counter = counter }
 
-                Seem sense ongoing oldProperty ->
-                    { model | pivot = Seem sense ongoing (maybe property) }
+        SetCounterProperty property ->
+            { model | counter = Just (CounterProperty property) }
 
-                _ ->
-                    model
+        SetCounterRelator relator ->
+            { model | counter = Just (CounterRelator relator) }
 
         AddBalance ->
-            { model | balances = model.balances ++ [ ( Nothing, Nothing ) ] }
+            { model | balances = model.balances ++ [ ( Nothing, SameAsMain ) ] }
 
         RemoveBalance ->
             let
@@ -107,17 +95,17 @@ update signal model =
                     , elaborations = List.filter (doesNotTarget lastIndex) model.elaborations
                 }
 
-        SetBalanceCounter index counter ->
-            { model | balances = modifyItem index (setCounter counter) model.balances }
+        SetBalanceRelator index relator ->
+            { model | balances = modifyItem index (setRelator relator) model.balances }
 
         SetBalanceWeight index weight ->
             { model | balances = modifyItem index (setWeight weight) model.balances }
 
-        SetBalanceObject index object ->
-            { model | balances = modifyItem index (setObject object) model.balances }
+        SetBalanceWeightObject index object ->
+            { model | balances = modifyItem index (setWeightObject object) model.balances }
 
-        SetBalanceObjectString index string ->
-            { model | balances = modifyItem index (setObjectString string) model.balances }
+        SetBalanceWeightObjectString index string ->
+            { model | balances = modifyItem index (setWeightObjectString string) model.balances }
 
         AddElaboration index recipe ->
             let
@@ -138,12 +126,6 @@ update signal model =
         SetDisplacerPivot index pivot ->
             { model | elaborations = modifyItem index (setDisplacerPivot pivot) model.elaborations }
 
-        SetDisplacerPivotProperty index property ->
-            { model | elaborations = modifyItem index (setDisplacerPivotProperty property) model.elaborations }
-
-        SetDisplacerPivotSense index sense ->
-            { model | elaborations = modifyItem index (setDisplacerPivotSense sense) model.elaborations }
-
         SetDisplacerPivotVerbality index verbality ->
             { model | elaborations = modifyItem index (setDisplacerPivotVerbality verbality) model.elaborations }
 
@@ -152,6 +134,15 @@ update signal model =
 
         ToggleDisplacerPivotPassive index ->
             { model | elaborations = modifyItem index toggleDisplacerPivotPassive model.elaborations }
+
+        SetDisplacerCounter index counter ->
+            { model | elaborations = modifyItem index (setDisplacerCounter counter) model.elaborations }
+
+        SetDisplacerCounterProperty index property ->
+            { model | elaborations = modifyItem index (setDisplacerCounterProperty property) model.elaborations }
+
+        SetDisplacerCounterRelator index relator ->
+            { model | elaborations = modifyItem index (setDisplacerCounterRelator relator) model.elaborations }
 
         SetDisplacerModality index modality ->
             { model | elaborations = modifyItem index (setDisplacerModality modality) model.elaborations }
@@ -167,9 +158,6 @@ update signal model =
 
         SetTarget index target ->
             { model | elaborations = modifyItem index (setTarget target) model.elaborations }
-
-        SetTargetInt index balanceIndex ->
-            { model | elaborations = modifyItem index (setTargetInt balanceIndex) model.elaborations }
 
         SetPointer index pointer ->
             { model | elaborations = modifyItem index (setPointer pointer) model.elaborations }
@@ -210,34 +198,6 @@ toggleOrMinus toggleIndex currentIndex elaboration =
         { elaboration | plus = False }
 
 
-{-| Merge two pivots together. This is used to change the base type of pivot
-without losing the existing values of any common arguments.
--}
-mergePivots : Pivot -> Pivot -> Pivot
-mergePivots pivot1 pivot2 =
-    case ( pivot1, pivot2 ) of
-        ( Be ongoing1 property1, Seem sense ongoing2 property2 ) ->
-            Be ongoing2 property2
-
-        ( Be ongoing1 property, Do verbality ongoing2 passive ) ->
-            Be ongoing2 property
-
-        ( Seem sense ongoing1 property1, Be ongoing2 property2 ) ->
-            Seem sense ongoing2 property2
-
-        ( Seem sense ongoing1 property, Do verbality ongoing2 passive ) ->
-            Seem sense ongoing2 property
-
-        ( Do verbality ongoing1 passive, Be ongoing2 property ) ->
-            Do verbality ongoing2 passive
-
-        ( Do verbality ongoing1 passive, Seem sense ongoing2 property ) ->
-            Do verbality ongoing2 passive
-
-        _ ->
-            pivot1
-
-
 {-| Check that an elaboration does not target the balancing object at the given
 index. Used to remove any elaboration that does, when the corresponding balance
 is deleted.
@@ -246,8 +206,7 @@ doesNotTarget : Int -> Elaboration -> Bool
 doesNotTarget balanceIndex elaboration =
     not
         (List.member elaboration.recipe [ MakeINDIRECT, MakeENUMERATED, MakeAMASSED ]
-            && elaboration.target
-            == BalancingObject balanceIndex
+            && elaboration.target == balanceIndex
         )
 
 
@@ -293,7 +252,7 @@ elaborationDefault recipe =
     , string1 = Nothing
     , string2 = Nothing
     , string3 = Nothing
-    , target = MainObject
+    , target = -1
     , pointer = The
     , quantifier = Nothing
     , other = False
@@ -304,11 +263,11 @@ elaborationWithDisplacer : Recipe -> Elaboration
 elaborationWithDisplacer recipe =
     { plus = False
     , recipe = recipe
-    , displacer = Just (Primary (Be False Nothing))
+    , displacer = Just (Primary (Be False) Nothing)
     , string1 = Nothing
     , string2 = Nothing
     , string3 = Nothing
-    , target = MainObject
+    , target = -1
     , pointer = The
     , quantifier = Nothing
     , other = False
@@ -323,7 +282,7 @@ elaborationWithQuantifier recipe =
     , string1 = Nothing
     , string2 = Nothing
     , string3 = Nothing
-    , target = MainObject
+    , target = -1
     , pointer = The
     , quantifier = Just Some
     , other = False
@@ -348,34 +307,34 @@ modifyItem index modified list =
 {-| Functions for modifying the components of a balance, used as arguments to
 the modifyItem function above.
 -}
-setCounter : Maybe Counter -> Balance -> Balance
-setCounter counter ( oldCounter, weight ) =
-    ( counter, weight )
+setRelator : Maybe Relator -> Balance -> Balance
+setRelator relator ( oldRelator, weight ) =
+    ( relator, weight )
 
 
-setWeight : Maybe Weight -> Balance -> Balance
-setWeight weight ( counter, oldWeight ) =
-    ( counter, weight )
+setWeight : Weight -> Balance -> Balance
+setWeight weight ( relator, oldWeight ) =
+    ( relator, weight )
 
 
-setObject : Object -> Balance -> Balance
-setObject object ( counter, balance ) =
-    case balance of
-        Just (Different oldObject) ->
-            ( counter, Just (Different object) )
-
-        _ ->
-            ( counter, balance )
-
-
-setObjectString : String -> Balance -> Balance
-setObjectString string ( counter, weight ) =
+setWeightObject : Object -> Balance -> Balance
+setWeightObject object ( relator, weight ) =
     case weight of
-        Just (Different (Other plural sex oldString)) ->
-            ( counter, Just (Different (Other plural sex (maybe string))) )
+        Different oldObject ->
+            ( relator, Different object )
 
         _ ->
-            ( counter, weight )
+            ( relator, weight )
+
+
+setWeightObjectString : String -> Balance -> Balance
+setWeightObjectString string ( relator, weight ) =
+    case weight of
+        Different (Other plural sex oldString) ->
+            ( relator, Different (Other plural sex (maybe string)) )
+
+        _ ->
+            ( relator, weight )
 
 
 {-| Functions for modifying the components of an elaboration, used as arguments
@@ -392,20 +351,10 @@ setDisplacer displacer elaboration =
 
 
 setDisplacerPivot : Pivot -> Elaboration -> Elaboration
-setDisplacerPivot pivot1 elaboration =
+setDisplacerPivot pivot elaboration =
     case elaboration.displacer of
-        Just (Primary pivot2) ->
-            { elaboration | displacer = Just (Primary (mergePivots pivot1 pivot2)) }
-
-        _ ->
-            elaboration
-
-
-setDisplacerPivotSense : Maybe Sense -> Elaboration -> Elaboration
-setDisplacerPivotSense sense elaboration =
-    case elaboration.displacer of
-        Just (Primary (Seem oldSense ongoing property)) ->
-            { elaboration | displacer = Just (Primary (Seem sense ongoing property)) }
+        Just (Primary pivot beam) ->
+            { elaboration | displacer = Just (Primary pivot beam) }
 
         _ ->
             elaboration
@@ -414,8 +363,8 @@ setDisplacerPivotSense sense elaboration =
 setDisplacerPivotVerbality : Verbality -> Elaboration -> Elaboration
 setDisplacerPivotVerbality verbality elaboration =
     case elaboration.displacer of
-        Just (Primary (Do oldVerbality ongoing passive)) ->
-            { elaboration | displacer = Just (Primary (Do verbality ongoing passive)) }
+        Just (Primary (Do oldVerbality ongoing passive) beam) ->
+            { elaboration | displacer = Just (Primary (Do verbality ongoing passive) beam) }
 
         _ ->
             elaboration
@@ -424,14 +373,11 @@ setDisplacerPivotVerbality verbality elaboration =
 toggleDisplacerPivotOngoing : Elaboration -> Elaboration
 toggleDisplacerPivotOngoing elaboration =
     case elaboration.displacer of
-        Just (Primary (Be ongoing property)) ->
-            { elaboration | displacer = Just (Primary (Be (not ongoing) property)) }
+        Just (Primary (Be ongoing) beam) ->
+            { elaboration | displacer = Just (Primary (Be (not ongoing)) beam) }
 
-        Just (Primary (Seem sense ongoing property)) ->
-            { elaboration | displacer = Just (Primary (Seem sense (not ongoing) property)) }
-
-        Just (Primary (Do verbality ongoing passive)) ->
-            { elaboration | displacer = Just (Primary (Do verbality (not ongoing) passive)) }
+        Just (Primary (Do verbality ongoing passive) beam) ->
+            { elaboration | displacer = Just (Primary (Do verbality (not ongoing) passive) beam) }
 
         _ ->
             elaboration
@@ -440,21 +386,38 @@ toggleDisplacerPivotOngoing elaboration =
 toggleDisplacerPivotPassive : Elaboration -> Elaboration
 toggleDisplacerPivotPassive elaboration =
     case elaboration.displacer of
-        Just (Primary (Do verbality ongoing passive)) ->
-            { elaboration | displacer = Just (Primary (Do verbality ongoing (not passive))) }
+        Just (Primary (Do verbality ongoing passive) beam) ->
+            { elaboration | displacer = Just (Primary (Do verbality ongoing (not passive)) beam) }
 
         _ ->
             elaboration
 
 
-setDisplacerPivotProperty : Property -> Elaboration -> Elaboration
-setDisplacerPivotProperty property elaboration =
+setDisplacerCounter : Maybe Counter -> Elaboration -> Elaboration
+setDisplacerCounter counter elaboration =
     case elaboration.displacer of
-        Just (Primary (Be ongoing oldProperty)) ->
-            { elaboration | displacer = Just (Primary (Be ongoing (maybe property))) }
+        Just (Primary pivot oldCounter) ->
+            { elaboration | displacer = Just (Primary pivot counter) }
 
-        Just (Primary (Seem sense ongoing oldProperty)) ->
-            { elaboration | displacer = Just (Primary (Seem sense ongoing (maybe property))) }
+        _ ->
+            elaboration
+
+
+setDisplacerCounterProperty : Property -> Elaboration -> Elaboration
+setDisplacerCounterProperty property elaboration =
+    case elaboration.displacer of
+        Just (Primary pivot counter) ->
+            { elaboration | displacer = Just (Primary pivot (Just (CounterProperty property))) }
+
+        _ ->
+            elaboration
+
+
+setDisplacerCounterRelator : Relator -> Elaboration -> Elaboration
+setDisplacerCounterRelator relator elaboration =
+    case elaboration.displacer of
+        Just (Primary pivot counter) ->
+            { elaboration | displacer = Just (Primary pivot (Just (CounterRelator relator))) }
 
         _ ->
             elaboration
@@ -488,14 +451,9 @@ maybe string =
         Just string
 
 
-setTarget : Target -> Elaboration -> Elaboration
+setTarget : Int -> Elaboration -> Elaboration
 setTarget target elaboration =
     { elaboration | target = target }
-
-
-setTargetInt : Int -> Elaboration -> Elaboration
-setTargetInt balanceIndex elaboration =
-    { elaboration | target = BalancingObject balanceIndex }
 
 
 setPointer : Pointer -> Elaboration -> Elaboration

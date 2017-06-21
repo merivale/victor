@@ -32,9 +32,9 @@ type Message
     | PREORDAINED (Maybe Displacer) (Maybe Time) Message
     | EXTENDED Duration Message
     | SCATTERED Tally Message
-    | INDIRECT Target Pointer Bool Haystack Message
-    | ENUMERATED Target Quantifier Bool Haystack Message
-    | AMASSED Target (Maybe Quantifier) Bool Haystack Message
+    | INDIRECT Int Indirection Message
+    | ENUMERATED Int Agglomeration Message
+    | AMASSED Int Agglomeration Message
 
 
 {-| The nucleus of an English message consists of an object, a pivot, and a
@@ -67,37 +67,35 @@ balances fetching up in any subsequent words. Some pivots are encoded into more
 than one word, however, such as "be happy", "be being silly", or "be eaten".
 -}
 type alias Condition =
-    ( Pivot, List Balance )
+    ( Pivot, Maybe Counter, List Balance )
 
 
+{-| Pivots are of two kinds, Be or Do. The first is for predicates like "be
+happy", "seem happy", "look happy", "become happy"; the second is for everything
+else. The boolean argument for Be pivots specifies whether the condition is
+ongoing or not ("be happy" versus "be being happy"). Likewise the first boolean
+argument for Do pivots. The second indicates whether the condition is passive
+or not ("eat" versus "be eaten").
+-}
 type Pivot
-    = Be Bool (Maybe Property)
-    | Seem (Maybe Sense) Bool (Maybe Property)
+    = Be Bool
     | Do Verbality Bool Bool
 
 
-type Sense
-    = Sight
-    | Smell
-    | Sound
-    | Taste
-    | Touch
-
-
-{-| A balance consists of either a counter or a weight, or both. The weight is
-encoded in a pronoun, proper name, or noun phrase; it's essentially just another
-object, with a tweak to allow for reflexive pronouns like "myself", "herself",
-etc. The counter is encoded in a preposition.
-
-This aspect of the model is a considerable simplification, and there are a lot
-of plain messages that cannot be constructed (or encoded) within my system. But
-the simplification is still very powerful, perhaps surprisingly so.
--}
-type alias Balance =
-    ( Maybe Counter, Maybe Weight )
+type alias Verbality =
+    String
 
 
 type Counter
+    = CounterProperty Property
+    | CounterRelator Relator
+
+
+type alias Property =
+    String
+
+
+type Relator
     = About
     | Above
     | After
@@ -131,19 +129,26 @@ type Counter
     | Without
 
 
+{-| A balance consists of either a counter or a weight, or both. The weight is
+encoded in a pronoun, proper name, or noun phrase; it's essentially just another
+object, with a tweak to allow for reflexive pronouns like "myself", "herself",
+etc. The counter is encoded in a preposition.
+-}
+type alias Balance =
+    ( Maybe Relator, Weight )
+
+
 type Weight
-    = SameObject
+    = SameAsMain
     | Different Object
 
 
 {-| This is not the place to explain the nature of the various elaborations
 posited by my model. Nor is it the place to go into detail about the additional
-arguments that (some of) these elaborations take. See the README file for
-details. Note that many of these arguments are currently just aliases for
-strings, which means that users are obliged to encode them for themselves.
+arguments that (some of) these elaborations take; see the README file.
 -}
 type Displacer
-    = Primary Pivot
+    = Primary Pivot (Maybe Counter)
     | Secondary Modality
 
 
@@ -159,9 +164,12 @@ type Modality
     | Command
 
 
-type Target
-    = MainObject
-    | BalancingObject Int
+type alias Indirection =
+    ( Pointer, Bool, Haystack )
+
+
+type alias Agglomeration =
+    ( Maybe Quantifier, Bool, Haystack )
 
 
 type Pointer
@@ -190,8 +198,8 @@ type alias Haystack =
     ( Category, Maybe Property, Maybe Restriction )
 
 
-{-| Various types that (for now at least) are just aliases for strings; meaning
-that users must encode these for themselves.
+{-| Unearthed variable types, i.e. types that (for now at least) are just
+aliases for strings; meaning that users must encode these for themselves.
 -}
 type alias Frequency =
     String
@@ -206,14 +214,6 @@ type alias Duration =
 
 
 type alias Tally =
-    String
-
-
-type alias Property =
-    String
-
-
-type alias Verbality =
     String
 
 
@@ -235,8 +235,7 @@ down are direct determiners of the output string.
 type alias Vars =
     { past : Bool
     , negateObject : Bool
-    , object : Object
-    , objectOverride : Maybe PseudoObject
+    , object : PseudoObject
     , modality : Maybe Modality
     , longPivot : LongPivot
     , longPivots : List LongPivot
@@ -247,17 +246,19 @@ type alias Vars =
 
 type alias LongPivot =
     { pivot : Pivot
+    , counter : Maybe Counter
     , prior : Bool
     , pre : List String
     }
 
 
 type PseudoObject
-    = PointerObject Pointer Bool Haystack
-    | QuantifierObject Bool (Maybe Quantifier) Bool Haystack
+    = RealObject Object
+    | IndirectObject Object Indirection
+    | AgglomeratedObject Object Bool Agglomeration
 
 
 type PseudoBalance
     = RealBalance Balance
-    | PointerBalance (Maybe Counter) Object Pointer Bool Haystack
-    | QuantifierBalance (Maybe Counter) Object Bool (Maybe Quantifier) Bool Haystack
+    | IndirectBalance (Maybe Relator) Object Indirection
+    | AgglomeratedBalance (Maybe Relator) Object Bool Agglomeration

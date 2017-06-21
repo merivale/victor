@@ -183,11 +183,11 @@ relative2 object =
             string ++ "'s"
 
 
-{-| Encode a counter in a preposition.
+{-| Encode a relator in a preposition.
 -}
-preposition : Counter -> String
-preposition counter =
-    String.toLower (toString counter)
+preposition : Relator -> String
+preposition relator =
+    String.toLower (toString relator)
 
 
 {-| Encode a pointer in an article. Note that I distinguish articles from

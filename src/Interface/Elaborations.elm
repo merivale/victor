@@ -2,6 +2,7 @@ module Interface.Elaborations
     exposing
         ( displacer
         , pivot
+        , counter
         , modality
         , frequency
         , time
@@ -39,24 +40,14 @@ displacer optional index elaboration =
 pivot : Int -> Pivot -> Html.Html Signal
 pivot index pivot =
     case pivot of
-        Be ongoing property ->
+        Be ongoing ->
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Pivot"
                 , pivotSelect index pivot
                 , Input.emptyInput
                 , pivotOngoing index ongoing
-                , pivotProperty index property
-                ]
-
-        Seem sense ongoing property ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Pivot"
-                , pivotSelect index pivot
-                , pivotSenseSelect index sense
-                , pivotOngoing index ongoing
-                , pivotProperty index property
+                , Input.emptyInput
                 ]
 
         Do verbality ongoing passive ->
@@ -67,6 +58,34 @@ pivot index pivot =
                 , pivotVerbality index verbality
                 , pivotOngoing index ongoing
                 , pivotPassive index passive
+                ]
+
+
+counter : Int -> Maybe Counter -> Html.Html Signal
+counter index counter =
+    case counter of
+        Nothing ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Counter"
+                , counterSelect index counter
+                , Input.emptyInput
+                ]
+
+        Just (CounterProperty property) ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Counter"
+                , counterSelect index counter
+                , counterProperty index property
+                ]
+
+        Just (CounterRelator relator) ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Counter"
+                , counterSelect index counter
+                , counterRelatorSelect index relator
                 ]
 
 
@@ -214,14 +233,25 @@ pivotSelect index pivot =
         }
 
 
-pivotSenseSelect : Int -> Maybe Sense -> Html.Html Signal
-pivotSenseSelect index sense =
+counterSelect : Int -> Maybe Counter -> Html.Html Signal
+counterSelect index counter =
     Input.select
-        { value = sense
-        , options = Ideas.listSenses
+        { value = counter
+        , options = Ideas.listCounters
+        , equivalent = Ideas.equateCounters
+        , signal = SetDisplacerCounter index
+        , toLabel = Ideas.displayCounter
+        }
+
+
+counterRelatorSelect : Int -> Relator -> Html.Html Signal
+counterRelatorSelect index relator =
+    Input.select
+        { value = relator
+        , options = Ideas.listRelators
         , equivalent = (==)
-        , signal = SetDisplacerPivotSense index
-        , toLabel = Ideas.displaySense
+        , signal = SetDisplacerCounterRelator index
+        , toLabel = toString
         }
 
 
@@ -236,7 +266,7 @@ modalitySelect limited index modality =
         }
 
 
-targetSelect : Int -> Int -> Target -> Html.Html Signal
+targetSelect : Int -> Int -> Int -> Html.Html Signal
 targetSelect balanceCount index target =
     Input.select
         { value = target
@@ -282,22 +312,22 @@ quantifierSelect amassed index quantifier =
 
 {-| Text inputs, used by the main output functions above.
 -}
-pivotProperty : Int -> Maybe Property -> Html.Html Signal
-pivotProperty index property =
-    Input.text
-        { value = Maybe.withDefault "" property
-        , placeholder = "e.g. able, eager, happy (optional)"
-        , signal = SetDisplacerPivotProperty index
-        , disabled = False
-        }
-
-
 pivotVerbality : Int -> Verbality -> Html.Html Signal
 pivotVerbality index verbality =
     Input.text
         { value = verbality
         , placeholder = "e.g. have, like, want"
         , signal = SetDisplacerPivotVerbality index
+        , disabled = False
+        }
+
+
+counterProperty : Int -> Property -> Html.Html Signal
+counterProperty index property =
+    Input.text
+        { value = property
+        , placeholder = "e.g. able, eager, happy (optional)"
+        , signal = SetDisplacerCounterProperty index
         , disabled = False
         }
 

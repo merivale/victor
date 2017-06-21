@@ -2,6 +2,7 @@ module Interface.Nucleus
     exposing
         ( object
         , pivot
+        , counter
         , balance
         )
 
@@ -31,24 +32,14 @@ object object =
 pivot : Pivot -> Html.Html Signal
 pivot pivot =
     case pivot of
-        Be ongoing property ->
+        Be ongoing ->
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Pivot"
                 , pivotSelect pivot
                 , Input.emptyInput
                 , pivotOngoing ongoing
-                , pivotProperty property
-                ]
-
-        Seem sense ongoing property ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Pivot"
-                , pivotSelect pivot
-                , pivotSenseSelect sense
-                , pivotOngoing ongoing
-                , pivotProperty property
+                , Input.emptyInput
                 ]
 
         Do verbality ongoing passive ->
@@ -62,37 +53,55 @@ pivot pivot =
                 ]
 
 
-balance : Int -> Balance -> Html.Html Signal
-balance index ( counter, weight ) =
-    case weight of
+counter : Maybe Counter -> Html.Html Signal
+counter counter =
+    case counter of
         Nothing ->
             Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Counter"
+                , counterSelect counter
+                , Input.emptyInput
+                ]
+
+        Just (CounterProperty property) ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Counter"
+                , counterSelect counter
+                , counterProperty property
+                ]
+
+        Just (CounterRelator relator) ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Counter"
+                , counterSelect counter
+                , counterRelatorSelect relator
+                ]
+
+
+balance : Int -> Balance -> Html.Html Signal
+balance index ( relator, weight ) =
+    case weight of
+        SameAsMain ->
+            Html.div
                 [ Attr.class "factor balance" ]
                 [ Input.label ("Balance " ++ (toString (index + 1)))
-                , counterSelect index counter
-                , weightSelect index weight
+                , balanceRelatorSelect index relator
+                , balanceWeightSelect index weight
                 , Input.emptyInput
                 , Input.emptyInput
                 ]
 
-        Just SameObject ->
+        Different object ->
             Html.div
                 [ Attr.class "factor balance" ]
                 [ Input.label ("Balance " ++ (toString (index + 1)))
-                , counterSelect index counter
-                , weightSelect index weight
-                , Input.emptyInput
-                , Input.emptyInput
-                ]
-
-        Just (Different object) ->
-            Html.div
-                [ Attr.class "factor balance" ]
-                [ Input.label ("Balance " ++ (toString (index + 1)))
-                , counterSelect index counter
-                , weightSelect index weight
-                , weightObjectSelect index object
-                , weightObjectText index object
+                , balanceRelatorSelect index relator
+                , balanceWeightSelect index weight
+                , balanceWeightObjectSelect index object
+                , balanceWeightObjectText index object
                 ]
 
 
@@ -120,30 +129,41 @@ pivotSelect pivot =
         }
 
 
-pivotSenseSelect : Maybe Sense -> Html.Html Signal
-pivotSenseSelect sense =
-    Input.select
-        { value = sense
-        , options = Ideas.listSenses
-        , equivalent = (==)
-        , signal = SetPivotSense
-        , toLabel = Ideas.displaySense
-        }
-
-
-counterSelect : Int -> Maybe Counter -> Html.Html Signal
-counterSelect index counter =
+counterSelect : Maybe Counter -> Html.Html Signal
+counterSelect counter =
     Input.select
         { value = counter
         , options = Ideas.listCounters
-        , equivalent = (==)
-        , signal = SetBalanceCounter index
+        , equivalent = Ideas.equateCounters
+        , signal = SetCounter
         , toLabel = Ideas.displayCounter
         }
 
 
-weightSelect : Int -> Maybe Weight -> Html.Html Signal
-weightSelect index weight =
+counterRelatorSelect : Relator -> Html.Html Signal
+counterRelatorSelect relator =
+    Input.select
+        { value = relator
+        , options = Ideas.listRelators
+        , equivalent = (==)
+        , signal = SetCounterRelator
+        , toLabel = toString
+        }
+
+
+balanceRelatorSelect : Int -> Maybe Relator -> Html.Html Signal
+balanceRelatorSelect index relator =
+    Input.select
+        { value = relator
+        , options = Ideas.listMaybeRelators
+        , equivalent = (==)
+        , signal = SetBalanceRelator index
+        , toLabel = Ideas.displayMaybeRelator
+        }
+
+
+balanceWeightSelect : Int -> Weight -> Html.Html Signal
+balanceWeightSelect index weight =
     Input.select
         { value = weight
         , options = Ideas.listWeights
@@ -153,13 +173,13 @@ weightSelect index weight =
         }
 
 
-weightObjectSelect : Int -> Object -> Html.Html Signal
-weightObjectSelect index object =
+balanceWeightObjectSelect : Int -> Object -> Html.Html Signal
+balanceWeightObjectSelect index object =
     Input.selectGroup Ideas.listObjectGroups
         { value = object
         , options = Ideas.listObjects
         , equivalent = Ideas.equateObjects
-        , signal = SetBalanceObject index
+        , signal = SetBalanceWeightObject index
         , toLabel = Ideas.displayObject
         }
 
@@ -176,16 +196,6 @@ objectText object =
         }
 
 
-pivotProperty : Maybe Property -> Html.Html Signal
-pivotProperty property =
-    Input.text
-        { value = Maybe.withDefault "" property
-        , placeholder = "e.g. able, eager, happy (optional)"
-        , signal = SetPivotProperty
-        , disabled = False
-        }
-
-
 pivotVerbality : Verbality -> Html.Html Signal
 pivotVerbality verbality =
     Input.text
@@ -196,12 +206,22 @@ pivotVerbality verbality =
         }
 
 
-weightObjectText : Int -> Object -> Html.Html Signal
-weightObjectText index object =
+counterProperty : Property -> Html.Html Signal
+counterProperty property =
+    Input.text
+        { value = property
+        , placeholder = "e.g. able, eager, happy (optional)"
+        , signal = SetCounterProperty
+        , disabled = False
+        }
+
+
+balanceWeightObjectText : Int -> Object -> Html.Html Signal
+balanceWeightObjectText index object =
     Input.text
         { value = Maybe.withDefault "" (Ideas.objectString object)
         , placeholder = "name (optional)"
-        , signal = SetBalanceObjectString index
+        , signal = SetBalanceWeightObjectString index
         , disabled = not (Ideas.objectHasString object)
         }
 
