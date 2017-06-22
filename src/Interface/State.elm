@@ -353,7 +353,7 @@ setDisplacer displacer elaboration =
 setDisplacerPivot : Pivot -> Elaboration -> Elaboration
 setDisplacerPivot pivot elaboration =
     case elaboration.displacer of
-        Just (Primary pivot beam) ->
+        Just (Primary oldPivot beam) ->
             { elaboration | displacer = Just (Primary pivot beam) }
 
         _ ->

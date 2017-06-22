@@ -25,9 +25,9 @@ explode message =
             explode subMessage
                 |> andThen negative
 
-        PAST subMessage ->
+        PAST time subMessage ->
             explode subMessage
-                |> andThen past
+                |> andThen (past time)
 
         PRIOR subMessage ->
             explode subMessage
@@ -137,20 +137,22 @@ negative vars =
 
 {-| PAST messages.
 -}
-past : Vars -> Result String Vars
-past vars =
+past : Maybe Time -> Vars -> Result String Vars
+past time vars =
     if vars.past then
-        Err "past messages cannot be made more past"
+        Err "PAST messages cannot be made PAST"
     else if vars.modality == Just HardYes then
-        Err "messages with the HARD YES modality (MUST/NEED) cannot be made past"
+        Err "messages with the hard yes modality ('must'/'need') cannot be made PAST"
     else if vars.modality == Just SoftYesIsh then
-        Err "messages with the SOFT YES-ISH modality (SHOULD) cannot be made past"
+        Err "messages with the soft yes-ish modality ('should') cannot be made PAST"
     else if vars.modality == Just HardYesIsh then
-        Err "messages with the HARD YES-ISH modality (OUGHT) cannot be made past"
+        Err "messages with the hard yes-ish modality ('ought') cannot be made PAST"
     else if vars.modality == Just Dare then
-        Err "messages with the DARE modality (DARE) cannot be made past"
+        Err "messages with the dare modality ('dare') cannot be made PAST"
+    else if vars.modality /= Nothing && time /= Nothing then
+        Err "messages with a modality cannot be given a PAST time"
     else
-        Ok { vars | past = True }
+        Ok { vars | past = True, post = maybeAddToPost time vars.post }
 
 
 {-| PRIOR messages.
@@ -158,7 +160,7 @@ past vars =
 prior : Vars -> Result String Vars
 prior vars =
     if vars.longPivot.prior then
-        Err "prior messages cannot be made more prior"
+        Err "PRIOR messages cannot be made PRIOR"
     else
         Ok { vars | longPivot = setPrior vars.longPivot }
 
@@ -168,7 +170,7 @@ prior vars =
 displaced : Displacer -> Vars -> Result String Vars
 displaced displacer vars =
     if vars.past then
-        Err "past messages cannot be made DISPLACED"
+        Err "PAST messages cannot be made DISPLACED"
     else if vars.modality /= Nothing then
         Err "messages with a modality cannot be made DISPLACED"
     else
@@ -199,7 +201,7 @@ displaced displacer vars =
 
 {-| REGULAR messages.
 -}
-regular : Maybe Displacer -> Maybe String -> Vars -> Result String Vars
+regular : Maybe Displacer -> Maybe Frequency -> Vars -> Result String Vars
 regular displacer frequency vars =
     if vars.past then
         Err "past messages cannot be made REGULAR"
@@ -250,12 +252,7 @@ preordained displacer time vars =
     else
         let
             newVars =
-                case time of
-                    Nothing ->
-                        { vars | negateObject = False }
-
-                    Just string ->
-                        { vars | negateObject = False, post = vars.post ++ [ string ] }
+                { vars | negateObject = False, post = maybeAddToPost time vars.post }
         in
             case displacer of
                 Nothing ->
@@ -454,6 +451,16 @@ maybeAddToPre toAdd longPivot =
 
         Just string ->
             addToPre string longPivot
+
+
+maybeAddToPost : Maybe String -> List String -> List String
+maybeAddToPost string post =
+    case string of
+        Nothing ->
+            post
+
+        Just str ->
+            post ++ [ str ]
 
 
 setPrior : LongPivot -> LongPivot

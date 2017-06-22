@@ -1,11 +1,12 @@
 module Interface.Elaborations
     exposing
-        ( displacer
+        ( pastTime
+        , displacer
         , pivot
         , counter
         , modality
         , frequency
-        , time
+        , preordainedTime
         , duration
         , tally
         , target
@@ -28,6 +29,18 @@ import Theory.Types exposing (..)
 
 {-| The output functions, for displaying elaboration factor inputs.
 -}
+pastTime : Int -> Elaboration -> Html.Html Signal
+pastTime index elaboration =
+    Html.div
+        [ Attr.class "factor" ]
+        [ Input.label "Time"
+        , stringText
+            "e.g. yesterday, last week"
+            (SetString1 index)
+            elaboration.string1
+        ]
+
+
 displacer : Bool -> Int -> Elaboration -> Html.Html Signal
 displacer optional index elaboration =
     Html.div
@@ -110,8 +123,8 @@ frequency index elaboration =
         ]
 
 
-time : Int -> Elaboration -> Html.Html Signal
-time index elaboration =
+preordainedTime : Int -> Elaboration -> Html.Html Signal
+preordainedTime index elaboration =
     Html.div
         [ Attr.class "factor" ]
         [ Input.label "Time"

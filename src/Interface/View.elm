@@ -170,6 +170,13 @@ elaborationHeading index elaboration =
 elaborationBody : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
 elaborationBody balanceCount index elaboration subContent =
     case elaboration.recipe of
+        MakePAST ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.pastTime index elaboration
+                , subContent
+                ]
+
         MakeDISPLACED ->
             case elaboration.displacer of
                 Nothing ->
@@ -231,7 +238,7 @@ elaborationBody balanceCount index elaboration subContent =
                     Html.div
                         [ Attr.class "body" ]
                         [ Elaborations.displacer True index elaboration
-                        , Elaborations.time index elaboration
+                        , Elaborations.preordainedTime index elaboration
                         , subContent
                         ]
 
@@ -241,7 +248,7 @@ elaborationBody balanceCount index elaboration subContent =
                         [ Elaborations.displacer True index elaboration
                         , Elaborations.pivot index pivot
                         , Elaborations.counter index counter
-                        , Elaborations.time index elaboration
+                        , Elaborations.preordainedTime index elaboration
                         , subContent
                         ]
 
@@ -250,7 +257,7 @@ elaborationBody balanceCount index elaboration subContent =
                         [ Attr.class "body" ]
                         [ Elaborations.displacer True index elaboration
                         , Elaborations.modality False index modality
-                        , Elaborations.time index elaboration
+                        , Elaborations.preordainedTime index elaboration
                         , subContent
                         ]
 

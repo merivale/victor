@@ -67,7 +67,7 @@ elaborate elaborations message =
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakePAST ->
-                    past message
+                    past elaboration.string1 message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakePRIOR ->
@@ -120,9 +120,9 @@ negative message =
     Ok (NEGATIVE message)
 
 
-past : Message -> Result String Message
-past message =
-    Ok (PAST message)
+past : Maybe String -> Message -> Result String Message
+past time message =
+    Ok (PAST time message)
 
 
 prior : Message -> Result String Message

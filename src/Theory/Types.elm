@@ -25,7 +25,7 @@ values.
 type Message
     = Plain Nucleus
     | NEGATIVE Message
-    | PAST Message
+    | PAST (Maybe Time) Message
     | PRIOR Message
     | DISPLACED Displacer Message
     | REGULAR (Maybe Displacer) (Maybe Frequency) Message
