@@ -4,21 +4,23 @@ A model of the English language, thought of as a code for processing *messages* 
 
 ## 1. The Point
 
-My project does not fit neatly into existing intellectual paradigms. Indeed, it seeks to subvert them. Dudman presented his work as a contribution to philosophical semantics, urging that this subject needed to be approached grammatically. But the code breaker's methodology is scarcely less radical in grammatical circles than it is in philosophical ones. (Many linguists, it is true, have embraced the code *analogy*; but the *methodology* that analogy suggests remains largely untested.) I am apt to suspect that philosophers missed the significance of Dudman's ideas largely as a result of failing to appreciate what he meant by "grammar". To make matters worse, there is a venerable tradition in analytic philosophy, going right back to Bertrand Russell, of viewing "surface" grammar as positively at odds with the "deeper" logical realities. Insofar as there was ever any truth to these worries, they simply reflected bad grammatical theory; and insofar as the grammar was sound, they reflected semantic speculation lazily divorced from empirical fact. For the code breaker, grammar, logic, and semantics are all facets of one and the same scientific enterprise.
+My project does not fit neatly into existing intellectual paradigms. Indeed, it seeks to subvert them. Dudman presented his work as a contribution to philosophical semantics, urging that this subject needed to be approached grammatically. But the code breaker's methodology is scarcely less radical in grammatical circles than it is in philosophical ones. (Many linguists, it is true, have embraced the code *analogy*; but the *methodology* that analogy suggests remains largely untested.) I am apt to suspect that philosophers missed the significance of Dudman's ideas largely as a result of failing to appreciate what he meant by "grammar". To make matters worse, there is a venerable tradition in analytic philosophy, going right back to Bertrand Russell, of viewing "surface" grammar as positively at odds with the "deeper" logical realities. Insofar as there was ever any truth to these worries, they simply reflected bad grammatical theory; and insofar as the grammar was sound, they reflected dubious logical and semantic speculation lazily divorced from empirical fact. For the code breaker, grammar, logic, and semantics are all facets of one and the same scientific enterprise.
 
-The standard picture in philosophical circles nowadays is that the science of language divides into three parts. The first, *syntax*, seeks to uncover the rules governing the construction of grammatical or well-formed sentences. The second and third, *semantics* and *pragmatics*, attempt to articulate the meanings of the sentences thus constructed, and the relationship between these two sides of the communicative coin. Semantics is the study of the meanings of sentences *in general*, on the assumption that there are such things, and that they are related *functionally* to the sentences that convey them. Pragmatics is the study of the meanings of sentences *in context*, something that is observed to go above and beyond their semantic or *literal* meaning. It is generally assumed that this layer of meaning is not functionally determined, and consequently not susceptible to the sort of formal treatment typical of philosophical semantics; the sentence determines a literal meaning, on this view, but that literal meaning then serves (together with other contextual factors) as *evidence for* the pragmatically enriched information.
+The standard picture in philosophical circles nowadays is that the science of language divides into three parts. The first, *syntax*, seeks to uncover the rules governing the construction of grammatical or well-formed sentences. The second and third, *semantics* and *pragmatics*, attempt to articulate the meanings of the sentences thus constructed, and the relationship between these two sides of the communicative coin (the signs and what they signify). Semantics is the study of the meanings of sentences *in general*, on the assumption that there are such things, and that they are related *functionally* to the sentences that convey them. Pragmatics is the study of the meanings of sentences *in context*, something that is observed to go above and beyond their semantic or *literal* meaning. It is generally assumed that this layer of meaning is not functionally determined, and consequently not susceptible to the sort of formal treatment typical of philosophical semantics; the sentence determines a literal meaning, on this view, but that literal meaning then serves (together with other contextual factors) as *evidence for* the pragmatically enriched information.
 
 When philosophers think of grammar, they think of syntax; grammar, to their minds, is the study of how sentences are formed. Grammarians, however, are not in the habit of trying to specify formal syntactic rules of the sort philosophers routinely describe for their artificial languages (with the exception of practitioners of generative grammar, that is, who are in the habit of doing precisely this). Moreover, grammarians typically see their remit as extending beyond syntax; into morphology and phenology, for instance, but more importantly for present purposes into semantics as well. But the grammatical approach to semantics differs strikingly from the philosophical approach: where philosophers delight in general rules, and tend to downplay their exceptions (or perhaps shrug them off as problems for pragmatics), grammarians prefer to catalogue the several different uses of a given syntactic device, showing little interest in speculation about any deeper regularities that might underlie the surface variety.
 
-Nowhere is this lack of interest in underlying regularities more striking than in grammatical discussions of the meanings of the inflectional forms of the English verbs. The so-called "present tense form", it is said, is used to talk about the present (`"I am hungry"`), the future (`"We are seeing him tomorrow"`), all time (`"Salt dissolves in water"`), and even no time at all (`"Two plus two equals four"`). The so-called "past tense form", meanwhile, is observed in talk about the past (`"I was hungry"`), the future (`"We were seeing him tomorrow"`), and what is often diagnosed as "unreality", be it past, present, or future (`"If she had been here yesterday, ..."`/`"If she was here today, ..."`/`"If she came by here tomorrow, ..."`). This is all well and good, as far as it goes. But to the mind of a truly scientific enquirer, it does not go nearly far enough. What we want is a general theory that *predicts and explains* all of these intriguingly different uses.
+Nowhere is this lack of interest in underlying regularities more striking than in grammatical discussions of the meanings of the inflectional forms of the English verbs. The so-called "present tense" form, it is said, is used to talk about the present (`"I am hungry"`), the future (`"We are seeing him tomorrow"`), all time (`"Salt dissolves in water"`), and even no time at all (`"Two plus two equals four"`). The so-called "past tense" form, meanwhile, is observed in talk about the past (`"I was hungry"`), the future (`"We were seeing him tomorrow"`), and what is often diagnosed as "unreality", be it past, present, or future (`"If she had been here yesterday, ..."`/`"If she was here today, ..."`/`"If she came by here tomorrow, ..."`). This is all well and good, as far as it goes. But to the mind of a truly scientific enquirer, it does not go nearly far enough. What we want is a general theory that *predicts and explains* all of these intriguingly different uses.
 
 When we turn to the philosophers, alas, we are no less disappointed. They love their general rules, but conversely tend to show little interest in the tantalisingly varied data of English usage. Philosophical theories of tense and time achieve regularity simply by stipulation. And if these stipulations don't match the English language? Well, that just goes to show how messy natural languages are (more work for pragmatics, I suppose), how misleading the grammar of English is, and what a good thing it is that Frege and Russell set us on the track of developing clear and precise artificial languages in which to conduct our business instead.
 
 We can do better. And the way to do better is to embrace the code breaker's methodology. Philosophical semantics treats languages as functions from sentences to their (literal and context-independent) interpretations, with the inputs to those functions coming from the quite separate field of grammar or syntax. I suggest that they are approaching the problem the wrong way around. Languages should be modelled as functions in precisely the *opposite* direction, as codes for processing messages into sentences. Syntax and semantics would then no longer be separate subjects, but one and the same: the function that connects sentences to their interpretations is also the function that generates those sentences in the first place.
 
-By modelling the function in my preferred direction, therefore, we have a way of bringing semantic theories directly into contact with the observable data. These theories can no longer ignore or dismiss the words English speakers use to convey their messages, as problems for grammar or pragmatics. Consequently my approach promises the best of both worlds: the formal rigour and quest for general theory typical of modern analytic philosophy, but with the kind of attention to empirical detail that we find in contemporary grammatical enquiry. Nor is this an empty promise. Building on Dudman's work, I have developed *a unified theory of tense and time in English*, which reduces all of the surface variety observable in the use of the finite forms of the English verbs and modals to the interplay of just a handful of very simple rules. If Dudman and I are right, then English is neither the capricious system grammarians often describe, nor the irregular mess philosophers typically assume. It is an elegant, precise, and formally specifiable code.
+By modelling the function in my preferred direction, therefore, we have a way of bringing semantic theories directly into contact with the observable data. These theories can no longer ignore or dismiss the words English speakers use to convey their messages, as problems for grammar or pragmatics. Consequently my approach promises the best of both worlds: the formal rigour and quest for general theory typical of modern philosophical semantics, but with the kind of attention to empirical detail that we find in contemporary grammatical enquiry. Nor is this an empty promise. Building on Dudman's work, I have developed *a unified theory of tense and time in English*, which reduces all of the surface variety observable in the use of the finite forms of the English verbs and modals to the interplay of just a handful of very simple rules. If Dudman and I are right, then English is neither the capricious system grammarians often describe, nor the irregular mess philosophers typically assume. It is an elegant, precise, and formally specifiable code.
 
-There is also another, more specific reason why the direction in which we model the semantic function matters, and it is based on the phenomenon of ambiguity. The decision to treat the message as a function of the sentence forces us into an uncomfortable theoretical position, whereby ambiguous sentences are, from the semantic point of view, quite simply impossible. This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity. By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English encoding function, we are able to see precisely how and why various English ambiguities arise.
+There is also another, more specific reason why the direction in which we model the semantic function matters, and it is based on the phenomenon of ambiguity. The decision to treat the message as a function of the sentence forces us into an uncomfortable theoretical position, whereby ambiguous sentences are, from the semantic point of view, quite simply impossible. This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity. By modelling languages as codes, i.e. as functions from messages to sentences, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English encoding function, we are able to see precisely how and why various English ambiguities arise.
+
+(The obverse of ambiguity is the phenomenon of *stylistic variance*, whereby the same information is encoded in more than one sentence. Stylistic variance includes optional abbreviations (`"She is not hungry"`/`"She's not hungry"`/`"She isn't hungry"`), word order (`"He left yesterday"`/`"Yesterday he left"`), and a few other as well. It poses no threat to the code analogy. It simply means that we must build stylistic as well as informational choices into the code. The better to focus on the latter for now, my model does not yet include any stylistic variables, insisting on just one "canonical" output for every infomational combination. In a later iteration, however, I do intend to add some stylistic arguments to my function.)
 
 ## 2. The Source
 
@@ -90,11 +92,11 @@ This general preference extends itself to my labels for the various forms of the
 | **`"teach"`** | `"teach"` | `"teaches"` | `"taught"` | `"teaching"` | `"taught"`   |
 | ...           |           |             |            |              |              |
 
-For regular verbs, and for some otherwise irregular ones as well, the second finite form and the second participle form are identical (a fact that must surely have some semantic significance). Nevertheless, it is convenient to draw the distinction for every verb.
+For regular verbs, and for some otherwise irregular ones as well, the second finite form and the second participle form are identical (a fact that must surely have some semantic significance). Nevertheless, it makes for a simpler model if we draw the distinction for every verb.
 
 At first blush, readers will recognise the first and second finite forms as the "present tense" and "past tense" forms respectively. I strongly oppose this loaded terminology, since it is a matter of considerable controversy what these forms signify, and whether it is (or whether it is always) temporal information. It is better to settle at the outset on some semantically neutral labels. I said *at first blush*, moreover; in fact, the "present tense" standardly refers to a *dual* form, which (in my terms) sometimes looks like the base form, and sometimes looks like the first finite form. There is of course a very natural reason for this grouping: `"I like you"` and `"He likes you"` encode messages that differ only in respect of who is doing the liking. But the fact that the base form can be used in this way, as informationally equivalent to the first finite form, is itself a very striking, and it demands an explanation. Talk of a dual "present tense" form serves only to hide this curious feature of English; as though the `"like"` in `"I like you"` was not really the base form of the verb at all, but a finite form that merely happens to look like the base form.
 
-The uniquely awkward verb **`"be"`** is like any other verb in its base form and participle forms (`"be"`, `"being"`, `"been"`), but instead of two finite forms it has five: `"am"`, `"is"`, `"are"`, `"was"`, and `"were"`. The second of these corresponds to the first finite form of other verbs, while the last two correspond to the second. The first and third have no exact analogues in the other verbs, but correspond to the familiar "present tense" use of the base form. I expect an explanation of this verb's uniquely irregular behaviour. In other words, I expect any account of the English code to locate the meaning of **`"be"`** alongside the meanings of the other verbs, but also somewhat distinct from them; there ought to be some underlying difference that sustains the irregularity.
+The uniquely awkward verb **`"be"`** is like any other verb in its base form and participle forms (`"be"`, `"being"`, `"been"`), but instead of two finite forms it has five: `"am"`, `"is"`, `"are"`, `"was"`, and `"were"`. The second of these corresponds to the first finite form of other verbs, while the last two correspond to the second. The first and third have no exact analogues in the other verbs, but correspond to the familiar "present tense" use of the base form. I expect an explanation of this verb's uniquely irregular behaviour. In other words, I expect an account of the English code to locate the meaning of **`"be"`** alongside the meanings of the other verbs, but also somewhat distinct from them; there ought to be some underlying difference that sustains the irregularity.
 
 The English modals, finally, each have one finite form, and half of them have two:
 
@@ -134,7 +136,7 @@ For example, and using some very crude representations of objects and conditions
 
 There should be nothing very surprising here. The object/condition distinction at the level of the message corresponds exactly to the familiar subject/predicate distinction at the level of the sentence. In this respect, my theory is positively boring.
 
-Every plain English message, I submit, affirms the *present* satisfaction of the condition by the object, and is encoded in a sentence containing either the base form or the first finite form of the verb. (The decision between these two forms depends straightforwardly on the object, and encodes no additional information.) This constitutes the first principle in my unified theory of tense for English. That the present is the default time in the English predication system is suggested by the use of the base form of the verb for such affirmations. Ultimately, however, the evidence for this claim is holistic, and derives from the success and simplicity of my theory as a whole.
+Every plain English message, I submit, affirms the present satisfaction of the condition by the object, and is encoded in a sentence containing either the base form or the first finite form of the verb. (The decision between these two forms depends straightforwardly on the object, and encodes no additional information.) This constitutes the first principle in my unified theory of tense for English. That the present is the default time in the English predication system is suggested by the use of the base form of the verb for such affirmations. Ultimately, however, the evidence for this claim is holistic, and derives from the success and simplicity of my theory as a whole.
 
 The various (apparently) non-present uses of the base and first finite form will mostly be handled by my theory of elaborations. One of them, however, can be dealt with right away: its use in conveying apparently "timeless" affirmations concerning mathematical or conceptual affairs:
 
@@ -146,9 +148,9 @@ The various (apparently) non-present uses of the base and first finite form will
     -> "A vixen is a female fox."
 ```
 
-I diagnose these as plain messages (actually the second is elaborated, but not in such a way as to affect its temporal components; see section 5.6). Consequently I insist that they are still affirmations about the *present*. It is simply that sensible readers *ignore* this temporal information, knowing full well that it is irrelevant. The alternative to this refreshingly striaghtforward account is to posit a class of *genuinely* timeless affirmations in English, which are encoded (ambiguously) in the very same sentences that encodes their corresponding present affirmations. But this - surprisingly popular - view is needlessly complicated, and not supported by the data. Why introduce a whole new class of message, and a whole new subroutine to encode it, when we can simply use the resources already in place? The question is intended to be rhetorical; but in any case, the fact that the output sentences are identical indicates fairly clearly that we *didn't* do this.
+I diagnose these as plain messages (actually the second is elaborated, but not in such a way as to affect its temporal components; see section 5.6). Consequently I insist that they are still affirmations about the *present*. It is simply that sensible readers *ignore* this temporal information, knowing full well that it is irrelevant. The alternative to this refreshingly striaghtforward account is to posit a class of *genuinely* timeless affirmations in English, which are encoded (ambiguously) in the very same sentences that encode their corresponding present affirmations. But this - surprisingly popular - view is needlessly complicated, and not supported by the data. Why introduce a whole new class of message, and a whole new subroutine to encode it, when we can simply use the resources already in place? The question is intended to be rhetorical; but in any case, the fact that the output sentences are identical indicates fairly clearly that we *didn't* do this.
 
-That the present is the default option within the English system perhaps explains why we use it in talking about abstract matters for which time is irrelevant. (Though I dare say this would have been the obvious choice anyway.) More significantly, it might help to explain the attraction to the view that such messages really are timeless, an attraction that appears to have been widely felt, in spite of the entirely unnecessary additional computational complexity that this hypothesis implies. It is easier to ignore information that simply comes by default, than to ignore information that needs to be actively chosen. With this in mind, perhaps my view is not so different from the alternative after all.
+That the present is the default option within the English system perhaps explains why we use it in talking about abstract matters for which time is irrelevant. (Though I dare say this would have been the obvious choice anyway.) More significantly, it might help to explain the attraction to the view that such messages really are timeless, an attraction that appears to have been widely felt, in spite of the entirely unnecessary computational complexity that this hypothesis implies. It is easier to ignore information that simply comes by default, than to ignore information that needs to be actively selected. With this in mind, perhaps my view is not so different from the alternative after all.
 
 ### 4.1. Objects
 
@@ -209,7 +211,7 @@ type Relator
     ...
 ```
 
-My model does not currently contain any properties or adjectives, and consequently the property type is just an alias for a string. What this means in practice is that users are obliged to encode their properties for themselves, inputting the resulting adjective directly into the system. They are an example of what I call an *unearthed* variable (see section 4.4 below). There are 31 relators in my model at present, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but it accounts for the many common prepositions.
+My model does not currently contain any properties or adjectives, and consequently the property type is just an alias for a string. What this means in practice is that users are obliged to encode their properties for themselves, inputting the resulting adjective directly into the system. There are 31 relators in my model at present, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but it accounts for many common prepositions.
 
 Going back to the start of the condition, we have the pivot. The pivot determines the choice of verb at the start of the predicate, and can take one of two values:
 
@@ -232,7 +234,7 @@ The `Be` pivot, unsurprisingly, triggers selection of the verb **`"be"`**, with 
 
 The boolean argument this pivot takes indicates whether or not the condition as a whole is *ongoing*; when set to true, this introduces the participle form `"being"` immediately after the finite form as determined by the object.
 
-If there is an English condition comprising nothing other than the `Be` pivot, then it is the condition of existence; as in the standard translation of Descartes' famous claim, `"I think, therefore I am"`. For what it's worth, I find it hard to read this message into sentences like `"We are"` or `"They are"`. Such semi-sentences seem to demand the response, *are what?* And so I am tempted to say that there is no English condition comprising the `Be` pivot on its own, and that the proper translation of Descartes is `"... therefore I exist"`. But my intuition is not shared by all English speakers, and I needn't insist on the point.
+If there is an English condition comprising nothing other than the `Be` pivot, then it is the condition of existence; as in the standard translation of Descartes' famous claim, `"I think, therefore I am"`. For what it's worth, I find it hard to interpret sentences like `"We are"` or `"They are"` as encoding existential claims. Such semi-sentences seem to me to demand the response, *are what?* And so I am tempted to say that there is no English condition comprising the `Be` pivot on its own, and that the proper translation of Descartes is `"... therefore I exist"`. But my intuition is not shared by all English speakers, and I needn't insist on the point.
 
 At any rate, there are certainly plenty of English conditions built with the `Be` pivot and a counter. When the counter is a property, the condition is that of having that property:
 
@@ -260,50 +262,95 @@ When the counter is a relator, the condition is that of being in a certain *stan
     -> "We are over."
 ```
 
-More precisely, a balance consists of either a *counter* or a *weight* (or both), where the counter is something encoded in a preposition, and a weight is either a repeat of the main object, or a distinct object of its own:
+(I am adopting some more abbreviating conventions here: Instead of `Just (CounterProperty "hungry")` I write `"hungry"`, and instead of `Just (CounterRelator Out)` I write `Out`. When there is no counter, I omit it, instead of writing `Nothing`. And when there are no balances, similarly, I omit the list variable altogether, instead of writing `[]`.)
+
+The `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language. The *verbality* variable is intended to capture the idea that determines the verb. For now it is just an alias for a string, meaning that (as with the property variable) users are obliged to encode their verbalities for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). Following the verbality, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the `Be` pivot; this underlies the difference between, for example, `"She lives"` and `"She is living"`. The second boolean argument, not available for the `Be` pivot, indicates whether the condition as a whole is *passive* or not; this is the difference between, for example, `"She eats"` or `"She is eating"` on the one hand, and `"She is eaten"` or `"She is being eaten"` on the other.
+
+Some `Do` pivots (though not many) can support properties much like the `Be` pivot; for example:
+
+```elm
+( Female, ( Do "seem", "hungry" ) )
+    -> "She seems hungry."
+
+( Others, ( Do "look", "serious" ) )
+    -> "They look serious."
+
+( Female "Grannie", ( Do "become" Ongoing, "ridiculous" ) )
+    -> "Grannie is becoming ridiculous."
+```
+
+Rather more `Do` pivots can support relators; for example:
+
+```elm
+( Male, ( Do "go" Ongoing, Out ) )
+    -> "He is going out."
+
+( Hearer, ( Do "look" Ongoing, Down ) )
+    -> "You are looking down."
+
+( Female "Grannie", ( Do "fall" Ongoing, Over ) )
+    -> "Grannie is falling over."
+```
+
+Many `Do` pivots, as we will see in the next section support balances as well. In general, there is little else to say about `Do` pivots. They are considerably varied. There are ten of thousands of them, and the study of them is an enormous subject in its own right.
+
+###4.3. Conditions, part 2/2: Balances
+
+A balance consists a *weight*, optionally preceeded by a *relator*. Relators we have already met (they are encoded in prepositions). Weights, meanwhile, are essentially just objects like the main object of the nucleus, with the added possibility that they simply refer back to that main object (in which case they generate the third direct form of the pronoun, `"myself"`, `"yourself"`, `"themselves"`, etc.):
 
 ```elm
 type alias Balance =
-    ( Maybe Counter, Maybe Weight )
-
-type Counter
-    = About
-    | Above
-    | After
-    | Against
-    | At
-    | Before
-    | Behind
-    ...
+    ( Maybe Relator, Weight )
 
 type Weight
-    = SameObject
+    = SameAsMain
     | Different Object
 ```
 
-There are 31 counters in my model, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but accounts for the most common prepositions. When the weight has the `SameObject` value, the result is third direct form of the pronoun (`"myself"`, `"yourself"`, `"yourselves"`, etc.), with the pronoun in question being determined by the main object of the nucleus. (It is in this context, as noted in section 3 above, that the distinction between singular and plural `Hearer` objects reveals itself.) When it has the `Different` value, the additional object argument determines the pronoun, which then shows up in the second direct form (`"me"`, `"him"`, `"her"`, etc.).
-
-When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a counter or a weight is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a counter or only a weight (i.e. not both), I will drop the brackets around it. For example:
+When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a relator is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a weight (i.e. no relator), I will drop the brackets around it. For example:
 
 | Abbreviation                  | Full Meaning                                                                   |
 | ----------------------------- | ------------------------------------------------------------------------------ |
-| `Out`                         | `( Just Out, Nothing )`                                                        |
 | `Others`                      | `( Nothing, Just (Different (Other True Nothing Nothing)) )`                   |
 | `( Behind, Hearer )`          | `( Just Behind, Just (Different (Hearer False)) )`                             |
-| `( For, SameObject )`         | `( Just For, Just SameObject )`                                                |
+| `( For, SameAsMain )`         | `( Just For, Just SameAsMain )`                                                |
 | `( With, Female "Grannie" )`  | `( Just With, Just (Different (Other False (Just Female) (Just "Grannie"))) )` |
 
 If it wasn't clear before, I trust this table illustrates the benefits of conventions like these. I adopt them not just to save space, but to make my examples easier to read and understand. Brackets and `Just`s and `False`s all over the place are necessary for compilers, but for human readers they very often serve to obscure more than to illuminate.
 
-And now for some examples themselves, making use of these abbreviating conventions, and with a view to solidifying the understanding of balances built up in this section:
+When a `Be` pivot has a counter, typically no balances are required to make a complete condition. In some cases, however, with a suitable counter, a balance can also be included:
 
 ```elm
-( Speaker, ( be, [ Male "Victor" ] ) )
+( Male, ( Be, Out [ With, Male "Robert" ] ) )
+    -> "He is out with Robert."
+
+( Speakers, ( Be "happy", [ For, Hearers ] ) )
+    -> "We are happy for you."
+```
+
+When a `Be` pivot has no counter, one alternative is to balance it out simply with another object, the overall result being an identity claim:
+
+```elm
+( Speaker, ( Be, [ Male "Victor" ] ) )
     -> "I am Victor."
+```
 
-( Male, ( be, [ Out ] ) )
-    -> "He is out."
+Another alternative is to balance it out with an object prefixed with the `Like` relator, the overall result being a similarity claim. Such balances are also common with the `Do` pivots that (like the `Be` pivot) can support properties:
 
+```elm
+( Speaker, ( Be, [ ( Like, Male "Victor" ) ] ) )
+    -> "I am like Victor."
+
+( Hearer, ( Do "sound", [ Like, Female ] ) )
+    -> "You sound like her."
+
+( Female, ( Do "look", [ Like, Hearer ] ) )
+    -> "She looks like you."
+```
+
+Balances of all kinds are common with other `Do` pivots:
+
+```elm
 ( Male "Victor", ( love, [ Female "Grannie" ] ) )
     -> "Victor loves Grannie."
 
@@ -314,93 +361,22 @@ And now for some examples themselves, making use of these abbreviating conventio
     -> "Grannie lives at Cockroach Lane with Susan."
 ```
 
-### 4.3. Conditions, part 2/2: Pivots
-
-I divide pivots into three main kinds, as follows:
-
-```elm
-type Pivot
-    = Be Bool (Maybe Property)
-    | Seem (Maybe Sense) Bool (Maybe Property)
-    | Do Verbality Bool Bool
-
-type alias Property =
-    String
-
-type Sense
-    = Sight
-    | Smell
-    | Sound
-    | Taste
-    | Touch
-
-type alias Verbality =
-    String
-```
-
-The `Be` pivot, as you would expect, is encoded in the verb `"be"`, and the boolean argument it takes marks whether the condition as a whole is *ongoing* or not; this is the difference between, for example, `"He is silly"` and `"He is being silly"`. The optional *property* argument is responsible for the output adjective `"silly"` in the two examples just given. As you can see, the property type at present is just an alias for a string, meaning that users are required to encode properties into their corresponding adjectives for themselves. I am not presently inclined to give my model a great dictionary of properties/adjectives.
-
-When a `Be` pivot has a property, typically no balances are required to make a complete condition. In some cases, however, with a suitable property and a suitable counter, a balancing object can also be included. For example, and adopting some abbreviating conventions along the same lines as those already laid out (I trust by now I needn't spell out these conventions explicitly):
-
-```elm
-( Male "Robert", ( Be "hungry", [] ) )
-    -> "Robert is hungry."
-
-( Hearer, ( Be, [ Male "Robert" ] ) )
-    -> "You are Robert."
-
-( Hearer, ( Be, [ Like, Male "Robert" ] ) )
-    -> "You are like Robert."
-
-( Speakers, ( Be "happy", [ For, Hearers ] ) )
-    -> "We are happy for you."
-```
-
-Some readers might be wondering why the property variable is attached to the pivot itself, instead of showing up in the list of balances. There are a few reasons for this. One is that the `Do` pivot - which I will come to shortly - can support balances but cannot support properties. The other is that balances, as I intend them, are predominantly meant for holding *objects*, and properties are fundamentally different kinds of things, belonging in a separate part of the code. The third reason depends on my theory of elaborations, and consequently I cannot explain it here; see section 5.3 below.
-
-The `Seem` pivot operates exactly like the `Be` pivot, taking a boolean argument specifying whether or not the condition is ongoing, and an optional property argument. It is for messages to the effect that things *seem* as the corresponding `Be` message says they *are*. The optional `Sense` argument specifies the sense to which these appearances present themselves. For example:
-
-```elm
-( Female "Grannie", ( Seem "angry", [] ) )
-    -> "Grannie seems angry."
-
-( Female "Grannie", ( Seem Sound "angry", [] ) )
-    -> "Grannie sounds angry."
-
-( Female "Grannie", ( Seem Sight "angry", [] ) )
-    -> "Grannie looks angry."
-
-( Female "Grannie", ( Seem Sight, [ ( Like, Hearer ) ] ) )
-    -> "Grannie looks like you."
-```
-
-Finally, the `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language (of which there are probably tens of thousands). The *verbality* variable is intended to capture the idea that gets encoded in the verb, but for now it is just an alias for a string, meaning that (as with the property variable for the other pivots) users are obliged to encode these for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). Following the verbality, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the other pivots; this underlies the difference between, for example, `"She lives"` and `"She is living"`.
-
-Despite the enormous variety of `Do` pivots, they all have two things in common, and which distinguish them from `Be` and `Seem` pivots. The first is that they cannot support a property; one can *be* angry, *seem* angry, or *look* angry, but one cannot *jump* angry, or *smile* angry. The second is that, in addition to being ongoing or not, they can also be *passive* or not, and this is the point of the second boolean argument these pivots take. This underlies the different between, for example, `"Grannie is eating"` and `"Grannie is being eaten"`.
-
 ### 4.4. Limitations
 
 It should go without saying that my theory is incomplete, a work in progress that stands in need of significant expansion and refinement. My theory of plain messages in particular - more specifically my theory of English *conditions* - is the most strikingly incomplete aspect of the whole. My aim in this section is to get out in front of any criticisms on this score, by acknowledging the most egregious of these inadequacies, and explaining why I am in no great hurry to address them. The main point, by way of headline, is that I am more interested in the theory of elaborations, and I expect that any philosophers who are likely to take an interest in my work will share this bias. My theory of plain messages is not intended to make any very great headway into that field, then, but rather to provide just enough to serve as the basis for my main project, the theory of elaborations.
 
-The first most obvious inadequacy in my theory of plain messages is that it doesn't predict all of the data. In other words, there are plain messages that my model can neither represent nor encode into their corresponding sentences. This is relatively untroubling. It doesn't indicate that I am on the wrong track; it merely reminds us that - of course - I have yet to reach the end of that track. Here is a very simple example of a sentence I am unable to account for:
+There are two immediately obvious inadequacies, namely that my theory does not cover all of the ground (there are some sentences that I cannot generate), and that, even in the ground that it does cover, it leaves some things unearthed (the properties and verbalities that users are currently obliged to encode for themselves). These are both relatively untroubling. If you'll excuse the change of metaphor, neither of them indicate that I am on the wrong track; they merely remined us that - of course - I have yet to reach the end of that track. While I am here, I may add that precisely the same limitations apply to my theory of elaborations too: there are many elaborate messages that my system cannot encode, and with the ones that it does encode, it still relies on users encoding certain unearthed variables for themselves.
+
+Here is a very simple example of a plain message beyond the scope of my present model:
 
 ```elm
 ( Speaker, ( Be, ??? ) )
     -> "I am here."
 ```
 
-For what it's worth, my current thinking is that this sentence should be accounted for by expanding the type definition for a weight, to include options for *places* as well as objects. These options would include, at least, *here*, *there*, *home*, *abroad*, and *away*. By itself, this addition is not difficult to implement, although it would have implications in the implementation of my theory of elaborations that I am not yet sure how to handle. And in any case, there will always be more to do, and one has to stop somewhere. (`"Somewhere"`, incidentally, would be the result of elaborating a message with a place variable like *here* or *there* in its underlying condition; my model doesn't predict the uses of this word yet either.)
+For what it's worth, my current thinking is that this sentence should be accounted for by expanding the type definition for a weight, to include options for *places* as well as objects. These options would include, at least, *here*, *there*, *home*, and *away*. By itself, this addition is not difficult to implement, although it would have implications in the implementation of my theory of elaborations that I am not yet sure how to handle. In any case, there will always be more to do, and one has to stop somewhere. (`"Somewhere"`, incidentally, would be the result of elaborating a message with a place variable like *here* or *there* in its underlying condition; my model doesn't predict the uses of this word yet either.) I am also unable to generate compound prepositional phrases like `"in front of"` or `"on top of"`.
 
-More worryingly, I am unable to generate compound prepositional phrases like `"in front of"` or `"over and above"`. And while I can generate `"up to"`, I need two balances to do it; for example:
-
-```elm
-( Male, ( Do "look", [ Up, ( To, Female ) ] ) )
-    -> "He looks up to her."
-```
-
-This just doesn't seem like the right structural diagnosis. Overall, it looks as though my treatment of counters is not only incomplete but also inaccurate. It is an approximation at best.
-
-More worrying still is that there are ambiguities I am unable to account for. This is particularly regrettable, because the ability to account for ambiguities is precisely one of the main selling points of my approach as a whole. In my defence, I can account for several ambiguities with my theory of elaborations, and that, as I advertised above, is where my main interests lie. There are some ambiguities, however, that need to be accounted for by the theory of plain messages, and my model is not yet able to do this. The ambiguities in question concern how balances fit into the overall condition, informational differences that are not captured when we represent balances simply in a list. For example:
+More worrying still is that there are ambiguities I am unable to account for. This is particularly regrettable, because the ability to account for ambiguities is precisely one of the main selling points of my approach as a whole. In my defence, I can account for several ambiguities with my theory of elaborations (as we will see), and that, as I advertised above, is where my main interests lie. There are some ambiguities, however, that need to be accounted for by the theory of plain messages, and my model is not yet able to do this. The ambiguities in question concern how balances fit into the overall condition, informational differences that are not captured when we represent balances simply in a list. For example:
 
 ```elm
 "He is looking at Grannie with Victor."
@@ -412,27 +388,27 @@ This sentence is ambiguous: is he with Victor, looking at Grannie, or is Grannie
 ( Male, ( Do "look" Ongoing, [ ( At, Female "Grannie" ), ( With, Male "Victor" ) ] ) )
 ```
 
-Evidently, then, there is more to a condition than just a pivot and a bare *list* of balances. To understand a condition fully, one also must appreciate how each individual balance relates to the pivot, and that information is not always signalled in the output string. But this is a problem for another day.
+Evidently, then, there is more to a condition than just a pivot and a bare *list* of balances. To understand a condition fully, one also must appreciate how each individual balance relates to the pivot. Sometimes that relation is signalled explicitly by the relator (`"He gave the book to her"`), and sometimes it is signalled implicitly by the order of the balances (`"He gave her the book"`). But sometimes - as in the ambiguous example just now - there is yet more information that goes unsignalled. But representing this information in my model of messages is a problem for another day.
 
+(A tentative suggestion: Perhaps the definition of a weight needs to be made recursive, allowing for balances within weights. The representation above, then, would be of the message that he is with Victor looking at Grannie. The message where Victor is with Grannie instead would involve a balance within a weight: `( At, ( Female "Grannie", ( With, Male "Victor" ) ) )`. In plainer terms, the difference would be between *looking at-Grannie with-Victor* (two separate balances) and *looking at Grannie-with-Victor* (one balance, with another balance inside it). With balances being encoded in order, and sub-balances before the next balance at the same level in the list, it is easy to see how the ambiguity in the sentence would then arise.)
 
-
-Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any counter with any (or no) object; while in constructing the condition itself, they may append any balance to any pivot. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
+Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any counter with any object; while in constructing the condition itself, they may append any combination of counter and balances to any pivot. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
 
 ```elm
-( Male "Victor", ( love, [ At, ( Behind, Female "Grannie" ), For ] ) )
-    -> "Victor loves at behind Grannie for."
+( Male "Victor", ( love, At, [ ( Behind, Female "Grannie" ) ] ) )
+    -> "Victor loves at behind Grannie."
 
 ( Female "Grannie", ( live, [ Speaker, Hearer, ( Over, SameObject ) ] ) )
     -> "Grannie lives me you over herself."
 
-( Female "Grannie", ( Be "red", [ Speakers ] ) )
+( Female "Grannie", ( Be, "red", [ Speakers ] ) )
     -> "Grannie is red us."
 
-( Others, ( Seem Taste "heavy", [ Hearer, ( With, Other ) ] ) )
+( Others, ( Do "taste", "heavy", [ Hearer, ( With, Other ) ] ) )
     -> "They taste heavy you with it."
 ```
 
-Obviously this is a very serious inadequacy, and I make no attempt to shy away from this fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition. This is for two reasons. First, the task is quite simply an enormous one, requiring the collation of literally tens of thousands of pivots, noting - just for starters - how many balances each of these can support, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this crude theory of plain messages predominantly just so that I have a basis on which to build this latter theory. And I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to my rough and ready model of conditions.
+Obviously this is a very serious inadequacy, and I make no attempt to shy away from this fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition. This is for two reasons. First, the task is quite simply an enormous one, requiring the collation of tens of thousands of pivots, noting - just for starters - how many balances each of these can support, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this crude theory of plain messages predominantly just so that I have a basis on which to build this latter theory. And I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to my rough and ready model of conditions.
 
 ## 5. The Theory, part 2/2: The Elaborations
 
