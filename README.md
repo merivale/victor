@@ -20,7 +20,7 @@ By modelling the function in my preferred direction, therefore, we have a way of
 
 There is also another, more specific reason why the direction in which we model the semantic function matters, and it is based on the phenomenon of ambiguity. The decision to treat the message as a function of the sentence forces us into an uncomfortable theoretical position, whereby ambiguous sentences are, from the semantic point of view, quite simply impossible. This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity. By modelling languages as codes, i.e. as functions from messages to sentences, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English encoding function, we are able to see precisely how and why various English ambiguities arise.
 
-(The obverse of ambiguity is the phenomenon of *stylistic variance*, whereby the same information is encoded in more than one sentence. Stylistic variance includes optional abbreviations (`"She is not hungry"`/`"She's not hungry"`/`"She isn't hungry"`), word order (`"He left yesterday"`/`"Yesterday he left"`), and a few other as well. It poses no threat to the code analogy. It simply means that we must build stylistic as well as informational choices into the code. The better to focus on the latter for now, my model does not yet include any stylistic variables, insisting on just one "canonical" output for every infomational combination. In a later iteration, however, I do intend to add some stylistic arguments to my function.)
+(The obverse of ambiguity is the phenomenon of *stylistic variance*, whereby the same information is encoded in more than one sentence. Stylistic variance includes optional abbreviations (`"She is not hungry"`/`"She's not hungry"`/`"She isn't hungry"`), word order (`"He left yesterday"`/`"Yesterday he left"`), and a few other things as well. It poses no threat to the code analogy. It simply means that we must build stylistic as well as informational choices into the code. The better to focus on the latter for now, my model does not yet include any stylistic variables, insisting on just one "canonical" output for every infomational combination. In a later iteration, however, I do intend to add some stylistic arguments to my function.)
 
 ## 2. The Source
 
@@ -34,7 +34,7 @@ I have not yet written any tests, but there is a stub `test` directory as a plac
 
 ## 3. Grammatical Terminology
 
-I deploy a small amount of grammatical terminology, some of which I expect to be familiar, but some of which is a little idiosyncratic. It is simplest to introduce this all up front. Semantic terminology will be introduced *in situ* in sections 4 and 5 below.
+I deploy a small amount of grammatical terminology, most of which I expect to be familiar, but some of which is a little idiosyncratic. It is simplest to introduce this all up front. Semantic terminology will be introduced *in situ* in sections 4 and 5 below.
 
 First, I divide English lexemes into a handful of categories, mostly standard. There are just a couple of things to note: (i) I do not treat the *modals* as a subset of the *verbs*, but as belonging to a distinct category all of their own (more on this below); and (ii) I distinguish between *articles* and *determiners*, and in a somewhat unusual way (I classify the so-called "indefinite article" as a determiner). Here are the categories I will be assuming, with some examples:
 
@@ -150,7 +150,7 @@ The various (apparently) non-present uses of the base and first finite form will
 
 I diagnose these as plain messages (actually the second is elaborated, but not in such a way as to affect its temporal components; see section 5.6). Consequently I insist that they are still affirmations about the *present*. It is simply that sensible readers *ignore* this temporal information, knowing full well that it is irrelevant. The alternative to this refreshingly striaghtforward account is to posit a class of *genuinely* timeless affirmations in English, which are encoded (ambiguously) in the very same sentences that encode their corresponding present affirmations. But this - surprisingly popular - view is needlessly complicated, and not supported by the data. Why introduce a whole new class of message, and a whole new subroutine to encode it, when we can simply use the resources already in place? The question is intended to be rhetorical; but in any case, the fact that the output sentences are identical indicates fairly clearly that we *didn't* do this.
 
-That the present is the default option within the English system perhaps explains why we use it in talking about abstract matters for which time is irrelevant. (Though I dare say this would have been the obvious choice anyway.) More significantly, it might help to explain the attraction to the view that such messages really are timeless, an attraction that appears to have been widely felt, in spite of the entirely unnecessary computational complexity that this hypothesis implies. It is easier to ignore information that simply comes by default, than to ignore information that needs to be actively selected. With this in mind, perhaps my view is not so different from the alternative after all.
+That the present is the default option within the English system perhaps explains why we use it in talking about abstract matters for which time is irrelevant. (Though I dare say this would have been the obvious choice anyway.) More significantly, it might help to explain the attraction to the view that such messages really are timeless, an attraction that appears to have been widely felt, in spite of the entirely unnecessary computational complexity that this hypothesis implies. It is easier to ignore information that simply comes by default, than to ignore information that needs to be actively selected.
 
 ### 4.1. Objects
 
@@ -179,7 +179,7 @@ When referring to objects in what follows, I will adopt the following abbreviati
 | `Female "Grannie"` | `Other False (Just Female) (Just "Grannie")` |
 | `Others`           | `Other True Nothing Nothing`                 |
 
-I hope these conventions are all intuitive and easy to understand. The point of adopting them is just to make the examples that follow easier on all of us. I will adopt similar conventions with regard to the writing out of conditions, once I start unpacking their component parts. I will not bother to state these conventions explicitly, since I do not expect them to give rise to any confusion.
+I hope these conventions are all intuitive and easy to understand. The point of adopting them is just to make the examples that follow easier on all of us. I will adopt similar conventions with regard to the writing out of conditions, once I start unpacking their component parts.
 
 ### 4.2. Conditions, part 1/2: Pivots and Counters
 
@@ -242,7 +242,7 @@ At any rate, there are certainly plenty of English conditions built with the `Be
 ( Speaker, ( Be, "hungry" ) )
     -> "I am hungry."
 
-( Hearer, ( Be True, "silly" ) )
+( Hearer, ( Be Ongoing, "silly" ) )
     -> "He is being silly."
 
 ( Others, ( Be, "beautiful" ) )
@@ -262,9 +262,11 @@ When the counter is a relator, the condition is that of being in a certain *stan
     -> "We are over."
 ```
 
-(I am adopting some more abbreviating conventions here: Instead of `Just (CounterProperty "hungry")` I write `"hungry"`, and instead of `Just (CounterRelator Out)` I write `Out`. When there is no counter, I omit it, instead of writing `Nothing`. And when there are no balances, similarly, I omit the list variable altogether, instead of writing `[]`.)
+(I am adopting some more abbreviating conventions here: Instead of `Just (CounterProperty "hungry")` I write `"hungry"`, and instead of `Just (CounterRelator Out)` I write `Out`. When there is no counter, I omit it, instead of writing `Nothing`. When there are no balances, similarly, I omit the list variable altogether, instead of writing `[]`. When the *ongoing* boolean argument is `False`, finally, I omit it, and when it is `True` I write it as `Ongoing` instead, so readers don't have to remember what its purpose is.)
 
-The `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language. The *verbality* variable is intended to capture the idea that determines the verb. For now it is just an alias for a string, meaning that (as with the property variable) users are obliged to encode their verbalities for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). Following the verbality, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the `Be` pivot; this underlies the difference between, for example, `"She lives"` and `"She is living"`. The second boolean argument, not available for the `Be` pivot, indicates whether the condition as a whole is *passive* or not; this is the difference between, for example, `"She eats"` or `"She is eating"` on the one hand, and `"She is eaten"` or `"She is being eaten"` on the other.
+The `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language. The *verbality* variable is intended to capture the choice that determines the verb. For now it is just an alias for a string, meaning that (as with the property variable type) users are obliged to encode their verbalities for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). The form is then determined by the object: the first finite form in the case of the `Other` object, and the base form otherwise.
+
+Following the verbality, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the `Be` pivot; this underlies the difference between, for example, `"She lives"` and `"She is living"`. The second boolean argument, not available for the `Be` pivot, indicates whether the condition as a whole is *passive* or not; this accounts for the difference between, for example, `"She eats"` or `"She is eating"` on the one hand, and `"She is eaten"` or `"She is being eaten"` on the other.
 
 Some `Do` pivots (though not many) can support properties much like the `Be` pivot; for example:
 
@@ -292,11 +294,11 @@ Rather more `Do` pivots can support relators; for example:
     -> "Grannie is falling over."
 ```
 
-Many `Do` pivots, as we will see in the next section support balances as well. In general, there is little else to say about `Do` pivots. They are considerably varied. There are ten of thousands of them, and the study of them is an enormous subject in its own right.
+Many `Do` pivots, as we will see in the next section, support balances as well. In general, there is little else to say about `Do` pivots. They are considerably varied. There are ten of thousands of them, and the study of them is an enormous subject in its own right (not attempted here).
 
 ###4.3. Conditions, part 2/2: Balances
 
-A balance consists a *weight*, optionally preceeded by a *relator*. Relators we have already met (they are encoded in prepositions). Weights, meanwhile, are essentially just objects like the main object of the nucleus, with the added possibility that they simply refer back to that main object (in which case they generate the third direct form of the pronoun, `"myself"`, `"yourself"`, `"themselves"`, etc.):
+A balance consists a *weight*, optionally preceeded by a *relator*. Relators we have already met (they are encoded in prepositions). Weights, meanwhile, are essentially just objects like the main object of the nucleus, with the added possibility that they may simply refer back to that main object (in which case they generate the third direct form of the pronoun, `"myself"`, `"yourself"`, `"themselves"`, etc.):
 
 ```elm
 type alias Balance =
@@ -307,7 +309,9 @@ type Weight
     | Different Object
 ```
 
-When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a relator is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a weight (i.e. no relator), I will drop the brackets around it. For example:
+For clarity, I will distinguish where necessary the *main* object of the nucleus from any *balancing* objects in the list of balances.
+
+Some more abbreviating conventions relating to balances, and conditions as a while: Whenever a relator is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is not the same as the main object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a weight (i.e. no relator), I will drop the brackets around it. For example:
 
 | Abbreviation                  | Full Meaning                                                                   |
 | ----------------------------- | ------------------------------------------------------------------------------ |
