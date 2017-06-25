@@ -94,30 +94,33 @@ sentence.
 negative : Vars -> Result String Vars
 negative vars =
     case vars.negationTarget of
-        Condition ->
+        NegateCondition ->
             Ok { vars | longPivot = addToPre "not" vars.longPivot }
 
-        Modality ->
-            case modality of
-                SoftYes ->
+        NegateModality ->
+            case vars.modality of
+                Nothing ->
+                    Err "there is no modality to negate"
+
+                Just SoftYes ->
                     Err "the SOFT YES modality (WILL) cannot be negated"
 
-                SoftMaybe ->
+                Just SoftMaybe ->
                     Err "the SOFT MAYBE modality (MAY) cannot be negated"
 
-                SoftYesIsh ->
+                Just SoftYesIsh ->
                     Err "the SOFT YES-ISH modality (SHOULD) cannot be negated"
 
-                HardYesIsh ->
+                Just HardYesIsh ->
                     Err "the HARD YES-ISH modality (OUGHT) cannot be negated"
 
-                Command ->
+                Just Command ->
                     Err "the COMMAND modality (SHALL) cannot be negated"
 
                 _ ->
-                    Ok { vars | negateModality = True, longPivot = addToPre "not" vars.longPivot }
+                    Ok { vars | negatedModality = True, longPivot = addToPre "not" vars.longPivot }
 
-        MainObject ->
+        NegateMainObject ->
             case vars.object of
                 RealObject object ->
                     Err "direct objects cannot be negated"
@@ -475,7 +478,7 @@ elaborations).
 overrideMainObject : Bool -> PseudoObject -> Vars -> Vars
 overrideMainObject negateObject pseudoObject vars =
     if negateObject then
-        { vars | negationTarget = NegateObject, object = pseudoObject }
+        { vars | negationTarget = NegateMainObject, object = pseudoObject }
     else
         { vars | object = pseudoObject }
 

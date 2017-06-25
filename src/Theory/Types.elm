@@ -237,7 +237,7 @@ type alias Vars =
     , negationTarget : NegationTarget
     , object : PseudoObject
     , modality : Maybe Modality
-    , negateModality : Bool
+    , negatedModality : Bool
     , longPivot : LongPivot
     , longPivots : List LongPivot
     , balances : List PseudoBalance
