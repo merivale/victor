@@ -256,7 +256,7 @@ preordained displacer time vars =
     else
         let
             newVars =
-                { vars | negationTarget = NegateCondition, post = maybeAddToPost time vars.post }
+                { vars | negationTarget = NegateModality, post = maybeAddToPost time vars.post }
         in
             case displacer of
                 Nothing ->
