@@ -228,8 +228,8 @@ determiner quantifier =
 
 {-| Encode a modality in a modal.
 -}
-modal : Modality -> Bool -> String
-modal modality past =
+modal : Modality -> Bool -> Bool -> String
+modal modality past negated =
     case modality of
         SoftYes ->
             if past then
@@ -238,7 +238,10 @@ modal modality past =
                 "will"
 
         HardYes ->
-            "must"
+            if negated then
+                "need"
+            else
+                "must"
 
         SoftMaybe ->
             if past then

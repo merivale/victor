@@ -234,14 +234,21 @@ down are direct determiners of the output string.
 -}
 type alias Vars =
     { past : Bool
-    , negateObject : Bool
+    , negationTarget : NegationTarget
     , object : PseudoObject
     , modality : Maybe Modality
+    , negateModality : Bool
     , longPivot : LongPivot
     , longPivots : List LongPivot
     , balances : List PseudoBalance
     , post : List String
     }
+
+
+type NegationTarget
+    = NegateCondition
+    | NegateModality
+    | NegateMainObject
 
 
 type alias LongPivot =

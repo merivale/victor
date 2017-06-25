@@ -73,9 +73,10 @@ plain : Nucleus -> Result String Vars
 plain ( object, ( pivot, counter, balances ) ) =
     Ok
         { past = False
-        , negateObject = False
+        , negationTarget = NegateCondition
         , object = RealObject object
         , modality = Nothing
+        , negatedModality = False
         , longPivot = newLongPivot pivot counter
         , longPivots = []
         , balances = List.map (\x -> RealBalance x) balances
@@ -92,47 +93,47 @@ sentence.
 -}
 negative : Vars -> Result String Vars
 negative vars =
-    if vars.negateObject then
-        case vars.object of
-            RealObject object ->
-                Err "direct objects cannot be negated"
+    case vars.negationTarget of
+        Condition ->
+            Ok { vars | longPivot = addToPre "not" vars.longPivot }
 
-            IndirectObject object indirection ->
-                Err "indirect objects cannot be negated"
+        Modality ->
+            case modality of
+                SoftYes ->
+                    Err "the SOFT YES modality (WILL) cannot be negated"
 
-            AgglomeratedObject object negated agglomeration ->
-                if negated then
-                    Err "agglomerated objects cannot be negated twice"
-                else
-                    Ok
-                        { vars
-                            | negateObject = False
-                            , object = AgglomeratedObject object True agglomeration
-                        }
-    else
-        case vars.modality of
-            Nothing ->
-                Ok { vars | longPivot = addToPre "not" vars.longPivot }
+                SoftMaybe ->
+                    Err "the SOFT MAYBE modality (MAY) cannot be negated"
 
-            Just modality ->
-                case modality of
-                    SoftYes ->
-                        Err "the SOFT YES modality (WILL) cannot be negated"
+                SoftYesIsh ->
+                    Err "the SOFT YES-ISH modality (SHOULD) cannot be negated"
 
-                    SoftMaybe ->
-                        Err "the SOFT MAYBE modality (MAY) cannot be negated"
+                HardYesIsh ->
+                    Err "the HARD YES-ISH modality (OUGHT) cannot be negated"
 
-                    SoftYesIsh ->
-                        Err "the SOFT YES-ISH modality (SHOULD) cannot be negated"
+                Command ->
+                    Err "the COMMAND modality (SHALL) cannot be negated"
 
-                    HardYesIsh ->
-                        Err "the HARD YES-ISH modality (OUGHT) cannot be negated"
+                _ ->
+                    Ok { vars | negateModality = True, longPivot = addToPre "not" vars.longPivot }
 
-                    Command ->
-                        Err "the COMMAND modality (SHALL) cannot be negated"
+        MainObject ->
+            case vars.object of
+                RealObject object ->
+                    Err "direct objects cannot be negated"
 
-                    _ ->
-                        Ok { vars | longPivot = addToPre "not" vars.longPivot }
+                IndirectObject object indirection ->
+                    Err "indirect objects cannot be negated"
+
+                AgglomeratedObject object negated agglomeration ->
+                    if negated then
+                        Err "agglomerated objects cannot be negated twice"
+                    else
+                        Ok
+                            { vars
+                                | negationTarget = NegateCondition
+                                , object = AgglomeratedObject object True agglomeration
+                            }
 
 
 {-| PAST messages.
@@ -178,7 +179,7 @@ displaced displacer vars =
             Primary pivot beam ->
                 Ok
                     { vars
-                        | negateObject = False
+                        | negationTarget = NegateCondition
                         , longPivot = newLongPivot pivot beam
                         , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
                     }
@@ -187,14 +188,14 @@ displaced displacer vars =
                 if modality == HardYesIsh then
                     Ok
                         { vars
-                            | negateObject = False
+                            | negationTarget = NegateModality
                             , modality = Just modality
                             , longPivot = (addToPre "to" vars.longPivot)
                         }
                 else
                     Ok
                         { vars
-                            | negateObject = False
+                            | negationTarget = NegateModality
                             , modality = Just modality
                         }
 
@@ -212,14 +213,14 @@ regular displacer frequency vars =
             Nothing ->
                 Ok
                     { vars
-                        | negateObject = False
+                        | negationTarget = NegateCondition
                         , longPivot = maybeAddToPre frequency vars.longPivot
                     }
 
             Just (Primary pivot counter) ->
                 Ok
                     { vars
-                        | negateObject = False
+                        | negationTarget = NegateCondition
                         , longPivot = maybeAddToPre frequency (newLongPivot pivot counter)
                         , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
                     }
@@ -228,14 +229,14 @@ regular displacer frequency vars =
                 if modality == HardYesIsh then
                     Ok
                         { vars
-                            | negateObject = False
+                            | negationTarget = NegateModality
                             , modality = Just modality
                             , longPivot = addToPre "to" (maybeAddToPre frequency vars.longPivot)
                         }
                 else
                     Ok
                         { vars
-                            | negateObject = False
+                            | negationTarget = NegateModality
                             , modality = Just modality
                             , longPivot = maybeAddToPre frequency vars.longPivot
                         }
@@ -252,7 +253,7 @@ preordained displacer time vars =
     else
         let
             newVars =
-                { vars | negateObject = False, post = maybeAddToPost time vars.post }
+                { vars | negationTarget = NegateCondition, post = maybeAddToPost time vars.post }
         in
             case displacer of
                 Nothing ->
@@ -283,7 +284,7 @@ extended duration vars =
     else if vars.modality /= Nothing then
         Err "messages with a modality cannot be made EXTENDED"
     else
-        Ok { vars | negateObject = False, post = vars.post ++ [ duration ] }
+        Ok { vars | negationTarget = NegateCondition, post = vars.post ++ [ duration ] }
 
 
 {-| SCATTERED messages.
@@ -295,7 +296,7 @@ scattered tally vars =
     else if vars.modality /= Nothing then
         Err "messages with a modality cannot be made SCATTERED"
     else
-        Ok { vars | negateObject = False, post = vars.post ++ [ tally ] }
+        Ok { vars | negationTarget = NegateCondition, post = vars.post ++ [ tally ] }
 
 
 {-| INDIRECT messages.
@@ -473,7 +474,10 @@ elaborations).
 -}
 overrideMainObject : Bool -> PseudoObject -> Vars -> Vars
 overrideMainObject negateObject pseudoObject vars =
-    { vars | negateObject = negateObject, object = pseudoObject }
+    if negateObject then
+        { vars | negationTarget = NegateObject, object = pseudoObject }
+    else
+        { vars | object = pseudoObject }
 
 
 overrideBalancingObject : Int -> PseudoBalance -> Vars -> Vars

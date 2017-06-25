@@ -274,7 +274,7 @@ pre vars =
             (finiteVerbPhrase vars.past (object vars.object) vars.longPivot) :: (List.map baseVerbPhrase vars.longPivots)
 
         Just m ->
-            (Words.modal m vars.past) :: (List.map baseVerbPhrase (vars.longPivot :: vars.longPivots))
+            (Words.modal m vars.past vars.negateModality) :: (List.map baseVerbPhrase (vars.longPivot :: vars.longPivots))
 
 
 {-| Fulcrum and pre stuff...
