@@ -349,52 +349,50 @@ indirect target description vars =
 enumerated : Int -> Multiplicity -> Vars -> Result String Vars
 enumerated target multiplicity vars =
     let
-        ( quantifier, other, haystack) =
+        ( quantifier, other, haystack ) =
             multiplicity
     in
         if not (isEnumerating quantifier) then
             Err "this quantifier cannot be used in ENUMERATED elaborations"
+        else if target < 0 then
+            case vars.object of
+                DirectObject object ->
+                    if not (objectIsThirdPerson object) then
+                        Err "only third person (other) objects can be overridden"
+                    else if isPlural quantifier && not (objectIsPlural object) then
+                        Err "your ENUMERATED quantifier requires a plural balancing object"
+                    else
+                        let
+                            negateObject =
+                                isNegatable quantifier
+
+                            pseudoObject =
+                                EnumeratedObject object False multiplicity
+                        in
+                            Ok (overrideMainObject negateObject pseudoObject vars)
+
+                _ ->
+                    Err "main object cannot be overridden twice"
         else
-            if target < 0 then
-                case vars.object of
-                    DirectObject object ->
-                        if not (objectIsThirdPerson object) then
-                            Err "only third person (other) objects can be overridden"
-                        else if isPlural quantifier && not (objectIsPlural object) then
-                            Err "your ENUMERATED quantifier requires a plural balancing object"
-                        else
-                            let
-                                negateObject =
-                                    isNegatable quantifier
+            case Array.get target (Array.fromList vars.balances) of
+                Nothing ->
+                    Err "target index out of range"
 
-                                pseudoObject =
-                                    EnumeratedObject object False multiplicity
-                            in
-                                Ok (overrideMainObject negateObject pseudoObject vars)
+                Just (DirectBalance ( relator, SameAsMain )) ->
+                    Err "only different balancing objects can be overridden"
 
-                    _ ->
-                        Err "main object cannot be overridden twice"
+                Just (DirectBalance ( relator, Different object )) ->
+                    if not (objectIsThirdPerson object) then
+                        Err "only third person (other) objects can be overridden"
+                    else if isPlural quantifier && not (objectIsPlural object) then
+                        Err "your ENUMERATED quantifier requires a plural balancing object"
+                    else if objectIsPlural object && not (isPlural quantifier) then
+                        Err "your ENUMERATED quantifier requires a singular balancing object"
+                    else
+                        Ok (overrideBalancingObject target (EnumeratedBalance relator object False multiplicity) vars)
 
-            else
-                case Array.get target (Array.fromList vars.balances) of
-                    Nothing ->
-                        Err "target index out of range"
-
-                    Just (DirectBalance ( relator, SameAsMain )) ->
-                        Err "only different balancing objects can be overridden"
-
-                    Just (DirectBalance ( relator, Different object )) ->
-                        if not (objectIsThirdPerson object) then
-                            Err "only third person (other) objects can be overridden"
-                        else if isPlural quantifier && not (objectIsPlural object) then
-                            Err "your ENUMERATED quantifier requires a plural balancing object"
-                        else if objectIsPlural object && not (isPlural quantifier) then
-                            Err "your ENUMERATED quantifier requires a singular balancing object"
-                        else
-                            Ok (overrideBalancingObject target (EnumeratedBalance relator object False multiplicity) vars)
-
-                    _ ->
-                        Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
+                _ ->
+                    Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
 
 
 {-| AMASSED messages.
@@ -402,46 +400,45 @@ enumerated target multiplicity vars =
 amassed : Int -> Proportion -> Vars -> Result String Vars
 amassed target proportion vars =
     let
-        ( quantifier, other, haystack) =
+        ( quantifier, other, haystack ) =
             proportion
     in
         if not (isAmassing quantifier) then
             Err "this quantifier cannot be used in AMASSED elaborations"
+        else if target < 0 then
+            case vars.object of
+                DirectObject object ->
+                    if not (objectIsThirdPerson object) then
+                        Err "only third person (other) objects can be overridden"
+                    else if quantifier == Just Much && (objectIsPlural object) then
+                        Err "this quantifier cannot be used with plural objects"
+                    else
+                        let
+                            pseudoObject =
+                                AmassedObject object False proportion
+                        in
+                            Ok (overrideMainObject True pseudoObject vars)
+
+                _ ->
+                    Err "main object cannot be overridden twice"
         else
-            if target < 0 then
-                case vars.object of
-                    DirectObject object ->
-                        if not (objectIsThirdPerson object) then
-                            Err "only third person (other) objects can be overridden"
-                        else if quantifier == Just Much && (objectIsPlural object) then
-                            Err "this quantifier cannot be used with plural objects"
-                        else
-                            let
-                                pseudoObject =
-                                    AmassedObject object False proportion
-                            in
-                                Ok (overrideMainObject True pseudoObject vars)
+            case Array.get target (Array.fromList vars.balances) of
+                Nothing ->
+                    Err "target index out of range"
 
-                    _ ->
-                        Err "main object cannot be overridden twice"
-            else
-                case Array.get target (Array.fromList vars.balances) of
-                    Nothing ->
-                        Err "target index out of range"
+                Just (DirectBalance ( relator, SameAsMain )) ->
+                    Err "only different balancing objects can be overridden"
 
-                    Just (DirectBalance ( relator, SameAsMain )) ->
-                        Err "only different balancing objects can be overridden"
+                Just (DirectBalance ( relator, Different object )) ->
+                    if not (objectIsThirdPerson object) then
+                        Err "only third person (other) objects can be overridden"
+                    else if quantifier == Just Much && (objectIsPlural object) then
+                        Err "this quantifier cannot be used with plural objects"
+                    else
+                        Ok (overrideBalancingObject target (AmassedBalance relator object False proportion) vars)
 
-                    Just (DirectBalance ( relator, Different object )) ->
-                        if not (objectIsThirdPerson object) then
-                            Err "only third person (other) objects can be overridden"
-                        else if quantifier == Just Much && (objectIsPlural object) then
-                            Err "this quantifier cannot be used with plural objects"
-                        else
-                            Ok (overrideBalancingObject target (AmassedBalance relator object False proportion) vars)
-
-                    _ ->
-                        Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
+                _ ->
+                    Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
 
 
 {-| Some functions for modifying LongPivots.

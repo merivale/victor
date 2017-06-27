@@ -29,7 +29,7 @@ plain object pivot counter balances =
     else if propertyEmpty counter then
         Err "please enter a property for your counter"
     else
-        Ok (Plain ( object, ( pivot, counter, balances) ))
+        Ok (Plain ( object, ( pivot, counter, balances ) ))
 
 
 verbalityEmpty : Pivot -> Bool
@@ -40,7 +40,7 @@ verbalityEmpty pivot =
 
         _ ->
             False
-    
+
 
 propertyEmpty : Maybe Counter -> Bool
 propertyEmpty counter =

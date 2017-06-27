@@ -209,7 +209,8 @@ doesNotTarget : Int -> Elaboration -> Bool
 doesNotTarget balanceIndex elaboration =
     not
         (List.member elaboration.recipe [ MakeINDIRECT, MakeENUMERATED, MakeAMASSED ]
-            && elaboration.target == balanceIndex
+            && elaboration.target
+            == balanceIndex
         )
 
 
