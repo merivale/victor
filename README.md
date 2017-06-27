@@ -138,14 +138,11 @@ There should be nothing very surprising here. The object/condition distinction a
 
 Every plain English message, I submit, affirms the present satisfaction of the condition by the object, and is encoded in a sentence containing either the base form or the first finite form of the verb. (The decision between these two forms depends straightforwardly on the object, and encodes no additional information.) This constitutes the first principle in my unified theory of tense for English. That the present is the default time in the English predication system is suggested by the use of the base form of the verb for such affirmations. Ultimately, however, the evidence for this claim is holistic, and derives from the success and simplicity of my theory as a whole.
 
-The various (apparently) non-present uses of the base and first finite form will mostly be handled by my theory of elaborations. One of them, however, can be dealt with right away: its use in conveying apparently "timeless" affirmations concerning mathematical or conceptual affairs:
+The various (apparently) non-present uses of the base and first finite form will mostly be handled by my theory of elaborations. One of them, however, can be dealt with right away: its use in conveying apparently "timeless" affirmations concerning mathematical or conceptual affairs. Consider for example the natural interpretations of the following sentences:
 
 ```elm
-( two plus two, equal four )
-    -> "Two plus two equals four."
-
-( a vixen, be a female fox )
-    -> "A vixen is a female fox."
+"Two plus two equals four."
+"A vixen is a female fox."
 ```
 
 I diagnose these as plain messages (actually the second is elaborated, but not in such a way as to affect its temporal components; see section 5.6). Consequently I insist that they are still affirmations about the *present*. It is simply that sensible readers *ignore* this temporal information, knowing full well that it is irrelevant. The alternative to this refreshingly striaghtforward account is to posit a class of *genuinely* timeless affirmations in English, which are encoded (ambiguously) in the very same sentences that encode their corresponding present affirmations. But this - surprisingly popular - view is needlessly complicated, and not supported by the data. Why introduce a whole new class of message, and a whole new subroutine to encode it, when we can simply use the resources already in place? The question is intended to be rhetorical; but in any case, the fact that the output sentences are identical indicates fairly clearly that we *didn't* do this.
@@ -211,7 +208,7 @@ type Relator
     ...
 ```
 
-My model does not currently contain any properties or adjectives, and consequently the property type is just an alias for a string. What this means in practice is that users are obliged to encode their properties for themselves, inputting the resulting adjective directly into the system. There are 31 relators in my model at present, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but it accounts for many common prepositions.
+There are 31 relators in my model at present, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but it accounts for many common prepositions. My model does not currently contain any properties or adjectives, meanwhile, and consequently the *property* type is just an alias for a string. What this means in practice is that users are obliged to encode their properties for themselves, inputting the resulting adjective directly into the system. I will call this an *unearthed* variable type; as we will see, there are a few more of these in my model. I will say something more general about this fact in section 4.4 below.
 
 Going back to the start of the condition, we have the pivot. The pivot determines the choice of verb at the start of the predicate, and can take one of two values:
 
@@ -224,19 +221,19 @@ type alias Verbality =
     String
 ```
 
-The `Be` pivot, unsurprisingly, triggers selection of the verb **`"be"`**, with the form is this verb being determined by the main object of the nucleus, according to the following schema:
+The `Be` pivot, unsurprisingly, triggers selection of the verb **`"be"`**, with the form of this verb being determined by the main object of the nucleus, according to the following schema:
 
-| Object    | Form    |
-| --------- | ------- |
-| Speaker   | `"am"`  |
-| Other     | `"is"`  |
-| otherwise | `"are"` |
+| Object      | Form    |
+| ----------- | ------- |
+| Speaker     | `"am"`  |
+| Other       | `"is"`  |
+| *otherwise* | `"are"` |
 
 The boolean argument this pivot takes indicates whether or not the condition as a whole is *ongoing*; when set to true, this introduces the participle form `"being"` immediately after the finite form as determined by the object.
 
-If there is an English condition comprising nothing other than the `Be` pivot, then it is the condition of existence; as in the standard translation of Descartes' famous claim, `"I think, therefore I am"`. For what it's worth, I find it hard to interpret sentences like `"We are"` or `"They are"` as encoding existential claims. Such semi-sentences seem to me to demand the response, *are what?* And so I am tempted to say that there is no English condition comprising the `Be` pivot on its own, and that the proper translation of Descartes is `"... therefore I exist"`. But my intuition is not shared by all English speakers, and I needn't insist on the point.
+If there is an English condition comprising nothing other than the `Be` pivot, then it is the condition of existence; as in the standard translation of Descartes' famous claim, `"I think, therefore I am"`. For what it's worth, I myself find it hard to interpret sentences like `"We are"` or `"They are"` as encoding existential claims. Such semi-sentences seem to me to demand the response, *are what?* And so I am tempted to say that there is no English condition comprising the `Be` pivot on its own, and that the proper translation of Descartes is `"... therefore I exist"`. But my intuition is not shared by all English speakers, and I needn't insist on the point.
 
-At any rate, there are certainly plenty of English conditions built with the `Be` pivot and a counter. When the counter is a property, the condition is that of having that property:
+At any rate, there are certainly plenty of English conditions made up of the `Be` pivot together with a counter. When the counter is a property, the condition is that of having that property:
 
 ```elm
 ( Speaker, ( Be, "hungry" ) )
@@ -264,7 +261,7 @@ When the counter is a relator, the condition is that of being in a certain *stan
 
 (I am adopting some more abbreviating conventions here: Instead of `Just (CounterProperty "hungry")` I write `"hungry"`, and instead of `Just (CounterRelator Out)` I write `Out`. When there is no counter, I omit it, instead of writing `Nothing`. When there are no balances, similarly, I omit the list variable altogether, instead of writing `[]`. When the *ongoing* boolean argument is `False`, finally, I omit it, and when it is `True` I write it as `Ongoing` instead, so readers don't have to remember what its purpose is.)
 
-The `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language. The *verbality* variable is intended to capture the choice that determines the verb. For now it is just an alias for a string, meaning that (as with the property variable type) users are obliged to encode their verbalities for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). The form is then determined by the object: the first finite form in the case of the `Other` object, and the base form otherwise.
+The `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language. The *verbality* variable is intended to capture the choice that determines the verb. For now it is another unearthed variable type like the *property* type; i.e. it is just an alias for a string. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). The form is then determined by the object: the first finite form in the case of the `Other` object, and the base form otherwise.
 
 Following the verbality, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the `Be` pivot; this underlies the difference between, for example, `"She lives"` and `"She is living"`. The second boolean argument, not available for the `Be` pivot, indicates whether the condition as a whole is *passive* or not; this accounts for the difference between, for example, `"She eats"` or `"She is eating"` on the one hand, and `"She is eaten"` or `"She is being eaten"` on the other.
 
@@ -294,11 +291,11 @@ Rather more `Do` pivots can support relators; for example:
     -> "Grannie is falling over."
 ```
 
-Many `Do` pivots, as we will see in the next section, support balances as well. In general, there is little else to say about `Do` pivots. They are considerably varied. There are ten of thousands of them, and the study of them is an enormous subject in its own right (not attempted here).
+Many `Do` pivots, as we will see in the next section, support balances as well. In general, there is little else to say about `Do` pivots. They are considerably varied. There are tens of thousands of them, and the study of them is an enormous subject in its own right (not attempted here).
 
-###4.3. Conditions, part 2/2: Balances
+### 4.3. Conditions, part 2/2: Balances
 
-A balance consists a *weight*, optionally preceeded by a *relator*. Relators we have already met (they are encoded in prepositions). Weights, meanwhile, are essentially just objects like the main object of the nucleus, with the added possibility that they may simply refer back to that main object (in which case they generate the third direct form of the pronoun, `"myself"`, `"yourself"`, `"themselves"`, etc.):
+A balance consists of a *weight*, optionally preceeded by a *relator*. Relators we have already met (they are encoded in prepositions). Weights, meanwhile, are essentially just objects like the main object of the nucleus, with the added possibility that they may refer back to the main object itself (in which case they generate the third direct form of the pronoun, `"myself"`, `"yourself"`, `"themselves"`, etc.):
 
 ```elm
 type alias Balance =
@@ -311,7 +308,7 @@ type Weight
 
 For clarity, I will distinguish where necessary the *main* object of the nucleus from any *balancing* objects in the list of balances.
 
-Some more abbreviating conventions relating to balances, and conditions as a while: Whenever a relator is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is not the same as the main object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a weight (i.e. no relator), I will drop the brackets around it. For example:
+Some more abbreviating conventions relating to balances, and conditions as a whole: Whenever a relator is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is not the same as the main object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a weight (i.e. no relator), I will drop the brackets around it. For example:
 
 | Abbreviation                  | Full Meaning                                                                   |
 | ----------------------------- | ------------------------------------------------------------------------------ |
@@ -325,10 +322,10 @@ If it wasn't clear before, I trust this table illustrates the benefits of conven
 When a `Be` pivot has a counter, typically no balances are required to make a complete condition. In some cases, however, with a suitable counter, a balance can also be included:
 
 ```elm
-( Male, ( Be, Out [ With, Male "Robert" ] ) )
+( Male, ( Be, Out [ ( With, Male "Robert" ) ] ) )
     -> "He is out with Robert."
 
-( Speakers, ( Be "happy", [ For, Hearers ] ) )
+( Speakers, ( Be "happy", [ ( For, Hearers ) ] ) )
     -> "We are happy for you."
 ```
 
@@ -345,10 +342,10 @@ Another alternative is to balance it out with an object prefixed with the `Like`
 ( Speaker, ( Be, [ ( Like, Male "Victor" ) ] ) )
     -> "I am like Victor."
 
-( Hearer, ( Do "sound", [ Like, Female ] ) )
+( Hearer, ( Do "sound", [ ( Like, Female ) ] ) )
     -> "You sound like her."
 
-( Female, ( Do "look", [ Like, Hearer ] ) )
+( Female, ( Do "look", [ ( Like, Hearer ) ] ) )
     -> "She looks like you."
 ```
 
@@ -378,7 +375,7 @@ Here is a very simple example of a plain message beyond the scope of my present 
     -> "I am here."
 ```
 
-For what it's worth, my current thinking is that this sentence should be accounted for by expanding the type definition for a weight, to include options for *places* as well as objects. These options would include, at least, *here*, *there*, *home*, and *away*. By itself, this addition is not difficult to implement, although it would have implications in the implementation of my theory of elaborations that I am not yet sure how to handle. In any case, there will always be more to do, and one has to stop somewhere. (`"Somewhere"`, incidentally, would be the result of elaborating a message with a place variable like *here* or *there* in its underlying condition; my model doesn't predict the uses of this word yet either.) I am also unable to generate compound prepositional phrases like `"in front of"` or `"on top of"`.
+For what it's worth, my current thinking is that this sentence should be accounted for by expanding the type definition for a weight to include options for *places* as well as objects. These options would include, at least, *here*, *there*, *home*, and *away*. By itself, this addition is not difficult to implement, although it would have implications in the implementation of my theory of elaborations that I am not yet sure how to handle. In any case, there will always be more to do, and one has to stop somewhere. (`"Somewhere"`, incidentally, would be the result of elaborating a message with a place variable like *here* or *there* in its underlying condition; my model doesn't predict the uses of this word yet either.) I am also unable to generate compound prepositional phrases like `"in front of"` or `"on top of"`.
 
 More worrying still is that there are ambiguities I am unable to account for. This is particularly regrettable, because the ability to account for ambiguities is precisely one of the main selling points of my approach as a whole. In my defence, I can account for several ambiguities with my theory of elaborations (as we will see), and that, as I advertised above, is where my main interests lie. There are some ambiguities, however, that need to be accounted for by the theory of plain messages, and my model is not yet able to do this. The ambiguities in question concern how balances fit into the overall condition, informational differences that are not captured when we represent balances simply in a list. For example:
 
@@ -392,11 +389,11 @@ This sentence is ambiguous: is he with Victor, looking at Grannie, or is Grannie
 ( Male, ( Do "look" Ongoing, [ ( At, Female "Grannie" ), ( With, Male "Victor" ) ] ) )
 ```
 
-Evidently, then, there is more to a condition than just a pivot and a bare *list* of balances. To understand a condition fully, one also must appreciate how each individual balance relates to the pivot. Sometimes that relation is signalled explicitly by the relator (`"He gave the book to her"`), and sometimes it is signalled implicitly by the order of the balances (`"He gave her the book"`). But sometimes - as in the ambiguous example just now - there is yet more information that goes unsignalled. But representing this information in my model of messages is a problem for another day.
+Evidently, then, there is more to a condition than just a pivot, an optional counter, and a bare *list* of balances. To understand a condition fully, one also must appreciate how each individual balance relates to the pivot. Sometimes that relation is signalled explicitly by the relator (`"He gave the book to her"`), and sometimes it is signalled implicitly by the order of the balances (`"He gave her the book"`). But sometimes - as in the ambiguous example just now - there is yet more information that goes unsignalled. But representing this information in my model of messages is a problem for another day.
 
-(A tentative suggestion: Perhaps the definition of a weight needs to be made recursive, allowing for balances within weights. The representation above, then, would be of the message that he is with Victor looking at Grannie. The message where Victor is with Grannie instead would involve a balance within a weight: `( At, ( Female "Grannie", ( With, Male "Victor" ) ) )`. In plainer terms, the difference would be between *looking at-Grannie with-Victor* (two separate balances) and *looking at Grannie-with-Victor* (one balance, with another balance inside it). With balances being encoded in order, and sub-balances before the next balance at the same level in the list, it is easy to see how the ambiguity in the sentence would then arise.)
+(A tentative suggestion: Perhaps the definition of a weight needs to be made recursive, allowing for balances within weights. The representation above, then, would be of the message in which he is with Victor looking at Grannie. The message where Victor is with Grannie instead would involve a balance within a weight: `( At, ( Female "Grannie", ( With, Male "Victor" ) ) )`. In plainer terms, the difference would be between *looking at-Grannie with-Victor* (two separate balances) and *looking at Grannie-with-Victor* (one balance, with another balance inside it). With balances being encoded in order, and sub-balances before the next balance at the same level in the list, it is easy to see how the ambiguity in the sentence would then arise.)
 
-Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any counter with any object; while in constructing the condition itself, they may append any combination of counter and balances to any pivot. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
+Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any relator with any object; while in constructing the condition itself, they may combine any counter with any pivot, and append any list of balances whatsoever. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
 
 ```elm
 ( Male "Victor", ( love, At, [ ( Behind, Female "Grannie" ) ] ) )
@@ -442,7 +439,7 @@ The definition is of course recursive, reflecting the fact that the elaborations
 
 The elaborations that I posit all have what I like to call *global scope*, but *local influence*. By this I mean that they all operate on messages as a whole (global scope), but that their semantic effect invariably applies only to one particular component of the message (local influence): sometimes the object, sometimes the condition, sometimes an extra-nuclear argument introduced by a previous elaboration, and in a few cases the time of the condition's satisfaction. (Because of this, it is often convenient to refer to an elaborated *something*, where that something is the locally affected component, rather than the message as whole.) It is an interesting question whether English has elaborating devices that are local in scope as well as influence. I should not like to say with any certainty that it does not; the hypothesis, it seems to me, certainly merits further investigation.
 
-However that may be, I insist that the elaborations I have diagnosed thus far really do have global scope, notwithstanding their local influence. There are two main reasons for this. First, one and the same elaboration may affect a *different* component of its input message, depending on how that message has been elaborated previously. Where I have one globally scoped elaboration with varying local influence, therefore, the alternative would not only require *multiple* locally scoped elaborations, but also a suite of additional validation rules restricting the use of these elaborations. Secondly, the order in which elaborations are applied is typically a matter of considerable semantic significance, even when the elaborations target completely separate parts of the message. A `PAST INDIRECT` message, for example, is importantly distinct from its corresponding `INDIRECT PAST` message (see section 5.6 below). If we treat these elaborations as having local scope, we lose the ability to represent the order in which they are applied, and therefore have no way of representing this difference. It would of course be perfectly possible to represent the order in which locally scoped elaborations are applied in some other way. But again, that would introduce more complexity into the system. Overall, a model with globally scoped elaborations is simpler, covering the same ground with less convoluted machinery.
+However that may be, I insist that the elaborations I have diagnosed thus far really do have global scope, notwithstanding their local influence. There are two main reasons for this. First, one and the same elaboration may affect a *different* component of its input message, depending on how that message has been elaborated previously. Where I have one globally scoped elaboration with varying local influence, therefore, the alternative would not only require *multiple* locally scoped elaborations, but also a suite of additional validation rules restricting the use of these elaborations. Secondly, the order in which elaborations are applied is typically a matter of considerable semantic significance, even when the elaborations target separate parts of the message. A `PAST INDIRECT` message, for example, is importantly distinct from its corresponding `INDIRECT PAST` message (see section 5.6 below). If we treat these elaborations as having local scope, we lose the ability to represent the order in which they are applied, and therefore have no way of representing this difference. It would of course be perfectly possible to represent the order in which locally scoped elaborations are applied in some other way. But again, that would introduce more complexity into the system. Overall, a model with globally scoped elaborations is simpler, covering the same ground with less convoluted machinery.
 
 ### 5.1. PAST and PRIOR Messages
 
