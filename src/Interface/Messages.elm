@@ -96,19 +96,19 @@ elaborate elaborations message =
 
                 MakeINDIRECT ->
                     haystack elaboration
-                        |> andThen (indirection elaboration)
+                        |> andThen (description elaboration)
                         |> andThen (indirect elaboration message)
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeENUMERATED ->
                     haystack elaboration
-                        |> andThen (agglomeration elaboration)
+                        |> andThen (multiplicity elaboration)
                         |> andThen (enumerated elaboration message)
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeAMASSED ->
                     haystack elaboration
-                        |> andThen (agglomeration elaboration)
+                        |> andThen (proportion elaboration)
                         |> andThen (amassed elaboration message)
                         |> andThen (elaborate (List.drop 1 elaborations))
 
@@ -210,26 +210,36 @@ haystack elaboration =
             Ok ( string, elaboration.string2, elaboration.string3 )
 
 
-indirection : Elaboration -> Haystack -> Result String Indirection
-indirection elaboration haystack =
+description : Elaboration -> Haystack -> Result String Description
+description elaboration haystack =
     Ok ( elaboration.pointer, elaboration.other, haystack )
 
 
-agglomeration : Elaboration -> Haystack -> Result String Agglomeration
-agglomeration elaboration haystack =
+multiplicity : Elaboration -> Haystack -> Result String Multiplicity
+multiplicity elaboration haystack =
+    case elaboration.quantifier of
+        Nothing ->
+            Err "please select a quantifier for your ENUMERATED elaboration"
+
+        Just quantifier ->
+            Ok ( quantifier, elaboration.other, haystack )
+
+
+proportion : Elaboration -> Haystack -> Result String Proportion
+proportion elaboration haystack =
     Ok ( elaboration.quantifier, elaboration.other, haystack )
 
 
-indirect : Elaboration -> Message -> Indirection -> Result String Message
-indirect elaboration message indirection =
-    Ok (INDIRECT elaboration.target indirection message)
+indirect : Elaboration -> Message -> Description -> Result String Message
+indirect elaboration message description =
+    Ok (INDIRECT elaboration.target description message)
 
 
-enumerated : Elaboration -> Message -> Agglomeration -> Result String Message
-enumerated elaboration message agglomeration =
-    Ok (ENUMERATED elaboration.target agglomeration message)
+enumerated : Elaboration -> Message -> Multiplicity -> Result String Message
+enumerated elaboration message multiplicity =
+    Ok (ENUMERATED elaboration.target multiplicity message)
 
 
-amassed : Elaboration -> Message -> Agglomeration -> Result String Message
-amassed elaboration message agglomeration =
-    Ok (AMASSED elaboration.target agglomeration message)
+amassed : Elaboration -> Message -> Proportion -> Result String Message
+amassed elaboration message proportion =
+    Ok (AMASSED elaboration.target proportion message)

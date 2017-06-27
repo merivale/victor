@@ -32,15 +32,13 @@ type Message
     | PREORDAINED (Maybe Displacer) (Maybe Time) Message
     | EXTENDED Duration Message
     | SCATTERED Tally Message
-    | INDIRECT Int Indirection Message
-    | ENUMERATED Int Agglomeration Message
-    | AMASSED Int Agglomeration Message
+    | INDIRECT Int Description Message
+    | ENUMERATED Int Multiplicity Message
+    | AMASSED Int Proportion Message
 
 
-{-| The nucleus of an English message consists of an object, a pivot, and a
-(potentially empty) array of balances. The pivot and balances together comprise
-a condition, and a plain message affirms the present satisfaction of this
-condition by the object.
+{-| The nucleus of an English message consists of an object and a condition. A
+plain message affirms the present satisfaction of the condition by the object.
 -}
 type alias Nucleus =
     ( Object, Condition )
@@ -62,20 +60,18 @@ type Sex
 
 
 {-| The condition is encoded into the predicate of the sentence. The pivot is
-(approximately) encoded in the verb at the start of the predicate, with any
-balances fetching up in any subsequent words. Some pivots are encoded into more
-than one word, however, such as "be happy", "be being silly", or "be eaten".
+(approximately) encoded in the verb at the start of the predicate, with the
+counter and any balances fetching up in subsequent words. Some pivots are
+encoded into more than one word, however, such as "be laughing" or "be seen".
 -}
 type alias Condition =
     ( Pivot, Maybe Counter, List Balance )
 
 
-{-| Pivots are of two kinds, Be or Do. The first is for predicates like "be
-happy", "seem happy", "look happy", "become happy"; the second is for everything
-else. The boolean argument for Be pivots specifies whether the condition is
-ongoing or not ("be happy" versus "be being happy"). Likewise the first boolean
-argument for Do pivots. The second indicates whether the condition is passive
-or not ("eat" versus "be eaten").
+{-| Pivots are of two kinds, Be or Do. The boolean argument for Be pivots
+specifies whether the condition is ongoing or not ("be" versus "be being").
+Likewise the first boolean argument for Do pivots. The second indicates
+whether the condition is passive or not ("see" versus "be seen").
 -}
 type Pivot
     = Be Bool
@@ -129,10 +125,10 @@ type Relator
     | Without
 
 
-{-| A balance consists of either a counter or a weight, or both. The weight is
-encoded in a pronoun, proper name, or noun phrase; it's essentially just another
-object, with a tweak to allow for reflexive pronouns like "myself", "herself",
-etc. The counter is encoded in a preposition.
+{-| A balance consists of a weight prefixed by an optional relator. The weight
+is encoded in a pronoun, proper name, or noun phrase; it's essentially just
+another object, with a tweak to allow for reflexive pronouns like "myself",
+"herself", etc. The relator is encoded in a preposition.
 -}
 type alias Balance =
     ( Maybe Relator, Weight )
@@ -143,9 +139,8 @@ type Weight
     | Different Object
 
 
-{-| This is not the place to explain the nature of the various elaborations
-posited by my model. Nor is it the place to go into detail about the additional
-arguments that (some of) these elaborations take; see the README file.
+{-| The DISPLACED, REGULAR, and PREORDAINED elaborations take a Displacer
+argument. This is either another pivot or a modality.
 -}
 type Displacer
     = Primary Pivot (Maybe Counter)
@@ -164,11 +159,31 @@ type Modality
     | Command
 
 
-type alias Indirection =
+{-| The last two modalities on this list are permissible in PREORDAINED
+elaborations only. The Messages module, when validating DISPLACED and REGULAR
+messages, should use this list to check all is as it should be.
+-}
+preordainedOnly : List Modality
+preordainedOnly =
+    [ Permission
+    , Command
+    ]
+
+
+{-| The INDIRECT, ENUMERATED, and AMASSED elaborations all take Description,
+Multiplicity, and Proportion arguments respectively. These arguments have quite
+a lot in common; together they are responsible for noun phrases, like "the red
+baloon", "your best friend", "several seditious scribes from Caesarea", etc.
+-}
+type alias Description =
     ( Pointer, Bool, Haystack )
 
 
-type alias Agglomeration =
+type alias Multiplicity =
+    ( Quantifier, Bool, Haystack )
+
+
+type alias Proportion =
     ( Maybe Quantifier, Bool, Haystack )
 
 
@@ -181,6 +196,7 @@ type Pointer
 
 type Quantifier
     = A
+    | Integer Int
     | Several
     | Many
     | Each
@@ -194,12 +210,50 @@ type Quantifier
     | Enough
 
 
+{-| Multiplicities and Proportions for the most part use different Quantifiers.
+Some and Any, however, show up on both sides of this divide. The Messages
+module, when validating ENUMERATED and AMASSED messages, should use these lists
+to check all is as it should be.
+-}
+enumerators : List Quantifier
+enumerators =
+    [ A
+    , Integer 0
+    , Several
+    , Many
+    , Each
+    , Every
+    , Both
+    , Some
+    , Any
+    ]
+
+
+amassors : List Quantifier
+amassors =
+    [ Some
+    , Any
+    , All
+    , Much
+    , Enough
+    ]
+
+
 type alias Haystack =
     ( Category, Maybe Property, Maybe Restriction )
 
 
-{-| Unearthed variable types, i.e. types that (for now at least) are just
-aliases for strings; meaning that users must encode these for themselves.
+type alias Category =
+    String
+
+
+type alias Restriction =
+    String
+
+
+{-| Other variables for elaborations are currently entirely unearthed. They are
+just aliases for string, meaning that users must encode these arguments for
+themselves.
 -}
 type alias Frequency =
     String
@@ -214,14 +268,6 @@ type alias Duration =
 
 
 type alias Tally =
-    String
-
-
-type alias Category =
-    String
-
-
-type alias Restriction =
     String
 
 
@@ -260,12 +306,14 @@ type alias LongPivot =
 
 
 type PseudoObject
-    = RealObject Object
-    | IndirectObject Object Indirection
-    | AgglomeratedObject Object Bool Agglomeration
+    = DirectObject Object
+    | IndirectObject Object Description
+    | EnumeratedObject Object Bool Multiplicity
+    | AmassedObject Object Bool Proportion
 
 
 type PseudoBalance
-    = RealBalance Balance
-    | IndirectBalance (Maybe Relator) Object Indirection
-    | AgglomeratedBalance (Maybe Relator) Object Bool Agglomeration
+    = DirectBalance Balance
+    | IndirectBalance (Maybe Relator) Object Description
+    | EnumeratedBalance (Maybe Relator) Object Bool Multiplicity
+    | AmassedBalance (Maybe Relator) Object Bool Proportion

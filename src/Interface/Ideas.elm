@@ -339,7 +339,7 @@ displayModality modality =
             "Soft Yes ('will')"
 
         HardYes ->
-            "Hard Yes ('must')"
+            "Hard Yes ('must'/'need')"
 
         SoftMaybe ->
             "Soft Maybe ('may')"
@@ -433,6 +433,7 @@ listQuantifiers amassed =
         ]
     else
         [ Just A
+        , Just (Integer 0)
         , Just Several
         , Just Many
         , Just Each
@@ -443,6 +444,21 @@ listQuantifiers amassed =
         ]
 
 
+equateQuantifiers : Maybe Quantifier -> Maybe Quantifier -> Bool
+equateQuantifiers quantifier1 quantifier2 =
+    case ( quantifier1, quantifier2 ) of
+        ( Just (Integer int1), Just (Integer int2) ) ->
+            True
+
+        _ ->
+            quantifier1 == quantifier2
+
+
 displayQuantifier : Maybe Quantifier -> String
 displayQuantifier quantifier =
-    Maybe.withDefault "-- No Quantifier --" (Maybe.map toString quantifier)
+    case quantifier of
+        Just (Integer int) ->
+            "Integer"
+
+        _ ->
+            Maybe.withDefault "-- No Quantifier --" (Maybe.map toString quantifier)

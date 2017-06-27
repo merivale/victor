@@ -82,6 +82,7 @@ type Signal
     | SetPointerObject Int Object
     | SetPointerObjectString Int String
     | SetQuantifier Int (Maybe Quantifier)
+    | SetQuantifierInteger Int String
     | ToggleOther Int
 
 

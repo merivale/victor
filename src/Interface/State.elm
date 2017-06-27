@@ -171,6 +171,9 @@ update signal model =
         SetQuantifier index quantifier ->
             { model | elaborations = modifyItem index (setQuantifier quantifier) model.elaborations }
 
+        SetQuantifierInteger index int ->
+            { model | elaborations = modifyItem index (setQuantifierInteger int) model.elaborations }
+
         ToggleOther index ->
             { model | elaborations = modifyItem index toggleOther model.elaborations }
 
@@ -479,6 +482,15 @@ setPointerObjectString string elaboration =
 setQuantifier : Maybe Quantifier -> Elaboration -> Elaboration
 setQuantifier quantifier elaboration =
     { elaboration | quantifier = quantifier }
+
+
+setQuantifierInteger : String -> Elaboration -> Elaboration
+setQuantifierInteger string elaboration =
+    let
+        int =
+            Result.withDefault 0 (String.toInt string)
+    in
+        { elaboration | quantifier = Just (Integer int) }
 
 
 toggleOther : Elaboration -> Elaboration

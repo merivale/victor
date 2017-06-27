@@ -194,12 +194,24 @@ pointer index elaboration =
 
 quantifier : Bool -> Int -> Elaboration -> Html.Html Signal
 quantifier amassed index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Quantifier"
-        , quantifierSelect amassed index elaboration.quantifier
-        , other index elaboration.other
-        ]
+    case elaboration.quantifier of
+        Just (Integer int) ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Quantifier"
+                , quantifierSelect amassed index elaboration.quantifier
+                , quantifierInteger index int
+                , other index elaboration.other
+                ]
+
+        _ ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Quantifier"
+                , quantifierSelect amassed index elaboration.quantifier
+                , Input.emptyInput
+                , other index elaboration.other
+                ]
 
 
 haystack : Int -> Elaboration -> Html.Html Signal
@@ -317,13 +329,13 @@ quantifierSelect amassed index quantifier =
     Input.select
         { value = quantifier
         , options = Ideas.listQuantifiers amassed
-        , equivalent = (==)
+        , equivalent = Ideas.equateQuantifiers
         , signal = SetQuantifier index
         , toLabel = Ideas.displayQuantifier
         }
 
 
-{-| Text inputs, used by the main output functions above.
+{-| Text and number inputs, used by the main output functions above.
 -}
 pivotVerbality : Int -> Verbality -> Html.Html Signal
 pivotVerbality index verbality =
@@ -350,8 +362,18 @@ pointerObjectText index object =
     Input.text
         { value = Maybe.withDefault "" (Ideas.objectString object)
         , placeholder = "name (optional)"
-        , signal = SetObjectString
+        , signal = SetPointerObjectString index
         , disabled = not (Ideas.objectHasString object)
+        }
+
+
+quantifierInteger : Int -> Int -> Html.Html Signal
+quantifierInteger index int =
+    Input.number
+        { value = toString int
+        , placeholder = "integer"
+        , signal = SetQuantifierInteger index
+        , disabled = False
         }
 
 

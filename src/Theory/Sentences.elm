@@ -39,13 +39,16 @@ implode vars =
 object : PseudoObject -> Object
 object pseudoObject =
     case pseudoObject of
-        RealObject object ->
+        DirectObject object ->
             object
 
-        IndirectObject object indirection ->
+        IndirectObject object description ->
             object
 
-        AgglomeratedObject object negated agglomeration ->
+        EnumeratedObject object negated multiplicity ->
+            object
+
+        AmassedObject object negated proportion ->
             object
 
 
@@ -59,14 +62,17 @@ function defined shortly.
 subject : Vars -> List String
 subject vars =
     case vars.object of
-        RealObject object ->
+        DirectObject object ->
             [ Words.direct1 object ]
 
-        IndirectObject object indirection ->
-            articlePhrase (isPlural object) indirection
+        IndirectObject object description ->
+            articlePhrase (isPlural object) description
 
-        AgglomeratedObject object negated agglomeration ->
-            determinerPhrase (isPlural object) negated agglomeration
+        EnumeratedObject object negated multiplicity ->
+            enumeratedDeterminerPhrase (isPlural object) negated multiplicity
+
+        AmassedObject object negated proportion ->
+            amassedDeterminerPhrase (isPlural object) negated proportion
 
 
 {-| ...
@@ -74,22 +80,28 @@ subject vars =
 middle : Object -> PseudoBalance -> String
 middle mainObject balance =
     case balance of
-        RealBalance ( relator, weight ) ->
+        DirectBalance ( relator, weight ) ->
             String.join " "
                 ((relatorToString relator)
                     ++ (weightToString mainObject weight)
                 )
 
-        IndirectBalance relator object indirection ->
+        IndirectBalance relator object description ->
             String.join " "
                 ((relatorToString relator)
-                    ++ (articlePhrase (isPlural object) indirection)
+                    ++ (articlePhrase (isPlural object) description)
                 )
 
-        AgglomeratedBalance relator object negated agglomeration ->
+        EnumeratedBalance relator object negated multiplicity ->
             String.join " "
                 ((relatorToString relator)
-                    ++ (determinerPhrase (isPlural object) negated agglomeration)
+                    ++ (enumeratedDeterminerPhrase (isPlural object) negated multiplicity)
+                )
+
+        AmassedBalance relator object negated proportion ->
+            String.join " "
+                ((relatorToString relator)
+                    ++ (amassedDeterminerPhrase (isPlural object) negated proportion)
                 )
 
 
@@ -130,11 +142,11 @@ weightToString mainObject weight =
 pointer, get a list of words from the haystack, and combine them - optionally
 with "other" inserted in between.
 -}
-articlePhrase : Bool -> Indirection -> List String
-articlePhrase plural indirection =
+articlePhrase : Bool -> Description -> List String
+articlePhrase plural description =
     let
         ( pointer, other, haystack ) =
-            indirection
+            description
 
         article =
             Words.article plural pointer
@@ -148,13 +160,28 @@ articlePhrase plural indirection =
 {-| Determiner phrases would be similarly straightforward, except that things
 like "anybody", "everyone", "something" do not fit the general pattern.
 -}
-determinerPhrase : Bool -> Bool -> Agglomeration -> List String
-determinerPhrase plural negated agglomeration =
+enumeratedDeterminerPhrase : Bool -> Bool -> Multiplicity -> List String
+enumeratedDeterminerPhrase plural negated multiplicity =
     let
         ( quantifier, other, haystack ) =
-            agglomeration
+            multiplicity
+    in
+        determinerPhrase plural negated (Just quantifier) other haystack
 
-        ( category, description, restriction ) =
+
+amassedDeterminerPhrase : Bool -> Bool -> Proportion -> List String
+amassedDeterminerPhrase plural negated proportion =
+    let
+        ( quantifier, other, haystack ) =
+            proportion
+    in
+        determinerPhrase plural negated quantifier other haystack
+
+
+determinerPhrase : Bool -> Bool -> Maybe Quantifier -> Bool -> Haystack -> List String
+determinerPhrase plural negated quantifier other haystack =
+    let
+        ( category, property, restriction ) =
             haystack
 
         canAbbreviate =
@@ -180,7 +207,7 @@ necessary to deal with abbreviations ("someone", "everyone", etc.), and also
 determiner : Bool -> Maybe Quantifier -> Bool -> Haystack -> List String
 determiner canAbbreviate quantifier other haystack =
     let
-        ( category, description, restriction ) =
+        ( category, property, restriction ) =
             haystack
     in
         case quantifier of
@@ -215,10 +242,10 @@ wrinkle: the category needs to be suppressed in the case of abbreviation, since
 it is already included in the determiner ("someone", "everything", etc.).
 -}
 haystackToString : Bool -> Bool -> Haystack -> List String
-haystackToString canAbbreviate plural ( category, description, restriction ) =
+haystackToString canAbbreviate plural ( category, property, restriction ) =
     let
         d =
-            (Maybe.withDefault [] (Maybe.map String.words description))
+            (Maybe.withDefault [] (Maybe.map String.words property))
 
         r =
             (Maybe.withDefault [] (Maybe.map String.words restriction))

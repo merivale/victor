@@ -53,17 +53,17 @@ explode message =
             explode subMessage
                 |> andThen (scattered tally)
 
-        INDIRECT target indirection subMessage ->
+        INDIRECT target description subMessage ->
             explode subMessage
-                |> andThen (indirect target indirection)
+                |> andThen (indirect target description)
 
-        ENUMERATED target agglomeration subMessage ->
+        ENUMERATED target multiplicty subMessage ->
             explode subMessage
-                |> andThen (enumerated target agglomeration)
+                |> andThen (enumerated target multiplicty)
 
-        AMASSED target agglomeration subMessage ->
+        AMASSED target proportion subMessage ->
             explode subMessage
-                |> andThen (amassed target agglomeration)
+                |> andThen (amassed target proportion)
 
 
 {-| Generate the initial variables to be passed on to any elaborating functions.
@@ -74,12 +74,12 @@ plain ( object, ( pivot, counter, balances ) ) =
     Ok
         { past = False
         , negationTarget = NegateCondition
-        , object = RealObject object
+        , object = DirectObject object
         , modality = Nothing
         , negatedModality = False
         , longPivot = newLongPivot pivot counter
         , longPivots = []
-        , balances = List.map (\x -> RealBalance x) balances
+        , balances = List.map (\x -> DirectBalance x) balances
         , post = []
         }
 
@@ -122,20 +122,30 @@ negative vars =
 
         NegateMainObject ->
             case vars.object of
-                RealObject object ->
+                DirectObject object ->
                     Err "direct objects cannot be negated"
 
-                IndirectObject object indirection ->
+                IndirectObject object description ->
                     Err "indirect objects cannot be negated"
 
-                AgglomeratedObject object negated agglomeration ->
+                EnumeratedObject object negated multiplicity ->
                     if negated then
-                        Err "agglomerated objects cannot be negated twice"
+                        Err "enumerated objects cannot be negated twice"
                     else
                         Ok
                             { vars
                                 | negationTarget = NegateCondition
-                                , object = AgglomeratedObject object True agglomeration
+                                , object = EnumeratedObject object True multiplicity
+                            }
+
+                AmassedObject object negated proportion ->
+                    if negated then
+                        Err "amassed objects cannot be negated twice"
+                    else
+                        Ok
+                            { vars
+                                | negationTarget = NegateCondition
+                                , object = AmassedObject object True proportion
                             }
 
 
@@ -304,15 +314,15 @@ scattered tally vars =
 
 {-| INDIRECT messages.
 -}
-indirect : Int -> Indirection -> Vars -> Result String Vars
-indirect target indirection vars =
+indirect : Int -> Description -> Vars -> Result String Vars
+indirect target description vars =
     if target < 0 then
         case vars.object of
-            RealObject object ->
+            DirectObject object ->
                 if not (objectIsThirdPerson object) then
                     Err "only third person (other) objects can be overridden"
                 else
-                    Ok (overrideMainObject False (IndirectObject object indirection) vars)
+                    Ok (overrideMainObject False (IndirectObject object description) vars)
 
             _ ->
                 Err "main object cannot be overridden twice"
@@ -321,14 +331,14 @@ indirect target indirection vars =
             Nothing ->
                 Err "target index out of range"
 
-            Just (RealBalance ( relator, SameAsMain )) ->
+            Just (DirectBalance ( relator, SameAsMain )) ->
                 Err "only different balancing objects can be overridden"
 
-            Just (RealBalance ( relator, Different object )) ->
+            Just (DirectBalance ( relator, Different object )) ->
                 if not (objectIsThirdPerson object) then
                     Err "only third person (other) objects can be overridden"
                 else
-                    Ok (overrideBalancingObject target (IndirectBalance relator object indirection) vars)
+                    Ok (overrideBalancingObject target (IndirectBalance relator object description) vars)
 
             _ ->
                 Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
@@ -336,29 +346,29 @@ indirect target indirection vars =
 
 {-| ENUMERATED messages.
 -}
-enumerated : Int -> Agglomeration -> Vars -> Result String Vars
-enumerated target agglomeration vars =
+enumerated : Int -> Multiplicity -> Vars -> Result String Vars
+enumerated target multiplicity vars =
     let
         ( quantifier, other, haystack) =
-            agglomeration
+            multiplicity
     in
-        if not (List.member quantifier enumeratedQuantifiers) then
+        if not (isEnumerating quantifier) then
             Err "this quantifier cannot be used in ENUMERATED elaborations"
         else
             if target < 0 then
                 case vars.object of
-                    RealObject object ->
+                    DirectObject object ->
                         if not (objectIsThirdPerson object) then
                             Err "only third person (other) objects can be overridden"
-                        else if List.member quantifier pluralQuantifiers && not (objectIsPlural object) then
+                        else if isPlural quantifier && not (objectIsPlural object) then
                             Err "your ENUMERATED quantifier requires a plural balancing object"
                         else
                             let
                                 negateObject =
-                                    List.member quantifier negatableQuantifiers
+                                    isNegatable quantifier
 
                                 pseudoObject =
-                                    AgglomeratedObject object False agglomeration
+                                    EnumeratedObject object False multiplicity
                             in
                                 Ok (overrideMainObject negateObject pseudoObject vars)
 
@@ -370,16 +380,18 @@ enumerated target agglomeration vars =
                     Nothing ->
                         Err "target index out of range"
 
-                    Just (RealBalance ( relator, SameAsMain )) ->
+                    Just (DirectBalance ( relator, SameAsMain )) ->
                         Err "only different balancing objects can be overridden"
 
-                    Just (RealBalance ( relator, Different object )) ->
+                    Just (DirectBalance ( relator, Different object )) ->
                         if not (objectIsThirdPerson object) then
                             Err "only third person (other) objects can be overridden"
-                        else if List.member quantifier pluralQuantifiers && not (objectIsPlural object) then
+                        else if isPlural quantifier && not (objectIsPlural object) then
                             Err "your ENUMERATED quantifier requires a plural balancing object"
+                        else if objectIsPlural object && not (isPlural quantifier) then
+                            Err "your ENUMERATED quantifier requires a singular balancing object"
                         else
-                            Ok (overrideBalancingObject target (AgglomeratedBalance relator object False agglomeration) vars)
+                            Ok (overrideBalancingObject target (EnumeratedBalance relator object False multiplicity) vars)
 
                     _ ->
                         Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
@@ -387,31 +399,28 @@ enumerated target agglomeration vars =
 
 {-| AMASSED messages.
 -}
-amassed : Int -> Agglomeration -> Vars -> Result String Vars
-amassed target agglomeration vars =
+amassed : Int -> Proportion -> Vars -> Result String Vars
+amassed target proportion vars =
     let
         ( quantifier, other, haystack) =
-            agglomeration
+            proportion
     in
-        if not (List.member quantifier amassedQuantifiers) then
+        if not (isAmassing quantifier) then
             Err "this quantifier cannot be used in AMASSED elaborations"
         else
             if target < 0 then
                 case vars.object of
-                    RealObject object ->
+                    DirectObject object ->
                         if not (objectIsThirdPerson object) then
                             Err "only third person (other) objects can be overridden"
                         else if quantifier == Just Much && (objectIsPlural object) then
                             Err "this quantifier cannot be used with plural objects"
                         else
                             let
-                                negateObject =
-                                    List.member quantifier negatableQuantifiers
-
                                 pseudoObject =
-                                    AgglomeratedObject object False agglomeration
+                                    AmassedObject object False proportion
                             in
-                                Ok (overrideMainObject negateObject pseudoObject vars)
+                                Ok (overrideMainObject True pseudoObject vars)
 
                     _ ->
                         Err "main object cannot be overridden twice"
@@ -420,16 +429,16 @@ amassed target agglomeration vars =
                     Nothing ->
                         Err "target index out of range"
 
-                    Just (RealBalance ( relator, SameAsMain )) ->
+                    Just (DirectBalance ( relator, SameAsMain )) ->
                         Err "only different balancing objects can be overridden"
 
-                    Just (RealBalance ( relator, Different object )) ->
+                    Just (DirectBalance ( relator, Different object )) ->
                         if not (objectIsThirdPerson object) then
                             Err "only third person (other) objects can be overridden"
                         else if quantifier == Just Much && (objectIsPlural object) then
                             Err "this quantifier cannot be used with plural objects"
                         else
-                            Ok (overrideBalancingObject target (AgglomeratedBalance relator object False agglomeration) vars)
+                            Ok (overrideBalancingObject target (AmassedBalance relator object False proportion) vars)
 
                     _ ->
                         Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")
@@ -524,48 +533,67 @@ objectIsPlural object =
 {-| Lists of Quantifiers (used for validating INDIRECT/ENUMERATED/AMASSED
 elaborations).
 -}
-enumeratedQuantifiers : List (Maybe Quantifier)
-enumeratedQuantifiers =
-    [ Just A
-    , Just Several
-    , Just Many
-    , Just Each
-    , Just Every
-    , Just Both
-    , Just Some
-    , Just Any
-    ]
+isEnumerating : Quantifier -> Bool
+isEnumerating quantifier =
+    case quantifier of
+        Integer int ->
+            True
+
+        _ ->
+            List.member
+                quantifier
+                [ A
+                , Several
+                , Many
+                , Each
+                , Every
+                , Both
+                , Some
+                , Any
+                ]
 
 
-amassedQuantifiers : List (Maybe Quantifier)
-amassedQuantifiers =
-    [ Nothing
-    , Just Some
-    , Just Any
-    , Just All
-    , Just Much
-    , Just Most
-    , Just Enough
-    ]
+isAmassing : Maybe Quantifier -> Bool
+isAmassing quantifier =
+    List.member
+        quantifier
+        [ Nothing
+        , Just Some
+        , Just Any
+        , Just All
+        , Just Much
+        , Just Most
+        , Just Enough
+        ]
 
 
-negatableQuantifiers : List (Maybe Quantifier)
-negatableQuantifiers =
-    [ Just Many
-    , Just Every
-    , Just Both
-    , Just Some
-    , Just Any
-    , Just All
-    , Just Much
-    , Just Most
-    , Just Enough
-    ]
+isNegatable : Quantifier -> Bool
+isNegatable quantifier =
+    case quantifier of
+        Integer int ->
+            True
+
+        _ ->
+            List.member
+                quantifier
+                [ Many
+                , Every
+                , Both
+                , Some
+                , Any
+                ]
 
 
-pluralQuantifiers : List (Maybe Quantifier)
-pluralQuantifiers =
-    [ Just Several
-    , Just Many
-    , Just Both
-    ]
+isPlural : Quantifier -> Bool
+isPlural quantifier =
+    case quantifier of
+        Integer int ->
+            (abs int) /= 1
+
+        _ ->
+            List.member
+                quantifier
+                [ Several
+                , Many
+                , Both
+                ]
