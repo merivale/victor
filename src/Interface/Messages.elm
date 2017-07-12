@@ -16,25 +16,40 @@ import Theory.Types exposing (..)
 -}
 message : Model -> Result String Message
 message model =
-    plain model.object model.pivot model.balances
+    plain model.object model.pivot model.counter model.balances
         |> andThen (elaborate model.elaborations)
 
 
 {-| Make a plain message from the core ingredients.
 -}
-plain : Object -> Pivot -> List Balance -> Result String Message
-plain object pivot balances =
+plain : Object -> Pivot -> Maybe Counter -> List Balance -> Result String Message
+plain object pivot counter balances =
+    if verbalityEmpty pivot then
+        Err "please enter a verbality for your pivot"
+    else if propertyEmpty counter then
+        Err "please enter a property for your counter"
+    else
+        Ok (Plain ( object, ( pivot, counter, balances ) ))
+
+
+verbalityEmpty : Pivot -> Bool
+verbalityEmpty pivot =
     case pivot of
         Do verbality ongoing passive ->
-            if String.length verbality == 0 then
-                Err "please enter a verb for your pivot"
-            else if verbality == "be" then
-                Err "please enter a verb other than 'be' for your pivot"
-            else
-                Ok (Plain ( object, ( pivot, balances ) ))
+            String.length verbality == 0
 
         _ ->
-            Ok (Plain ( object, ( pivot, balances ) ))
+            False
+
+
+propertyEmpty : Maybe Counter -> Bool
+propertyEmpty counter =
+    case counter of
+        Just (CounterProperty property) ->
+            String.length property == 0
+
+        _ ->
+            False
 
 
 {-| Elaborate a message recusrively.
@@ -48,15 +63,15 @@ elaborate elaborations message =
         Just elaboration ->
             case elaboration.recipe of
                 MakeNEGATIVE ->
-                    makeNegative message
+                    negative message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakePAST ->
-                    makePast message
+                    past elaboration.string1 message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakePRIOR ->
-                    makePrior message
+                    prior message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakePRACTICAL ->
@@ -72,17 +87,6 @@ elaborate elaborations message =
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeDISPLACED ->
-<<<<<<< Updated upstream
-                    makeDisplaced elaboration.displacer message
-                        |> andThen (elaborate (List.drop 1 elaborations))
-
-                MakeREGULAR ->
-                    makeRegular elaboration.displacer elaboration.string1 message
-                        |> andThen (elaborate (List.drop 1 elaborations))
-
-                MakePREORDAINED ->
-                    makePreordained elaboration.displacer elaboration.string1 message
-=======
                     displaced elaboration.pivot elaboration.counter message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
@@ -92,99 +96,61 @@ elaborate elaborations message =
 
                 MakePREORDAINED ->
                     preordained elaboration.string1 message
->>>>>>> Stashed changes
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeEXTENDED ->
-                    makeExtended elaboration.string1 message
+                    extended elaboration.string1 message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeSCATTERED ->
-                    makeScattered elaboration.string1 message
+                    scattered elaboration.string1 message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeINDIRECT ->
-                    makeHaystack elaboration
-                        |> andThen (makeIndirect elaboration message)
+                    haystack elaboration
+                        |> andThen (description elaboration)
+                        |> andThen (indirect elaboration message)
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeENUMERATED ->
-                    makeHaystack elaboration
-                        |> andThen (makeEnumerated elaboration message)
+                    haystack elaboration
+                        |> andThen (multiplicity elaboration)
+                        |> andThen (enumerated elaboration message)
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeAMASSED ->
-                    makeHaystack elaboration
-                        |> andThen (makeAmassed elaboration message)
+                    haystack elaboration
+                        |> andThen (proportion elaboration)
+                        |> andThen (amassed elaboration message)
                         |> andThen (elaborate (List.drop 1 elaborations))
 
 
 {-| One function for each type of elaboration.
 -}
-makeNegative : Message -> Result String Message
-makeNegative message =
+negative : Message -> Result String Message
+negative message =
     Ok (NEGATIVE message)
 
 
-makePast : Message -> Result String Message
-makePast message =
-    Ok (PAST message)
+past : Maybe String -> Message -> Result String Message
+past time message =
+    Ok (PAST time message)
 
 
-makePrior : Message -> Result String Message
-makePrior message =
+prior : Message -> Result String Message
+prior message =
     Ok (PRIOR message)
 
 
-<<<<<<< Updated upstream
-makeDisplaced : Maybe Displacer -> Message -> Result String Message
-makeDisplaced displacer message =
-    case displacer of
-        Nothing ->
-            Err "DISPLACED messages require a displacer"
-
-        Just disp ->
-            case disp of
-                Primary (Do verbality ongoing passive) ->
-                    if String.length verbality == 0 then
-                        Err "please enter a verb for your DISPLACED pivot"
-                    else
-                        Ok (DISPLACED disp message)
-
-                _ ->
-                    Ok (DISPLACED disp message)
-
-
-makeRegular : Maybe Displacer -> Maybe String -> Message -> Result String Message
-makeRegular displacer string message =
-    case displacer of
-        Just (Primary (Do verbality ongoing passive)) ->
-            if String.length verbality == 0 then
-                Err "please enter a verb for your REGULAR pivot"
-            else
-                Ok (REGULAR displacer string message)
-=======
 practical : Modality -> Message -> Result String Message
 practical modality message =
     Ok (PRACTICAL modality message)
->>>>>>> Stashed changes
 
 
 projective : Modality -> Maybe String -> Message -> Result String Message
 projective modality string message =
     Ok (PROJECTIVE modality string message)
 
-<<<<<<< Updated upstream
-makePreordained : Maybe Displacer -> Maybe String -> Message -> Result String Message
-makePreordained displacer string message =
-    case displacer of
-        Just (Primary (Do verbality ongoing passive)) ->
-            if String.length verbality == 0 then
-                Err "please enter a verb for your PREORDAINED pivot"
-            else
-                Ok (PREORDAINED displacer string message)
-=======
->>>>>>> Stashed changes
 
 evasive : Modality -> Maybe String -> Message -> Result String Message
 evasive modality string message =
@@ -211,9 +177,9 @@ preordained string message =
     Ok (PREORDAINED string message)
 
 
-makeExtended : Maybe String -> Message -> Result String Message
-makeExtended string message =
-    case string of
+extended : Maybe Duration -> Message -> Result String Message
+extended duration message =
+    case duration of
         Nothing ->
             Err "please enter a value for the duration"
 
@@ -221,9 +187,9 @@ makeExtended string message =
             Ok (EXTENDED str message)
 
 
-makeScattered : Maybe String -> Message -> Result String Message
-makeScattered string message =
-    case string of
+scattered : Maybe Tally -> Message -> Result String Message
+scattered tally message =
+    case tally of
         Nothing ->
             Err "please enter a value for the tally"
 
@@ -231,8 +197,8 @@ makeScattered string message =
             Ok (SCATTERED str message)
 
 
-makeHaystack : Elaboration -> Result String Haystack
-makeHaystack elaboration =
+haystack : Elaboration -> Result String Haystack
+haystack elaboration =
     case elaboration.string1 of
         Nothing ->
             Err "please enter a category for your haystack"
@@ -241,21 +207,36 @@ makeHaystack elaboration =
             Ok ( string, elaboration.string2, elaboration.string3 )
 
 
-makeIndirect : Elaboration -> Message -> Haystack -> Result String Message
-makeIndirect elaboration message haystack =
-    Ok (INDIRECT elaboration.target elaboration.pointer elaboration.other haystack message)
+description : Elaboration -> Haystack -> Result String Description
+description elaboration haystack =
+    Ok ( elaboration.pointer, elaboration.other, haystack )
 
 
-makeEnumerated : Elaboration -> Message -> Haystack -> Result String Message
-makeEnumerated elaboration message haystack =
+multiplicity : Elaboration -> Haystack -> Result String Multiplicity
+multiplicity elaboration haystack =
     case elaboration.quantifier of
         Nothing ->
             Err "please select a quantifier for your ENUMERATED elaboration"
 
         Just quantifier ->
-            Ok (ENUMERATED elaboration.target quantifier elaboration.other haystack message)
+            Ok ( quantifier, elaboration.other, haystack )
 
 
-makeAmassed : Elaboration -> Message -> Haystack -> Result String Message
-makeAmassed elaboration message haystack =
-    Ok (AMASSED elaboration.target elaboration.quantifier elaboration.other haystack message)
+proportion : Elaboration -> Haystack -> Result String Proportion
+proportion elaboration haystack =
+    Ok ( elaboration.quantifier, elaboration.other, haystack )
+
+
+indirect : Elaboration -> Message -> Description -> Result String Message
+indirect elaboration message description =
+    Ok (INDIRECT elaboration.target description message)
+
+
+enumerated : Elaboration -> Message -> Multiplicity -> Result String Message
+enumerated elaboration message multiplicity =
+    Ok (ENUMERATED elaboration.target multiplicity message)
+
+
+amassed : Elaboration -> Message -> Proportion -> Result String Message
+amassed elaboration message proportion =
+    Ok (AMASSED elaboration.target proportion message)

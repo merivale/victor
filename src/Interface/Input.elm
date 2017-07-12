@@ -4,6 +4,7 @@ module Interface.Input
         , iconButton
         , label
         , text
+        , number
         , checkbox
         , select
         , selectGroup
@@ -50,6 +51,19 @@ text : TextProperties -> Html.Html Signal
 text { value, placeholder, signal, disabled } =
     Html.input
         [ Attr.type_ "text"
+        , Attr.class "text"
+        , Attr.value value
+        , Attr.placeholder placeholder
+        , Events.onInput signal
+        , Attr.disabled disabled
+        ]
+        []
+
+
+number : TextProperties -> Html.Html Signal
+number { value, placeholder, signal, disabled } =
+    Html.input
+        [ Attr.type_ "number"
         , Attr.class "text"
         , Attr.value value
         , Attr.placeholder placeholder
@@ -127,5 +141,6 @@ emptyInput =
     Html.input
         [ Attr.type_ "text"
         , Attr.class "text"
-        , Attr.disabled True ]
+        , Attr.disabled True
+        ]
         []

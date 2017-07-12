@@ -136,8 +136,9 @@ nucleusBody : Model -> Html.Html Signal
 nucleusBody model =
     Html.div
         [ Attr.class "body" ]
-        ([ Nucleus.object model.object, Nucleus.pivot model.pivot ]
-            ++ (List.indexedMap Nucleus.balance model.balances))
+        ([ Nucleus.object model.object, Nucleus.pivot model.pivot, Nucleus.counter model.counter ]
+            ++ (List.indexedMap Nucleus.balance model.balances)
+        )
 
 
 elaborationInput : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
@@ -169,88 +170,6 @@ elaborationHeading index elaboration =
 elaborationBody : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
 elaborationBody balanceCount index elaboration subContent =
     case elaboration.recipe of
-<<<<<<< Updated upstream
-        MakeDISPLACED ->
-            case elaboration.displacer of
-                Nothing ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer False index elaboration
-                        , subContent
-                        ]
-
-                Just (Primary pivot) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer False index elaboration
-                        , Elaborations.pivot index pivot
-                        , subContent
-                        ]
-
-                Just (Secondary modality) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer False index elaboration
-                        , Elaborations.modality False index modality
-                        , subContent
-                        ]
-
-        MakeREGULAR ->
-            case elaboration.displacer of
-                Nothing ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.frequency index elaboration
-                        , subContent
-                        ]
-
-                Just (Primary pivot) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.pivot index pivot
-                        , Elaborations.frequency index elaboration
-                        , subContent
-                        ]
-
-                Just (Secondary modality) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.modality True index modality
-                        , Elaborations.frequency index elaboration
-                        , subContent
-                        ]
-
-        MakePREORDAINED ->
-            case elaboration.displacer of
-                Nothing ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.time index elaboration
-                        , subContent
-                        ]
-
-                Just (Primary pivot) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.pivot index pivot
-                        , Elaborations.time index elaboration
-                        , subContent
-                        ]
-
-                Just (Secondary modality) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.modality False index modality
-                        , Elaborations.time index elaboration
-                        , subContent
-                        ]
-=======
         MakePAST ->
             Html.div
                 [ Attr.class "body" ]
@@ -271,7 +190,6 @@ elaborationBody balanceCount index elaboration subContent =
                 [ Elaborations.preordainedTime index elaboration
                 , subContent
                 ]
->>>>>>> Stashed changes
 
         MakeEXTENDED ->
             Html.div

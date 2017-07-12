@@ -1,14 +1,19 @@
 module Interface.Elaborations
     exposing
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         ( displacer
 =======
         ( pastTime
 >>>>>>> Stashed changes
+=======
+        ( pastTime
+>>>>>>> master
         , pivot
+        , counter
         , modality
         , frequency
-        , time
+        , preordainedTime
         , duration
         , tally
         , target
@@ -16,7 +21,6 @@ module Interface.Elaborations
         , quantifier
         , haystack
         )
-
 
 {-| Module for generating HTML for user input for the elaborations applied to a
 message.
@@ -32,16 +36,25 @@ import Theory.Types exposing (..)
 
 {-| The output functions, for displaying elaboration factor inputs.
 -}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 displacer : Bool -> Int -> Elaboration -> Html.Html Signal
 displacer optional index elaboration =
+=======
+pastTime : Int -> Elaboration -> Html.Html Signal
+pastTime index elaboration =
+>>>>>>> master
     Html.div
         [ Attr.class "factor" ]
-        [ Input.label "Displacer"
-        , displacerSelect optional index elaboration.displacer
+        [ Input.label "Time"
+        , stringText
+            "e.g. yesterday, last week"
+            (SetString1 index)
+            elaboration.string1
         ]
 
 
+<<<<<<< HEAD
 pivot : Int -> Pivot -> Html.Html Signal
 pivot index pivot =
     case pivot of
@@ -59,24 +72,30 @@ pastTime index elaboration =
         ]
 
 
+=======
+>>>>>>> master
 pivot : Int -> Elaboration -> Html.Html Signal
 pivot index elaboration =
     case elaboration.pivot of
         Be ongoing ->
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> master
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Pivot"
                 , pivotSelect index elaboration.pivot
                 , Input.emptyInput
                 , pivotOngoing index ongoing
-                , pivotProperty index property
+                , Input.emptyInput
                 ]
 
-        Seem sense ongoing property ->
+        Do verbality ongoing passive ->
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Pivot"
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                 , pivotSelect index pivot
                 , pivotSenseSelect index sense
@@ -84,10 +103,15 @@ pivot index elaboration =
                 , pivotSelect index elaboration.pivot
                 , pivotVerbality index verbality
 >>>>>>> Stashed changes
+=======
+                , pivotSelect index elaboration.pivot
+                , pivotVerbality index verbality
+>>>>>>> master
                 , pivotOngoing index ongoing
-                , pivotProperty index property
+                , pivotPassive index passive
                 ]
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         Do verbality ongoing passive ->
             Html.div
@@ -105,6 +129,15 @@ counter index elaboration =
         Nothing ->
             Html.div
                 [ Attr.class "factor" ]
+=======
+
+counter : Int -> Elaboration -> Html.Html Signal
+counter index elaboration =
+    case elaboration.counter of
+        Nothing ->
+            Html.div
+                [ Attr.class "factor" ]
+>>>>>>> master
                 [ Input.label "Counter"
                 , counterSelect index elaboration.counter
                 , Input.emptyInput
@@ -116,6 +149,17 @@ counter index elaboration =
                 [ Input.label "Counter"
                 , counterSelect index elaboration.counter
                 , counterProperty index property
+<<<<<<< HEAD
+=======
+                ]
+
+        Just (CounterRelator relator) ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Counter"
+                , counterSelect index elaboration.counter
+                , counterRelatorSelect index relator
+>>>>>>> master
                 ]
 
         Just (CounterRelator relator) ->
@@ -127,7 +171,10 @@ counter index elaboration =
 >>>>>>> Stashed changes
                 ]
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 modality : Bool -> Int -> Elaboration -> Html.Html Signal
 modality limited index elaboration =
     Html.div
@@ -149,8 +196,8 @@ frequency index elaboration =
         ]
 
 
-time : Int -> Elaboration -> Html.Html Signal
-time index elaboration =
+preordainedTime : Int -> Elaboration -> Html.Html Signal
+preordainedTime index elaboration =
     Html.div
         [ Attr.class "factor" ]
         [ Input.label "Time"
@@ -187,7 +234,7 @@ tally index elaboration =
 
 target : Int -> Int -> Elaboration -> Html.Html Signal
 target balanceCount index elaboration =
-    Html.div 
+    Html.div
         [ Attr.class "factor" ]
         [ Input.label "Target"
         , targetSelect balanceCount index elaboration.target
@@ -220,12 +267,24 @@ pointer index elaboration =
 
 quantifier : Bool -> Int -> Elaboration -> Html.Html Signal
 quantifier amassed index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Quantifier"
-        , quantifierSelect amassed index elaboration.quantifier
-        , other index elaboration.other
-        ]
+    case elaboration.quantifier of
+        Just (Integer int) ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Quantifier"
+                , quantifierSelect amassed index elaboration.quantifier
+                , quantifierInteger index int
+                , other index elaboration.other
+                ]
+
+        _ ->
+            Html.div
+                [ Attr.class "factor" ]
+                [ Input.label "Quantifier"
+                , quantifierSelect amassed index elaboration.quantifier
+                , Input.emptyInput
+                , other index elaboration.other
+                ]
 
 
 haystack : Int -> Elaboration -> Html.Html Signal
@@ -261,10 +320,13 @@ pivotSelect index pivot =
         }
 
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 pivotSenseSelect : Int -> Maybe Sense -> Html.Html Signal
 pivotSenseSelect index sense =
 =======
+=======
+>>>>>>> master
 counterSelect : Int -> Maybe Counter -> Html.Html Signal
 counterSelect index counter =
     Input.select
@@ -278,11 +340,15 @@ counterSelect index counter =
 
 counterRelatorSelect : Int -> Relator -> Html.Html Signal
 counterRelatorSelect index relator =
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> master
     Input.select
-        { value = sense
-        , options = Ideas.listSenses
+        { value = relator
+        , options = Ideas.listRelators
         , equivalent = (==)
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         , signal = SetDisplacerPivotSense index
         , toLabel = Ideas.displaySense
@@ -290,6 +356,10 @@ counterRelatorSelect index relator =
         , signal = SetDisplacedCounterRelator index
         , toLabel = toString
 >>>>>>> Stashed changes
+=======
+        , signal = SetDisplacedCounterRelator index
+        , toLabel = toString
+>>>>>>> master
         }
 
 
@@ -304,7 +374,7 @@ modalitySelect limited index modality =
         }
 
 
-targetSelect : Int -> Int -> Target -> Html.Html Signal
+targetSelect : Int -> Int -> Int -> Html.Html Signal
 targetSelect balanceCount index target =
     Input.select
         { value = target
@@ -342,17 +412,18 @@ quantifierSelect amassed index quantifier =
     Input.select
         { value = quantifier
         , options = Ideas.listQuantifiers amassed
-        , equivalent = (==)
+        , equivalent = Ideas.equateQuantifiers
         , signal = SetQuantifier index
         , toLabel = Ideas.displayQuantifier
         }
 
 
-{-| Text inputs, used by the main output functions above.
+{-| Text and number inputs, used by the main output functions above.
 -}
-pivotProperty : Int -> Maybe Property -> Html.Html Signal
-pivotProperty index property =
+pivotVerbality : Int -> Verbality -> Html.Html Signal
+pivotVerbality index verbality =
     Input.text
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         { value = Maybe.withDefault "" property
         , placeholder = "e.g. able, eager, happy (optional)"
@@ -362,13 +433,19 @@ pivotProperty index property =
         , placeholder = "e.g. have, like, want"
         , signal = SetDisplacedPivotVerbality index
 >>>>>>> Stashed changes
+=======
+        { value = verbality
+        , placeholder = "e.g. have, like, want"
+        , signal = SetDisplacedPivotVerbality index
+>>>>>>> master
         , disabled = False
         }
 
 
-pivotVerbality : Int -> Verbality -> Html.Html Signal
-pivotVerbality index verbality =
+counterProperty : Int -> Property -> Html.Html Signal
+counterProperty index property =
     Input.text
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         { value = verbality
         , placeholder = "e.g. have, like, want"
@@ -378,6 +455,11 @@ pivotVerbality index verbality =
         , placeholder = "e.g. able, eager, happy (optional)"
         , signal = SetDisplacedCounterProperty index
 >>>>>>> Stashed changes
+=======
+        { value = property
+        , placeholder = "e.g. able, eager, happy (optional)"
+        , signal = SetDisplacedCounterProperty index
+>>>>>>> master
         , disabled = False
         }
 
@@ -387,8 +469,18 @@ pointerObjectText index object =
     Input.text
         { value = Maybe.withDefault "" (Ideas.objectString object)
         , placeholder = "name (optional)"
-        , signal = SetObjectString
+        , signal = SetPointerObjectString index
         , disabled = not (Ideas.objectHasString object)
+        }
+
+
+quantifierInteger : Int -> Int -> Html.Html Signal
+quantifierInteger index int =
+    Input.number
+        { value = toString int
+        , placeholder = "integer"
+        , signal = SetQuantifierInteger index
+        , disabled = False
         }
 
 

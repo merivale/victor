@@ -11,6 +11,7 @@ type alias Model =
     { plus : Bool
     , object : Object
     , pivot : Pivot
+    , counter : Maybe Counter
     , balances : List Balance
     , elaborations : List Elaboration
     }
@@ -22,14 +23,10 @@ type alias Elaboration =
     , string1 : Maybe String
     , string2 : Maybe String
     , string3 : Maybe String
-<<<<<<< Updated upstream
-    , target : Target
-=======
     , pivot : Pivot
     , counter : Maybe Counter
     , modality : Modality
     , target : Int
->>>>>>> Stashed changes
     , pointer : Pointer
     , quantifier : Maybe Quantifier
     , other : Bool
@@ -58,35 +55,21 @@ type Signal
     | SetObject Object
     | SetObjectString String
     | SetPivot Pivot
-    | SetPivotSense (Maybe Sense)
     | SetPivotVerbality Verbality
     | TogglePivotOngoing
     | TogglePivotPassive
-    | SetPivotProperty Property
+    | SetCounter (Maybe Counter)
+    | SetCounterProperty Property
+    | SetCounterRelator Relator
     | AddBalance
     | RemoveBalance
-    | SetBalanceCounter Int (Maybe Counter)
-    | SetBalanceWeight Int (Maybe Weight)
-    | SetBalanceObject Int Object
-    | SetBalanceObjectString Int String
+    | SetBalanceRelator Int (Maybe Relator)
+    | SetBalanceWeight Int Weight
+    | SetBalanceWeightObject Int Object
+    | SetBalanceWeightObjectString Int String
     | AddElaboration Int Recipe
     | RemoveElaboration Int
     | ToggleElaborationPlus Int
-<<<<<<< Updated upstream
-    | SetDisplacer Int (Maybe Displacer)
-    | SetDisplacerPivot Int Pivot
-    | SetDisplacerPivotSense Int (Maybe Sense)
-    | SetDisplacerPivotVerbality Int Verbality
-    | ToggleDisplacerPivotOngoing Int
-    | ToggleDisplacerPivotPassive Int
-    | SetDisplacerPivotProperty Int Property
-    | SetDisplacerModality Int Modality
-    | SetString1 Int String
-    | SetString2 Int String
-    | SetString3 Int String
-    | SetTarget Int Target
-    | SetTargetInt Int Int
-=======
     | SetString1 Int String
     | SetString2 Int String
     | SetString3 Int String
@@ -99,11 +82,11 @@ type Signal
     | SetDisplacedCounterRelator Int Relator
     | SetModality Int Modality
     | SetTarget Int Int
->>>>>>> Stashed changes
     | SetPointer Int Pointer
     | SetPointerObject Int Object
     | SetPointerObjectString Int String
     | SetQuantifier Int (Maybe Quantifier)
+    | SetQuantifierInteger Int String
     | ToggleOther Int
 
 
