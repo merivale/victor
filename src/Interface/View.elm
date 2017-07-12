@@ -169,6 +169,7 @@ elaborationHeading index elaboration =
 elaborationBody : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
 elaborationBody balanceCount index elaboration subContent =
     case elaboration.recipe of
+<<<<<<< Updated upstream
         MakeDISPLACED ->
             case elaboration.displacer of
                 Nothing ->
@@ -249,6 +250,28 @@ elaborationBody balanceCount index elaboration subContent =
                         , Elaborations.time index elaboration
                         , subContent
                         ]
+=======
+        MakePAST ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.pastTime index elaboration
+                , subContent
+                ]
+
+        MakeREGULAR ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.frequency index elaboration
+                , subContent
+                ]
+
+        MakePREORDAINED ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.preordainedTime index elaboration
+                , subContent
+                ]
+>>>>>>> Stashed changes
 
         MakeEXTENDED ->
             Html.div
@@ -261,6 +284,37 @@ elaborationBody balanceCount index elaboration subContent =
             Html.div
                 [ Attr.class "body" ]
                 [ Elaborations.tally index elaboration
+                , subContent
+                ]
+
+        MakeDISPLACED ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.pivot index elaboration
+                , Elaborations.counter index elaboration
+                , subContent
+                ]
+
+        MakePRACTICAL ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.modality True index elaboration
+                , subContent
+                ]
+
+        MakePROJECTIVE ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.modality False index elaboration
+                , Elaborations.preordainedTime index elaboration
+                , subContent
+                ]
+
+        MakeEVASIVE ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.modality True index elaboration
+                , Elaborations.frequency index elaboration
                 , subContent
                 ]
 
@@ -336,15 +390,18 @@ elaborationButtons index plus =
                     [ MakeNEGATIVE
                     , MakePAST
                     , MakePRIOR
-                    , MakeDISPLACED
                     , MakeREGULAR
                     , MakePREORDAINED
+                    , MakeEXTENDED
+                    , MakeSCATTERED
                     ]
                 )
             , Html.div []
                 (List.map (elaborationButton index)
-                    [ MakeEXTENDED
-                    , MakeSCATTERED
+                    [ MakeDISPLACED
+                    , MakePRACTICAL
+                    , MakePROJECTIVE
+                    , MakeEVASIVE
                     , MakeINDIRECT
                     , MakeENUMERATED
                     , MakeAMASSED

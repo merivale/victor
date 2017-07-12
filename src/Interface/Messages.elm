@@ -59,7 +59,20 @@ elaborate elaborations message =
                     makePrior message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
+                MakePRACTICAL ->
+                    practical elaboration.modality message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
+                MakePROJECTIVE ->
+                    projective elaboration.modality elaboration.string1 message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
+                MakeEVASIVE ->
+                    evasive elaboration.modality elaboration.string1 message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
                 MakeDISPLACED ->
+<<<<<<< Updated upstream
                     makeDisplaced elaboration.displacer message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
@@ -69,6 +82,17 @@ elaborate elaborations message =
 
                 MakePREORDAINED ->
                     makePreordained elaboration.displacer elaboration.string1 message
+=======
+                    displaced elaboration.pivot elaboration.counter message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
+                MakeREGULAR ->
+                    regular elaboration.string1 message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
+                MakePREORDAINED ->
+                    preordained elaboration.string1 message
+>>>>>>> Stashed changes
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeEXTENDED ->
@@ -112,6 +136,7 @@ makePrior message =
     Ok (PRIOR message)
 
 
+<<<<<<< Updated upstream
 makeDisplaced : Maybe Displacer -> Message -> Result String Message
 makeDisplaced displacer message =
     case displacer of
@@ -138,11 +163,18 @@ makeRegular displacer string message =
                 Err "please enter a verb for your REGULAR pivot"
             else
                 Ok (REGULAR displacer string message)
+=======
+practical : Modality -> Message -> Result String Message
+practical modality message =
+    Ok (PRACTICAL modality message)
+>>>>>>> Stashed changes
 
-        _ ->
-            Ok (REGULAR displacer string message)
 
+projective : Modality -> Maybe String -> Message -> Result String Message
+projective modality string message =
+    Ok (PROJECTIVE modality string message)
 
+<<<<<<< Updated upstream
 makePreordained : Maybe Displacer -> Maybe String -> Message -> Result String Message
 makePreordained displacer string message =
     case displacer of
@@ -151,9 +183,32 @@ makePreordained displacer string message =
                 Err "please enter a verb for your PREORDAINED pivot"
             else
                 Ok (PREORDAINED displacer string message)
+=======
+>>>>>>> Stashed changes
 
-        _ ->
-            Ok (PREORDAINED displacer string message)
+evasive : Modality -> Maybe String -> Message -> Result String Message
+evasive modality string message =
+    Ok (EVASIVE modality string message)
+
+
+displaced : Pivot -> Maybe Counter -> Message -> Result String Message
+displaced pivot counter message =
+    if verbalityEmpty pivot then
+        Err "please enter a verb for your DISPLACED pivot"
+    else if propertyEmpty counter then
+        Err "please enter a property for your DISPLACED counter"
+    else
+        Ok (DISPLACED pivot counter message)
+
+
+regular : Maybe String -> Message -> Result String Message
+regular string message =
+    Ok (REGULAR string message)
+
+
+preordained : Maybe String -> Message -> Result String Message
+preordained string message =
+    Ok (PREORDAINED string message)
 
 
 makeExtended : Maybe String -> Message -> Result String Message

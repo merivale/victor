@@ -132,12 +132,13 @@ update signal model =
         ToggleElaborationPlus index ->
             { model | plus = False, elaborations = List.indexedMap (toggleOrMinus index) model.elaborations }
 
-        SetDisplacer index displacer ->
-            { model | elaborations = modifyItem index (setDisplacer displacer) model.elaborations }
+        SetString1 index string ->
+            { model | elaborations = modifyItem index (setString1 string) model.elaborations }
 
-        SetDisplacerPivot index pivot ->
-            { model | elaborations = modifyItem index (setDisplacerPivot pivot) model.elaborations }
+        SetString2 index string ->
+            { model | elaborations = modifyItem index (setString2 string) model.elaborations }
 
+<<<<<<< Updated upstream
         SetDisplacerPivotProperty index property ->
             { model | elaborations = modifyItem index (setDisplacerPivotProperty property) model.elaborations }
 
@@ -146,24 +147,39 @@ update signal model =
 
         SetDisplacerPivotVerbality index verbality ->
             { model | elaborations = modifyItem index (setDisplacerPivotVerbality verbality) model.elaborations }
-
-        ToggleDisplacerPivotOngoing index ->
-            { model | elaborations = modifyItem index toggleDisplacerPivotOngoing model.elaborations }
-
-        ToggleDisplacerPivotPassive index ->
-            { model | elaborations = modifyItem index toggleDisplacerPivotPassive model.elaborations }
-
-        SetDisplacerModality index modality ->
-            { model | elaborations = modifyItem index (setDisplacerModality modality) model.elaborations }
-
-        SetString1 index string ->
-            { model | elaborations = modifyItem index (setString1 string) model.elaborations }
-
-        SetString2 index string ->
-            { model | elaborations = modifyItem index (setString2 string) model.elaborations }
-
+=======
         SetString3 index string ->
             { model | elaborations = modifyItem index (setString3 string) model.elaborations }
+>>>>>>> Stashed changes
+
+        SetDisplacedPivot index pivot ->
+            { model | elaborations = modifyItem index (setDisplacedPivot pivot) model.elaborations }
+
+        SetDisplacedPivotVerbality index verbality ->
+            { model | elaborations = modifyItem index (setDisplacedPivotVerbality verbality) model.elaborations }
+
+<<<<<<< Updated upstream
+        SetDisplacerModality index modality ->
+            { model | elaborations = modifyItem index (setDisplacerModality modality) model.elaborations }
+=======
+        ToggleDisplacedPivotOngoing index ->
+            { model | elaborations = modifyItem index toggleDisplacedPivotOngoing model.elaborations }
+
+        ToggleDisplacedPivotPassive index ->
+            { model | elaborations = modifyItem index toggleDisplacedPivotPassive model.elaborations }
+
+        SetDisplacedCounter index counter ->
+            { model | elaborations = modifyItem index (setDisplacedCounter counter) model.elaborations }
+
+        SetDisplacedCounterProperty index property ->
+            { model | elaborations = modifyItem index (setDisplacedCounterProperty property) model.elaborations }
+>>>>>>> Stashed changes
+
+        SetDisplacedCounterRelator index relator ->
+            { model | elaborations = modifyItem index (setDisplacedCounterRelator relator) model.elaborations }
+
+        SetModality index modality ->
+            { model | elaborations = modifyItem index (setModality modality) model.elaborations }
 
         SetTarget index target ->
             { model | elaborations = modifyItem index (setTarget target) model.elaborations }
@@ -270,18 +286,40 @@ addElaboration index recipe elaborations =
 
         elaboration =
             case recipe of
-                MakeDISPLACED ->
-                    elaborationWithDisplacer recipe
-
                 MakeENUMERATED ->
-                    elaborationWithQuantifier recipe
+                    { plus = False
+                    , recipe = recipe
+                    , string1 = Nothing
+                    , string2 = Nothing
+                    , string3 = Nothing
+                    , modality = SoftYes
+                    , pivot = Be False
+                    , counter = Nothing
+                    , target = -1
+                    , pointer = The
+                    , quantifier = Nothing
+                    , other = False
+                    }
 
                 _ ->
-                    elaborationDefault recipe
+                    { plus = False
+                    , recipe = recipe
+                    , string1 = Nothing
+                    , string2 = Nothing
+                    , string3 = Nothing
+                    , modality = SoftYes
+                    , pivot = Be False
+                    , counter = Nothing
+                    , target = -1
+                    , pointer = The
+                    , quantifier = Just Some
+                    , other = False
+                    }
     in
         before ++ (elaboration :: after)
 
 
+<<<<<<< Updated upstream
 elaborationDefault : Recipe -> Elaboration
 elaborationDefault recipe =
     { plus = False
@@ -327,6 +365,8 @@ elaborationWithQuantifier recipe =
     }
 
 
+=======
+>>>>>>> Stashed changes
 {-| Modify an item within a list at the given index, using the given modifying
 function. Used to change the components of balances and elaborations, which
 reside within lists in the model.
@@ -383,6 +423,7 @@ togglePlus elaboration =
     { elaboration | plus = not elaboration.plus }
 
 
+<<<<<<< Updated upstream
 setDisplacer : Maybe Displacer -> Elaboration -> Elaboration
 setDisplacer displacer elaboration =
     { elaboration | displacer = displacer }
@@ -406,75 +447,29 @@ setDisplacerPivotSense sense elaboration =
 
         _ ->
             elaboration
-
-
-setDisplacerPivotVerbality : Verbality -> Elaboration -> Elaboration
-setDisplacerPivotVerbality verbality elaboration =
-    case elaboration.displacer of
-        Just (Primary (Do oldVerbality ongoing passive)) ->
-            { elaboration | displacer = Just (Primary (Do verbality ongoing passive)) }
-
-        _ ->
-            elaboration
-
-
-toggleDisplacerPivotOngoing : Elaboration -> Elaboration
-toggleDisplacerPivotOngoing elaboration =
-    case elaboration.displacer of
-        Just (Primary (Be ongoing property)) ->
-            { elaboration | displacer = Just (Primary (Be (not ongoing) property)) }
-
-        Just (Primary (Seem sense ongoing property)) ->
-            { elaboration | displacer = Just (Primary (Seem sense (not ongoing) property)) }
-
-        Just (Primary (Do verbality ongoing passive)) ->
-            { elaboration | displacer = Just (Primary (Do verbality (not ongoing) passive)) }
-
-        _ ->
-            elaboration
-
-
-toggleDisplacerPivotPassive : Elaboration -> Elaboration
-toggleDisplacerPivotPassive elaboration =
-    case elaboration.displacer of
-        Just (Primary (Do verbality ongoing passive)) ->
-            { elaboration | displacer = Just (Primary (Do verbality ongoing (not passive))) }
-
-        _ ->
-            elaboration
-
-
-setDisplacerPivotProperty : Property -> Elaboration -> Elaboration
-setDisplacerPivotProperty property elaboration =
-    case elaboration.displacer of
-        Just (Primary (Be ongoing oldProperty)) ->
-            { elaboration | displacer = Just (Primary (Be ongoing (maybe property))) }
-
-        Just (Primary (Seem sense ongoing oldProperty)) ->
-            { elaboration | displacer = Just (Primary (Seem sense ongoing (maybe property))) }
-
-        _ ->
-            elaboration
-
-
-setDisplacerModality : Modality -> Elaboration -> Elaboration
-setDisplacerModality modality elaboration =
-    { elaboration | displacer = Just (Secondary modality) }
-
-
+=======
 setString1 : String -> Elaboration -> Elaboration
 setString1 string elaboration =
     { elaboration | string1 = maybe string }
 
+>>>>>>> Stashed changes
 
 setString2 : String -> Elaboration -> Elaboration
 setString2 string elaboration =
     { elaboration | string2 = maybe string }
 
+<<<<<<< Updated upstream
+setDisplacerPivotVerbality : Verbality -> Elaboration -> Elaboration
+setDisplacerPivotVerbality verbality elaboration =
+    case elaboration.displacer of
+        Just (Primary (Do oldVerbality ongoing passive)) ->
+            { elaboration | displacer = Just (Primary (Do verbality ongoing passive)) }
+=======
 
 setString3 : String -> Elaboration -> Elaboration
 setString3 string elaboration =
     { elaboration | string3 = maybe string }
+>>>>>>> Stashed changes
 
 
 maybe : String -> Maybe String
@@ -483,6 +478,95 @@ maybe string =
         Nothing
     else
         Just string
+
+<<<<<<< Updated upstream
+toggleDisplacerPivotOngoing : Elaboration -> Elaboration
+toggleDisplacerPivotOngoing elaboration =
+    case elaboration.displacer of
+        Just (Primary (Be ongoing property)) ->
+            { elaboration | displacer = Just (Primary (Be (not ongoing) property)) }
+=======
+
+setDisplacedPivot : Pivot -> Elaboration -> Elaboration
+setDisplacedPivot pivot elaboration =
+    { elaboration | pivot = pivot }
+>>>>>>> Stashed changes
+
+        Just (Primary (Seem sense ongoing property)) ->
+            { elaboration | displacer = Just (Primary (Seem sense (not ongoing) property)) }
+
+<<<<<<< Updated upstream
+        Just (Primary (Do verbality ongoing passive)) ->
+            { elaboration | displacer = Just (Primary (Do verbality (not ongoing) passive)) }
+=======
+setDisplacedPivotVerbality : Verbality -> Elaboration -> Elaboration
+setDisplacedPivotVerbality verbality elaboration =
+    case elaboration.pivot of
+        Do oldVerbality ongoing passive ->
+            { elaboration | pivot = Do verbality ongoing passive }
+>>>>>>> Stashed changes
+
+        _ ->
+            elaboration
+
+
+<<<<<<< Updated upstream
+toggleDisplacerPivotPassive : Elaboration -> Elaboration
+toggleDisplacerPivotPassive elaboration =
+    case elaboration.displacer of
+        Just (Primary (Do verbality ongoing passive)) ->
+            { elaboration | displacer = Just (Primary (Do verbality ongoing (not passive))) }
+=======
+toggleDisplacedPivotOngoing : Elaboration -> Elaboration
+toggleDisplacedPivotOngoing elaboration =
+    case elaboration.pivot of
+        Be ongoing ->
+            { elaboration | pivot = Be (not ongoing) }
+>>>>>>> Stashed changes
+
+        Do verbality ongoing passive ->
+            { elaboration | pivot = Do verbality (not ongoing) passive }
+
+
+<<<<<<< Updated upstream
+setDisplacerPivotProperty : Property -> Elaboration -> Elaboration
+setDisplacerPivotProperty property elaboration =
+    case elaboration.displacer of
+        Just (Primary (Be ongoing oldProperty)) ->
+            { elaboration | displacer = Just (Primary (Be ongoing (maybe property))) }
+
+        Just (Primary (Seem sense ongoing oldProperty)) ->
+            { elaboration | displacer = Just (Primary (Seem sense ongoing (maybe property))) }
+=======
+toggleDisplacedPivotPassive : Elaboration -> Elaboration
+toggleDisplacedPivotPassive elaboration =
+    case elaboration.pivot of
+        Do verbality ongoing passive ->
+            { elaboration | pivot = Do verbality ongoing (not passive) }
+>>>>>>> Stashed changes
+
+        _ ->
+            elaboration
+
+
+setDisplacedCounter : Maybe Counter -> Elaboration -> Elaboration
+setDisplacedCounter counter elaboration =
+    { elaboration | counter = counter }
+
+
+setDisplacedCounterProperty : Property -> Elaboration -> Elaboration
+setDisplacedCounterProperty property elaboration =
+    { elaboration | counter = Just (CounterProperty property) }
+
+
+setDisplacedCounterRelator : Relator -> Elaboration -> Elaboration
+setDisplacedCounterRelator relator elaboration =
+    { elaboration | counter = Just (CounterRelator relator) }
+
+
+setModality : Modality -> Elaboration -> Elaboration
+setModality modality elaboration =
+    { elaboration | modality = modality }
 
 
 setTarget : Target -> Elaboration -> Elaboration

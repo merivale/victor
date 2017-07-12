@@ -249,6 +249,7 @@ displayWeight weight =
             "Different Object"
 
 
+<<<<<<< Updated upstream
 {-| Displacers.
 -}
 listDisplacers : Bool -> List (Maybe Displacer)
@@ -293,6 +294,8 @@ displayDisplacer displacer =
             "Secondary Displacer"
 
 
+=======
+>>>>>>> Stashed changes
 {-| Modalities.
 -}
 listModalities : Bool -> List Modality

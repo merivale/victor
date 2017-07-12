@@ -24,6 +24,7 @@ values.
 -}
 type Message
     = Plain Nucleus
+<<<<<<< Updated upstream
     | NEGATIVE Message  -- N
     | PAST Message  -- P
     | PRIOR Message  -- H
@@ -41,6 +42,26 @@ type Message
 (potentially empty) array of balances. The pivot and balances together comprise
 a condition, and a plain message affirms the present satisfaction of this
 condition by the object.
+=======
+    | NEGATIVE Message
+    | PAST (Maybe Time) Message
+    | PRIOR Message
+    | REGULAR (Maybe Frequency) Message
+    | PREORDAINED (Maybe Time) Message
+    | EXTENDED Duration Message
+    | SCATTERED Tally Message
+    | DISPLACED Pivot (Maybe Counter) Message
+    | PRACTICAL Modality Message
+    | PROJECTIVE Modality (Maybe Time) Message
+    | EVASIVE Modality (Maybe Frequency) Message
+    | INDIRECT Int Description Message
+    | ENUMERATED Int Multiplicity Message
+    | AMASSED Int Proportion Message
+
+
+{-| The nucleus of an English message consists of an object and a condition. A
+plain message affirms the present satisfaction of the condition by the object.
+>>>>>>> Stashed changes
 -}
 type alias Nucleus =
     ( Object, Condition )
@@ -136,6 +157,7 @@ type Weight
     | Different Object
 
 
+<<<<<<< Updated upstream
 {-| This is not the place to explain the nature of the various elaborations
 posited by my model. Nor is it the place to go into detail about the additional
 arguments that (some of) these elaborations take. See the README file for
@@ -147,6 +169,11 @@ type Displacer
     | Secondary Modality
 
 
+=======
+{-| The PRACTICAL, PROJECTIVE, and EVASIVE elaborations take a Modality
+argument.
+-}
+>>>>>>> Stashed changes
 type Modality
     = SoftYes
     | HardYes
@@ -159,9 +186,27 @@ type Modality
     | Command
 
 
+<<<<<<< Updated upstream
 type Target
     = MainObject
     | BalancingObject Int
+=======
+{-| The INDIRECT, ENUMERATED, and AMASSED elaborations all take Description,
+Multiplicity, and Proportion arguments respectively. These arguments have quite
+a lot in common; together they are responsible for noun phrases, like "the red
+baloon", "your best friend", "several seditious scribes from Caesarea", etc.
+-}
+type alias Description =
+    ( Pointer, Bool, Haystack )
+
+
+type alias Multiplicity =
+    ( Quantifier, Bool, Haystack )
+
+
+type alias Proportion =
+    ( Maybe Quantifier, Bool, Haystack )
+>>>>>>> Stashed changes
 
 
 type Pointer
@@ -188,6 +233,7 @@ type Quantifier
 
 type alias Haystack =
     ( Category, Maybe Property, Maybe Restriction )
+<<<<<<< Updated upstream
 
 
 {-| Various types that (for now at least) are just aliases for strings; meaning
@@ -199,6 +245,8 @@ type alias Frequency
 
 type alias Time
     = String
+=======
+>>>>>>> Stashed changes
 
 
 type alias Duration
@@ -238,6 +286,11 @@ type alias Vars =
     , object : Object
     , objectOverride : Maybe PseudoObject
     , modality : Maybe Modality
+<<<<<<< Updated upstream
+=======
+    , negatedModality : Bool
+    , practical : Bool
+>>>>>>> Stashed changes
     , longPivot : LongPivot
     , longPivots : List LongPivot
     , balances : List PseudoBalance

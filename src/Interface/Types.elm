@@ -19,11 +19,17 @@ type alias Model =
 type alias Elaboration =
     { plus : Bool
     , recipe : Recipe
-    , displacer : Maybe Displacer
     , string1 : Maybe String
     , string2 : Maybe String
     , string3 : Maybe String
+<<<<<<< Updated upstream
     , target : Target
+=======
+    , pivot : Pivot
+    , counter : Maybe Counter
+    , modality : Modality
+    , target : Int
+>>>>>>> Stashed changes
     , pointer : Pointer
     , quantifier : Maybe Quantifier
     , other : Bool
@@ -34,11 +40,14 @@ type Recipe
     = MakeNEGATIVE
     | MakePAST
     | MakePRIOR
-    | MakeDISPLACED
     | MakeREGULAR
     | MakePREORDAINED
     | MakeEXTENDED
     | MakeSCATTERED
+    | MakeDISPLACED
+    | MakePRACTICAL
+    | MakePROJECTIVE
+    | MakeEVASIVE
     | MakeINDIRECT
     | MakeENUMERATED
     | MakeAMASSED
@@ -63,6 +72,7 @@ type Signal
     | AddElaboration Int Recipe
     | RemoveElaboration Int
     | ToggleElaborationPlus Int
+<<<<<<< Updated upstream
     | SetDisplacer Int (Maybe Displacer)
     | SetDisplacerPivot Int Pivot
     | SetDisplacerPivotSense Int (Maybe Sense)
@@ -76,6 +86,20 @@ type Signal
     | SetString3 Int String
     | SetTarget Int Target
     | SetTargetInt Int Int
+=======
+    | SetString1 Int String
+    | SetString2 Int String
+    | SetString3 Int String
+    | SetDisplacedPivot Int Pivot
+    | SetDisplacedPivotVerbality Int Verbality
+    | ToggleDisplacedPivotOngoing Int
+    | ToggleDisplacedPivotPassive Int
+    | SetDisplacedCounter Int (Maybe Counter)
+    | SetDisplacedCounterProperty Int Property
+    | SetDisplacedCounterRelator Int Relator
+    | SetModality Int Modality
+    | SetTarget Int Int
+>>>>>>> Stashed changes
     | SetPointer Int Pointer
     | SetPointerObject Int Object
     | SetPointerObjectString Int String
