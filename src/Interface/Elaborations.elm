@@ -1,7 +1,6 @@
 module Interface.Elaborations
     exposing
         ( pastTime
-        , displacer
         , pivot
         , counter
         , modality
@@ -41,23 +40,14 @@ pastTime index elaboration =
         ]
 
 
-displacer : Bool -> Int -> Elaboration -> Html.Html Signal
-displacer optional index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Displacer"
-        , displacerSelect optional index elaboration.displacer
-        ]
-
-
-pivot : Int -> Pivot -> Html.Html Signal
-pivot index pivot =
-    case pivot of
+pivot : Int -> Elaboration -> Html.Html Signal
+pivot index elaboration =
+    case elaboration.pivot of
         Be ongoing ->
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Pivot"
-                , pivotSelect index pivot
+                , pivotSelect index elaboration.pivot
                 , Input.emptyInput
                 , pivotOngoing index ongoing
                 , Input.emptyInput
@@ -67,21 +57,21 @@ pivot index pivot =
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Pivot"
-                , pivotSelect index pivot
+                , pivotSelect index elaboration.pivot
                 , pivotVerbality index verbality
                 , pivotOngoing index ongoing
                 , pivotPassive index passive
                 ]
 
 
-counter : Int -> Maybe Counter -> Html.Html Signal
-counter index counter =
-    case counter of
+counter : Int -> Elaboration -> Html.Html Signal
+counter index elaboration =
+    case elaboration.counter of
         Nothing ->
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Counter"
-                , counterSelect index counter
+                , counterSelect index elaboration.counter
                 , Input.emptyInput
                 ]
 
@@ -89,7 +79,7 @@ counter index counter =
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Counter"
-                , counterSelect index counter
+                , counterSelect index elaboration.counter
                 , counterProperty index property
                 ]
 
@@ -97,17 +87,17 @@ counter index counter =
             Html.div
                 [ Attr.class "factor" ]
                 [ Input.label "Counter"
-                , counterSelect index counter
+                , counterSelect index elaboration.counter
                 , counterRelatorSelect index relator
                 ]
 
 
-modality : Bool -> Int -> Modality -> Html.Html Signal
-modality limited index modality =
+modality : Bool -> Int -> Elaboration -> Html.Html Signal
+modality limited index elaboration =
     Html.div
         [ Attr.class "factor" ]
         [ Input.label "Modality"
-        , modalitySelect limited index modality
+        , modalitySelect limited index elaboration.modality
         ]
 
 
@@ -236,24 +226,13 @@ haystack index elaboration =
 
 {-| Select dropdowns, used by the main output functions above.
 -}
-displacerSelect : Bool -> Int -> Maybe Displacer -> Html.Html Signal
-displacerSelect optional index displacer =
-    Input.select
-        { value = displacer
-        , options = Ideas.listDisplacers optional
-        , equivalent = Ideas.equateDisplacers
-        , signal = SetDisplacer index
-        , toLabel = Ideas.displayDisplacer
-        }
-
-
 pivotSelect : Int -> Pivot -> Html.Html Signal
 pivotSelect index pivot =
     Input.select
         { value = pivot
         , options = Ideas.listPivots
         , equivalent = Ideas.equatePivots
-        , signal = SetDisplacerPivot index
+        , signal = SetDisplacedPivot index
         , toLabel = Ideas.displayPivot
         }
 
@@ -264,7 +243,7 @@ counterSelect index counter =
         { value = counter
         , options = Ideas.listCounters
         , equivalent = Ideas.equateCounters
-        , signal = SetDisplacerCounter index
+        , signal = SetDisplacedCounter index
         , toLabel = Ideas.displayCounter
         }
 
@@ -275,7 +254,7 @@ counterRelatorSelect index relator =
         { value = relator
         , options = Ideas.listRelators
         , equivalent = (==)
-        , signal = SetDisplacerCounterRelator index
+        , signal = SetDisplacedCounterRelator index
         , toLabel = toString
         }
 
@@ -286,7 +265,7 @@ modalitySelect limited index modality =
         { value = modality
         , options = Ideas.listModalities limited
         , equivalent = (==)
-        , signal = SetDisplacerModality index
+        , signal = SetModality index
         , toLabel = Ideas.displayModality
         }
 
@@ -342,7 +321,7 @@ pivotVerbality index verbality =
     Input.text
         { value = verbality
         , placeholder = "e.g. have, like, want"
-        , signal = SetDisplacerPivotVerbality index
+        , signal = SetDisplacedPivotVerbality index
         , disabled = False
         }
 
@@ -352,7 +331,7 @@ counterProperty index property =
     Input.text
         { value = property
         , placeholder = "e.g. able, eager, happy (optional)"
-        , signal = SetDisplacerCounterProperty index
+        , signal = SetDisplacedCounterProperty index
         , disabled = False
         }
 
@@ -395,7 +374,7 @@ pivotOngoing index ongoing =
         { id = "ongoing" ++ (toString index)
         , label = "Ongoing"
         , checked = ongoing
-        , signal = ToggleDisplacerPivotOngoing index
+        , signal = ToggleDisplacedPivotOngoing index
         }
 
 
@@ -405,7 +384,7 @@ pivotPassive index passive =
         { id = "passive" ++ (toString index)
         , label = "Passive"
         , checked = passive
-        , signal = ToggleDisplacerPivotPassive index
+        , signal = ToggleDisplacedPivotPassive index
         }
 
 

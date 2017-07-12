@@ -74,16 +74,28 @@ elaborate elaborations message =
                     prior message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
+                MakePRACTICAL ->
+                    practical elaboration.modality message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
+                MakePROJECTIVE ->
+                    projective elaboration.modality elaboration.string1 message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
+                MakeEVASIVE ->
+                    evasive elaboration.modality elaboration.string1 message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
                 MakeDISPLACED ->
-                    displaced elaboration.displacer message
+                    displaced elaboration.pivot elaboration.counter message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeREGULAR ->
-                    regular elaboration.displacer elaboration.string1 message
+                    regular elaboration.string1 message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakePREORDAINED ->
-                    preordained elaboration.displacer elaboration.string1 message
+                    preordained elaboration.string1 message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeEXTENDED ->
@@ -130,54 +142,39 @@ prior message =
     Ok (PRIOR message)
 
 
-displaced : Maybe Displacer -> Message -> Result String Message
-displaced displacer message =
-    case displacer of
-        Nothing ->
-            Err "DISPLACED messages require a displacer"
-
-        Just disp ->
-            case disp of
-                Primary pivot counter ->
-                    if verbalityEmpty pivot then
-                        Err "please enter a verb for your DISPLACED pivot"
-                    else if propertyEmpty counter then
-                        Err "please enter a property for your DISPLACED counter"
-                    else
-                        Ok (DISPLACED disp message)
-
-                _ ->
-                    Ok (DISPLACED disp message)
+practical : Modality -> Message -> Result String Message
+practical modality message =
+    Ok (PRACTICAL modality message)
 
 
-regular : Maybe Displacer -> Maybe String -> Message -> Result String Message
-regular displacer string message =
-    case displacer of
-        Just (Primary pivot counter) ->
-            if verbalityEmpty pivot then
-                Err "please enter a verbality for your REGULAR pivot"
-            else if propertyEmpty counter then
-                Err "please enter a property for your REGULAR counter"
-            else
-                Ok (REGULAR displacer string message)
-
-        _ ->
-            Ok (REGULAR displacer string message)
+projective : Modality -> Maybe String -> Message -> Result String Message
+projective modality string message =
+    Ok (PROJECTIVE modality string message)
 
 
-preordained : Maybe Displacer -> Maybe String -> Message -> Result String Message
-preordained displacer string message =
-    case displacer of
-        Just (Primary pivot counter) ->
-            if verbalityEmpty pivot then
-                Err "please enter a verbality for your PREORDAINED pivot"
-            else if propertyEmpty counter then
-                Err "please enter a property for your PREORDAINED counter"
-            else
-                Ok (PREORDAINED displacer string message)
+evasive : Modality -> Maybe String -> Message -> Result String Message
+evasive modality string message =
+    Ok (EVASIVE modality string message)
 
-        _ ->
-            Ok (PREORDAINED displacer string message)
+
+displaced : Pivot -> Maybe Counter -> Message -> Result String Message
+displaced pivot counter message =
+    if verbalityEmpty pivot then
+        Err "please enter a verb for your DISPLACED pivot"
+    else if propertyEmpty counter then
+        Err "please enter a property for your DISPLACED counter"
+    else
+        Ok (DISPLACED pivot counter message)
+
+
+regular : Maybe String -> Message -> Result String Message
+regular string message =
+    Ok (REGULAR string message)
+
+
+preordained : Maybe String -> Message -> Result String Message
+preordained string message =
+    Ok (PREORDAINED string message)
 
 
 extended : Maybe Duration -> Message -> Result String Message

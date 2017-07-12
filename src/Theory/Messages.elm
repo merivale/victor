@@ -33,17 +33,13 @@ explode message =
             explode subMessage
                 |> andThen prior
 
-        DISPLACED displacer subMessage ->
+        REGULAR frequency subMessage ->
             explode subMessage
-                |> andThen (displaced displacer)
+                |> andThen (regular frequency)
 
-        REGULAR displacer frequency subMessage ->
+        PREORDAINED time subMessage ->
             explode subMessage
-                |> andThen (regular displacer frequency)
-
-        PREORDAINED displacer time subMessage ->
-            explode subMessage
-                |> andThen (preordained displacer time)
+                |> andThen (preordained time)
 
         EXTENDED duration subMessage ->
             explode subMessage
@@ -52,6 +48,22 @@ explode message =
         SCATTERED tally subMessage ->
             explode subMessage
                 |> andThen (scattered tally)
+
+        DISPLACED pivot counter subMessage ->
+            explode subMessage
+                |> andThen (displaced pivot counter)
+
+        PRACTICAL modality subMessage ->
+            explode subMessage
+                |> andThen (practical modality)
+
+        PROJECTIVE modality time subMessage ->
+            explode subMessage
+                |> andThen (projective modality time)
+
+        EVASIVE modality frequency subMessage ->
+            explode subMessage
+                |> andThen (evasive modality frequency)
 
         INDIRECT target description subMessage ->
             explode subMessage
@@ -77,6 +89,7 @@ plain ( object, ( pivot, counter, balances ) ) =
         , object = DirectObject object
         , modality = Nothing
         , negatedModality = False
+        , practical = False
         , longPivot = newLongPivot pivot counter
         , longPivots = []
         , balances = List.map (\x -> DirectBalance x) balances
@@ -85,11 +98,12 @@ plain ( object, ( pivot, counter, balances ) ) =
 
 
 {-| Negating a message typically has the effect of negating its underlying
-condition. Enumerated and amassed elaborations, however, if they target the
-main object with the right kind of quantifier, hijack this default behaviour,
-making any subsequent negation effect that quantifier instead. The result, in
-these cases, is something like "not all" or "not every" at the start of the
-sentence.
+condition. The PRACTICAL, PROJECTIVE, and EVASIVE elaborations, however,
+introduce a modality that becomes the target of any subsequent negation instead.
+Similarly, the ENUMERATED and AMASSED elaborations, if they target the main
+object with the right kind of quantifier, making any subsequent negation effect
+that quantifier instead. The result, in these cases, is something like "not all"
+or "not every" at the start of the sentence.
 -}
 negative : Vars -> Result String Vars
 negative vars =
@@ -175,126 +189,39 @@ prior : Vars -> Result String Vars
 prior vars =
     if vars.longPivot.prior then
         Err "PRIOR messages cannot be made PRIOR"
+    else if vars.modality /= Nothing && not vars.past then
+        Err "messages with a modality can only be PRIOR if they are PAST"
+    else if vars.modality /= Nothing && vars.practical then
+        Err "PRACTICAL messages cannot be PRIOR PAST"
     else
         Ok { vars | longPivot = setPrior vars.longPivot }
 
 
-{-| DISPLACED messages.
--}
-displaced : Displacer -> Vars -> Result String Vars
-displaced displacer vars =
-    if vars.past then
-        Err "PAST messages cannot be made DISPLACED"
-    else if vars.modality /= Nothing then
-        Err "messages with a modality cannot be made DISPLACED"
-    else
-        case displacer of
-            Primary pivot beam ->
-                Ok
-                    { vars
-                        | negationTarget = NegateCondition
-                        , longPivot = newLongPivot pivot beam
-                        , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
-                    }
-
-            Secondary modality ->
-                if modality == HardYesIsh then
-                    Ok
-                        { vars
-                            | negationTarget = NegateModality
-                            , modality = Just modality
-                            , longPivot = (addToPre "to" vars.longPivot)
-                        }
-                else
-                    Ok
-                        { vars
-                            | negationTarget = NegateModality
-                            , modality = Just modality
-                        }
-
-
 {-| REGULAR messages.
 -}
-regular : Maybe Displacer -> Maybe Frequency -> Vars -> Result String Vars
-regular displacer frequency vars =
-    if vars.past then
-        Err "past messages cannot be made REGULAR"
-    else if vars.modality /= Nothing then
+regular : Maybe Frequency -> Vars -> Result String Vars
+regular frequency vars =
+    if vars.modality /= Nothing then
         Err "messages with a modality cannot be made REGULAR"
     else
-        case displacer of
-            Nothing ->
-                Ok
-                    { vars
-                        | negationTarget = NegateCondition
-                        , longPivot = maybeAddToPre frequency vars.longPivot
-                    }
-
-            Just (Primary pivot counter) ->
-                Ok
-                    { vars
-                        | negationTarget = NegateCondition
-                        , longPivot = maybeAddToPre frequency (newLongPivot pivot counter)
-                        , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
-                    }
-
-            Just (Secondary modality) ->
-                if modality == HardYesIsh then
-                    Ok
-                        { vars
-                            | negationTarget = NegateModality
-                            , modality = Just modality
-                            , longPivot = addToPre "to" (maybeAddToPre frequency vars.longPivot)
-                        }
-                else
-                    Ok
-                        { vars
-                            | negationTarget = NegateModality
-                            , modality = Just modality
-                            , longPivot = maybeAddToPre frequency vars.longPivot
-                        }
+        Ok { vars | negationTarget = NegateCondition, longPivot = maybeAddToPre frequency vars.longPivot }
 
 
 {-| PREORDAINED messages.
 -}
-preordained : Maybe Displacer -> Maybe Time -> Vars -> Result String Vars
-preordained displacer time vars =
-    if vars.past then
-        Err "past messages cannot be made PREORDAINED"
-    else if vars.modality /= Nothing then
+preordained : Maybe Time -> Vars -> Result String Vars
+preordained time vars =
+    if vars.modality /= Nothing then
         Err "messages with a modality cannot be made PREORDAINED"
     else
-        let
-            newVars =
-                { vars | negationTarget = NegateModality, post = maybeAddToPost time vars.post }
-        in
-            case displacer of
-                Nothing ->
-                    Ok newVars
-
-                Just (Primary pivot counter) ->
-                    Ok
-                        { newVars
-                            | longPivot = newLongPivot pivot counter
-                            , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
-                        }
-
-                Just (Secondary modality) ->
-                    if modality == HardYesIsh then
-                        Ok { newVars | modality = Just modality, longPivot = addToPre "to" vars.longPivot }
-                    else
-                        Ok { newVars | modality = Just modality }
+        Ok { vars | negationTarget = NegateCondition, post = maybeAddToPost time vars.post }
 
 
 {-| EXTENDED messages.
 -}
 extended : Duration -> Vars -> Result String Vars
 extended duration vars =
-    if vars.past then
-        Err "past messages cannot be made EXTENDED"
-    else if vars.longPivot.prior then
-        Err "prior messages cannot be made EXTENDED"
-    else if vars.modality /= Nothing then
+    if vars.modality /= Nothing then
         Err "messages with a modality cannot be made EXTENDED"
     else
         Ok { vars | negationTarget = NegateCondition, post = vars.post ++ [ duration ] }
@@ -304,12 +231,90 @@ extended duration vars =
 -}
 scattered : Tally -> Vars -> Result String Vars
 scattered tally vars =
-    if vars.past then
-        Err "past messages cannot be made SCATTERED"
-    else if vars.modality /= Nothing then
+    if vars.modality /= Nothing then
         Err "messages with a modality cannot be made SCATTERED"
     else
         Ok { vars | negationTarget = NegateCondition, post = vars.post ++ [ tally ] }
+
+
+{-| DISPLACED messages.
+-}
+displaced : Pivot -> Maybe Counter -> Vars -> Result String Vars
+displaced pivot counter vars =
+    if vars.past then
+        Err "PAST messages cannot be DISPLACED"
+    else if vars.modality /= Nothing then
+        Err "messages with a modality cannot be DISPLACED"
+    else
+        Ok
+            { vars
+                | negationTarget = NegateCondition
+                , longPivot = newLongPivot pivot counter
+                , longPivots = (addToPre "to" vars.longPivot) :: vars.longPivots
+            }
+
+
+{- PRACTICAL messages.
+-}
+practical : Modality -> Vars -> Result String Vars
+practical modality vars =
+    if vars.past then
+        Err "PAST messages cannot be PRACTICAL"
+    else if modality == Permission then
+        Err "the Permission modality ('may') cannot be used in PRACTICAL messages"
+    else if modality == Command then
+        Err "the Command modality ('shall') cannot be used in PRACTICAL messages"
+    else
+        let
+            newVars =
+                { vars | negationTarget = NegateModality, modality = Just modality, practical = True }
+        in
+            if modality == HardYesIsh then
+                Ok { newVars | longPivot = addToPre "to" vars.longPivot }
+            else
+                Ok newVars
+
+
+{- PROJECTIVE messages.
+-}
+projective : Modality -> Maybe Time -> Vars -> Result String Vars
+projective modality time vars =
+    if vars.past then
+        Err "PAST messages cannot be PROJECTIVE"
+    else
+        let
+            newVars =
+                { vars
+                    | negationTarget = NegateModality
+                    , modality = Just modality
+                    , post = maybeAddToPost time vars.post
+                }
+        in
+            if modality == HardYesIsh then
+                Ok { newVars | longPivot = addToPre "to" vars.longPivot }
+            else
+                Ok newVars
+
+
+{- EVASIVE messages.
+-}
+evasive : Modality -> Maybe Frequency -> Vars -> Result String Vars
+evasive modality frequency vars =
+    if vars.past then
+        Err "PAST messages cannot be EVASIVE"
+    else if modality == Permission then
+        Err "the Permission modality ('may') cannot be used in EVASIVE messages"
+    else if modality == Command then
+        Err "the Command modality ('shall') cannot be used in EVASIVE messages"
+    else
+        let
+            newVars =
+                { vars | negationTarget = NegateModality, modality = Just modality }
+        in
+            if modality == HardYesIsh then
+                Ok { newVars | longPivot = addToPre "to" (maybeAddToPre frequency vars.longPivot) }
+            else
+                Ok { newVars | longPivot = maybeAddToPre frequency vars.longPivot }
 
 
 {-| INDIRECT messages.

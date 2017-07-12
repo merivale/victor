@@ -27,11 +27,14 @@ type Message
     | NEGATIVE Message
     | PAST (Maybe Time) Message
     | PRIOR Message
-    | DISPLACED Displacer Message
-    | REGULAR (Maybe Displacer) (Maybe Frequency) Message
-    | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+    | REGULAR (Maybe Frequency) Message
+    | PREORDAINED (Maybe Time) Message
     | EXTENDED Duration Message
     | SCATTERED Tally Message
+    | DISPLACED Pivot (Maybe Counter) Message
+    | PRACTICAL Modality Message
+    | PROJECTIVE Modality (Maybe Time) Message
+    | EVASIVE Modality (Maybe Frequency) Message
     | INDIRECT Int Description Message
     | ENUMERATED Int Multiplicity Message
     | AMASSED Int Proportion Message
@@ -139,14 +142,9 @@ type Weight
     | Different Object
 
 
-{-| The DISPLACED, REGULAR, and PREORDAINED elaborations take a Displacer
-argument. This is either another pivot or a modality.
+{-| The PRACTICAL, PROJECTIVE, and EVASIVE elaborations take a Modality
+argument.
 -}
-type Displacer
-    = Primary Pivot (Maybe Counter)
-    | Secondary Modality
-
-
 type Modality
     = SoftYes
     | HardYes
@@ -157,17 +155,6 @@ type Modality
     | Dare
     | Permission
     | Command
-
-
-{-| The last two modalities on this list are permissible in PREORDAINED
-elaborations only. The Messages module, when validating DISPLACED and REGULAR
-messages, should use this list to check all is as it should be.
--}
-preordainedOnly : List Modality
-preordainedOnly =
-    [ Permission
-    , Command
-    ]
 
 
 {-| The INDIRECT, ENUMERATED, and AMASSED elaborations all take Description,
@@ -208,35 +195,6 @@ type Quantifier
     | Much
     | Most
     | Enough
-
-
-{-| Multiplicities and Proportions for the most part use different Quantifiers.
-Some and Any, however, show up on both sides of this divide. The Messages
-module, when validating ENUMERATED and AMASSED messages, should use these lists
-to check all is as it should be.
--}
-enumerators : List Quantifier
-enumerators =
-    [ A
-    , Integer 0
-    , Several
-    , Many
-    , Each
-    , Every
-    , Both
-    , Some
-    , Any
-    ]
-
-
-amassors : List Quantifier
-amassors =
-    [ Some
-    , Any
-    , All
-    , Much
-    , Enough
-    ]
 
 
 type alias Haystack =
@@ -284,6 +242,7 @@ type alias Vars =
     , object : PseudoObject
     , modality : Maybe Modality
     , negatedModality : Bool
+    , practical : Bool
     , longPivot : LongPivot
     , longPivots : List LongPivot
     , balances : List PseudoBalance

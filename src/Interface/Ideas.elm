@@ -262,50 +262,6 @@ displayWeight weight =
             "Different Object"
 
 
-{-| Displacers.
--}
-listDisplacers : Bool -> List (Maybe Displacer)
-listDisplacers optional =
-    if optional then
-        [ Nothing
-        , Just (Primary (Be False) Nothing)
-        , Just (Secondary SoftYes)
-        ]
-    else
-        [ Just (Primary (Be False) Nothing)
-        , Just (Secondary SoftYes)
-        ]
-
-
-equateDisplacers : Maybe Displacer -> Maybe Displacer -> Bool
-equateDisplacers displacer1 displacer2 =
-    case ( displacer1, displacer2 ) of
-        ( Nothing, Nothing ) ->
-            True
-
-        ( Just (Primary pivot1 counter1), Just (Primary pivot2 counter2) ) ->
-            True
-
-        ( Just (Secondary modality1), Just (Secondary modality2) ) ->
-            True
-
-        _ ->
-            False
-
-
-displayDisplacer : Maybe Displacer -> String
-displayDisplacer displacer =
-    case displacer of
-        Nothing ->
-            "-- No Displacer --"
-
-        Just (Primary pivot counter) ->
-            "Primary Displacer"
-
-        Just (Secondary modality) ->
-            "Secondary Displacer"
-
-
 {-| Modalities.
 -}
 listModalities : Bool -> List Modality

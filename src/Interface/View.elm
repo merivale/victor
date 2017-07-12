@@ -177,89 +177,19 @@ elaborationBody balanceCount index elaboration subContent =
                 , subContent
                 ]
 
-        MakeDISPLACED ->
-            case elaboration.displacer of
-                Nothing ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer False index elaboration
-                        , subContent
-                        ]
-
-                Just (Primary pivot counter) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer False index elaboration
-                        , Elaborations.pivot index pivot
-                        , Elaborations.counter index counter
-                        , subContent
-                        ]
-
-                Just (Secondary modality) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer False index elaboration
-                        , Elaborations.modality False index modality
-                        , subContent
-                        ]
-
         MakeREGULAR ->
-            case elaboration.displacer of
-                Nothing ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.frequency index elaboration
-                        , subContent
-                        ]
-
-                Just (Primary pivot counter) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.pivot index pivot
-                        , Elaborations.counter index counter
-                        , Elaborations.frequency index elaboration
-                        , subContent
-                        ]
-
-                Just (Secondary modality) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.modality True index modality
-                        , Elaborations.frequency index elaboration
-                        , subContent
-                        ]
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.frequency index elaboration
+                , subContent
+                ]
 
         MakePREORDAINED ->
-            case elaboration.displacer of
-                Nothing ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.preordainedTime index elaboration
-                        , subContent
-                        ]
-
-                Just (Primary pivot counter) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.pivot index pivot
-                        , Elaborations.counter index counter
-                        , Elaborations.preordainedTime index elaboration
-                        , subContent
-                        ]
-
-                Just (Secondary modality) ->
-                    Html.div
-                        [ Attr.class "body" ]
-                        [ Elaborations.displacer True index elaboration
-                        , Elaborations.modality False index modality
-                        , Elaborations.preordainedTime index elaboration
-                        , subContent
-                        ]
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.preordainedTime index elaboration
+                , subContent
+                ]
 
         MakeEXTENDED ->
             Html.div
@@ -272,6 +202,37 @@ elaborationBody balanceCount index elaboration subContent =
             Html.div
                 [ Attr.class "body" ]
                 [ Elaborations.tally index elaboration
+                , subContent
+                ]
+
+        MakeDISPLACED ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.pivot index elaboration
+                , Elaborations.counter index elaboration
+                , subContent
+                ]
+
+        MakePRACTICAL ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.modality True index elaboration
+                , subContent
+                ]
+
+        MakePROJECTIVE ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.modality False index elaboration
+                , Elaborations.preordainedTime index elaboration
+                , subContent
+                ]
+
+        MakeEVASIVE ->
+            Html.div
+                [ Attr.class "body" ]
+                [ Elaborations.modality True index elaboration
+                , Elaborations.frequency index elaboration
                 , subContent
                 ]
 
@@ -347,15 +308,18 @@ elaborationButtons index plus =
                     [ MakeNEGATIVE
                     , MakePAST
                     , MakePRIOR
-                    , MakeDISPLACED
                     , MakeREGULAR
                     , MakePREORDAINED
+                    , MakeEXTENDED
+                    , MakeSCATTERED
                     ]
                 )
             , Html.div []
                 (List.map (elaborationButton index)
-                    [ MakeEXTENDED
-                    , MakeSCATTERED
+                    [ MakeDISPLACED
+                    , MakePRACTICAL
+                    , MakePROJECTIVE
+                    , MakeEVASIVE
                     , MakeINDIRECT
                     , MakeENUMERATED
                     , MakeAMASSED
