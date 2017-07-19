@@ -136,7 +136,7 @@ nucleusBody : Model -> Html.Html Signal
 nucleusBody model =
     Html.div
         [ Attr.class "body" ]
-        ([ Nucleus.object model.object, Nucleus.pivot model.pivot, Nucleus.counter model.counter ]
+        ([ Nucleus.object model.object, Nucleus.verbality model.verbality, Nucleus.status model.status ]
             ++ (List.indexedMap Nucleus.balance model.balances)
         )
 
@@ -177,19 +177,27 @@ elaborationBody balanceCount index elaboration subContent =
                 , subContent
                 ]
 
-        MakeREGULAR ->
+        MakeDISPLACED ->
             Html.div
                 [ Attr.class "body" ]
-                [ Elaborations.frequency index elaboration
-                , subContent
-                ]
+                ((Elaborations.displacer True True index elaboration) ++
+                    [ subContent ])
 
         MakePREORDAINED ->
             Html.div
                 [ Attr.class "body" ]
-                [ Elaborations.preordainedTime index elaboration
-                , subContent
-                ]
+                ((Elaborations.displacer False False index elaboration) ++
+                    [ Elaborations.preordainedTime index elaboration
+                    , subContent
+                    ])
+
+        MakeREGULAR ->
+            Html.div
+                [ Attr.class "body" ]
+                ((Elaborations.displacer False True index elaboration) ++
+                    [ Elaborations.frequency index elaboration
+                    , subContent
+                    ])
 
         MakeEXTENDED ->
             Html.div
@@ -202,37 +210,6 @@ elaborationBody balanceCount index elaboration subContent =
             Html.div
                 [ Attr.class "body" ]
                 [ Elaborations.tally index elaboration
-                , subContent
-                ]
-
-        MakeDISPLACED ->
-            Html.div
-                [ Attr.class "body" ]
-                [ Elaborations.pivot index elaboration
-                , Elaborations.counter index elaboration
-                , subContent
-                ]
-
-        MakePRACTICAL ->
-            Html.div
-                [ Attr.class "body" ]
-                [ Elaborations.modality True index elaboration
-                , subContent
-                ]
-
-        MakePROJECTIVE ->
-            Html.div
-                [ Attr.class "body" ]
-                [ Elaborations.modality False index elaboration
-                , Elaborations.preordainedTime index elaboration
-                , subContent
-                ]
-
-        MakeEVASIVE ->
-            Html.div
-                [ Attr.class "body" ]
-                [ Elaborations.modality True index elaboration
-                , Elaborations.frequency index elaboration
                 , subContent
                 ]
 
@@ -308,18 +285,15 @@ elaborationButtons index plus =
                     [ MakeNEGATIVE
                     , MakePAST
                     , MakePRIOR
+                    , MakeDISPLACED
                     , MakeREGULAR
                     , MakePREORDAINED
-                    , MakeEXTENDED
-                    , MakeSCATTERED
                     ]
                 )
             , Html.div []
                 (List.map (elaborationButton index)
-                    [ MakeDISPLACED
-                    , MakePRACTICAL
-                    , MakePROJECTIVE
-                    , MakeEVASIVE
+                    [ MakeEXTENDED
+                    , MakeSCATTERED
                     , MakeINDIRECT
                     , MakeENUMERATED
                     , MakeAMASSED

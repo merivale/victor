@@ -14,8 +14,8 @@ initial : Model
 initial =
     { plus = False
     , object = Speaker False
-    , pivot = Be False
-    , counter = Nothing
+    , verbality = Be False
+    , status = Nothing
     , balances = [ ( Nothing, Different (Other False (Just Male) (Just "Victor")) ) ]
     , elaborations = []
     }
@@ -46,41 +46,41 @@ update signal model =
                 _ ->
                     model
 
-        SetPivot pivot ->
-            { model | pivot = pivot }
+        SetVerbality verbality ->
+            { model | verbality = verbality }
 
-        SetPivotVerbality verbality ->
-            case model.pivot of
-                Do oldVerbality ongoing passive ->
-                    { model | pivot = Do verbality ongoing passive }
+        SetVerbalityString string ->
+            case model.verbality of
+                Do oldString ongoing passive ->
+                    { model | verbality = Do string ongoing passive }
 
                 _ ->
                     model
 
-        TogglePivotOngoing ->
-            case model.pivot of
+        ToggleVerbalityOngoing ->
+            case model.verbality of
                 Be ongoing ->
-                    { model | pivot = Be (not ongoing) }
+                    { model | verbality = Be (not ongoing) }
 
-                Do verbality ongoing passive ->
-                    { model | pivot = Do verbality (not ongoing) passive }
+                Do string ongoing passive ->
+                    { model | verbality = Do string (not ongoing) passive }
 
-        TogglePivotPassive ->
-            case model.pivot of
-                Do verbality ongoing passive ->
-                    { model | pivot = Do verbality ongoing (not passive) }
+        ToggleVerbalityPassive ->
+            case model.verbality of
+                Do string ongoing passive ->
+                    { model | verbality = Do string ongoing (not passive) }
 
                 _ ->
                     model
 
-        SetCounter counter ->
-            { model | counter = counter }
+        SetStatus status ->
+            { model | status = status }
 
-        SetCounterProperty property ->
-            { model | counter = Just (CounterProperty property) }
+        SetStatusString string ->
+            { model | status = Just (Absolute string) }
 
-        SetCounterRelator relator ->
-            { model | counter = Just (CounterRelator relator) }
+        SetStatusRelator relator ->
+            { model | status = Just (Relative relator) }
 
         AddBalance ->
             { model | balances = model.balances ++ [ ( Nothing, SameAsMain ) ] }
@@ -96,16 +96,16 @@ update signal model =
                 }
 
         SetBalanceRelator index relator ->
-            { model | balances = modifyItem index (setRelator relator) model.balances }
+            { model | balances = modifyItem index (setBalanceRelator relator) model.balances }
 
         SetBalanceWeight index weight ->
-            { model | balances = modifyItem index (setWeight weight) model.balances }
+            { model | balances = modifyItem index (setBalanceWeight weight) model.balances }
 
         SetBalanceWeightObject index object ->
-            { model | balances = modifyItem index (setWeightObject object) model.balances }
+            { model | balances = modifyItem index (setBalanceWeightObject object) model.balances }
 
         SetBalanceWeightObjectString index string ->
-            { model | balances = modifyItem index (setWeightObjectString string) model.balances }
+            { model | balances = modifyItem index (setBalanceWeightObjectString string) model.balances }
 
         AddElaboration index recipe ->
             let
@@ -120,59 +120,62 @@ update signal model =
         ToggleElaborationPlus index ->
             { model | plus = False, elaborations = List.indexedMap (toggleOrMinus index) model.elaborations }
 
-        SetString1 index string ->
-            { model | elaborations = modifyItem index (setString1 string) model.elaborations }
+        SetElaborationString1 index string ->
+            { model | elaborations = modifyItem index (setElaborationString1 string) model.elaborations }
 
-        SetString2 index string ->
-            { model | elaborations = modifyItem index (setString2 string) model.elaborations }
+        SetElaborationString2 index string ->
+            { model | elaborations = modifyItem index (setElaborationString2 string) model.elaborations }
 
-        SetString3 index string ->
-            { model | elaborations = modifyItem index (setString3 string) model.elaborations }
+        SetElaborationString3 index string ->
+            { model | elaborations = modifyItem index (setElaborationString3 string) model.elaborations }
 
-        SetDisplacedPivot index pivot ->
-            { model | elaborations = modifyItem index (setDisplacedPivot pivot) model.elaborations }
+        SetElaborationDisplacer index displacer ->
+            { model | elaborations = modifyItem index (setElaborationDisplacer displacer) model.elaborations }
 
-        SetDisplacedPivotVerbality index verbality ->
-            { model | elaborations = modifyItem index (setDisplacedPivotVerbality verbality) model.elaborations }
+        SetElaborationDisplacerVerbality index verbality ->
+            { model | elaborations = modifyItem index (setElaborationDisplacerVerbality verbality) model.elaborations }
 
-        ToggleDisplacedPivotOngoing index ->
-            { model | elaborations = modifyItem index toggleDisplacedPivotOngoing model.elaborations }
+        SetElaborationDisplacerVerbalityString index verbality ->
+            { model | elaborations = modifyItem index (setElaborationDisplacerVerbalityString verbality) model.elaborations }
 
-        ToggleDisplacedPivotPassive index ->
-            { model | elaborations = modifyItem index toggleDisplacedPivotPassive model.elaborations }
+        ToggleElaborationDisplacerVerbalityOngoing index ->
+            { model | elaborations = modifyItem index toggleElaborationDisplacerVerbalityOngoing model.elaborations }
 
-        SetDisplacedCounter index counter ->
-            { model | elaborations = modifyItem index (setDisplacedCounter counter) model.elaborations }
+        ToggleElaborationDisplacerVerbalityPassive index ->
+            { model | elaborations = modifyItem index toggleElaborationDisplacerVerbalityPassive model.elaborations }
 
-        SetDisplacedCounterProperty index property ->
-            { model | elaborations = modifyItem index (setDisplacedCounterProperty property) model.elaborations }
+        SetElaborationDisplacerStatus index status ->
+            { model | elaborations = modifyItem index (setElaborationDisplacerStatus status) model.elaborations }
 
-        SetDisplacedCounterRelator index relator ->
-            { model | elaborations = modifyItem index (setDisplacedCounterRelator relator) model.elaborations }
+        SetElaborationDisplacerStatusString index string ->
+            { model | elaborations = modifyItem index (setElaborationDisplacerStatusString string) model.elaborations }
 
-        SetModality index modality ->
-            { model | elaborations = modifyItem index (setModality modality) model.elaborations }
+        SetElaborationDisplacerStatusRelator index relator ->
+            { model | elaborations = modifyItem index (setElaborationDisplacerStatusRelator relator) model.elaborations }
 
-        SetTarget index target ->
-            { model | elaborations = modifyItem index (setTarget target) model.elaborations }
+        SetElaborationDisplacerModality index modality ->
+            { model | elaborations = modifyItem index (setElaborationDisplacerModality modality) model.elaborations }
 
-        SetPointer index pointer ->
-            { model | elaborations = modifyItem index (setPointer pointer) model.elaborations }
+        SetElaborationTarget index int ->
+            { model | elaborations = modifyItem index (setElaborationTarget int) model.elaborations }
 
-        SetPointerObject index object ->
-            { model | elaborations = modifyItem index (setPointerObject object) model.elaborations }
+        SetElaborationPointer index pointer ->
+            { model | elaborations = modifyItem index (setElaborationPointer pointer) model.elaborations }
 
-        SetPointerObjectString index string ->
-            { model | elaborations = modifyItem index (setPointerObjectString string) model.elaborations }
+        SetElaborationPointerObject index object ->
+            { model | elaborations = modifyItem index (setElaborationPointerObject object) model.elaborations }
 
-        SetQuantifier index quantifier ->
-            { model | elaborations = modifyItem index (setQuantifier quantifier) model.elaborations }
+        SetElaborationPointerObjectString index string ->
+            { model | elaborations = modifyItem index (setElaborationPointerObjectString string) model.elaborations }
 
-        SetQuantifierInteger index int ->
-            { model | elaborations = modifyItem index (setQuantifierInteger int) model.elaborations }
+        SetElaborationQuantifier index quantifier ->
+            { model | elaborations = modifyItem index (setElaborationQuantifier quantifier) model.elaborations }
 
-        ToggleOther index ->
-            { model | elaborations = modifyItem index toggleOther model.elaborations }
+        SetElaborationQuantifierInteger index int ->
+            { model | elaborations = modifyItem index (setElaborationQuantifierInteger int) model.elaborations }
+
+        ToggleElaborationOther index ->
+            { model | elaborations = modifyItem index toggleElaborationOther model.elaborations }
 
 
 {-| Set all pluses to False (i.e. collapse all expanded elaboration boxes). This
@@ -233,15 +236,26 @@ addElaboration index recipe elaborations =
 
         elaboration =
             case recipe of
+                MakeDISPLACED ->
+                    { plus = False
+                    , recipe = recipe
+                    , string1 = Nothing
+                    , string2 = Nothing
+                    , string3 = Nothing
+                    , displacer = Just (Primary ( Be False, Nothing ))
+                    , target = -1
+                    , pointer = The
+                    , quantifier = Nothing
+                    , other = False
+                    }
+
                 MakeENUMERATED ->
                     { plus = False
                     , recipe = recipe
                     , string1 = Nothing
                     , string2 = Nothing
                     , string3 = Nothing
-                    , modality = SoftYes
-                    , pivot = Be False
-                    , counter = Nothing
+                    , displacer = Nothing
                     , target = -1
                     , pointer = The
                     , quantifier = Nothing
@@ -254,9 +268,7 @@ addElaboration index recipe elaborations =
                     , string1 = Nothing
                     , string2 = Nothing
                     , string3 = Nothing
-                    , modality = SoftYes
-                    , pivot = Be False
-                    , counter = Nothing
+                    , displacer = Nothing
                     , target = -1
                     , pointer = The
                     , quantifier = Just Some
@@ -284,18 +296,18 @@ modifyItem index modified list =
 {-| Functions for modifying the components of a balance, used as arguments to
 the modifyItem function above.
 -}
-setRelator : Maybe Relator -> Balance -> Balance
-setRelator relator ( oldRelator, weight ) =
+setBalanceRelator : Maybe Relator -> Balance -> Balance
+setBalanceRelator relator ( oldRelator, weight ) =
     ( relator, weight )
 
 
-setWeight : Weight -> Balance -> Balance
-setWeight weight ( relator, oldWeight ) =
+setBalanceWeight : Weight -> Balance -> Balance
+setBalanceWeight weight ( relator, oldWeight ) =
     ( relator, weight )
 
 
-setWeightObject : Object -> Balance -> Balance
-setWeightObject object ( relator, weight ) =
+setBalanceWeightObject : Object -> Balance -> Balance
+setBalanceWeightObject object ( relator, weight ) =
     case weight of
         Different oldObject ->
             ( relator, Different object )
@@ -304,8 +316,8 @@ setWeightObject object ( relator, weight ) =
             ( relator, weight )
 
 
-setWeightObjectString : String -> Balance -> Balance
-setWeightObjectString string ( relator, weight ) =
+setBalanceWeightObjectString : String -> Balance -> Balance
+setBalanceWeightObjectString string ( relator, weight ) =
     case weight of
         Different (Other plural sex oldString) ->
             ( relator, Different (Other plural sex (maybe string)) )
@@ -317,23 +329,23 @@ setWeightObjectString string ( relator, weight ) =
 {-| Functions for modifying the components of an elaboration, used as arguments
 to the modifyItem function above.
 -}
-togglePlus : Elaboration -> Elaboration
-togglePlus elaboration =
+toggleElaborationPlus : Elaboration -> Elaboration
+toggleElaborationPlus elaboration =
     { elaboration | plus = not elaboration.plus }
 
 
-setString1 : String -> Elaboration -> Elaboration
-setString1 string elaboration =
+setElaborationString1 : String -> Elaboration -> Elaboration
+setElaborationString1 string elaboration =
     { elaboration | string1 = maybe string }
 
 
-setString2 : String -> Elaboration -> Elaboration
-setString2 string elaboration =
+setElaborationString2 : String -> Elaboration -> Elaboration
+setElaborationString2 string elaboration =
     { elaboration | string2 = maybe string }
 
 
-setString3 : String -> Elaboration -> Elaboration
-setString3 string elaboration =
+setElaborationString3 : String -> Elaboration -> Elaboration
+setElaborationString3 string elaboration =
     { elaboration | string3 = maybe string }
 
 
@@ -345,78 +357,106 @@ maybe string =
         Just string
 
 
-setDisplacedPivot : Pivot -> Elaboration -> Elaboration
-setDisplacedPivot pivot elaboration =
-    { elaboration | pivot = pivot }
+setElaborationDisplacer : Maybe Displacer -> Elaboration -> Elaboration
+setElaborationDisplacer displacer elaboration =
+    { elaboration | displacer = displacer }
 
 
-setDisplacedPivotVerbality : Verbality -> Elaboration -> Elaboration
-setDisplacedPivotVerbality verbality elaboration =
-    case elaboration.pivot of
-        Do oldVerbality ongoing passive ->
-            { elaboration | pivot = Do verbality ongoing passive }
-
-        _ ->
-            elaboration
-
-
-toggleDisplacedPivotOngoing : Elaboration -> Elaboration
-toggleDisplacedPivotOngoing elaboration =
-    case elaboration.pivot of
-        Be ongoing ->
-            { elaboration | pivot = Be (not ongoing) }
-
-        Do verbality ongoing passive ->
-            { elaboration | pivot = Do verbality (not ongoing) passive }
-
-
-toggleDisplacedPivotPassive : Elaboration -> Elaboration
-toggleDisplacedPivotPassive elaboration =
-    case elaboration.pivot of
-        Do verbality ongoing passive ->
-            { elaboration | pivot = Do verbality ongoing (not passive) }
+setElaborationDisplacerVerbality : Verbality -> Elaboration -> Elaboration
+setElaborationDisplacerVerbality verbality elaboration =
+    case elaboration.displacer of
+        Just (Primary ( oldVerbality, status )) ->
+            { elaboration | displacer = Just (Primary ( verbality, status )) }
 
         _ ->
             elaboration
 
 
-setDisplacedCounter : Maybe Counter -> Elaboration -> Elaboration
-setDisplacedCounter counter elaboration =
-    { elaboration | counter = counter }
+setElaborationDisplacerVerbalityString : String -> Elaboration -> Elaboration
+setElaborationDisplacerVerbalityString string elaboration =
+    case elaboration.displacer of
+        Just (Primary ( Do oldString ongoing passive, status )) ->
+            { elaboration | displacer = Just (Primary ( Do string ongoing passive, status )) }
+
+        _ ->
+            elaboration
 
 
-setDisplacedCounterProperty : Property -> Elaboration -> Elaboration
-setDisplacedCounterProperty property elaboration =
-    { elaboration | counter = Just (CounterProperty property) }
+toggleElaborationDisplacerVerbalityOngoing : Elaboration -> Elaboration
+toggleElaborationDisplacerVerbalityOngoing elaboration =
+    case elaboration.displacer of
+        Just (Primary ( Be ongoing, status )) ->
+            { elaboration | displacer = Just (Primary ( Be (not ongoing), status )) }
+
+        Just (Primary ( Do string ongoing passive, status )) ->
+            { elaboration | displacer = Just (Primary ( Do string (not ongoing) passive, status )) }
+
+        _ ->
+            elaboration
 
 
-setDisplacedCounterRelator : Relator -> Elaboration -> Elaboration
-setDisplacedCounterRelator relator elaboration =
-    { elaboration | counter = Just (CounterRelator relator) }
+toggleElaborationDisplacerVerbalityPassive : Elaboration -> Elaboration
+toggleElaborationDisplacerVerbalityPassive elaboration =
+    case elaboration.displacer of
+        Just (Primary ( Do string ongoing passive, status )) ->
+            { elaboration | displacer = Just (Primary ( Do string ongoing (not passive), status )) }
+
+        _ ->
+            elaboration
 
 
-setModality : Modality -> Elaboration -> Elaboration
-setModality modality elaboration =
-    { elaboration | modality = modality }
+setElaborationDisplacerStatus : Maybe Status -> Elaboration -> Elaboration
+setElaborationDisplacerStatus status elaboration =
+    case elaboration.displacer of
+        Just (Primary ( verbality, oldStatus )) ->
+            { elaboration | displacer = Just (Primary ( verbality, status )) }
+
+        _ ->
+            elaboration
 
 
-setTarget : Int -> Elaboration -> Elaboration
-setTarget target elaboration =
-    { elaboration | target = target }
+setElaborationDisplacerStatusString : String -> Elaboration -> Elaboration
+setElaborationDisplacerStatusString string elaboration =
+    case elaboration.displacer of
+        Just (Primary ( verbality, status )) ->
+            { elaboration | displacer = Just (Primary ( verbality, Just (Absolute string) )) }
+
+        _ ->
+            elaboration
 
 
-setPointer : Pointer -> Elaboration -> Elaboration
-setPointer pointer elaboration =
+setElaborationDisplacerStatusRelator : Relator -> Elaboration -> Elaboration
+setElaborationDisplacerStatusRelator relator elaboration =
+    case elaboration.displacer of
+        Just (Primary ( verbality, status )) ->
+            { elaboration | displacer = Just (Primary ( verbality, Just (Relative relator) )) }
+
+        _ ->
+            elaboration
+
+
+setElaborationDisplacerModality : Modality -> Elaboration -> Elaboration
+setElaborationDisplacerModality modality elaboration =
+    { elaboration | displacer = Just (Secondary modality) }
+
+
+setElaborationTarget : Int -> Elaboration -> Elaboration
+setElaborationTarget int elaboration =
+    { elaboration | target = int }
+
+
+setElaborationPointer : Pointer -> Elaboration -> Elaboration
+setElaborationPointer pointer elaboration =
     { elaboration | pointer = pointer }
 
 
-setPointerObject : Object -> Elaboration -> Elaboration
-setPointerObject object elaboration =
+setElaborationPointerObject : Object -> Elaboration -> Elaboration
+setElaborationPointerObject object elaboration =
     { elaboration | pointer = RelatedTo object }
 
 
-setPointerObjectString : String -> Elaboration -> Elaboration
-setPointerObjectString string elaboration =
+setElaborationPointerObjectString : String -> Elaboration -> Elaboration
+setElaborationPointerObjectString string elaboration =
     case elaboration.pointer of
         RelatedTo (Other plural sex oldString) ->
             { elaboration | pointer = RelatedTo (Other plural sex (maybe string)) }
@@ -425,13 +465,13 @@ setPointerObjectString string elaboration =
             elaboration
 
 
-setQuantifier : Maybe Quantifier -> Elaboration -> Elaboration
-setQuantifier quantifier elaboration =
+setElaborationQuantifier : Maybe Quantifier -> Elaboration -> Elaboration
+setElaborationQuantifier quantifier elaboration =
     { elaboration | quantifier = quantifier }
 
 
-setQuantifierInteger : String -> Elaboration -> Elaboration
-setQuantifierInteger string elaboration =
+setElaborationQuantifierInteger : String -> Elaboration -> Elaboration
+setElaborationQuantifierInteger string elaboration =
     let
         int =
             Result.withDefault 0 (String.toInt string)
@@ -439,6 +479,6 @@ setQuantifierInteger string elaboration =
         { elaboration | quantifier = Just (Integer int) }
 
 
-toggleOther : Elaboration -> Elaboration
-toggleOther elaboration =
+toggleElaborationOther : Elaboration -> Elaboration
+toggleElaborationOther elaboration =
     { elaboration | other = not elaboration.other }

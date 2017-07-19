@@ -16,37 +16,37 @@ import Theory.Types exposing (..)
 -}
 message : Model -> Result String Message
 message model =
-    plain model.object model.pivot model.counter model.balances
+    plain model.object model.verbality model.status model.balances
         |> andThen (elaborate model.elaborations)
 
 
 {-| Make a plain message from the core ingredients.
 -}
-plain : Object -> Pivot -> Maybe Counter -> List Balance -> Result String Message
-plain object pivot counter balances =
-    if verbalityEmpty pivot then
-        Err "please enter a verbality for your pivot"
-    else if propertyEmpty counter then
-        Err "please enter a property for your counter"
+plain : Object -> Verbality -> Maybe Status -> List Balance -> Result String Message
+plain object verbality status balances =
+    if verbalityEmpty verbality then
+        Err "please enter a verb for the verbality"
+    else if propertyEmpty status then
+        Err "please enter an adjective for the status"
     else
-        Ok (Plain ( object, ( pivot, counter, balances ) ))
+        Ok (Plain ( object, ( ( verbality, status ), balances ) ))
 
 
-verbalityEmpty : Pivot -> Bool
-verbalityEmpty pivot =
-    case pivot of
-        Do verbality ongoing passive ->
-            String.length verbality == 0
+verbalityEmpty : Verbality -> Bool
+verbalityEmpty verbality =
+    case verbality of
+        Do string ongoing passive ->
+            String.length string == 0
 
         _ ->
             False
 
 
-propertyEmpty : Maybe Counter -> Bool
-propertyEmpty counter =
-    case counter of
-        Just (CounterProperty property) ->
-            String.length property == 0
+propertyEmpty : Maybe Status -> Bool
+propertyEmpty status =
+    case status of
+        Just (Absolute string) ->
+            String.length string == 0
 
         _ ->
             False
@@ -74,28 +74,16 @@ elaborate elaborations message =
                     prior message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
-                MakePRACTICAL ->
-                    practical elaboration.modality message
-                        |> andThen (elaborate (List.drop 1 elaborations))
-
-                MakePROJECTIVE ->
-                    projective elaboration.modality elaboration.string1 message
-                        |> andThen (elaborate (List.drop 1 elaborations))
-
-                MakeEVASIVE ->
-                    evasive elaboration.modality elaboration.string1 message
-                        |> andThen (elaborate (List.drop 1 elaborations))
-
                 MakeDISPLACED ->
-                    displaced elaboration.pivot elaboration.counter message
-                        |> andThen (elaborate (List.drop 1 elaborations))
-
-                MakeREGULAR ->
-                    regular elaboration.string1 message
+                    displaced elaboration.displacer message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakePREORDAINED ->
-                    preordained elaboration.string1 message
+                    preordained elaboration.displacer elaboration.string1 message
+                        |> andThen (elaborate (List.drop 1 elaborations))
+
+                MakeREGULAR ->
+                    regular elaboration.displacer elaboration.string1 message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
                 MakeEXTENDED ->
@@ -142,42 +130,61 @@ prior message =
     Ok (PRIOR message)
 
 
-practical : Modality -> Message -> Result String Message
-practical modality message =
-    Ok (PRACTICAL modality message)
+displaced : Maybe Displacer -> Message -> Result String Message
+displaced displacer message =
+    case displacer of
+        Nothing ->
+            Err "please enter a displacer for the DISPLACED elaboration"
+
+        Just (Primary ( verbality, status )) ->
+            if verbalityEmpty verbality then
+                Err "please enter a verb for the DISPLACED verbality"
+            else if propertyEmpty status then
+                Err "please enter an adjective for the DISPLACED status"
+            else
+                Ok (DISPLACED (Primary ( verbality, status )) message)
+
+        Just (Secondary modality) ->
+            Ok (DISPLACED (Secondary modality) message)
 
 
-projective : Modality -> Maybe String -> Message -> Result String Message
-projective modality string message =
-    Ok (PROJECTIVE modality string message)
+preordained : Maybe Displacer -> Maybe String -> Message -> Result String Message
+preordained displacer string message =
+    case displacer of
+        Nothing ->
+            Ok (PREORDAINED displacer string message)
+
+        Just (Primary ( verbality, status )) ->
+            if verbalityEmpty verbality then
+                Err "please enter a verb for the PREORDAINED verbality"
+            else if propertyEmpty status then
+                Err "please enter an adjective for the PREORDAINED status"
+            else
+                Ok (PREORDAINED displacer string message)
+
+        Just (Secondary modality) ->
+            Ok (PREORDAINED displacer string message)
 
 
-evasive : Modality -> Maybe String -> Message -> Result String Message
-evasive modality string message =
-    Ok (EVASIVE modality string message)
+regular : Maybe Displacer -> Maybe String -> Message -> Result String Message
+regular displacer string message =
+    case displacer of
+        Nothing ->
+            Ok (REGULAR displacer string message)
+
+        Just (Primary ( verbality, status )) ->
+            if verbalityEmpty verbality then
+                Err "please enter a verb for the REGULAR verbality"
+            else if propertyEmpty status then
+                Err "please enter an adjective for the REGULAR status"
+            else
+                Ok (REGULAR displacer string message)
+
+        Just (Secondary modality) ->
+            Ok (REGULAR displacer string message)
 
 
-displaced : Pivot -> Maybe Counter -> Message -> Result String Message
-displaced pivot counter message =
-    if verbalityEmpty pivot then
-        Err "please enter a verb for your DISPLACED pivot"
-    else if propertyEmpty counter then
-        Err "please enter a property for your DISPLACED counter"
-    else
-        Ok (DISPLACED pivot counter message)
-
-
-regular : Maybe String -> Message -> Result String Message
-regular string message =
-    Ok (REGULAR string message)
-
-
-preordained : Maybe String -> Message -> Result String Message
-preordained string message =
-    Ok (PREORDAINED string message)
-
-
-extended : Maybe Duration -> Message -> Result String Message
+extended : Maybe String -> Message -> Result String Message
 extended duration message =
     case duration of
         Nothing ->
@@ -187,7 +194,7 @@ extended duration message =
             Ok (EXTENDED str message)
 
 
-scattered : Maybe Tally -> Message -> Result String Message
+scattered : Maybe String -> Message -> Result String Message
 scattered tally message =
     case tally of
         Nothing ->
@@ -201,7 +208,7 @@ haystack : Elaboration -> Result String Haystack
 haystack elaboration =
     case elaboration.string1 of
         Nothing ->
-            Err "please enter a category for your haystack"
+            Err "please enter a category for the haystack"
 
         Just string ->
             Ok ( string, elaboration.string2, elaboration.string3 )
@@ -216,7 +223,7 @@ multiplicity : Elaboration -> Haystack -> Result String Multiplicity
 multiplicity elaboration haystack =
     case elaboration.quantifier of
         Nothing ->
-            Err "please select a quantifier for your ENUMERATED elaboration"
+            Err "please select a quantifier for the ENUMERATED elaboration"
 
         Just quantifier ->
             Ok ( quantifier, elaboration.other, haystack )

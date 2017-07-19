@@ -1,47 +1,87 @@
 # Victor
 
-A model of the English language, thought of as a code for processing *messages* (structured arrangements of informational and stylistic choices) into *sentences* (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman. Read on for an outline of the theory, or play around with the current version at  [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
+A model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman, and with a gracious nod to Claude Shannon, the founder of information theory. Read on for an outline of the model and the philosophy behind it, and play around with the current version at [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
 
 ## 1. The Point
 
-Modern philosophical semantics treats languages as functions from strings to messages, routinely enquiring after "the rules that determine the meaning of a sentence". This forces its practitioners into an uncomfortable theoretical position, in which ambiguous sentences are, from the semantic point of view, impossible (because functions, of course, can assign only one output to every input). This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity.
+My project does not fit neatly into existing intellectual paradigms. Indeed, it seeks to subvert them. Dudman presented his work as a contribution to philosophical semantics, urging that this subject needed to be approached grammatically. But the code breaker's methodology is scarcely less radical in grammatical circles than it is in philosophical ones. (Many linguists, it is true, have embraced the code analogy; but the methodology that analogy suggests remains largely untested.) I am apt to suspect that philosophers missed the significance of Dudman's ideas largely as a result of failing to appreciate what he meant by "grammar". To make matters worse, there is a venerable tradition in analytic philosophy, going right back to Bertrand Russell, of viewing "surface" grammar as positively at odds with the "deeper" logical realities. Insofar as there was ever any truth to these worries, they simply reflected bad grammatical theory; and insofar as the grammar was sound, they reflected dubious logical and semantic speculation lazily divorced from empirical fact. For the code breaker, grammar, logic, and semantics are all facets of one and the same scientific enterprise.
 
-By modelling languages as codes, i.e. as functions in precisely the *opposite* direction, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. In other words, ambiguous languages are *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English function, we should be able to see precisely how and why various English ambiguities arise. See section 4 below for examples.
+The standard picture in philosophical circles nowadays is that the science of language divides into three parts. The first, *syntax*, seeks to uncover the rules governing the construction of grammatical or well-formed sentences. The second and third, *semantics* and *pragmatics*, attempt to articulate the meanings of the sentences thus constructed, and the relationship between these two sides of the communicative coin (the signs and what they signify). Semantics is the study of the meanings of sentences in general, on the assumption that there are such things, and that they are related functionally to the sentences that convey them. Pragmatics is the study of the meanings of sentences in context, something that is observed to go above and beyond their semantic or literal meaning. It is generally assumed that this layer of meaning is not functionally determined, and consequently not susceptible to the sort of formal treatment typical of philosophical semantics; the sentence determines a literal meaning, on this view, but that literal meaning then serves (together with other contextual factors) as evidence for the pragmatically enriched information.
+
+When philosophers think of grammar, they think of syntax; grammar, to their minds, is the study of how sentences are formed. Grammarians, however, are not generally in the habit of trying to specify formal syntactic rules of the sort philosophers routinely describe for their artificial languages (with the exception of practitioners of generative grammar, that is, who are in the habit of doing precisely this). Moreover, grammarians typically see their remit as extending beyond syntax; into morphology and phenology, for instance, but more importantly for present purposes into semantics as well. But the grammatical approach to semantics differs strikingly from the philosophical approach: where philosophers delight in general rules, and tend to downplay their exceptions (or perhaps shrug them off as problems for pragmatics), grammarians prefer to catalogue the several different uses of a given syntactic device, showing little interest in speculation about any deeper regularities that might underlie the surface variety.
+
+Nowhere is this lack of interest in underlying regularities more striking than in grammatical discussions of the meanings of the inflectional forms of the English verbs. The so-called "present tense" form, it is said, is used to talk about the present (`"I am hungry"`), the future (`"We are seeing him tomorrow"`), all time (`"Salt dissolves in water"`), and even no time at all (`"Two plus two equals four"`). The so-called "past tense" form, meanwhile, is observed in talk about the past (`"I was hungry"`), the future (`"We were seeing him tomorrow"`), and what is often diagnosed as "unreality", be it past, present, or future (`"If she had been here yesterday, ..."`/`"If she was here today, ..."`/`"If she came by here tomorrow, ..."`). This is all well and good, as far as it goes. But to the mind of a truly scientific enquirer, it does not go nearly far enough. What we want is a general theory that predicts and explains all of these intriguingly different uses.
+
+When we turn to the philosophers, alas, we are no less disappointed. They love their general rules, but conversely tend to show little interest in the tantalisingly varied data of English usage. Philosophical theories of tense and time achieve regularity simply by stipulation. And if these stipulations don't match the English language? Well, that just goes to show how messy natural languages are (more work for pragmatics, I suppose), how misleading the grammar of English is, and what a good thing it is that Frege and Russell set us on the track of developing clear and precise artificial languages in which to conduct our business instead.
+
+We can do better. And the way to do better is to embrace the code breaker's methodology. Philosophical semantics treats languages as functions from sentences to their (literal and context-independent) interpretations, with the inputs to those functions coming from the quite separate field of grammar or syntax. I suggest that they are approaching the problem the wrong way around. Languages should be modelled as functions in precisely the *opposite* direction, as codes for processing messages into sentences. Syntax and semantics would then no longer be separate subjects, but one and the same: the function that connects sentences to their interpretations is also the function that generates those sentences in the first place.
+
+By modelling the function in my preferred direction, therefore, we have a way of bringing semantic theories directly into contact with the observable data. These theories can no longer ignore or dismiss the words English speakers use to convey their messages, as problems for grammar or pragmatics. Consequently my approach promises the best of both worlds: the formal rigour and quest for general theory typical of modern philosophical semantics, but with the kind of attention to empirical detail that we find in contemporary grammatical enquiry. Nor is this an empty promise. Building on Dudman's work, I have developed a unified theory of tense and time in English, which reduces all of the surface variety observable in the use of the finite forms of the English verbs and modals to the interplay of just a handful of very simple rules. If Dudman and I are right, then English is neither the capricious system grammarians often describe, nor the irregular mess philosophers typically assume. It is an elegant, precise, and formally specifiable code.
+
+There is also another, more specific reason why the direction in which we model the semantic function matters, and it is based on the phenomenon of ambiguity. The decision to treat the message as a function of the sentence forces us into an uncomfortable theoretical position, whereby ambiguous sentences are, from the semantic point of view, quite simply impossible. This may be fine for unambiguous artificial languages, but since the sentences of natural languages are typically rife with ambiguity, philosophers have no option but to offer syntactic or pragmatic accounts of this - as they see it - messy and unwelcome feature of the real world. I argue (though not here) that these accounts are unsatisfactory. What we need are *semantic* explanations of ambiguity. By modelling languages as codes, i.e. as functions from messages to sentences, semantic explanations of ambiguity become possible. The explanation in general is that the encoding function of an ambiguous language is not one-to-one, but many-to-one. Ambiguous languages are thus *lossy* codes, which do not preserve in their output strings all of the information in their input messages. More than this, however, by articulating the English encoding function, we are able to see precisely how and why various English ambiguities arise.
+
+(The obverse of ambiguity is the phenomenon of stylistic variance, whereby the same information is encoded in more than one sentence. Stylistic variance includes optional abbreviations (`"She is not hungry"`/`"She's not hungry"`/`"She isn't hungry"`), word order (`"He left yesterday"`/`"Yesterday he left"`), and a few other things as well. It poses no threat to the code analogy. It simply means that we must build stylistic as well as informational choices into the code. The better to focus on the latter for now, my model does not yet include any stylistic variables, insisting on just one "canonical" output for every infomational input. In a later iteration, however, I do intend to add some stylistic arguments to my function.)
 
 ## 2. The Source
 
 My algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the gh-pages branch, for easy integration with [GitHub Pages](https://pages.github.com/). The `src` directory contains the main program module, which simply pulls everything together (nothing to see there), and two subdirectories, `Interface` and `Theory`. The former directory contains all the modules responsible for generating the web page users see, for keeping track of user input, and for piecing that input together into a `Message` variable. It is the modules in the latter directory that are potentially of theoretical interest, since they describe what a `Message` variable looks like, and define the encoding functions that convert these variables into strings.
 
-There is no need to go into detail about the `Theory` modules here. Anyone interested in the nuts and bolts should simply read the code itself. It is internally documented, and is intended to be intelligible to anyone of a suitably logical turn of mind (although obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then glance at the `Words` module. This latter contains a few small functions for generating words and their various forms, not very interesting in itself, but perhaps helpful in serving to solidify an understanding of the grammatical terminology that I use.
+There is no need to go into detail about the `Theory` modules here. Anyone interested in the nuts and bolts should simply read the code itself. It is internally documented, and is intended to be intelligible to anyone of a suitably logical turn of mind (although obviously some experience of functional programming would help). Indeed, I consider it a major selling point of my theory that it is computationally very simple, with only as much complexity as the empirical data demand. Readers should start with the `Types` module for my account of `Messages` (and their components), and then glance at the `Words` module. This latter contains a few small functions for generating words and their various forms. It is not very interesting in itself, but is perhaps helpful in serving to solidify an understanding of the grammatical terminology that I use (see section 3 below).
 
-Next, readers should look at the `Sentences` module, which contains the encoding function itself, the function for processing messages into sentences. This function divides into two stages. In the first stage, the message is validated, and the variables that have a bearing on the output sentence are extracted; in the second stage, those variables are used to generate the sentence. The second stage is implemented in the `Sentences` module itself (with help from the little functions exposed by the `Words` module). The first stage is handled by the separate `Messages` module.
+Next, readers should look at the `Sentences` module, which contains the encoding function itself, the function for processing messages into sentences. This function divides into two stages. In the first stage, the message is validated, and the variables that have a bearing on the output sentence are extracted; in the second stage, those variables are used to generate the sentence itself. The second stage is implemented directly within the `Sentences` module (with help from the little functions exposed by the `Words` module). The first stage is handled by the separate `Messages` module.
 
-I have not yet written any tests, but there is a stub `test` directory as a placeholder for later development in this direction. From the point of view of the theory (never mind the interface), it would be helpful to have tests that run various `Message` variables through my encoding function, and check that the resulting strings are as they should be.
+I have not yet written any tests, but there is a stub `test` directory as a placeholder for later development in this direction. From the point of view of the theory (never mind the interface), it would be helpful to have tests that run various message variables through my encoding function, and check that the resulting strings are as they should be.
 
-## 3. The Theory Part 1/2: The Nucleus
+## 3. Grammatical Terminology
 
-<<<<<<< Updated upstream
-The overarching hypothesis behind my model is that every atomic English message is made up out of a series of zero or more *elaborations* applied to a core *nucleus*. (The model does not currently cover compound messages, but will in due course be expanded in this direction; the working assumption is that these too can be treated as the result of further elaborations, but elaborations that introduce a second nucleus into the message.) Consequently my theory as a whole consists of two interlocking theories: a theory of plain English messages (i.e. those messages composed of an unelaborated nucleus), and a theory of English elaborations. Naturally enough, I will start with the first.
-=======
-My labels for these forms are idiosyncratic. People will likely know the third direct form as the *reflexive* form, for example, and the first relative form as the *possessive* form. I dislike the second of these terms, since the first relative form does not signal the relation of possession in particular, but simply the idea of a relation more generally (see section 5.7 below). The first, however, seems harmless enough. Nevertheless, I have a general preference for bland terminology that doesn't assume or imply too much at the level of interpretation.
->>>>>>> Stashed changes
+I deploy a small amount of grammatical terminology, most of which I expect to be familiar, but some of which is a little idiosyncratic. It is simplest to introduce this all up front. Semantic terminology will be introduced in situ in sections 4 and 5 below.
 
-The nucleus of every English message is an ordered pair, containing an *object* and a *condition*, and a plain message affirms the present satisfaction of the condition by the object:
+First, I divide English lexemes into a handful of categories, mostly standard. There are just a couple of things to note: (i) I do not treat the *modals* as a subset of the *verbs*, but as belonging to a distinct category all of their own (more on this distinction below); and (ii) I distinguish between *articles* and *determiners*, and in a somewhat unusual way (I classify the so-called "indefinite article" as a determiner). Here are the categories I will be assuming, with some examples:
 
-<<<<<<< Updated upstream
-    type alias Nucleus =
-        ( Object, Condition )
+| Category    | Examples                                                                                           |
+| ----------- | -------------------------------------------------------------------------------------------------- |
+| Preposition | `"at"`, `"by"`, `"from"`, `"in"`, `"on"`, `"with"`, ...                                            |
+| Article     | `"the"`, **`"this"`**, **`"that"`**                                                                |
+| Determiner  | **`"a"`**, `"any"`, `"all"`, `"each"`, `"every"`, `"some"`, ...                                    |
+| Noun        | **`"car"`**, **`"cat"`**, **`"frog"`**, **`"treasure"`**, **`"water"`**, ...                       |
+| Pronoun     | **`"I"`**, **`"you"`**, **`"he"`**, **`"she"`**, **`"it"`**, **`"we"`**, **`"you"`**, **`"they"`** |
+| Verb        | **`"be"`**, **`"have"`**, **`"do"`**, **`"eat"`**, **`"laugh"`**, **`"sing"`**, ...                |
+| Modal       | **`"will"`**, **`"shall"`**, **`"can"`**, **`"may"`**, `"must"`, `"ought"`, `"need"`, `"dare"`     |
+| Adjective   | `"angry"`, `"happy"`, `"hungry"`, `"green"`, `"red"`, `"silly"`, ...                               |
+| Adverb      | `"quickly"`, `"quietly"`, `"sometimes"`, `"occasionally"`, `"often"`, ...                          |
 
-For example, and using some very crude representations of objects and conditions for now:
+I refer to lexemes that have more than one form in **boldface**, using ordinary weighting to refer to their individual forms. Thus the determiner **`"a"`** has the two (informationally equivalent) forms `"a"` and `"an"`. The article **`"this"`** has the two forms `"this"` (singular) and `"these"` (plural), and the article **`"that"`** has the two forms `"that"` (singular) and `"those"` (plural). The nouns likewise all have a singular and a plural form (`"car"`/`"cars"`, `"frog"`/`"frogs"`, etc.).
 
-    ( Victor, love Grannie )
-        -> "Victor loves Grannie."
-    
-    ( Grannie, live at Cockroach Lane )
-        -> "Grannie lives at Cockroach Lane."
+I count eight pronouns, and label them in the standard way: *first*, *second*, and *third person*, each either *singular* or *plural* (which makes six), and then an additional two in the third person singular, distinguishing male and female from neuter. Thus:
 
-There should be nothing surprising here. The object/condition distinction at the level of the message corresponds exactly to the familiar subject/predicate distinction at the level of the sentence. In this respect, my theory is positively boring. Things get more interesting as we start to chip away at the nature of objects and conditions themselves.
-=======
+| Number   | Person | Pronoun                 |
+| -------- | ------ | ----------------------- |
+| Singular | First  | `"I"`                   |
+|          | Second | `"you"`                 |
+|          | Third  | `"he"`, `"she"`, `"it"` |
+| Plural   | First  | `"we"`                  |
+|          | Second | `"you"`                 |
+|          | Third  | `"they"`                |
+
+Since the old second person singular `"thou"` was usurped by its corresponding plural pronoun `"you"`, the latter is now ambiguous. It is simplest to distinguish two pronouns here, both spelt the same.
+
+The eight pronouns come in five different forms, three *direct* and two *relative*. The distinction between the two second person pronouns, note, reveals itself in the third direct form (`"yourself"` vs. `"yourselves"`):
+
+| Pronoun      | Direct 1 | Direct 2 | Direct 3       | Relative 1 | Relative 2 |
+| ------------ | -------- | -------- | -------------- | ---------- | ---------- |
+| **`"I"`**    | `"I"`    | `"me"`   | `"myself"`     | `"my"`     | `"mine"`   |
+| **`"you"`**  | `"you"`  | `"you"`  | `"yourself"`   | `"your"`   | `"yours"`  |
+| **`"he"`**   | `"he"`   | `"him"`  | `"himself"`    | `"his"`    | `"his"`    |
+| **`"she"`**  | `"she"`  | `"her"`  | `"herself"`    | `"her"`    | `"hers"`   |
+| **`"it"`**   | `"it"`   | `"it"`   | `"itself"`     | `"its"`    | `"its"`    |
+| **`"we"`**   | `"we"`   | `"us"`   | `"ourselves"`  | `"our"`    | `"ours"`   |
+| **`"you"`**  | `"you"`  | `"you"`  | `"yourselves"` | `"your"`   | `"yours"`  |
+| **`"they"`** | `"they"` | `"them"` | `"themselves"` | `"their"`  | `"theirs"` |
+
+My labels for these forms are idiosyncratic. People will likely know the third direct form as the "reflexive" form, for example, and the first relative form as the "possessive" form. I dislike the second of these terms, since the first relative form does not signal the relation of possession in particular, but simply the idea of a relation more generally (see section 5.9 below). The first, however, seems harmless enough. Nevertheless, I have a general preference for bland terminology that doesn't assume or imply too much at the level of interpretation.
+
+This general preference extends itself to my labels for the various forms of the verbs. The English verbs (apart from **`"be"`**, which I will come to in a moment) all come in five forms, a *base* form, two *finite* forms, and two *participle* forms. For example:
+
 | Verb          | Base      | Finite 1    | Finite 2   | Participle 1 | Participle 2 |
 | ------------- | --------- | ----------- | ---------- | ------------ | ------------ |
 | **`"do"`**    | `"do"`    | `"does"`    | `"did"`    | `"doing"`    | `"done"`     |
@@ -54,20 +94,20 @@ There should be nothing surprising here. The object/condition distinction at the
 
 For regular verbs, and for some otherwise irregular ones as well, the second finite form and the second participle form are identical (a fact that must surely have some semantic significance). Nevertheless, it makes for a simpler model if we draw the distinction for every verb.
 
-At first blush, readers will recognise the first and second finite forms as the "present tense" and "past tense" forms respectively. I strongly oppose this loaded terminology, since it is a matter of considerable controversy what these forms signify, and whether it is (or whether it is always) temporal information. It is better to settle at the outset on some semantically neutral labels. I said *at first blush*, moreover; in fact, the "present tense" standardly refers to a *dual* form, which (in my terms) sometimes looks like the base form, and sometimes looks like the first finite form. There is of course a very natural reason for this grouping: `"I like you"` and `"He likes you"` encode messages that differ only in respect of who is doing the liking. But the fact that the base form can be used in this way, as informationally equivalent to the first finite form, is itself very striking, and it demands an explanation. Talk of a dual "present tense" form serves only to hide this curious feature of English; as though the `"like"` in `"I like you"` was not really the base form of the verb at all, but a finite form that merely happens to look like the base form.
+At first blush, readers will recognise the first and second finite forms as the "present tense" and "past tense" forms respectively. I strongly oppose this loaded terminology, since it is a matter of considerable controversy what these forms signify, and whether it is (or whether it is always) temporal information. Somewhat perversely, I defend the (uncommon) view that it *is* always temporal information. Nevertheless, it is better to settle at the outset on some semantically neutral labels. I said *at first blush*, moreover; in fact, the "present tense" standardly refers to a dual form, which (in my terms) sometimes looks like the base form, and sometimes looks like the first finite form. There is of course a very natural reason for this grouping: `"I like you"` and `"He likes you"` encode messages that differ only in respect of who is doing the liking. But the fact that the base form can be used in this way, as informationally equivalent to the first finite form, is itself very striking, and it demands an explanation. Talk of a dual "present tense" form serves only to hide this curious feature of English; as though the `"like"` in `"I like you"` was not really the base form of the verb at all, but a finite form that merely happens to look like the base form.
 
-The uniquely awkward verb **`"be"`** is like any other verb in its base form and participle forms (`"be"`, `"being"`, `"been"`), but instead of two finite forms it has five: `"am"`, `"is"`, `"are"`, `"was"`, and `"were"`. The second of these corresponds to the first finite form of other verbs, while the last two correspond to the second. The first and third have no exact analogues in the other verbs, but correspond to the familiar "present tense" use of the base form. I expect an explanation of this verb's uniquely irregular behaviour. In other words, I expect an account of the English code to locate the meaning of **`"be"`** alongside the meanings of the other verbs, but also somewhat distinct from them; there ought to be some underlying difference that sustains the irregularity.
+The uniquely awkward verb **`"be"`** is like any other verb in its base and participle forms (`"be"`, `"being"`, `"been"`), but instead of two finite forms it has five: `"am"`, `"is"`, `"are"`, `"was"`, and `"were"`. The second of these corresponds to the first finite form of other verbs, while the last two correspond to the second. The first and third have no exact analogues in the other verbs, but correspond to the familiar "present tense" use of the base form. I expect an explanation of this verb's uniquely irregular behaviour. In other words, I expect an account of the English code to locate the meaning of **`"be"`** alongside the meanings of the other verbs, but also somewhat distinct from them; there ought to be some underlying difference that sustains the irregularity.
 
-The English modals, finally, each have one finite form, and half of them have two:
+The English modals, finally, each have one finite form, and half of them have two (I classify `"ought"` as a *second* finite form on semantic grounds; see sections 5.6 and 5.7 below):
 
-| Modal         | Finite 1  | Finite 2   |
+| Modal	        | Finite 1  | Finite 2   |
 | ------------- | --------- | ---------- |
 | **`"will"`**  | `"will"`  | `"would"`  |
 | **`"shall"`** | `"shall"` | `"should"` |
 | **`"may"`**   | `"may"`   | `"might"`  |
 | **`"can"`**   | `"can"`   | `"could"`  |
 | `"must"`      | `"must"`  | -          |
-| `"ought"`     | `"ought"` | -          |
+| `"ought"`     | -         | `"ought"`  |
 | `"need"`      | `"need"`  | -          |
 | `"dare"`      | `"dare"`  | -          |
 
@@ -102,30 +142,24 @@ The various (apparently) non-present uses of the base and first finite form will
 
 ```elm
 "Two plus two equals four."
+
 "A vixen is a female fox."
 ```
 
-I diagnose these as plain messages (actually the second is elaborated, but not in such a way as to affect its temporal components; see section 5.7). Consequently I insist that they are still affirmations about the *present*. It is simply that sensible readers *ignore* this temporal information, knowing full well that it is irrelevant. The alternative to this refreshingly straightforward account is to posit a class of *genuinely* timeless affirmations in English, which are encoded (ambiguously) in the very same sentences that encode their corresponding present affirmations. But this - surprisingly popular - view is needlessly complicated, and not supported by the data. Why introduce a whole new class of message, and a whole new subroutine to encode it, when we can simply use the resources already in place? The question is intended to be rhetorical; but in any case, the fact that the output sentences are identical indicates fairly clearly that we *didn't* do this.
->>>>>>> Stashed changes
+I diagnose these as plain messages (actually the second is elaborated, but not in such a way as to affect its temporal components; see section 5.9). Consequently I insist that they are still affirmations about the *present*. It is simply that sensible readers *ignore* this temporal information, knowing full well that it is irrelevant. The alternative to this refreshingly straightforward account is to posit a class of *genuinely* timeless affirmations in English, which are encoded (ambiguously) into the very same sentences that encode their corresponding present affirmations. But this surprisingly popular view is needlessly complicated, and not supported by the data. Why introduce a whole new class of message, and a whole new subroutine to encode it, when we can simply use the resources already in place? The question is intended to be rhetorical; but in any case, the fact that the output sentences are identical indicates fairly clearly that we *didn't* do this.
 
-### 3.1. Objects
+That the present is the default option within the English system perhaps explains why we use it in talking about abstract matters for which time is irrelevant. (Though I dare say this would have been the obvious choice anyway.) More significantly, it might help to explain the attraction to the view that such messages really are timeless, an attraction that appears to have been widely felt, in spite of the entirely unnecessary computational complexity that this hypothesis implies. It is easier to ignore information that simply comes by default, than to ignore information that needs to be actively selected.
 
-There are three types of objects available in English, each of which comes in either a singular or plural form (represented in my model by a boolean argument, `False` for singular and `True` for plural):
+### 4.1. Objects
 
-    type Object
-        = Speaker Bool
-        | Hearer Bool
-        | Other Bool (Maybe Sex) (Maybe String)
-    
-    type Sex
-        = Male
-        | Female
+There are three types of objects available in English, each of which comes in either singular or plural (represented in my model by a boolean argument, `False` for singular and `True` for plural):
 
-The `Speaker` and `Hearer` objects are encoded in the pronouns `"I"`, `"we"`, and `"you"`. (`"You"` is ambiguous between the singular and the plural, though the singular and plural `Hearer` objects do distinguish themselves in other contexts, when they show up as `"yourself"` and `"yourselves"` respectively.) By default, the `Other` object is encoded in the pronouns `"it"`, `"he"`, `"she"`, and `"they"` (I trust the influence of the optional `Sex` argument here is self-explanatory). In the case of `Other` objects only, English has room for an optional string argument. This argument is intended to house a proper name (`"Victor"`, `"Grannie"`, `"France"`, etc.), which overwrites the default pronoun. There is no restriction in the English code on what can count as a proper name; the only rule is that it should begin with a capital letter.
+```elm
+type Object
+    = Speaker Bool
+    | Hearer Bool
+    | Other Bool (Maybe Sex) (Maybe String)
 
-<<<<<<< Updated upstream
-When referring to objects in what follows, I will adopt the following abbreviating conventions. Rather than write `Speaker False` and `Speaker True`, I will write `Speaker` and `Speakers` respectively; similarly for `Hearer(s)` and `Other(s)`. When the optional sex and string arguments are not present, I will simply omit them, instead of explicitly writing `Nothing`. And when they are present, I will simply write them on their own, as `Male` or `Female` instead of `Just Male` or `Just Female`. Finally, when the sex variable is present, I will not bother to write `Other` in front of it. For example:
-=======
 type Sex
     = Male
     | Female
@@ -135,8 +169,7 @@ The `Speaker` and `Hearer` objects are encoded in the first and second person pr
 
 (For readers unfamiliar with this style of programming, a `Maybe x` variable can take one of two values: `Nothing` or `Just x`. The `Nothing` value acts like the `null` value used in some other programming languages. The difference is that, in languages that allow `null` as a value, *any* variable can take that value, making every value effectively optional. In Elm, as in Haskell, optional variables must be explicitly defined as such with `Maybe`.)
 
-When referring to objects in what follows, I will adopt the following abbreviating conventions. Rather than write `Speaker False` and `Speaker True`, I will write `Speaker` and `Speakers` respectively; similarly for `Hearer(s)` and `Other(s)`. When the optional sex and string arguments are not present, meanwhile, I will omit them, instead of explicitly writing `Nothing`. And when they are present, I will write them on their own, as `Male` or `Female` instead of `Just Male` or `Just Female`. Finally, when the sex variable is present, I will not bother to write `Other` in front of it. For example:
->>>>>>> Stashed changes
+When referring to objects in what follows, I will adopt the following abbreviating conventions. Rather than write `Speaker False` and `Speaker True`, I will write `Speaker` and `Speakers` respectively; similarly for `Hearer(s)` and `Other(s)`. When the optional sex and string arguments are not present, meanwhile, I will simply omit them, instead of explicitly writing `Nothing`. And when they are present, I will write them on their own, as `Male` or `Female` instead of `Just Male` or `Just Female`. Finally, when the sex variable is present, I will not bother to write `Other` in front of it. For example:
 
 | Abbreviation       | Full Meaning                                 |
 | ------------------ | -------------------------------------------- |
@@ -146,29 +179,32 @@ When referring to objects in what follows, I will adopt the following abbreviati
 | `Female "Grannie"` | `Other False (Just Female) (Just "Grannie")` |
 | `Others`           | `Other True Nothing Nothing`                 |
 
-<<<<<<< Updated upstream
-I hope these conventions are all intuitive and easy to understand. The point of adopting them is just to make the examples that follow easier on all of us. I will introduce similar conventions with regard to the writing out of conditions, once we have started unpacking their component parts.
-=======
 I hope these conventions are all intuitive and easy to understand. The point of adopting them is to make the examples that follow easier on all of us. I will adopt similar conventions with regard to the writing out of conditions, once I start unpacking their component parts.
 
-### 4.2. Conditions, part 1/2: Pivots and Counters
+Objects are always encoded in either pronouns or proper names. Nouns and noun phrases - `"water"`, `"some water"`, `"a glass of water"`, `"that glass of water"`, `"her glass of water"`, etc. - are accounted for by my theory of elaborations. The elaborations responsible for these things will not be introduced until the very end of section 5, after I have introduced all of the other elaborations in my model. (There is no particlar reason for this; it is simply that something has to come last.) In the meantime, I will want to make use of examples that are not restricted to just pronouns and proper names. To this end, I will misrepresent nouns and noun phrases as proper names, refering to objects like `Other "water"` or `Other "a glass of water"`. The fudge is harmless in the contexts in which I use it (where what matters are the other elaborations under scrutiny, not the elaborations responsible for the nouns or noun phrases), and the proper analysis of these things will be given in section 5.9.
 
-English conditions, in my model, break down into a *pivot*, an optional *counter*, and a (possibly empty) list of *balances*:
+### 4.2. Conditions, part 1/3: Statuses
+
+English conditions, in my model, break down into a *pivot* and a (possibly empty) list of *balances*:
 
 ```elm
 type alias Condition =
-    ( Pivot, Maybe Counter, List Balance )
+    ( Pivot, List Balance )
 ```
 
-It is perhaps simplest to start in the middle here, with the idea of a counter, which may take one of two values. The first type of value is a *property*, encoded in an adjective (e.g. `"happy"`, `"hilarious"`, `"hungry"`); the second type of value is what I call a *relator*, encoded in a preposition (e.g. `"at"`, `"by"`, `"in"`, `"with"`):
+We will look at balances in section 4.4. First, let us start to examine pivots, which break down further into a *verbality* and an optional *status*:
 
 ```elm
-type Counter
-    = CounterProperty Property
-    | CounterRelator Relator
+type alias Pivot =
+    ( Verbality, Maybe Status )
 
-type alias Property =
-    String
+type Verbality
+    = Be Bool
+    | Do String Bool Bool
+
+type Status
+    = Absolute String
+    | Relative Relator
 
 type Relator
     = About
@@ -181,113 +217,100 @@ type Relator
     ...
 ```
 
-There are 31 relators in my model at present (I didn't bother listing them all above). This list is incomplete, but it accounts for many common prepositions. My model does not currently contain any properties or adjectives, meanwhile, and consequently the *property* type is just an alias for a string. What this means in practice is that users are obliged to encode their properties for themselves, inputting the resulting adjective directly into the system. I call values for which this is the case *unearthed* variables; as we will see, there are a few more of these in my model. I will say something more general about unearthed variables in section 4.4 below.
+It is perhaps simplest to begin with statuses, saving verbalities for the next section. Statuses, then, may take one of two values, either `Absolute` or `Relative`. `Absolute` statuses are for *properties*, encoded in adjectives (`"happy"`, `"hilarious"`, `"hungry"`, etc.). My model does not currently contain any properties or adjectives, however, and consequently the `Absolute` value simply takes a string argument. What this means is that users are obliged to encode their properties for themselves, inputting the resulting adjective directly into the system. I call values for which this is the case *unearthed* variables; as we will see, there are a few such unearthed variables in my model. I will say something more general about this in section 4.5 below.
 
-Going back to the start of the condition, we have the pivot. The pivot determines the choice of verb at the start of the predicate, and can take one of two values:
+`Relative` statuses are for what I call *relators*, which are encoded in prepositions (`"at"`, `"by"`, `"in"`, `"with"`, etc.). There are 31 relators in my model at present (I didn't bother listing them all above). This list is incomplete, but it accounts for many common prepositions. Relators will reappear in the context of balances; see section 4.4.
+
+### 4.3. Conditions, part 2/3: Verbalities
+
+Going back to the start of the pivot, we have the verbality. The verbality determines the choice of verb at the start of the predicate, and can take one of two values:
 
 ```elm
-type Pivot
+type Verbality
     = Be Bool
-    | Do Verbality Bool Bool
-
-type alias Verbality =
-    String
+    | Do String Bool Bool
 ```
 
-The `Be` pivot, unsurprisingly, triggers selection of the verb **`"be"`**, with the form of this verb being determined by the main object of the nucleus, according to the following schema:
+The `Be` verbality, unsurprisingly, triggers selection of the verb **`"be"`**, with the form of this verb being determined by the main object of the nucleus, according to the following schema:
 
 | Object      | Form    |
 | ----------- | ------- |
-| Speaker     | `"am"`  |
-| Other       | `"is"`  |
+| `Speaker`   | `"am"`  |
+| `Other`     | `"is"`  |
 | *otherwise* | `"are"` |
 
-The boolean argument this pivot takes indicates whether or not the condition as a whole is *ongoing*; when set to true, this introduces the participle form `"being"` immediately after the finite form as determined by the object. It underlies the difference between, for example, `"He is silly"` and `"He is being silly"`.
+The boolean argument this pivot takes indicates whether or not the condition as a whole is *ongoing*; when set to true, this introduces the participle form `"being"` immediately after the finite form as determined by the object. It underlies the difference between, for example, `"He is silly"` and `"He is being silly"`. (The adjective `"silly"`, in these examples, comes from the status.)
 
-If there is an English condition comprising nothing other than the `Be` pivot, then it is the condition of existence; as in the standard translation of Descartes' famous claim, `"I think, therefore I am"`. For what it's worth, I myself find it hard to interpret sentences like `"I am"` or `"They are"` as encoding existential claims. Such semi-sentences seem to me to demand the response, *are what?* And so I am tempted to say that there is no English condition comprising the `Be` pivot on its own, and that the proper translation of Descartes is `"... therefore I exist"`. But my intuition is not shared by all English speakers, and I needn't insist on the point.
+If there is an English condition comprising nothing other than the `Be` verbality (i.e. a pivot with no status, and an empty list of balances), then it is the condition of existence; as in the standard translation of Descartes' famous claim, `"I think, therefore I am"`. For what it's worth, I myself find it hard to interpret sentences like `"I am"` or `"They are"` as encoding existential claims. Such semi-sentences seem to me to demand the response, *are what?* And so I am tempted to say that there is no English condition comprising the `Be` verbality on its own, and that the proper translation of Descartes is `"... therefore I exist"`. But my intuition is not shared by all English speakers, and I needn't insist on the point.
 
-At any rate, there are certainly plenty of English conditions made up of the `Be` pivot together with a counter. When the counter is a property, the condition is that of having that property:
+At any rate, there are certainly plenty of English conditions made up of the `Be` verbality together with a status. When the status is absolute (i.e. a property), the condition is that of having that property:
 
 ```elm
-( Speaker, ( Be, "hungry" ) )
+( Speaker, Be, "hungry" )
     -> "I am hungry."
 
-( Hearer, ( Be, "silly" ) )
+( Hearer, Be, "silly" )
     -> "He is silly."
 
-( Others, ( Be, "beautiful" ) )
+( Others, Be, "beautiful" )
     -> "They are beautiful."
 ```
 
-When the counter is a relator, the condition is that of being in a certain *standing*, a notion that I intend here to blur the boundary between *location* and *status*. For example:
+When the status is relative (i.e. a relator), the condition is that of being in a certain *standing*. For example:
 
 ```elm
-( Speaker, ( Be, Out ) )
+( Speaker, Be, Out )
     -> "I am out."
 
-( Female "Grannie", ( Be, Up ) )
+( Female "Grannie", Be, Up )
     -> "Grannie is up."
 
-( Speakers, ( Be, Over ) )
+( Speakers, Be, Over )
     -> "We are over."
 ```
 
-(I am adopting some more abbreviating conventions here: Instead of `Just (CounterProperty "hungry")` I write `"hungry"`, and instead of `Just (CounterRelator Out)` I write `Out`. When there is no counter, I omit it, instead of writing `Nothing`. When there are no balances, similarly, I omit the list variable altogether, instead of writing `[]`. When the *ongoing* boolean argument is `False`, finally, I omit it, and when it is `True` I write it as `Ongoing` instead, so readers don't have to remember what its purpose is.)
+I am adopting some more abbreviating conventions here. To being with, I do not bother with brackets around either the condition or its underlying pivot, since there is no possibility of confusion, and including them would therefore make things longer and harder to read for no reason. And when the list of balances is empty (as in all the examples above) I will omit it, instead of explicitly writing `[]`. When the *ongoing* boolean argument to the `Be` verbality is `False` (as above), I omit it; when it is `True`, I will write it as `Ongoing` instead, so that readers don't have to remember what its purpose is. With statuses, finally, I will omit them when they are absent (instead of explicitly writing `Nothing`), and just write the crucial value when they are present, since there is once again no possibility of confusion. Thus I write `"hungry"` instead of `Just (Absolute "hungry")`, or `Out` instead of `Just (Relative Out)`.
 
-Not every condition involving the `Be` pivot can be made ongoing. It is only those for which some intelligible distinction can be made. `"I am being up"` is not a sentence of English, presumably because there is no way in which its interpretation might differ from that of `"I am up"`. In contrast, `"He is being silly"` is perfectly fine, and marks an important informational difference from `"He is silly"`. The former conveys something about his present behaviour, while the latter conveys something about his present character.
+Not every condition involving the `Be` verbality can be made ongoing. It is only those for which some intelligible distinction can be made. `"I am being up"`, for example, is not a sentence of English, presumably because there is no way in which its interpretation might differ from that of `"I am up"`. In contrast, `"He is being silly"` is perfectly fine, and marks an important informational difference from `"He is silly"`. The former conveys something about his present behaviour, while the latter conveys something about his present character.
 
-The `Do` pivot is essentially my catch-all variable for every other pivot expressible in the English language. The *verbality* variable is intended to capture the choice that determines the verb. For now it is another unearthed variable like the *property* variable; i.e. it is just an alias for a string. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). The form is then determined by the object: the first finite form in the case of the `Other` object singular, and the base form otherwise.
+The `Do` verbality is responsible for all other English verbs. As with properties and adjectives, however, my model does not currently include any of these options itself. For now users are obliged - except in the special case of `Be` - to encode the core of their verbalities for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). The form is then determined by the object: the first finite form in the case of the `Other` object singular, and the base form otherwise.
 
-Following the verbality, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the `Be` pivot; this underlies the difference between, for example, `"She lives"` and `"She is living"`. The second boolean argument, not available for the `Be` pivot, indicates whether the condition as a whole is *passive* or not; this accounts for the difference between, for example, `"She eats"` or `"She is eating"` on the one hand, and `"She is eaten"` or `"She is being eaten"` on the other.
+Following the string argument of the `Do` verbality, there is a boolean argument representing whether or not the condition in question is ongoing, exactly as it does with the `Be` verbality; this underlies the difference between, for example, `"She lives"` and `"She is living"`. The second boolean argument, not available for the `Be` verbality, indicates whether or not the condition as a whole is *passive*; this accounts for the difference between, for example, `"She eats"` or `"She is eating"` on the one hand, and `"She is eaten"` or `"She is being eaten"` on the other.
 
-Some `Do` pivots (though not many) can support properties much like the `Be` pivot; for example:
+Some `Do` verbalities (though not many) can pair up with properties much like the `Be` pivot; for example:
 
 ```elm
-( Female, ( Do "seem", "hungry" ) )
+( Female, Do "seem", "hungry" )
     -> "She seems hungry."
->>>>>>> Stashed changes
 
-### 3.2. Conditions Part 1/2: Balances
+( Others, Do "look", "serious" )
+    -> "They look serious."
 
-English conditions, in my model, break down into a *pivot* and a (possibly empty) list of *balances*:
+( Female "Grannie", Do "become" Ongoing, "ridiculous" )
+    -> "Grannie is becoming ridiculous."
+```
 
-    type alias Condition =
-        ( Pivot, List Balance )
+Rather more `Do` verbalities can pair up with relators; for example:
 
-Very approximately, and just to set us of on the right foot, the pivot is what gets encoded in the verb at the start of the predicate, while the balances (if any) are what get encoded in the words following that verb. Balances typically are or include additional objects, which I will refer to as *balancing* objects, as opposed to the *main* object that resides next to the condition in the nucleus itself. Balancing objects are variables of exactly the same type as the main object, though in this position they fetch up in different forms of the corresponding pronoun: `"him"` instead of `"he"`, `"her"` instead of `"she"`, `"us"` instead of `"we"`, and so on.
+```elm
+( Male, Do "go" Ongoing, Out )
+    -> "He is going out."
 
-I will examine pivots more closely in the next section. For now, we can continue with the approximation that they are encoded in the verb at the start of the predicate, and I will restrict myself to examples for which this is true. Since objects are already familiar, it will perhaps be easier to unpack the notion of a balance first.
+( Hearer, Do "look" Ongoing, Down )
+    -> "You are looking down."
 
-A balance consists of either a *counter* or a *weight* (or both), where the counter is something encoded in a preposition, and a weight is either a pointer back to the main object of the nucleus, or a distinct object:
+( Female "Grannie", Do "fall" Ongoing, Over )
+    -> "Grannie is falling over."
+```
 
-<<<<<<< Updated upstream
-    type alias Balance =
-        ( Maybe Counter, Maybe Weight )
-    
-    type Counter
-        = About
-        | Above
-        | After
-        | Against
-        | At
-        | Before
-        | Behind
-        ...
-    
-    type Weight
-        = SameObject
-        | Different Object
-=======
-Many `Do` pivots, as we will see in the next section, support balances as well. In general, there is little to say about the semantics of `Do` pivots. They are considerably varied. There are tens of thousands of them, and the study of them is an enormous subject in its own right (not attempted here).
+Many `Do` verbalities, as we will see in the next section, support balances as well. In general, there is little to say about the semantics of `Do` verbalities. They are considerably varied. There are tens of thousands of them, and the study of them is an enormous subject in its own right (not attempted here).
 
-One thing to say in general is that the satisfaction of some conditions with `Do` pivots necessarily *takes time*, and that for this reason the `Ongoing` flag is typically called for when these pivots occur in unelaborated messages: `"They are eating out"` rather than `"They eat out"`. The latter sentence has a perfectly sound interpretation (concerning their general habits), but it is an elaborated message; see section 5.3.
->>>>>>> Stashed changes
+One thing to say in general is that the satisfaction of some conditions with `Do` verbalities necessarily *takes time*, and that for this reason the `Ongoing` flag is typically called for when these verbalities occur in unelaborated messages: `"They are eating out"` rather than `"They eat out"`. The latter sentence has a perfectly sound interpretation (concerning their general habits), but it is an elaborated message; see section 5.3.
 
-There are currently 31 counters in my model, though I didn't bother listing them all above. The full list of 31 is anyway incomplete, but accounts for the most common prepositions. When the weight has the `SameObject` value, the result is a reflexive pronoun like `"myself"`, `"yourself"`, `"yourselves"`, with the pronoun in question being determined by the main object of the nucleus. (It is in this context, as noted above, that the distinction between singular and plural `Hearer` objects reveals itself.) When it has the `Different` value, the additional object argument determines the pronoun, which shows up in a form like `"me"`, `"him"`, `"her"`, etc.
+There is a degree of fluidity between `Be` verbalities and `Do` verbalities when the latter are either ongoing or passive. For example, the message encoded as `"It is interesting"` could be the result either of the `Be` verbality followed by a property encoded as `"interesting"`, or directly of the `Do "interest" Ongoing` verablity. Similarly, `"It is allowed"` could be the result either of the `Be` verbality followed by a property encoded as `"allowed"`, or directly of the `Do "allow" Passive` verablity. I suggest it doesn't much matter which analysis we opt for. Since my model only allows for one status following the verbality, however, a sentence like `"They are allowed in"` can only be the result of a passive `Do` verablity; the status generates the preposition `"in"`, and so `"allowed"` must be coming directly from the verbality in this case.
 
-<<<<<<< Updated upstream
-When referring to balances from now on, I will adopt - in addition to the abbreviating conventions already outlined for objects - a few more such conventions in the same spirit. Whenever a counter or a weight is absent, I will simply omit it, rather than explicitly write `Nothing`; and when it is present, I will simply write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is a different object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a counter or only a weight (not both), I will drop the brackets around it. For example:
-=======
+### 4.4. Conditions, part 3/3: Balances
+
 A balance consists of a *weight*, optionally preceeded by a *relator*. Relators we have already met (they are encoded in prepositions). Weights, meanwhile, are essentially just objects like the main object of the nucleus, with the added possibility that they may refer back to the main object itself (in which case they generate the third direct form of the pronoun, `"myself"`, `"yourself"`, `"themselves"`, etc.):
 
 ```elm
@@ -301,88 +324,119 @@ type Weight
 
 For clarity, I will distinguish where necessary the *main* object of the nucleus from any *balancing* objects in the list of balances.
 
-Some more abbreviating conventions relating to balances, and to conditions as a whole: Whenever a relator is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is not the same as the main object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a weight (i.e. no relator), I will drop the brackets around it. For example:
->>>>>>> Stashed changes
+Some more abbreviating conventions relating to balances: Whenever a relator is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is not the same as the main object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a weight (i.e. no relator), I will drop the brackets around it. For example:
 
 | Abbreviation                  | Full Meaning                                                                   |
 | ----------------------------- | ------------------------------------------------------------------------------ |
-| `Out`                         | `( Just Out, Nothing )`                                                        |
 | `Others`                      | `( Nothing, Just (Different (Other True Nothing Nothing)) )`                   |
 | `( Behind, Hearer )`          | `( Just Behind, Just (Different (Hearer False)) )`                             |
-| `( For, SameObject )`         | `( Just For, Just SameObject )`                                                |
+| `( For, SameAsMain )`         | `( Just For, Just SameAsMain )`                                                |
 | `( With, Female "Grannie" )`  | `( Just With, Just (Different (Other False (Just Female) (Just "Grannie"))) )` |
 
-If it wasn't clear before, I trust this table illustrates the benefits of conventions like these. I adopt them not just to save space, but to make my examples easier to read and understand.
+If it wasn't clear before, I trust this table illustrates the benefits of conventions like these. I adopt them not just to save space, but to make my examples easier to read and understand. Brackets and `Just`s and `False`s all over the place are necessary for compilers, but for human readers they very often serve to obscure more than to illuminate.
 
-And now for some examples themselves, with a view to solidifying the understanding of balances:
+When the `Be` verbality is paired with a status, typically no balances are required to make a complete condition. In some cases, however, with a suitable status, a balance can also be included:
 
-    ( Speaker, ( be, [ Male "Victor" ] ) )
-        -> "I am Victor."
-    
-    ( Male, ( be, [ Out ] ) )
-        -> "He is out."
-    
-    ( Male "Victor", ( love, [ Female "Grannie" ] ) )
-        -> "Victor loves Grannie."
-    
-    ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ) ] ) )
-        -> "Grannie lives at Cockroach Lane."
-    
-    ( Female "Grannie", ( live, [ ( At, Other "Cockroach Lane" ), ( With, Female "Susan" ) ] ) )
-        -> "Grannie lives at Cockroach Lane with Susan."
+```elm
+( Male, Be, Out [ ( With, Male "Robert" ) ] )
+    -> "He is out with Robert."
 
-At this point I must issue a major disclaimer. It should go without saying that my theory is incomplete and in need of further development and refinement. Nowhere is its partial nature more evident, however, than in its failure to provide any kind of validation whatsoever for conditions. In the construction of a balance, it allows users to combine any counter with any (or no) object; while in the construction of a condition itself, it allows any balances to be appended to any pivot. Consequently it is possible - let me not mince words - to generate complete nonsense within my system. For instance:
+( Speakers, Be, "happy", [ ( For, Hearers ) ] )
+    -> "We are happy for you."
+```
 
-<<<<<<< Updated upstream
-    ( Male "Victor", ( love, [ At, ( Behind, Female "Grannie" ), For ] ) )
-        -> "Victor loves at behind Grannie for."
-    
-    ( Female "Grannie", ( live, [ Speaker, Hearer, ( Over, SameObject ) ] ) )
-        -> "Grannie lives me you over herself."
+When the `Be` verbality has no subsequent status, one possibility is to balance out the pivot with another object, the overall result being an identity claim:
 
-What this means, practically speaking, is that my theory of plain English messages predicts whole swathes of messages that an accurate theory should not predict, messages that are incoherent and which - when fed through my encoding function - result in strings of words that are not grammatical sentences of English.
-=======
-There are two immediately obvious inadequacies, namely that my theory does not cover all of the ground (there are sentences that it cannot account for), and that, even in the ground that it does cover, it leaves some things unearthed (the properties and verbalities that users are currently obliged to encode for themselves). These are both relatively untroubling. If you'll excuse the change of metaphor, neither of them indicate that I am on the wrong track; they merely remined us that - of course - I have yet to reach the end of that track. While I am here, I may add that precisely the same limitations apply to my theory of elaborations too: there are many elaborate messages that my system cannot encode, and with the ones that it does encode, it still relies on users encoding certain unearthed variables for themselves.
+```elm
+( Speaker, Be, [ Male "Victor" ] )
+    -> "I am Victor."
+```
 
-In developing my theory in the future, I will naturally want to dig up some of the presently unearthed variables. In some cases, however, I will be in no great hurry to do so. It seems to me that there is nothing particularly puzzling or intriguing, from a theoretical point of view, about properties and the way in which they are encoded into adjectives, and uncovering this variable would simply be a matter of giving my system an enormous dictionary. The same is true of what I call *categories* (which are encoded into nouns), another unearthed variable that we will meet in my theory of elaborations (section 5.7). And the same is mostly true of verbalities, except that in their case unearthing would be necessary for the implementation of any validation checks on conditions (see the end of this section).
+Another possibility is to balance it out with an object prefixed with the `Like` relator, the overall result being a similarity claim. Such balances are also common with the `Do` verbalities that (like the `Be` verbality) can be paired with properties:
 
-Returning to the uncovered ground, here is a very simple example of a plain message beyond the scope of my present model:
->>>>>>> Stashed changes
+```elm
+( Speaker, Be, [ ( Like, Male "Victor" ) ] )
+    -> "I am like Victor."
 
-Obviously this is a very serious inadequacy, and I make no attempt to shy away from that fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition, for two reasons. First, the task is quite simply an enormous one, requiring the collation of tens of thousands of pivots, noting - just for starters - how many balances each of these can accompany, and which counters are needed or allowed within these balances. It is not a task for one person alone. Secondly, although I would by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this - very rough and ready - theory of plain messages predominantly just so that I have a basis on which to build this latter theory. I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to the generation of conditions.
+( Hearer, Do "sound", [ ( Like, Female ) ] )
+    -> "You sound like her."
 
-### 3.3. Conditions Part 2/2: Pivots
+( Female, Do "look", [ ( Like, Hearer ) ] )
+    -> "She looks like you."
+```
 
-[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]
+Balances of all kinds are common with other `Do` verbalities:
 
-## 4. The Theory Part 2/2: The Elaborations
+```elm
+( Male "Victor", Do "love", [ Female "Grannie" ] )
+    -> "Victor loves Grannie."
 
-The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the "nucleus"/"elaboration" terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. And this, in turn, is because my approach is so different. Always my aim is to *explain the sentences* that English speakers produce, rather than to capture the logical entailments of English messages in any formal system.
+( Female "Grannie", Do "live", [ ( At, Other "Cockroach Lane" ) ] )
+    -> "Grannie lives at Cockroach Lane."
 
-<<<<<<< Updated upstream
-There are currently 11 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a decent start. Though it will not make much sense up front, here is the full type definition for messages (details of the individual elaborations to follow):
+( Female "Grannie", Do "live", [ ( At, Other "Cockroach Lane" ), ( With, Female "Susan" ) ] )
+    -> "Grannie lives at Cockroach Lane with Susan."
+```
 
-    type Message
-        = Plain Nucleus
-        | NEGATIVE Message
-        | PAST Message
-        | PRIOR Message
-        | DISPLACED Displacer Message
-        | REGULAR (Maybe Displacer) (Maybe Frequency) Message
-        | PREORDAINED (Maybe Displacer) (Maybe Time) Message
-        | EXTENDED Duration Message
-        | SCATTERED Tally Message
-        | INDIRECT Target Pointer Bool Haystack Message
-        | ENUMERATED Target Quantifier Bool Haystack Message
-        | AMASSED Target (Maybe Quantifier) Bool Haystack Message
+At this point, my theory of plain messages gives out (more on the present limitations of the model in the next section). My current thinking, however, is that there are in English at least two other kinds of weights aside from objects: places and conditions. These, I suggest, would respectively account for sentences like the following:
 
-The definition is of course recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself (see the `Messages` module). The function returns an error in cases of such invalid input.
+```elm
+"I am here."
 
-* * *
+"She likes singing."
+```
 
-[My model was recently changed significantly (13/06/2017), rendering the notes that used to be here largely obsolete. I am in the process of updating them, and will post them back here soon.]
-=======
-Since elaborations are so central to my theory, I adopt the convention of writing them in ALLCAPS, so as to render them easily distinguishable from the other aspects of my system. There are currently 12 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a substantial start. Though it will not make much sense up front, here is the full type definition for messages (details of the individual elaborations to follow):
+(Sentences like `"She likes to sing"`, in contrast, will be dealt with by my theory of elaborations; see section ??.) If no evidence to the contrary emerges, I will likely expand the definition of a weight in due course to accommodate these possibilities.
+
+### 4.5. Limitations
+
+It should go without saying that my theory is incomplete, a work in progress that stands in need of significant expansion and refinement. My theory of plain messages in particular - more specifically my theory of English *conditions* - is the most strikingly incomplete aspect of the whole. My aim in this section is to get out in front of any criticisms on this score, by acknowledging the most egregious of these inadequacies, and explaining why I am in no great hurry to address them. The main point, by way of headline, is that I am more interested in the theory of elaborations, and I expect that any philosophers who are likely to take an interest in my work will share this bias. My theory of plain messages is not intended to make any very great headway into that field, then, but rather to provide just enough to serve as the basis for my main project, the theory of elaborations.
+
+There are two immediately obvious inadequacies, namely that my theory does not cover all of the ground (there are sentences that it cannot account for), and that, even in the ground that it does cover, it leaves some things unearthed (the properties and verbalities that users are currently obliged to encode for themselves). Both of these inadequacies are relatively untroubling. If you'll excuse the change of metaphor, neither of them indicates that I am on the wrong track; they merely remined us that - of course - I have yet to reach the end of that track. While I am here, I may add that precisely the same limitations apply to my theory of elaborations too: there are many elaborate messages that my system cannot encode, and with the ones that it does encode, it still relies on users encoding certain unearthed variables for themselves.
+
+In developing my theory in the future, I will naturally want to dig up some of the presently unearthed variables. In some cases, however, I will be in no great hurry to do so. It seems to me that there is nothing particularly puzzling or intriguing, from a theoretical point of view, about properties and the way in which they are encoded into adjectives, and uncovering this variable would simply be a matter of giving my system an enormous dictionary. The same is true of what I call *categories* (which are encoded into nouns), another unearthed variable that we will meet in my theory of elaborations (section 5.9). And the same is mostly true of verbalities, except that in their case unearthing would be necessary for the implementation of any validation checks on conditions (see the end of this section).
+
+As to the uncovered ground, I already noted at the end of the previous section the current impotence of my theory with regard to sentences like `"I am here"` and `"She is singing"`. I gestured at how the model might be expanded to account for them (namely by extending the definition of a weight to include places and conditions as well as objects). But there will always be more to do, and one has to pause somewhere along the way. (I presume that `"somewhere"`, incidentally, would be the result of elaborating a message with a place variable in its underlying condition; my model doesn't predict the uses of this word yet either.) I am also unable to generate compound prepositional phrases like `"in front of"` or `"on top of"`.
+
+More worrying still is that there are ambiguities I am unable to account for. This is particularly regrettable, because the ability to account for ambiguities is precisely one of the main selling points of my approach as a whole. In my defence, I can account for several ambiguities with my theory of elaborations (as we will see), and that, as I advertised above, is where my main interests lie. There are some ambiguities, however, that need to be accounted for by the theory of plain messages, and my model is not yet able to do this. The ambiguities in question concern how balances fit into the overall condition, informational differences that are not captured when we represent balances simply in a list. For example:
+
+```elm
+"He is looking at Grannie with Victor."
+```
+
+This sentence is ambiguous: is he with Victor, looking at Grannie, or is Grannie with Victor, both being looked at by him? There must be two distinct conditions here, and consequently two distinct messages, both of which fetch up in the same English sentence. But I have no way of representing the difference. On my model as it stands, I have room only for one message to correspond to this sentence:
+
+```elm
+( Male, Do "look" Ongoing, [ ( At, Female "Grannie" ), ( With, Male "Victor" ) ] )
+```
+
+Evidently, then, there is more to a condition than just a pivot and a bare *list* of balances. To understand a condition fully, one must also appreciate how each individual balance relates to the pivot. Sometimes that relation is signalled explicitly by the relator (`"He gave the book to her"`), and sometimes it is signalled implicitly by the order of the balances (`"He gave her the book"`). But sometimes - as in the ambiguous example just now - there is yet more information that goes unsignalled. But representing this information in my model of messages is a problem for another day.
+
+(A tentative suggestion: Perhaps the definition of a weight needs to be made recursive, allowing for balances within weights. The representation above, then, would be of the message in which he is with Victor, both of them looking at Grannie. The message where Victor is with Grannie instead would involve a balance within a weight: `( At, ( Female "Grannie", ( With, Male "Victor" ) ) )`. In plainer terms, the difference would be between *looking at-Grannie with-Victor* (two separate balances) and *looking at Grannie-with-Victor* (one balance, with another balance inside it). With balances being encoded in order, and sub-balances before the next balance at the same level in the list, it is easy to see how the ambiguity in the sentence would then arise.)
+
+Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any relator with any object; while in constructing the condition itself, they may combine any status with any verablity, and then append any list of balances whatsoever. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
+
+```elm
+( Male "Victor", Do "love", At, [ ( Behind, Female "Grannie" ) ] )
+    -> "Victor loves at behind Grannie."
+
+( Female "Grannie", Do "live", [ Speaker, Hearer, ( Over, SameObject ) ] )
+    -> "Grannie lives me you over herself."
+
+( Female "Grannie", Be, "red", [ Speakers ] )
+    -> "Grannie is red us."
+
+( Others, Do "taste", "heavy", [ Hearer, ( With, Other ) ] )
+    -> "They taste heavy you with it."
+```
+
+Obviously this is a very serious inadequacy, and I make no attempt to shy away from this fact. I am not, however, in any great hurry to develop my theory further in this direction, and to write in constraints on what counts as a valid condition. This is for two reasons. First, the task is quite simply an enormous one, requiring the collation of tens of thousands of verbalities, noting - just for starters - what statuses each of these can be paired with, and what sort of balances the ensuing pivots can support. It is not a task for one person alone. Secondly, although I by no means wish to belittle the value of this endeavour, my own interests currently lie elsewhere, in the theory of English elaborations. I offer this crude theory of plain messages predominantly just so that I have a basis on which to build this latter theory. And I am anticipating that my critics will share this bias, and therefore show me some leniency with regard to my rough and ready model of conditions.
+
+## 5. The Theory, part 2/2: The Elaborations
+
+The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the "nucleus"/"elaboration" terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. And this, in turn, is because my approach is so different. Always my aim is to explain the sentences that English speakers produce, rather than to capture the logical entailments of English messages in any formal system.
+
+Since elaborations are so central to my theory, I adopt the convention of writing them in ALLCAPS, so as to render them easily distinguishable from the other aspects of my system. There are currently 11 elaborations posited by my model. This list is no doubt incomplete, but it represents - or so I hope - a substantial start. Though it will not make much sense up front, here is the full type definition for messages (details of the individual elaborations to follow):
 
 ```elm
 type Message
@@ -390,12 +444,11 @@ type Message
     | NEGATIVE Message
     | PAST (Maybe Time) Message
     | PRIOR Message
-    | REGULAR (Maybe Frequency) Message
-    | PREORDAINED (Maybe Time) Message
+    | DISPLACED Displacer Message
+    | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+    | REGULAR (Maybe Displacer) (Maybe Frequency) Message
     | EXTENDED Duration Message
     | SCATTERED Tally Message
-    | MODAL Modality Message
-    | DISPLACED Pivot (Maybe Counter) Message
     | INDIRECT Int Description Message
     | ENUMERATED Int Multiplicity Message
     | AMASSED Int Proportion Message
@@ -403,13 +456,13 @@ type Message
 
 The definition is of course recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them below). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself (see the `Messages` module). The function returns an error in cases of such invalid input.
 
-The elaborations that I posit all have what I call *global scope*, but *local influence*. By this I mean that they all operate on messages as a whole (global scope), but that their semantic effect invariably applies only to one particular component of the message (local influence): sometimes the object, sometimes the condition, sometimes an extra-nuclear argument introduced by a previous elaboration, and in a few cases the time of the condition's satisfaction. I will refer to this as the *target* of the elaboration. (Because of this local influence, it is often convenient to refer to an elaborated *something*, where that something is the target rather than the message as whole.) It is an interesting question whether English has elaborating devices that are local in scope as well as influence. I should not like to say with any certainty that it does not; the hypothesis, it seems to me, certainly merits further investigation.
+The elaborations that I posit all have what I call *global scope*, but *local influence*. By this I mean that they all operate on messages as a whole (global scope), but that their semantic effect invariably applies only to one particular component of the message (local influence): sometimes the object, sometimes the condition, sometimes an extra-nuclear argument introduced by a previous elaboration, in a few cases the time of the condition's satisfaction, and in one case the satisfaction itself. I will refer to this as the *target* of the elaboration. It is an interesting question whether English has elaborating devices that are local in scope as well as influence. I should not like to say with any certainty that it does not; the hypothesis, it seems to me, certainly merits further investigation.
 
-However that may be, I insist that the elaborations I have diagnosed thus far really do have global scope, notwithstanding their local influence. There are two main reasons for this. First, one and the same elaboration may affect a *different* component of its input message, depending on how that message has been elaborated previously. Where I have one globally scoped elaboration with varying local influence, therefore, the alternative would not only require *multiple* locally scoped elaborations, but also a suite of additional validation rules restricting the use of these elaborations. Secondly, the order in which elaborations are applied is typically a matter of considerable semantic significance, even when the elaborations target separate parts of the message. A `PAST INDIRECT` message, for example, is importantly distinct from its corresponding `INDIRECT PAST` message (see section 5.7 below). If we treat these elaborations as having local scope, we lose the ability to represent the order in which they are applied, and therefore have no way of representing this difference. It would of course be perfectly possible to represent the order in which locally scoped elaborations are applied in some other way. But again, that would introduce more complexity into the system. Overall, a model with globally scoped elaborations is simpler, covering the same ground with less convoluted machinery.
+However that may be, I insist that the elaborations I have diagnosed thus far really do have global scope, notwithstanding their local influence. There are two main reasons for this. First, one and the same elaboration may affect a *different* component of its input message, depending on how that message has been elaborated previously. Where I have one globally scoped elaboration with varying local influence, therefore, the alternative would not only require *multiple* locally scoped elaborations, but also a suite of additional validation rules restricting the use of these elaborations. Secondly, the order in which elaborations are applied is typically a matter of considerable semantic significance, even when the elaborations target separate parts of the message. A `PAST INDIRECT` message, for example, is importantly distinct from its corresponding `INDIRECT PAST` message (see section 5.9 below). If we treat these elaborations as having local scope, we lose the ability to represent the order in which they are applied. It would of course be perfectly possible to find some other way to represent this order. But again, that would introduce more complexity into the system. Overall, a model with globally scoped elaborations is simpler, covering the same ground with less convoluted machinery.
 
 ### 5.1. PAST and PRIOR Messages
 
-A plain English message, recall, affirms the present satisfaction of the condition by the object. I explain talk of multiple satisfactions, and past or future satisfactions, with my theory of elaborations. The nature of these elaborations, and the way in which they interact, is one of the most intriguing features of the English code. The semantic results can be extremely complex and sophisticated, but it is all acheived - at least if my theory is correct - through the coordination of devices that are themselves beautifully simple. I can take only a fraction of the credit here: though I fancy I have made some improvements to his model, the core insights here are all taken over from Dudman.
+A plain English message, recall, affirms the present satisfaction of the condition by the object. I explain talk of multiple satisfactions, and past or future satisfactions, with my theory of elaborations. The nature of these elaborations, and the way in which they interact, is one of the most intriguing features of the English code. The semantic results can be extremely complex and sophisticated, but it is all acheived - at least if my theory is correct - through the coordination of devices that are themselves beautifully simple. I can take only a fraction of the credit here: though I fancy I have made some improvements to his model, a number of central insights are all taken over directly from Dudman.
 
 Things need to be introduced in manageable chunks. I will begin, in this section, with a look at the `PAST` and `PRIOR` elaborations, which make talk about the past possible. Here are the relevant parts of the type definitions:
 
@@ -450,7 +503,7 @@ Grammarians standardly call this the "perfect". While its effect on the sentence
 
 One difference, immediately visible in my type definition for messages, is that the `PRIOR` elaboration does not take an additional *time* argument. In support of this, note that `"They have gone to America last year"` is not a sentence of English. Admittedly one can say, for example, `"I have eaten this morning"`. However, one can only say this while it is still morning, when `"this morning"` consequently signals the present rather than the past; as it does in, for instance, `"I am hungry this morning"`. One can also say things like, `"They have already been to America"`, but `"already"` here cannot be the result of an additional argument to the `PRIOR` elaboration, since it also arises without that elaboration (`"They already left for America"`). In both cases, therefore, the additional words - `"this morning"` and `"already"` - cannot be owing to any additional argument to the `PRIOR` elaboration itself. My model does not yet account for these words, but my assumption is that they will each be accounted for by an additional elaboration.
 
-(To get a little ahead of myself, and somewhat speculatively, perhaps we need a `PRESENT` elaboration whose sole purpose is to allow for the introduction of a more precise specification of the present time of the condition's satisfaction. It would need to be incompatible with the `PAST` elaboration, of course, but not with the `PRIOR` elaboration. And then perhaps we need a - let's say - `PREVIOUS` elaboration, responsible for the introduction of the adverb `"already"`. This would of course be incompatible with `PRESENT` or plain messages, but a common companion of the `PAST` and `PRIOR` elaborations alike.)
+(To get a little ahead of myself, and somewhat speculatively, perhaps we need a `PRESENT` elaboration whose sole purpose is to allow for the introduction of a more detailed or explicit specification of the present time of the condition's satisfaction. It would need to be incompatible with the `PAST` elaboration, of course, but not with the `PRIOR` elaboration. And then perhaps we need a - let's say - `PREVIOUS` elaboration, responsible for the introduction of the adverb `"already"`. This would of course be incompatible with `PRESENT` or plain messages, but a common companion of the `PAST` and `PRIOR` elaborations alike.)
 
 A second difference between the `PAST` and `PRIOR` elaborations is that, where the former merely indicates that something is past, the latter indicates that something is past *with respect to something else*. Hence my choice of terminology: what is past is simply past, but what is prior is prior *to* something. More specifically, when applied to a plain message, the `PRIOR` elaboration doesn't *directly* produce a message concerning the past satisfaction of its underlying condition; rather, it produces a *new* condition, one whose satisfaction (at any given point in time) entails the satisfaction of the underlying condition *prior* to that point. This, I take it, explains why it cannot take an additional time argument in the same way that the `PAST` elaboration does.
 
@@ -475,27 +528,27 @@ PRIOR (PAST "an hour before you arrived" ( Speaker, ( Do "see", [ Male ] ) ))
 
 Note that, in the second example, `"an hour before you arrived"` serves to encode the time at which I *saw* him; whereas in the first, `"when you arrived"` encodes the time at which I *had* (already) seen him. In further confirmation of the claim that the second sentence does not encode a `PAST PRIOR` message, notice that `"I have seen him an hour before you arrived"` - like `"They have been to America last year"` - is not a sentence of English.
 
-With plain messages (which are present by default), and with the `PAST` and `PRIOR` elaborations, I can predict and explain a substantial portion of the uses of the finite forms of the verbs (more to come as we proceed). I can predict and explain the ambiguity accessible to phrases like `"had seen"`, which in general can encode both `PAST PRIOR` messages ("past perfect"), and `PRIOR PAST` messages ("past past"). And I can do all this without the need to posit a third "past past" tense. Two elaborations that can be applied in different orders are all that is needed.
+### 5.2. Conservative PREORDAINED Messages
 
-### 5.2. PREORDAINED Messages
+At this juncture one might expect me to introduce a `FUTURE` elaboration, as a direct analogue to the `PAST` elaboration, whose purpose is to locate the time of the underlying condition's satisfaction in the future. Talk about the future in English, however, is a more complicated affair than talk about the present or the past, and there is in my view no such straightforwardly symmetric elaboration. The `PREORDAINED` elaboration, to be examined in this section, is the closest thing to a `FUTURE` elaboration in my system. If anything, however, it has a closer symmetry with the `PRIOR` elaboration, insofar as it locates the satisfaction of a condition as future *with respect to some other point*. It typically does this, moreover, by generating a new condition. But there is yet more to this elaboration, that outstrips anything observed in the `PRIOR` elaboration, as we will see.
 
-At this juncture one might expect me to introduce a `FUTURE` elaboration, as a direct analogue to the `PAST` elaboration, whose purpose is to locate the time of the underlying condition's satisfaction in the future. Talk about the future in English, however, is a more complicated affair than talk about the present or the past, and there is in my view no such straightforwardly symmetric elaboration. The `PREORDAINED` elaboration, to be examined in this section, is the closest thing to a `FUTURE` elaboration in my system. If anything, however, it has a closer symmetry with the `PRIOR` elaboration, insofar as it locates the satisfaction of a condition as future *with respect to some other point*. It does this, moreover, by generating a new condition. But there is yet more to this elaboration, that outstrips anything observed in the `PRIOR` elaboration, as we will see.
-
-Here are the relevant parts of my type definitions:
+Here are the relevant parts of my type definitions for now:
 
 ```elm
 type Message
     = ...
-    | PREORDAINED (Maybe Time) Message
+    | PREORDAINED (Maybe Displacer) (Maybe Time) Message
     | ...
 
 type alias Time =
     String
 ```
 
-The `PREORDAINED` elaboration generates a new condition, one whose satisfaction entails that the satisfaction of the underlying condition is either prearranged or predetermined for some later time (the label "preordained" is intended to capture what these two more specific notions have in common). The time in question can optionally be specified with the *time* argument, which is the very same unearthed variable that we saw in the case of `PAST` messages. Typically, of course, it will be a time in the *future* rather than the past; though that, as we will see, is not universally the case.
+I am omitting the definition of a *displacer*, and for the time being I will restrict my attention to cases in which this optional variable is absent. For clarity, I will refer to the *conservative* `PREORDAINED` elaboration, meaning the `PREORDAINED` elaboration with no displacer. As I said at the start of the previous section, things need to be introduced in manageable chunks, and this variable raises a whole host of further questions best tackled later on, when some other aspects of the theory have been put into place. Not wishing to leave the reader in the dark, I will just say for now that this variable is reponsible for - among other things - `"will"` and `"be going to"`.
 
-The `PREORDAINED` elaboration is most common in the case of prearrangments; for example:
+The `PREORDAINED` elaboration is one of two English elaborations related to the broad notion of *expectation* (we will meet the other in section). Expectations are (as I will term it) either *coloured* or *uncoloured*, and in the former case - hence the choice of metaphor - there is a whole spectrum of possibilities. This distinction will become clearer as we proceed, and as we see it played out in the various cases. In general, let me start by saying that uncoloured expectations are *disinterested*. Paradigmatically, they concern inaminate objects, and they concern animate creatures only insofar as their actions can be impartially predicted. Coloured expectations, in contrast, are exclusively related to the actions of intentional agents - notably human beings, but by extention some other animals - who have plans and goals and habits, and whose behaviour may be judged (and characters informed) by moral and other standards. The variety of colours reflects the variety of notions in this area: intentions, wishes, hopes, plans, promises, etc. on the one hand; and morals, manners, practicalities, etc. on the other.
+
+With displacers, as we will see later, many colours are possible. The colour in the case of conservative `PREORDAINED` messages, meanwhile, is the notion of a (man-made) *prearrangement*. For example:
 
 ```elm
 PREORDAINED "tomorrow" ( Speaker, ( Be, "busy" ) )
@@ -508,7 +561,7 @@ PREORDAINED "at dawn" ( Speakers, ( Do "attack" ) )
     -> "We attack at dawn."
 ```
 
-As noted, however, it also shows up in claims concerning predetermination; for instance:
+Uncoloured conservative `PREORDAINED` messages are also possible, however, and in this case "predetermination" is the more appropriate term. For instance:
 
 ```elm
 PREORDAINED "tomorrow" ( Other, ( Be, [ Other "Tuesday" ] ) )
@@ -518,9 +571,11 @@ PREORDAINED "at 7.05pm tomorrow" ( Other "the sun", ( Do "set" ) )
     -> "The sun sets at 7.05pm tomorrow."
 ```
 
-(I am here treating `"the sun"` as a proper name, because I have not yet explained the part of my model that allows us to generate it as a definite description; see section 5.7.)
+(I am here treating `"the sun"` as a proper name, because I have not yet explained the part of my model that allows us to generate it as a definite description; recall my general warning about this in section 4.1. I will do this sort of thing several more times until section 5.9, when I explain the elaborations responsible for nouns and noun phrases. I will not bother with this proviso again.)
 
-It is important to be clear that these are all claims about *present* prearrangements or predeterminations. While these messages are about the future, therefore, they are about the future only *indirectly*. First and foremost, they are about the *present*: present prearrangements or predeterminations *for* the future. In this respect, as I have already advertised, the `PREORDAINED` elaboration is much more like the `PRIOR` elaboration than it is like the `PAST` elaboration. It locates something as future *with respect to something else*, via the generation of a new condition. And just as it is possible to have `PAST PRIOR` messages, it is also possible to have `PAST PREORDAINED` messages, which are claims about *past* prearrangements or predeterminations that are, by implication, no longer present:
+With the conservative `PREORDAINED` elaboration, there is (I am fairly sure) never any ambiguity as to whether the message is coloured or uncoloured; invariably there is only ever one plausible possibility. In any case, I diagnose the phenomenon of colouring as *pragmatic* rather than semantic. In other words, colour (or the lack of it) is certainly an aspect of the overall information conveyed in an English exchange, but it is not information that is anywhere consulted in the generation of the sentence. Consequently it does not feature as an informational ingredient of my messages, but as pragmatic information communicated over and above what is encoded in the sentence.
+
+It is important to be clear that these are all claims about *present* prearrangements or predeterminations. While these messages are about the future, therefore, they are about the future only *indirectly*. First and foremost, they are about the *present*: present prearrangements or predeterminations *for* the future. In this respect, as I have already advertised, the `PREORDAINED` elaboration is much more like the `PRIOR` elaboration than it is like the `PAST` elaboration. It locates something as future *with respect to something else*, typically via the generation of a new condition (for the cases in which it does this without generating a new condition, see section 5.8). And just as it is possible to have `PAST PRIOR` messages, it is also possible to have `PAST PREORDAINED` messages, which are claims about *past* prearrangements or predeterminations that are, by implication, no longer present:
 
 ```elm
 PAST (PREORDAINED "next month" ( Others, ( Do "get" Ongoing, "married" ) ))
@@ -537,7 +592,7 @@ PRIOR (PAST (PREORDAINED "tomorrow" ( Speaker, ( Be, "busy" ) )))
     -> "I had been busy tomorrow."  -- before I heard of the accident, but then I cleared my schedule
 ```
 
-With this in mind, let me stress that the optional time argument needn't specify a time in the future; the constraint is rather that it must specify a time that is *later* than the time of the prearrangment or predetermination. Thus we find `PAST PREORDAINED` messages (and `PRIOR PAST PREORDAINED` messages) for which the time specified is itself past:
+With this in mind, let me stress that the optional time argument needn't specify a time in the future; the constraint is rather that it must specify a time that is *later* than the time of the prearrangment or predetermination. Thus we find conservative `PAST PREORDAINED` messages (and conservative `PRIOR PAST PREORDAINED` messages) for which the time specified is itself past:
 
 ```elm
 PAST (PREORDAINED "yesterday" ( Speaker, ( Be, "busy" ) ))
@@ -547,14 +602,14 @@ PRIOR (PAST (PREORDAINED "yesterday" ( Speaker, ( Be, "busy" ) )))
     -> "I had been busy yesterday."  -- before I heard of the accident ...
 ```
 
-So far I have been emphasising the symmetry between the `PRIOR` and the `PREORDAINED` elaborations, but there are asymmetries as well. First, the new condition generated by the `PRIOR` elaboration (when it does generate a new condition) entails the *actual* prior satisfaction of its underlying condition. The message as a whole is true only if the underlying condition was in fact satisfied at that prior time. The new condition generated by the `PREORDAINED` elaboration, however, does *not* entail the actual satisfaction of its underlying condition at the later time. Rather, it entails - as I have been saying - the existence of some prearrangement or predetermination to that effect. But plans, as we all know, can change, and it may be perfectly true that someone is getting married next month, even if she later calls it off (at which point it will still be true that she *was* getting married next month). With predeterminations, there is room for metaphysical debate: some would argue that, if an asteroid hits tonight and moves us into a new orbit, then the sun was never going to set at 7.05pm tomorrow after all. But however that may be, English allows us - if we want it - the facility to communicate on the assumption that predeterminations can also change, saying for instance that the sun *did* set at 7.05pm tomorrow, even though it no longer *does*. It is not for semantics to settle this metaphysical dispute.
+So far I have been emphasising the symmetry between the `PRIOR` and the `PREORDAINED` elaborations, but there are asymmetries as well. First, the new condition generated by the `PRIOR` elaboration (when it does generate a new condition) entails the *actual* prior satisfaction of its underlying condition. The message as a whole is true only if the underlying condition was in fact satisfied at that prior time. The new condition generated by the conservative `PREORDAINED` elaboration, however, does *not* entail the actual satisfaction of its underlying condition at the later time. Rather, it entails - as I have been saying - the existence of some prearrangement or predetermination to that effect. But plans, as we all know, can change, and it may be perfectly true that someone is getting married next month, even if she later calls it off (at which point it will still be true that she *was* getting married next month). With predeterminations, there is room for metaphysical debate: some would argue that, if an asteroid hits tonight and moves us into a new orbit, then the sun never set at 7.05pm tomorrow after all. But however that may be, English allows us - if we want it - the facility to communicate on the assumption that predeterminations can also change, saying for instance that the sun *did* set at 7.05pm tomorrow, even though it no longer *does*. It is not for semantics to settle this metaphysical dispute.
 
-The second asymmetry is syntactic rather than semantic. The `PREORDAINED` elaboration, unlike the `PRIOR` elaboration, has the curious feature of being *invisible*. By this I mean that it has, in and of itself, no impact on the output sentence. The optional time argument, it is true, shows up in an adverbial expression at the end of the predicate, but the elaboration itself leaves no mark (where the `PRIOR` elaboration, of course, replaces the main verb with the corresponding form of the verb **`"have"`** followed by the second participle form of the original verb). As we will see in the next section, the `PREORDAINED` elaboration is not the only English elaboration that is invisible in this sense. And the existence of invisible elaborations, as you might well expect, is one very considerable source of ambiguity: from the sentence alone, it may be unclear which invisible elaborations (if any) have been applied, and moreover which order they have been applied in.
+The second asymmetry is syntactic rather than semantic. The conservative `PREORDAINED` elaboration, unlike the `PRIOR` elaboration, has the curious feature of being *invisible*. By this I mean that it has, in and of itself, no impact on the output sentence. The optional time argument, it is true, shows up in an adverbial expression at the end of the predicate, and the optional displacer argument to be examined in due course also has a visible effect. But the conservative elaboration itself leaves no mark (where the `PRIOR` elaboration, of course, replaces the main verb with the corresponding form of the verb **`"have"`** followed by the second participle form of the original verb). As we will see in the next section, the conservative `PREORDAINED` elaboration is not the only one to be invisible in this sense. And the existence of invisible elaborations, as you might well expect, is one very considerable source of ambiguity: from the sentence alone, it may be unclear which invisible elaborations (if any) have been applied, and moreover which order they have been applied in.
 
-More on that in the next section. In the meantime, let me end this section by accounting for a couple of comparatively straightforward ambiguities arising from the `PREORDAINED` and `PAST` elaborations alone, in virtue of the former's invisibility. First, when the optional time argument is absent from a `PREORDAINED` elaboration, it simply cannot be deduced from the sentence whether the elaboration has been applied or not. Thus the sentence `"They are getting married"` admits of a plain interpretation (they are at the altar as we speak) as well as a `PREORDAINED` one (they are engaged to be married):
+More on that in the next section. In the meantime, let me end this section by accounting for a couple of comparatively straightforward ambiguities arising from the `PAST` and conservative `PREORDAINED` elaborations alone, in virtue of the latter's invisibility. First, when the optional time argument is absent from a conservative `PREORDAINED` elaboration, it simply cannot be deduced from the sentence whether the elaboration has been applied or not. Thus the sentence `"They are getting married"` admits of a plain interpretation (they are at the altar as we speak) as well as a conservative `PREORDAINED` one (they are engaged to be married):
 
 ```elm
-Plain ( Others, ( Do "get" Ongoing, "married" ) )
+( Others, ( Do "get" Ongoing, "married" ) )
     -> "They are getting married."
 
 PREORDAINED ( Others, ( Do "get" Ongoing, "married" ) )
@@ -563,7 +618,7 @@ PREORDAINED ( Others, ( Do "get" Ongoing, "married" ) )
 
 The same is true of `"They were getting married"`, which arises from subjecting either of the messages above to the `PAST` elaboration (as it might be, they were at the altar and are now wed; or, they were engaged but have now split).
 
-Secondly, and rather more interestingly, the sentence `"They were getting married yesterday"` supports (at least) *three* distinct interpretations. The first is a direct claim about the past, about what they got up to yesterday. The second is a claim about yesterday's plans: that the couple were then engaged to be wed at some unspecified point in the future. The third, finally, is a claim about past plans *for* yesterday: that at some point in the past (unspecified) the happy day was scheduled for yesterday. The point, in a nutshell, is that the sentence does not reveal whether the word `"yesterday"` is coming from the `PAST` elaboration or the `PREORDAINED` one (if the `PREORDAINED` elaboration has been applied at all, that is). I represent the three messages here as follows:
+Secondly, the sentence `"They were getting married yesterday"` supports (at least) *three* distinct interpretations. The first is a direct claim about the past, about what they got up to yesterday. The second is a claim about yesterday's plans: that the couple were then engaged to be wed at some unspecified point in the future. The third, finally, is a claim about past plans *for* yesterday: that at some point in the past (unspecified) the happy day was scheduled for yesterday. The point, in a nutshell, is that the sentence does not reveal whether the word `"yesterday"` is coming from the `PAST` elaboration or the `PREORDAINED` one (if the `PREORDAINED` elaboration has been applied at all, that is). I represent the three messages here as follows:
 
 ```elm
 PAST "yesterday" ( Others, ( Do "get" Ongoing, "married" ) )
@@ -591,14 +646,16 @@ In this case, it would be more natural to bring the output of the outermost time
 
 My model is not yet able to generate sentences like these, however, and rigidly insists on placing the outputs of all time arguments at the end of the sentence.
 
-### 5.3. REGULAR, EXTENDED, and SCATTERED Messages
+### 5.3. Conservative REGULAR, EXTENDED, and SCATTERED Messages
 
-There are three more invisible elaborations in my model: `REGULAR`, `EXTENDED`, and `SCATTERED`. It is convenient to discuss these all together, since they have a great deal in common. The relevant parts of type definitions are as follows:
+Closely related to the `PREORDAINED` elaboration is the `REGULAR` elaboration, which is most notably like the former in also taking an optional displacer argument. As above, I will begin by restricting my attention to cases in which this argument is absent, referring in the same vein to the *conservative* `REGULAR` elaboration. Displacers will be introduced in section 5.5, and their role in both `REGULAR` and `PREORDAINED` messages examined in section 5.6.
+
+The conservative `REGULAR` elaboration is also like the conservative `PREORDAINED` elaboration in being invisible. This is a trait these elaborations share with two more: the `EXTENDED` and `SCATTERED` elaborations. Having taken my time in introducing the conservative `PREORDAINED` elaboration, I will now pick up the pace a little, and examine these other three elaborations at once. The relevant parts of type definitions are as follows:
 
 ```elm
 type Message
     = ...
-    | REGULAR (Maybe Frequency) Message
+    | REGULAR (Maybe Displacer) (Maybe Frequency) Message
     | EXTENDED Duration Message
     | SCATTERED Tally Message
     | ...
@@ -613,9 +670,9 @@ type alias Tally =
     String
 ```
 
-As with the *time* argument for `PAST` and `PREORDAINED` elaborations, the *frequency*, *duration*, and *tally* arguments are all unearthed variables for now; users are obliged to encode these variables into strings for themselves. (But see section 5.7 below for some speculation on how two of them might be dug up.)
+As with the *time* argument for `PAST` and `PREORDAINED` elaborations, the *frequency*, *duration*, and *tally* arguments are all unearthed variables for now; users are obliged to encode these variables into strings for themselves. (But see section 5.9 below for some speculation on how two of them might be dug up.)
 
-The `REGULAR` elaboration generates a new condition whose satisfaction entails - I don't know how else to say it - the *regular* satisfaction of its input condition, with the optional frequency argument specifying the frequency of that regularity. `REGULAR` messages concern the habits of such creatures as are capable of forming them (notably human beings), as well as the typical or predictable behaviour of inanimate objects under certain conditions:
+The conservative `REGULAR` elaboration generates a new condition whose satisfaction entails the *general* satisfaction of its input condition, with the optional frequency argument specifying the frequency of that generality. The `REGULAR` elaboration is the second of the three elaborations to concern expectations, and consequently to open the door to the phenomenon of colouring (the first being the `PREORDAINED` elaboration discussed in the previous section). The coloured uses of the conservative `REGULAR` elaboration concern the habits of such creatures as are capable of forming them:
 
 ```elm
 REGULAR "often" ( Female "Grannie", ( Do "eat", Out ) )
@@ -623,14 +680,18 @@ REGULAR "often" ( Female "Grannie", ( Do "eat", Out ) )
 
 REGULAR "occasionally" ( Male "Victor", ( Do "laugh", [ ( At, Female "Grannie" ) ] ) )
     -> "Victor occasionally laughs at Grannie."
+```
 
+Its uncoloured uses, meanwhile, concern the typical or predictable behaviour of inanimate objects under certain conditions:
+
+```elm
 REGULAR ( Other "salt", ( Do "dissolve", [ ( In, Other "water" ) ] ) )
     -> "Salt dissolves in water."
 ```
 
-(`"Salt"` and `"water"` are not proper names, and the last example here is a fudge; but I have not yet described the elaboration that accounts for these words, and it is difficult to think of a suitable example involving only pronouns or proper names. See section 5.7 for a more accurate analysis.)
+As with the conservative `PREORDAINED` elaboration, the possibility of colouring in the conservative `REGULAR` elaboration does not appear to give rise to any ambiguity (there is only ever one plausible possibility); but if it did it would call for a pragmatic rather than a semantic treatment. Colour (or the lack of it) is not an ingredient of the message, but a part of what is communicated over and above the information encoded in the sentence.
 
-The `SCATTERED` elaboration likewise generates a new condition whose satisfaction entails multiple satisfactions of its underlying condition. Rather than convey nomological apprehensions, however, these messages affirm nothing over and above the brute multiplicity. The compulsory *tally* argument specifies the total number of separate satisfactions (not necessarily with any great precision, as in the second example below):
+The `SCATTERED` elaboration likewise generates a new condition whose satisfaction entails multiple satisfactions of its underlying condition. Rather than convey nomological apprehensions, however, these messages affirm nothing more than the brute multiplicity. The compulsory *tally* argument specifies the total number of separate satisfactions (not necessarily with any great precision, as in the second example below):
 
 ```elm
 PAST "last week" (SCATTERED "twice" ( Female "Grannie", ( Do "eat", Out ) ))
@@ -657,7 +718,17 @@ PREORDAINED "tomorrow" (EXTENDED "for an hour" ( Male, ( Do "see" Ongoing, [ Fem
     -> "He is seeing her for an hour tomorrow."
 ```
 
-Several ambiguities arise from the interaction of the four invisible elaborations. Consider, for example, the sentence:
+There appears to be very little overlap between tallies, frequencies, and durations. One exception to this rule springs to mind, however: `"always"` can encode both a frequency and a duration. For example:
+
+```elm
+REGULAR "always" ( Do "smile", [ At, Male ] )
+    -> "She always smiles at him."
+
+PAST (EXTENDED "always" ( Male, ( Do "like", [ Female ] ) ))
+    -> "He always liked her."
+```
+
+A good deal of ambiguity arises from the interaction of the four invisible elaborations. Consider, for example, the sentence:
 
 ```elm
 "He walked to work for a week."
@@ -673,7 +744,7 @@ And then we have this seemingly straightforward sentence:
 
 By my count, this string is accessible to no fewer than *five* distinct interpretations: (i) a simple claim about when the film started (a `PAST` message); (ii) a claim about when it was scheduled to start (a `PAST PREORDAINED` message); (iii) a claim about when showings of used to start (a `PAST REGULAR` message); (iv) a claim about when showings of it used to be scheduled to start (a `PAST PREORDAINED REGULAR` message); and (v) a claim about the time at which the management, when drawing up their plans, generally scheduled showings of it to start (a `PAST REGULAR PREORDAINED` message). (It may be hard to envisage a use for this last message. To aid your imaginations, suppose the management had to fix the timetable anew each morning, and typically ended up placing the film in question in the 8 o'clock slot. This in contrast to the more likely fourth interpretation, in which they settle once and for all on a regular 8 o'clock position.)
 
-I could go on, but hopefully these two examples suffice to illustrate the general point. With invisible elaborations, there is frequently nothing in the sentence that indicates the order in which they have been applied, or even - if their optional arguments are missing, or if the outputs of those arguments could have come from somewhere else - whether or not they have been applied at all. For the record, though I will not argue the point here, I defy anyone to come up with a satisfactory syntactic or pragmatic account of any of these ambiguities. It is only by embracing the code analogy, by modelling the semantic function from message to sentence rather than the other way around, that we can explain these various phenomena.
+I could go on, but hopefully these two examples suffice to illustrate the general point. With invisible elaborations, there is frequently nothing in the sentence that indicates the order in which they have been applied, or even - if their optional arguments are missing, or if the outputs of those arguments could have come from somewhere else - whether or not they have been applied at all. For the record, though I will not argue the point here, I defy anyone to come up with a satisfactory syntactic or pragmatic account of any of these ambiguities. It is only by embracing the code breaker's methodology, by modelling the semantic function from message to sentence rather than the other way around, that we can explain these various phenomena.
 
 ### 5.4. NEGATIVE Messages
 
@@ -687,7 +758,7 @@ The chief puzzle facing any theory of negation in English is posed by the relate
 
 In the first case, the speaker might be maintaining that Claire is tee-totalled, or might instead be denying that she is an alcoholic. The latter reading is consistent with Claire enjoying a drink now and then, while the former is not. In the second case, the speaker might be affirming that she was free all day yesterday, or might rather be rejecting the claim that she was occupied all day. The latter interpretation is consistent with her having been busy at some point in the day, while the former is not. In sum, the first interpretation of each sentence is a positive message about something internally negative, whereas the second is a negative message about something internally positive. (The possibility of these two kinds of negation is also why double negation isn't always vacuous: `"Claire doesn't not drink"`, for example, can be used perfectly intelligibly to deny that she is tee-totalled.)
 
-My model posits a `NEGATIVE` elaboration, which has the effect, in general, of converting an affirmative message into its corresponding denial. In most cases - we will meet the exceptions in sections 5.5 and 5.7 - this amounts to the creation of a new condition, whose satisfaction entails the non-satisfaction of its input condition (the *complement* of the input condition, in other words). The difference between the pairs of messages noted above is accounted for by the *order* in which this elaboration is applied, relative to the other elaborations in the message (the `REGULAR` and `EXTENDED` elaborations respectively). In the second of each pair, the `NEGATIVE` elaboration is the outermost one, whereas in the first of each pair it is closer to the nucleus, with the other elaboration being applied on top of it. The `REGULAR NEGATIVE` interpretation of the first sentence affirms that Claire is in the habit of abstaining from drink, while the corresponding `NEGATIVE REGULAR` denies that she is in the habit of drinking. The `EXTENDED NEGATIVE` interpretation of the second sentence, similarly, affirms that the speaker was free all day, while its `NEGATIVE EXTENDED` counterpart denies that the speaker was busy all day.
+My model posits a `NEGATIVE` elaboration, which has the effect, in general, of converting an affirmative message into its corresponding denial. In most cases - we will meet the exceptions in sections 5.7-9 - this amounts to the creation of a new condition, whose satisfaction entails the non-satisfaction of its input condition (the *complement* of the input condition, in other words). The difference between the pairs of messages noted above is accounted for by the *order* in which this elaboration is applied, relative to the other elaborations in the message (the `REGULAR` and `EXTENDED` elaborations respectively). In the second of each pair, the `NEGATIVE` elaboration is the outermost one, whereas in the first of each pair it is closer to the nucleus, with the other elaboration being applied on top of it. The `REGULAR NEGATIVE` interpretation of the first sentence affirms that Claire is in the habit of abstaining from drink, while the corresponding `NEGATIVE REGULAR` denies that she is in the habit of drinking. The `EXTENDED NEGATIVE` interpretation of the second sentence, similarly, affirms that the speaker was free all day, while its `NEGATIVE EXTENDED` counterpart denies that the speaker was busy all day.
 
 Analagous ambiguities arise through the interaction of the `NEGATIVE` elaboration with the `PREORDAINED` and `SCATTERED` elaborations: `"I am not seeing him tomorrow"` may be taken as a denial of any present plan to that effect (a `NEGATIVE PREORDAINED` message), or as an affirmation of a present plan to avoid him (a `PREORDAINED NEGATIVE` message); `"Grannie did not fall down fifteen times yesterday"` may be said as a precursor to insisting that she took only fourteen tumbles that day (a `NEGATIVE SCATTERED` message), or as a claim that, though she may have faltered fifteen times, on none of those occasions did she ultimately fall (a `SCATTERED NEGATIVE` message).
 
@@ -699,19 +770,208 @@ Yet more ambiguities arise from the possibility of throwing the `NEGATIVE` elabo
 
 Brace yourselves. This sentence encodes, among others: (i) a `PAST NEGATIVE EXTENDED` message (he saw her, but for an hour and a half at most); (ii) a `PAST EXTENDED NEGATIVE` message (for two whole hours, he didn't see her); (iii) a `PAST REGULAR NEGATIVE EXTENDED` message (he was formerly in the habit of avoiding her for two hours at a time); (iv) a `PAST NEGATIVE REGULAR EXTENDED` message (he wasn't formally in the habit of seeing her for two hours at a time); (v) a `PAST EXTENDED REGULAR NEGATIVE` message (his habit of avoiding her lasted a mere two hours); (vi) a `PAST NEGATIVE EXTENDED REGULAR` message (his habit of seeing her lasted more than two hours); (vii) a `PAST NEGATIVE PREORDAINED EXTENDED` message (there was no plan to see her for two hours; perhaps the plan was to see her for only one hour); (viii) a `PAST PREORDAINED EXTENDED NEGATIVE` message (the plan was to avoid her for two hours); (ix) a `PAST EXTENDED PREORDAINED NEGATIVE` message (for two hours, there was a short-lived plan to avoid her). I'll stop here, but by now it should be clear that these by no means exhaust the possibilities.
 
-Admittedly some of the interpretations just given of this sentence will seem implausible; and some of its other interpretations (not listed) will seem outright bizarre. Nevertheless I maintain that they are all perfectly legitimate from a grammatical point of view. If any of them are in any sense ruled out, it can only be because they are weird or pointless, not because they are ungrammatical. Change the nucleus, meanwhile, or some of the surrounding arguments (durations, frequencies, tallies, and so on), and different sets of elaborations leap to mind as plausible or likely. I see no reason to suppose that some combinations of these elaborations are intrinsically problematic. In any case, it is undeniable that there are many ambiguities like these in English, and it may be noted how effortlessly my theory is able to predict and explain them all. As with those highlighted in the previous section, I defy anyone to account for them satisfactorily in syntactic or pragmatic terms.
+Admittedly some of the interpretations just given of this sentence will seem implausible; and some of its other interpretations (not listed) will seem outright bizarre. Nevertheless I maintain that they are all perfectly legitimate from a grammatical point of view. If any of them are in any sense ruled out, it can only be because they are weird or pointless, not because they are ungrammatical. Change the nucleus, meanwhile, or some of the surrounding arguments (durations, frequencies, tallies, and so on), and different sequences of elaborations leap to mind as plausible or likely. I see no reason to suppose that some combinations of these elaborations are intrinsically problematic. In any case, it is undeniable that there are many ambiguities like these in English, and it may be noted how effortlessly my theory is able to predict and explain them all. As with those highlighted in the previous section, I defy anyone to account for them satisfactorily in syntactic or pragmatic terms.
 
-Before moving on, let us take stock of a few things. Most of the elaborations we have seen so far (and in the contexts we have seen them) generate new conditions. The only exceptions are the `PAST` elaboration, and the `PRIOR` elaboration when it is applied on top of the `PAST` elaboration, which target the time of the condition's satisfaction instead. (The `NEGATIVE` elaboration doesn't always target the condition either, but we have yet to see the elaborations that change its behaviour in this respect.) With the generation of new conditions, meanwhile, the order in which elaborations are applied is almost always significant: a `REGULAR NEGATIVE` message is not the same as its corresponding `NEGATIVE REGULAR`, and so on.
+Before moving on, let us take stock of a few things. Most of the elaborations we have seen so far (and in the contexts in which we have seen them) generate new conditions. The only exceptions are the `PAST` elaboration, and the `PRIOR` elaboration when it is applied on top of the `PAST` elaboration, which target the time of the condition's satisfaction instead. (The `PREORDAINED`, `REGULAR`, and `NEGATIVE` elaborations don't always target the condition either, but we have yet to see the contexts in which they don't.) With the generation of new conditions, meanwhile, the order in which elaborations are applied is almost always significant: a `REGULAR NEGATIVE` message is not the same as its corresponding `NEGATIVE REGULAR`, and so on.
 
-There is, as far as I can see, only one exception to this general rule: a `PRIOR NEGATIVE` is no different from its corresponding `NEGATIVE PRIOR`. The sentence, `"He has not eaten"` can be generated by applying these elaborations in either order, but that does not reflect any ambiguity. There is no discernible difference between being in a state of having not eaten, and not being in a state of having eaten. The same is true of `PAST NEGATIVE` messages and `NEGATIVE PAST` messages. This is perhaps less surprising, however, since the `PAST` elaboration targets a completely separate part of the message. Indeed, the order in which the `PAST` elaboration is applied relative to *any* of the other elaborations examined so far makes no difference whatsoever to the overall message. As a matter of convention, I will always represent it has having been applied *as late as possible* in the overall message. This means that it is typically the outermost elaboration, except when it has been made `PRIOR`, or subjected to one of the elaborations I will look at in section 5.7 (for which the order does matter).
+There is, as far as I can see, only one exception to this general rule: a `PRIOR NEGATIVE` is no different from its corresponding `NEGATIVE PRIOR`. The sentence, `"He has not eaten"` can be generated by applying these elaborations in either order, but that does not reflect any ambiguity. There is no discernible difference between being in a state of having not eaten, and not being in a state of having eaten. The same is true of `PAST NEGATIVE` messages and `NEGATIVE PAST` messages. This is perhaps less surprising, however, since the `PAST` elaboration targets a completely separate part of the message. Indeed, the order in which the `PAST` elaboration is applied relative to *any* of the other elaborations examined so far makes no difference whatsoever to the overall message. As a matter of convention, I will always represent it has having been applied *as late as possible* in the overall message. This means that it is typically the outermost elaboration, except when it has been made `PRIOR`, or subjected to one of the other elaborations for which the order does matter.
 
-### 5.5. MODAL Messages
+### 5.5. Primary Displacers (DISPLACED, PREORDAINED, and REGULAR Messages)
+
+The time has finally come to introduce the *displacer* variable, an optional argument for the `PREORDAINED` and `REGULAR` elaborations discussed above, and also a compulsory argument for the `DISPLACED` elaboration, which we have yet to meet. Let us start with the relevant type definitions:
+
+```elm
+type Message
+    = ...
+    | DISPLACED Displacer Message
+    | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+    | REGULAR (Maybe Displacer) (Maybe Frequency) Message
+    | ...
+
+type Displacer
+    = Primary Pivot
+    | Secondary Modality
+
+type Modality
+    = Yes1    -- "will"
+    | Yes2    -- "shall"
+    | Yes3    -- "must"/"ought"/"need"
+    | Maybe1  -- "may"
+    | Maybe3  -- "can"
+    | Maybe4  -- "dare"
+```
+
+Thus far, our examples have been limited to sentences with just one verb phrase, and no modal. The displacer variable, and these three elaborations that make room for it, account for the generation of sentences with modals or more than one verb phrase. Just to give a quick taste of the sorts of things we'll be dealing with:
+
+```elm
+"She is happy to see him."
+
+"She is hoping to see him."
+
+"She is going to see him."
+
+"It is going to rain."
+
+"It is about to rain."
+
+"It is likely to rain."
+
+"It seems likely to rain."
+
+"He seems to be upset."
+
+"He must be upset."
+
+"He might be upset."
+
+"He will be upset."
+
+"Victor tends to tease Grannie."
+
+"Victor likes to tease Grannie."
+
+"Grannie wants to eat out."
+
+...
+```
+
+I will tackle the data here in two stages, starting with primary displacers (i.e. pivots and counters, responsible for additional verb phrases). Secondary displacers (i.e. modalities, which are encoded in the English modals) will be examined in the next section.
+
+The first thing to note is that the `"to"` in the sentences above is not used in the sense of `"in order to"`. We can say things like, `"He went out to go to the shops"`, but the message here is that he went out *in order to* go to the shops. Sentences like these, I suggest, must be the result of an altogether different elaboration, which I do not yet have in my model. That elaboration, whatever it is, introduces the *second* of the two verb phrases, elaborating the simpler message that he went out. It introduces this verb phrase, moreover, at the very end of the sentence, even after any balances (as in, `"He went out with her to go to the shops"`). The `DISPLACED` elaboration, in contrast, and the `PREORDAINED` and `REGULAR` elaborations when they too have a displacer, introduce the *first* of the two verb phrases: `"He seems to be upset"` encodes an elaboration of the plain message encoded as `"He is upset"`.
+
+The next thing to note is that not every pivot can act as a primary displacer in this way. `"It is red to rain"` is not a sentence of English, for example. And while `"He sings to laugh"` has an interpretation, the interpretation is that he sings *in order to* laugh; the `Do "sing"` pivot cannot be used as a displacer. In fact the vast majority of pivots cannot be used in this way, and it would be far simpler to list the ones that can than the ones that can't. However, since more research is necessary before I can venture anything like a complete list, I have for the time being simply allowed *any* pivot in my model. Consequently it is possible, in my system, to generate nonsense strings like `"It is red to rain"`. This is a hole that will have to be plugged at a later date.
+
+The English code-breaker faces a number of intriguing puzzles, among them how to account for the two strikingly different uses of the `"be going to"` construction, as illustrated in the following pair of sentences:
+
+```elm
+"She is going to France."
+
+"She is going to leave."
+```
+
+It is possible, of course, that `"be going to"` is simply inherently ambiguous, the result of two distinct ideas. But that would be a most disappointing discovery. The scientific mind abhors coincidence, and thirsts for a deeper account, for some more general principles that might predict the two different uses without appealing to brute, lexical ambiguity.
+
+Let us see if we can delve a little deeper. The first of these sentences is ambiguous between a plain reading (she is en route as we speak) and a conservative `PREORDAINED` reading (the plans have been made). Thus, to be clear:
+
+```elm
+( Female, Do "go" Ongoing, [ To, Other "France" ] )
+    -> "She is going to France."
+
+PREORDAINED ( Female, Do "go" Ongoing, [ To, Other "France" ] )
+    -> "She is going to France."  -- e.g. next month
+```
+
+Either way, this is what we might call the *basic* use of `"be going to"`; it simply arises from the `Do "go" Ongoing` verablity, and encodes the idea of going in the literal sense of moving from one place to another. Notice that neither of these messages can include any specification of the time that she arrives. `"She is going to France tomorrow"` only has a `PREORDAINED` interpretation, and `"tomorrow"` serves to encode the time at which she is going, not the time at which she gets there. Thus, while the idea of going somewhere naturally invites thoughts of a later arrival, the verbality itself cannot support any specification of that later time.
+
+These two messages do not contain any displacer. The `"be going to"`, in both cases, is coming directly from the nucleus. It is when this phrase is introduced by a displacer that things start to get interesting. Consider the following sentence:
+
+```elm
+"She is going to see him."
+```
+
+There are now three relevant interpretations. On the first, she is on the way to see him as we speak. On the second, there is a prearrangement in place for her to go and see him at some unspecified time in the future. These two correspond to the two messages just examined, the second being a conservative `PREORDAINED` version of the first. But there is now also a third interpretation, unlike any we have seen before, according to which she herself needn't be going anywhere. Her seeing him in the future is expected, but perhaps because he is coming to see her.
+
+I diagnose the first of these three interpretations - she is on the way to his location as we speak - as a `DISPLACED` message. Thus:
+
+```elm
+DISPLACED ( Do "go" Ongoing ) ( Female, Do "see", [ Male ] )
+    -> "She is going to see him."
+```
+
+The `DISPLACED` elaboration, when introducing a primary displacer, has the effect of modifying the underlying condition. The displacer itself contributes to the message just what it would contribute were it directly in the nucleus. Going to see him, in this sense, is no different from going to France, except of course for the different endpoint of the journey. The second of the three interpretations, meanwhile, is a conservative `PREORDAINED DISPLACED` message:
+
+```elm
+PREORDAINED (DISPLACED ( Do "go" Ongoing ) ( Female, Do "see", [ Male ] ))
+    -> "She is going to see him."
+```
+
+There is nothing unusual here. What the first interpretation alleges to be happening right now, the second alleges to be prearranged for some later time. This is exactly the way of conservative `PREORDAINED` messages in general.
+
+The interesting case is the third interpretation, which I diagnose, not as a `PREORDAINED DISPLACED` message, but rather as `PREORDAINED` message *with a displacer*:
+
+```elm
+PREORDAINED ( Do "go" Ongoing ) ( Female, Do "see", [ Male ] )
+    -> "She is going to see him."
+```
+
+The difference between the second and third interpretations is that, where the former applies the idea of prearrangement to the previously displaced condition, the latter builds the displacer into the idea of the prearrangement itself. The result is a prearrangement with the metaphorical character of a journey: the plans being what they are, she is currently "on the way" to a state of affairs in which they meet. This is consistent with him being the one who'll do the actual moving.
+
+We have been considering an example of prearrangement. But the `PREORDAINED` elaboration with the `Do "go" Ongoing` pivot admits of uncoloured uses as well, just like the conservative `PREORDAINED` elaboration. `"It is going to rain"`, for example, conveys nothing about any prearrangements, but rather concerns present predeterminations for the future.
+
+The `DISPLACED` elaboration takes no arguments besides the displacer and the underlying message. The sentence, `"She is going to see him tomorrow"` has two interpretations, a conservative `PREORDAINED DISPLACED` message and a `PREORDAINED` message with a displacer. Either way, `"tomorrow"` can only be coming from the `PREORDAINED` elaboration. Just as the condition of *going to France* cannot include any specification of the time of arrival, so the more elaborate `DISPLACED` condition of *going to see him* cannot include any specification of the time of the meeting.
+
+This point is helpful in distinguishing `DISPLACED` messages from `PREORDAINED` messages with a displacer. All `PREORDAINED` messages necessarily concern a later satisfaction of the underlying condition. With `DISPLACED` messages, some do and some do not. Even when they do, however, there is a simple test to see whether a displacer has come from the `DISPLACED` elaboration or the `PREORDAINED` elaboration: consider whether the message can include a specification of the time of the underlying condition's satisfaction. For example, one might have thought that `"It is about to rain"`, like `"It is going to rain"`, comes from the `PREORDAINED` elaboration. I submit that it comes only from the `DISPLACED` elaboration, however, since - unlike the latter - no specification of *when* it rains is possible. `"It is about to rain in five minutes"` is not English. Nor is this anything to do with the immediacy conveyed by `"about to"`; `"It is about to rain in one second"` is no less permissible.
+
+The primary displacer `( Be, "likely" )` shows up in both `DISPLACED` and `PREORDAINED` messages, which explains an ambiguity in the sentences thereby produced, which can be taken to concern either the present or the future:
+
+```elm
+DISPLACED ( Be, "likely" ) ( Male, ( Be, [ In, Other "Spain" ] ) )
+    -> "He is likely to be in Spain."  -- right now
+
+PREORDAINED ( Be, "likely" ) ( Male, ( Be, [ In, Other "Spain" ] ) )
+    -> "He is likely to be in Spain."  -- next week
+```
+
+In the second of these messages, the claim is not that there are plans for next week's likelihood to be high, but that the plans are such that the *present* likelihood is high. The likelihood itself is not preordained; rather, the likelihood and the idea of preordainment work together to say something jointly about the prospect of his being in Spain next week. This is exactly analogous to the difference, examined above, between `PREORDAINED (DISPLACED (Do "go" Ongoing))` messages and `PREORDAINED (Do "go" Ongoing)` messages.
+
+The very same occurs with displacers concerning intentional attitudes that can be directed either at the present or the future. For example:
+
+```elm
+DISPLACED ( Do "want" ) ( Speaker, Do "live", [ In, Other "Portugal" ] )
+    -> "I want to live in Portugal."  -- right now
+
+PREORDAINED ( Do "want" ) ( Speaker, Do "live", [ In, Other "Portugal" ] )
+    -> "I want to live in Portugal."  -- when I retire
+```
+
+In the second of these messages, it is not that I plan now to have a desire when I retire to live in Portugal. Rather, I have a desire now to live there when I retire. Again, the wanting and the idea of preordainment combine to form a desire for something future. In this way, we see that the two uses of `"be going to"` are part of a more general pattern, an eminently more satisfying explanation than one that simply resorts to lexical ambiguity.
+
+Having seen some examples of the difference between `DISPLACED` and `PREORDAINED` messages with a primary displacer, the idea of `REGULAR` messages with a primary displacer should now be relatively easy to introduce. It seems to me there are not many primary displacers that can be used with the `REGULAR` elaboration. Here are examples of the most obvious:
+
+```
+REGULAR ( Do "like" ) ( Male "Victor", Do "tease", [ Other "Grannie" ] )
+    -> "Victor likes to tease Grannie."
+
+REGULAR (Do "tend" ) ( Male "Victor", Do "tease", [ Other "Grannie" ] )
+    -> "Victor tends to tease Grannie."
+
+PAST (REGULAR (Do "use" ) ( Male "Victor", Do "tease", [ Other "Grannie" ] ))
+    -> "Victor used to tease Grannie."
+```
+
+In the second of these examples, it is hard to think of an equivalent message in which the optional frequency argument is also present. The frequency seems already to be covered (albeit vaguely) by the primary displacer. The third example represents a very curious puzzle that I confess I have not yet been able to solve. Why does this construction only occur in the past? What relationship does this use of `"use"` have with the other more literal one? Perhaps none; but as with the two uses of `"be going to"`, that would be a disappointing admission.
+
+Messages with a primary displacer can of course be made `PAST` or `PRIOR` (or both) in all the usual ways, giving rise to sentences like, `"It was about to rain"`, `"He has had to leave"`, or `"I had hoped to see you"`. The `DISPLACED` elaboration can also be applied on top of the `PRIOR` elaboration, with predictable results:
+
+```elm
+PRIOR ( Male, Do "leave" )
+    -> "He has left."
+
+DISPLACED ( Do "seem" ) (PRIOR ( Male, Do "leave" ))
+    -> "He seems to have left."
+```
+
+Less obviously, I suggest that it can also be applied on top of the `PAST` elaboration, with similar results. That is to say, I suggest that sentences like, `"He seems to have left"` are ambiguous between `DISPLACED PRIOR` interpretations (it seems that he has left) and `DISPLACED PAST` interpretations (it seems that he left). The distinction here reveals itself when we include the optional time argument to the `PAST` elaboration:
+
+```elm
+DISPLACED ( Do "seem" ) (PRIOR ( Male, Do "leave" ))
+    -> "He seems to have left."
+
+DISPLACED ( Do "seem" ) (PAST "yesterday" ( Male, Do "leave" ))
+    -> "He seems to have left yesterday."
+```
+
+The second sentence here cannot be the result of a `DISPLACED PRIOR` message, since `PRIOR` messages cannot take an additional time argument; `"He has left yesterday"` is not a sentence of English. That it is a `DISPLACED PAST` message - an elaboration of the message encoded as `"He left yesterday"` - therefore seems the only plausible diagnosis.
+
+### 5.6. Interlude: Against the Future Tense Hypothesis
 
 We come now to one of the most puzzling aspects of the English code, namely the use of the English modals: **`"will"`**, **`"shall"`**, **`"may"`**, **`"can"`**, `"must"`, `"ought"`, `"need"`, and `"dare"`. Before venturing my hypothesis, let me briefly call into question a long-standing and very popular view: that `"will"` is a marker of the future tense. On this hypothesis, the natural interpretations of the following three sentences differ only in the time of the condition's satisfaction by the object:
 
 ```elm
 "It will be sunny in Paris tomorrow."
+
 "It is sunny in Paris at the moment."
+
 "It was sunny in Paris yesterday."
 ```
 
@@ -721,48 +981,64 @@ There are several reasons for rejecting this hypothesis. I have promised to be b
 
 ```elm
 "It will be sunny in Paris tomorrow."
+
 "It will be sunny in Paris at the moment."
+
 "It will have been sunny in Paris yesterday."
 ```
 
-As a first stab, what these messages seem to have in common is that they reflect the speaker's *best guess* in the absence of concrete observation. The speaker in Paris, looking up at the sky, may opine that it *is* sunny; but the speaker in London, armed only with knowledge of the time of year and the general way of these things, will more likely venture the judgement that it *will be* sunny there. The claim that it will be sunny in Paris *tomorrow*, meanwhile, is surely much more like the Londoner's guess than the Parisian's statement. We make use of the same words to convey it, and we say such things - necessarily - in the absence of observational confirmation.
+As a first stab, what these messages seem to have in common is that they reflect the speaker's *best guess* in the absence of concrete observation. The speaker in Paris, looking up at the sky, may opine that it *is* sunny; but the speaker in London, armed only with knowledge of the time of year and the general way of these things, will more likely venture the judgement that it *will be* sunny there. The claim that it will be sunny in Paris *tomorrow*, meanwhile, is surely much more like the Londoner's guess than the Parisian's report. We make use of the same words to convey it, and we say such things - necessarily - in the absence of observational confirmation.
 
-Secondly, the behaviour of `"will"` in reported speech is difficult to square with the future tense hypothesis. Having said on Monday that it *is* sunny in Paris, I may be correctly reported on Tuesday as having said that it *was* sunny yesterday. This is to be expected, since the `PAST` elaboration does nothing but change the time of the condition's satisfaction. But having said on Wednesday that it *will be* sunny in Paris tomorrow, the correct report on Thursday is that I said it *would be* sunny in Paris today. If my claim on Wednesday was the result of a `FUTURE` elaboration that merely located the condition's satisfaction in the future, the correct report on Thursday should be that I said it *is* sunny in Paris today. But that is plainly *not* what I said. Following on from the first point above, *that* sounds like an observational report, whereas what I affirmed on Wednesday was not based on a magical observation of the future; it was my best guess given the epistemic circumstances.
+Secondly, the behaviour of `"will"` in reported speech is difficult to square with the future tense hypothesis. Having said on Monday that it *is* sunny in Paris, I may be correctly reported on Tuesday as having said that it *was* sunny yesterday. This is to be expected, since the `PAST` elaboration does nothing but change the time of the condition's satisfaction. But having said on Wednesday that it *will be* sunny in Paris tomorrow, the correct report on Thursday is that I said it *would be* sunny in Paris today. If my claim on Wednesday was the result of a `FUTURE` elaboration that merely located the condition's satisfaction in the future, the correct report on Thursday should be that I said it *is* sunny in Paris today. But that is plainly *not* what I said. Following on from the first point above, *that* sounds like an observational report, whereas what I affirmed on Wednesday was not based on a magical observation of the future; it was my best guess given the epistemic circumstances. (What reported speech suggests is the hypothesis that `"will be"` encodes something like a *present* guess, where `"would be"` encodes the corresponding *past* guess. On my view, this is indeed exactly the case.)
 
 Thirdly, wherever `"will"` shows up encoding a claim about the future, it is one option among many, the other options being precisely the other modals:
 
 ```elm
 "It will be sunny in Paris tomorrow."
+
 "It may be sunny in Paris tomorrow."
+
 "It ought to be sunny in Paris tomorrow."
+
 "It needn't be sunny in Paris tomorrow."
+
 ...
 ```
 
-To the mind of a codebreaker, these examples show fairly clearly that `"will"` does not encode futurity, any more than `"may"`, `"ought"`, or `"need"` does. It encodes something on a par with what these other modals encode, and the fact that the messages here are about about the future is to be explained by something else entirely.
+To the mind of a codebreaker, these examples show fairly clearly that `"will"` does not encode futurity, any more than `"may"`, `"ought"`, or `"need"` do. Rather it encodes something on a par with what these other modals encode, and the fact that the messages here are about about the future is to be explained by something else entirely.
 
-There is plenty more that could be said here, but this is not the place to pursue the argument in depth. Rather, this is the place to present my alternative hypothesis, which I believe is vastly more promising. Debates about the relative merits of the two proposals (and indeed of any other proposals intended to accommodate the same data) can then be pursued elsewhere. Let me waste no time in admitting that, while I consider my own hypothesis to be considerably closer to the truth than the future tense hypothesis, I would not be at all surprised (or disappointed) if it ultimately proves to be inadequate. I venture it because it strikes me as the best place to start, in virtue of its simplicity. We ought to see how much of the data can be explained in this eminently simple way, before succumbing to any complications. Then we can be relatively confident that a more complicated theory, if that is what the data eventually force us into, is no more complicated than it needs to be.
+There is plenty more that could be said here, but this is not the place to pursue the argument in depth. Rather, this is the place to present my alternative hypothesis, which I believe is vastly more promising. Debates about the relative merits of the two proposals (and indeed of any other proposals intended to accommodate the same data) can then be pursued elsewhere.
 
-Enough preamble. My hypothesis is that the English modals are to be accounted for by a single elaboration which introduces a *modality* into the message, with the choice of modality determining the choice of modal. Thus:
+### 5.7. Secondary Displacers, part 1/2 (DISPLACED Messages)
+
+With no more ado, then, my hypothesis is that the English modals are to be accounted for by precisely the three elaborations that introduce displacers into messages (`DISPLACED`, `PREORDAINED`, and `REGULAR`). Where primary displacers are pivots, secondary displacers are *modalities*, which latter ideas are responsible for the selection of the modal. The alleged future tense, then, drops out of my system as a special case of the `PREORDAINED` elaboration, with the modality behind `"will"` as its displacer.
+
+As ever, I begin with the relevant parts of my type definitions (many of which are now being repeated from earlier sections):
 
 ```elm
 type Message
     = ...
-    | MODAL Modality Message
+    | DISPLACED Displacer Message
+    | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+    | REGULAR (Maybe Displacer) (Maybe Time) Message
     | ...
+
+type Displacer
+    = Primary Pivot
+    | Secondary Modality
 
 type Modality
     = Yes1    -- "will"
-    | Yes2    -- "must"/"ought"/"need"
-    | Yes3    -- "shall"
+    | Yes2    -- "shall"
+    | Yes3    -- "must"/"ought"/"need"
     | Maybe1  -- "may"
-    | Maybe2  -- "can"
-    | Maybe3  -- "dare"
+    | Maybe3  -- "can"
+    | Maybe4  -- "dare"
 ```
 
-As the type definition indicates, I divide the English modalities into two logical categories, *yes* and *maybe*. This logical distinction will be made clearer as we proceed. Each of these two fundamental types then comes in three different *flavours*. The first of each list - encoded in the modals **`"will"`** and **`"may"`** respectively - is the *plain* variety. I will begin by restricting my attention to these, exploring their various different uses, before expanding the picture to include the other *rich* modalities as well.
+As the type definition indicates, I divide the English modalities into two logical categories, *yes* and *maybe*. This logical distinction will be made clearer as we proceed. Each of these two fundamental types then comes in four different *flavours* (though flavours 2 and 4 each exist in only one of the logical categories).
 
-The first use for `MODAL` messages, and the conceptually basic use on my account, is in speculating about matters of present fact. Suppose we are considering whether or not James knows the answer to a certain question. There are two possible factual claims here, an unelaborated one and a `NEGATIVE` one, encoded respectively in the following two sentences:
+I begin with the examination of `DISPLACED` messages with secondary displacers, which are on my view the conceptually basic cases. In the first instance, these messages are speculations about matters of present fact. Thus suppose, for example, that we are considering whether or not James knows Claire. There are two possible factual claims here, a plain one and a `NEGATIVE` one, encoded respectively in the following two sentences:
 
 ```elm
 "James knows Claire."
@@ -770,309 +1046,162 @@ The first use for `MODAL` messages, and the conceptually basic use on my account
 "James doesn't know Claire."
 ```
 
-When it comes to *speculations* about this fact, however, there are more possibilities. For where factual questions call for yes/no answers, with speculations there is room also for *maybe* and *maybe not*. This affords us our first foothold in the theory of the English modalities, and the likely explanation of the difference between `"will"` and `"may"`. Thus:
+When it comes to *speculations* about this fact, however, there is a third possibility. For where factual questions call for yes/no answers, with speculations there is room also for *maybe*. This affords us our first foothold in the theory of the English modalities, and the likely explanation of the informational difference underlying the choice between `"will"` and `"may"`. Thus:
 
 ```elm
-MODAL Yes1 ( Other "James", ( Do "know", [ Other "Claire" ] ) )
+DISPLACED Yes1 ( Male "James", Do "know", [ Female "Claire" ] )
     -> "James will know Claire."
 
-MODAL Maybe1 ( Other "James", ( Do "know", [ Other "Claire" ] ) )
+DISPLACED Maybe1 ( Male "James", Do "know", [ Female "Claire" ] )
     -> "James may know Claire."
 
-MODAL Maybe1 (NEGATIVE ( Other "James", ( Do "know", [ Other "Claire" ] ) ))
+DISPLACED Maybe1 (NEGATIVE ( Male "James", Do "know", [ Female "Claire" ] ))
     -> "James may not know Claire."
 
-MODAL Yes1 (NEGATIVE ( Other "James", ( Do "know", [ Other "Claire" ] ) ))
+DISPLACED Yes1 (NEGATIVE ( Male "James", Do "know", [ Female "Claire" ] ))
     -> "James will not know Claire."
 ```
 
-I have diagnosed the second two messages here as `MODAL NEGATIVE` messages, but one could equally think of them as `NEGATIVE MODAL` messages with the `Yes1` and `Maybe1` modalities reversed; for the contrary of *yes* is *maybe not*, while the contrary of *maybe* is *no* (i.e. *yes* to the corresponding denial). In other words, logically speaking, `NEGATIVE (MODAL Yes1) == MODAL Maybe NEGATIVE`, and `NEGATIVE (MODAL Maybe1) == MODAL Yes NEGATIVE`. (While we are here, it may be noted that this serves as another reason to reject the future tense hypothesis. The contraries of the messages encoded as `"It is/was sunny in Paris today/yesterday"` are encoded as `"It is/was not sunny in Paris today/yesterday"`. But the contrary of the message encoded as `It will be sunny in Paris tomorrow"` is encoded as `"It may not be sunny in Paris tomorrow"`.) When the `NEGATIVE` elaboration is applied on top of the `MODAL` elaboration, therefore, the result is not a negative condition, but a negative modality.
+I have diagnosed the second two messages here as `DISPLACED NEGATIVE` messages, but one could equally think of them as `NEGATIVE DISPLACED` messages with the `Yes1` and `Maybe1` modalities reversed; for the contrary of *yes* is *maybe not*, while the contrary of *maybe* is *no* (i.e. *yes* to the corresponding denial). In other words, logically speaking, `NEGATIVE (DISPLACED Yes1) == DISPLACED Maybe1 NEGATIVE`, and `NEGATIVE (DISPLACED Maybe1) == DISPLACED Yes1 NEGATIVE`. (While we are here, it may be noted that this serves as another reason to reject the future tense hypothesis. The contraries of the messages encoded as `"It is/was sunny in Paris today/yesterday"` are encoded as `"It is/was not sunny in Paris today/yesterday"`. But the contrary of the message encoded as `It will be sunny in Paris tomorrow"` is encoded as `"It may not be sunny in Paris tomorrow"`.) When the `NEGATIVE` elaboration is applied on top of the `DISPLACED` elaboration with a secondary displacer, therefore, the result is not a negative condition, but a negative modality.
 
-Following Dudman, I will refer to messages like these as *judgements*, and refer to the modality as the *verdict* of the judgement. Plain messages, recall, affirm the present satisfaction of the condition by the object. We have seen many elaborations that target the condition, and a couple that target the time of its satisfaction. In section 5.7 we will see some elaborations that target the object. The `MODAL` elaboration, in contrast to all of these, targets the *satisfaction* itself: the verdict concerns the (imagined) satisfaction of the condition in circumstances not immediately accessible to the speaker.
+Following Dudman, I will refer to messages like these as *judgements*, and refer to the modality as the *verdict* of the judgement. Plain messages, recall, affirm the present satisfaction of the condition by the object. We have seen many elaborations that target the condition, and a couple that target the time of its satisfaction. In section 5.9 we will see some elaborations that target the object. The `DISPLACED` elaboration, in contrast to all of these, targets the *satisfaction* itself: the verdict concerns the (imagined) satisfaction of the condition in circumstances not immediately accessible to the speaker.
 
-
-Applying the `MODAL` elaboration to a plain message generates a speculation concerning the present satisfaction of the underlying condition. It is a brute fact about the English code, for which I can give no explanation, that the `MODAL` elaboration cannot be applied on top of `PAST` messages to generate equivalent speculations concerning the *past* satisfaction of the underlying condition: `"James will knew Claire"` is not a sentence of English. The limitation here is harmless, however, since the code offers us free use of the `PRIOR` elaboration for the purpose instead:
+Applying the `DISPLACED` elaboration to a plain message generates a judgement concerning the *present* satisfaction of the underlying condition. English also allows for the communication of judgements concerning the *past* satisfaction of the underlying condition. In encoding these, the second finite form of the verb is not a grammatical possibility: we do not say, `"Susan will ate"`, for example. Instead, English deploys its other trick for talking about the past, namely the one used in `PRIOR` messages. For example:
 
 ```elm
-MODAL Yes (PRIOR ( Other "James", ( Do "know", [ Other "Claire" ] ) ))
-    -> "James will have known Claire."
+DISPLACED Yes1 (PAST "this morning" ( Female "Susan", ( Do "eat" ) ))
+    -> "Susan will have eaten this morning."
 
-MODAL Maybe (PRIOR ( Other "James", ( Do "know", [ Other "Claire" ] ) ))
-    -> "James may have known Claire."
+DISPLACED Maybe1 (PAST "this morning" ( Female "Susan", ( Do "eat" ) ))
+    -> "Susan may have eaten this morning."
 ```
 
-Given that `MODAL PRIOR` messages are possible, but `MODAL PAST` messages are not, any distinction that might have been drawn between the two is unavailable. Consequently it is unclear whether the first sentence above is best followed up with, `"Yes, he *did* know her"` or, `"Yes, he *has* known her"`. Sometimes the speaker will have a `PRIOR` message in mind, and sometimes a `PAST` message; and sometimes there may simply be no determinate answer either way.
-
-The other way around, the very reverse is true: `PRIOR MODAL` messages do not exist, but `PAST MODAL` messages do. I suggest that it is `PAST MODAL` messages that are responsible for the following sentences:
+The use of `"have"` followed by the second participle form of the verb notwithstanding, I diagnose these as `DISPLACED PAST` messages rather than `DISPLACED PRIOR` messages, for two reasons. First, the grammatical point is that they have room for an additional time argument (encoded here as `"this morning"`) in the same way that `PAST` messages do, and `PRIOR` messages do not. Secondly, the intuitive point is that these seem to be judgements concerning whether or not Susan *ate* this morning, rather than whether or not she *has eaten*. Not that judgements about whether or not she *has eaten* are impossible: on the contrary, these are simply `DISPLACED PRIOR` messages, and in general phrases like `"will have eaten"` are ambiguous between `DISPLACED PAST` and `DISPLACED PRIOR` readings:
 
 ```elm
-PAST (MODAL Yes ( Other "James", ( Do "know", [ Other "Claire" ] ) ))
+DISPLACED Yes1 (PAST ( Female "Susan", ( Do "eat" ) ))
+    -> "Susan will have eaten."  -- at 7 o'clock this morning
+
+DISPLACED Yes1 (PRIOR ( Female "Susan", ( Do "eat" ) ))
+    -> "Susan will have eaten."  -- already / by now
+```
+
+Just as the difference between `PAST` and `PRIOR` messages is in general a subtle one, in some cases having very little practical import, so the difference between `DISPLACED PAST` and `DISPLACED PRIOR` messages is also very slight. In cases where the difference is negligible, it may be unclear which of the two the speaker has in mind (if she even has one definitely in mind at all). Nevertheless, the ambiguity in general remains. And this, I should add, is precisely what we already observed in section 5.5 regarding the application of the primary `DISPLACED` elaboration on top of the `PAST` and `PRIOR` elaborations.
+
+Secondary `PRIOR DISPLACED` messages do not exist, but secondary `PAST DISPLACED` messages do. I suggest that it is secondary `PAST DISPLACED` messages that are responsible for the following sentences:
+
+```elm
+PAST (DISPLACED Yes1 ( Other "James", Do "know", [ Other "Claire" ] ))
     -> "James would know Claire."
 
-PAST (MODAL Maybe ( Other "James", ( Do "know", [ Other "Claire" ] ) ))
+PAST (DISPLACED Maybe1 ( Other "James", Do "know", [ Other "Claire" ] ))
     -> "James might know Claire."
 ```
 
 The diagnosis here is not immediately obvious, but it has a great deal to recommend it. First, it is the most natural explanation of the words used, since `"would"` and `"might"` stand to `"will"` and `"may"` just as `"was"` and `"did"` stand to `"is"` and `"does"`. Put crudely, the sentences here *look like* the result of the `PAST` elaboration applied on top of whatever elaboration introduced `"will"` and `"may"`. This observation by itself wouldn't amount to much if the underlying semantics didn't match up with intuitions or usage, but on consideration it matches up remarkably well. Allow me to switch to another example to make the point:
 
 ```elm
-"James will know the result of the football."
+DISPLACED Yes1 ( Male "James", Do "know", [ Other "the result of the football" ] )
+    -> "James will know the result of the football."
 
-"James would know the result of the football."
+PAST (DISPLACED Yes1 ( Male "James", Do "know", [ Other "the result of the football" ] ))
+    -> "James would know the result of the football."
 ```
 
-The first sentence here encodes a speculation based on *up to the minute* information. It is likely on the lips of someone who may or may not know James very well, but has seen that he has been watching the television in the pub all afternoon. The second sentence, in contrast, encodes a speculation which *waives* up to the minute information, drawing on more well established evidence. It is likely on the lips of someone who has no idea what James has been up to today, but knows he is an avid fan who rarely misses a game. To make this more precise, the first encodes the result of *present* speculating about the present, while the second encodes the result of *past* speculating about the present. It is not, of course, that the speculations themselves are present or past; the mental act is inevitably present. Rather it is the time of the imagined *basis* of those speculations.
+The first sentence here encodes a speculation based on *up to the minute* information. It is likely on the lips of someone who may or may not know James very well, but has seen that he has been watching the television in the pub all afternoon. The second sentence, in contrast, encodes a speculation which *waives* such recent information, drawing on more well established evidence. It is likely on the lips of someone who has no idea what James has been up to today, but knows he is an avid fan who rarely misses a game. To make this more precise, let us say that secondary `DISPLACED` messages are made from a certain *standpoint*, which is the time of the latest fact that counts for the speaker as evidence for that judgement. By default, the standpoint of a secondary `DISPLACED` message is present; the `PAST` elaboration changes this default time to the past.
 
-Before I start introducing other modalities into the picture, let me continue on this examination of some of the more complex messages that can arise through the interaction of the `MODAL` elaboration with the other elaborations we have seen. Consider the following sentences:
+Before examining the modalities or secondary displacers in `PREORDAINED` and `REGULAR` messages, let us broaden our investigation to include the other flavours of English modality. Consider:
 
 ```elm
-"Grannie will usually walk home."
+"James must know the result of the football."
 
-"Grannie may ocassionally walk home."
+"James ought to know the result of the football."
+
+"James needn't know the result of the football."
+
+"James should know the result of the football."
+
+"James can't know the result of the football."
+
+"James daren't know the result of the football."
 ```
 
-Both are ambiguous, admitting of (at least) two interpretations. The first of each pair is relatively uninteresting, and not much different from what we have seen so far. They are `MODAL REGULAR` messages, and concern speculations about Grannie's present habits. The have corresponding `MODAL REGULAR PRIOR` messages, concerning speculations about her past habits:
+In general, these sentences all encode judgements concerning the present satisfaction of the underlying condition, on a par with those we have seen already with the `Yes1` and `Maybe1` modalities for verdicts. But the flavour of these verdicts is different. Let us start with the informational triggers behind `"must"` and `"can"`, which have the flavour of *necessity* and *possibility* respectively. To say that James *must* know the result is to convey that he will know it, but rather more emphatically: it is necessary that he knows it, there is no way he could fail to know it.
+
+On the other side, it is a curious fact that `"can"` does not occur in these contexts unless it is negated. (The sentence `"James can know the result of the football"` has an interpretation, but it is not a judgement as to whether or not he does, but a message granting permission to tell him. We will examine these messages in the next section.) I explain this fact as follows. Since the meaning of `"can"` concerns what is possible, James *can* know the result only if he *does*. Consequently the only basis for the `DISPLACED` claim would also be a basis for the simpler and stronger unelaborated claim, which we therefore resort to instead. Saying that James *can't* know the result, however, is very different from saying that he *doesn't*. It is tantamount to saying that the available facts *rule out* the possibility of his knowing. The judgement that James can't know, to be clear, is a `NEGATIVE DISPLACED` claim, not a `DISPLACED NEGATIVE`: its sponsor does not affirm the possibility of James failing to know, but rather denies the possibility of him knowing.
+
+It seems to me that `"must"` stands to `"can"` more or less exactly as `"will"` stands to `"may"`. We have here, I suggest, just one other flavour of modality, with its two logical sides; thus `Yes3` for `"must"` and `Maybe3` for `"can"`. (Why 3 instead of 2? I will explain the reason for this numbering at the end of this section.) In full, then, here are my analyses of these messages:
 
 ```elm
-"Grannie will usually have walked home."
-"Grannie may ocassionally have walked home."
+DISPLACED Yes3 ( Male "James", Do "know", [ Other "the result of the football" ] )
+    -> "James must know the result of the football."
+
+NEGATIVE (DISPLACED Maybe3 ( Male "James", Do "know", [ Other "the result of the football" ] ))
+    -> "James can't know the result of the football."
 ```
 
-But more interesting is the second of each pair, which are `REGULAR MODAL` messages. With `REGULAR MODAL` messages, the `REGULAR` elaboration subsumes the modality, giving it very little influence in the overall claim. Indeed, these messages - at least where the plain modalities `Yes1` and `Maybe1` are concerned - seem to have almost no informational difference from their plainer `REGULAR` counterparts. More specifically, when the `REGULAR` elaboration is applied on top of the `MODAL` elaboration, it restores the default behaviour of the `PAST` elaboration. A `PAST MODAL` message, as I just explained, does not amount to a speculation about the past satisfaction of some condition, but the result of past speculating about the satisfaction of some condition. A `PAST REGULAR MODAL` message, however, is a more straightforward claim about some past regularity:
+While `"James can't know"` encodes a `NEGATIVE DISPLACED` claim, `"James must not know"` encodes a `DISPLACED NEGATIVE`: the latter claim is not that it isn't necessary that he knows, but that it is necessary that he doesn't. Of course, if it is necessary that he doesn't, then it is impossible that he does, and the same logical relationship holds between `Yes3` and `Maybe3` as holds between `Yes1` and `Maybe1`; i.e. `DISPLACED Yes3 NEGATIVE == NEGATIVE (DISPLACED Maybe3)` and `DISPLACED Maybe3 NEGATIVE == NEGATIVE (DISPLACED Yes3)`. Thus `"James can't know"` encodes something logically equivalent to `"James must not know"`. But now, since `"James must not know"` encodes a `DISPLACED NEGATIVE`, we are left wondering how to convey the corresponding `NEGATIVE DISPLACED`. I suggest that it is encoded in the modal `"need"`, which is thus informationally identical to `"must"`:
 
 ```elm
-"(These days,) Grannie will usually walk home."
-
-"(In those days,) Grannie would usually walk home."
+NEGATIVE (DISPLACED Yes3 ( Male "James", Do "know", [ Other "the result of the football" ] ))
+    -> James needn't know the result of the football."
 ```
 
+This hypothesis has several things to recommend it. First, it is gratifyingly simple, since it does not require us to posit any additional modality responsible exclusively for the modal `"need"`; the one responsible for `"must"` already suffices. Secondly, it explains why the modal `"need"` only ever occurs in `NEGATIVE` messages (`"James need know the result of the football"` is not a sentence of English). Thirdly, and related to these first two points, on this hypothesis we do not need to build any extra constraints into the code. If there was an additional modality responsible for `"need"` but not responsible for `"must"`, then we would have to add in that the latter can never be negated, while the former must always be.
 
-
-
-
-
-
-
-Now let us consider what the messages thus generated amount to, and how this one elaboration can account for the various data. In the first instance (i.e. when they have not been elaborated further), `MODAL` messages are speculations about the unobserved present. Consider the following sentences:
+As already noted, `"can"` does not occur in these contexts unless it is negated. I explain this fact with reference to the underlying modality, and the logical point that James *can* know only if he *does*, whereupon the latter becomes the more natural thing to say. The same restriction, however, is not observed with `"could"`: `"James could know"` and `"James couldn't know"` are both equally acceptable. This is not to be explained by supposing that `"could"` encodes a different modality from `"can"`. That hypothesis is most unwelcome, since these are just two forms of the same modal. Much more welcome would be a hypothesis that explained the difference in *temporal* terms, since - to outward appearances at least - `"could"` stands to `"can"` as `"would"` stands to `"will"`, and `"did"` stands to `"does"`. Gratifyingly, just such a hypothesis fares admirably against the data. I propose that `"James could know"` and `"James couldn't know"` are both the results of `PAST DISPLACED` messages, just like `"James would know"` and `"James might know"`:
 
 ```elm
-"James will know the answer."
-"James must know the answer."
-"James may know the answer.
-"James ought to know the answer."
+PAST (DISPLACED Maybe2 ( Male "James", Do "know", [ Other "the result of the football" ] ))
+    -> "James could know the result of the football."
+
+PAST (NEGATIVE (DISPLACED Maybe2 ( Male "James", Do "know", [ Other "the result of the football" ] )))
+    -> "James couldn't know the result of the football."
 ```
 
-The `MODAL` elaboration does not result in any new condition; rather, the modality serves to say something about the underlying condition's satisfaction. In the case of `Will`, what it says about its satisfaction is, simply, *yes*. `Will`, I suggest, is the bare positive modality, something which perhaps explains the temptation to treat `"will"` apart from the other modals, as the marker of a future tense. Compare it with `Must`, which likewise says *yes*, but rather more substantially or emphatically: the ideas of *necessity* and *force* seem close by. Where `Will` and `Must` say *yes*, meanwhile, `May` says *maybe*, and `Ought` says *yes rather than no*. `Ought` stands in between `Will` and `Must` on one side, and `May` on the other. I will say more about the other modalities as we proceed, but for various reasons they seldom or never show up in the absence of other elaborations.
+The judgement that James *can't* know, like the judgement that he *will* or *may* know, is taken from a present standpoint, based on up to the minute information. Consequently it is the *present* state of the world that the speaker takes to be ruling out this possibility; and that is why, on the other side, he *can* know only if he *does*. There is no parallel obstacle to saying that he *could* know, however, since the sponsor of this judgement is *waiving* present facts. The overall effect is that the possibility in question is felt to be more "distant", because grounded in the past. The speaker is leaving it open that more recent events may render his knowing the result impossible.
 
-The `MODAL` elaboration interacts interestingly with the `NEGATIVE` elaboration. In the first place, we have `MODAL NEGATIVE` messages, which convey something about the underlying condition's *non*-satisfaction. Consider:
+With this in mind, let me venture a less visually obvious hypothesis: that `"ought"` stands to `"must"` as `"could"` stands to `"can"`. In other words, `"ought"` is not the result of any additional flavour of modality, but rather the result of applying the `PAST` elaboration to a `MODAL` message with the `Yes3` modality; thus:
 
 ```elm
-"James will not know the answer."
-"James may not know the answer."
-"James ought not to know the answer."
+PAST (DISPLACED Yes3 ( Male "James", Do "know", [ Other "the result of the football" ] ))
+    -> "James ought to know the result of the football."
 ```
 
-If a `MODAL` message with `Will` or `Must` says *yes* to its underlying condition's satisfaction, then a `MODAL NEGATIVE` with the same modality says *no* to it. And if a `MODAL` message with `Ought` says *yes rather than no*, then a `MODAL NEGATIVE` with this same modality says *no rather than yes*. With `May`, the presence or absence of a `NEGATIVE` elaboration underneath serves mainly to emphasise the point one way or the other: *maybe* and *maybe not* are effectively equivalent.
+That `"ought"` is the result of the `PAST` elaboration is by no means immediately clear, and further evidence for this claim must wait until the next section, when I examine the modal in some other contexts. For now, I offer two things in support of the proposal. First, much like my proposal with regard to the modal `"need"`, it has the merits of simplicity. Not only do we require no further modality to account for the additional modal, we also need no extra validation rules. If `"ought"` was the result of a whole new modality, we should have to add that the modality behind `"must"` cannot be subjected the `PAST` elaboration, while the modality behind `"ought"` has to be. (Well, it has to be if my suggestion that it is caused by the `PAST` elaboration is accepted; otherwise it presumably *can't* be, since there is in any case only one possibility.) Secondly, the semantics seems intuitively to fit: the judgement that James ought to know invokes a more distant kind of necessity than the judgement that he must know; in much the same way as the judgement that he could know invokes a more distant kind of possibility.
 
-In the second place, we have `NEGATIVE MODAL` messages, which serve to negate, not the underlying condition, but the modality itself. Curiously, not every modality is negatable in every context. `Will` and `Ought`, for example, are never negatable, and `May` is only negatable in a context we have yet to meet. `Must`, however, is always negatable. When negated, however, it shows up in the modal `"need"` rather than `"must"`:
+If my proposals about `"must"`, `"need"`, and `"ought"` sharing the same underlying modality are right, then the obvious question is why this modality calls for different words when made `NEGATIVE` or `PAST`. I confess I have no very satisfactory answer to this question. I surmise that, as English evolved, three somewhat different ideas converged on the same informational territory, while each of the corresponding words refused to drop out of use. In the end, they settled on dividing up the ground: `"must"` for the unelaborated, `"need"` for the `NEGATIVE`, and `"ought"` for the `PAST`. This leaves one case unaccounted for: the `PAST NEGATIVE`. Should this be handled by `"ought"` or by `"need"`? I submit that it is handled by the latter, and consequently that `"need"` is ambiguous between a merely `NEGATIVE` and a `PAST NEGATIVE` interpretation:
 
 ```elm
-"James needn't know the answer."
+NEGATIVE (DISPLACED Yes3 ( Male "James", Do "know", [ Other "the result of the football" ] ))
+    -> "James needn't know the result of the football."
+
+PAST (NEGATIVE (DISPLACED Yes3 ( Male "James", Do "know", [ Other "the result of the football" ] )))
+    -> "James needn't know the result of the football."
 ```
 
-I diagnose this sentence as encoding the *denial* of what `"James must know the answer"` encodes: he needn't know if and only if it is not the case that he must know. This explains why the modal `"need"` only ever shows up in the negative: `"James need know the answer"` is not a sentence of English.
+In other words, the string `"James needn't know"` encodes both a denial of the claim that he *must* know, and a denial of the claim that he *ought to* know. Evidence that the modal `"need"` can be taken in a past as well as a present sense will be presented in the next section, alongside evidence that the modal `"ought"` can only be taken in a past sense.
 
-The modality `Can`, which has yet to enter into our examples, is like `Must` in being negatable everywhere. In otherwise unelaborated messages, moreover, it almost always shows up negated, as in:
+The first and third flavours of English modalities - at least if I am right about the relationship between `"must"`, `"need"`, and `"ought"` - exhibit a fairly tidy pattern. There are two more flavours, however, that make things a little messier. The first is responsible for the modal **`"shall"`**, and it is logically a *yes* modality. The second is responsible for the modal `"dare"`, and it is logically a *maybe* modality. These are clearly different flavours, however, and do not relate to each other in the same way that the other two flavours do: where **`"will"`** has **`"may"`**, **`"shall"`** has nothing; and where **`"can"`** has `"must"`/`"need"`/`"ought"`, `"dare"` has nothing. Thus I use different number suffixes for the underlying modalities here, writing them as `Yes2` and `Maybe4` respectively.
+
+Like `"need"`, `"dare"` seems - with one possible exception - only ever to occur in negated contexts: `"James dare know the result of the football"` is not English. Why this might be, however, I cannot say. All I can think is that it has something to do with the nature of `Maybe4` itself, that something in this informational choice precludes its occurence in positive form. But perhaps even this vague assertion is wrong, because there is arguably one exception to the general rule: `"I dare say"`. If this sentence is not *sui generis*, if it is not merely a fixed, hard-coded expression, then it must be the result of a non-negative `DISPLACED` message with the `Maybe4` modality for a displacer. For this reason, I have not (yet) ruled out the possibility of non-negative `Maybe4` messages in my model, though perhaps I should.
+
+Not only does `Maybe4` have no logical *yes* counterpart, it also refuses to succumb to the `PAST` elaboration; the closest English allows here is to switch to the verb **`"dare"`**, and venture a past judgement with the `Yes1` modality: `"He wouldn't dare"`. We will see another way in which the `Maybe4` modality differs from all the rest in the next section. There is no getting away from it: this modality is peculiar.
+
+The modal **`"shall"`**, together with its underlying modality `Yes2`, is also somewhat atypical. The first thing to note is that this modality is not available unless then message is elaborated further in one of a small handful of ways. `"James shall know the result of the football"` has an interpretation, but it is a message insisting that James be told at some point in the future, not a speculation concerning whether or not he knows at present. We will examine its ilk in the next section. For now, the first elaboration to consider that makes this modality possible is the `PAST` elaboration:
 
 ```elm
-"James can't know the answer."
+PAST (DISPLACED Yes3 ( Male "James", Do "know", [ Other "the result of the football" ] ))
+    -> "James should know the result of the football."
 ```
 
-Note that the message here is indeed a `NEGATIVE MODAL`, not a `MODAL NEGATIVE`; the speaker is not claiming it is possible that James doesn't know, but rather denying it is possible that he does.
+Intuitively, this message is practically identical to the corresponding message involving the `Yes3` modality: `"James should know"` and `"James ought to know"` are virtually synonymous. (On the assumption that `"should"` is indeed the result of the `PAST` elaboration - which it certainly *appears* to be - this fact is some small support for my claim that `"ought"` is likewise the result of this elaboration.) The claim as a whole evokes a more distant kind of necessity than the claim that he *must* know. It must be, then, that `Yes2` and `Yes3` are informationally very close, such that in the present context their difference becomes vanishingly small. In other contexts, however, `Yes2` appears to have a closer affinity with `Yes1` (as we will see in the next section). And in general, if I want to deny that he *should* know, should I say that he *needn't* know or that he *might not* know? It is hard to choose. Overall, I suggest that `Yes2` lies informationally *between* `Yes1` and `Yes3`. And that, belatedly, is the reason for the numbering, which might at first have looked a little odd.
 
-`Can` stands to `Must` as `May` stands to `Will`. In other words, where `Will` and `May` simply say *yes* and *maybe*, unadorned, `Must` and `Can` say *yes* and *maybe* more forcefully, with overtones of inevitability. Where `Must` goes hand in hand with the idea of *necessity*, therefore, `Can` goes hand in hand with the idea of *possibility*. But now, it is *possible* for James to know the answer only if he *does* know the answer. Anyone in a position to claim that he *can* know, therefore, would equally be in a position to claim that he *does*. It is for this reason, I suggest, that positive (and otherwise unelaborated) claims involving `Can` are not made. While `"James need know the answer"` is not English, `"James can know the answer"` is; it is just that it encodes a message no one is ever likely to have a use for.
+### 5.8. Secondary Displacers, part 2/2 (PREORDAINED and REGULAR Messages)
 
-The modals are subject to a systematic ambiguity that I have not yet acknowledged. It corresponds to the familiar philosophical distinction between mind-to-world and world-to-mind "direction of fit". Recall the sentence: `"James ought to know the answer"`. The mind-to-world interpretation of this sentence amounts to a (tentative) speculation as to how things actually stand. One might expect it to be followed up with: `"So let's go and ask him"`. The world-to-mind interpretation, in contrast, is a claim about how things ought to stand (I can think of no other way to say it) in an ideal world. One might expect it to be followed up with: `"So shame on him if he doesn't"`. 
+[Coming soon.]
 
-
-The mind-to-world interpretation of this sentence has it that he probably does. If it turns out that he doesn't in fact know, the sponsor of this interpretation will be obliged to admit, at least in some qualified sense, to having been wrong (though not as wrong, of course, as if she had said that he *will* know, or *must* know, and still less than if she had said that he *does* know). The world-to-mind interpretation, however, is uninterested in whether or not he does; the sponsor of this message is conveying something about her attitudes to the matter
-
-
-
-So far we have, with one insignificant exception, been limited to sentences with just one base or finite form of a verb. The exception is `NEGATIVE` messages with `Do` pivots, which triggers output of the dummy **`"do"`**; e.g. `"We do not believe him"`. But simple English sentences can contain multiple verbs in their base or finite form, chained together with the preposition `"to"`:
-
-```elm
-"They want to leave."
-"They are able to leave."
-"They are about to leave."
-"They are about to want to leave."
-"They have to be about to want to leave."
-```
-
-And then there are also sentences in which this chain starts with a modal:
-
-```elm
-"They will leave."
-"They can leave."
-"They must want to leave."
-"They should be about to want to leave."
-```
-
-How to account for sentences like these is one of the major tasks facing the code breaker of English. Let me dismiss one partial possibility right away: that sentences like `"They will leave"` can be accounted for by positing a `FUTURE` elaboration symmetrical to the `PAST` elaboration. Something like this hypothesis has been extraordinarily popular among philosophers, even to the point of enjoying the status of a truism. But it is ill-suited to the full range of data; and when we start developing a theory better suited to the full range, it quickly becomes clear that it can embrace future-referring uses of `"will"` very naturally, without the need for a whole new elaboration responsible for just some uses of just this one modal.
-
-To account for sentences like these, my own theory contains three elaborations and one special kind of variable. We have met two of the elaborations already, the `PREORDAINED` and `REGULAR` elaborations, but I ignored the relevant special variable - the *displacer* - until now. The third elaboration, which I call simply the `DISPLACED` elaboration, *requires* a displacer, where the other two can get by without one (a difference I will explain later):
-
-```elm
-type Message
-    = ...
-    | DISPLACED Displacer Message
-    | PREORDAINED (Maybe Displacer) (Maybe Time) Message
-    | REGULAR (Maybe Displacer) (Maybe Frequency) Message
-    | ...
-```
-
-Before turning to the elaborations, I will lay some groundwork with my account of displacers themselves. They are of two kinds, `Primary` and `Secondary`, the former for introducing new verbs into the sentence, and the latter for introducing a modal. The former comprises a pivot and a counter, just as we saw in the nucleus of plain messages (so I will not bother to repeat their type definitions here):
-
-```elm
-type Displacer
-    = Primary Pivot (Maybe Counter)
-    | Secondary Modality
-
-type Modality
-    = SoftYes  -- "will"
-    | HardYes  -- "must"/"need"
-    | SoftMaybe  -- "may"
-    | HardMaybe  -- "can"
-    | SoftYesIsh  -- "should"
-    | HardYesIsh  -- "ought"
-    | Dare  -- "dare"
-    | Permission  -- "may"
-    | Command  -- "shall"
-```
-
-There is not a lot to say about displacers in general, except that the distinction between primary and secondary has semantic as well as syntactic significance; it is not random or coincidental that the modals behave differently from the verbs. We will see more of the semantic differences as we proceed, but at the outset let me advertise the two highlights. First, while primary displacers serve to generate a new condition from an old one, the modalitites or secondary displacers constitute information that remains distinct from the underlying condition. Secondly, and relatedly, the modalities set up a second target for the `NEGATIVE` elaboration, distinct from the condition which it targets by default. We see this point at work in, for example, the sentence `"You can't not go"`, which encodes a message comprising a negated `Can` alongside a negated condition.
-
-Let me get a substantial disclaimer out of the way right up front: not every pivot and counter combination is permissible in English, and moreover not every permissible combination can serve as a primary displacer. Just as I make no attempt at present to rule out the impermissible combinations in general (recall section 4.4), I also make no attempt to rule out, in the present context, the ones that are impermissible as displacers. For example, none of the following is a sentence of English:
-
-```elm
-"I call hungry to meet you."
-"She laughs in to want a car."
-"They are eating to see you tomorrow."
-```
-
-But all of these strings can be generated within my system. Uncovering the restrictions that would rule out all and only the impermissible sentences like these is an important task that I have yet to begin.
-
-There is one more qualificatory point to make before we proceed. There are many English sentences that look like they might have been generated by one of the elaborations I will be discussing here, but which I maintain have not been. These are sentences in which a `"to"` appears in between verbs, but with the sense of `"in order to"`; for example:
-
-```elm
-"They left to catch the bus."
-"She is going out to see her friend."
-```
-
-These, I presume, are the result of some other elaboration, not yet incorporated into my model. At any rate, they are *not* the result of any of the elaborations we are now to examine, which give rise to messages of a quite different sort. The `"to"` in between the verbs or modals generated by the messages I am presently interested in never has the sense of `"in order to"`.
-
-`REGULAR` messages are perhaps the easiest to start with. When the `REGULAR` elaboration has no displacer, recall, it results in a new condition that entails the regular satisfaction of its input condition, with an optionally specifiable frequency. Such messages are common for conveying something about an individual's habits; for example:
-
-```elm
-REGULAR "often" ( Female "Grannie", ( Do "tease", [ ( Male "Victor" ) ] ) )
-    -> "Grannie often teases Victor."
-
-REGULAR "ocassionally" ( Male "Robert", ( Do "sing", [ ( To, SameAsMain ) ] ) )
-    -> "Robert ocassionally sings to himself."
-```
-
-I suggest that the very same elaboration is at work in the messages encoded in the following sentences, but with a primary displacer:
-
-```elm
-REGULAR ( Do "like" ) "often" ( Female "Grannie", ( Do "tease", [ ( Male "Victor" ) ] ) )
-    -> "Grannie often likes to tease Victor."
-
-REGULAR ( Be, "liable" ) "ocassionally" ( Male "Robert", ( Do "sing", [ ( To, SameAsMain ) ] ) )
-    -> "Robert is ocassionally liable to sing to himself."
-```
-
-In support of this diagnosis, notice that the frequency in these messages applies to the underlying condition: to the teasing or the singing, not to the liking or the being known. Moreover it is in the very nature of 
-
-### 5.6. DISPLACED Messages
-
-My model includes a `DISPLACED` elaboration, but let me waste no time in admitting I have little confidence that this elaboration accurately models the realities of English. I have included it as a placeholder for now, a crude way of accounting for various data that call for further investigation. The messages that I have in mind here have much in common with `PRACTICAL`, `PROJECTIVE`, and `EVASIVE` messages, except that where these other messages have a modality, `DISPLACED` messages have a pivot and an optional counter:
-
-```elm
-type Message
-    = ...
-    | DISPLACED Pivot (Maybe Counter) Message
-    | ...
-```
-
-The point of calling these messages "displaced" is that the pivot and optional counter *displace* those found in the nucleus. The result is a sequence of verbs or verb phrases glued together with the word `"to"`:
-
-```elm
-"They want to leave."
-"They are able to leave."
-"They are about to leave."
-"They are about to want to leave."
-"They have to be about to want to leave."
-```
-
-As the last two examples remind us, the elaboration or elaborations at work here can be applied on top of each other.
-
-Beyond the obvious syntactic similarities, there are semantic similarities between these messages and the messages examined in the previous section. Particularly striking parallels are observed between some uses of `"be able to"` and `"can"` for example, and some uses of `"have to"` or `"need to"` and the modals `"must"` and `"need"`:
-
-```elm
-"He can swim a mile."
-"He is able to swim a mile."
-
-"You must leave."
-"You have to leave."
-
-"You needn't go."
-"You don't need to go."
-```
-
-We may also observe some of the same patterns. Some `DISPLACED` messages are like `PROJECTIVE` messages in concerning a later satisfaction of the underlying condition:
-
-```elm
-"Grannie is about to say something."
-"Robert is going to meet me tomorrow."
-"Robert is able to meet me tomorrow."
-```
-
-Others are like `PRACTICAL` messages in being about the present or past satisfaction of the underlying condition, depending on whether their input message is `PRIOR` or not:
-
-```elm
-"He is likely to be seeing her at the moment."
-"He is likely to have seen her yesterday."
-```
-
-And others, finally, are like `EVASIVE` messages in being about no particular occassions of the underlying condition's satisfaction:
-
-```elm
-"Victor likes to tease Grannie."
-"Claire is sometimes to be found in the library."
-```
-
-Perhaps, then, instead of just one `DISPLACED` elaboration, we should have three, one corresponding to each of the three elaborations examined in the previous section. Or perhaps we should have no new elaborations, but rather expand the definition of those other three so that they can take pivot and counter arguments instead of modality arguments. We would then have just one elaboration responsible, for example, for all of these sentences:
-
-```elm
-"I will see him tomorrow."
-"I can see him tomorrow."
-"I must see him tomorrow."
-"I am going to see him tomorrow."
-"I am likely to see him tomorrow."
-"I hope to see him tomorrow."
-"I want to see him tomorrow."
-```
-
-There is certainly something tempting in this proposal. But the case is by no means clear, for there are differences separating the versions of these messages with a modality from those involving a pivot and (optional) counter. The most striking of these is the way they behave with respect to the time of the underlying condition. As noted in the previous section, a `PAST PROJECTIVE` message can only be about the present or the future, never the past; `PROJECTIVE` messages can only be about the past if they are `PRIOR PAST PROJECTIVE`s. But no such rule holds for (what I am tentatively diagnosing as) `PAST DISPLACED` messages, which can be about the past without any need for the `PRIOR` elaboration:
-
-```elm
-"I was going to see him yesterday."
-"I was likely to see him yesterday."
-```
-
-Somewhat similarly, `PAST PRACTICAL` messages can be about the present, as in `"Fred would/might/could know the result of the football (so let's ask him)"`. But `PAST DISPLACED` messages are not so liberal: `"Fred had to know the result of the football now"` is not English.
-
-### 5.7. INDIRECT, ENUMERATED, and AMASSED Messages
+### 5.9. INDIRECT, ENUMERATED, and AMASSED Messages
 
 Pronouns and proper names are generated by objects, which we find already in the nuclues of English messages. To generate nouns and noun phrases - like `"water"`, `"some water"`, `"any water"`, `"that water over there"` - we require some elaboration. I account for the data here with three elaborations:
 

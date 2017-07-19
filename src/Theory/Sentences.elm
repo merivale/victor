@@ -298,33 +298,33 @@ pre : Vars -> List String
 pre vars =
     case vars.modality of
         Nothing ->
-            (finiteVerbPhrase vars.past (object vars.object) vars.longPivot) :: (List.map baseVerbPhrase vars.longPivots)
+            (finiteVerbPhrase vars.past (object vars.object) vars.prior vars.pre vars.pivot) :: (List.map baseVerbPhrase vars.displacedPivots)
 
         Just m ->
-            (Words.modal m vars.past vars.negatedModality) :: (List.map baseVerbPhrase (vars.longPivot :: vars.longPivots))
+            (Words.modal m vars.past vars.negatedModality) :: (List.map baseVerbPhrase (( vars.prior, vars.pre, vars.pivot ) :: vars.displacedPivots))
 
 
 {-| Fulcrum and pre stuff...
 -}
-finiteVerbPhrase : Bool -> Object -> LongPivot -> String
-finiteVerbPhrase past object longPivot =
+finiteVerbPhrase : Bool -> Object -> Bool -> List String -> Pivot -> String
+finiteVerbPhrase past object prior pre pivot =
     let
         ( verbBase, rest ) =
-            verbBaseAndRest longPivot
+            verbBaseAndRest prior pivot
 
         fulcrum =
             conjugate verbBase past object
     in
-        combine longPivot.prior (verbBase == "be") longPivot.pre fulcrum rest
+        combine prior (verbBase == "be") pre fulcrum rest
 
 
-baseVerbPhrase : LongPivot -> String
-baseVerbPhrase longPivot =
+baseVerbPhrase : ( Bool, List String, Pivot ) -> String
+baseVerbPhrase ( prior, pre, pivot ) =
     let
         ( verbBase, rest ) =
-            verbBaseAndRest longPivot
+            verbBaseAndRest prior pivot
     in
-        String.join " " (longPivot.pre ++ (verbBase :: rest))
+        String.join " " (pre ++ (verbBase :: rest))
 
 
 combine : Bool -> Bool -> List String -> String -> List String -> String
@@ -393,43 +393,46 @@ conjugate base past object =
             base
 
 
-verbBaseAndRest : LongPivot -> ( String, List String )
-verbBaseAndRest { pivot, counter, prior, pre } =
+verbBaseAndRest : Bool -> Pivot -> ( String, List String )
+verbBaseAndRest prior pivot =
     let
+        ( verbality, status ) =
+            pivot
+
         end =
-            case counter of
+            case status of
                 Nothing ->
                     []
 
-                Just (CounterProperty property) ->
-                    [ property ]
+                Just (Absolute string) ->
+                    [ string ]
 
-                Just (CounterRelator relator) ->
+                Just (Relative relator) ->
                     [ Words.preposition relator ]
 
-        ( verbality, ongoing, passive ) =
-            case pivot of
+        ( string, ongoing, passive ) =
+            case verbality of
                 Be ongoing ->
                     ( "be", ongoing, False )
 
-                Do verbality ongoing passive ->
-                    ( verbality, ongoing, passive )
+                Do string ongoing passive ->
+                    ( string, ongoing, passive )
 
-        ( verb, rest ) =
+        ( verbBase, rest ) =
             case ( ongoing, passive ) of
                 ( True, True ) ->
-                    ( "be", [ "being", Words.participle2 verbality ] ++ end )
+                    ( "be", [ "being", Words.participle2 string ] ++ end )
 
                 ( True, False ) ->
-                    ( "be", [ Words.participle1 verbality ] ++ end )
+                    ( "be", [ Words.participle1 string ] ++ end )
 
                 ( False, True ) ->
-                    ( "be", [ Words.participle2 verbality ] ++ end )
+                    ( "be", [ Words.participle2 string ] ++ end )
 
                 ( False, False ) ->
-                    ( verbality, end )
+                    ( string, end )
     in
         if prior then
-            ( "have", (Words.participle2 verb) :: rest )
+            ( "have", (Words.participle2 verbBase) :: rest )
         else
-            ( verb, rest )
+            ( verbBase, rest )

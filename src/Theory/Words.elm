@@ -316,50 +316,40 @@ integerToString int =
 modal : Modality -> Bool -> Bool -> String
 modal modality past negated =
     case modality of
-        SoftYes ->
+        Yes1 ->
             if past then
                 "would"
             else
                 "will"
 
-        HardYes ->
+        Yes2 ->
+            if past then
+                "should"
+            else
+                "shall"
+
+        Yes3 ->
             if negated then
                 "need"
+            else if past then
+                "ought"
             else
                 "must"
 
-        SoftMaybe ->
+        Maybe1 ->
             if past then
                 "might"
             else
                 "may"
 
-        HardMaybe ->
+        Maybe3 ->
             if past then
                 "could"
             else
                 "can"
 
-        SoftYesIsh ->
-            "should"
-
-        HardYesIsh ->
-            "ought"
-
-        Dare ->
+        Maybe4 ->
             "dare"
-
-        Permission ->
-            if past then
-                "might"
-            else
-                "may"
-
-        Command ->
-            if past then
-                "should"
-            else
-                "shall"
 
 
 {-| Generate the plural form of a noun from its singular. This functions tries

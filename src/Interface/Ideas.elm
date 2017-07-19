@@ -109,78 +109,122 @@ objectHasString object =
             False
 
 
-{-| Pivots.
+{-| Displacers.
 -}
-listPivots : List Pivot
-listPivots =
+listDisplacers : Bool -> List (Maybe Displacer)
+listDisplacers compulsory =
+    if compulsory then
+        [ Just (Primary ( Be False, Nothing ))
+        , Just (Secondary Yes1)
+        ]
+    else
+        [ Nothing
+        , Just (Primary ( Be False, Nothing ))
+        , Just (Secondary Yes1)
+        ]
+
+
+equateDisplacers : Maybe Displacer -> Maybe Displacer -> Bool
+equateDisplacers displacer1 displacer2 =
+    case ( displacer1, displacer2 ) of
+        ( Nothing, Nothing ) ->
+            True
+
+        ( Just (Primary pivot1), Just (Primary pivot2) ) ->
+            True
+
+        ( Just (Secondary modality1), Just (Secondary modality2) ) ->
+            True
+
+        _ ->
+            False
+
+
+displayDisplacer : Maybe Displacer -> String
+displayDisplacer displacer =
+    case displacer of
+        Nothing ->
+            "-- No Displacer --"
+
+        Just (Primary pivot) ->
+            "Primary"
+
+        Just (Secondary modality) ->
+            "Secondary"
+
+
+{-| Verbalities.
+-}
+listVerbalities : List Verbality
+listVerbalities =
     [ Be False
     , Do "" False False
     ]
 
 
-equatePivots : Pivot -> Pivot -> Bool
-equatePivots pivot1 pivot2 =
-    case ( pivot1, pivot2 ) of
+equateVerbalities : Verbality -> Verbality -> Bool
+equateVerbalities verbality1 verbality2 =
+    case ( verbality1, verbality2 ) of
         ( Be ongoing1, Be ongoing2 ) ->
             True
 
-        ( Do verbality1 ongoing1 passive1, Do verbality2 ongoing2 passive2 ) ->
+        ( Do string1 ongoing1 passive1, Do string2 ongoing2 passive2 ) ->
             True
 
         _ ->
             False
 
 
-displayPivot : Pivot -> String
-displayPivot pivot =
-    case pivot of
+displayVerbality : Verbality -> String
+displayVerbality verbality =
+    case verbality of
         Be ongoing ->
             "Be"
 
-        Do verbality ongoing passive ->
+        Do string ongoing passive ->
             "Do"
 
 
-{-| Counters.
+{-| Statuses.
 -}
-listCounters : List (Maybe Counter)
-listCounters =
+listStatuses : List (Maybe Status)
+listStatuses =
     [ Nothing
-    , Just (CounterProperty "")
-    , Just (CounterRelator About)
+    , Just (Absolute "")
+    , Just (Relative About)
     ]
 
 
-displayCounter : Maybe Counter -> String
-displayCounter counter =
-    case counter of
+displayStatus : Maybe Status -> String
+displayStatus status =
+    case status of
         Nothing ->
-            "-- No Counter --"
+            "-- No Status --"
 
-        Just (CounterProperty property) ->
-            "Property"
+        Just (Absolute string) ->
+            "Absolute"
 
-        Just (CounterRelator relator) ->
-            "Relator"
+        Just (Relative relator) ->
+            "Relative"
 
 
-equateCounters : Maybe Counter -> Maybe Counter -> Bool
-equateCounters counter1 counter2 =
-    case ( counter1, counter2 ) of
+equateStatuses : Maybe Status -> Maybe Status -> Bool
+equateStatuses status1 status2 =
+    case ( status1, status2 ) of
         ( Nothing, Nothing ) ->
             True
 
-        ( Just (CounterProperty property1), Just (CounterProperty property2) ) ->
+        ( Just (Absolute string1), Just (Absolute string2) ) ->
             True
 
-        ( Just (CounterRelator relator1), Just (CounterRelator relator2) ) ->
+        ( Just (Relative relator1), Just (Relative relator2) ) ->
             True
 
         _ ->
             False
 
 
-{-| Relators (used in counters).
+{-| Relators (used in statuses).
 -}
 listRelators : List Relator
 listRelators =
@@ -267,56 +311,42 @@ displayWeight weight =
 listModalities : Bool -> List Modality
 listModalities limited =
     if limited then
-        [ SoftYes
-        , HardYes
-        , SoftMaybe
-        , HardMaybe
-        , SoftYesIsh
-        , HardYesIsh
-        , Dare
+        [ Yes1
+        , Yes2
+        , Yes3
+        , Maybe1
+        , Maybe3
         ]
     else
-        [ SoftYes
-        , HardYes
-        , SoftMaybe
-        , HardMaybe
-        , SoftYesIsh
-        , HardYesIsh
-        , Dare
-        , Permission
-        , Command
+        [ Yes1
+        , Yes2
+        , Yes3
+        , Maybe1
+        , Maybe3
+        , Maybe4
         ]
 
 
 displayModality : Modality -> String
 displayModality modality =
     case modality of
-        SoftYes ->
-            "Soft Yes ('will')"
+        Yes1 ->
+            "Yes1 ('will')"
 
-        HardYes ->
-            "Hard Yes ('must'/'need')"
+        Yes2 ->
+            "Yes2 ('shall')"
 
-        SoftMaybe ->
-            "Soft Maybe ('may')"
+        Yes3 ->
+            "Yes3 ('must'/'ought'/'need')"
 
-        HardMaybe ->
-            "Hard Maybe ('can')"
+        Maybe1 ->
+            "Maybe1 ('may')"
 
-        SoftYesIsh ->
-            "Soft Yes-ish ('should')"
+        Maybe3 ->
+            "Maybe3 ('can')"
 
-        HardYesIsh ->
-            "Hard Yes-ish ('ought')"
-
-        Permission ->
-            "Permission ('may')"
-
-        Command ->
-            "Command ('shall')"
-
-        Dare ->
-            "Dare ('dare')"
+        Maybe4 ->
+            "Maybe4 ('dare')"
 
 
 {-| Targets.

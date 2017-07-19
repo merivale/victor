@@ -10,8 +10,8 @@ import Theory.Types exposing (..)
 type alias Model =
     { plus : Bool
     , object : Object
-    , pivot : Pivot
-    , counter : Maybe Counter
+    , verbality : Verbality
+    , status : Maybe Status
     , balances : List Balance
     , elaborations : List Elaboration
     }
@@ -23,9 +23,7 @@ type alias Elaboration =
     , string1 : Maybe String
     , string2 : Maybe String
     , string3 : Maybe String
-    , pivot : Pivot
-    , counter : Maybe Counter
-    , modality : Modality
+    , displacer : Maybe Displacer
     , target : Int
     , pointer : Pointer
     , quantifier : Maybe Quantifier
@@ -37,14 +35,11 @@ type Recipe
     = MakeNEGATIVE
     | MakePAST
     | MakePRIOR
-    | MakeREGULAR
+    | MakeDISPLACED
     | MakePREORDAINED
+    | MakeREGULAR
     | MakeEXTENDED
     | MakeSCATTERED
-    | MakeDISPLACED
-    | MakePRACTICAL
-    | MakePROJECTIVE
-    | MakeEVASIVE
     | MakeINDIRECT
     | MakeENUMERATED
     | MakeAMASSED
@@ -54,13 +49,13 @@ type Signal
     = TogglePlus
     | SetObject Object
     | SetObjectString String
-    | SetPivot Pivot
-    | SetPivotVerbality Verbality
-    | TogglePivotOngoing
-    | TogglePivotPassive
-    | SetCounter (Maybe Counter)
-    | SetCounterProperty Property
-    | SetCounterRelator Relator
+    | SetVerbality Verbality
+    | SetVerbalityString String
+    | ToggleVerbalityOngoing
+    | ToggleVerbalityPassive
+    | SetStatus (Maybe Status)
+    | SetStatusString String
+    | SetStatusRelator Relator
     | AddBalance
     | RemoveBalance
     | SetBalanceRelator Int (Maybe Relator)
@@ -70,24 +65,25 @@ type Signal
     | AddElaboration Int Recipe
     | RemoveElaboration Int
     | ToggleElaborationPlus Int
-    | SetString1 Int String
-    | SetString2 Int String
-    | SetString3 Int String
-    | SetDisplacedPivot Int Pivot
-    | SetDisplacedPivotVerbality Int Verbality
-    | ToggleDisplacedPivotOngoing Int
-    | ToggleDisplacedPivotPassive Int
-    | SetDisplacedCounter Int (Maybe Counter)
-    | SetDisplacedCounterProperty Int Property
-    | SetDisplacedCounterRelator Int Relator
-    | SetModality Int Modality
-    | SetTarget Int Int
-    | SetPointer Int Pointer
-    | SetPointerObject Int Object
-    | SetPointerObjectString Int String
-    | SetQuantifier Int (Maybe Quantifier)
-    | SetQuantifierInteger Int String
-    | ToggleOther Int
+    | SetElaborationString1 Int String
+    | SetElaborationString2 Int String
+    | SetElaborationString3 Int String
+    | SetElaborationDisplacer Int (Maybe Displacer)
+    | SetElaborationDisplacerVerbality Int Verbality
+    | SetElaborationDisplacerVerbalityString Int String
+    | ToggleElaborationDisplacerVerbalityOngoing Int
+    | ToggleElaborationDisplacerVerbalityPassive Int
+    | SetElaborationDisplacerStatus Int (Maybe Status)
+    | SetElaborationDisplacerStatusString Int String
+    | SetElaborationDisplacerStatusRelator Int Relator
+    | SetElaborationDisplacerModality Int Modality
+    | SetElaborationTarget Int Int
+    | SetElaborationPointer Int Pointer
+    | SetElaborationPointerObject Int Object
+    | SetElaborationPointerObjectString Int String
+    | SetElaborationQuantifier Int (Maybe Quantifier)
+    | SetElaborationQuantifierInteger Int String
+    | ToggleElaborationOther Int
 
 
 type alias ButtonProperties =

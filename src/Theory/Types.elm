@@ -25,16 +25,13 @@ values.
 type Message
     = Plain Nucleus
     | NEGATIVE Message
-    | PAST (Maybe Time) Message
+    | PAST (Maybe String) Message
     | PRIOR Message
-    | REGULAR (Maybe Frequency) Message
-    | PREORDAINED (Maybe Time) Message
-    | EXTENDED Duration Message
-    | SCATTERED Tally Message
-    | DISPLACED Pivot (Maybe Counter) Message
-    | PRACTICAL Modality Message
-    | PROJECTIVE Modality (Maybe Time) Message
-    | EVASIVE Modality (Maybe Frequency) Message
+    | DISPLACED Displacer Message
+    | PREORDAINED (Maybe Displacer) (Maybe String) Message
+    | REGULAR (Maybe Displacer) (Maybe String) Message
+    | EXTENDED String Message
+    | SCATTERED String Message
     | INDIRECT Int Description Message
     | ENUMERATED Int Multiplicity Message
     | AMASSED Int Proportion Message
@@ -47,9 +44,10 @@ type alias Nucleus =
     ( Object, Condition )
 
 
-{-| Objects take the following (hopefully self-explanatory) values. The optional
-string argument in some cases is intended to house a proper name; otherwise
-English defaults to the appropriate pronoun.
+{-| Objects take the following values. The boolean argument represents whether
+or not the object is plural. The optional string argument in the Other case is
+intended to house a proper name; otherwise English defaults to the appropriate
+pronoun.
 -}
 type Object
     = Speaker Bool
@@ -62,36 +60,46 @@ type Sex
     | Female
 
 
-{-| The condition is encoded into the predicate of the sentence. The pivot is
-(approximately) encoded in the verb at the start of the predicate, with the
-counter and any balances fetching up in subsequent words. Some pivots are
-encoded into more than one word, however, such as "be laughing" or "be seen".
+{-| The condition is encoded into the predicate of the sentence. It is an
+ordered pair of a pivot and a (possibly empty) list of balances.
 -}
 type alias Condition =
-    ( Pivot, Maybe Counter, List Balance )
+    ( Pivot, List Balance )
 
 
-{-| Pivots are of two kinds, Be or Do. The boolean argument for Be pivots
-specifies whether the condition is ongoing or not ("be" versus "be being").
-Likewise the first boolean argument for Do pivots. The second indicates
-whether the condition is passive or not ("see" versus "be seen").
+{-| The pivot in turn is an ordered pair of a compulsory verbality and an
+optional status.
 -}
-type Pivot
+type alias Pivot =
+    ( Verbality, Maybe Status )
+
+
+{-| Verbalities are of two kinds, either Be or Do. In the latter case, the
+string argument is for holding the verb (in its base form; "do", "like", "live",
+"love", etc.). The boolean arguments are for ongoing and passive (but only
+Do verbalities can be passive). Between them these account for the following:
+
+    | ongoing | passive | output           |
+    | ------- | ------- | ---------------- |
+    |    F    |    F    | "eat"            |
+    |    F    |    T    | "be eaten"       |
+    |    T    |    F    | "be eating"      |
+    |    T    |    T    | "be being eaten" |
+-}
+type Verbality
     = Be Bool
-    | Do Verbality Bool Bool
+    | Do String Bool Bool
 
 
-type alias Verbality =
-    String
-
-
-type Counter
-    = CounterProperty Property
-    | CounterRelator Relator
-
-
-type alias Property =
-    String
+{-| Statuses are of two kinds, absolute or relative. Absolute statuses are
+encoded in adjectives, which users must input for themselves (hence the string
+argument). Relative statuses are relators, encoded in prepositions. There are
+more relators/prepositions in English than my model presently accommodates, but
+I've included a fair number of the most common.
+-}
+type Status
+    = Absolute String
+    | Relative Relator
 
 
 type Relator
@@ -131,7 +139,7 @@ type Relator
 {-| A balance consists of a weight prefixed by an optional relator. The weight
 is encoded in a pronoun, proper name, or noun phrase; it's essentially just
 another object, with a tweak to allow for reflexive pronouns like "myself",
-"herself", etc. The relator is encoded in a preposition.
+"herself", etc. The relator - as above - is encoded in a preposition.
 -}
 type alias Balance =
     ( Maybe Relator, Weight )
@@ -142,25 +150,30 @@ type Weight
     | Different Object
 
 
-{-| The PRACTICAL, PROJECTIVE, and EVASIVE elaborations take a Modality
-argument.
+{-| The DISPLACED, PREORDAINED, and REGULAR elaborations take a Displacer
+argument, which is either primary (a pivot) or secondary (a modality, encoded
+in one of the English modals).
 -}
+type Displacer
+    = Primary Pivot
+    | Secondary Modality
+
+
 type Modality
-    = SoftYes
-    | HardYes
-    | SoftMaybe
-    | HardMaybe
-    | SoftYesIsh
-    | HardYesIsh
-    | Dare
-    | Permission
-    | Command
+    = Yes1    -- "will"
+    | Yes2    -- "shall"
+    | Yes3    -- "must"/"ought"/"need"
+    | Maybe1  -- "may"
+    | Maybe3  -- "can"
+    | Maybe4  -- "dare"
 
 
 {-| The INDIRECT, ENUMERATED, and AMASSED elaborations all take Description,
 Multiplicity, and Proportion arguments respectively. These arguments have quite
 a lot in common; together they are responsible for noun phrases, like "the red
-baloon", "your best friend", "several seditious scribes from Caesarea", etc.
+baloon", "your best friend", "several seditious scribes from Caesarea", etc. The
+boolean argument in the middle triggers in output of "other"/"else", as in "your
+other friend", "someone else", etc.
 -}
 type alias Description =
     ( Pointer, Bool, Haystack )
@@ -181,6 +194,14 @@ type Pointer
     | RelatedTo Object
 
 
+{-| Quantifiers are of two kinds, enumerating and amassing, the former for
+multiplicites (in ENUMERATED messages) and the latter for proportions (in
+AMASSED messages). The quantifiers Some and Any, however, are both enumerating
+and amassing, i.e. they can be used in both multiplicities and proportions.
+Consequently there is only one type definition. The quantifiers up to and
+including Some and Any in this list are enumerating; those including and
+afterwards are amassing.
+-}
 type Quantifier
     = A
     | Integer Int
@@ -198,35 +219,7 @@ type Quantifier
 
 
 type alias Haystack =
-    ( Category, Maybe Property, Maybe Restriction )
-
-
-type alias Category =
-    String
-
-
-type alias Restriction =
-    String
-
-
-{-| Other variables for elaborations are currently entirely unearthed. They are
-just aliases for string, meaning that users must encode these arguments for
-themselves.
--}
-type alias Frequency =
-    String
-
-
-type alias Time =
-    String
-
-
-type alias Duration =
-    String
-
-
-type alias Tally =
-    String
+    ( String, Maybe String, Maybe String )
 
 
 {-| To keep track of the effect the nucleus and any subsequent elaboration has
@@ -237,14 +230,17 @@ for the most part flags required for message validation; the properties further
 down are direct determiners of the output string.
 -}
 type alias Vars =
-    { past : Bool
-    , negationTarget : NegationTarget
+    { negationTarget : NegationTarget
     , object : PseudoObject
+    , past : Bool
+    , prior : Bool
     , modality : Maybe Modality
     , negatedModality : Bool
-    , practical : Bool
-    , longPivot : LongPivot
-    , longPivots : List LongPivot
+    , preordained : Bool
+    , regular : Bool
+    , pre : List String
+    , pivot : Pivot
+    , displacedPivots : List ( Bool, List String, Pivot )
     , balances : List PseudoBalance
     , post : List String
     }
@@ -254,14 +250,6 @@ type NegationTarget
     = NegateCondition
     | NegateModality
     | NegateMainObject
-
-
-type alias LongPivot =
-    { pivot : Pivot
-    , counter : Maybe Counter
-    , prior : Bool
-    , pre : List String
-    }
 
 
 type PseudoObject

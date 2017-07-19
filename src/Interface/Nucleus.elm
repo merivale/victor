@@ -1,8 +1,8 @@
 module Interface.Nucleus
     exposing
         ( object
-        , pivot
-        , counter
+        , verbality
+        , status
         , balance
         )
 
@@ -29,55 +29,55 @@ object object =
         ]
 
 
-pivot : Pivot -> Html.Html Signal
-pivot pivot =
-    case pivot of
+verbality : Verbality -> Html.Html Signal
+verbality verbality =
+    case verbality of
         Be ongoing ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Pivot"
-                , pivotSelect pivot
+                [ Input.label "Verbality"
+                , verbalitySelect verbality
                 , Input.emptyInput
-                , pivotOngoing ongoing
+                , verbalityOngoing ongoing
                 , Input.emptyInput
                 ]
 
-        Do verbality ongoing passive ->
+        Do string ongoing passive ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Pivot"
-                , pivotSelect pivot
-                , pivotVerbality verbality
-                , pivotOngoing ongoing
-                , pivotPassive passive
+                [ Input.label "Verbality"
+                , verbalitySelect verbality
+                , verbalityString string
+                , verbalityOngoing ongoing
+                , verbalityPassive passive
                 ]
 
 
-counter : Maybe Counter -> Html.Html Signal
-counter counter =
-    case counter of
+status : Maybe Status -> Html.Html Signal
+status status =
+    case status of
         Nothing ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Counter"
-                , counterSelect counter
+                [ Input.label "Status"
+                , statusSelect status
                 , Input.emptyInput
                 ]
 
-        Just (CounterProperty property) ->
+        Just (Absolute string) ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Counter"
-                , counterSelect counter
-                , counterProperty property
+                [ Input.label "Status"
+                , statusSelect status
+                , statusString string
                 ]
 
-        Just (CounterRelator relator) ->
+        Just (Relative relator) ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Counter"
-                , counterSelect counter
-                , counterRelatorSelect relator
+                [ Input.label "Status"
+                , statusSelect status
+                , statusRelatorSelect relator
                 ]
 
 
@@ -118,35 +118,35 @@ objectSelect object =
         }
 
 
-pivotSelect : Pivot -> Html.Html Signal
-pivotSelect pivot =
+verbalitySelect : Verbality -> Html.Html Signal
+verbalitySelect verbality =
     Input.select
-        { value = pivot
-        , options = Ideas.listPivots
-        , equivalent = Ideas.equatePivots
-        , signal = SetPivot
-        , toLabel = Ideas.displayPivot
+        { value = verbality
+        , options = Ideas.listVerbalities
+        , equivalent = Ideas.equateVerbalities
+        , signal = SetVerbality
+        , toLabel = Ideas.displayVerbality
         }
 
 
-counterSelect : Maybe Counter -> Html.Html Signal
-counterSelect counter =
+statusSelect : Maybe Status -> Html.Html Signal
+statusSelect status =
     Input.select
-        { value = counter
-        , options = Ideas.listCounters
-        , equivalent = Ideas.equateCounters
-        , signal = SetCounter
-        , toLabel = Ideas.displayCounter
+        { value = status
+        , options = Ideas.listStatuses
+        , equivalent = Ideas.equateStatuses
+        , signal = SetStatus
+        , toLabel = Ideas.displayStatus
         }
 
 
-counterRelatorSelect : Relator -> Html.Html Signal
-counterRelatorSelect relator =
+statusRelatorSelect : Relator -> Html.Html Signal
+statusRelatorSelect relator =
     Input.select
         { value = relator
         , options = Ideas.listRelators
         , equivalent = (==)
-        , signal = SetCounterRelator
+        , signal = SetStatusRelator
         , toLabel = toString
         }
 
@@ -196,22 +196,22 @@ objectText object =
         }
 
 
-pivotVerbality : Verbality -> Html.Html Signal
-pivotVerbality verbality =
+verbalityString : String -> Html.Html Signal
+verbalityString string =
     Input.text
-        { value = verbality
+        { value = string
         , placeholder = "e.g. have, like, want"
-        , signal = SetPivotVerbality
+        , signal = SetVerbalityString
         , disabled = False
         }
 
 
-counterProperty : Property -> Html.Html Signal
-counterProperty property =
+statusString : String -> Html.Html Signal
+statusString string =
     Input.text
-        { value = property
+        { value = string
         , placeholder = "e.g. able, eager, happy (optional)"
-        , signal = SetCounterProperty
+        , signal = SetStatusString
         , disabled = False
         }
 
@@ -228,21 +228,21 @@ balanceWeightObjectText index object =
 
 {-| Input checkboxes, used by the main output functions above.
 -}
-pivotOngoing : Bool -> Html.Html Signal
-pivotOngoing ongoing =
+verbalityOngoing : Bool -> Html.Html Signal
+verbalityOngoing ongoing =
     Input.checkbox
         { id = "ongoing"
         , label = "Ongoing"
         , checked = ongoing
-        , signal = TogglePivotOngoing
+        , signal = ToggleVerbalityOngoing
         }
 
 
-pivotPassive : Bool -> Html.Html Signal
-pivotPassive passive =
+verbalityPassive : Bool -> Html.Html Signal
+verbalityPassive passive =
     Input.checkbox
         { id = "passive"
         , label = "Passive"
         , checked = passive
-        , signal = TogglePivotPassive
+        , signal = ToggleVerbalityPassive
         }

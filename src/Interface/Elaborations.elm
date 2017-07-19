@@ -1,11 +1,9 @@
 module Interface.Elaborations
     exposing
         ( pastTime
-        , pivot
-        , counter
-        , modality
-        , frequency
+        , displacer
         , preordainedTime
+        , frequency
         , duration
         , tally
         , target
@@ -35,81 +33,96 @@ pastTime index elaboration =
         [ Input.label "Time"
         , stringText
             "e.g. yesterday, last week"
-            (SetString1 index)
+            (SetElaborationString1 index)
             elaboration.string1
         ]
 
 
-pivot : Int -> Elaboration -> Html.Html Signal
-pivot index elaboration =
-    case elaboration.pivot of
+displacer : Bool -> Bool -> Int -> Elaboration -> List (Html.Html Signal)
+displacer compulsory limitedModalities index elaboration =
+    case elaboration.displacer of
+        Nothing ->
+            [ displacerBase compulsory index elaboration.displacer ]
+
+        Just (Primary ( verbalityValue, statusValue )) ->
+            [ displacerBase compulsory index elaboration.displacer
+            , verbality index verbalityValue
+            , status index statusValue
+            ]
+
+        Just (Secondary modalityValue) ->
+            [ displacerBase compulsory index elaboration.displacer
+            , modality limitedModalities index modalityValue
+            ]
+
+
+displacerBase : Bool -> Int -> Maybe Displacer -> Html.Html Signal
+displacerBase compulsory index displacer =
+    Html.div
+        [ Attr.class "factor" ]
+        [ Input.label "Displacer"
+        , displacerSelect compulsory index displacer
+        ]
+
+
+verbality : Int -> Verbality -> Html.Html Signal
+verbality index verbalityValue =
+    case verbalityValue of
         Be ongoing ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Pivot"
-                , pivotSelect index elaboration.pivot
+                [ Input.label "Verbality"
+                , verbalitySelect index verbalityValue
                 , Input.emptyInput
-                , pivotOngoing index ongoing
+                , verbalityOngoing index ongoing
                 , Input.emptyInput
                 ]
 
-        Do verbality ongoing passive ->
+        Do string ongoing passive ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Pivot"
-                , pivotSelect index elaboration.pivot
-                , pivotVerbality index verbality
-                , pivotOngoing index ongoing
-                , pivotPassive index passive
+                [ Input.label "Verbality"
+                , verbalitySelect index verbalityValue
+                , verbalityString index string
+                , verbalityOngoing index ongoing
+                , verbalityPassive index passive
                 ]
 
 
-counter : Int -> Elaboration -> Html.Html Signal
-counter index elaboration =
-    case elaboration.counter of
+status : Int -> Maybe Status -> Html.Html Signal
+status index statusValue =
+    case statusValue of
         Nothing ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Counter"
-                , counterSelect index elaboration.counter
+                [ Input.label "Status"
+                , statusSelect index statusValue
                 , Input.emptyInput
                 ]
 
-        Just (CounterProperty property) ->
+        Just (Absolute string) ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Counter"
-                , counterSelect index elaboration.counter
-                , counterProperty index property
+                [ Input.label "Status"
+                , statusSelect index statusValue
+                , statusString index string
                 ]
 
-        Just (CounterRelator relator) ->
+        Just (Relative relator) ->
             Html.div
                 [ Attr.class "factor" ]
-                [ Input.label "Counter"
-                , counterSelect index elaboration.counter
-                , counterRelatorSelect index relator
+                [ Input.label "Status"
+                , statusSelect index statusValue
+                , statusRelatorSelect index relator
                 ]
 
 
-modality : Bool -> Int -> Elaboration -> Html.Html Signal
-modality limited index elaboration =
+modality : Bool -> Int -> Modality -> Html.Html Signal
+modality limited index modalityValue =
     Html.div
         [ Attr.class "factor" ]
         [ Input.label "Modality"
-        , modalitySelect limited index elaboration.modality
-        ]
-
-
-frequency : Int -> Elaboration -> Html.Html Signal
-frequency index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Frequency"
-        , stringText
-            "e.g. usually, sometimes, occasionally"
-            (SetString1 index)
-            elaboration.string1
+        , modalitySelect limited index modalityValue
         ]
 
 
@@ -120,7 +133,19 @@ preordainedTime index elaboration =
         [ Input.label "Time"
         , stringText
             "e.g. tomorrow, next week"
-            (SetString1 index)
+            (SetElaborationString1 index)
+            elaboration.string1
+        ]
+
+
+frequency : Int -> Elaboration -> Html.Html Signal
+frequency index elaboration =
+    Html.div
+        [ Attr.class "factor" ]
+        [ Input.label "Frequency"
+        , stringText
+            "e.g. usually, sometimes, occasionally"
+            (SetElaborationString1 index)
             elaboration.string1
         ]
 
@@ -132,7 +157,7 @@ duration index elaboration =
         [ Input.label "Duration"
         , stringText
             "e.g. for a while, for two hours, all day"
-            (SetString1 index)
+            (SetElaborationString1 index)
             elaboration.string1
         ]
 
@@ -144,7 +169,7 @@ tally index elaboration =
         [ Input.label "Tally"
         , stringText
             "e.g. once, twice, several times"
-            (SetString1 index)
+            (SetElaborationString1 index)
             elaboration.string1
         ]
 
@@ -211,50 +236,61 @@ haystack index elaboration =
         [ Input.label "Haystack"
         , stringText
             "category (e.g. apple, water)"
-            (SetString1 index)
+            (SetElaborationString1 index)
             elaboration.string1
         , stringText
             "description (e.g. red, happy, interesting)"
-            (SetString2 index)
+            (SetElaborationString2 index)
             elaboration.string2
         , stringText
             "restriction (e.g. in the room, of France)"
-            (SetString3 index)
+            (SetElaborationString3 index)
             elaboration.string3
         ]
 
 
 {-| Select dropdowns, used by the main output functions above.
 -}
-pivotSelect : Int -> Pivot -> Html.Html Signal
-pivotSelect index pivot =
+displacerSelect : Bool -> Int -> Maybe Displacer -> Html.Html Signal
+displacerSelect compulsory index displacer =
     Input.select
-        { value = pivot
-        , options = Ideas.listPivots
-        , equivalent = Ideas.equatePivots
-        , signal = SetDisplacedPivot index
-        , toLabel = Ideas.displayPivot
+        { value = displacer
+        , options = Ideas.listDisplacers compulsory
+        , equivalent = Ideas.equateDisplacers
+        , signal = SetElaborationDisplacer index
+        , toLabel = Ideas.displayDisplacer
         }
 
 
-counterSelect : Int -> Maybe Counter -> Html.Html Signal
-counterSelect index counter =
+verbalitySelect : Int -> Verbality -> Html.Html Signal
+verbalitySelect index verbality =
     Input.select
-        { value = counter
-        , options = Ideas.listCounters
-        , equivalent = Ideas.equateCounters
-        , signal = SetDisplacedCounter index
-        , toLabel = Ideas.displayCounter
+        { value = verbality
+        , options = Ideas.listVerbalities
+        , equivalent = Ideas.equateVerbalities
+        , signal = SetElaborationDisplacerVerbality index
+        , toLabel = Ideas.displayVerbality
         }
 
 
-counterRelatorSelect : Int -> Relator -> Html.Html Signal
-counterRelatorSelect index relator =
+statusSelect : Int -> Maybe Status -> Html.Html Signal
+statusSelect index status =
+    Input.select
+        { value = status
+        , options = Ideas.listStatuses
+        , equivalent = Ideas.equateStatuses
+        , signal = SetElaborationDisplacerStatus index
+        , toLabel = Ideas.displayStatus
+        }
+
+
+statusRelatorSelect : Int -> Relator -> Html.Html Signal
+statusRelatorSelect index relator =
     Input.select
         { value = relator
         , options = Ideas.listRelators
         , equivalent = (==)
-        , signal = SetDisplacedCounterRelator index
+        , signal = SetElaborationDisplacerStatusRelator index
         , toLabel = toString
         }
 
@@ -265,7 +301,7 @@ modalitySelect limited index modality =
         { value = modality
         , options = Ideas.listModalities limited
         , equivalent = (==)
-        , signal = SetModality index
+        , signal = SetElaborationDisplacerModality index
         , toLabel = Ideas.displayModality
         }
 
@@ -276,7 +312,7 @@ targetSelect balanceCount index target =
         { value = target
         , options = Ideas.listTargets balanceCount
         , equivalent = (==)
-        , signal = SetTarget index
+        , signal = SetElaborationTarget index
         , toLabel = Ideas.displayTarget
         }
 
@@ -287,7 +323,7 @@ pointerSelect index pointer =
         { value = pointer
         , options = Ideas.listPointers
         , equivalent = Ideas.equatePointers
-        , signal = SetPointer index
+        , signal = SetElaborationPointer index
         , toLabel = Ideas.displayPointer
         }
 
@@ -298,7 +334,7 @@ pointerObjectSelect index object =
         { value = object
         , options = Ideas.listObjects
         , equivalent = Ideas.equateObjects
-        , signal = SetPointerObject index
+        , signal = SetElaborationPointerObject index
         , toLabel = Ideas.displayObject
         }
 
@@ -309,29 +345,29 @@ quantifierSelect amassed index quantifier =
         { value = quantifier
         , options = Ideas.listQuantifiers amassed
         , equivalent = Ideas.equateQuantifiers
-        , signal = SetQuantifier index
+        , signal = SetElaborationQuantifier index
         , toLabel = Ideas.displayQuantifier
         }
 
 
 {-| Text and number inputs, used by the main output functions above.
 -}
-pivotVerbality : Int -> Verbality -> Html.Html Signal
-pivotVerbality index verbality =
+verbalityString : Int -> String -> Html.Html Signal
+verbalityString index string =
     Input.text
-        { value = verbality
+        { value = string
         , placeholder = "e.g. have, like, want"
-        , signal = SetDisplacedPivotVerbality index
+        , signal = SetElaborationDisplacerVerbalityString index
         , disabled = False
         }
 
 
-counterProperty : Int -> Property -> Html.Html Signal
-counterProperty index property =
+statusString : Int -> String -> Html.Html Signal
+statusString index string =
     Input.text
-        { value = property
+        { value = string
         , placeholder = "e.g. able, eager, happy (optional)"
-        , signal = SetDisplacedCounterProperty index
+        , signal = SetElaborationDisplacerStatusString index
         , disabled = False
         }
 
@@ -341,7 +377,7 @@ pointerObjectText index object =
     Input.text
         { value = Maybe.withDefault "" (Ideas.objectString object)
         , placeholder = "name (optional)"
-        , signal = SetPointerObjectString index
+        , signal = SetElaborationPointerObjectString index
         , disabled = not (Ideas.objectHasString object)
         }
 
@@ -351,7 +387,7 @@ quantifierInteger index int =
     Input.number
         { value = toString int
         , placeholder = "integer"
-        , signal = SetQuantifierInteger index
+        , signal = SetElaborationQuantifierInteger index
         , disabled = False
         }
 
@@ -368,23 +404,23 @@ stringText placeholder signal string =
 
 {-| Input checkboxes, used by the main output functions above.
 -}
-pivotOngoing : Int -> Bool -> Html.Html Signal
-pivotOngoing index ongoing =
+verbalityOngoing : Int -> Bool -> Html.Html Signal
+verbalityOngoing index ongoing =
     Input.checkbox
         { id = "ongoing" ++ (toString index)
         , label = "Ongoing"
         , checked = ongoing
-        , signal = ToggleDisplacedPivotOngoing index
+        , signal = ToggleElaborationDisplacerVerbalityOngoing index
         }
 
 
-pivotPassive : Int -> Bool -> Html.Html Signal
-pivotPassive index passive =
+verbalityPassive : Int -> Bool -> Html.Html Signal
+verbalityPassive index passive =
     Input.checkbox
         { id = "passive" ++ (toString index)
         , label = "Passive"
         , checked = passive
-        , signal = ToggleDisplacedPivotPassive index
+        , signal = ToggleElaborationDisplacerVerbalityPassive index
         }
 
 
@@ -394,5 +430,5 @@ other index checked =
         { id = "other" ++ (toString index)
         , label = "Other"
         , checked = checked
-        , signal = ToggleOther index
+        , signal = ToggleElaborationOther index
         }
