@@ -190,7 +190,7 @@ It remains to see what objects, verbalities, statuses, relators, and weights are
 <table>
   <tr>
     <th>Object</th>
-    <th colspan="4">Condition</th>
+    <th colspan="6">Condition</th>
   </tr>
   <tr>
     <th></th>
