@@ -2,20 +2,22 @@
 
 A model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman, and with a gracious nod to Claude Shannon, the founder of information theory. Read on for an outline of the model and the philosophy behind it, and play around with the current version at [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
 
+## Contents
+
 1. [The Point](#1-the-point)
 2. [The Source](#2-the-source)
 3. [Grammatical Terminology](#3-grammatical-terminology)
-4. [The Theory, part 1/2: The Nucleus](#4the-theory-part-12-the-nucleus)
+4. [The Theory, part 1/2: The Nucleus](#4-the-theory-part-12-the-nucleus)
     1. [Objects and Balances](#41-objects-and-balances)
     2. [Pivots](#42-pivots)
     3. [Limitations](#43-limitations)
-5. [The Theory, part 2/2: The Elaborations](#5the-theory-part-22-the-elaborations)
+5. [The Theory, part 2/2: The Elaborations](#5-the-theory-part-22-the-elaborations)
     1. [PAST and PRIOR Messages](#51-past-and-prior-messages)
     2. [Conservative PREORDAINED Messages](#52-conservative-preordained-messages)
     3. [Conservative REGULAR, EXTENDED, and SCATTERED Messages](#53-conservative-regular-extended-and-scattered-messages)
     4. [NEGATIVE Messages](#54-negative-messages)
     5. [Interlude: Against the Future Tense Hypothesis](#55-interlude-against-the-future-tense-hypothesis)
-    6. [Primary DISPLACED, PREORDAINED, and REGULAR Messages](#56-primary-displaced-regular-and-preordained-messages)
+    6. [Primary DISPLACED, PREORDAINED, and REGULAR Messages](#56-primary-displaced-preordained-and-regular-messages)
     7. [Secondary DISPLACED Messages](#57-secondary-displaced-messages)
     8. [Secondary PREORDAINED and REGULAR Messages](#58-secondary-preordained-and-regular-messages)
     9. [INDIRECT, ENUMERATED, and AMASSED Messages](#59-indirect-enumerated-and-amassed-messages)
