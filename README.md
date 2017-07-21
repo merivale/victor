@@ -24,7 +24,7 @@ A model of the English language, thought of as a code for processing *messages* 
 
 ## 1. The Point
 
-My project does not fit neatly into existing intellectual paradigms. Indeed, it seeks to subvert them. Dudman presented his work as a contribution to philosophical semantics, urging that this subject needed to be approached grammatically. But the code breaker's methodology is scarcely less radical in grammatical circles than it is in philosophical ones. (Many linguists, it is true, have embraced the code analogy; but the methodology that analogy suggests remains largely untested.) I am apt to suspect that philosophers missed the significance of Dudman's ideas largely as a result of failing to appreciate what he meant by "grammar". To make matters worse, there is a venerable tradition in analytic philosophy, going right back to Bertrand Russell, of viewing "surface" grammar as positively at odds with the "deeper" logical realities. Insofar as there was ever any truth to these worries, they simply reflected bad grammatical theory; and insofar as the grammar was sound, they reflected dubious logical and semantic speculation lazily divorced from empirical fact. For the code breaker, grammar, logic, and semantics are all facets of one and the same scientific enterprise.
+My project does not fit neatly into existing intellectual paradigms. Indeed, it seeks to subvert them. Dudman presented his work as a contribution to philosophical semantics, urging that this subject needed to be approached grammatically. But the code breaker's methodology is scarcely less radical in grammatical circles than it is in philosophical ones. (Many linguists, it is true, have embraced the code *analogy*; but the methodology that analogy suggests remains largely untested.) I am apt to suspect that philosophers missed the significance of Dudman's ideas largely as a result of failing to appreciate what he meant by "grammar". To make matters worse, there is a venerable tradition in analytic philosophy, going right back to Bertrand Russell, of viewing "surface" grammar as positively at odds with the "deeper" logical realities. Insofar as there was ever any truth to these worries, they simply reflected bad grammatical theory; and insofar as the grammar was sound, they reflected dubious logical and semantic speculation lazily divorced from empirical fact. For the code breaker, grammar, logic, and semantics are all facets of one and the same scientific enterprise.
 
 The standard picture in philosophical circles nowadays is that the science of language divides into three parts. The first, *syntax*, seeks to uncover the rules governing the construction of grammatical or well-formed sentences. The second and third, *semantics* and *pragmatics*, attempt to articulate the meanings of the sentences thus constructed, and the relationship between these two sides of the communicative coin (the signs and what they signify). Semantics is the study of the meanings of sentences in general, on the assumption that there are such things, and that they are related functionally to the sentences that convey them. Pragmatics is the study of the meanings of sentences in context, something that is observed to go above and beyond their semantic or literal meaning. It is generally assumed that this layer of meaning is not functionally determined, and consequently not susceptible to the sort of formal treatment typical of philosophical semantics; the sentence determines a literal meaning, on this view, but that literal meaning then serves (together with other contextual factors) as evidence for the pragmatically enriched information.
 
@@ -74,16 +74,16 @@ I refer to lexemes that have more than one form in **boldface**, using ordinary 
 
 I count eight pronouns, and label them in the standard way: *first*, *second*, and *third person*, each either *singular* or *plural* (which makes six), and then an additional two in the third person singular, distinguishing male and female from neuter. Thus:
 
-| Number   | Person | Pronoun                 |
-| -------- | ------ | ----------------------- |
-| Singular | First  | `"I"`                   |
-|          | Second | `"you"`                 |
-|          | Third  | `"he"`, `"she"`, `"it"` |
-| Plural   | First  | `"we"`                  |
-|          | Second | `"you"`                 |
-|          | Third  | `"they"`                |
+| Number   | Person | Pronoun                             |
+| -------- | ------ | ----------------------------------- |
+| Singular | First  | **`"I"`**                           |
+|          | Second | **`"you"`**                         |
+|          | Third  | **`"he"`**, **`"she"`**, **`"it"`** |
+| Plural   | First  | **`"we"`**                          |
+|          | Second | **`"you"`**                         |
+|          | Third  | **`"they"`**                        |
 
-Since the old second person singular `"thou"` was usurped by its corresponding plural pronoun `"you"`, the latter is now ambiguous. It is simplest to distinguish two pronouns here, both spelt the same.
+Since the old second person singular **`"thou"`** was usurped by its corresponding plural pronoun **`"you"`**, the latter is now ambiguous. It is simplest to distinguish two pronouns here, both spelt the same.
 
 The eight pronouns come in five different forms, three *direct* and two *relative*. The distinction between the two second person pronouns, note, reveals itself in the third direct form (`"yourself"` vs. `"yourselves"`):
 
@@ -168,11 +168,11 @@ The various (apparently) non-present uses of the base and first finite forms wil
 
 I diagnose these as plain messages (actually the second is elaborated, but not in such a way as to affect its temporal components; see [section 5.9](#59-indirect-enumerated-and-amassed-messages)). Consequently I insist that they are indeed affirmations about the present. It is simply that sensible readers *ignore* this temporal information, knowing full well that it is irrelevant.
 
-The alternative to this refreshingly straightforward account is to posit a class of *genuinely* timeless affirmations in English, which are encoded (ambiguously) into the very same sentences that encode their corresponding present affirmations. But this surprisingly popular view is needlessly complicated, and not supported by the data. Why introduce a whole new class of message, and a whole new subroutine to encode it, when we can simply use the resources already in place? The question is intended to be rhetorical; but in any case, the fact that the output sentences are identical indicates fairly clearly that we *didn't* do this.
+The alternative to this straightforward account is to posit a class of *genuinely* timeless affirmations in English, which are encoded (ambiguously) into the very same sentences that encode their corresponding present affirmations. But this surprisingly popular view is needlessly complicated, and not supported by the data. Why introduce a whole new class of message, and a whole new subroutine to encode it, when we can simply use the resources already in place? The question is intended to be rhetorical; but in any case, the fact that the output sentences are identical indicates fairly clearly that we *didn't* do this.
 
-That the present is the default option within the English system perhaps explains why we use it in talking about abstract matters for which time is irrelevant. (Though I dare say this would have been the obvious choice anyway.) More significantly, it might help to explain the attraction to the view that such messages really are timeless, an attraction that appears to have been widely felt, in spite of the entirely unnecessary computational complexity that this hypothesis implies. It is easier to ignore information that simply comes by default, than to ignore information that needs to be actively selected.
+That the present is the default option within the English system perhaps explains why we use it in talking about abstract matters for which time is irrelevant (though I dare say this would have been the obvious choice anyway). More significantly, it might help to explain the attraction to the view that such messages really are timeless, an attraction that appears to have been widely felt, in spite of the entirely unnecessary computational complexity that this hypothesis implies. It is easier to ignore information that simply comes by default, than to ignore information that needs to be actively selected.
 
-Conditions break down further into a *pivot* and a (possibly empty) list of *balances*. Pivots consist of a *verbality* optionally followed by a *status*, and balances comprise a *weight* optionally prefixed with a *relator*. Thus:
+Conditions break down further into a *pivot* and a (possibly empty) list of *balances*. Pivots, in turn, consist of a *verbality* optionally followed by a *status*, and balances comprise a *weight* optionally prefixed with a *relator*. Thus:
 
 ```elm
 type alias Condition =
@@ -185,7 +185,7 @@ type alias Balance =
     ( Maybe Relator, Weight )
 ```
 
-It remains to see what objects, verbalities, statuses, relators, and weights are. Before going into the details, however, some examples should help start us off with an approximate idea:
+This is a lot of new technical terms to introduce at once; I will explain the details slowly over the next two sections. First, however, some examples should help to give an approximate idea:
 
 <table>
   <tr>
@@ -215,24 +215,6 @@ It remains to see what objects, verbalities, statuses, relators, and weights are
     <td>you.</td>
     <td></td>
     <td></td>
-  </tr>
-  <tr>
-    <td>I</td>
-    <td>am singing.</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>I</td>
-    <td>am giving</td>
-    <td>-</td>
-    <td>-</td>
-    <td>it</td>
-    <td>to</td>
-    <td>her.</td>
   </tr>
   <tr>
     <td>She</td>
@@ -270,9 +252,36 @@ It remains to see what objects, verbalities, statuses, relators, and weights are
     <td></td>
     <td></td>
   </tr>
+  <tr>
+    <td>I</td>
+    <td>am singing.</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>They</td>
+    <td>are laughing.</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>We</td>
+    <td>are leaving</td>
+    <td>-</td>
+    <td>-</td>
+    <td>it</td>
+    <td>to</td>
+    <td>them.</td>
+  </tr>
 </table>
 
-As these examples illustrate, every nucleus must have at least an object and a verbality. Many conditions, however, include statuses and one or more balances as well. We will examine the nucleus from the outside in, looking at objects and balances first, before delving deeper into the pivot that holds these two sides together.
+As these examples illustrate, every nucleus must have at least an object and a verbality. Many conditions, however, include a status and one or more balances as well. We will examine the nucleus of English messages from the outside in, looking at objects and balances in [section 4.1](#41-objects-and-balances), and then pivots in [section 4.2](#42-pivots).
 
 ### 4.1. Objects and Balances
 
@@ -305,6 +314,8 @@ When referring to objects in what follows, I will adopt the following abbreviati
 
 I hope these conventions are all intuitive and easy to understand. The point of adopting them is to make the examples that follow easier on all of us.
 
+Objects occur in two places in the nucleus: as the *main* object which satisfies the condition, or as a *balancing* object inside the condition itself. The main object is encoded in the first direct form of the pronoun. Balancing objects are encoded in either the second or third direct forms.
+
 A balance consists of a *weight*, optionally preceeded by a *relator*:
 
 ```elm
@@ -326,7 +337,7 @@ type Weight
     | Different Object
 ```
 
-Relators are encoded in prepositions. There are 31 relators in my model at present (I didn't bother listing them all above). This list is incomplete, but it accounts for many common prepositions. Relators will reappear in the context of pivots; see [section 4.2](#42-pivots). Weights, meanwhile, are essentially just objects like the main object of the nucleus, with the added possibility that they may refer back to the main object itself (in which case they generate the third direct form of the pronoun, `"myself"`, `"yourself"`, `"themselves"`, etc.) For clarity, I will distinguish where necessary the *main* object of the nucleus from any *balancing* objects in the list of balances.
+Relators are encoded in prepositions. There are 31 relators in my model at present (I didn't bother listing them all above). This list is incomplete, but it accounts for many common prepositions. Relators will reappear in the context of pivots; see [section 4.2](#42-pivots). Weights, meanwhile, are the balancing objects mentioned a moment ago. These are essentially just objects like the main object of the nucleus, but with the added possibility that they may refer back to the main object itself (in which case they generate the third direct form of the pronoun, rather than the second).
 
 Some more abbreviating conventions relating to balances: Whenever a relator is absent, I will omit it, rather than explicitly writing `Nothing`; and when it is present, I will write it on its own, as e.g. `Against` instead of `Just Against`. When the weight is not the same as the main object, I will not bother explictly writing `Different`, but write the object on its own (abbreviated as before). And finally, when a balance contains only a weight (i.e. no relator), I will drop the brackets around it. For example:
 
@@ -358,9 +369,9 @@ type Status
     | Relative Relator
 ```
 
-Statuses, first of all, are of two kinds, either `Absolute` or `Relative`. `Absolute` statuses are *properties*, encoded in adjectives (`"happy"`, `"hilarious"`, `"hungry"`, etc.). My model does not currently contain any properties or adjectives, however, and consequently the `Absolute` value simply takes a string argument. What this means is that users are obliged to encode their properties for themselves, inputting the resulting adjective directly into the system. I call values for which this is the case *unearthed* variables; as we will see, there are a few such unearthed variables in my model. I will say something more general about this in [section 4.3](#43-limitations) below. `Relative` statuses are for relators, which are encoded in prepositions (`"at"`, `"by"`, `"in"`, `"with"`, etc.). We already met these in [section 4.1](#41-objects-and-balances).
+Statuses, first of all, are of two kinds, either `Absolute` or `Relative`. `Absolute` statuses are *properties*, encoded in adjectives (`"happy"`, `"hilarious"`, `"hungry"`, etc.). My model does not currently contain any properties or adjectives, however, and consequently the `Absolute` value simply takes a string argument. What this means is that users are obliged to encode any properties for themselves, inputting the resulting adjective directly into the system. I call values for which this is the case *unearthed* variables; as we will see, there are a few such unearthed variables in my model. I will say something more general about this in [section 4.3](#43-limitations) below. `Relative` statuses, meanwhile, are for relators, which are encoded in prepositions (`"at"`, `"by"`, `"in"`, `"with"`, etc.). We already met these in [section 4.1](#41-objects-and-balances).
 
-Going back to the start of the pivot, we have the verbality, which determines the choice of verb at the start of the predicate. It can take one of two values:
+Going back to the start of the pivot, we have the verbality, which determines the choice of verb. It can take one of two values:
 
 ```elm
 type Verbality
@@ -376,9 +387,9 @@ The `Be` verbality, unsurprisingly, triggers selection of the verb **`"be"`**, w
 | `Other`     | `"is"`  |
 | *otherwise* | `"are"` |
 
-The boolean argument this pivot takes indicates whether or not the condition as a whole is *ongoing*; when set to true, this introduces the participle form `"being"` immediately after the finite form as determined by the object. It underlies the difference between, for example, `"He is silly"` and `"He is being silly"`. (The adjective `"silly"`, in these examples, comes from the status variable.)
+The boolean argument this verbality takes indicates whether or not the condition as a whole is *ongoing*; when set to true, this introduces the participle form `"being"` immediately after the finite form as determined by the object. It underlies the difference between, for example, `"He is silly"` and `"He is being silly"`. (The adjective `"silly"`, in these examples, comes from the status variable.)
 
-If there is an English condition comprising nothing other than the `Be` verbality (i.e. a pivot with no status, and an empty list of balances), then it is the condition of existence; as in the standard translation of Descartes' famous claim, `"I think, therefore I am"`. For what it's worth, I myself find it hard to interpret sentences like `"I am"` or `"They are"` as encoding existential claims. Such semi-sentences seem to me to demand the response, *are what?* And so I am tempted to say that there is no English condition comprising the `Be` verbality on its own, and that the proper translation of Descartes is `"... therefore I exist"`. But my intuition is not shared by all English speakers, and I needn't insist on the point.
+If there is an English condition comprising nothing other than the `Be` verbality (i.e. a pivot with no status, followed by an empty list of balances), then it is the condition of existence; as in the standard translation of Descartes' famous claim, `"I think, therefore I am"`. For what it's worth, I myself find it hard to interpret sentences like `"I am"` or `"They are"` as encoding existential claims. Such semi-sentences seem to me to demand the response, *are what?* And so I am tempted to say that there is no English condition comprising the `Be` verbality on its own, and that the proper translation of Descartes is `"... therefore I exist"`. But my intuition is not shared by all English speakers, and I needn't insist on the point.
 
 At any rate, there are certainly plenty of English conditions made up of the `Be` verbality together with a status. When the status is `Absolute` (i.e. a property), the condition is that of having that property:
 
@@ -406,11 +417,11 @@ When the status is relative (i.e. a relator), the condition is that of being in 
     -> "We are over."
 ```
 
-To be clear, I am adopting some more abbreviating conventions here. To being with, I do not bother with brackets around either the condition or its underlying pivot, since there is no possibility of confusion, and including them would therefore make things longer and harder to read for no reason. And when the list of balances is empty (as in all the examples above) I omit it, instead of explicitly writing `[]`. When the *ongoing* boolean argument to the `Be` verbality is `False` (as above), I likewise omit it; when it is `True`, I will write it as `Ongoing` instead, so that readers don't have to remember what its purpose is. With statuses, finally, I will omit them when they are absent (instead of explicitly writing `Nothing`), and just write the crucial value when they are present, since there is again no possibility of confusion. Thus I write `"hungry"` instead of `Just (Absolute "hungry")`, or `Out` instead of `Just (Relative Out)`.
+To be clear, I am adopting some more abbreviating conventions here. To begin with, I do not bother with brackets around either the condition or its underlying pivot, since there is no possibility of confusion, and including them would therefore make things longer and harder to read for no reason. And when the list of balances is empty (as in all the examples above) I omit it, instead of explicitly writing `[]`. When the *ongoing* boolean argument to the `Be` verbality is `False` (as above), I likewise omit it; when it is `True`, I will write it as `Ongoing` instead, so that readers don't have to remember what its purpose is. With statuses, finally, I will omit them when they are absent (instead of explicitly writing `Nothing`), and just write the crucial value when they are present, since there is again no possibility of confusion. Thus I write `"hungry"` instead of `Just (Absolute "hungry")`, or `Out` instead of `Just (Relative Out)`.
 
 Not every condition involving the `Be` verbality can be made ongoing. It is only those for which some intelligible distinction can be made. `"I am being up"`, for example, is not a sentence of English, presumably because there is no way in which its interpretation might differ from that of `"I am up"`. In contrast, `"He is being silly"` is perfectly fine, and marks an important informational difference from `"He is silly"`. The former conveys something about his present behaviour, while the latter conveys something about his present character.
 
-The `Do` verbality is responsible for all other English verbs. As with properties and adjectives, however, my model does not currently include any of these options itself. For now users are obliged - except in the special case of `Be` - to encode the core of their verbalities for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). The form is then determined by the object: the first finite form in the case of the `Other` object singular, and the base form otherwise.
+The `Do` verbality is responsible for all other English verbs. As with properties and adjectives, however, my model does not currently include any of these options itself. For now users are obliged - except in the special case of `Be` - to encode the core of their verbalities for themselves. My system generates the appropriate *form* of the verb for your message, but you need to supply the verb yourself (in its base form, e.g. `"eat"`, `"dance"`, `"live"`). This is the point of the string argument. The form of the verb is then determined by the object: the first finite form in the case of the `Other` object singular, and the base form otherwise.
 
 Following the string argument of the `Do` verbality, there is a boolean argument representing whether or not the condition in question is *ongoing*, exactly as it does with the `Be` verbality; this underlies the difference between, for example, `"She lives"` and `"She is living"`. The second boolean argument, not available for the `Be` verbality, indicates whether or not the condition as a whole is *passive*; this accounts for the difference between, for example, `"She eats"` or `"She is eating"` on the one hand, and `"She is eaten"` or `"She is being eaten"` on the other.
 
@@ -444,7 +455,7 @@ Many `Do` verbalities, as we will see in a moment, support balances as well. In 
 
 One thing to say in general is that the satisfaction of some conditions with `Do` verbalities necessarily *takes time*, and that for this reason the `Ongoing` flag is typically called for when these verbalities occur in unelaborated messages: `"They are eating out"` rather than `"They eat out"`. The latter sentence has a perfectly sound interpretation (concerning their general eating habits), but it is an elaborated message; see [section 5.3](#53-conservative-regular-extended-and-scattered-messages).
 
-There is a degree of fluidity between `Be` verbalities and `Do` verbalities when the latter are either ongoing or passive. For example, the message encoded as `"It is interesting"` could be the result either of the `Be` verbality followed by a property encoded as `"interesting"`, or of the `Do "interest" Ongoing` verablity. Similarly, `"It is allowed"` could be the result either of the `Be` verbality followed by a property encoded as `"allowed"`, or of the `Do "allow" Passive` verablity. I suggest it doesn't much matter which analysis we opt for. Since my model only allows for one status following the verbality, however, a sentence like `"They are allowed in"` can only be the result of a passive `Do` verablity; the status generates the preposition `"in"`, and so `"allowed"` must be coming directly from the verbality in this case.
+There is a degree of fluidity between `Be` verbalities and `Do` verbalities when the latter are either ongoing or passive. For example, the message encoded as `"It is interesting"` could be the result either of the `Be` verbality followed by a property encoded as `"interesting"`, or of the `Do "interest" Ongoing` verbality. Similarly, `"It is allowed"` could be the result either of the `Be` verbality followed by a property encoded as `"allowed"`, or of the `Do "allow" Passive` verbality. I suggest it doesn't much matter which analysis we opt for. Since my model only allows for one status following the verbality, however, a sentence like `"They are allowed in"` can only be the result of a passive `Do` verbality; the status generates the preposition `"in"`, and so `"allowed"` must be coming directly from the verbality in this case.
 
 When the `Be` verbality is paired with a status, typically no balances are required to make a complete condition. In some cases, however, with a suitable status, a balance can also be included:
 
@@ -495,17 +506,19 @@ It should go without saying that my theory is incomplete, a work in progress tha
 
 There are two immediately obvious inadequacies, namely that my theory does not cover all of the ground (there are sentences that it cannot account for), and that, even in the ground that it does cover, it leaves some things unearthed (the properties and verbalities that users are currently obliged to encode for themselves). Both of these inadequacies are relatively untroubling. If you'll excuse the change of metaphor, neither of them indicates that I am on the wrong track; they merely remined us that - of course - I have yet to reach the end of that track. While I am here, I may add that precisely the same limitations apply to my theory of elaborations too: there are many elaborate messages that my system cannot encode, and with the ones that it does encode, it still relies on users encoding certain unearthed variables for themselves.
 
-In developing my theory in the future, I will naturally want to dig up some of the presently unearthed variables. In some cases, however, I will be in no great hurry to do so. It seems to me that there is nothing particularly puzzling or intriguing, from a theoretical point of view, about properties and the way in which they are encoded into adjectives, and uncovering this variable would simply be a matter of giving my system an enormous dictionary. The same is true of what I call *categories* (which are encoded into nouns), another unearthed variable that we will meet in my theory of elaborations ([section 5.9](#59-indirect-enumerated-and-amassed-messages)). And the same is mostly true of verbalities, except that in their case unearthing would be necessary for the implementation of any validation checks on conditions (see the end of this section).
+In developing my theory in the future, I will naturally want to dig up some of the presently unearthed variables. In some cases, however, I will be in no great hurry to do so. It seems to me that there is nothing particularly puzzling or intriguing, from a theoretical point of view, about properties and the way in which they are encoded into adjectives, and uncovering this variable would simply be a matter of giving my system an enormous dictionary. The same is true of what I call *categories* (which are encoded into nouns), another unearthed variable that we will meet in my theory of elaborations ([section 5.9](#59-indirect-enumerated-and-amassed-messages)). And the same is mostly true of verbalities, except that in their case at least a degree of excavation would be necessary for the implementation of any validation checks on conditions (see the end of this section).
 
-Regarding the uncovered ground, here are two simple sentences that my theory is not yet able to account for:
+Regarding the uncovered ground, here are three simple sentences that my theory is not yet able to account for:
 
 ```elm
 "I am here."
 
 "She likes singing."
+
+"Singing is fun."
 ```
 
-For what it's worth, my current thinking is that there are in English at least two other kinds of weights aside from objects: places and conditions. These, I suggest, would respectively account for the two sentences above. (Sentences like `"She likes to sing"` are dealt with by my theory of elaborations; see [section 5.5](#55-primary-displaced-messages).) But there will always be more to do, and one has to pause somewhere along the way. (I presume that `"somewhere"`, incidentally, would be the result of elaborating a message with a place variable in its underlying condition; my model doesn't predict the uses of this word yet either.) I am also unable to generate compound prepositional phrases like `"in front of"` or `"on top of"`.
+For what it's worth, my current thinking is that there are in English at least two other kinds of `Other` (third person) objects not presently captured in my model: places and conditions. These, I suggest, would account for the first and last two sentences above respectively. (Sentences like `"She likes to sing"` are dealt with by my theory of elaborations; see [section 5.5](#55-primary-displaced-messages).) But there will always be more to do, and one has to pause somewhere along the way. (I presume that `"somewhere"`, incidentally, would be the result of elaborating a message with a place variable in its nucleus; my model doesn't predict the uses of this word yet either.) I am also unable to generate compound prepositional phrases like `"in front of"` or `"on top of"`.
 
 More worrying still is that there are ambiguities I am unable to account for. This is particularly regrettable, because the ability to account for ambiguities is precisely one of the main selling points of my approach as a whole. In my defence, I can account for several ambiguities with my theory of elaborations (as we will see), and that, as I advertised above, is where my main interests lie. There are some ambiguities, however, that need to be accounted for by the theory of plain messages, and my model is not yet able to do this. The ambiguities in question concern how balances fit into the overall condition, informational differences that are not captured when we represent balances simply as a list. For example:
 
@@ -523,7 +536,7 @@ Evidently, then, there is more to a condition than just a pivot and a bare *list
 
 (A tentative suggestion: Perhaps the definition of a weight needs to be made recursive, allowing for balances within weights. The representation above, then, would be of the message in which he is with Victor, both of them looking at Grannie. The message where Victor is with Grannie instead would involve a balance within a weight: `( At, ( Female "Grannie", ( With, Male "Victor" ) ) )`. In plainer terms, the difference would be between *looking at-Grannie with-Victor* (two separate balances) and *looking at Grannie-with-Victor* (one balance, with another balance inside it). With balances being encoded in order, and sub-balances before the next balance at the same level in the list, it is easy to see how the ambiguity in the sentence would then arise.)
 
-Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any relator with any object; while in constructing the condition itself, they may combine any status with any verablity, and then append any list of balances whatsoever. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
+Finally, perhaps the most striking weakness in my theory of plain messages is that it currently predicts far too much. This is because my model makes *no attempt whatsoever* to validate input conditions. In constructing balances, users are allowed to combine any relator with any object; while in constructing the condition itself, they may combine any status with any verbality, and then append any list of balances whatsoever. As a result it is possible - let me not mince words - to generate *complete and utter nonsense* within my system. For instance:
 
 ```elm
 ( Male "Victor", Do "love", At, [ ( Behind, Female "Grannie" ) ] )
@@ -1068,7 +1081,7 @@ PREORDAINED ( Female, Do "go" Ongoing, [ To, Other "France" ] )
     -> "She is going to France."  -- e.g. next month
 ```
 
-Either way, this is what we might call the *basic* use of `"be going to"`; it simply arises from the `Do "go" Ongoing` verablity, and encodes the idea of going in the literal sense of moving from one place to another. Notice that neither of these messages can include any specification of the time at which she arrives. `"She is going to France tomorrow"` only has a `PREORDAINED` interpretation, and `"tomorrow"` here serves to encode the time at which she laves, not the time at which she gets there. Thus, while the idea of going somewhere naturally invites thoughts of a later arrival, the verbality itself cannot support any specification of that later time.
+Either way, this is what we might call the *basic* use of `"be going to"`; it simply arises from the `Do "go" Ongoing` verbality, and encodes the idea of going in the literal sense of moving from one place to another. Notice that neither of these messages can include any specification of the time at which she arrives. `"She is going to France tomorrow"` only has a `PREORDAINED` interpretation, and `"tomorrow"` here serves to encode the time at which she laves, not the time at which she gets there. Thus, while the idea of going somewhere naturally invites thoughts of a later arrival, the verbality itself cannot support any specification of that later time.
 
 These two messages do not contain any displacer. The `"be going to"`, in both cases, is coming directly from the nucleus. It is when this phrase is introduced by a displacer that things start to get interesting. Consider the following sentence:
 

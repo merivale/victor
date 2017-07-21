@@ -89,10 +89,10 @@ plain ( object, ( pivot, balances ) ) =
 
 
 {-| Negating a message typically has the effect of negating its underlying
-condition. The PRACTICAL, PROJECTIVE, and EVASIVE elaborations, however,
+condition. The DISPLACED, PREORDAINED, and REGULAR elaborations, however, may
 introduce a modality that becomes the target of any subsequent negation instead.
 Similarly, the ENUMERATED and AMASSED elaborations, if they target the main
-object with the right kind of quantifier, making any subsequent negation effect
+object with the right kind of quantifier, make any subsequent negation affect
 that quantifier instead. The result, in these cases, is something like "not all"
 or "not every" at the start of the sentence.
 -}
@@ -110,8 +110,8 @@ negative vars =
                 Just Yes1 ->
                     Err "the Yes1 modality ('will') cannot be negated"
 
-                Just Yes3 ->
-                    Err "the Yes3 modality ('shall') cannot be negated"
+                Just Yes2 ->
+                    Err "the Yes2 modality ('shall') cannot be negated"
 
                 _ ->
                     Ok { vars | negatedModality = True, pre = "not" :: vars.pre }
@@ -363,7 +363,7 @@ displace displacer vars =
 
         Just (Primary pivot) ->
             swapPastForPrior { vars | negationTarget = NegateCondition }
-               |> andThen (displacePrimary pivot)
+                |> andThen (displacePrimary pivot)
 
         Just (Secondary modality) ->
             swapPastForPrior { vars | negationTarget = NegateCondition }
@@ -373,7 +373,7 @@ displace displacer vars =
 swapPastForPrior : Vars -> Result String Vars
 swapPastForPrior vars =
     if vars.past && vars.prior then
-            Err "PRIOR PAST messages cannot be given a displacer"
+        Err "PRIOR PAST messages cannot be given a displacer"
     else if vars.past then
         Ok { vars | past = False, prior = True }
     else
@@ -391,7 +391,7 @@ displacePrimary pivot vars =
 
 displaceSecondary : Modality -> Vars -> Result String Vars
 displaceSecondary modality vars =
-    Ok { vars | modality = Just modality }
+    Ok { vars | negationTarget = NegateModality, modality = Just modality }
 
 
 {-| Some functions for possibly adding strings.

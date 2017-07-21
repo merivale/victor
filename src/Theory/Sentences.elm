@@ -301,10 +301,20 @@ pre vars =
             (finiteVerbPhrase vars.past (object vars.object) vars.prior vars.pre vars.pivot) :: (List.map baseVerbPhrase vars.displacedPivots)
 
         Just m ->
-            (Words.modal m vars.past vars.negatedModality) :: (List.map baseVerbPhrase (( vars.prior, vars.pre, vars.pivot ) :: vars.displacedPivots))
+            let
+                modal =
+                    Words.modal m vars.past vars.negatedModality
+
+                displacedPivot =
+                    if modal == "ought" then
+                        ( vars.prior, "to" :: vars.pre, vars.pivot )
+                    else
+                        ( vars.prior, vars.pre, vars.pivot )
+            in
+                modal :: (List.map baseVerbPhrase (displacedPivot :: vars.displacedPivots))
 
 
-{-| Fulcrum and pre stuff...
+{-| Fulcrum and pre stuff.
 -}
 finiteVerbPhrase : Bool -> Object -> Bool -> List String -> Pivot -> String
 finiteVerbPhrase past object prior pre pivot =

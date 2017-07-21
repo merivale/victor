@@ -180,24 +180,27 @@ elaborationBody balanceCount index elaboration subContent =
         MakeDISPLACED ->
             Html.div
                 [ Attr.class "body" ]
-                ((Elaborations.displacer True True index elaboration) ++
-                    [ subContent ])
+                ((Elaborations.displacer True True index elaboration)
+                    ++ [ subContent ]
+                )
 
         MakePREORDAINED ->
             Html.div
                 [ Attr.class "body" ]
-                ((Elaborations.displacer False False index elaboration) ++
-                    [ Elaborations.preordainedTime index elaboration
-                    , subContent
-                    ])
+                ((Elaborations.displacer False False index elaboration)
+                    ++ [ Elaborations.preordainedTime index elaboration
+                       , subContent
+                       ]
+                )
 
         MakeREGULAR ->
             Html.div
                 [ Attr.class "body" ]
-                ((Elaborations.displacer False True index elaboration) ++
-                    [ Elaborations.frequency index elaboration
-                    , subContent
-                    ])
+                ((Elaborations.displacer False True index elaboration)
+                    ++ [ Elaborations.frequency index elaboration
+                       , subContent
+                       ]
+                )
 
         MakeEXTENDED ->
             Html.div

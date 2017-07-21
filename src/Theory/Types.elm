@@ -19,8 +19,8 @@ elaborating system, i.e. that every combination of elaborations is allowable
 unless there is some positive reason for ruling it out.
 
 Since elaborations are such a central part of the theory, I adopt the convention
-of writing them in ALLCAPS, so as to visibly distinct from other types and
-values.
+of writing them in ALLCAPS, so as to make them clearly visibly distinct from
+other types and values.
 -}
 type Message
     = Plain Nucleus
@@ -50,9 +50,9 @@ intended to house a proper name; otherwise English defaults to the appropriate
 pronoun.
 -}
 type Object
-    = Speaker Bool
-    | Hearer Bool
-    | Other Bool (Maybe Sex) (Maybe String)
+    = Speaker Bool                           -- "I"/"we"
+    | Hearer Bool                            -- "you"
+    | Other Bool (Maybe Sex) (Maybe String)  -- "he"/"she"/"it"/"they"
 
 
 type Sex
@@ -77,25 +77,26 @@ type alias Pivot =
 {-| Verbalities are of two kinds, either Be or Do. In the latter case, the
 string argument is for holding the verb (in its base form; "do", "like", "live",
 "love", etc.). The boolean arguments are for ongoing and passive (but only
-Do verbalities can be passive). Between them these account for the following:
+Do verbalities can be passive). Between them these account for the following
+verb phrases:
 
-    | ongoing | passive | output           |
-    | ------- | ------- | ---------------- |
-    |    F    |    F    | "eat"            |
-    |    F    |    T    | "be eaten"       |
-    |    T    |    F    | "be eating"      |
-    |    T    |    T    | "be being eaten" |
+| ongoing | passive | output           |
+| ------- | ------- | ---------------- |
+|    F    |    F    | "eat"            |
+|    F    |    T    | "be eaten"       |
+|    T    |    F    | "be eating"      |
+|    T    |    T    | "be being eaten" |
 -}
 type Verbality
     = Be Bool
     | Do String Bool Bool
 
 
-{-| Statuses are of two kinds, absolute or relative. Absolute statuses are
-encoded in adjectives, which users must input for themselves (hence the string
-argument). Relative statuses are relators, encoded in prepositions. There are
-more relators/prepositions in English than my model presently accommodates, but
-I've included a fair number of the most common.
+{-| Statuses are of two kinds, either Absolute or Relative. Absolute statuses
+are encoded in adjectives, which users must input for themselves (hence the
+string argument). Relative statuses are relators, encoded in prepositions. There
+are more relators/prepositions in English than my model presently accommodates,
+but I've included a fair number of the most common.
 -}
 type Status
     = Absolute String
@@ -172,8 +173,8 @@ type Modality
 Multiplicity, and Proportion arguments respectively. These arguments have quite
 a lot in common; together they are responsible for noun phrases, like "the red
 baloon", "your best friend", "several seditious scribes from Caesarea", etc. The
-boolean argument in the middle triggers in output of "other"/"else", as in "your
-other friend", "someone else", etc.
+boolean argument in the middle triggers the output of "other"/"else", as in
+"your other friend", "someone else", etc.
 -}
 type alias Description =
     ( Pointer, Bool, Haystack )
@@ -198,9 +199,9 @@ type Pointer
 multiplicites (in ENUMERATED messages) and the latter for proportions (in
 AMASSED messages). The quantifiers Some and Any, however, are both enumerating
 and amassing, i.e. they can be used in both multiplicities and proportions.
-Consequently there is only one type definition. The quantifiers up to and
-including Some and Any in this list are enumerating; those including and
-afterwards are amassing.
+Consequently there is only one type definition covering both kinds. The
+quantifiers up to and including Some and Any in this list are enumerating;
+those including and afterwards are amassing.
 -}
 type Quantifier
     = A
@@ -218,16 +219,19 @@ type Quantifier
     | Enough
 
 
+{-| Users must encode their haystacks for themselves. The compulsory string at
+the start encodes the category (e.g. "bag"); the first optional string encodes
+a description (e.g. "red bag"); the second optional string encodes a restriction
+(e.g. "red bag from London").
+-}
 type alias Haystack =
     ( String, Maybe String, Maybe String )
 
 
-{-| To keep track of the effect the nucleus and any subsequent elaboration has
-on the sentence, and to check that the message is valid, the encoding function
-needs to pass around several variables. For convenience, these variables are
-collected together here into a single record. The Booleans at the start are
-for the most part flags required for message validation; the properties further
-down are direct determiners of the output string.
+{-| To keep track of the effect that the nucleus and any subsequent elaborations
+have on the sentence, and to check that the message is valid, the encoding
+function needs to pass around several variables. For convenience, these
+variables are collected together here into a single record.
 -}
 type alias Vars =
     { negationTarget : NegationTarget

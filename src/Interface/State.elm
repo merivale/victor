@@ -189,9 +189,9 @@ minusAll model =
     }
 
 
-{-| Toggle the plus of a specific elaboration, and otherwise set it to False.
-Used to map the elaborations, to ensure that only one elaboration box is open at
-a time.
+{-| Either toggle the plus of an elaboration (if it is the one given as an
+argument), or set it to False. This is used to map the elaborations, to ensure
+that only one elaboration box is open at a time.
 -}
 toggleOrMinus : Int -> Int -> Elaboration -> Elaboration
 toggleOrMinus toggleIndex currentIndex elaboration =
@@ -202,8 +202,8 @@ toggleOrMinus toggleIndex currentIndex elaboration =
 
 
 {-| Check that an elaboration does not target the balancing object at the given
-index. Used to remove any elaboration that does, when the corresponding balance
-is deleted.
+index. This is used to remove any elaboration that does, when the corresponding
+balance is deleted.
 -}
 doesNotTarget : Int -> Elaboration -> Bool
 doesNotTarget balanceIndex elaboration =
@@ -214,7 +214,7 @@ doesNotTarget balanceIndex elaboration =
         )
 
 
-{-| Remove an element from a list at the given index. Used for deleting
+{-| Remove an element from a list at the given index. This is used for deleting
 elaborations.
 -}
 removeFromList : Int -> List a -> List a
@@ -222,8 +222,7 @@ removeFromList index list =
     (List.take index list) ++ (List.drop (index + 1) list)
 
 
-{-| Functions for adding a new elaboration, with appropriate default
-ingredients.
+{-| Function for adding a new elaboration, with appropriate default ingredients.
 -}
 addElaboration : Int -> Recipe -> List Elaboration -> List Elaboration
 addElaboration index recipe elaborations =
@@ -279,8 +278,8 @@ addElaboration index recipe elaborations =
 
 
 {-| Modify an item within a list at the given index, using the given modifying
-function. Used to change the components of balances and elaborations, which
-reside within lists in the model.
+function. This is used to change the components of balances and elaborations,
+which reside within lists in the model.
 -}
 modifyItem : Int -> (a -> a) -> List a -> List a
 modifyItem index modified list =
