@@ -24,26 +24,8 @@ import Theory.Sentences as Sentences
 root : Model -> Html.Html Signal
 root model =
     Html.div []
-        [ Html.header []
-            [ Html.h1 []
-                [ Html.text "Victor: A Model of the English Code" ]
-            ]
-        , Html.main_ []
-            [ output model
-            , input (List.reverse model.elaborations) model
-            ]
-        , Html.footer []
-            [ Html.ul []
-                [ Html.li []
-                    [ Html.a [ Attr.href "http://www.merivale.uk/" ]
-                        [ Html.text "Amyas Merivale" ]
-                    ]
-                , Html.li []
-                    [ Html.a [ Attr.href "https://github.com/merivale/victor" ]
-                        [ Html.text "View Source on GitHub" ]
-                    ]
-                ]
-            ]
+        [ output model
+        , input (List.reverse model.elaborations) model
         ]
 
 
