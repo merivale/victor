@@ -2,7 +2,7 @@
 
 A model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman, and with a gracious nod to Claude Shannon, the founder of information theory. Read on for an outline of the model and the philosophy behind it, and play around with the current version at [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
 
-For exposition purposes, the model is divided into four layers of increasing complexity (each one in its own GitHub branch). There is also a zeroth layer for the full theory (the master branch), identical to the fourth but without the introductory explanations. Users unfamiliar with the theory should look at the README for the Full Theory first, then move through the four layers of the model in turn.
+For exposition purposes, the model is divided into four layers of increasing complexity (each one in its own git branch). There is also a zeroth layer for the full theory (the `master` branch), identical to the fourth but without the introductory explanations. Users unfamiliar with the theory should look at the README for the full theory first, then move through the four layers of the model in turn.
 
 - Full Theory (the `master` branch)
     - [view README and source](https://github.com/merivale/victor/)
@@ -23,7 +23,7 @@ For exposition purposes, the model is divided into four layers of increasing com
 
 ## The Full Theory
 
-You are currently viewing the README for the Full Theory (the `master` branch).
+You are currently viewing the README for the full theory (the `master` branch).
 
 1. [The Point](#1-the-point)
 2. [The Source](#2-the-source)
