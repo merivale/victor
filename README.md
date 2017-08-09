@@ -2,9 +2,11 @@
 
 A model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). Inspired by the work of grammarian and logician Victor Howard Dudman, and with a gracious nod to Claude Shannon, the founder of information theory. Read on for an outline of the model and the philosophy behind it, and play around with the current version at [https://merivale.github.io/victor/](https://merivale.github.io/victor/).
 
-For exposition purposes, the model is divided into four layers (GitHub branches) of increasing complexity. There is also a fifth layer (the master branch) for the full theory, identical to the fourth but without the introductory explanations. Users unfamiliar with the theory should start with the first layer (Plain Messages), and move on from there.
+For exposition purposes, the model is divided into four layers (GitHub branches) of increasing complexity. There is also a zeroth layer (the master branch) for the full theory, identical to the fourth but without the introductory explanations. Users unfamiliar with the theory should view the README for the Full Theory first, then move through the four layers of the model in turn.
 
-You are currently viewing the README for the Full Theory (the `master` branch).
+- Full Theory (the `master` branch)
+    - [view README and source](https://github.com/merivale/victor/)
+    - [experiment with the model](https://merivale.github.io/victor/)
 
 1. Plain Messages (the *plain* branch)
     - [view README and source](https://github.com/merivale/victor/tree/plain)
@@ -18,11 +20,15 @@ You are currently viewing the README for the Full Theory (the `master` branch).
 4. Object Elaborations (the `object` branch)
     - [view README and source](https://github.com/merivale/victor/tree/object)
     - [experiment with the model](https://merivale.github.io/victor/object.html)
-5. Full Theory (the `master` branch)
-    - [view README and source](https://github.com/merivale/victor/)
-    - [experiment with the model](https://merivale.github.io/victor/)
 
-## 1. The Point
+## The Full Theory
+
+You are currently viewing the README for the Full Theory (the `master` branch).
+
+1. [The Point](#1-the-point)
+2. [The Source](#2-the-source)
+
+### 1. The Point
 
 My project does not fit neatly into existing intellectual paradigms. Indeed, it seeks to subvert them. Dudman presented his work as a contribution to philosophical semantics, urging that this subject needed to be approached grammatically. But the codebreaker's methodology is scarcely less radical in grammatical circles than it is in philosophical ones. (Many linguists, it is true, have embraced the code *analogy*; but the methodology that analogy suggests remains largely untested.) I am apt to suspect that philosophers missed the significance of Dudman's ideas largely as a result of failing to appreciate what he meant by "grammar". To make matters worse, there is a venerable tradition in analytic philosophy, going right back to Bertrand Russell, of viewing "surface" grammar as positively at odds with the "deeper" logical realities. Insofar as there was ever any truth to these worries, they simply reflected bad grammatical theory; and insofar as the grammar was sound, they reflected dubious logical and semantic speculation lazily divorced from empirical fact. For the codebreaker, grammar, logic, and semantics are all facets of one and the same scientific enterprise.
 
@@ -42,7 +48,7 @@ There is also another, more specific reason why the direction in which we model 
 
 (The obverse of ambiguity is the phenomenon of stylistic variance, whereby the same information is encoded in more than one sentence. Stylistic variance includes optional abbreviations (`"She is not hungry"`/`"She's not hungry"`/`"She isn't hungry"`), word order (`"He left yesterday"`/`"Yesterday he left"`), and a few other things as well. It poses no threat to the code analogy. It simply means that we must build stylistic as well as informational choices into the code. The better to focus on the latter for now, my model does not yet include any stylistic variables, insisting on just one "canonical" output for every infomational input. In a later iteration, however, I do intend to add some stylistic arguments to my function.)
 
-## 2. The Source
+### 2. The Source
 
 My algorithm is written in [Elm](http://elm-lang.org/), with the styles written in [Less](http://lesscss.org/). The compiled HTML+JS+CSS is stored in the gh-pages branch, for easy integration with [GitHub Pages](https://pages.github.com/). The `src` directory contains the main program module, which simply pulls everything together (nothing to see there), and two subdirectories, `Interface` and `Theory`. The former directory contains all the modules responsible for generating the web page users see, for keeping track of user input, and for piecing that input together into a message variable. It is the modules in the latter directory that are potentially of theoretical interest, since they describe what a message variable looks like, and define the encoding function that converts these variables into strings.
 
