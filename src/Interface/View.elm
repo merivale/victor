@@ -314,12 +314,12 @@ help =
                 , Html.em [] [ Html.text "messages" ]
                 , Html.text " (structured arrangements of informational choices) into "
                 , Html.em [] [ Html.text "sentences" ]
-                , Html.text "(strings of words). Use the blue input box directly above to generate your message; the corresponding sentence will show up in the green output box at the top."]
+                , Html.text " (strings of words). Use the blue input box directly above to generate your message; the corresponding sentence will show up in the green output box at the top."]
             , Html.p []
                 [ Html.text "For exposition purposes, the model is divided into four layers of increasing complexity. If you are new to the theory, start with "
                 , Html.a [ Attr.href "plain.html" ] [ Html.text "Plain Messages" ]
                 , Html.text ", and move up from there. See the "
-                , Html.a [] [ Html.text "README on GitHub" ]
+                , Html.a [ Attr.href "https://github.com/merivale/victor/" ] [ Html.text "README on GitHub" ]
                 , Html.text " for an explanation of the philosophical context of the model."
                 ]
             ]
