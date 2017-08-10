@@ -319,8 +319,8 @@ help =
                 [ Html.text "For exposition purposes, the model is divided into four layers of increasing complexity. If you are new to the theory, start with "
                 , Html.a [ Attr.href "plain.html" ] [ Html.text "Plain Messages" ]
                 , Html.text ", and move up from there. See the "
-                , Html.a [ Attr.href "https://github.com/merivale/victor/" ] [ Html.text "README on GitHub" ]
-                , Html.text " for an explanation of the philosophical context of the model."
+                , Html.a [ Attr.href "https://github.com/merivale/victor/" ] [ Html.text "README" ]
+                , Html.text " for further details."
                 ]
             ]
         ]
