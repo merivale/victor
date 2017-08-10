@@ -321,11 +321,17 @@ finiteVerbPhrase past object prior pre pivot =
     let
         ( verbBase, rest ) =
             verbBaseAndRest prior pivot
-
-        fulcrum =
-            conjugate verbBase past object
     in
-        combine prior (verbBase == "be") pre fulcrum rest
+        if prior || verbBase == "be" then
+            String.join " " ((conjugate verbBase past object) :: (pre ++ rest))
+        else if List.member "not" pre then
+            let
+                ( newPre, newRest ) =
+                    splitAtNot 0 pre (verbBase :: rest)
+            in
+                String.join " " (newPre ++ ((conjugate "do" past object) :: newRest))
+        else
+            String.join " " (pre ++ ((conjugate verbBase past object) :: rest))
 
 
 baseVerbPhrase : ( Bool, List String, Pivot ) -> String
@@ -335,20 +341,6 @@ baseVerbPhrase ( prior, pre, pivot ) =
             verbBaseAndRest prior pivot
     in
         String.join " " (pre ++ (verbBase :: rest))
-
-
-combine : Bool -> Bool -> List String -> String -> List String -> String
-combine be prior pre verb rest =
-    if prior || be then
-        String.join " " (verb :: (pre ++ rest))
-    else if List.member "not" pre then
-        let
-            ( newPre, newRest ) =
-                splitAtNot 0 pre rest
-        in
-            String.join " " (newPre ++ (verb :: newRest))
-    else
-        String.join " " (pre ++ (verb :: rest))
 
 
 splitAtNot : Int -> List String -> List String -> ( List String, List String )
