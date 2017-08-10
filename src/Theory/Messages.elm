@@ -190,7 +190,7 @@ preordained displacer time vars =
     if vars.modality /= Nothing then
         Err "messages with a modality cannot be made PREORDAINED"
     else
-        displace displacer { vars | post = maybeAddToPost time vars.post }
+        displace displacer { vars | preordained = True, post = maybeAddToPost time vars.post }
 
 
 {-| REGULAR messages.
@@ -200,7 +200,7 @@ regular displacer frequency vars =
     if vars.modality /= Nothing then
         Err "messages with a modality cannot be made REGULAR"
     else
-        displace displacer { vars | pre = maybeAddToPre frequency vars.pre }
+        displace displacer { vars | regular = True, pre = maybeAddToPre frequency vars.pre }
 
 
 {-| EXTENDED messages.
