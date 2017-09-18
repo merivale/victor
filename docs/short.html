@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Victor</title>
+    <link rel="stylesheet" type="text/css" href="css/screen.css">
+  </head>
+  <body>
+    <header class="header">
+      <h1>Victor: A Model of the English Code</h1>
+    </header>
+    <nav class="nav">
+      <ul>
+        <li><a href="plain.html">Plain Messages</a></li>
+        <li><a class="active" href="short.html">Short Elaborations</a></li>
+        <li><a href="long.html">Long Elaborations</a></li>
+        <li><a href="object.html">Object Elaborations</a></li>
+        <li><a href="index.html">Full Theory (Master)</a></li>
+      </ul>
+    </nav>
+    <main id="victor">
+      <div class="starting">starting up...</div>
+    </main>
+    <aside class="help">
+      <h2>Short Elaborations</h2>
+      <p>Plain messages can be elaborated in various ways. Short elaborations are those that do not change the verb or modal at the start of the predicate. For more details, see the <a href="https://github.com/merivale/victor/tree/master/src/Theory/Short">README on GitHub</a>.</p>
+    </aside>
+    <footer class="footer">
+      <ul>
+        <li><a href="http://www.merivale.uk/">Amyas Merivale</a></li>
+        <li><a href="https://github.com/merivale/victor">View Source on GitHub</a></li>
+      </ul>
+    </footer>
+    <script src="js/short.js"></script>
+    <script>
+        (function () {
+            var node = document.getElementById("victor");
+            var victor = Elm.Short.embed(node);
+        }());
+    </script>
+  </body>
+</html>

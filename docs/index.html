@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Victor</title>
+    <link rel="stylesheet" type="text/css" href="css/screen.css">
+  </head>
+  <body>
+    <header class="header">
+      <h1>Victor: A Model of the English Code</h1>
+    </header>
+    <nav class="nav">
+      <ul>
+        <li><a href="plain.html">Plain Messages</a></li>
+        <li><a href="short.html">Short Elaborations</a></li>
+        <li><a href="long.html">Long Elaborations</a></li>
+        <li><a href="object.html">Object Elaborations</a></li>
+        <li><a class="active" href="index.html">Full Theory</a></li>
+      </ul>
+    </nav>
+    <main id="victor">
+      <div class="starting">starting up...</div>
+    </main>
+    <aside class="help">
+      <h2>The Full Theory</h2>
+      <p>Victor is a model of the English language, thought of as a code for processing <em>messages</em> (structured arrangements of informational choices) into <em>sentences</em> (strings of words). For exposition purposes, the theory is divided into four layers of increasing complexity. If you are new to the theory, start with <a href="plain.html">Plain Messages</a>, and move up from there. For more details, see the <a href="https://github.com/merivale/victor">README on GitHub</a>.</p>
+    </aside>
+    <footer class="footer">
+      <ul>
+        <li><a href="http://www.merivale.uk/">Amyas Merivale</a></li>
+        <li><a href="https://github.com/merivale/victor">View Source on GitHub</a></li>
+      </ul>
+    </footer>
+    <script src="js/victor.js"></script>
+    <script>
+        (function () {
+            var node = document.getElementById("victor");
+            var victor = Elm.Victor.embed(node);
+        }());
+    </script>
+  </body>
+</html>

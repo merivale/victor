@@ -1,0 +1,99 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background: #fff;
+    color: $darkgray;
+    line-height: 1.5;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 80em;
+    padding: 0 1em;
+}
+
+button {
+    background: $lightgray;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    min-width: 2.5rem;
+    padding: .5em .25em;
+    &:hover,
+    &:focus {
+        outline: 0;
+    }
+    &:before {
+        color: #fff;
+        font-weight: 600;
+    }
+    &.plus,
+    &.minus {
+        background: $green;
+    }
+    &.close {
+        background: $red;
+        &:before {
+            content: "×";
+        }
+    }
+    &.plus {
+        &:before {
+            content: "+";
+        }
+    }
+    &.minus {
+        &:before {
+            content: "-";
+        }
+    }
+}
+
+label {
+    white-space: nowrap;
+}
+
+label, input[type="text"], input[type="number"], select, .checkbox {
+    height: 2.5em;
+}
+
+label, select {
+    padding: .5em .25em;
+}
+
+input[type="text"], input[type="number"], .checkbox {
+    padding: .5em;
+}
+
+input[type="text"], input[type="number"], select, .checkbox {
+    border: 1px solid $gray;
+    display: block;
+    width: 100%;
+}
+
+input[type="text"] {
+    background: $lightyellow;
+}
+
+input[type="text"], input[type="number"], select {
+    &[disabled] {
+        background: $lightred;
+        cursor: not-allowed;
+        opacity: .5;
+    }
+}
+
+.checkbox {
+    cursor: pointer;
+    input {
+        margin-right: .25em;
+    }
+}
