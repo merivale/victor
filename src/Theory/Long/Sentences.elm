@@ -39,12 +39,12 @@ predicate vars =
         Just modality ->
             let
                 addTo =
-                    modality == Displacers.Yes3 && not vars.negated && vars.past
+                    modality == Displacers.Yes3 && not vars.negatedModality && vars.past
 
                 displaced =
                     { prior = vars.prior, pre = vars.pre, pivot = vars.pivot }
             in
-                [ Modals.modal vars.past vars.negated modality ]
+                [ Modals.modal vars.past vars.negatedModality modality ]
                     ++ (List.map (baseVerbPhrase addTo) (displaced :: vars.displaced))
                     ++ (List.map (Counters.counter vars.object) vars.balances)
                     ++ (List.reverse vars.post)

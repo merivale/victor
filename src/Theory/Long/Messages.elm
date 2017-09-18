@@ -22,9 +22,9 @@ type alias Vars =
     { object : Nucleus.Object
     , past : Bool
     , modality : Maybe Displacers.Modality
-    , negated : Bool
-    , preordained : Bool
-    , regular : Bool
+    , negatedModality : Bool
+    , preordainedModality : Bool
+    , regularModality : Bool
     , prior : Bool
     , pre : List String
     , pivot : Nucleus.Pivot
@@ -80,9 +80,9 @@ plain ( object, ( pivot, balances ) ) =
     { object = object
     , past = False
     , modality = Nothing
-    , negated = False
-    , preordained = False
-    , regular = False
+    , negatedModality = False
+    , preordainedModality = False
+    , regularModality = False
     , prior = False
     , pre = []
     , pivot = pivot
@@ -107,10 +107,10 @@ negative vars =
             Err "the Yes2 modality ('shall') cannot be negated"
 
         _ ->
-            if vars.negated then
+            if vars.negatedModality then
                 Err "modalities cannot be negated twice"
             else
-                Ok { vars | negated = True, pre = "not" :: vars.pre }
+                Ok { vars | negatedModality = True, pre = "not" :: vars.pre }
 
 
 {-| PAST messages.
@@ -121,7 +121,7 @@ past time vars =
         Err "PAST messages cannot be made PAST"
     else if vars.modality == Just Displacers.Maybe4 then
         Err "messages with the Maybe4 modality ('dare') cannot be made PAST"
-    else if vars.modality /= Nothing && not vars.regular && time /= Nothing then
+    else if vars.modality /= Nothing && not vars.regularModality && time /= Nothing then
         Err "DISPLACED and PREORDAINED messages with a modality cannot be given a PAST time"
     else
         Ok { vars | past = True, post = Utils.maybeCons time vars.post }
@@ -135,7 +135,7 @@ prior vars =
         Err "PRIOR messages cannot be made PRIOR"
     else if vars.modality /= Nothing && not vars.past then
         Err "messages with a modality can only be PRIOR if they are PAST"
-    else if vars.modality /= Nothing && not vars.regular && not vars.preordained then
+    else if vars.modality /= Nothing && not vars.regularModality && not vars.preordainedModality then
         Err "DISPLACED messages with a modality cannot be made PRIOR PAST"
     else
         Ok { vars | prior = True }
@@ -150,8 +150,7 @@ displaced displacer vars =
     else
         case displacer of
             Displacers.Primary pivot ->
-                swapPastForPrior vars
-                    |> Result.map (primary pivot)
+                swapPastForPrior vars |> Result.map (primary pivot)
 
             Displacers.Secondary modality ->
                 swapPastForPrior { vars | modality = Just modality }
@@ -176,11 +175,10 @@ preordained displacer time vars =
                         Ok varsWithPost
 
                 Just (Displacers.Primary pivot) ->
-                    swapPastForPrior varsWithPost
-                        |> Result.map (primary pivot)
+                    swapPastForPrior varsWithPost |> Result.map (primary pivot)
 
                 Just (Displacers.Secondary modality) ->
-                    swapPastForPrior { varsWithPost | modality = Just modality, preordained = True }
+                    swapPastForPrior varsWithPost |> Result.map (secondary modality True False)
 
 
 {-| REGULAR messages.
@@ -202,11 +200,10 @@ regular displacer frequency vars =
                         Ok varsWithPre
 
                 Just (Displacers.Primary pivot) ->
-                    swapPastForPrior varsWithPre
-                        |> Result.map (primary pivot)
+                    swapPastForPrior varsWithPre |> Result.map (primary pivot)
 
                 Just (Displacers.Secondary modality) ->
-                    swapPastForPrior { varsWithPre | modality = Just modality, regular = True }
+                    swapPastForPrior varsWithPre |> Result.map (secondary modality False True)
 
 
 {-| EXTENDED messages.
@@ -247,3 +244,12 @@ primary pivot vars =
             , pivot = pivot
             , displaced = displaced :: vars.displaced
         }
+
+
+secondary : Displacers.Modality -> Bool -> Bool -> Vars -> Vars
+secondary modality preordainedModality regularModality vars =
+    { vars
+        | modality = Just modality
+        , preordainedModality = preordainedModality
+        , regularModality = regularModality
+    }

@@ -8811,6 +8811,16 @@ var _merivale$victor$Theory_Words_Utils$consontanty = function (base) {
 		}));
 };
 
+var _merivale$victor$Theory_Long_Messages$secondary = F4(
+	function (modality, preordainedModality, regularModality, vars) {
+		return _elm_lang$core$Native_Utils.update(
+			vars,
+			{
+				modality: _elm_lang$core$Maybe$Just(modality),
+				preordainedModality: preordainedModality,
+				regularModality: regularModality
+			});
+	});
 var _merivale$victor$Theory_Long_Messages$primary = F2(
 	function (pivot, vars) {
 		var displaced = {prior: vars.prior, pre: vars.pre, pivot: vars.pivot};
@@ -8865,13 +8875,10 @@ var _merivale$victor$Theory_Long_Messages$regular = F3(
 						_merivale$victor$Theory_Long_Messages$primary(_p0._0._0),
 						_merivale$victor$Theory_Long_Messages$swapPastForPrior(varsWithPre));
 				} else {
-					return _merivale$victor$Theory_Long_Messages$swapPastForPrior(
-						_elm_lang$core$Native_Utils.update(
-							varsWithPre,
-							{
-								modality: _elm_lang$core$Maybe$Just(_p0._0._0),
-								regular: true
-							}));
+					return A2(
+						_elm_lang$core$Result$map,
+						A3(_merivale$victor$Theory_Long_Messages$secondary, _p0._0._0, false, true),
+						_merivale$victor$Theory_Long_Messages$swapPastForPrior(varsWithPre));
 				}
 			}
 		}
@@ -8896,13 +8903,10 @@ var _merivale$victor$Theory_Long_Messages$preordained = F3(
 						_merivale$victor$Theory_Long_Messages$primary(_p1._0._0),
 						_merivale$victor$Theory_Long_Messages$swapPastForPrior(varsWithPost));
 				} else {
-					return _merivale$victor$Theory_Long_Messages$swapPastForPrior(
-						_elm_lang$core$Native_Utils.update(
-							varsWithPost,
-							{
-								modality: _elm_lang$core$Maybe$Just(_p1._0._0),
-								preordained: true
-							}));
+					return A2(
+						_elm_lang$core$Result$map,
+						A3(_merivale$victor$Theory_Long_Messages$secondary, _p1._0._0, true, false),
+						_merivale$victor$Theory_Long_Messages$swapPastForPrior(varsWithPost));
 				}
 			}
 		}
@@ -8929,7 +8933,7 @@ var _merivale$victor$Theory_Long_Messages$displaced = F2(
 		}
 	});
 var _merivale$victor$Theory_Long_Messages$prior = function (vars) {
-	return vars.prior ? _elm_lang$core$Result$Err('PRIOR messages cannot be made PRIOR') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && (!vars.past)) ? _elm_lang$core$Result$Err('messages with a modality can only be PRIOR if they are PAST') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && ((!vars.regular) && (!vars.preordained))) ? _elm_lang$core$Result$Err('DISPLACED messages with a modality cannot be made PRIOR PAST') : _elm_lang$core$Result$Ok(
+	return vars.prior ? _elm_lang$core$Result$Err('PRIOR messages cannot be made PRIOR') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && (!vars.past)) ? _elm_lang$core$Result$Err('messages with a modality can only be PRIOR if they are PAST') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && ((!vars.regularModality) && (!vars.preordainedModality))) ? _elm_lang$core$Result$Err('DISPLACED messages with a modality cannot be made PRIOR PAST') : _elm_lang$core$Result$Ok(
 		_elm_lang$core$Native_Utils.update(
 			vars,
 			{prior: true}))));
@@ -8938,7 +8942,7 @@ var _merivale$victor$Theory_Long_Messages$past = F2(
 	function (time, vars) {
 		return vars.past ? _elm_lang$core$Result$Err('PAST messages cannot be made PAST') : (_elm_lang$core$Native_Utils.eq(
 			vars.modality,
-			_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Long_Displacers$Maybe4)) ? _elm_lang$core$Result$Err('messages with the Maybe4 modality (\'dare\') cannot be made PAST') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && ((!vars.regular) && (!_elm_lang$core$Native_Utils.eq(time, _elm_lang$core$Maybe$Nothing)))) ? _elm_lang$core$Result$Err('DISPLACED and PREORDAINED messages with a modality cannot be given a PAST time') : _elm_lang$core$Result$Ok(
+			_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Long_Displacers$Maybe4)) ? _elm_lang$core$Result$Err('messages with the Maybe4 modality (\'dare\') cannot be made PAST') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && ((!vars.regularModality) && (!_elm_lang$core$Native_Utils.eq(time, _elm_lang$core$Maybe$Nothing)))) ? _elm_lang$core$Result$Err('DISPLACED and PREORDAINED messages with a modality cannot be given a PAST time') : _elm_lang$core$Result$Ok(
 			_elm_lang$core$Native_Utils.update(
 				vars,
 				{
@@ -8962,11 +8966,11 @@ var _merivale$victor$Theory_Long_Messages$negative = function (vars) {
 			case 'Yes2':
 				return _elm_lang$core$Result$Err('the Yes2 modality (\'shall\') cannot be negated');
 			default:
-				return vars.negated ? _elm_lang$core$Result$Err('modalities cannot be negated twice') : _elm_lang$core$Result$Ok(
+				return vars.negatedModality ? _elm_lang$core$Result$Err('modalities cannot be negated twice') : _elm_lang$core$Result$Ok(
 					_elm_lang$core$Native_Utils.update(
 						vars,
 						{
-							negated: true,
+							negatedModality: true,
 							pre: {ctor: '::', _0: 'not', _1: vars.pre}
 						}));
 		}
@@ -8978,9 +8982,9 @@ var _merivale$victor$Theory_Long_Messages$plain = function (_p4) {
 		object: _p5._0,
 		past: false,
 		modality: _elm_lang$core$Maybe$Nothing,
-		negated: false,
-		preordained: false,
-		regular: false,
+		negatedModality: false,
+		preordainedModality: false,
+		regularModality: false,
 		prior: false,
 		pre: {ctor: '[]'},
 		pivot: _p5._1._0,
@@ -9049,7 +9053,7 @@ var _merivale$victor$Theory_Long_Messages$Vars = function (a) {
 									return function (j) {
 										return function (k) {
 											return function (l) {
-												return {object: a, past: b, modality: c, negated: d, preordained: e, regular: f, prior: g, pre: h, pivot: i, displaced: j, balances: k, post: l};
+												return {object: a, past: b, modality: c, negatedModality: d, preordainedModality: e, regularModality: f, prior: g, pre: h, pivot: i, displaced: j, balances: k, post: l};
 											};
 										};
 									};
@@ -12218,8 +12222,8 @@ var _merivale$victor$Interface_View_Input$fromId = function (options) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Interface.View.Input',
 				{
-					start: {line: 130, column: 13},
-					end: {line: 135, column: 22}
+					start: {line: 129, column: 13},
+					end: {line: 134, column: 22}
 				},
 				_p0)('select element is broken :(');
 		} else {
@@ -13591,6 +13595,81 @@ var _merivale$victor$Interface_View_Elaborations$elaborationBody = F5(
 							_1: {ctor: '[]'}
 						}
 					});
+			case 'MakeINDIRECT':
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A3(_merivale$victor$Interface_View_Elaborations$target, balanceCount, index, elaboration),
+						_1: {
+							ctor: '::',
+							_0: A2(_merivale$victor$Interface_View_Elaborations$pointer, index, elaboration),
+							_1: {
+								ctor: '::',
+								_0: A2(_merivale$victor$Interface_View_Elaborations$haystack, index, elaboration),
+								_1: {
+									ctor: '::',
+									_0: subContent,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					});
+			case 'MakeENUMERATED':
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A3(_merivale$victor$Interface_View_Elaborations$target, balanceCount, index, elaboration),
+						_1: {
+							ctor: '::',
+							_0: A3(_merivale$victor$Interface_View_Elaborations$quantifier, false, index, elaboration),
+							_1: {
+								ctor: '::',
+								_0: A2(_merivale$victor$Interface_View_Elaborations$haystack, index, elaboration),
+								_1: {
+									ctor: '::',
+									_0: subContent,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					});
+			case 'MakeAMASSED':
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A3(_merivale$victor$Interface_View_Elaborations$target, balanceCount, index, elaboration),
+						_1: {
+							ctor: '::',
+							_0: A3(_merivale$victor$Interface_View_Elaborations$quantifier, true, index, elaboration),
+							_1: {
+								ctor: '::',
+								_0: A2(_merivale$victor$Interface_View_Elaborations$haystack, index, elaboration),
+								_1: {
+									ctor: '::',
+									_0: subContent,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					});
 			default:
 				return A2(
 					_elm_lang$html$Html$div,
@@ -14007,7 +14086,7 @@ var _merivale$victor$Theory_Words_Pronouns$relative2 = function (object) {
 					return 'theirs';
 				}
 			} else {
-				return A2(_elm_lang$core$Basics_ops['++'], _p0._2._0, '\'s');
+				return A2(_elm_lang$core$Basics_ops['++'], _p0._2._0, '’s');
 			}
 	}
 };
@@ -14038,7 +14117,7 @@ var _merivale$victor$Theory_Words_Pronouns$relative1 = function (object) {
 					return 'their';
 				}
 			} else {
-				return A2(_elm_lang$core$Basics_ops['++'], _p1._2._0, '\'s');
+				return A2(_elm_lang$core$Basics_ops['++'], _p1._2._0, '’s');
 			}
 	}
 };
@@ -16969,12 +17048,12 @@ var _merivale$victor$Theory_Long_Sentences$predicate = function (vars) {
 	} else {
 		var _p7 = _p6._0;
 		var displaced = {prior: vars.prior, pre: vars.pre, pivot: vars.pivot};
-		var addTo = _elm_lang$core$Native_Utils.eq(_p7, _merivale$victor$Theory_Long_Displacers$Yes3) && ((!vars.negated) && vars.past);
+		var addTo = _elm_lang$core$Native_Utils.eq(_p7, _merivale$victor$Theory_Long_Displacers$Yes3) && ((!vars.negatedModality) && vars.past);
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
 			{
 				ctor: '::',
-				_0: A3(_merivale$victor$Theory_Words_Modals$modal, vars.past, vars.negated, _p7),
+				_0: A3(_merivale$victor$Theory_Words_Modals$modal, vars.past, vars.negatedModality, _p7),
 				_1: {ctor: '[]'}
 			},
 			A2(

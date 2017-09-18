@@ -217,12 +217,10 @@ displaced displacer vars =
     else
         case displacer of
             Displacers.Primary pivot ->
-                swapPastForPrior vars
-                    |> Result.map (primary pivot)
+                swapPastForPrior vars |> Result.map (primary pivot)
 
             Displacers.Secondary modality ->
-                swapPastForPrior vars
-                    |> Result.map (secondary modality False False)
+                swapPastForPrior vars |> Result.map (secondary modality False False)
 
 
 {-| PREORDAINED messages.
@@ -244,12 +242,10 @@ preordained displacer time vars =
                         Ok varsWithPost
 
                 Just (Displacers.Primary pivot) ->
-                    swapPastForPrior varsWithPost
-                        |> Result.map (primary pivot)
+                    swapPastForPrior varsWithPost |> Result.map (primary pivot)
 
                 Just (Displacers.Secondary modality) ->
-                    swapPastForPrior varsWithPost
-                        |> Result.map (secondary modality True False)
+                    swapPastForPrior varsWithPost |> Result.map (secondary modality True False)
 
 
 {-| REGULAR messages.
@@ -271,12 +267,10 @@ regular displacer frequency vars =
                         Ok varsWithPre
 
                 Just (Displacers.Primary pivot) ->
-                    swapPastForPrior varsWithPre
-                        |> Result.map (primary pivot)
+                    swapPastForPrior varsWithPre |> Result.map (primary pivot)
 
                 Just (Displacers.Secondary modality) ->
-                    swapPastForPrior varsWithPre
-                        |> Result.map (secondary modality False True)
+                    swapPastForPrior varsWithPre |> Result.map (secondary modality False True)
 
 
 {-| EXTENDED messages.
