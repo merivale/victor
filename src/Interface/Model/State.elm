@@ -1,33 +1,67 @@
-module Interface.State exposing (initial, update)
+module Interface.Model.State exposing (initial, update)
 
-{-| Module for initialising and updating the model (application state).
+
+{-| This module defines the initial Model for the application, and the function
+for updating the Model in response to user input.
 -}
+import Interface.Model.Types exposing (..)
+import Interface.Model.Examples as Examples
+import Theory.Plain.Nucleus exposing (..)
+import Theory.Long.Displacers exposing (..)
+import Theory.Object.Pseudo exposing (..)
 
-import Interface.Types exposing (..)
-import Theory.Types exposing (..)
 
-
-{-| The initial application state. Results in my friendly welcome message,
-encoded as "I am Victor".
+{-| The initial application state. Depends on the layer of the theory.
 -}
-initial : Model
-initial =
-    { plus = False
-    , object = Speaker False
-    , verbality = Be False
-    , status = Nothing
-    , balances = [ ( Nothing, Different (Other False (Just Male) (Just "Victor")) ) ]
-    , elaborations = []
-    }
+initial : TheoryLayer -> Model
+initial theoryLayer =
+    case theoryLayer of
+        PlainTheory ->
+            Examples.plainFirst
+
+        ShortTheory ->
+            Examples.shortFirst
+
+        LongTheory ->
+            Examples.longFirst
+
+        ObjectTheory ->
+            Examples.objectFirst
+
+        FullTheory ->
+            Examples.plainFirst
 
 
-{-| Function for updating the applicated state in response to user input. Those
-familiar with Elm may note the use of "Signal" instead of the standard "Msg";
-this is to avoid confusion with "Message", a key term of art within my theory.
+{-| Function for updating the application state in response to user input.
 -}
 update : Signal -> Model -> Model
 update signal model =
     case signal of
+        LoadExample theoryLayer index ->
+            let examples =
+                case theoryLayer of
+                    PlainTheory ->
+                        Examples.plainExamples
+
+                    ShortTheory ->
+                        Examples.shortExamples
+
+                    LongTheory ->
+                        Examples.longExamples
+
+                    ObjectTheory ->
+                        Examples.objectExamples
+
+                    FullTheory ->
+                        Examples.allExamples
+            in
+                case List.head (List.drop index examples) of
+                    Nothing ->
+                        model
+
+                    Just example ->
+                        example
+
         TogglePlus ->
             let
                 allMinus =
@@ -222,7 +256,7 @@ removeFromList index list =
     (List.take index list) ++ (List.drop (index + 1) list)
 
 
-{-| Function for adding a new elaboration, with appropriate default ingredients.
+{-| Add a new elaboration, with appropriate default ingredients.
 -}
 addElaboration : Int -> Recipe -> List Elaboration -> List Elaboration
 addElaboration index recipe elaborations =

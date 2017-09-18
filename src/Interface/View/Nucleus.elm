@@ -1,30 +1,75 @@
-module Interface.Nucleus
+module Interface.View.Nucleus
     exposing
-        ( object
+        ( nucleus
+        , object
         , verbality
         , status
         , balance
         )
 
-{-| Module for generating HTML for user input for the nucleus of the message.
--}
 
+{-| Module for generating HTML inputs for nucleus factors.
+-}
 import Html
 import Html.Attributes as Attr
-import Interface.Types exposing (..)
-import Interface.Ideas as Ideas
-import Interface.Input as Input
-import Theory.Types exposing (..)
+import Theory.Plain.Nucleus exposing (..)
+import Interface.Model.Types exposing (..)
+import Interface.View.Ideas as Ideas
+import Interface.View.Buttons as Buttons
+import Interface.View.Input as Input
 
 
-{-| The output functions, for displaying nucleus factor inputs.
+{-| The nucleus input box.
+-}
+nucleus : Bool -> Model -> Html.Html Signal
+nucleus elaborate model =
+    if elaborate then
+        Html.div
+            [ Attr.class "nucleus" ]
+            [ heading model
+            , body model
+            ]
+    else
+        Html.div
+            [ Attr.class "nucleus" ]
+            [ heading model
+            , elaborationButtons -1 model.plus
+            , body model
+            ]
+
+
+heading : Model -> Html.Html Signal
+heading model =
+    if List.length model.balances > 0 then
+        Html.div
+            [ Attr.class "heading" ]
+            [ Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ]
+            , Buttons.removeBalance
+            , Buttons.addBalance
+            ]
+    else
+        Html.div
+            [ Attr.class "heading" ]
+            [ Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ]
+            , Buttons.addBalance
+            ]
+
+
+body : Model -> Html.Html Signal
+body model =
+    Html.div
+        [ Attr.class "body" ]
+        ([ object model.object, verbality model.verbality, status model.status ]
+            ++ (List.indexedMap balance model.balances)
+        )
+
+
+{-| Functions for displaying the nucleus factors.
 -}
 object : Object -> Html.Html Signal
 object object =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Object"
-        , objectSelect object
+    Input.factor "Object"
+        [ objectSelect object
         , objectText object
         ]
 
@@ -33,20 +78,16 @@ verbality : Verbality -> Html.Html Signal
 verbality verbality =
     case verbality of
         Be ongoing ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Verbality"
-                , verbalitySelect verbality
+            Input.factor "Verbality"
+                [ verbalitySelect verbality
                 , Input.emptyInput
                 , verbalityOngoing ongoing
                 , Input.emptyInput
                 ]
 
         Do string ongoing passive ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Verbality"
-                , verbalitySelect verbality
+            Input.factor "Verbality"
+                [ verbalitySelect verbality
                 , verbalityString string
                 , verbalityOngoing ongoing
                 , verbalityPassive passive
@@ -57,26 +98,20 @@ status : Maybe Status -> Html.Html Signal
 status status =
     case status of
         Nothing ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Status"
-                , statusSelect status
+            Input.factor "Status"
+                [ statusSelect status
                 , Input.emptyInput
                 ]
 
         Just (Absolute string) ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Status"
-                , statusSelect status
+            Input.factor "Status"
+                [ statusSelect status
                 , statusString string
                 ]
 
         Just (Relative relator) ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Status"
-                , statusSelect status
+            Input.factor "Status"
+                [ statusSelect status
                 , statusRelatorSelect relator
                 ]
 
@@ -85,27 +120,23 @@ balance : Int -> Balance -> Html.Html Signal
 balance index ( relator, weight ) =
     case weight of
         SameAsMain ->
-            Html.div
-                [ Attr.class "factor balance" ]
-                [ Input.label ("Balance " ++ (toString (index + 1)))
-                , balanceRelatorSelect index relator
+            Input.factor ("Balance " ++ (toString (index + 1)))
+                [ balanceRelatorSelect index relator
                 , balanceWeightSelect index weight
                 , Input.emptyInput
                 , Input.emptyInput
                 ]
 
         Different object ->
-            Html.div
-                [ Attr.class "factor balance" ]
-                [ Input.label ("Balance " ++ (toString (index + 1)))
-                , balanceRelatorSelect index relator
+            Input.factor ("Balance " ++ (toString (index + 1)))
+                [ balanceRelatorSelect index relator
                 , balanceWeightSelect index weight
                 , balanceWeightObjectSelect index object
                 , balanceWeightObjectText index object
                 ]
 
 
-{-| Select dropdowns, used by the main output functions above.
+{-| Select dropdowns, used by the main exposed functions above.
 -}
 objectSelect : Object -> Html.Html Signal
 objectSelect object =
@@ -184,7 +215,7 @@ balanceWeightObjectSelect index object =
         }
 
 
-{-| Text inputs, used by the main output functions above.
+{-| Text inputs, used by the main exposed functions above.
 -}
 objectText : Object -> Html.Html Signal
 objectText object =
@@ -226,7 +257,7 @@ balanceWeightObjectText index object =
         }
 
 
-{-| Input checkboxes, used by the main output functions above.
+{-| Input checkboxes, used by the main exposed functions above.
 -}
 verbalityOngoing : Bool -> Html.Html Signal
 verbalityOngoing ongoing =

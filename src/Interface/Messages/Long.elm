@@ -1,15 +1,12 @@
-module Interface.Messages exposing (message)
+module Interface.Messages.Long exposing (message)
 
-{-| Module for generating a message from the model (application state). This
-module does not attempt to validate the message (see the Theory/Messages module
-for that), except to confirm that some compulsory ingredients exist, and that
-required strings are of non-zero length.
--}
 
 import Maybe
 import Result exposing (andThen)
-import Interface.Types exposing (..)
-import Theory.Types exposing (..)
+import Interface.Model.Types exposing (..)
+import Theory.Plain.Nucleus exposing (..)
+import Theory.Long.Displacers exposing (..)
+import Theory.Long.Messages exposing (..)
 
 
 {-| The main exposed function.
@@ -94,23 +91,8 @@ elaborate elaborations message =
                     scattered elaboration.string1 message
                         |> andThen (elaborate (List.drop 1 elaborations))
 
-                MakeINDIRECT ->
-                    haystack elaboration
-                        |> andThen (description elaboration)
-                        |> andThen (indirect elaboration message)
-                        |> andThen (elaborate (List.drop 1 elaborations))
-
-                MakeENUMERATED ->
-                    haystack elaboration
-                        |> andThen (multiplicity elaboration)
-                        |> andThen (enumerated elaboration message)
-                        |> andThen (elaborate (List.drop 1 elaborations))
-
-                MakeAMASSED ->
-                    haystack elaboration
-                        |> andThen (proportion elaboration)
-                        |> andThen (amassed elaboration message)
-                        |> andThen (elaborate (List.drop 1 elaborations))
+                _ ->
+                    elaborate (List.drop 1 elaborations) message
 
 
 {-| One function for each type of elaboration.
@@ -202,48 +184,3 @@ scattered tally message =
 
         Just str ->
             Ok (SCATTERED str message)
-
-
-haystack : Elaboration -> Result String Haystack
-haystack elaboration =
-    case elaboration.string1 of
-        Nothing ->
-            Err "please enter a category for the haystack"
-
-        Just string ->
-            Ok ( string, elaboration.string2, elaboration.string3 )
-
-
-description : Elaboration -> Haystack -> Result String Description
-description elaboration haystack =
-    Ok ( elaboration.pointer, elaboration.other, haystack )
-
-
-multiplicity : Elaboration -> Haystack -> Result String Multiplicity
-multiplicity elaboration haystack =
-    case elaboration.quantifier of
-        Nothing ->
-            Err "please select a quantifier for the ENUMERATED elaboration"
-
-        Just quantifier ->
-            Ok ( quantifier, elaboration.other, haystack )
-
-
-proportion : Elaboration -> Haystack -> Result String Proportion
-proportion elaboration haystack =
-    Ok ( elaboration.quantifier, elaboration.other, haystack )
-
-
-indirect : Elaboration -> Message -> Description -> Result String Message
-indirect elaboration message description =
-    Ok (INDIRECT elaboration.target description message)
-
-
-enumerated : Elaboration -> Message -> Multiplicity -> Result String Message
-enumerated elaboration message multiplicity =
-    Ok (ENUMERATED elaboration.target multiplicity message)
-
-
-amassed : Elaboration -> Message -> Proportion -> Result String Message
-amassed elaboration message proportion =
-    Ok (AMASSED elaboration.target proportion message)

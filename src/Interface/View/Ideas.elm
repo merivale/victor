@@ -1,12 +1,10 @@
-module Interface.Ideas exposing (..)
+module Interface.View.Ideas exposing (..)
 
-{-| Module for creating lists of input options, and custom equivalence and
-toString functions. Used by the Interface.Nucleus and Interface.Elaborations
-modules, mainly in the generation of select dropdown menus.
--}
 
 import Maybe
-import Theory.Types exposing (..)
+import Theory.Plain.Nucleus exposing (..)
+import Theory.Long.Displacers exposing (..)
+import Theory.Object.Pseudo exposing (..)
 
 
 {-| Objects.

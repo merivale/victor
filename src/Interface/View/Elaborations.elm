@@ -1,4 +1,4 @@
-module Interface.Elaborations
+module Interface.View.Elaborations
     exposing
         ( pastTime
         , displacer
@@ -12,26 +12,25 @@ module Interface.Elaborations
         , haystack
         )
 
-{-| Module for generating HTML for user input for the elaborations applied to a
-message.
--}
 
+{-| Module for generating HTML inputs for elaboration factors.
+-}
 import Html
 import Html.Attributes as Attr
-import Interface.Types exposing (..)
-import Interface.Ideas as Ideas
-import Interface.Input as Input
-import Theory.Types exposing (..)
+import Interface.Model.Types exposing (..)
+import Interface.View.Ideas as Ideas
+import Interface.View.Input as Input
+import Theory.Plain.Nucleus exposing (..)
+import Theory.Long.Displacers exposing (..)
+import Theory.Object.Pseudo exposing (..)
 
 
-{-| The output functions, for displaying elaboration factor inputs.
+{-| The exposed functions, for displaying the inputs.
 -}
 pastTime : Int -> Elaboration -> Html.Html Signal
 pastTime index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Time"
-        , stringText
+    Input.factor "Time"
+        [ stringText
             "e.g. yesterday, last week"
             (SetElaborationString1 index)
             elaboration.string1
@@ -58,31 +57,23 @@ displacer compulsory limitedModalities index elaboration =
 
 displacerBase : Bool -> Int -> Maybe Displacer -> Html.Html Signal
 displacerBase compulsory index displacer =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Displacer"
-        , displacerSelect compulsory index displacer
-        ]
+    Input.factor "Displacer" [ displacerSelect compulsory index displacer ]
 
 
 verbality : Int -> Verbality -> Html.Html Signal
 verbality index verbalityValue =
     case verbalityValue of
         Be ongoing ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Verbality"
-                , verbalitySelect index verbalityValue
+            Input.factor "Verbality"
+                [ verbalitySelect index verbalityValue
                 , Input.emptyInput
                 , verbalityOngoing index ongoing
                 , Input.emptyInput
                 ]
 
         Do string ongoing passive ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Verbality"
-                , verbalitySelect index verbalityValue
+            Input.factor "Verbality"
+                [ verbalitySelect index verbalityValue
                 , verbalityString index string
                 , verbalityOngoing index ongoing
                 , verbalityPassive index passive
@@ -93,45 +84,33 @@ status : Int -> Maybe Status -> Html.Html Signal
 status index statusValue =
     case statusValue of
         Nothing ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Status"
-                , statusSelect index statusValue
+            Input.factor "Status"
+                [ statusSelect index statusValue
                 , Input.emptyInput
                 ]
 
         Just (Absolute string) ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Status"
-                , statusSelect index statusValue
+            Input.factor "Status"
+                [ statusSelect index statusValue
                 , statusString index string
                 ]
 
         Just (Relative relator) ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Status"
-                , statusSelect index statusValue
+            Input.factor "Status"
+                [ statusSelect index statusValue
                 , statusRelatorSelect index relator
                 ]
 
 
 modality : Bool -> Int -> Modality -> Html.Html Signal
 modality limited index modalityValue =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Modality"
-        , modalitySelect limited index modalityValue
-        ]
+    Input.factor "Modality" [ modalitySelect limited index modalityValue ]
 
 
 preordainedTime : Int -> Elaboration -> Html.Html Signal
 preordainedTime index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Time"
-        , stringText
+    Input.factor "Time"
+        [ stringText
             "e.g. tomorrow, next week"
             (SetElaborationString1 index)
             elaboration.string1
@@ -140,10 +119,8 @@ preordainedTime index elaboration =
 
 frequency : Int -> Elaboration -> Html.Html Signal
 frequency index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Frequency"
-        , stringText
+    Input.factor "Frequency"
+        [ stringText
             "e.g. usually, sometimes, occasionally"
             (SetElaborationString1 index)
             elaboration.string1
@@ -152,10 +129,8 @@ frequency index elaboration =
 
 duration : Int -> Elaboration -> Html.Html Signal
 duration index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Duration"
-        , stringText
+    Input.factor "Duration"
+        [ stringText
             "e.g. for a while, for two hours, all day"
             (SetElaborationString1 index)
             elaboration.string1
@@ -164,10 +139,8 @@ duration index elaboration =
 
 tally : Int -> Elaboration -> Html.Html Signal
 tally index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Tally"
-        , stringText
+    Input.factor "Tally"
+        [ stringText
             "e.g. once, twice, several times"
             (SetElaborationString1 index)
             elaboration.string1
@@ -176,31 +149,23 @@ tally index elaboration =
 
 target : Int -> Int -> Elaboration -> Html.Html Signal
 target balanceCount index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Target"
-        , targetSelect balanceCount index elaboration.target
-        ]
+    Input.factor "Target" [ targetSelect balanceCount index elaboration.target ]
 
 
 pointer : Int -> Elaboration -> Html.Html Signal
 pointer index elaboration =
     case elaboration.pointer of
         RelatedTo object ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Pointer"
-                , pointerSelect index elaboration.pointer
+            Input.factor "Pointer"
+                [ pointerSelect index elaboration.pointer
                 , pointerObjectSelect index object
                 , pointerObjectText index object
                 , other index elaboration.other
                 ]
 
         _ ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Pointer"
-                , pointerSelect index elaboration.pointer
+            Input.factor "Pointer"
+                [ pointerSelect index elaboration.pointer
                 , Input.emptyInput
                 , Input.emptyInput
                 , other index elaboration.other
@@ -211,19 +176,15 @@ quantifier : Bool -> Int -> Elaboration -> Html.Html Signal
 quantifier amassed index elaboration =
     case elaboration.quantifier of
         Just (Integer int) ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Quantifier"
-                , quantifierSelect amassed index elaboration.quantifier
+            Input.factor "Quantifier"
+                [ quantifierSelect amassed index elaboration.quantifier
                 , quantifierInteger index int
                 , other index elaboration.other
                 ]
 
         _ ->
-            Html.div
-                [ Attr.class "factor" ]
-                [ Input.label "Quantifier"
-                , quantifierSelect amassed index elaboration.quantifier
+            Input.factor "Quantifier"
+                [ quantifierSelect amassed index elaboration.quantifier
                 , Input.emptyInput
                 , other index elaboration.other
                 ]
@@ -231,10 +192,8 @@ quantifier amassed index elaboration =
 
 haystack : Int -> Elaboration -> Html.Html Signal
 haystack index elaboration =
-    Html.div
-        [ Attr.class "factor" ]
-        [ Input.label "Haystack"
-        , stringText
+    Input.factor "Haystack"
+        [ stringText
             "category (e.g. apple, water)"
             (SetElaborationString1 index)
             elaboration.string1
@@ -249,7 +208,7 @@ haystack index elaboration =
         ]
 
 
-{-| Select dropdowns, used by the main output functions above.
+{-| Select dropdowns, used by the main exposed functions above.
 -}
 displacerSelect : Bool -> Int -> Maybe Displacer -> Html.Html Signal
 displacerSelect compulsory index displacer =
@@ -350,7 +309,7 @@ quantifierSelect amassed index quantifier =
         }
 
 
-{-| Text and number inputs, used by the main output functions above.
+{-| Text and number inputs, used by the main exposed functions above.
 -}
 verbalityString : Int -> String -> Html.Html Signal
 verbalityString index string =
@@ -402,7 +361,7 @@ stringText placeholder signal string =
         }
 
 
-{-| Input checkboxes, used by the main output functions above.
+{-| Input checkboxes, used by the main exposed functions above.
 -}
 verbalityOngoing : Int -> Bool -> Html.Html Signal
 verbalityOngoing index ongoing =

@@ -1,8 +1,8 @@
-module Interface.Input
+module Interface.View.Input
     exposing
         ( button
         , iconButton
-        , label
+        , factor
         , text
         , number
         , checkbox
@@ -11,13 +11,12 @@ module Interface.Input
         , emptyInput
         )
 
-{-| Module for creating HTML elements for gathering user input.
--}
 
 import Html
 import Html.Attributes as Attr
 import Html.Events as Events
-import Interface.Types exposing (..)
+import Json.Decode as Json
+import Interface.Model.Types exposing (..)
 
 
 button : ButtonProperties -> Html.Html Signal
@@ -40,18 +39,23 @@ iconButton { label, signal, title } =
         []
 
 
-label : String -> Html.Html Signal
-label text =
-    Html.label
-        [ Attr.class "label" ]
-        [ Html.text text ]
+factor : String -> List (Html.Html Signal) -> Html.Html Signal
+factor label inputs =
+    Html.div [ Attr.class "factor" ]
+        [ Html.label [ Attr.class "label" ] [ Html.text label ]
+        , Html.div [ Attr.class "inputs" ] (List.map inputWrapper inputs)
+        ]
+
+
+inputWrapper : Html.Html Signal -> Html.Html Signal
+inputWrapper input =
+    Html.div [ Attr.class "input" ] [ input ]
 
 
 text : TextProperties -> Html.Html Signal
 text { value, placeholder, signal, disabled } =
     Html.input
         [ Attr.type_ "text"
-        , Attr.class "text"
         , Attr.value value
         , Attr.placeholder placeholder
         , Events.onInput signal
@@ -64,7 +68,6 @@ number : TextProperties -> Html.Html Signal
 number { value, placeholder, signal, disabled } =
     Html.input
         [ Attr.type_ "number"
-        , Attr.class "text"
         , Attr.value value
         , Attr.placeholder placeholder
         , Events.onInput signal
@@ -92,7 +95,7 @@ select : SelectProperties a -> Html.Html Signal
 select { value, options, equivalent, signal, toLabel } =
     Html.select
         [ Attr.class "select"
-        , Events.onInput (signal << fromId options)
+        , onChange (signal << fromId options)
         ]
         (List.map (option toLabel value equivalent) options)
 
@@ -100,9 +103,7 @@ select { value, options, equivalent, signal, toLabel } =
 selectGroup : List ( String, List a ) -> SelectProperties a -> Html.Html Signal
 selectGroup groups { value, options, equivalent, signal, toLabel } =
     Html.select
-        [ Attr.class "select"
-        , Events.onInput (signal << fromId options)
-        ]
+        [ onChange (signal << fromId options) ]
         (List.map (optionGroup toLabel value equivalent) groups)
 
 
@@ -136,11 +137,11 @@ fromId options =
         fromString
 
 
+onChange : (String -> Signal) -> Html.Attribute Signal
+onChange tagger =
+    Events.on "change" (Json.map tagger Events.targetValue)
+
+
 emptyInput : Html.Html Signal
 emptyInput =
-    Html.input
-        [ Attr.type_ "text"
-        , Attr.class "text"
-        , Attr.disabled True
-        ]
-        []
+    Html.input [ Attr.type_ "text", Attr.disabled True ] []

@@ -1,377 +1,39 @@
-module Theory.Words
+module Theory.Words.Verbs
     exposing
-        ( direct1
-        , direct2
-        , direct3
-        , relative1
-        , relative2
-        , preposition
-        , article
-        , determiner
-        , plural
-        , modal
-        , finite1
-        , finite2
+        ( conjugate
         , participle1
         , participle2
         )
 
-{-| Functions for encoding ideas into words. This is the least interesting part
-of my model; it simply generates (the various forms of) prepositions, pronouns,
-articles, determiners, modals, and verbs. It may be of interest purely to
-solidify an understanding of the grammatical terminology that I use.
-
-Note that the functions for generating the various forms of verbs cannot
-distinguish verbs that have the same base form but differ in other forms - e.g.
-"hang/hung" vs "hang/hanged", "lie/lied" vs "lie/lay". There's nothing very
-satisfactory I can do about this until I start encoding verbalities for myself
-(which I don't intend to do any time soon). For now, using the ordinary base
-form will default to the regular verb ("hang/hanged", "lie/lied"). If you want
-the irregular verb, input "hang*" or "lie*" into the system; this will trigger a
-match in the dictionary of irregularities.
--}
 
 import Dict
-import Theory.Types exposing (..)
+import Maybe
+import Theory.Plain.Nucleus as Nucleus
+import Theory.Words.Utils as Utils
 
 
-{-| The three direct forms of the pronouns, generated from their corresponding
-object. The first two can be overridden by a proper name in the case of third
-person objects.
--}
-direct1 : Object -> String
-direct1 object =
-    case object of
-        Speaker False ->
-            "I"
-
-        Speaker True ->
-            "we"
-
-        Hearer plural ->
-            "you"
-
-        Other False Nothing Nothing ->
-            "it"
-
-        Other False (Just Male) Nothing ->
-            "he"
-
-        Other False (Just Female) Nothing ->
-            "she"
-
-        Other True sex Nothing ->
-            "they"
-
-        Other plural sex (Just string) ->
-            string
-
-
-direct2 : Object -> String
-direct2 object =
-    case object of
-        Speaker False ->
-            "me"
-
-        Speaker True ->
-            "us"
-
-        Hearer plural ->
-            "you"
-
-        Other False Nothing Nothing ->
-            "it"
-
-        Other False (Just Male) Nothing ->
-            "him"
-
-        Other False (Just Female) Nothing ->
-            "her"
-
-        Other True sex Nothing ->
-            "them"
-
-        Other plural sex (Just string) ->
-            string
-
-
-direct3 : Object -> String
-direct3 object =
-    case object of
-        Speaker False ->
-            "myself"
-
-        Speaker True ->
-            "ourselves"
-
-        Hearer False ->
-            "yourself"
-
-        Hearer True ->
-            "yourselves"
-
-        Other False Nothing string ->
-            "itself"
-
-        Other False (Just Male) string ->
-            "himself"
-
-        Other False (Just Female) string ->
-            "herself"
-
-        Other True sex string ->
-            "themselves"
-
-
-{-| The two relative forms of the pronouns, generated from their corresponding
-object. These can be overridden by a proper name in the case of third person
-objects.
--}
-relative1 : Object -> String
-relative1 object =
-    case object of
-        Speaker False ->
-            "my"
-
-        Speaker True ->
-            "our"
-
-        Hearer plural ->
-            "your"
-
-        Other False Nothing Nothing ->
-            "its"
-
-        Other False (Just Male) Nothing ->
-            "his"
-
-        Other False (Just Female) Nothing ->
-            "her"
-
-        Other True sex Nothing ->
-            "their"
-
-        Other plural sex (Just string) ->
-            string ++ "'s"
-
-
-relative2 : Object -> String
-relative2 object =
-    case object of
-        Speaker False ->
-            "mine"
-
-        Speaker True ->
-            "ours"
-
-        Hearer plural ->
-            "yours"
-
-        Other False Nothing Nothing ->
-            "its"
-
-        Other False (Just Male) Nothing ->
-            "his"
-
-        Other False (Just Female) Nothing ->
-            "hers"
-
-        Other True sex Nothing ->
-            "theirs"
-
-        Other plural sex (Just string) ->
-            string ++ "'s"
-
-
-{-| Encode a relator in a preposition.
--}
-preposition : Relator -> String
-preposition relator =
-    String.toLower (toString relator)
-
-
-{-| Encode a pointer in an article. Note that I distinguish articles from
-determiners, on the basis of my pointer/quantifier distinction. This does not
-correspond exactly to standard grammatical terminology. Uses the first relative
-form of the pronoun in the case of RelatedTo pointers.
--}
-article : Bool -> Pointer -> String
-article plural pointer =
-    case ( pointer, plural ) of
-        ( The, _ ) ->
-            "the"
-
-        ( This, False ) ->
-            "this"
-
-        ( This, True ) ->
-            "these"
-
-        ( That, False ) ->
-            "that"
-
-        ( That, True ) ->
-            "those"
-
-        ( RelatedTo object, _ ) ->
-            relative1 object
-
-
-{-| Encode a quantifier in a determiner. Note that I distinguish articles from
-determiners, on the basis of my pointer/quantifier distinction. This does not
-correspond exactly to standard grammatical terminology.
--}
-determiner : Quantifier -> String
-determiner quantifier =
-    case quantifier of
-        Integer int ->
-            integerToString int
-
-        _ ->
-            String.toLower (toString quantifier)
-
-
-integerToString : Int -> String
-integerToString int =
-    if int < 0 then
-        "minus " ++ (integerToString -int)
-    else if int == 0 then
-        "zero"
-    else if int == 1 then
-        "one"
-    else if int == 2 then
-        "two"
-    else if int == 3 then
-        "three"
-    else if int == 4 then
-        "four"
-    else if int == 5 then
-        "five"
-    else if int == 6 then
-        "six"
-    else if int == 7 then
-        "seven"
-    else if int == 8 then
-        "eight"
-    else if int == 9 then
-        "nine"
-    else if int == 10 then
-        "ten"
-    else if int == 11 then
-        "eleven"
-    else if int == 12 then
-        "twelve"
-    else if int == 13 then
-        "thirteen"
-    else if int == 14 then
-        "fourteen"
-    else if int == 15 then
-        "fifteen"
-    else if int == 16 then
-        "sixteen"
-    else if int == 17 then
-        "seventeen"
-    else if int == 18 then
-        "eighteen"
-    else if int == 19 then
-        "nineteen"
-    else if int == 20 then
-        "twenty"
-    else if int < 30 then
-        "twenty-" ++ (integerToString (int - 20))
-    else if int == 30 then
-        "thirty"
-    else if int < 40 then
-        "thirty-" ++ (integerToString (int - 30))
-    else if int == 40 then
-        "fourty"
-    else if int < 50 then
-        "fourty-" ++ (integerToString (int - 40))
-    else if int == 50 then
-        "fifty"
-    else if int < 60 then
-        "fifty-" ++ (integerToString (int - 50))
-    else if int == 60 then
-        "sixty"
-    else if int < 70 then
-        "sixty-" ++ (integerToString (int - 60))
-    else if int == 70 then
-        "seventy"
-    else if int < 80 then
-        "seventy-" ++ (integerToString (int - 70))
-    else if int == 80 then
-        "eighty"
-    else if int < 90 then
-        "eighty-" ++ (integerToString (int - 80))
-    else if int == 90 then
-        "ninety"
-    else if int < 100 then
-        "ninety-" ++ (integerToString (int - 90))
+conjugate : Nucleus.Object -> Bool -> String -> String
+conjugate object past base =
+    if past && base == "be" then
+        if (Nucleus.isSpeaker object || Nucleus.isOther object) && not (Nucleus.isPlural object) then
+            "was"
+        else
+            "were"
+    else if base == "be" then
+        if (Nucleus.isSpeaker object) && not (Nucleus.isPlural object) then
+            "am"
+        else if (Nucleus.isOther object) && not (Nucleus.isPlural object) then
+            "is"
+        else
+            "are"
+    else if past then
+        finite2 base
+    else if (Nucleus.isOther object) && not (Nucleus.isPlural object) then
+        finite1 base
     else
-        "a hundred or more"
+        base
 
 
-{-| Encode a modality in a modal.
--}
-modal : Modality -> Bool -> Bool -> String
-modal modality past negated =
-    case modality of
-        Yes1 ->
-            if past then
-                "would"
-            else
-                "will"
-
-        Yes2 ->
-            if past then
-                "should"
-            else
-                "shall"
-
-        Yes3 ->
-            if negated then
-                "need"
-            else if past then
-                "ought"
-            else
-                "must"
-
-        Maybe1 ->
-            if past then
-                "might"
-            else
-                "may"
-
-        Maybe3 ->
-            if past then
-                "could"
-            else
-                "can"
-
-        Maybe4 ->
-            "dare"
-
-
-{-| Generate the plural form of a noun from its singular. This functions tries
-to guess the appropriate form, unless there is a match in the dictionary of
-nouns below. The dictionary contains nouns (maybe not all of them) that my
-guessing function gets wrong.
--}
-plural : String -> String
-plural noun =
-    Maybe.withDefault
-        (guessPlural noun)
-        (Dict.get noun nouns)
-
-
-{-| Generate the finite and participle forms of a verb from its base form. Like
-the above, these functions all try to guess the appropriate form, unless there
-is a match in the dictionary of verbs below. This dictionary includes irregular
-verbs, and also some regular verbs whose regularity my guessing functions cannot
-predict. This predictive failure concerns whether or not to double the consonant
-at the end of a verb in its second finite and first participle forms, which
-depends - at least in so far as it is regular - on where the stress falls.
--}
 finite1 : String -> String
 finite1 base =
     Maybe.withDefault
@@ -400,36 +62,9 @@ participle2 base =
         (Maybe.map (\x -> x.p2) (Dict.get base verbs))
 
 
-{-| Functions for guessing regular forms, as used in the five functions above.
-Note that the second participle form, with regular verbs, is identical to the
-second finite form. Consequently no additional function is needed for the
-former.
--}
-guessPlural : String -> String
-guessPlural singular =
-    if consontanty singular then
-        (String.dropRight 1 singular) ++ "ies"
-    else if List.member (String.right 2 singular) [ "ch", "sh", "ss" ] then
-        singular ++ "es"
-    else if (String.right 3 singular) == "sis" then
-        (String.dropRight 3 singular) ++ "ses"
-    else if (String.right 3 singular) == "xis" then
-        (String.dropRight 3 singular) ++ "xes"
-    else if (String.right 1 singular) == "f" then
-        (String.dropRight 1 singular) ++ "ves"
-    else if (String.right 2 singular) == "fe" then
-        (String.dropRight 2 singular) ++ "fes"
-    else if (String.right 1 singular) == "o" then
-        (String.dropRight 1 singular) ++ "oes"
-    else if (String.right 2 singular) == "ix" then
-        (String.dropRight 2 singular) ++ "ices"
-    else
-        singular ++ "s"
-
-
 guessFinite1 : String -> String
 guessFinite1 base =
-    if consontanty base then
+    if Utils.consontanty base then
         (String.dropRight 1 base) ++ "ies"
     else if List.member (String.right 2 base) [ "ch", "sh", "ss" ] then
         base ++ "es"
@@ -441,7 +76,7 @@ guessFinite2 : String -> String
 guessFinite2 base =
     if String.right 1 base == "e" then
         base ++ "d"
-    else if consontanty base then
+    else if Utils.consontanty base then
         (String.dropRight 1 base) ++ "ied"
     else
         base ++ "ed"
@@ -459,82 +94,6 @@ guessParticiple1 base =
         base ++ "ing"
 
 
-{-| Check if a word ends with a consonant followed by "y" - used by a couple of
-the guessing functions above.
--}
-consontanty : String -> Bool
-consontanty base =
-    let
-        ultimate =
-            String.right 1 base
-
-        penultimate =
-            String.slice -2 -1 base
-    in
-        ultimate == "y" && not (List.member penultimate [ "a", "e", "i", "o", "u" ])
-
-
-{-| A dictionary of nouns that the guessPlural function gets wrong.
--}
-nouns : Dict.Dict String String
-nouns =
-    Dict.fromList
-        [ ( "addendum", "addenda" )
-        , ( "alga", "algae" )
-        , ( "alumna", "alumnae" )
-        , ( "alumnus", "alumni" )
-        , ( "antenna", "antennae" )
-        , ( "bacillus", "bacilli" )
-        , ( "bacterium", "bacteria" )
-        , ( "beau", "beaux" )
-        , ( "bison", "bison" )
-        , ( "child", "children" )
-        , ( "corps", "corps" )
-        , ( "corpus", "corpora" )
-        , ( "criterion", "criteria" )
-        , ( "curriculum", "curricula" )
-        , ( "datum", "data" )
-        , ( "deer", "deer" )
-        , ( "die", "dice" )
-        , ( "erratum", "errata" )
-        , ( "fireman", "firemen" )
-        , ( "fish", "fish" )
-        , ( "foot", "feet" )
-        , ( "fungus", "fungi" )
-        , ( "genus", "genera" )
-        , ( "goose", "geese" )
-        , ( "louse", "lice" )
-        , ( "man", "men" )
-        , ( "means", "means" )
-        , ( "medium", "media" )
-        , ( "memorandum", "memoranda" )
-        , ( "millennium", "milennia" )
-        , ( "moose", "moose" )
-        , ( "mouse", "mice" )
-        , ( "nebula", "nebulae" )
-        , ( "nucleus", "nuclei" )
-        , ( "ovum", "ova" )
-        , ( "ox", "oxen" )
-        , ( "person", "people" )
-        , ( "phenomenon", "phenomena" )
-        , ( "radius", "radii" )
-        , ( "series", "series" )
-        , ( "sheep", "sheep" )
-        , ( "species", "species" )
-        , ( "stimulus", "stimuli" )
-        , ( "stratum", "strata" )
-        , ( "symposium", "symposia" )
-        , ( "tableau", "tableaux" )
-        , ( "tooth", "teeth" )
-        , ( "vertebra", "vertebrae" )
-        , ( "vita", "vitae" )
-        , ( "woman", "women" )
-        ]
-
-
-{-| A dictionary of verbs that at least one of the guessing functions for verb
-forms gets wrong.
--}
 verbs : Dict.Dict String { f1 : String, f2 : String, p1 : String, p2 : String }
 verbs =
     Dict.fromList

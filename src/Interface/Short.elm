@@ -1,63 +1,47 @@
-module Interface.View exposing (root)
+module Short exposing (main)
 
-{-| HTML for displaying the current state of the application, together with
-inputs for the user to modify the application state.
+
+{-| The application for the second layer of the theory (short messages).
 -}
-
-import Char
 import Html
 import Html.Attributes as Attr
 import Html.Events as Events
-import Result exposing (andThen)
-import Interface.Types exposing (..)
-import Interface.Nucleus as Nucleus
-import Interface.Elaborations as Elaborations
-import Interface.Input as Input
-import Interface.State as State
-import Interface.Messages as Messages
-import Theory.Types exposing (..)
-import Theory.Sentences as Sentences
+import Result
+import Interface.Model.Types exposing (..)
+import Interface.Model.State as State
+import Interface.Messages.Short as Messages
+import Interface.View.Output as Output
+import Interface.View.Examples as Examples
+import Interface.View.Input as Input
+import Interface.View.Nucleus as Nucleus
+import Interface.View.Elaborations as Elaborations
+import Theory.Short.Sentences as Sentences
 
 
-{-| The root display for export.
+{-| Run the application.
 -}
-root : Model -> Html.Html Signal
-root model =
-    Html.div []
-        [ output model
-        , input (List.reverse model.elaborations) model
-        , help
-        ]
+main : Program Never Model Signal
+main =
+    Html.beginnerProgram
+        { model = State.initial ShortTheory
+        , update = State.update
+        , view = view
+        }
 
 
-{-| Output.
+{-| The view.
 -}
-output : Model -> Html.Html Signal
-output model =
-    case Messages.message model |> andThen Sentences.sentence of
-        Err error ->
-            Html.div
-                [ Attr.class "output error" ]
-                [ Html.text error ]
-
-        Ok sentence ->
-            Html.div
-                [ Attr.class "output" ]
-                [ Html.text (format sentence) ]
-
-
-format : String -> String
-format sentence =
+view : Model -> Html.Html Signal
+view model =
     let
-        ucFirst =
-            case String.uncons sentence of
-                Nothing ->
-                    String.toUpper sentence
-
-                Just ( firstLetter, rest ) ->
-                    String.cons (Char.toUpper firstLetter) rest
+        result =
+            Messages.message model |> Result.andThen Sentences.sentence
     in
-        String.append ucFirst "."
+        Html.div []
+            [ Output.output result
+            , Examples.examples ShortTheory
+            , input (List.reverse model.elaborations) model
+            ]
 
 
 {-| Input.
@@ -82,7 +66,7 @@ input elaborations model =
 nucleusInput : Model -> Html.Html Signal
 nucleusInput model =
     Html.div
-        [ Attr.class "input" ]
+        [ Attr.class "nucleus" ]
         [ nucleusHeading model
         , elaborationButtons -1 model.plus
         , nucleusBody model
@@ -131,7 +115,7 @@ nucleusBody model =
 elaborationInput : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
 elaborationInput balanceCount index elaboration subContent =
     Html.div
-        [ Attr.class "input" ]
+        [ Attr.class "elaboration" ]
         [ elaborationHeading index elaboration
         , elaborationButtons index elaboration.plus
         , elaborationBody balanceCount index elaboration subContent
@@ -164,30 +148,19 @@ elaborationBody balanceCount index elaboration subContent =
                 , subContent
                 ]
 
-        MakeDISPLACED ->
-            Html.div
-                [ Attr.class "body" ]
-                ((Elaborations.displacer True True index elaboration)
-                    ++ [ subContent ]
-                )
-
         MakePREORDAINED ->
             Html.div
                 [ Attr.class "body" ]
-                ((Elaborations.displacer False False index elaboration)
-                    ++ [ Elaborations.preordainedTime index elaboration
-                       , subContent
-                       ]
-                )
+                [ Elaborations.preordainedTime index elaboration
+                , subContent
+                ]
 
         MakeREGULAR ->
             Html.div
                 [ Attr.class "body" ]
-                ((Elaborations.displacer False True index elaboration)
-                    ++ [ Elaborations.frequency index elaboration
-                       , subContent
-                       ]
-                )
+                [ Elaborations.frequency index elaboration
+                , subContent
+                ]
 
         MakeEXTENDED ->
             Html.div
@@ -200,33 +173,6 @@ elaborationBody balanceCount index elaboration subContent =
             Html.div
                 [ Attr.class "body" ]
                 [ Elaborations.tally index elaboration
-                , subContent
-                ]
-
-        MakeINDIRECT ->
-            Html.div
-                [ Attr.class "body" ]
-                [ Elaborations.target balanceCount index elaboration
-                , Elaborations.pointer index elaboration
-                , Elaborations.haystack index elaboration
-                , subContent
-                ]
-
-        MakeENUMERATED ->
-            Html.div
-                [ Attr.class "body" ]
-                [ Elaborations.target balanceCount index elaboration
-                , Elaborations.quantifier False index elaboration
-                , Elaborations.haystack index elaboration
-                , subContent
-                ]
-
-        MakeAMASSED ->
-            Html.div
-                [ Attr.class "body" ]
-                [ Elaborations.target balanceCount index elaboration
-                , Elaborations.quantifier True index elaboration
-                , Elaborations.haystack index elaboration
                 , subContent
                 ]
 
@@ -275,18 +221,10 @@ elaborationButtons index plus =
                     [ MakeNEGATIVE
                     , MakePAST
                     , MakePRIOR
-                    , MakeDISPLACED
                     , MakeREGULAR
                     , MakePREORDAINED
-                    ]
-                )
-            , Html.div []
-                (List.map (elaborationButton index)
-                    [ MakeEXTENDED
+                    , MakeEXTENDED
                     , MakeSCATTERED
-                    , MakeINDIRECT
-                    , MakeENUMERATED
-                    , MakeAMASSED
                     ]
                 )
             ]
@@ -299,28 +237,3 @@ elaborationButton index recipe =
         , signal = AddElaboration index recipe
         , title = "Add " ++ (String.dropLeft 4 (toString recipe)) ++ " Elaboration"
         }
-
-
-{-| Help.
--}
-help : Html.Html Signal
-help =
-    Html.div [ Attr.class "help" ]
-        [ Html.div []
-            [ Html.h2 []
-                [ Html.text "Help" ]
-            , Html.p []
-                [ Html.text "Victor is a model of the English language, thought of as a code for processing "
-                , Html.em [] [ Html.text "messages" ]
-                , Html.text " (structured arrangements of informational choices) into "
-                , Html.em [] [ Html.text "sentences" ]
-                , Html.text " (strings of words). Use the blue input box directly above to generate your message; the corresponding sentence will show up in the green output box at the top."]
-            , Html.p []
-                [ Html.text "For exposition purposes, the model is divided into four layers of increasing complexity. If you are new to the theory, start with "
-                , Html.a [ Attr.href "plain.html" ] [ Html.text "Plain Messages" ]
-                , Html.text ", and move up from there. See the "
-                , Html.a [ Attr.href "https://github.com/merivale/victor/" ] [ Html.text "README" ]
-                , Html.text " for further details."
-                ]
-            ]
-        ]
