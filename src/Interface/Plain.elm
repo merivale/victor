@@ -4,8 +4,6 @@ module Plain exposing (main)
 {-| The application for the first layer of the theory (plain messages).
 -}
 import Html
-import Html.Attributes as Attr
-import Html.Events as Events
 import Result
 import Interface.Model.Types exposing (..)
 import Interface.Model.State as State

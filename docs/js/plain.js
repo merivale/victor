@@ -10624,6 +10624,14 @@ var _merivale$victor$Interface_View_Buttons$removeBalance = _merivale$victor$Int
 	{label: 'close', signal: _merivale$victor$Interface_Model_Types$RemoveBalance, title: 'Remove Balance'});
 var _merivale$victor$Interface_View_Buttons$addBalance = _merivale$victor$Interface_View_Buttons$iconButton(
 	{label: 'plus', signal: _merivale$victor$Interface_Model_Types$AddBalance, title: 'Add Balance'});
+var _merivale$victor$Interface_View_Buttons$removeElaboration = function (index) {
+	return _merivale$victor$Interface_View_Buttons$iconButton(
+		{
+			label: 'close',
+			signal: _merivale$victor$Interface_Model_Types$RemoveElaboration(index),
+			title: 'Remove Elaboration'
+		});
+};
 var _merivale$victor$Interface_View_Buttons$addElaboration = F2(
 	function (index, recipe) {
 		return _merivale$victor$Interface_View_Buttons$button(

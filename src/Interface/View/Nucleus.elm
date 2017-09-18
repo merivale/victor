@@ -1,11 +1,4 @@
-module Interface.View.Nucleus
-    exposing
-        ( nucleus
-        , object
-        , verbality
-        , status
-        , balance
-        )
+module Interface.View.Nucleus exposing (nucleus)
 
 
 {-| Module for generating HTML inputs for nucleus factors.

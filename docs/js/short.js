@@ -10990,6 +10990,14 @@ var _merivale$victor$Interface_View_Buttons$removeBalance = _merivale$victor$Int
 	{label: 'close', signal: _merivale$victor$Interface_Model_Types$RemoveBalance, title: 'Remove Balance'});
 var _merivale$victor$Interface_View_Buttons$addBalance = _merivale$victor$Interface_View_Buttons$iconButton(
 	{label: 'plus', signal: _merivale$victor$Interface_Model_Types$AddBalance, title: 'Add Balance'});
+var _merivale$victor$Interface_View_Buttons$removeElaboration = function (index) {
+	return _merivale$victor$Interface_View_Buttons$iconButton(
+		{
+			label: 'close',
+			signal: _merivale$victor$Interface_Model_Types$RemoveElaboration(index),
+			title: 'Remove Elaboration'
+		});
+};
 var _merivale$victor$Interface_View_Buttons$addElaboration = F2(
 	function (index, recipe) {
 		return _merivale$victor$Interface_View_Buttons$button(
@@ -12294,6 +12302,399 @@ var _merivale$victor$Interface_View_Input$button = function (_p20) {
 		});
 };
 
+var _merivale$victor$Interface_View_Nucleus$verbalityPassive = function (passive) {
+	return _merivale$victor$Interface_View_Input$checkbox(
+		{id: 'passive', label: 'Passive', checked: passive, signal: _merivale$victor$Interface_Model_Types$ToggleVerbalityPassive});
+};
+var _merivale$victor$Interface_View_Nucleus$verbalityOngoing = function (ongoing) {
+	return _merivale$victor$Interface_View_Input$checkbox(
+		{id: 'ongoing', label: 'Ongoing', checked: ongoing, signal: _merivale$victor$Interface_Model_Types$ToggleVerbalityOngoing});
+};
+var _merivale$victor$Interface_View_Nucleus$balanceWeightObjectText = F2(
+	function (index, object) {
+		return _merivale$victor$Interface_View_Input$text(
+			{
+				value: A2(
+					_elm_lang$core$Maybe$withDefault,
+					'',
+					_merivale$victor$Interface_View_Ideas$objectString(object)),
+				placeholder: 'name (optional)',
+				signal: _merivale$victor$Interface_Model_Types$SetBalanceWeightObjectString(index),
+				disabled: !_merivale$victor$Interface_View_Ideas$objectHasString(object)
+			});
+	});
+var _merivale$victor$Interface_View_Nucleus$statusString = function (string) {
+	return _merivale$victor$Interface_View_Input$text(
+		{value: string, placeholder: 'e.g. able, eager, happy (optional)', signal: _merivale$victor$Interface_Model_Types$SetStatusString, disabled: false});
+};
+var _merivale$victor$Interface_View_Nucleus$verbalityString = function (string) {
+	return _merivale$victor$Interface_View_Input$text(
+		{value: string, placeholder: 'e.g. have, like, want', signal: _merivale$victor$Interface_Model_Types$SetVerbalityString, disabled: false});
+};
+var _merivale$victor$Interface_View_Nucleus$objectText = function (object) {
+	return _merivale$victor$Interface_View_Input$text(
+		{
+			value: A2(
+				_elm_lang$core$Maybe$withDefault,
+				'',
+				_merivale$victor$Interface_View_Ideas$objectString(object)),
+			placeholder: 'name (optional)',
+			signal: _merivale$victor$Interface_Model_Types$SetObjectString,
+			disabled: !_merivale$victor$Interface_View_Ideas$objectHasString(object)
+		});
+};
+var _merivale$victor$Interface_View_Nucleus$balanceWeightObjectSelect = F2(
+	function (index, object) {
+		return A2(
+			_merivale$victor$Interface_View_Input$selectGroup,
+			_merivale$victor$Interface_View_Ideas$listObjectGroups,
+			{
+				value: object,
+				options: _merivale$victor$Interface_View_Ideas$listObjects,
+				equivalent: _merivale$victor$Interface_View_Ideas$equateObjects,
+				signal: _merivale$victor$Interface_Model_Types$SetBalanceWeightObject(index),
+				toLabel: _merivale$victor$Interface_View_Ideas$displayObject
+			});
+	});
+var _merivale$victor$Interface_View_Nucleus$balanceWeightSelect = F2(
+	function (index, weight) {
+		return _merivale$victor$Interface_View_Input$select(
+			{
+				value: weight,
+				options: _merivale$victor$Interface_View_Ideas$listWeights,
+				equivalent: _merivale$victor$Interface_View_Ideas$equateWeights,
+				signal: _merivale$victor$Interface_Model_Types$SetBalanceWeight(index),
+				toLabel: _merivale$victor$Interface_View_Ideas$displayWeight
+			});
+	});
+var _merivale$victor$Interface_View_Nucleus$balanceRelatorSelect = F2(
+	function (index, relator) {
+		return _merivale$victor$Interface_View_Input$select(
+			{
+				value: relator,
+				options: _merivale$victor$Interface_View_Ideas$listMaybeRelators,
+				equivalent: F2(
+					function (x, y) {
+						return _elm_lang$core$Native_Utils.eq(x, y);
+					}),
+				signal: _merivale$victor$Interface_Model_Types$SetBalanceRelator(index),
+				toLabel: _merivale$victor$Interface_View_Ideas$displayMaybeRelator
+			});
+	});
+var _merivale$victor$Interface_View_Nucleus$statusRelatorSelect = function (relator) {
+	return _merivale$victor$Interface_View_Input$select(
+		{
+			value: relator,
+			options: _merivale$victor$Interface_View_Ideas$listRelators,
+			equivalent: F2(
+				function (x, y) {
+					return _elm_lang$core$Native_Utils.eq(x, y);
+				}),
+			signal: _merivale$victor$Interface_Model_Types$SetStatusRelator,
+			toLabel: _elm_lang$core$Basics$toString
+		});
+};
+var _merivale$victor$Interface_View_Nucleus$statusSelect = function (status) {
+	return _merivale$victor$Interface_View_Input$select(
+		{value: status, options: _merivale$victor$Interface_View_Ideas$listStatuses, equivalent: _merivale$victor$Interface_View_Ideas$equateStatuses, signal: _merivale$victor$Interface_Model_Types$SetStatus, toLabel: _merivale$victor$Interface_View_Ideas$displayStatus});
+};
+var _merivale$victor$Interface_View_Nucleus$verbalitySelect = function (verbality) {
+	return _merivale$victor$Interface_View_Input$select(
+		{value: verbality, options: _merivale$victor$Interface_View_Ideas$listVerbalities, equivalent: _merivale$victor$Interface_View_Ideas$equateVerbalities, signal: _merivale$victor$Interface_Model_Types$SetVerbality, toLabel: _merivale$victor$Interface_View_Ideas$displayVerbality});
+};
+var _merivale$victor$Interface_View_Nucleus$objectSelect = function (object) {
+	return A2(
+		_merivale$victor$Interface_View_Input$selectGroup,
+		_merivale$victor$Interface_View_Ideas$listObjectGroups,
+		{value: object, options: _merivale$victor$Interface_View_Ideas$listObjects, equivalent: _merivale$victor$Interface_View_Ideas$equateObjects, signal: _merivale$victor$Interface_Model_Types$SetObject, toLabel: _merivale$victor$Interface_View_Ideas$displayObject});
+};
+var _merivale$victor$Interface_View_Nucleus$balance = F2(
+	function (index, _p0) {
+		var _p1 = _p0;
+		var _p5 = _p1._1;
+		var _p4 = _p1._0;
+		var _p2 = _p5;
+		if (_p2.ctor === 'SameAsMain') {
+			return A2(
+				_merivale$victor$Interface_View_Input$factor,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'Balance ',
+					_elm_lang$core$Basics$toString(index + 1)),
+				{
+					ctor: '::',
+					_0: A2(_merivale$victor$Interface_View_Nucleus$balanceRelatorSelect, index, _p4),
+					_1: {
+						ctor: '::',
+						_0: A2(_merivale$victor$Interface_View_Nucleus$balanceWeightSelect, index, _p5),
+						_1: {
+							ctor: '::',
+							_0: _merivale$victor$Interface_View_Input$emptyInput,
+							_1: {
+								ctor: '::',
+								_0: _merivale$victor$Interface_View_Input$emptyInput,
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				});
+		} else {
+			var _p3 = _p2._0;
+			return A2(
+				_merivale$victor$Interface_View_Input$factor,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'Balance ',
+					_elm_lang$core$Basics$toString(index + 1)),
+				{
+					ctor: '::',
+					_0: A2(_merivale$victor$Interface_View_Nucleus$balanceRelatorSelect, index, _p4),
+					_1: {
+						ctor: '::',
+						_0: A2(_merivale$victor$Interface_View_Nucleus$balanceWeightSelect, index, _p5),
+						_1: {
+							ctor: '::',
+							_0: A2(_merivale$victor$Interface_View_Nucleus$balanceWeightObjectSelect, index, _p3),
+							_1: {
+								ctor: '::',
+								_0: A2(_merivale$victor$Interface_View_Nucleus$balanceWeightObjectText, index, _p3),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				});
+		}
+	});
+var _merivale$victor$Interface_View_Nucleus$status = function (status) {
+	var _p6 = status;
+	if (_p6.ctor === 'Nothing') {
+		return A2(
+			_merivale$victor$Interface_View_Input$factor,
+			'Status',
+			{
+				ctor: '::',
+				_0: _merivale$victor$Interface_View_Nucleus$statusSelect(status),
+				_1: {
+					ctor: '::',
+					_0: _merivale$victor$Interface_View_Input$emptyInput,
+					_1: {ctor: '[]'}
+				}
+			});
+	} else {
+		if (_p6._0.ctor === 'Absolute') {
+			return A2(
+				_merivale$victor$Interface_View_Input$factor,
+				'Status',
+				{
+					ctor: '::',
+					_0: _merivale$victor$Interface_View_Nucleus$statusSelect(status),
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Interface_View_Nucleus$statusString(_p6._0._0),
+						_1: {ctor: '[]'}
+					}
+				});
+		} else {
+			return A2(
+				_merivale$victor$Interface_View_Input$factor,
+				'Status',
+				{
+					ctor: '::',
+					_0: _merivale$victor$Interface_View_Nucleus$statusSelect(status),
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Interface_View_Nucleus$statusRelatorSelect(_p6._0._0),
+						_1: {ctor: '[]'}
+					}
+				});
+		}
+	}
+};
+var _merivale$victor$Interface_View_Nucleus$verbality = function (verbality) {
+	var _p7 = verbality;
+	if (_p7.ctor === 'Be') {
+		return A2(
+			_merivale$victor$Interface_View_Input$factor,
+			'Verbality',
+			{
+				ctor: '::',
+				_0: _merivale$victor$Interface_View_Nucleus$verbalitySelect(verbality),
+				_1: {
+					ctor: '::',
+					_0: _merivale$victor$Interface_View_Input$emptyInput,
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Interface_View_Nucleus$verbalityOngoing(_p7._0),
+						_1: {
+							ctor: '::',
+							_0: _merivale$victor$Interface_View_Input$emptyInput,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+	} else {
+		return A2(
+			_merivale$victor$Interface_View_Input$factor,
+			'Verbality',
+			{
+				ctor: '::',
+				_0: _merivale$victor$Interface_View_Nucleus$verbalitySelect(verbality),
+				_1: {
+					ctor: '::',
+					_0: _merivale$victor$Interface_View_Nucleus$verbalityString(_p7._0),
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Interface_View_Nucleus$verbalityOngoing(_p7._1),
+						_1: {
+							ctor: '::',
+							_0: _merivale$victor$Interface_View_Nucleus$verbalityPassive(_p7._2),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+	}
+};
+var _merivale$victor$Interface_View_Nucleus$object = function (object) {
+	return A2(
+		_merivale$victor$Interface_View_Input$factor,
+		'Object',
+		{
+			ctor: '::',
+			_0: _merivale$victor$Interface_View_Nucleus$objectSelect(object),
+			_1: {
+				ctor: '::',
+				_0: _merivale$victor$Interface_View_Nucleus$objectText(object),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _merivale$victor$Interface_View_Nucleus$body = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('body'),
+			_1: {ctor: '[]'}
+		},
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _merivale$victor$Interface_View_Nucleus$object(model.object),
+				_1: {
+					ctor: '::',
+					_0: _merivale$victor$Interface_View_Nucleus$verbality(model.verbality),
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Interface_View_Nucleus$status(model.status),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			A2(_elm_lang$core$List$indexedMap, _merivale$victor$Interface_View_Nucleus$balance, model.balances)));
+};
+var _merivale$victor$Interface_View_Nucleus$heading = F2(
+	function (toggleButton, model) {
+		var right = (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(model.balances),
+			0) > 0) ? {
+			ctor: '::',
+			_0: _merivale$victor$Interface_View_Buttons$removeBalance,
+			_1: {
+				ctor: '::',
+				_0: _merivale$victor$Interface_View_Buttons$addBalance,
+				_1: {ctor: '[]'}
+			}
+		} : {
+			ctor: '::',
+			_0: _merivale$victor$Interface_View_Buttons$addBalance,
+			_1: {ctor: '[]'}
+		};
+		var left = toggleButton ? {
+			ctor: '::',
+			_0: A2(_merivale$victor$Interface_View_Buttons$toggleElaborations, -1, model.plus),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('title'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Nucleus'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		} : {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('title'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Nucleus'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		};
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('heading'),
+				_1: {ctor: '[]'}
+			},
+			A2(_elm_lang$core$Basics_ops['++'], left, right));
+	});
+var _merivale$victor$Interface_View_Nucleus$nucleus = F2(
+	function (theoryLayer, model) {
+		return _elm_lang$core$Native_Utils.eq(theoryLayer, _merivale$victor$Interface_Model_Types$PlainTheory) ? A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('nucleus'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(_merivale$victor$Interface_View_Nucleus$heading, false, model),
+				_1: {
+					ctor: '::',
+					_0: _merivale$victor$Interface_View_Nucleus$body(model),
+					_1: {ctor: '[]'}
+				}
+			}) : A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('nucleus'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(_merivale$victor$Interface_View_Nucleus$heading, true, model),
+				_1: {
+					ctor: '::',
+					_0: A3(_merivale$victor$Interface_View_Buttons$elaborationButtons, theoryLayer, -1, model.plus),
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Interface_View_Nucleus$body(model),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+
 var _merivale$victor$Interface_View_Elaborations$other = F2(
 	function (index, checked) {
 		return _merivale$victor$Interface_View_Input$checkbox(
@@ -12852,6 +13253,252 @@ var _merivale$victor$Interface_View_Elaborations$pastTime = F2(
 				_1: {ctor: '[]'}
 			});
 	});
+var _merivale$victor$Interface_View_Elaborations$elaborationBody = F5(
+	function (theoryLayer, balanceCount, index, elaboration, subContent) {
+		var _p6 = elaboration.recipe;
+		switch (_p6.ctor) {
+			case 'MakePAST':
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_merivale$victor$Interface_View_Elaborations$pastTime, index, elaboration),
+						_1: {
+							ctor: '::',
+							_0: subContent,
+							_1: {ctor: '[]'}
+						}
+					});
+			case 'MakeDISPLACED':
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A4(_merivale$victor$Interface_View_Elaborations$displacer, true, true, index, elaboration),
+						{
+							ctor: '::',
+							_0: subContent,
+							_1: {ctor: '[]'}
+						}));
+			case 'MakePREORDAINED':
+				return _elm_lang$core$Native_Utils.eq(theoryLayer, _merivale$victor$Interface_Model_Types$ShortTheory) ? A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_merivale$victor$Interface_View_Elaborations$preordainedTime, index, elaboration),
+						_1: {
+							ctor: '::',
+							_0: subContent,
+							_1: {ctor: '[]'}
+						}
+					}) : A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A4(_merivale$victor$Interface_View_Elaborations$displacer, false, false, index, elaboration),
+						{
+							ctor: '::',
+							_0: A2(_merivale$victor$Interface_View_Elaborations$preordainedTime, index, elaboration),
+							_1: {
+								ctor: '::',
+								_0: subContent,
+								_1: {ctor: '[]'}
+							}
+						}));
+			case 'MakeREGULAR':
+				return _elm_lang$core$Native_Utils.eq(theoryLayer, _merivale$victor$Interface_Model_Types$ShortTheory) ? A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_merivale$victor$Interface_View_Elaborations$frequency, index, elaboration),
+						_1: {
+							ctor: '::',
+							_0: subContent,
+							_1: {ctor: '[]'}
+						}
+					}) : A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A4(_merivale$victor$Interface_View_Elaborations$displacer, false, true, index, elaboration),
+						{
+							ctor: '::',
+							_0: A2(_merivale$victor$Interface_View_Elaborations$frequency, index, elaboration),
+							_1: {
+								ctor: '::',
+								_0: subContent,
+								_1: {ctor: '[]'}
+							}
+						}));
+			case 'MakeEXTENDED':
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_merivale$victor$Interface_View_Elaborations$duration, index, elaboration),
+						_1: {
+							ctor: '::',
+							_0: subContent,
+							_1: {ctor: '[]'}
+						}
+					});
+			case 'MakeSCATTERED':
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_merivale$victor$Interface_View_Elaborations$tally, index, elaboration),
+						_1: {
+							ctor: '::',
+							_0: subContent,
+							_1: {ctor: '[]'}
+						}
+					});
+			default:
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: subContent,
+						_1: {ctor: '[]'}
+					});
+		}
+	});
+var _merivale$victor$Interface_View_Elaborations$elaborationHeading = F2(
+	function (index, elaboration) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('heading'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(_merivale$victor$Interface_View_Buttons$toggleElaborations, index, elaboration.plus),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('title'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(
+									_elm_lang$core$String$dropLeft,
+									4,
+									_elm_lang$core$Basics$toString(elaboration.recipe))),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _merivale$victor$Interface_View_Buttons$removeElaboration(index),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _merivale$victor$Interface_View_Elaborations$elaborationInput = F5(
+	function (theoryLayer, balanceCount, index, elaboration, subContent) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('elaboration'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(_merivale$victor$Interface_View_Elaborations$elaborationHeading, index, elaboration),
+				_1: {
+					ctor: '::',
+					_0: A3(_merivale$victor$Interface_View_Buttons$elaborationButtons, theoryLayer, index, elaboration.plus),
+					_1: {
+						ctor: '::',
+						_0: A5(_merivale$victor$Interface_View_Elaborations$elaborationBody, theoryLayer, balanceCount, index, elaboration, subContent),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _merivale$victor$Interface_View_Elaborations$input = F3(
+	function (theoryLayer, elaborations, model) {
+		var _p7 = _elm_lang$core$List$head(elaborations);
+		if (_p7.ctor === 'Nothing') {
+			return A2(_merivale$victor$Interface_View_Nucleus$nucleus, theoryLayer, model);
+		} else {
+			var subContent = A3(
+				_merivale$victor$Interface_View_Elaborations$input,
+				theoryLayer,
+				A2(_elm_lang$core$List$drop, 1, elaborations),
+				model);
+			var index = _elm_lang$core$List$length(elaborations) - 1;
+			return A5(
+				_merivale$victor$Interface_View_Elaborations$elaborationInput,
+				theoryLayer,
+				_elm_lang$core$List$length(model.balances),
+				index,
+				_p7._0,
+				subContent);
+		}
+	});
+var _merivale$victor$Interface_View_Elaborations$elaborations = F2(
+	function (theoryLayer, model) {
+		return A3(
+			_merivale$victor$Interface_View_Elaborations$input,
+			theoryLayer,
+			_elm_lang$core$List$reverse(model.elaborations),
+			model);
+	});
 
 var _merivale$victor$Interface_View_Examples$objectExamples = {
 	ctor: '::',
@@ -13084,399 +13731,6 @@ var _merivale$victor$Interface_View_Examples$examples = function (theoryLayer) {
 			}
 		});
 };
-
-var _merivale$victor$Interface_View_Nucleus$verbalityPassive = function (passive) {
-	return _merivale$victor$Interface_View_Input$checkbox(
-		{id: 'passive', label: 'Passive', checked: passive, signal: _merivale$victor$Interface_Model_Types$ToggleVerbalityPassive});
-};
-var _merivale$victor$Interface_View_Nucleus$verbalityOngoing = function (ongoing) {
-	return _merivale$victor$Interface_View_Input$checkbox(
-		{id: 'ongoing', label: 'Ongoing', checked: ongoing, signal: _merivale$victor$Interface_Model_Types$ToggleVerbalityOngoing});
-};
-var _merivale$victor$Interface_View_Nucleus$balanceWeightObjectText = F2(
-	function (index, object) {
-		return _merivale$victor$Interface_View_Input$text(
-			{
-				value: A2(
-					_elm_lang$core$Maybe$withDefault,
-					'',
-					_merivale$victor$Interface_View_Ideas$objectString(object)),
-				placeholder: 'name (optional)',
-				signal: _merivale$victor$Interface_Model_Types$SetBalanceWeightObjectString(index),
-				disabled: !_merivale$victor$Interface_View_Ideas$objectHasString(object)
-			});
-	});
-var _merivale$victor$Interface_View_Nucleus$statusString = function (string) {
-	return _merivale$victor$Interface_View_Input$text(
-		{value: string, placeholder: 'e.g. able, eager, happy (optional)', signal: _merivale$victor$Interface_Model_Types$SetStatusString, disabled: false});
-};
-var _merivale$victor$Interface_View_Nucleus$verbalityString = function (string) {
-	return _merivale$victor$Interface_View_Input$text(
-		{value: string, placeholder: 'e.g. have, like, want', signal: _merivale$victor$Interface_Model_Types$SetVerbalityString, disabled: false});
-};
-var _merivale$victor$Interface_View_Nucleus$objectText = function (object) {
-	return _merivale$victor$Interface_View_Input$text(
-		{
-			value: A2(
-				_elm_lang$core$Maybe$withDefault,
-				'',
-				_merivale$victor$Interface_View_Ideas$objectString(object)),
-			placeholder: 'name (optional)',
-			signal: _merivale$victor$Interface_Model_Types$SetObjectString,
-			disabled: !_merivale$victor$Interface_View_Ideas$objectHasString(object)
-		});
-};
-var _merivale$victor$Interface_View_Nucleus$balanceWeightObjectSelect = F2(
-	function (index, object) {
-		return A2(
-			_merivale$victor$Interface_View_Input$selectGroup,
-			_merivale$victor$Interface_View_Ideas$listObjectGroups,
-			{
-				value: object,
-				options: _merivale$victor$Interface_View_Ideas$listObjects,
-				equivalent: _merivale$victor$Interface_View_Ideas$equateObjects,
-				signal: _merivale$victor$Interface_Model_Types$SetBalanceWeightObject(index),
-				toLabel: _merivale$victor$Interface_View_Ideas$displayObject
-			});
-	});
-var _merivale$victor$Interface_View_Nucleus$balanceWeightSelect = F2(
-	function (index, weight) {
-		return _merivale$victor$Interface_View_Input$select(
-			{
-				value: weight,
-				options: _merivale$victor$Interface_View_Ideas$listWeights,
-				equivalent: _merivale$victor$Interface_View_Ideas$equateWeights,
-				signal: _merivale$victor$Interface_Model_Types$SetBalanceWeight(index),
-				toLabel: _merivale$victor$Interface_View_Ideas$displayWeight
-			});
-	});
-var _merivale$victor$Interface_View_Nucleus$balanceRelatorSelect = F2(
-	function (index, relator) {
-		return _merivale$victor$Interface_View_Input$select(
-			{
-				value: relator,
-				options: _merivale$victor$Interface_View_Ideas$listMaybeRelators,
-				equivalent: F2(
-					function (x, y) {
-						return _elm_lang$core$Native_Utils.eq(x, y);
-					}),
-				signal: _merivale$victor$Interface_Model_Types$SetBalanceRelator(index),
-				toLabel: _merivale$victor$Interface_View_Ideas$displayMaybeRelator
-			});
-	});
-var _merivale$victor$Interface_View_Nucleus$statusRelatorSelect = function (relator) {
-	return _merivale$victor$Interface_View_Input$select(
-		{
-			value: relator,
-			options: _merivale$victor$Interface_View_Ideas$listRelators,
-			equivalent: F2(
-				function (x, y) {
-					return _elm_lang$core$Native_Utils.eq(x, y);
-				}),
-			signal: _merivale$victor$Interface_Model_Types$SetStatusRelator,
-			toLabel: _elm_lang$core$Basics$toString
-		});
-};
-var _merivale$victor$Interface_View_Nucleus$statusSelect = function (status) {
-	return _merivale$victor$Interface_View_Input$select(
-		{value: status, options: _merivale$victor$Interface_View_Ideas$listStatuses, equivalent: _merivale$victor$Interface_View_Ideas$equateStatuses, signal: _merivale$victor$Interface_Model_Types$SetStatus, toLabel: _merivale$victor$Interface_View_Ideas$displayStatus});
-};
-var _merivale$victor$Interface_View_Nucleus$verbalitySelect = function (verbality) {
-	return _merivale$victor$Interface_View_Input$select(
-		{value: verbality, options: _merivale$victor$Interface_View_Ideas$listVerbalities, equivalent: _merivale$victor$Interface_View_Ideas$equateVerbalities, signal: _merivale$victor$Interface_Model_Types$SetVerbality, toLabel: _merivale$victor$Interface_View_Ideas$displayVerbality});
-};
-var _merivale$victor$Interface_View_Nucleus$objectSelect = function (object) {
-	return A2(
-		_merivale$victor$Interface_View_Input$selectGroup,
-		_merivale$victor$Interface_View_Ideas$listObjectGroups,
-		{value: object, options: _merivale$victor$Interface_View_Ideas$listObjects, equivalent: _merivale$victor$Interface_View_Ideas$equateObjects, signal: _merivale$victor$Interface_Model_Types$SetObject, toLabel: _merivale$victor$Interface_View_Ideas$displayObject});
-};
-var _merivale$victor$Interface_View_Nucleus$balance = F2(
-	function (index, _p0) {
-		var _p1 = _p0;
-		var _p5 = _p1._1;
-		var _p4 = _p1._0;
-		var _p2 = _p5;
-		if (_p2.ctor === 'SameAsMain') {
-			return A2(
-				_merivale$victor$Interface_View_Input$factor,
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'Balance ',
-					_elm_lang$core$Basics$toString(index + 1)),
-				{
-					ctor: '::',
-					_0: A2(_merivale$victor$Interface_View_Nucleus$balanceRelatorSelect, index, _p4),
-					_1: {
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Nucleus$balanceWeightSelect, index, _p5),
-						_1: {
-							ctor: '::',
-							_0: _merivale$victor$Interface_View_Input$emptyInput,
-							_1: {
-								ctor: '::',
-								_0: _merivale$victor$Interface_View_Input$emptyInput,
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				});
-		} else {
-			var _p3 = _p2._0;
-			return A2(
-				_merivale$victor$Interface_View_Input$factor,
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'Balance ',
-					_elm_lang$core$Basics$toString(index + 1)),
-				{
-					ctor: '::',
-					_0: A2(_merivale$victor$Interface_View_Nucleus$balanceRelatorSelect, index, _p4),
-					_1: {
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Nucleus$balanceWeightSelect, index, _p5),
-						_1: {
-							ctor: '::',
-							_0: A2(_merivale$victor$Interface_View_Nucleus$balanceWeightObjectSelect, index, _p3),
-							_1: {
-								ctor: '::',
-								_0: A2(_merivale$victor$Interface_View_Nucleus$balanceWeightObjectText, index, _p3),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				});
-		}
-	});
-var _merivale$victor$Interface_View_Nucleus$status = function (status) {
-	var _p6 = status;
-	if (_p6.ctor === 'Nothing') {
-		return A2(
-			_merivale$victor$Interface_View_Input$factor,
-			'Status',
-			{
-				ctor: '::',
-				_0: _merivale$victor$Interface_View_Nucleus$statusSelect(status),
-				_1: {
-					ctor: '::',
-					_0: _merivale$victor$Interface_View_Input$emptyInput,
-					_1: {ctor: '[]'}
-				}
-			});
-	} else {
-		if (_p6._0.ctor === 'Absolute') {
-			return A2(
-				_merivale$victor$Interface_View_Input$factor,
-				'Status',
-				{
-					ctor: '::',
-					_0: _merivale$victor$Interface_View_Nucleus$statusSelect(status),
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Interface_View_Nucleus$statusString(_p6._0._0),
-						_1: {ctor: '[]'}
-					}
-				});
-		} else {
-			return A2(
-				_merivale$victor$Interface_View_Input$factor,
-				'Status',
-				{
-					ctor: '::',
-					_0: _merivale$victor$Interface_View_Nucleus$statusSelect(status),
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Interface_View_Nucleus$statusRelatorSelect(_p6._0._0),
-						_1: {ctor: '[]'}
-					}
-				});
-		}
-	}
-};
-var _merivale$victor$Interface_View_Nucleus$verbality = function (verbality) {
-	var _p7 = verbality;
-	if (_p7.ctor === 'Be') {
-		return A2(
-			_merivale$victor$Interface_View_Input$factor,
-			'Verbality',
-			{
-				ctor: '::',
-				_0: _merivale$victor$Interface_View_Nucleus$verbalitySelect(verbality),
-				_1: {
-					ctor: '::',
-					_0: _merivale$victor$Interface_View_Input$emptyInput,
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Interface_View_Nucleus$verbalityOngoing(_p7._0),
-						_1: {
-							ctor: '::',
-							_0: _merivale$victor$Interface_View_Input$emptyInput,
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			});
-	} else {
-		return A2(
-			_merivale$victor$Interface_View_Input$factor,
-			'Verbality',
-			{
-				ctor: '::',
-				_0: _merivale$victor$Interface_View_Nucleus$verbalitySelect(verbality),
-				_1: {
-					ctor: '::',
-					_0: _merivale$victor$Interface_View_Nucleus$verbalityString(_p7._0),
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Interface_View_Nucleus$verbalityOngoing(_p7._1),
-						_1: {
-							ctor: '::',
-							_0: _merivale$victor$Interface_View_Nucleus$verbalityPassive(_p7._2),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			});
-	}
-};
-var _merivale$victor$Interface_View_Nucleus$object = function (object) {
-	return A2(
-		_merivale$victor$Interface_View_Input$factor,
-		'Object',
-		{
-			ctor: '::',
-			_0: _merivale$victor$Interface_View_Nucleus$objectSelect(object),
-			_1: {
-				ctor: '::',
-				_0: _merivale$victor$Interface_View_Nucleus$objectText(object),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _merivale$victor$Interface_View_Nucleus$body = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('body'),
-			_1: {ctor: '[]'}
-		},
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			{
-				ctor: '::',
-				_0: _merivale$victor$Interface_View_Nucleus$object(model.object),
-				_1: {
-					ctor: '::',
-					_0: _merivale$victor$Interface_View_Nucleus$verbality(model.verbality),
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Interface_View_Nucleus$status(model.status),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			A2(_elm_lang$core$List$indexedMap, _merivale$victor$Interface_View_Nucleus$balance, model.balances)));
-};
-var _merivale$victor$Interface_View_Nucleus$heading = F2(
-	function (toggleButton, model) {
-		var right = (_elm_lang$core$Native_Utils.cmp(
-			_elm_lang$core$List$length(model.balances),
-			0) > 0) ? {
-			ctor: '::',
-			_0: _merivale$victor$Interface_View_Buttons$removeBalance,
-			_1: {
-				ctor: '::',
-				_0: _merivale$victor$Interface_View_Buttons$addBalance,
-				_1: {ctor: '[]'}
-			}
-		} : {
-			ctor: '::',
-			_0: _merivale$victor$Interface_View_Buttons$addBalance,
-			_1: {ctor: '[]'}
-		};
-		var left = toggleButton ? {
-			ctor: '::',
-			_0: A2(_merivale$victor$Interface_View_Buttons$toggleElaborations, -1, model.plus),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('title'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Nucleus'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		} : {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('title'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Nucleus'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		};
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('heading'),
-				_1: {ctor: '[]'}
-			},
-			A2(_elm_lang$core$Basics_ops['++'], left, right));
-	});
-var _merivale$victor$Interface_View_Nucleus$nucleus = F2(
-	function (theoryLayer, model) {
-		return _elm_lang$core$Native_Utils.eq(theoryLayer, _merivale$victor$Interface_Model_Types$PlainTheory) ? A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('nucleus'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(_merivale$victor$Interface_View_Nucleus$heading, false, model),
-				_1: {
-					ctor: '::',
-					_0: _merivale$victor$Interface_View_Nucleus$body(model),
-					_1: {ctor: '[]'}
-				}
-			}) : A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('nucleus'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(_merivale$victor$Interface_View_Nucleus$heading, true, model),
-				_1: {
-					ctor: '::',
-					_0: A3(_merivale$victor$Interface_View_Buttons$elaborationButtons, theoryLayer, -1, model.plus),
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Interface_View_Nucleus$body(model),
-						_1: {ctor: '[]'}
-					}
-				}
-			});
-	});
 
 var _merivale$victor$Interface_View_Output$format = function (sentence) {
 	var ucFirst = function () {
@@ -16493,273 +16747,6 @@ var _merivale$victor$Theory_Short_Sentences$sentence = function (message) {
 		_merivale$victor$Theory_Short_Messages$explode(message));
 };
 
-var _merivale$victor$Short$elaborationButton = F2(
-	function (index, recipe) {
-		return _merivale$victor$Interface_View_Input$button(
-			{
-				label: A2(
-					_elm_lang$core$String$dropLeft,
-					4,
-					_elm_lang$core$Basics$toString(recipe)),
-				signal: A2(_merivale$victor$Interface_Model_Types$AddElaboration, index, recipe),
-				title: A2(
-					_elm_lang$core$Basics_ops['++'],
-					'Add ',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						A2(
-							_elm_lang$core$String$dropLeft,
-							4,
-							_elm_lang$core$Basics$toString(recipe)),
-						' Elaboration'))
-			});
-	});
-var _merivale$victor$Short$elaborationButtons = F2(
-	function (index, plus) {
-		var $class = plus ? 'elaborations active' : 'elaborations';
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class($class),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					A2(
-						_elm_lang$core$List$map,
-						_merivale$victor$Short$elaborationButton(index),
-						{
-							ctor: '::',
-							_0: _merivale$victor$Interface_Model_Types$MakeNEGATIVE,
-							_1: {
-								ctor: '::',
-								_0: _merivale$victor$Interface_Model_Types$MakePAST,
-								_1: {
-									ctor: '::',
-									_0: _merivale$victor$Interface_Model_Types$MakePRIOR,
-									_1: {
-										ctor: '::',
-										_0: _merivale$victor$Interface_Model_Types$MakeREGULAR,
-										_1: {
-											ctor: '::',
-											_0: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-											_1: {
-												ctor: '::',
-												_0: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
-												_1: {
-													ctor: '::',
-													_0: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}
-								}
-							}
-						})),
-				_1: {ctor: '[]'}
-			});
-	});
-var _merivale$victor$Short$plusButton = F2(
-	function (index, plus) {
-		var signal = (_elm_lang$core$Native_Utils.cmp(index, 0) < 0) ? _merivale$victor$Interface_Model_Types$TogglePlus : _merivale$victor$Interface_Model_Types$ToggleElaborationPlus(index);
-		return plus ? _merivale$victor$Interface_View_Input$iconButton(
-			{label: 'minus', signal: signal, title: 'Hide Elaborations'}) : _merivale$victor$Interface_View_Input$iconButton(
-			{label: 'plus', signal: signal, title: 'Show Elaborations'});
-	});
-var _merivale$victor$Short$elaborationBody = F4(
-	function (balanceCount, index, elaboration, subContent) {
-		var _p0 = elaboration.recipe;
-		switch (_p0.ctor) {
-			case 'MakePAST':
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('body'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Elaborations$pastTime, index, elaboration),
-						_1: {
-							ctor: '::',
-							_0: subContent,
-							_1: {ctor: '[]'}
-						}
-					});
-			case 'MakePREORDAINED':
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('body'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Elaborations$preordainedTime, index, elaboration),
-						_1: {
-							ctor: '::',
-							_0: subContent,
-							_1: {ctor: '[]'}
-						}
-					});
-			case 'MakeREGULAR':
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('body'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Elaborations$frequency, index, elaboration),
-						_1: {
-							ctor: '::',
-							_0: subContent,
-							_1: {ctor: '[]'}
-						}
-					});
-			case 'MakeEXTENDED':
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('body'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Elaborations$duration, index, elaboration),
-						_1: {
-							ctor: '::',
-							_0: subContent,
-							_1: {ctor: '[]'}
-						}
-					});
-			case 'MakeSCATTERED':
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('body'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Elaborations$tally, index, elaboration),
-						_1: {
-							ctor: '::',
-							_0: subContent,
-							_1: {ctor: '[]'}
-						}
-					});
-			default:
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('body'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: subContent,
-						_1: {ctor: '[]'}
-					});
-		}
-	});
-var _merivale$victor$Short$elaborationHeading = F2(
-	function (index, elaboration) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('heading'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(_merivale$victor$Short$plusButton, index, elaboration.plus),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('title'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(
-								A2(
-									_elm_lang$core$String$dropLeft,
-									4,
-									_elm_lang$core$Basics$toString(elaboration.recipe))),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Interface_View_Input$iconButton(
-							{
-								label: 'close',
-								signal: _merivale$victor$Interface_Model_Types$RemoveElaboration(index),
-								title: 'Remove Elaboration'
-							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			});
-	});
-var _merivale$victor$Short$elaborationInput = F4(
-	function (balanceCount, index, elaboration, subContent) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('elaboration'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(_merivale$victor$Short$elaborationHeading, index, elaboration),
-				_1: {
-					ctor: '::',
-					_0: A2(_merivale$victor$Short$elaborationButtons, index, elaboration.plus),
-					_1: {
-						ctor: '::',
-						_0: A4(_merivale$victor$Short$elaborationBody, balanceCount, index, elaboration, subContent),
-						_1: {ctor: '[]'}
-					}
-				}
-			});
-	});
-var _merivale$victor$Short$input = F2(
-	function (elaborations, model) {
-		var _p1 = _elm_lang$core$List$head(elaborations);
-		if (_p1.ctor === 'Nothing') {
-			return A2(_merivale$victor$Interface_View_Nucleus$nucleus, _merivale$victor$Interface_Model_Types$ShortTheory, model);
-		} else {
-			var subContent = A2(
-				_merivale$victor$Short$input,
-				A2(_elm_lang$core$List$drop, 1, elaborations),
-				model);
-			var index = _elm_lang$core$List$length(elaborations) - 1;
-			return A4(
-				_merivale$victor$Short$elaborationInput,
-				_elm_lang$core$List$length(model.balances),
-				index,
-				_p1._0,
-				subContent);
-		}
-	});
 var _merivale$victor$Short$view = function (model) {
 	var result = A2(
 		_elm_lang$core$Result$andThen,
@@ -16776,10 +16763,7 @@ var _merivale$victor$Short$view = function (model) {
 				_0: _merivale$victor$Interface_View_Examples$examples(_merivale$victor$Interface_Model_Types$ShortTheory),
 				_1: {
 					ctor: '::',
-					_0: A2(
-						_merivale$victor$Short$input,
-						_elm_lang$core$List$reverse(model.elaborations),
-						model),
+					_0: A2(_merivale$victor$Interface_View_Elaborations$elaborations, _merivale$victor$Interface_Model_Types$ShortTheory, model),
 					_1: {ctor: '[]'}
 				}
 			}

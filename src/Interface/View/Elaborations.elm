@@ -1,16 +1,4 @@
-module Interface.View.Elaborations
-    exposing
-        ( pastTime
-        , displacer
-        , preordainedTime
-        , frequency
-        , duration
-        , tally
-        , target
-        , pointer
-        , quantifier
-        , haystack
-        )
+module Interface.View.Elaborations exposing (elaborations)
 
 
 {-| Module for generating HTML inputs for elaboration factors.
@@ -18,14 +6,161 @@ module Interface.View.Elaborations
 import Html
 import Html.Attributes as Attr
 import Interface.Model.Types exposing (..)
+import Interface.View.Nucleus as Nucleus
 import Interface.View.Ideas as Ideas
 import Interface.View.Input as Input
+import Interface.View.Buttons as Buttons
 import Theory.Plain.Nucleus exposing (..)
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
 
 
-{-| The exposed functions, for displaying the inputs.
+{-| Display the message.
+-}
+elaborations : TheoryLayer -> Model -> Html.Html Signal
+elaborations theoryLayer model =
+    input theoryLayer (List.reverse model.elaborations) model
+
+
+input : TheoryLayer -> List Elaboration -> Model -> Html.Html Signal
+input theoryLayer elaborations model =
+    case List.head elaborations of
+        Nothing ->
+            Nucleus.nucleus theoryLayer model
+
+        Just elaboration ->
+            let
+                index =
+                    (List.length elaborations) - 1
+
+                subContent =
+                    input theoryLayer (List.drop 1 elaborations) model
+            in
+                elaborationInput
+                    theoryLayer
+                    (List.length model.balances)
+                    index
+                    elaboration
+                    subContent
+
+
+elaborationInput : TheoryLayer -> Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
+elaborationInput theoryLayer balanceCount index elaboration subContent =
+    Html.div
+        [ Attr.class "elaboration" ]
+        [ elaborationHeading index elaboration
+        , Buttons.elaborationButtons theoryLayer index elaboration.plus
+        , elaborationBody theoryLayer balanceCount index elaboration subContent
+        ]
+
+
+elaborationHeading : Int -> Elaboration -> Html.Html Signal
+elaborationHeading index elaboration =
+    Html.div
+        [ Attr.class "heading" ]
+        [ Buttons.toggleElaborations index elaboration.plus
+        , Html.div
+            [ Attr.class "title" ]
+            [ Html.text (String.dropLeft 4 (toString elaboration.recipe)) ]
+        , Buttons.removeElaboration index
+        ]
+
+
+elaborationBody : TheoryLayer -> Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
+elaborationBody theoryLayer balanceCount index elaboration subContent =
+    case elaboration.recipe of
+        MakePAST ->
+            Html.div
+                [ Attr.class "body" ]
+                [ pastTime index elaboration
+                , subContent
+                ]
+
+        MakeDISPLACED ->
+            Html.div
+                [ Attr.class "body" ]
+                ((displacer True True index elaboration) ++ [ subContent ])
+
+        MakePREORDAINED ->
+            if theoryLayer == ShortTheory then
+                Html.div
+                    [ Attr.class "body" ]
+                    [ preordainedTime index elaboration
+                    , subContent
+                    ]
+            else
+                Html.div
+                    [ Attr.class "body" ]
+                    ((displacer False False index elaboration)
+                        ++ [ preordainedTime index elaboration
+                           , subContent
+                           ]
+                    )
+
+        MakeREGULAR ->
+            if theoryLayer == ShortTheory then
+                Html.div
+                    [ Attr.class "body" ]
+                    [ frequency index elaboration
+                    , subContent
+                    ]
+            else
+                Html.div
+                    [ Attr.class "body" ]
+                    ((displacer False True index elaboration)
+                        ++ [ frequency index elaboration
+                           , subContent
+                           ]
+                    )
+
+        MakeEXTENDED ->
+            Html.div
+                [ Attr.class "body" ]
+                [ duration index elaboration
+                , subContent
+                ]
+
+        MakeSCATTERED ->
+            Html.div
+                [ Attr.class "body" ]
+                [ tally index elaboration
+                , subContent
+                ]
+
+        MakeINDIRECT ->
+            Html.div
+                [ Attr.class "body" ]
+                [ target balanceCount index elaboration
+                , pointer index elaboration
+                , haystack index elaboration
+                , subContent
+                ]
+
+        MakeENUMERATED ->
+            Html.div
+                [ Attr.class "body" ]
+                [ target balanceCount index elaboration
+                , quantifier False index elaboration
+                , haystack index elaboration
+                , subContent
+                ]
+
+        MakeAMASSED ->
+            Html.div
+                [ Attr.class "body" ]
+                [ target balanceCount index elaboration
+                , quantifier True index elaboration
+                , haystack index elaboration
+                , subContent
+                ]
+
+        _ ->
+            Html.div
+                [ Attr.class "body" ]
+                [ subContent ]
+
+
+{-| Functions for displaying the inputs.
 -}
 pastTime : Int -> Elaboration -> Html.Html Signal
 pastTime index elaboration =

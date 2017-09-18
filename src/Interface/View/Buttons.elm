@@ -2,6 +2,7 @@ module Interface.View.Buttons
     exposing
         ( toggleElaborations
         , elaborationButtons
+        , removeElaboration
         , addBalance
         , removeBalance
         )
@@ -114,6 +115,15 @@ addElaboration index recipe =
         { label = String.dropLeft 4 (toString recipe)
         , signal = AddElaboration index recipe
         , title = "Add " ++ (String.dropLeft 4 (toString recipe)) ++ " Elaboration"
+        }
+
+
+removeElaboration : Int -> Html.Html Signal
+removeElaboration index =
+    iconButton
+        { label = "close"
+        , signal = RemoveElaboration index
+        , title = "Remove Elaboration"
         }
 
 
