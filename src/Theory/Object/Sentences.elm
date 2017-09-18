@@ -1,6 +1,5 @@
 module Theory.Object.Sentences exposing (sentence)
 
-
 import Result
 import Theory.Plain.Nucleus as Nucleus
 import Theory.Long.Displacers as Displacers
@@ -179,7 +178,7 @@ determiner canAbbreviate quantifier other category =
             else
                 []
 
-        Just Pseudo.A ->
+        Just (Pseudo.A) ->
             if other then
                 [ (Determiners.determiner Pseudo.A) ++ "nother" ]
             else if List.member (String.left 1 category) [ "a", "e", "i", "o", "u" ] then

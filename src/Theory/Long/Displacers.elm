@@ -1,6 +1,5 @@
 module Theory.Long.Displacers exposing (..)
 
-
 import Theory.Plain.Nucleus as Nucleus
 
 

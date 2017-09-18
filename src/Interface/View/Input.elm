@@ -11,7 +11,6 @@ module Interface.View.Input
         , emptyInput
         )
 
-
 import Html
 import Html.Attributes as Attr
 import Html.Events as Events

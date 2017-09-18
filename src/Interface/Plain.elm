@@ -1,8 +1,8 @@
 module Plain exposing (main)
 
-
 {-| The application for the first layer of the theory (plain messages).
 -}
+
 import Html
 import Result
 import Interface.Model.Types exposing (..)

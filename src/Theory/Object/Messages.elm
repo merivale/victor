@@ -1,6 +1,5 @@
 module Theory.Object.Messages exposing (..)
 
-
 import Array
 import Result
 import Theory.Plain.Nucleus as Nucleus
@@ -140,10 +139,10 @@ negative vars =
                 Nothing ->
                     Ok { vars | pre = "not" :: vars.pre }
 
-                Just Displacers.Yes1 ->
+                Just (Displacers.Yes1) ->
                     Err "the Yes1 modality ('will') cannot be negated"
 
-                Just Displacers.Yes2 ->
+                Just (Displacers.Yes2) ->
                     Err "the Yes2 modality ('shall') cannot be negated"
 
                 _ ->
@@ -431,7 +430,7 @@ amassed target proportion vars =
                             pseudoBalance =
                                 AmassedBalance relator object False proportion
                         in
-                        Ok (overrideBalancingObject target pseudoBalance vars)
+                            Ok (overrideBalancingObject target pseudoBalance vars)
 
                 _ ->
                     Err ("balancing object " ++ (toString (target + 1)) ++ " cannot be overridden twice")

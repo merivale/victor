@@ -1,6 +1,5 @@
 module Theory.Object.Pseudo exposing (..)
 
-
 import Theory.Plain.Nucleus as Nucleus
 
 

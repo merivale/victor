@@ -1,9 +1,9 @@
 module Interface.Model.State exposing (initial, update)
 
-
 {-| This module defines the initial Model for the application, and the function
 for updating the Model in response to user input.
 -}
+
 import Interface.Model.Types exposing (..)
 import Interface.Model.Examples as Examples
 import Theory.Plain.Nucleus exposing (..)
@@ -38,22 +38,23 @@ update : Signal -> Model -> Model
 update signal model =
     case signal of
         LoadExample theoryLayer index ->
-            let examples =
-                case theoryLayer of
-                    PlainTheory ->
-                        Examples.plainExamples
+            let
+                examples =
+                    case theoryLayer of
+                        PlainTheory ->
+                            Examples.plainExamples
 
-                    ShortTheory ->
-                        Examples.shortExamples
+                        ShortTheory ->
+                            Examples.shortExamples
 
-                    LongTheory ->
-                        Examples.longExamples
+                        LongTheory ->
+                            Examples.longExamples
 
-                    ObjectTheory ->
-                        Examples.objectExamples
+                        ObjectTheory ->
+                            Examples.objectExamples
 
-                    FullTheory ->
-                        Examples.allExamples
+                        FullTheory ->
+                            Examples.allExamples
             in
                 case List.head (List.drop index examples) of
                     Nothing ->

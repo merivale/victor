@@ -1,8 +1,8 @@
 module Interface.View.Output exposing (output)
 
-
 {-| Display the output sentence (or error message).
 -}
+
 import Char
 import Html
 import Html.Attributes as Attr

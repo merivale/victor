@@ -1,8 +1,8 @@
 module Object exposing (main)
 
-
 {-| The application for the fourth layer of the theory (object messages).
 -}
+
 import Html
 import Result
 import Interface.Model.Types exposing (..)

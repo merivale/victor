@@ -1,6 +1,5 @@
 module Theory.Long.Sentences exposing (sentence)
 
-
 import Result
 import Theory.Plain.Nucleus as Nucleus
 import Theory.Long.Displacers as Displacers

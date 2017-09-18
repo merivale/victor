@@ -1,8 +1,8 @@
 module Interface.View.Nucleus exposing (nucleus)
 
-
 {-| Module for generating HTML inputs for nucleus factors.
 -}
+
 import Html
 import Html.Attributes as Attr
 import Theory.Plain.Nucleus exposing (..)

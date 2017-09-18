@@ -1,6 +1,5 @@
 module Theory.Plain.Sentences exposing (sentence)
 
-
 import Theory.Plain.Nucleus as Nucleus
 import Theory.Words.Counters as Counters
 import Theory.Words.Fulcrums as Fulcrums

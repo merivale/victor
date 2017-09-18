@@ -1,6 +1,5 @@
 module Theory.Words.Prepositions exposing (preposition)
 
-
 import Theory.Plain.Nucleus as Nucleus
 
 

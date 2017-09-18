@@ -1,8 +1,8 @@
 module Victor exposing (main)
 
-
 {-| The application for the full theory.
 -}
+
 import Html
 import Result
 import Interface.Model.Types exposing (..)

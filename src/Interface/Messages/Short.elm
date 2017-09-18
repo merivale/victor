@@ -1,6 +1,5 @@
 module Interface.Messages.Short exposing (message)
 
-
 import Maybe
 import Result exposing (andThen)
 import Interface.Model.Types exposing (..)

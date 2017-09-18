@@ -5,7 +5,6 @@ module Theory.Words.Verbs
         , participle2
         )
 
-
 import Dict
 import Maybe
 import Theory.Plain.Nucleus as Nucleus

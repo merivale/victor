@@ -1,6 +1,5 @@
 module Interface.Messages.Object exposing (message)
 
-
 import Result
 import Interface.Model.Types exposing (..)
 import Theory.Plain.Nucleus exposing (..)

@@ -1,8 +1,8 @@
 module Interface.View.Examples exposing (examples)
 
-
 {-| This module generates select dropdowns for the example messages.
 -}
+
 import Html
 import Html.Attributes as Attr
 import Interface.Model.Types exposing (..)

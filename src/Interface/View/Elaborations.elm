@@ -1,8 +1,8 @@
 module Interface.View.Elaborations exposing (elaborations)
 
-
 {-| Module for generating HTML inputs for elaboration factors.
 -}
+
 import Html
 import Html.Attributes as Attr
 import Interface.Model.Types exposing (..)

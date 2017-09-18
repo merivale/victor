@@ -1,19 +1,20 @@
-module Interface.Model.Examples exposing
-    ( allExamples
-    , plainFirst
-    , plainExamples
-    , shortFirst
-    , shortExamples
-    , longFirst
-    , longExamples
-    , objectFirst
-    , objectExamples
-    )
-
+module Interface.Model.Examples
+    exposing
+        ( allExamples
+        , plainFirst
+        , plainExamples
+        , shortFirst
+        , shortExamples
+        , longFirst
+        , longExamples
+        , objectFirst
+        , objectExamples
+        )
 
 {-| This module simply outputs lists of Models, used for generating example
 Messages for illustrating the theory.
 -}
+
 import Interface.Model.Types exposing (..)
 import Theory.Plain.Nucleus exposing (..)
 import Theory.Long.Displacers exposing (..)
@@ -97,9 +98,9 @@ plainExamples =
       , verbality = Do "leave" True False
       , status = Nothing
       , balances =
-        [ ( Nothing, Different (Other False Nothing Nothing) )
-        , ( Just To, Different (Other True Nothing Nothing) )
-        ]
+            [ ( Nothing, Different (Other False Nothing Nothing) )
+            , ( Just To, Different (Other True Nothing Nothing) )
+            ]
       , elaborations = []
       }
     ]
@@ -115,7 +116,7 @@ shortFirst =
     , status = Just (Absolute "married")
     , balances = []
     , elaborations =
-      [ { elaboration | recipe = MakePAST, string1 = Just "yesterday" } ]
+        [ { elaboration | recipe = MakePAST, string1 = Just "yesterday" } ]
     }
 
 
@@ -128,9 +129,9 @@ shortExamples =
       , status = Just (Absolute "married")
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakePREORDAINED }
-        , { elaboration | recipe = MakePAST, string1 = Just "yesterday" }
-        ]
+            [ { elaboration | recipe = MakePREORDAINED }
+            , { elaboration | recipe = MakePAST, string1 = Just "yesterday" }
+            ]
       }
     , { plus = False
       , object = Other False (Just Female) (Just "Claire")
@@ -138,9 +139,9 @@ shortExamples =
       , status = Nothing
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeREGULAR }
-        , { elaboration | recipe = MakeNEGATIVE }
-        ]
+            [ { elaboration | recipe = MakeREGULAR }
+            , { elaboration | recipe = MakeNEGATIVE }
+            ]
       }
     , { plus = False
       , object = Other False (Just Female) (Just "Claire")
@@ -148,9 +149,9 @@ shortExamples =
       , status = Nothing
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeNEGATIVE }
-        , { elaboration | recipe = MakeREGULAR }
-        ]
+            [ { elaboration | recipe = MakeNEGATIVE }
+            , { elaboration | recipe = MakeREGULAR }
+            ]
       }
     , { plus = False
       , object = Other False (Just Male) (Just "Victor")
@@ -158,10 +159,10 @@ shortExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False (Just Female) (Just "Grannie")) ) ]
       , elaborations =
-        [ { elaboration | recipe = MakeEXTENDED, string1 = Just "for two hours" }
-        , { elaboration | recipe = MakeNEGATIVE }
-        , { elaboration | recipe = MakePAST }
-        ]
+            [ { elaboration | recipe = MakeEXTENDED, string1 = Just "for two hours" }
+            , { elaboration | recipe = MakeNEGATIVE }
+            , { elaboration | recipe = MakePAST }
+            ]
       }
     , { plus = False
       , object = Other False (Just Male) (Just "Victor")
@@ -169,10 +170,10 @@ shortExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False (Just Female) (Just "Grannie")) ) ]
       , elaborations =
-        [ { elaboration | recipe = MakeNEGATIVE }
-        , { elaboration | recipe = MakeEXTENDED, string1 = Just "for two hours" }
-        , { elaboration | recipe = MakePAST }
-        ]
+            [ { elaboration | recipe = MakeNEGATIVE }
+            , { elaboration | recipe = MakeEXTENDED, string1 = Just "for two hours" }
+            , { elaboration | recipe = MakePAST }
+            ]
       }
     , { plus = False
       , object = Other False (Just Female) (Just "Grannie")
@@ -180,10 +181,10 @@ shortExamples =
       , status = Just (Relative Over)
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeSCATTERED, string1 = Just "fifteen times" }
-        , { elaboration | recipe = MakeNEGATIVE }
-        , { elaboration | recipe = MakePAST, string1 = Just "yesterday" }
-        ]
+            [ { elaboration | recipe = MakeSCATTERED, string1 = Just "fifteen times" }
+            , { elaboration | recipe = MakeNEGATIVE }
+            , { elaboration | recipe = MakePAST, string1 = Just "yesterday" }
+            ]
       }
     , { plus = False
       , object = Other False (Just Female) (Just "Grannie")
@@ -191,10 +192,10 @@ shortExamples =
       , status = Just (Relative Over)
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeNEGATIVE }
-        , { elaboration | recipe = MakeSCATTERED, string1 = Just "fifteen times" }
-        , { elaboration | recipe = MakePAST, string1 = Just "yesterday" }
-        ]
+            [ { elaboration | recipe = MakeNEGATIVE }
+            , { elaboration | recipe = MakeSCATTERED, string1 = Just "fifteen times" }
+            , { elaboration | recipe = MakePAST, string1 = Just "yesterday" }
+            ]
       }
     ]
 
@@ -209,7 +210,7 @@ longFirst =
     , status = Nothing
     , balances = [ ( Nothing, Different (Other False (Just Male) Nothing) ) ]
     , elaborations =
-      [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Primary ( (Do "go" True False), Nothing )) } ]
+        [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Primary ( (Do "go" True False), Nothing )) } ]
     }
 
 
@@ -222,9 +223,9 @@ longExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False (Just Male) Nothing) ) ]
       , elaborations =
-        [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Primary ( (Do "go" True False), Nothing )) }
-        , { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow" }
-        ]
+            [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Primary ( (Do "go" True False), Nothing )) }
+            , { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow" }
+            ]
       }
     , { plus = False
       , object = Other False (Just Female) Nothing
@@ -232,8 +233,8 @@ longExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False (Just Male) Nothing) ) ]
       , elaborations =
-        [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Primary ( (Do "go" True False), Nothing )) }
-        ]
+            [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Primary ( (Do "go" True False), Nothing )) }
+            ]
       }
     , { plus = False
       , object = Other False (Just Male) (Just "Victor")
@@ -241,7 +242,7 @@ longExamples =
       , status = Nothing
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Secondary Yes1) } ]
+            [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Secondary Yes1) } ]
       }
     , { plus = False
       , object = Other False (Just Male) (Just "Victor")
@@ -249,9 +250,9 @@ longExamples =
       , status = Nothing
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Secondary Yes1) }
-        , { elaboration | recipe = MakePAST }
-        ]
+            [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Secondary Yes1) }
+            , { elaboration | recipe = MakePAST }
+            ]
       }
     , { plus = False
       , object = Other False Nothing Nothing
@@ -259,7 +260,7 @@ longExamples =
       , status = Nothing
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Secondary Yes1) } ]
+            [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Secondary Yes1) } ]
       }
     , { plus = False
       , object = Other False Nothing Nothing
@@ -267,7 +268,7 @@ longExamples =
       , status = Nothing
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Secondary Maybe1) } ]
+            [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Secondary Maybe1) } ]
       }
     , { plus = False
       , object = Other False Nothing Nothing
@@ -275,9 +276,9 @@ longExamples =
       , status = Nothing
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Secondary Maybe3) }
-        , { elaboration | recipe = MakePAST }
-        ]
+            [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Secondary Maybe3) }
+            , { elaboration | recipe = MakePAST }
+            ]
       }
     , { plus = False
       , object = Hearer False
@@ -285,10 +286,10 @@ longExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False (Just Male) Nothing) ) ]
       , elaborations =
-        [ { elaboration | recipe = MakePAST }
-        , { elaboration | recipe = MakeDISPLACED, displacer = Just (Secondary Maybe1) }
-        , { elaboration | recipe = MakePAST }
-        ]
+            [ { elaboration | recipe = MakePAST }
+            , { elaboration | recipe = MakeDISPLACED, displacer = Just (Secondary Maybe1) }
+            , { elaboration | recipe = MakePAST }
+            ]
       }
     , { plus = False
       , object = Hearer False
@@ -296,10 +297,10 @@ longExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False (Just Male) Nothing) ) ]
       , elaborations =
-        [ { elaboration | recipe = MakePREORDAINED, displacer = Just (Secondary Maybe1) }
-        , { elaboration | recipe = MakePAST }
-        , { elaboration | recipe = MakePRIOR }
-        ]
+            [ { elaboration | recipe = MakePREORDAINED, displacer = Just (Secondary Maybe1) }
+            , { elaboration | recipe = MakePAST }
+            , { elaboration | recipe = MakePRIOR }
+            ]
       }
     , { plus = False
       , object = Speaker False
@@ -307,7 +308,7 @@ longExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False Nothing Nothing) ) ]
       , elaborations =
-        [ { elaboration | recipe = MakeREGULAR, string1 = Just "sometimes", displacer = Just (Secondary Yes1) } ]
+            [ { elaboration | recipe = MakeREGULAR, string1 = Just "sometimes", displacer = Just (Secondary Yes1) } ]
       }
     , { plus = False
       , object = Speaker False
@@ -315,7 +316,7 @@ longExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False Nothing Nothing) ) ]
       , elaborations =
-        [ { elaboration | recipe = MakeREGULAR, string1 = Just "occasionally", displacer = Just (Secondary Maybe1) } ]
+            [ { elaboration | recipe = MakeREGULAR, string1 = Just "occasionally", displacer = Just (Secondary Maybe1) } ]
       }
     , { plus = False
       , object = Other False (Just Male) Nothing
@@ -323,7 +324,7 @@ longExamples =
       , status = Just (Relative Out)
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeREGULAR, displacer = Just (Primary ( (Do "tend" False False), Nothing )) } ]
+            [ { elaboration | recipe = MakeREGULAR, displacer = Just (Primary ( (Do "tend" False False), Nothing )) } ]
       }
     , { plus = False
       , object = Other False (Just Male) Nothing
@@ -331,9 +332,9 @@ longExamples =
       , status = Just (Relative Out)
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeREGULAR, displacer = Just (Primary ( (Do "use" False False), Nothing )) }
-        , { elaboration | recipe = MakePAST }
-        ]
+            [ { elaboration | recipe = MakeREGULAR, displacer = Just (Primary ( (Do "use" False False), Nothing )) }
+            , { elaboration | recipe = MakePAST }
+            ]
       }
     ]
 
@@ -348,7 +349,7 @@ objectFirst =
     , status = Just (Absolute "bald")
     , balances = []
     , elaborations =
-      [ { elaboration | recipe = MakeINDIRECT, string1 = Just "king", string3 = Just "of France" } ]
+        [ { elaboration | recipe = MakeINDIRECT, string1 = Just "king", string3 = Just "of France" } ]
     }
 
 
@@ -361,8 +362,8 @@ objectExamples =
       , status = Just (Absolute "insane")
       , balances = []
       , elaborations =
-        [ { elaboration | recipe = MakeINDIRECT, pointer = RelatedTo (Other False (Just Male) (Just "Smith")), string1 = Just "murderer" }
-        ]
+            [ { elaboration | recipe = MakeINDIRECT, pointer = RelatedTo (Other False (Just Male) (Just "Smith")), string1 = Just "murderer" }
+            ]
       }
     ]
 

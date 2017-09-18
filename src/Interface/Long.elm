@@ -1,8 +1,8 @@
 module Long exposing (main)
 
-
 {-| The application for the third layer of the theory (long messages).
 -}
+
 import Html
 import Result
 import Interface.Model.Types exposing (..)

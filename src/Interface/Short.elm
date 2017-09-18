@@ -1,8 +1,8 @@
 module Short exposing (main)
 
-
 {-| The application for the second layer of the theory (short messages).
 -}
+
 import Html
 import Result
 import Interface.Model.Types exposing (..)

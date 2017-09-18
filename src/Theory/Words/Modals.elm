@@ -1,6 +1,5 @@
 module Theory.Words.Modals exposing (modal)
 
-
 import Theory.Long.Displacers as Displacers
 
 

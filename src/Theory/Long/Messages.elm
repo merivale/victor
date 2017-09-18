@@ -1,6 +1,5 @@
 module Theory.Long.Messages exposing (..)
 
-
 import Result
 import Theory.Plain.Nucleus as Nucleus
 import Theory.Long.Displacers as Displacers
@@ -101,10 +100,10 @@ negative vars =
         Nothing ->
             Ok { vars | pre = "not" :: vars.pre }
 
-        Just Displacers.Yes1 ->
+        Just (Displacers.Yes1) ->
             Err "the Yes1 modality ('will') cannot be negated"
 
-        Just Displacers.Yes2 ->
+        Just (Displacers.Yes2) ->
             Err "the Yes2 modality ('shall') cannot be negated"
 
         _ ->

@@ -1,6 +1,5 @@
 module Interface.View.Ideas exposing (..)
 
-
 import Maybe
 import Theory.Plain.Nucleus exposing (..)
 import Theory.Long.Displacers exposing (..)

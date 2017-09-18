@@ -1,6 +1,5 @@
 module Theory.Short.Sentences exposing (sentence)
 
-
 import Result
 import Theory.Plain.Nucleus as Nucleus
 import Theory.Short.Messages as Messages

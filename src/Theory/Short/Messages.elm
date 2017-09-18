@@ -1,6 +1,5 @@
 module Theory.Short.Messages exposing (..)
 
-
 import Result
 import Theory.Plain.Nucleus as Nucleus
 import Theory.Words.Utils as Utils

@@ -1,9 +1,7 @@
 module Interface.Messages.Plain exposing (message)
 
-
 import Maybe
 import Result exposing (andThen)
-
 import Interface.Model.Types exposing (..)
 import Theory.Plain.Nucleus exposing (..)
 
