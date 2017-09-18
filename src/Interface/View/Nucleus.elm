@@ -21,38 +21,41 @@ import Interface.View.Input as Input
 
 {-| The nucleus input box.
 -}
-nucleus : Bool -> Model -> Html.Html Signal
-nucleus elaborate model =
-    if elaborate then
+nucleus : TheoryLayer -> Model -> Html.Html Signal
+nucleus theoryLayer model =
+    if theoryLayer == PlainTheory then
         Html.div
             [ Attr.class "nucleus" ]
-            [ heading model
+            [ heading False model
             , body model
             ]
     else
         Html.div
             [ Attr.class "nucleus" ]
-            [ heading model
-            , elaborationButtons -1 model.plus
+            [ heading True model
+            , Buttons.elaborationButtons theoryLayer -1 model.plus
             , body model
             ]
 
 
-heading : Model -> Html.Html Signal
-heading model =
-    if List.length model.balances > 0 then
-        Html.div
-            [ Attr.class "heading" ]
-            [ Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ]
-            , Buttons.removeBalance
-            , Buttons.addBalance
-            ]
-    else
-        Html.div
-            [ Attr.class "heading" ]
-            [ Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ]
-            , Buttons.addBalance
-            ]
+heading : Bool -> Model -> Html.Html Signal
+heading toggleButton model =
+    let
+        left =
+            if toggleButton then
+                [ Buttons.toggleElaborations -1 model.plus
+                , Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ]
+                ]
+            else
+                [ Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ] ]
+
+        right =
+            if List.length model.balances > 0 then
+                [ Buttons.removeBalance, Buttons.addBalance ]
+            else
+                [ Buttons.addBalance ]
+    in
+        Html.div [ Attr.class "heading" ] (left ++ right)
 
 
 body : Model -> Html.Html Signal

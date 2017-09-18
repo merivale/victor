@@ -38,5 +38,5 @@ view model =
         Html.div []
             [ Output.output result
             , Examples.examples PlainTheory
-            , Nucleus.nucleus model
+            , Nucleus.nucleus PlainTheory model
             ]

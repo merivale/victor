@@ -50,7 +50,7 @@ input : List Elaboration -> Model -> Html.Html Signal
 input elaborations model =
     case List.head elaborations of
         Nothing ->
-            nucleusInput model
+            Nucleus.nucleus FullTheory model
 
         Just elaboration ->
             let
@@ -61,55 +61,6 @@ input elaborations model =
                     input (List.drop 1 elaborations) model
             in
                 elaborationInput (List.length model.balances) index elaboration subContent
-
-
-nucleusInput : Model -> Html.Html Signal
-nucleusInput model =
-    Html.div
-        [ Attr.class "nucleus" ]
-        [ nucleusHeading model
-        , elaborationButtons -1 model.plus
-        , nucleusBody model
-        ]
-
-
-nucleusHeading : Model -> Html.Html Signal
-nucleusHeading model =
-    let
-        title =
-            Html.div [ Attr.class "title" ] [ Html.text "Nucleus" ]
-
-        removeButton =
-            Input.iconButton
-                { label = "close"
-                , signal = RemoveBalance
-                , title = "Remove Balance"
-                }
-
-        addButton =
-            Input.iconButton
-                { label = "plus"
-                , signal = AddBalance
-                , title = "Add Balance"
-                }
-    in
-        if List.length model.balances > 0 then
-            Html.div
-                [ Attr.class "heading" ]
-                [ plusButton -1 model.plus, title, removeButton, addButton ]
-        else
-            Html.div
-                [ Attr.class "heading" ]
-                [ plusButton -1 model.plus, title, addButton ]
-
-
-nucleusBody : Model -> Html.Html Signal
-nucleusBody model =
-    Html.div
-        [ Attr.class "body" ]
-        ([ Nucleus.object model.object, Nucleus.verbality model.verbality, Nucleus.status model.status ]
-            ++ (List.indexedMap Nucleus.balance model.balances)
-        )
 
 
 elaborationInput : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
