@@ -2,27 +2,11 @@
 
 ## 1. Introduction
 
-The idea of a message elaboration is itself nothing new; philosophers and logicians will recognise it as a propositional operator by another name. I avoid this more familiar terminology partly in deference to Dudman (the &ldquo;nucleus&rdquo;/&ldquo;elaboration&rdquo; terminology is his), and partly to avoid unwanted connotations from the last hundred years or so of semantic and logical enquiry. While there is a degree of overlap, the elaborations that I posit are in general rather different from the kinds of operators philosophers are familiar with. And this, in turn, is because my approach is so different. Always my aim is to explain the sentences that English speakers produce, rather than to capture the logical entailments of English messages in any formal system.
-
-Since elaborations are so central to my theory, I adopt the convention of writing them in ALLCAPS, so as to render them easily distinguishable from the other aspects of my system. There are 7 elaborations in this layer of my model (more elaborations are added in other layers). This list is no doubt incomplete, but it represents&emdash;or so I hope&emdash;a substantial start. Though it will not make much sense up front, here is the full type definition for messages:
-
-```elm
-type Message
-    = Plain Nucleus
-    | NEGATIVE Message
-    | PAST (Maybe String) Message
-    | PRIOR Message
-    | PREORDAINED (Maybe String) Message
-    | REGULAR (Maybe String) Message
-    | EXTENDED String Message
-    | SCATTERED String Message
-```
-
-The definition is recursive, reflecting the fact that the elaborations can all be applied on top of each other, presumptively without limit or restriction. In fact there are some combinations that English rules inadmissible, but not many (details as we come to them). Rather than write a more convoluted type definition that makes these combinations impossible, I have instead written some validation checks into the encoding function itself (see the `Messages` module). The function returns an error in cases of such invalid input.
+This README assumes you are already familiar with the outline of my theory (see [the README in the `src/Theory` directory](https://github.com/merivale/victor/tree/master/src/Theory)), and with my theory of plain messages (see [the README in the `src/Theory/Plain` directory](https://github.com/merivale/victor/tree/master/src/Theory/Plain)). This document introduces my theory of elaborations, by describing the seven *short* elaborations in my model. Short elaborations, in contrast to *long* elaborations (see [the README in the `src/Theory/Long directory`](https://github.com/merivale/victor/tree/master/src/Theory/Long)), are those that do not introduce any additional verbs or modals into the start of the predicate.
 
 ## 2. PAST and PRIOR Messages
 
-A plain English message, recall, affirms the present satisfaction of the condition by the object. I explain talk of past or future satisfactions with my theory of elaborations. The nature of these elaborations, and the way in which they interact, is one of the most intriguing features of the English code. The semantic results can be extremely complex and sophisticated, but it is all acheived&emdash;at least if my theory is correct&emdash;through the coordination of devices that are themselves beautifully simple.
+A plain English message, recall, affirms the present satisfaction of the condition by the object. I explain talk of past or future satisfactions with my theory of elaborations. The nature of these elaborations, and the way in which they interact, is one of the most intriguing features of the English code. The semantic results can be extremely complex and sophisticated, but it is all acheived—at least if my theory is correct—through the coordination of devices that are themselves beautifully simple.
 
 Things need to be introduced in manageable chunks. I will begin, in this section, with a look at the `PAST` and `PRIOR` elaborations, which make talk about the past possible. Here are the relevant parts of the type definitions:
 
@@ -44,7 +28,7 @@ PAST "last year" ( Others, ( Do "go", [ To, Other "America" ] ) )
     -> "They went to America last year."
 ```
 
-(To be clear, I adopt another abbreviating convention here and hereafter: I do not bother to write `Plain` in front of the nucleus.) The optional string argument is intended to encode the *time* of the condition&rsquo;s satisfaction with more precision. At present, however, this argument is an unearthed variable, that users are obliged to encode for themselves.
+(To be clear, I adopt another abbreviating convention here and hereafter: I do not bother to write `Plain` in front of the nucleus.) The optional string argument is intended to encode the *time* of the condition’s satisfaction with more precision. At present, however, this argument is an unearthed variable, that users are obliged to encode for themselves.
 
 Going by its grammatical effect, the `PRIOR` elaboration is easily distinguished from the `PAST` elaboration. Where the latter swaps the first form of the fulcrum for its second form, the former swaps it for the corresponding form of the verb **`"have"`**, followed by the second participle form of the original verb:
 
@@ -56,11 +40,11 @@ PRIOR ( Others, ( Do "go", [ To, Other "America" ] ) )
     -> "They have gone to America."
 ```
 
-Grammarians standardly call this the &ldquo;perfect&rdquo;. While its effect on the sentence is easy to see, it is harder to say what the underlying informational trigger is, and in particular how exactly this trigger differs from the `PAST` elaboration, to which it bears a very obvious resemblance. (It is surely no coincidence that the second finite form and the second participle form are identical for all regular verbs.)
+Grammarians standardly call this the “perfect”. While its effect on the sentence is easy to see, it is harder to say what the underlying informational trigger is, and in particular how exactly this trigger differs from the `PAST` elaboration, to which it bears a very obvious resemblance. (It is surely no coincidence that the second finite form and the second participle form are identical for all regular verbs.)
 
 One difference, immediately visible in my type definition for messages, is that the `PRIOR` elaboration does not take an additional time argument. In support of this, note that `"They have gone to America last year"` is not a sentence of English. Admittedly one can say, for example, `"I have eaten this morning"`. However, one can only say this while it is still morning, when `"this morning"` consequently signals the present rather than the past; as it does in, for instance, `"I am hungry this morning"`. One can also say things like, `"They have already been to America"`, but `"already"` here cannot be the result of an additional argument to the `PRIOR` elaboration, since it also arises without that elaboration (`"They already left for America"`). In both cases, therefore, the additional words - `"this morning"` and `"already"` - cannot be owing to any additional argument to the `PRIOR` elaboration itself. My model does not yet account for these words, but my assumption is that they will each be accounted for by an additional elaboration.
 
-(To get a little ahead of myself, and somewhat speculatively, perhaps we need a `PRESENT` elaboration whose sole purpose is to allow for the introduction of a more detailed or explicit specification of the present time of the condition's satisfaction. It would need to be incompatible with the `PAST` elaboration, of course, but not with the `PRIOR` elaboration. And then perhaps we need a&emdash;let&rsquo;s say&emdash;`PREVIOUS` elaboration, responsible for the introduction of the adverb `"already"`. This would of course be incompatible with `PRESENT` or plain messages, but a common companion of the `PAST` and `PRIOR` elaborations alike.)
+(To get a little ahead of myself, and somewhat speculatively, perhaps we need a `PRESENT` elaboration whose sole purpose is to allow for the introduction of a more detailed or explicit specification of the present time of the condition's satisfaction. It would need to be incompatible with the `PAST` elaboration, of course, but not with the `PRIOR` elaboration. And then perhaps we need a—let’s say—`PREVIOUS` elaboration, responsible for the introduction of the adverb `"already"`. This would of course be incompatible with `PRESENT` or plain messages, but a common companion of the `PAST` and `PRIOR` elaborations alike.)
 
 A second difference between the `PAST` and `PRIOR` elaborations is that, where the former merely indicates that the satisfaction of the input condition is past, the latter indicates that it is past *with respect to something else*. Hence my choice of terminology: what is past is simply past, but what is prior is prior *to* something. More specifically, when applied to a plain message, the `PRIOR` elaboration doesn't *directly* produce a message concerning the past satisfaction of its underlying condition; rather, it produces a *new* condition, one whose satisfaction (at any given point in time) entails the satisfaction of the underlying condition *prior* to that point. This, I take it, explains why it cannot take an additional time argument in the same way that the `PAST` elaboration does.
 
