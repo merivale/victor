@@ -10891,8 +10891,8 @@ var _merivale$victor$Interface_View_Input$fromId = function (options) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Interface.View.Input',
 				{
-					start: {line: 130, column: 13},
-					end: {line: 135, column: 22}
+					start: {line: 129, column: 13},
+					end: {line: 134, column: 22}
 				},
 				_p0)('select element is broken :(');
 		} else {
@@ -12639,7 +12639,7 @@ var _merivale$victor$Theory_Words_Pronouns$relative2 = function (object) {
 					return 'theirs';
 				}
 			} else {
-				return A2(_elm_lang$core$Basics_ops['++'], _p0._2._0, '\'s');
+				return A2(_elm_lang$core$Basics_ops['++'], _p0._2._0, '’s');
 			}
 	}
 };
@@ -12670,7 +12670,7 @@ var _merivale$victor$Theory_Words_Pronouns$relative1 = function (object) {
 					return 'their';
 				}
 			} else {
-				return A2(_elm_lang$core$Basics_ops['++'], _p1._2._0, '\'s');
+				return A2(_elm_lang$core$Basics_ops['++'], _p1._2._0, '’s');
 			}
 	}
 };
@@ -12858,36 +12858,6 @@ var _merivale$victor$Theory_Words_Utils$maybeCons = F2(
 			return {ctor: '::', _0: _p1._0, _1: list};
 		}
 	});
-var _merivale$victor$Theory_Words_Utils$integerToString = function ($int) {
-	return (_elm_lang$core$Native_Utils.cmp($int, 0) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'minus ',
-		_merivale$victor$Theory_Words_Utils$integerToString(0 - $int)) : (_elm_lang$core$Native_Utils.eq($int, 0) ? 'zero' : (_elm_lang$core$Native_Utils.eq($int, 1) ? 'one' : (_elm_lang$core$Native_Utils.eq($int, 2) ? 'two' : (_elm_lang$core$Native_Utils.eq($int, 3) ? 'three' : (_elm_lang$core$Native_Utils.eq($int, 4) ? 'four' : (_elm_lang$core$Native_Utils.eq($int, 5) ? 'five' : (_elm_lang$core$Native_Utils.eq($int, 6) ? 'six' : (_elm_lang$core$Native_Utils.eq($int, 7) ? 'seven' : (_elm_lang$core$Native_Utils.eq($int, 8) ? 'eight' : (_elm_lang$core$Native_Utils.eq($int, 9) ? 'nine' : (_elm_lang$core$Native_Utils.eq($int, 10) ? 'ten' : (_elm_lang$core$Native_Utils.eq($int, 11) ? 'eleven' : (_elm_lang$core$Native_Utils.eq($int, 12) ? 'twelve' : (_elm_lang$core$Native_Utils.eq($int, 13) ? 'thirteen' : (_elm_lang$core$Native_Utils.eq($int, 14) ? 'fourteen' : (_elm_lang$core$Native_Utils.eq($int, 15) ? 'fifteen' : (_elm_lang$core$Native_Utils.eq($int, 16) ? 'sixteen' : (_elm_lang$core$Native_Utils.eq($int, 17) ? 'seventeen' : (_elm_lang$core$Native_Utils.eq($int, 18) ? 'eighteen' : (_elm_lang$core$Native_Utils.eq($int, 19) ? 'nineteen' : (_elm_lang$core$Native_Utils.eq($int, 20) ? 'twenty' : ((_elm_lang$core$Native_Utils.cmp($int, 30) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'twenty-',
-		_merivale$victor$Theory_Words_Utils$integerToString($int - 20)) : (_elm_lang$core$Native_Utils.eq($int, 30) ? 'thirty' : ((_elm_lang$core$Native_Utils.cmp($int, 40) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'thirty-',
-		_merivale$victor$Theory_Words_Utils$integerToString($int - 30)) : (_elm_lang$core$Native_Utils.eq($int, 40) ? 'fourty' : ((_elm_lang$core$Native_Utils.cmp($int, 50) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'fourty-',
-		_merivale$victor$Theory_Words_Utils$integerToString($int - 40)) : (_elm_lang$core$Native_Utils.eq($int, 50) ? 'fifty' : ((_elm_lang$core$Native_Utils.cmp($int, 60) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'fifty-',
-		_merivale$victor$Theory_Words_Utils$integerToString($int - 50)) : (_elm_lang$core$Native_Utils.eq($int, 60) ? 'sixty' : ((_elm_lang$core$Native_Utils.cmp($int, 70) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'sixty-',
-		_merivale$victor$Theory_Words_Utils$integerToString($int - 60)) : (_elm_lang$core$Native_Utils.eq($int, 70) ? 'seventy' : ((_elm_lang$core$Native_Utils.cmp($int, 80) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'seventy-',
-		_merivale$victor$Theory_Words_Utils$integerToString($int - 70)) : (_elm_lang$core$Native_Utils.eq($int, 80) ? 'eighty' : ((_elm_lang$core$Native_Utils.cmp($int, 90) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'eighty-',
-		_merivale$victor$Theory_Words_Utils$integerToString($int - 80)) : (_elm_lang$core$Native_Utils.eq($int, 90) ? 'ninety' : ((_elm_lang$core$Native_Utils.cmp($int, 100) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'ninety-',
-		_merivale$victor$Theory_Words_Utils$integerToString($int - 90)) : 'a hundred or more'))))))))))))))))))))))))))))))))))));
-};
 var _merivale$victor$Theory_Words_Utils$consontanty = function (base) {
 	var penultimate = A3(_elm_lang$core$String$slice, -2, -1, base);
 	var ultimate = A2(_elm_lang$core$String$right, 1, base);
