@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-This README assumes you are already familiar with the outline of my theory (see [the README in the `src/Theory` directory](https://github.com/merivale/victor/tree/master/src/Theory)), and with my theory of plain messages (see [the README in the `src/Theory/Plain` directory](https://github.com/merivale/victor/tree/master/src/Theory/Plain)). This document introduces my theory of elaborations, by describing the seven *short* elaborations in my model. Short elaborations, in contrast to *long* elaborations (see [the README in the `src/Theory/Long directory`](https://github.com/merivale/victor/tree/master/src/Theory/Long)), are those that do not introduce any additional verbs or modals into the start of the predicate.
+This README assumes you are already familiar with the outline of my theory (see [the README in the `src/Theory` directory](https://github.com/merivale/victor/tree/master/src/Theory)), and with my theory of plain messages (see [the README in the `src/Theory/Plain` directory](https://github.com/merivale/victor/tree/master/src/Theory/Plain)). This document introduces my theory of elaborations, by describing the seven *short* elaborations in my model. Short elaborations, in contrast to *long* elaborations (see [the README in the `src/Theory/Long directory`](https://github.com/merivale/victor/tree/master/src/Theory/Long)), are those that do not introduce any additional verb phrases or modals into the start of the predicate.
 
 ## 2. PAST and PRIOR Messages
 
