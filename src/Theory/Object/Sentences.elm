@@ -124,11 +124,8 @@ nounPhrase mainObject balance =
 
 
 articlePhrase : Bool -> Pseudo.Description -> List String
-articlePhrase plural description =
+articlePhrase plural ( pointer, other, haystack ) =
     let
-        ( pointer, other, haystack ) =
-            description
-
         article =
             Articles.article plural pointer
     in

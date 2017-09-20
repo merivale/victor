@@ -17862,13 +17862,11 @@ var _merivale$victor$Theory_Object_Sentences$enumeratedDeterminerPhrase = F3(
 			_p12._2);
 	});
 var _merivale$victor$Theory_Object_Sentences$articlePhrase = F2(
-	function (plural, description) {
-		var _p13 = description;
-		var pointer = _p13._0;
-		var other = _p13._1;
-		var haystack = _p13._2;
-		var article = A2(_merivale$victor$Theory_Words_Articles$article, plural, pointer);
-		return other ? A2(
+	function (plural, _p13) {
+		var _p14 = _p13;
+		var _p15 = _p14._2;
+		var article = A2(_merivale$victor$Theory_Words_Articles$article, plural, _p14._0);
+		return _p14._1 ? A2(
 			_elm_lang$core$Basics_ops['++'],
 			{
 				ctor: '::',
@@ -17879,66 +17877,66 @@ var _merivale$victor$Theory_Object_Sentences$articlePhrase = F2(
 					_1: {ctor: '[]'}
 				}
 			},
-			A3(_merivale$victor$Theory_Object_Sentences$haystackToString, false, plural, haystack)) : {
+			A3(_merivale$victor$Theory_Object_Sentences$haystackToString, false, plural, _p15)) : {
 			ctor: '::',
 			_0: article,
-			_1: A3(_merivale$victor$Theory_Object_Sentences$haystackToString, false, plural, haystack)
+			_1: A3(_merivale$victor$Theory_Object_Sentences$haystackToString, false, plural, _p15)
 		};
 	});
 var _merivale$victor$Theory_Object_Sentences$nounPhrase = F2(
 	function (mainObject, balance) {
-		var _p14 = balance;
-		switch (_p14.ctor) {
+		var _p16 = balance;
+		switch (_p16.ctor) {
 			case 'DirectBalance':
 				return A2(
 					_merivale$victor$Theory_Words_Counters$counter,
 					mainObject,
-					{ctor: '_Tuple2', _0: _p14._0._0, _1: _p14._0._1});
+					{ctor: '_Tuple2', _0: _p16._0._0, _1: _p16._0._1});
 			case 'IndirectBalance':
 				return A2(
 					_elm_lang$core$String$join,
 					' ',
 					A2(
 						_elm_lang$core$Basics_ops['++'],
-						_merivale$victor$Theory_Words_Counters$prefix(_p14._0),
+						_merivale$victor$Theory_Words_Counters$prefix(_p16._0),
 						A2(
 							_merivale$victor$Theory_Object_Sentences$articlePhrase,
-							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p14._1),
-							_p14._2)));
+							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p16._1),
+							_p16._2)));
 			case 'EnumeratedBalance':
 				return A2(
 					_elm_lang$core$String$join,
 					' ',
 					A2(
 						_elm_lang$core$Basics_ops['++'],
-						_merivale$victor$Theory_Words_Counters$prefix(_p14._0),
+						_merivale$victor$Theory_Words_Counters$prefix(_p16._0),
 						A3(
 							_merivale$victor$Theory_Object_Sentences$enumeratedDeterminerPhrase,
-							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p14._1),
-							_p14._2,
-							_p14._3)));
+							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p16._1),
+							_p16._2,
+							_p16._3)));
 			default:
 				return A2(
 					_elm_lang$core$String$join,
 					' ',
 					A2(
 						_elm_lang$core$Basics_ops['++'],
-						_merivale$victor$Theory_Words_Counters$prefix(_p14._0),
+						_merivale$victor$Theory_Words_Counters$prefix(_p16._0),
 						A3(
 							_merivale$victor$Theory_Object_Sentences$amassedDeterminerPhrase,
-							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p14._1),
-							_p14._2,
-							_p14._3)));
+							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p16._1),
+							_p16._2,
+							_p16._3)));
 		}
 	});
 var _merivale$victor$Theory_Object_Sentences$baseVerbPhrase = F2(
-	function (addTo, _p15) {
-		var _p16 = _p15;
-		var _p18 = _p16.pre;
-		var newPre = addTo ? {ctor: '::', _0: 'to', _1: _p18} : _p18;
-		var _p17 = A2(_merivale$victor$Theory_Words_Fulcrums$fulcrum, _p16.prior, _p16.pivot);
-		var base = _p17._0;
-		var rest = _p17._1;
+	function (addTo, _p17) {
+		var _p18 = _p17;
+		var _p20 = _p18.pre;
+		var newPre = addTo ? {ctor: '::', _0: 'to', _1: _p20} : _p20;
+		var _p19 = A2(_merivale$victor$Theory_Words_Fulcrums$fulcrum, _p18.prior, _p18.pivot);
+		var base = _p19._0;
+		var rest = _p19._1;
 		return A2(
 			_elm_lang$core$String$join,
 			' ',
@@ -17948,9 +17946,9 @@ var _merivale$victor$Theory_Object_Sentences$baseVerbPhrase = F2(
 				{ctor: '::', _0: base, _1: rest}));
 	});
 var _merivale$victor$Theory_Object_Sentences$verbPhrase = function (vars) {
-	var _p19 = A2(_merivale$victor$Theory_Words_Fulcrums$fulcrum, vars.prior, vars.pivot);
-	var base = _p19._0;
-	var rest = _p19._1;
+	var _p21 = A2(_merivale$victor$Theory_Words_Fulcrums$fulcrum, vars.prior, vars.pivot);
+	var base = _p21._0;
+	var rest = _p21._1;
 	if (vars.prior || _elm_lang$core$Native_Utils.eq(base, 'be')) {
 		return {
 			ctor: '::',
@@ -17959,12 +17957,12 @@ var _merivale$victor$Theory_Object_Sentences$verbPhrase = function (vars) {
 		};
 	} else {
 		if (A2(_elm_lang$core$List$member, 'not', vars.pre)) {
-			var _p20 = A2(
+			var _p22 = A2(
 				_merivale$victor$Theory_Words_Utils$splitAtNot,
 				vars.pre,
 				{ctor: '::', _0: base, _1: rest});
-			var newPre = _p20._0;
-			var newRest = _p20._1;
+			var newPre = _p22._0;
+			var newRest = _p22._1;
 			return A2(
 				_elm_lang$core$Basics_ops['++'],
 				newPre,
@@ -17986,8 +17984,8 @@ var _merivale$victor$Theory_Object_Sentences$verbPhrase = function (vars) {
 	}
 };
 var _merivale$victor$Theory_Object_Sentences$predicate = function (vars) {
-	var _p21 = vars.modality;
-	if (_p21.ctor === 'Nothing') {
+	var _p23 = vars.modality;
+	if (_p23.ctor === 'Nothing') {
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
 			_merivale$victor$Theory_Object_Sentences$verbPhrase(vars),
@@ -18005,14 +18003,14 @@ var _merivale$victor$Theory_Object_Sentences$predicate = function (vars) {
 						vars.balances),
 					_elm_lang$core$List$reverse(vars.post))));
 	} else {
-		var _p22 = _p21._0;
+		var _p24 = _p23._0;
 		var displaced = {prior: vars.prior, pre: vars.pre, pivot: vars.pivot};
-		var addTo = _elm_lang$core$Native_Utils.eq(_p22, _merivale$victor$Theory_Long_Displacers$Yes3) && ((!vars.negatedModality) && vars.past);
+		var addTo = _elm_lang$core$Native_Utils.eq(_p24, _merivale$victor$Theory_Long_Displacers$Yes3) && ((!vars.negatedModality) && vars.past);
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
 			{
 				ctor: '::',
-				_0: A3(_merivale$victor$Theory_Words_Modals$modal, vars.past, vars.negatedModality, _p22),
+				_0: A3(_merivale$victor$Theory_Words_Modals$modal, vars.past, vars.negatedModality, _p24),
 				_1: {ctor: '[]'}
 			},
 			A2(
@@ -18031,8 +18029,8 @@ var _merivale$victor$Theory_Object_Sentences$predicate = function (vars) {
 	}
 };
 var _merivale$victor$Theory_Object_Sentences$subject = function (vars) {
-	var _p23 = vars.pseudoObject;
-	switch (_p23.ctor) {
+	var _p25 = vars.pseudoObject;
+	switch (_p25.ctor) {
 		case 'DirectObject':
 			return {
 				ctor: '::',
@@ -18043,19 +18041,19 @@ var _merivale$victor$Theory_Object_Sentences$subject = function (vars) {
 			return A2(
 				_merivale$victor$Theory_Object_Sentences$articlePhrase,
 				_merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object),
-				_p23._0);
+				_p25._0);
 		case 'EnumeratedObject':
 			return A3(
 				_merivale$victor$Theory_Object_Sentences$enumeratedDeterminerPhrase,
 				_merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object),
-				_p23._0,
-				_p23._1);
+				_p25._0,
+				_p25._1);
 		default:
 			return A3(
 				_merivale$victor$Theory_Object_Sentences$amassedDeterminerPhrase,
 				_merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object),
-				_p23._0,
-				_p23._1);
+				_p25._0,
+				_p25._1);
 	}
 };
 var _merivale$victor$Theory_Object_Sentences$implode = function (vars) {
