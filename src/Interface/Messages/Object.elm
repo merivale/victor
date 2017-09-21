@@ -20,61 +20,55 @@ message model =
 -}
 elaborate : List Elaboration -> Message -> Result String Message
 elaborate elaborations message =
-    case List.head elaborations of
-        Nothing ->
-            Ok message
+    List.foldl foo (Ok message) elaborations
 
-        Just elaboration ->
+
+foo : Elaboration -> Result String Message -> Result String Message
+foo elaboration messageResult =
+    case messageResult of
+        Err err ->
+            Err err
+
+        Ok message ->
             case elaboration.recipe of
                 MakeNEGATIVE ->
                     negative message
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakePAST ->
                     past elaboration.string1 message
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakePRIOR ->
                     prior message
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakeDISPLACED ->
                     displaced elaboration.displacer message
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakePREORDAINED ->
                     preordained elaboration.displacer elaboration.string1 message
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakeREGULAR ->
                     regular elaboration.displacer elaboration.string1 message
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakeEXTENDED ->
                     extended elaboration.string1 message
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakeSCATTERED ->
                     scattered elaboration.string1 message
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakeINDIRECT ->
                     haystack elaboration
                         |> Result.andThen (description elaboration)
                         |> Result.andThen (indirect elaboration message)
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakeENUMERATED ->
                     haystack elaboration
                         |> Result.andThen (multiplicity elaboration)
                         |> Result.andThen (enumerated elaboration message)
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
                 MakeAMASSED ->
                     haystack elaboration
                         |> Result.andThen (proportion elaboration)
                         |> Result.andThen (amassed elaboration message)
-                        |> Result.andThen (elaborate (List.drop 1 elaborations))
 
 
 {-| One function for each type of elaboration.
