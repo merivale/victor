@@ -13,7 +13,7 @@ import Theory.Plain.Nucleus exposing (..)
 -}
 message : Model -> Result String Message
 message model =
-    plain model.object model.verbality model.status model.balances
+    plain model
         |> andThen (elaborate model.elaborations)
 
 

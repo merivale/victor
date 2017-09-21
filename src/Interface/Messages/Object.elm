@@ -12,7 +12,7 @@ import Theory.Object.Pseudo exposing (..)
 -}
 message : Model -> Result String Message
 message model =
-    plain model.object model.verbality model.status model.balances
+    plain model
         |> Result.andThen (elaborate model.elaborations)
 
 

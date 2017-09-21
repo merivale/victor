@@ -8,8 +8,15 @@ import Theory.Object.Messages exposing (Message(..))
 import Theory.Plain.Nucleus exposing (..)
 
 
-plain : Object -> Verbality -> Maybe Status -> List Balance -> Result String Message
-plain object verbality status balances =
+plain :
+    { a
+        | balances : List Balance
+        , object : Object
+        , status : Maybe Status
+        , verbality : Verbality
+    }
+    -> Result String Message
+plain { object, verbality, status, balances } =
     if verbalityEmpty verbality then
         Err "please enter a verb for the verbality"
     else if propertyEmpty status then
