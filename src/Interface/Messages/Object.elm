@@ -1,11 +1,11 @@
 module Interface.Messages.Object exposing (message)
 
-import Result
 import Interface.Model.Types exposing (..)
-import Theory.Plain.Nucleus exposing (..)
+import Result
 import Theory.Long.Displacers exposing (..)
-import Theory.Object.Pseudo exposing (..)
 import Theory.Object.Messages exposing (..)
+import Theory.Object.Pseudo exposing (..)
+import Theory.Plain.Nucleus exposing (..)
 
 
 {-| The main exposed function.

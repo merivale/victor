@@ -1,8 +1,8 @@
 module Interface.Messages.Short exposing (message)
 
+import Interface.Model.Types exposing (..)
 import Maybe
 import Result exposing (andThen)
-import Interface.Model.Types exposing (..)
 import Theory.Plain.Nucleus exposing (..)
 import Theory.Short.Messages exposing (..)
 

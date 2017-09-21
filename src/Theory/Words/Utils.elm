@@ -10,7 +10,7 @@ consontanty base =
         penultimate =
             String.slice -2 -1 base
     in
-        ultimate == "y" && not (List.member penultimate [ "a", "e", "i", "o", "u" ])
+    ultimate == "y" && not (List.member penultimate [ "a", "e", "i", "o", "u" ])
 
 
 maybeCons : Maybe String -> List String -> List String
@@ -33,11 +33,11 @@ splitAtNot pre rest =
 
                 Just word ->
                     if word == "not" then
-                        ( List.take index pre, (List.drop index pre) ++ rest )
+                        ( List.take index pre, List.drop index pre ++ rest )
                     else
                         splitAtNot_ (index + 1) pre rest
     in
-        splitAtNot_ 0 pre rest
+    splitAtNot_ 0 pre rest
 
 
 splitMaybeString : Maybe String -> List String

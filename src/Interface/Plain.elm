@@ -4,13 +4,13 @@ module Plain exposing (main)
 -}
 
 import Html
-import Result
-import Interface.Model.Types exposing (..)
-import Interface.Model.State as State
 import Interface.Messages.Plain as Messages
-import Interface.View.Output as Output
+import Interface.Model.State as State
+import Interface.Model.Types exposing (..)
 import Interface.View.Examples as Examples
 import Interface.View.Nucleus as Nucleus
+import Interface.View.Output as Output
+import Result
 import Theory.Plain.Sentences as Sentences
 
 
@@ -33,8 +33,8 @@ view model =
         result =
             Messages.message model |> Result.andThen Sentences.sentence
     in
-        Html.div []
-            [ Output.output result
-            , Examples.examples PlainTheory
-            , Nucleus.nucleus PlainTheory model
-            ]
+    Html.div []
+        [ Output.output result
+        , Examples.examples PlainTheory
+        , Nucleus.nucleus PlainTheory model
+        ]

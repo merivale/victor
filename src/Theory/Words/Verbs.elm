@@ -19,15 +19,15 @@ conjugate object past base =
         else
             "were"
     else if base == "be" then
-        if (Nucleus.isSpeaker object) && not (Nucleus.isPlural object) then
+        if Nucleus.isSpeaker object && not (Nucleus.isPlural object) then
             "am"
-        else if (Nucleus.isOther object) && not (Nucleus.isPlural object) then
+        else if Nucleus.isOther object && not (Nucleus.isPlural object) then
             "is"
         else
             "are"
     else if past then
         finite2 base
-    else if (Nucleus.isOther object) && not (Nucleus.isPlural object) then
+    else if Nucleus.isOther object && not (Nucleus.isPlural object) then
         finite1 base
     else
         base
@@ -64,7 +64,7 @@ participle2 base =
 guessFinite1 : String -> String
 guessFinite1 base =
     if Utils.consontanty base then
-        (String.dropRight 1 base) ++ "ies"
+        String.dropRight 1 base ++ "ies"
     else if List.member (String.right 2 base) [ "ch", "sh", "ss" ] then
         base ++ "es"
     else
@@ -76,7 +76,7 @@ guessFinite2 base =
     if String.right 1 base == "e" then
         base ++ "d"
     else if Utils.consontanty base then
-        (String.dropRight 1 base) ++ "ied"
+        String.dropRight 1 base ++ "ied"
     else
         base ++ "ed"
 
@@ -86,9 +86,9 @@ guessParticiple1 base =
     if String.right 2 base == "ee" then
         base ++ "ing"
     else if String.right 2 base == "ie" then
-        (String.dropRight 2 base) ++ "ying"
+        String.dropRight 2 base ++ "ying"
     else if String.right 1 base == "e" then
-        (String.dropRight 1 base) ++ "ing"
+        String.dropRight 1 base ++ "ing"
     else
         base ++ "ing"
 

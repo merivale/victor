@@ -1,9 +1,9 @@
 module Interface.View.Ideas exposing (..)
 
 import Maybe
-import Theory.Plain.Nucleus exposing (..)
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
+import Theory.Plain.Nucleus exposing (..)
 
 
 {-| Objects.
@@ -263,7 +263,7 @@ listRelators =
 -}
 listMaybeRelators : List (Maybe Relator)
 listMaybeRelators =
-    Nothing :: (List.map (\x -> Just x) listRelators)
+    Nothing :: List.map (\x -> Just x) listRelators
 
 
 displayMaybeRelator : Maybe Relator -> String
@@ -358,7 +358,7 @@ displayTarget target =
     if target < 0 then
         "Main Object"
     else
-        "Balancing Object " ++ (toString (target + 1))
+        "Balancing Object " ++ toString (target + 1)
 
 
 {-| Pointers.

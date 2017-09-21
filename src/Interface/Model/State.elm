@@ -4,11 +4,11 @@ module Interface.Model.State exposing (initial, update)
 for updating the Model in response to user input.
 -}
 
-import Interface.Model.Types exposing (..)
 import Interface.Model.Examples as Examples
-import Theory.Plain.Nucleus exposing (..)
+import Interface.Model.Types exposing (..)
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
+import Theory.Plain.Nucleus exposing (..)
 
 
 {-| The initial application state. Depends on the layer of the theory.
@@ -56,19 +56,19 @@ update signal model =
                         FullTheory ->
                             Examples.allExamples
             in
-                case List.head (List.drop index examples) of
-                    Nothing ->
-                        model
+            case List.head (List.drop index examples) of
+                Nothing ->
+                    model
 
-                    Just example ->
-                        example
+                Just example ->
+                    example
 
         TogglePlus ->
             let
                 allMinus =
                     minusAll model
             in
-                { allMinus | plus = not model.plus }
+            { allMinus | plus = not model.plus }
 
         SetObject object ->
             { model | object = object }
@@ -123,12 +123,12 @@ update signal model =
         RemoveBalance ->
             let
                 lastIndex =
-                    (List.length model.balances) - 1
+                    List.length model.balances - 1
             in
-                { model
-                    | balances = List.take lastIndex model.balances
-                    , elaborations = List.filter (doesNotTarget lastIndex) model.elaborations
-                }
+            { model
+                | balances = List.take lastIndex model.balances
+                , elaborations = List.filter (doesNotTarget lastIndex) model.elaborations
+            }
 
         SetBalanceRelator index relator ->
             { model | balances = modifyItem index (setBalanceRelator relator) model.balances }
@@ -147,7 +147,7 @@ update signal model =
                 allMinus =
                     minusAll model
             in
-                { allMinus | elaborations = addElaboration index recipe allMinus.elaborations }
+            { allMinus | elaborations = addElaboration index recipe allMinus.elaborations }
 
         RemoveElaboration index ->
             { model | elaborations = removeFromList index model.elaborations }
@@ -254,7 +254,7 @@ elaborations.
 -}
 removeFromList : Int -> List a -> List a
 removeFromList index list =
-    (List.take index list) ++ (List.drop (index + 1) list)
+    List.take index list ++ List.drop (index + 1) list
 
 
 {-| Add a new elaboration, with appropriate default ingredients.
@@ -309,7 +309,7 @@ addElaboration index recipe elaborations =
                     , other = False
                     }
     in
-        before ++ (elaboration :: after)
+    before ++ (elaboration :: after)
 
 
 {-| Modify an item within a list at the given index, using the given modifying
@@ -323,8 +323,8 @@ modifyItem index modified list =
             list
 
         Just item ->
-            (List.take index list)
-                ++ ((modified item) :: (List.drop (index + 1) list))
+            List.take index list
+                ++ (modified item :: List.drop (index + 1) list)
 
 
 {-| Functions for modifying the components of a balance, used as arguments to
@@ -510,7 +510,7 @@ setElaborationQuantifierInteger string elaboration =
         int =
             Result.withDefault 0 (String.toInt string)
     in
-        { elaboration | quantifier = Just (Integer int) }
+    { elaboration | quantifier = Just (Integer int) }
 
 
 toggleElaborationOther : Elaboration -> Elaboration

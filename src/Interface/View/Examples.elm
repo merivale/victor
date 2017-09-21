@@ -5,8 +5,8 @@ module Interface.View.Examples exposing (examples)
 
 import Html
 import Html.Attributes as Attr
-import Interface.Model.Types exposing (..)
 import Interface.Model.Examples as Examples
+import Interface.Model.Types exposing (..)
 import Interface.View.Input as Input
 
 
@@ -29,19 +29,19 @@ examplesRange : TheoryLayer -> List Int
 examplesRange theoryLayer =
     case theoryLayer of
         FullTheory ->
-            List.range 0 ((List.length allExamples) - 1)
+            List.range 0 (List.length allExamples - 1)
 
         PlainTheory ->
-            List.range 0 ((List.length plainExamples) - 1)
+            List.range 0 (List.length plainExamples - 1)
 
         ShortTheory ->
-            List.range 0 ((List.length shortExamples) - 1)
+            List.range 0 (List.length shortExamples - 1)
 
         LongTheory ->
-            List.range 0 ((List.length longExamples) - 1)
+            List.range 0 (List.length longExamples - 1)
 
         ObjectTheory ->
-            List.range 0 ((List.length objectExamples) - 1)
+            List.range 0 (List.length objectExamples - 1)
 
 
 examplesToString : TheoryLayer -> Int -> String
@@ -64,7 +64,7 @@ examplesToString theoryLayer index =
                 ObjectTheory ->
                     objectExamples
     in
-        Maybe.withDefault "example index out of range" (List.head (List.drop index list))
+    Maybe.withDefault "example index out of range" (List.head (List.drop index list))
 
 
 allExamples : List String

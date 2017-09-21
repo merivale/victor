@@ -9,9 +9,9 @@ term of art within my theory.
 -}
 
 import Html
-import Theory.Plain.Nucleus exposing (..)
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
+import Theory.Plain.Nucleus exposing (..)
 
 
 {-| The Model (and its component types).

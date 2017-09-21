@@ -1,8 +1,8 @@
 module Theory.Long.Messages exposing (..)
 
 import Result
-import Theory.Plain.Nucleus as Nucleus
 import Theory.Long.Displacers as Displacers
+import Theory.Plain.Nucleus as Nucleus
 import Theory.Words.Utils as Utils
 
 
@@ -100,10 +100,10 @@ negative vars =
         Nothing ->
             Ok { vars | pre = "not" :: vars.pre }
 
-        Just (Displacers.Yes1) ->
+        Just Displacers.Yes1 ->
             Err "the Yes1 modality ('will') cannot be negated"
 
-        Just (Displacers.Yes2) ->
+        Just Displacers.Yes2 ->
             Err "the Yes2 modality ('shall') cannot be negated"
 
         _ ->
@@ -167,18 +167,18 @@ preordained displacer time vars =
             varsWithPost =
                 { vars | post = Utils.maybeCons time vars.post }
         in
-            case displacer of
-                Nothing ->
-                    if vars.past then
-                        Err "PAST messages cannot be made PREORDAINED without a displacer"
-                    else
-                        Ok varsWithPost
+        case displacer of
+            Nothing ->
+                if vars.past then
+                    Err "PAST messages cannot be made PREORDAINED without a displacer"
+                else
+                    Ok varsWithPost
 
-                Just (Displacers.Primary pivot) ->
-                    swapPastForPrior varsWithPost |> Result.map (primary pivot)
+            Just (Displacers.Primary pivot) ->
+                swapPastForPrior varsWithPost |> Result.map (primary pivot)
 
-                Just (Displacers.Secondary modality) ->
-                    swapPastForPrior varsWithPost |> Result.map (secondary modality True False)
+            Just (Displacers.Secondary modality) ->
+                swapPastForPrior varsWithPost |> Result.map (secondary modality True False)
 
 
 {-| REGULAR messages.
@@ -192,18 +192,18 @@ regular displacer frequency vars =
             varsWithPre =
                 { vars | pre = Utils.maybeCons frequency vars.pre }
         in
-            case displacer of
-                Nothing ->
-                    if vars.past then
-                        Err "PAST messages cannot be made REGULAR without a displacer"
-                    else
-                        Ok varsWithPre
+        case displacer of
+            Nothing ->
+                if vars.past then
+                    Err "PAST messages cannot be made REGULAR without a displacer"
+                else
+                    Ok varsWithPre
 
-                Just (Displacers.Primary pivot) ->
-                    swapPastForPrior varsWithPre |> Result.map (primary pivot)
+            Just (Displacers.Primary pivot) ->
+                swapPastForPrior varsWithPre |> Result.map (primary pivot)
 
-                Just (Displacers.Secondary modality) ->
-                    swapPastForPrior varsWithPre |> Result.map (secondary modality False True)
+            Just (Displacers.Secondary modality) ->
+                swapPastForPrior varsWithPre |> Result.map (secondary modality False True)
 
 
 {-| EXTENDED messages.
@@ -238,12 +238,12 @@ primary pivot vars =
         displaced =
             { prior = vars.prior, pre = vars.pre, pivot = vars.pivot }
     in
-        { vars
-            | prior = False
-            , pre = []
-            , pivot = pivot
-            , displaced = displaced :: vars.displaced
-        }
+    { vars
+        | prior = False
+        , pre = []
+        , pivot = pivot
+        , displaced = displaced :: vars.displaced
+    }
 
 
 secondary : Displacers.Modality -> Bool -> Bool -> Vars -> Vars

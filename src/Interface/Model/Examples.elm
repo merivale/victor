@@ -1,14 +1,14 @@
 module Interface.Model.Examples
     exposing
         ( allExamples
-        , plainFirst
-        , plainExamples
-        , shortFirst
-        , shortExamples
-        , longFirst
         , longExamples
-        , objectFirst
+        , longFirst
         , objectExamples
+        , objectFirst
+        , plainExamples
+        , plainFirst
+        , shortExamples
+        , shortFirst
         )
 
 {-| This module simply outputs lists of Models, used for generating example
@@ -16,9 +16,9 @@ Messages for illustrating the theory.
 -}
 
 import Interface.Model.Types exposing (..)
-import Theory.Plain.Nucleus exposing (..)
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
+import Theory.Plain.Nucleus exposing (..)
 
 
 {-| All examples.
@@ -210,7 +210,7 @@ longFirst =
     , status = Nothing
     , balances = [ ( Nothing, Different (Other False (Just Male) Nothing) ) ]
     , elaborations =
-        [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Primary ( (Do "go" True False), Nothing )) } ]
+        [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Primary ( Do "go" True False, Nothing )) } ]
     }
 
 
@@ -223,7 +223,7 @@ longExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False (Just Male) Nothing) ) ]
       , elaborations =
-            [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Primary ( (Do "go" True False), Nothing )) }
+            [ { elaboration | recipe = MakeDISPLACED, displacer = Just (Primary ( Do "go" True False, Nothing )) }
             , { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow" }
             ]
       }
@@ -233,7 +233,7 @@ longExamples =
       , status = Nothing
       , balances = [ ( Nothing, Different (Other False (Just Male) Nothing) ) ]
       , elaborations =
-            [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Primary ( (Do "go" True False), Nothing )) }
+            [ { elaboration | recipe = MakePREORDAINED, string1 = Just "tomorrow", displacer = Just (Primary ( Do "go" True False, Nothing )) }
             ]
       }
     , { plus = False
@@ -324,7 +324,7 @@ longExamples =
       , status = Just (Relative Out)
       , balances = []
       , elaborations =
-            [ { elaboration | recipe = MakeREGULAR, displacer = Just (Primary ( (Do "tend" False False), Nothing )) } ]
+            [ { elaboration | recipe = MakeREGULAR, displacer = Just (Primary ( Do "tend" False False, Nothing )) } ]
       }
     , { plus = False
       , object = Other False (Just Male) Nothing
@@ -332,7 +332,7 @@ longExamples =
       , status = Just (Relative Out)
       , balances = []
       , elaborations =
-            [ { elaboration | recipe = MakeREGULAR, displacer = Just (Primary ( (Do "use" False False), Nothing )) }
+            [ { elaboration | recipe = MakeREGULAR, displacer = Just (Primary ( Do "use" False False, Nothing )) }
             , { elaboration | recipe = MakePAST }
             ]
       }

@@ -11,27 +11,27 @@ fulcrum prior ( verbality, status ) =
         ( base, rest ) =
             case verbality of
                 Nucleus.Be True ->
-                    ( "be", "being" :: (complement status) )
+                    ( "be", "being" :: complement status )
 
                 Nucleus.Be False ->
                     ( "be", complement status )
 
                 Nucleus.Do string True True ->
-                    ( "be", [ "being", Verbs.participle2 string ] ++ (complement status) )
+                    ( "be", [ "being", Verbs.participle2 string ] ++ complement status )
 
                 Nucleus.Do string True False ->
-                    ( "be", [ Verbs.participle1 string ] ++ (complement status) )
+                    ( "be", [ Verbs.participle1 string ] ++ complement status )
 
                 Nucleus.Do string False True ->
-                    ( "be", [ Verbs.participle2 string ] ++ (complement status) )
+                    ( "be", [ Verbs.participle2 string ] ++ complement status )
 
                 Nucleus.Do string False False ->
                     ( string, complement status )
     in
-        if prior then
-            ( "have", (Verbs.participle2 base) :: rest )
-        else
-            ( base, rest )
+    if prior then
+        ( "have", Verbs.participle2 base :: rest )
+    else
+        ( base, rest )
 
 
 complement : Maybe Nucleus.Status -> List String

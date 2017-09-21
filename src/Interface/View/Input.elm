@@ -1,21 +1,21 @@
 module Interface.View.Input
     exposing
         ( button
-        , iconButton
-        , factor
-        , text
-        , number
         , checkbox
+        , emptyInput
+        , factor
+        , iconButton
+        , number
         , select
         , selectGroup
-        , emptyInput
+        , text
         )
 
 import Html
 import Html.Attributes as Attr
 import Html.Events as Events
-import Json.Decode as Json
 import Interface.Model.Types exposing (..)
+import Json.Decode as Json
 
 
 button : ButtonProperties -> Html.Html Signal
@@ -133,7 +133,7 @@ fromId options =
                 Just a ->
                     a
     in
-        fromString
+    fromString
 
 
 onChange : (String -> Signal) -> Html.Attribute Signal

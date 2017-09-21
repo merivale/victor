@@ -6,8 +6,8 @@ module Interface.View.Output exposing (output)
 import Char
 import Html
 import Html.Attributes as Attr
-import Result
 import Interface.Model.Types exposing (..)
+import Result
 
 
 {-| Output.
@@ -37,4 +37,4 @@ format sentence =
                 Just ( firstLetter, rest ) ->
                     String.cons (Char.toUpper firstLetter) rest
     in
-        String.append ucFirst "."
+    String.append ucFirst "."

@@ -7,7 +7,7 @@ import Theory.Words.Pronouns as Pronouns
 
 counter : Nucleus.Object -> Nucleus.Balance -> String
 counter object ( relator, weight ) =
-    String.join " " ((prefix relator) ++ (pronoun object weight))
+    String.join " " (prefix relator ++ pronoun object weight)
 
 
 prefix : Maybe Nucleus.Relator -> List String

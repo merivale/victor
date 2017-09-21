@@ -93,7 +93,7 @@ requiresPlural : Quantifier -> Bool
 requiresPlural quantifier =
     case quantifier of
         Integer int ->
-            (abs int) /= 1
+            abs int /= 1
 
         _ ->
             List.member
