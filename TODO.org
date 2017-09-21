@@ -1,0 +1,9 @@
+- Use elm-format. Just do it.
+- Build with --warn, every time.
+- One commit has alternate ways of doing (Maybe -> Result)
+- Don't commit the built docs. Yuck.
+- I don't like this BLOCKCAPS convention you've invented. But...I
+  suspect the fact that you have a mixture of that style and not that
+  style in Message is telling you that Message is really two types.
+- There's an option for cleaning up elaborate. Needs some polishing
+  Sorry, it's getting late!
