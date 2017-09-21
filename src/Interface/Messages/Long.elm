@@ -136,19 +136,11 @@ regular displacer string message =
 
 extended : Maybe String -> Message -> Result String Message
 extended duration message =
-    case duration of
-        Nothing ->
-            Err "please enter a value for the duration"
-
-        Just str ->
-            Ok (EXTENDED str message)
+    Maybe.map (flip EXTENDED message)
+        |> Result.fromMaybe "please enter a value for the duration"
 
 
 scattered : Maybe String -> Message -> Result String Message
 scattered tally message =
-    case tally of
-        Nothing ->
-            Err "please enter a value for the tally"
-
-        Just str ->
-            Ok (SCATTERED str message)
+    Maybe.map (\str -> SCATTERED str message)
+        |> Result.fromMaybe "please enter a value for the tally"
