@@ -5,7 +5,6 @@ module Interface.View.Examples exposing (examples)
 
 import Html
 import Html.Attributes as Attr
-import Interface.Model.Examples as Examples
 import Interface.Model.Types exposing (..)
 import Interface.View.Input as Input
 

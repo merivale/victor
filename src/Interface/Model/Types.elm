@@ -8,7 +8,6 @@ sent to the update function; this is to avoid confusion with `Message`, a key
 term of art within my theory.
 -}
 
-import Html
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
 import Theory.Plain.Nucleus exposing (..)
