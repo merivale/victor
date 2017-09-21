@@ -1,5 +1,6 @@
 module Interface.Messages.Long exposing (message)
 
+import Interface.Messages.Common exposing (..)
 import Interface.Model.Types exposing (..)
 import Maybe
 import Result exposing (andThen)
@@ -14,38 +15,6 @@ message : Model -> Result String Message
 message model =
     plain model.object model.verbality model.status model.balances
         |> andThen (elaborate model.elaborations)
-
-
-{-| Make a plain message from the core ingredients.
--}
-plain : Object -> Verbality -> Maybe Status -> List Balance -> Result String Message
-plain object verbality status balances =
-    if verbalityEmpty verbality then
-        Err "please enter a verb for the verbality"
-    else if propertyEmpty status then
-        Err "please enter an adjective for the status"
-    else
-        Ok (Plain ( object, ( ( verbality, status ), balances ) ))
-
-
-verbalityEmpty : Verbality -> Bool
-verbalityEmpty verbality =
-    case verbality of
-        Do string ongoing passive ->
-            String.length string == 0
-
-        _ ->
-            False
-
-
-propertyEmpty : Maybe Status -> Bool
-propertyEmpty status =
-    case status of
-        Just (Absolute string) ->
-            String.length string == 0
-
-        _ ->
-            False
 
 
 {-| Elaborate a message recusrively.
