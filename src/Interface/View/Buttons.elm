@@ -39,8 +39,8 @@ toggleElaborations index plus =
             }
 
 
-elaborationButtons : TheoryLayer -> Int -> Bool -> Html.Html Signal
-elaborationButtons theoryLayer index plus =
+elaborationButtons : Int -> Bool -> Html.Html Signal
+elaborationButtons index plus =
     let
         class =
             if plus then
@@ -48,67 +48,27 @@ elaborationButtons theoryLayer index plus =
             else
                 "elaborations"
     in
-    case theoryLayer of
-        PlainTheory ->
-            Html.div [ Attr.class class ] []
-
-        ShortTheory ->
-            Html.div [ Attr.class class ]
-                [ Html.div []
-                    (List.map (addElaboration index)
-                        [ MakeNEGATIVE
-                        , MakePAST
-                        , MakePRIOR
-                        , MakeREGULAR
-                        , MakePREORDAINED
-                        , MakeEXTENDED
-                        , MakeSCATTERED
-                        ]
-                    )
-                ]
-
-        LongTheory ->
-            Html.div [ Attr.class class ]
-                [ Html.div []
-                    (List.map (addElaboration index)
-                        [ MakeNEGATIVE
-                        , MakePAST
-                        , MakePRIOR
-                        , MakeDISPLACED
-                        ]
-                    )
-                , Html.div []
-                    (List.map (addElaboration index)
-                        [ MakeREGULAR
-                        , MakePREORDAINED
-                        , MakeEXTENDED
-                        , MakeSCATTERED
-                        ]
-                    )
-                ]
-
-        _ ->
-            Html.div [ Attr.class class ]
-                [ Html.div []
-                    (List.map (addElaboration index)
-                        [ MakeNEGATIVE
-                        , MakePAST
-                        , MakePRIOR
-                        , MakeDISPLACED
-                        , MakeREGULAR
-                        , MakePREORDAINED
-                        ]
-                    )
-                , Html.div []
-                    (List.map (addElaboration index)
-                        [ MakeEXTENDED
-                        , MakeSCATTERED
-                        , MakeINDIRECT
-                        , MakeENUMERATED
-                        , MakeAMASSED
-                        ]
-                    )
-                ]
+        Html.div [ Attr.class class ]
+            [ Html.div []
+                (List.map (addElaboration index)
+                    [ MakeNEGATIVE
+                    , MakePAST
+                    , MakePRIOR
+                    , MakeDISPLACED
+                    , MakeREGULAR
+                    , MakePREORDAINED
+                    ]
+                )
+            , Html.div []
+                (List.map (addElaboration index)
+                    [ MakeEXTENDED
+                    , MakeSCATTERED
+                    , MakeINDIRECT
+                    , MakeENUMERATED
+                    , MakeAMASSED
+                    ]
+                )
+            ]
 
 
 addElaboration : Int -> Recipe -> Html.Html Signal

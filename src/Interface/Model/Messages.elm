@@ -1,6 +1,6 @@
-module Interface.Messages.Object exposing (message)
+module Interface.Model.Messages exposing (message)
 
-{-| This module converts the model into an (object) message.
+{-| This module converts the model into a message.
 -}
 
 import Interface.Model.Types exposing (..)

@@ -14,21 +14,14 @@ import Theory.Plain.Nucleus exposing (..)
 
 {-| The nucleus input box.
 -}
-nucleus : TheoryLayer -> Model -> Html.Html Signal
-nucleus theoryLayer model =
-    if theoryLayer == PlainTheory then
-        Html.div
-            [ Attr.class "nucleus" ]
-            [ heading False model
-            , body model
-            ]
-    else
-        Html.div
-            [ Attr.class "nucleus" ]
-            [ heading True model
-            , Buttons.elaborationButtons theoryLayer -1 model.plus
-            , body model
-            ]
+nucleus : Model -> Html.Html Signal
+nucleus model =
+    Html.div
+        [ Attr.class "nucleus" ]
+        [ heading True model
+        , Buttons.elaborationButtons -1 model.plus
+        , body model
+        ]
 
 
 heading : Bool -> Model -> Html.Html Signal

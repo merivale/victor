@@ -57,8 +57,7 @@ type Recipe
 {-| Signals sent to the update function to step the application forward.
 -}
 type Signal
-    = LoadExample TheoryLayer Int
-    | TogglePlus
+    = TogglePlus
     | SetObject Object
     | SetObjectString String
     | SetVerbality Verbality
@@ -96,14 +95,6 @@ type Signal
     | SetElaborationQuantifier Int (Maybe Quantifier)
     | SetElaborationQuantifierInteger Int String
     | ToggleElaborationOther Int
-
-
-type TheoryLayer
-    = PlainTheory
-    | ShortTheory
-    | LongTheory
-    | ObjectTheory
-    | FullTheory
 
 
 {-| Some handy aliases used to group arguments sent to functions that create

@@ -8693,15 +8693,6 @@ var _merivale$victor$Interface_Model_Types$SetObject = function (a) {
 	return {ctor: 'SetObject', _0: a};
 };
 var _merivale$victor$Interface_Model_Types$TogglePlus = {ctor: 'TogglePlus'};
-var _merivale$victor$Interface_Model_Types$LoadExample = F2(
-	function (a, b) {
-		return {ctor: 'LoadExample', _0: a, _1: b};
-	});
-var _merivale$victor$Interface_Model_Types$FullTheory = {ctor: 'FullTheory'};
-var _merivale$victor$Interface_Model_Types$ObjectTheory = {ctor: 'ObjectTheory'};
-var _merivale$victor$Interface_Model_Types$LongTheory = {ctor: 'LongTheory'};
-var _merivale$victor$Interface_Model_Types$ShortTheory = {ctor: 'ShortTheory'};
-var _merivale$victor$Interface_Model_Types$PlainTheory = {ctor: 'PlainTheory'};
 
 var _merivale$victor$Theory_Words_Utils$splitMaybeString = function (string) {
 	return A2(
@@ -9377,27 +9368,27 @@ var _merivale$victor$Theory_Object_Messages$explode = function (message) {
 	}
 };
 
-var _merivale$victor$Interface_Messages_Object$amassed = F3(
+var _merivale$victor$Interface_Model_Messages$amassed = F3(
 	function (elaboration, message, proportion) {
 		return _elm_lang$core$Result$Ok(
 			A3(_merivale$victor$Theory_Object_Messages$AMASSED, elaboration.target, proportion, message));
 	});
-var _merivale$victor$Interface_Messages_Object$enumerated = F3(
+var _merivale$victor$Interface_Model_Messages$enumerated = F3(
 	function (elaboration, message, multiplicity) {
 		return _elm_lang$core$Result$Ok(
 			A3(_merivale$victor$Theory_Object_Messages$ENUMERATED, elaboration.target, multiplicity, message));
 	});
-var _merivale$victor$Interface_Messages_Object$indirect = F3(
+var _merivale$victor$Interface_Model_Messages$indirect = F3(
 	function (elaboration, message, description) {
 		return _elm_lang$core$Result$Ok(
 			A3(_merivale$victor$Theory_Object_Messages$INDIRECT, elaboration.target, description, message));
 	});
-var _merivale$victor$Interface_Messages_Object$proportion = F2(
+var _merivale$victor$Interface_Model_Messages$proportion = F2(
 	function (elaboration, haystack) {
 		return _elm_lang$core$Result$Ok(
 			{ctor: '_Tuple3', _0: elaboration.quantifier, _1: elaboration.other, _2: haystack});
 	});
-var _merivale$victor$Interface_Messages_Object$multiplicity = F2(
+var _merivale$victor$Interface_Model_Messages$multiplicity = F2(
 	function (elaboration, haystack) {
 		var _p0 = elaboration.quantifier;
 		if (_p0.ctor === 'Nothing') {
@@ -9407,12 +9398,12 @@ var _merivale$victor$Interface_Messages_Object$multiplicity = F2(
 				{ctor: '_Tuple3', _0: _p0._0, _1: elaboration.other, _2: haystack});
 		}
 	});
-var _merivale$victor$Interface_Messages_Object$description = F2(
+var _merivale$victor$Interface_Model_Messages$description = F2(
 	function (elaboration, haystack) {
 		return _elm_lang$core$Result$Ok(
 			{ctor: '_Tuple3', _0: elaboration.pointer, _1: elaboration.other, _2: haystack});
 	});
-var _merivale$victor$Interface_Messages_Object$haystack = function (elaboration) {
+var _merivale$victor$Interface_Model_Messages$haystack = function (elaboration) {
 	var _p1 = elaboration.string1;
 	if (_p1.ctor === 'Nothing') {
 		return _elm_lang$core$Result$Err('please enter a category for the haystack');
@@ -9421,7 +9412,7 @@ var _merivale$victor$Interface_Messages_Object$haystack = function (elaboration)
 			{ctor: '_Tuple3', _0: _p1._0, _1: elaboration.string2, _2: elaboration.string3});
 	}
 };
-var _merivale$victor$Interface_Messages_Object$scattered = F2(
+var _merivale$victor$Interface_Model_Messages$scattered = F2(
 	function (tally, message) {
 		var _p2 = tally;
 		if (_p2.ctor === 'Nothing') {
@@ -9431,7 +9422,7 @@ var _merivale$victor$Interface_Messages_Object$scattered = F2(
 				A2(_merivale$victor$Theory_Object_Messages$SCATTERED, _p2._0, message));
 		}
 	});
-var _merivale$victor$Interface_Messages_Object$extended = F2(
+var _merivale$victor$Interface_Model_Messages$extended = F2(
 	function (duration, message) {
 		var _p3 = duration;
 		if (_p3.ctor === 'Nothing') {
@@ -9441,20 +9432,20 @@ var _merivale$victor$Interface_Messages_Object$extended = F2(
 				A2(_merivale$victor$Theory_Object_Messages$EXTENDED, _p3._0, message));
 		}
 	});
-var _merivale$victor$Interface_Messages_Object$prior = function (message) {
+var _merivale$victor$Interface_Model_Messages$prior = function (message) {
 	return _elm_lang$core$Result$Ok(
 		_merivale$victor$Theory_Object_Messages$PRIOR(message));
 };
-var _merivale$victor$Interface_Messages_Object$past = F2(
+var _merivale$victor$Interface_Model_Messages$past = F2(
 	function (time, message) {
 		return _elm_lang$core$Result$Ok(
 			A2(_merivale$victor$Theory_Object_Messages$PAST, time, message));
 	});
-var _merivale$victor$Interface_Messages_Object$negative = function (message) {
+var _merivale$victor$Interface_Model_Messages$negative = function (message) {
 	return _elm_lang$core$Result$Ok(
 		_merivale$victor$Theory_Object_Messages$NEGATIVE(message));
 };
-var _merivale$victor$Interface_Messages_Object$propertyEmpty = function (status) {
+var _merivale$victor$Interface_Model_Messages$propertyEmpty = function (status) {
 	var _p4 = status;
 	if ((_p4.ctor === 'Just') && (_p4._0.ctor === 'Absolute')) {
 		return _elm_lang$core$Native_Utils.eq(
@@ -9464,7 +9455,7 @@ var _merivale$victor$Interface_Messages_Object$propertyEmpty = function (status)
 		return false;
 	}
 };
-var _merivale$victor$Interface_Messages_Object$verbalityEmpty = function (verbality) {
+var _merivale$victor$Interface_Model_Messages$verbalityEmpty = function (verbality) {
 	var _p5 = verbality;
 	if (_p5.ctor === 'Do') {
 		return _elm_lang$core$Native_Utils.eq(
@@ -9474,7 +9465,7 @@ var _merivale$victor$Interface_Messages_Object$verbalityEmpty = function (verbal
 		return false;
 	}
 };
-var _merivale$victor$Interface_Messages_Object$displaced = F2(
+var _merivale$victor$Interface_Model_Messages$displaced = F2(
 	function (displacer, message) {
 		var _p6 = displacer;
 		if (_p6.ctor === 'Nothing') {
@@ -9483,7 +9474,7 @@ var _merivale$victor$Interface_Messages_Object$displaced = F2(
 			if (_p6._0.ctor === 'Primary') {
 				var _p8 = _p6._0._0._0;
 				var _p7 = _p6._0._0._1;
-				return _merivale$victor$Interface_Messages_Object$verbalityEmpty(_p8) ? _elm_lang$core$Result$Err('please enter a verb for the DISPLACED verbality') : (_merivale$victor$Interface_Messages_Object$propertyEmpty(_p7) ? _elm_lang$core$Result$Err('please enter an adjective for the DISPLACED status') : _elm_lang$core$Result$Ok(
+				return _merivale$victor$Interface_Model_Messages$verbalityEmpty(_p8) ? _elm_lang$core$Result$Err('please enter a verb for the DISPLACED verbality') : (_merivale$victor$Interface_Model_Messages$propertyEmpty(_p7) ? _elm_lang$core$Result$Err('please enter an adjective for the DISPLACED status') : _elm_lang$core$Result$Ok(
 					A2(
 						_merivale$victor$Theory_Object_Messages$DISPLACED,
 						_merivale$victor$Theory_Long_Displacers$Primary(
@@ -9498,7 +9489,7 @@ var _merivale$victor$Interface_Messages_Object$displaced = F2(
 			}
 		}
 	});
-var _merivale$victor$Interface_Messages_Object$preordained = F3(
+var _merivale$victor$Interface_Model_Messages$preordained = F3(
 	function (displacer, string, message) {
 		var _p9 = displacer;
 		if (_p9.ctor === 'Nothing') {
@@ -9506,7 +9497,7 @@ var _merivale$victor$Interface_Messages_Object$preordained = F3(
 				A3(_merivale$victor$Theory_Object_Messages$PREORDAINED, displacer, string, message));
 		} else {
 			if (_p9._0.ctor === 'Primary') {
-				return _merivale$victor$Interface_Messages_Object$verbalityEmpty(_p9._0._0._0) ? _elm_lang$core$Result$Err('please enter a verb for the PREORDAINED verbality') : (_merivale$victor$Interface_Messages_Object$propertyEmpty(_p9._0._0._1) ? _elm_lang$core$Result$Err('please enter an adjective for the PREORDAINED status') : _elm_lang$core$Result$Ok(
+				return _merivale$victor$Interface_Model_Messages$verbalityEmpty(_p9._0._0._0) ? _elm_lang$core$Result$Err('please enter a verb for the PREORDAINED verbality') : (_merivale$victor$Interface_Model_Messages$propertyEmpty(_p9._0._0._1) ? _elm_lang$core$Result$Err('please enter an adjective for the PREORDAINED status') : _elm_lang$core$Result$Ok(
 					A3(_merivale$victor$Theory_Object_Messages$PREORDAINED, displacer, string, message)));
 			} else {
 				return _elm_lang$core$Result$Ok(
@@ -9514,7 +9505,7 @@ var _merivale$victor$Interface_Messages_Object$preordained = F3(
 			}
 		}
 	});
-var _merivale$victor$Interface_Messages_Object$regular = F3(
+var _merivale$victor$Interface_Model_Messages$regular = F3(
 	function (displacer, string, message) {
 		var _p10 = displacer;
 		if (_p10.ctor === 'Nothing') {
@@ -9522,7 +9513,7 @@ var _merivale$victor$Interface_Messages_Object$regular = F3(
 				A3(_merivale$victor$Theory_Object_Messages$REGULAR, displacer, string, message));
 		} else {
 			if (_p10._0.ctor === 'Primary') {
-				return _merivale$victor$Interface_Messages_Object$verbalityEmpty(_p10._0._0._0) ? _elm_lang$core$Result$Err('please enter a verb for the REGULAR verbality') : (_merivale$victor$Interface_Messages_Object$propertyEmpty(_p10._0._0._1) ? _elm_lang$core$Result$Err('please enter an adjective for the REGULAR status') : _elm_lang$core$Result$Ok(
+				return _merivale$victor$Interface_Model_Messages$verbalityEmpty(_p10._0._0._0) ? _elm_lang$core$Result$Err('please enter a verb for the REGULAR verbality') : (_merivale$victor$Interface_Model_Messages$propertyEmpty(_p10._0._0._1) ? _elm_lang$core$Result$Err('please enter an adjective for the REGULAR status') : _elm_lang$core$Result$Ok(
 					A3(_merivale$victor$Theory_Object_Messages$REGULAR, displacer, string, message)));
 			} else {
 				return _elm_lang$core$Result$Ok(
@@ -9530,7 +9521,7 @@ var _merivale$victor$Interface_Messages_Object$regular = F3(
 			}
 		}
 	});
-var _merivale$victor$Interface_Messages_Object$elaborate = F2(
+var _merivale$victor$Interface_Model_Messages$elaborate = F2(
 	function (elaborations, message) {
 		var _p11 = _elm_lang$core$List$head(elaborations);
 		if (_p11.ctor === 'Nothing') {
@@ -9542,93 +9533,93 @@ var _merivale$victor$Interface_Messages_Object$elaborate = F2(
 				case 'MakeNEGATIVE':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
-						_merivale$victor$Interface_Messages_Object$negative(message));
+						_merivale$victor$Interface_Model_Messages$negative(message));
 				case 'MakePAST':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
-						A2(_merivale$victor$Interface_Messages_Object$past, _p13.string1, message));
+						A2(_merivale$victor$Interface_Model_Messages$past, _p13.string1, message));
 				case 'MakePRIOR':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
-						_merivale$victor$Interface_Messages_Object$prior(message));
+						_merivale$victor$Interface_Model_Messages$prior(message));
 				case 'MakeDISPLACED':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
-						A2(_merivale$victor$Interface_Messages_Object$displaced, _p13.displacer, message));
+						A2(_merivale$victor$Interface_Model_Messages$displaced, _p13.displacer, message));
 				case 'MakePREORDAINED':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
-						A3(_merivale$victor$Interface_Messages_Object$preordained, _p13.displacer, _p13.string1, message));
+						A3(_merivale$victor$Interface_Model_Messages$preordained, _p13.displacer, _p13.string1, message));
 				case 'MakeREGULAR':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
-						A3(_merivale$victor$Interface_Messages_Object$regular, _p13.displacer, _p13.string1, message));
+						A3(_merivale$victor$Interface_Model_Messages$regular, _p13.displacer, _p13.string1, message));
 				case 'MakeEXTENDED':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
-						A2(_merivale$victor$Interface_Messages_Object$extended, _p13.string1, message));
+						A2(_merivale$victor$Interface_Model_Messages$extended, _p13.string1, message));
 				case 'MakeSCATTERED':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
-						A2(_merivale$victor$Interface_Messages_Object$scattered, _p13.string1, message));
+						A2(_merivale$victor$Interface_Model_Messages$scattered, _p13.string1, message));
 				case 'MakeINDIRECT':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
 						A2(
 							_elm_lang$core$Result$andThen,
-							A2(_merivale$victor$Interface_Messages_Object$indirect, _p13, message),
+							A2(_merivale$victor$Interface_Model_Messages$indirect, _p13, message),
 							A2(
 								_elm_lang$core$Result$andThen,
-								_merivale$victor$Interface_Messages_Object$description(_p13),
-								_merivale$victor$Interface_Messages_Object$haystack(_p13))));
+								_merivale$victor$Interface_Model_Messages$description(_p13),
+								_merivale$victor$Interface_Model_Messages$haystack(_p13))));
 				case 'MakeENUMERATED':
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
 						A2(
 							_elm_lang$core$Result$andThen,
-							A2(_merivale$victor$Interface_Messages_Object$enumerated, _p13, message),
+							A2(_merivale$victor$Interface_Model_Messages$enumerated, _p13, message),
 							A2(
 								_elm_lang$core$Result$andThen,
-								_merivale$victor$Interface_Messages_Object$multiplicity(_p13),
-								_merivale$victor$Interface_Messages_Object$haystack(_p13))));
+								_merivale$victor$Interface_Model_Messages$multiplicity(_p13),
+								_merivale$victor$Interface_Model_Messages$haystack(_p13))));
 				default:
 					return A2(
 						_elm_lang$core$Result$andThen,
-						_merivale$victor$Interface_Messages_Object$elaborate(
+						_merivale$victor$Interface_Model_Messages$elaborate(
 							A2(_elm_lang$core$List$drop, 1, elaborations)),
 						A2(
 							_elm_lang$core$Result$andThen,
-							A2(_merivale$victor$Interface_Messages_Object$amassed, _p13, message),
+							A2(_merivale$victor$Interface_Model_Messages$amassed, _p13, message),
 							A2(
 								_elm_lang$core$Result$andThen,
-								_merivale$victor$Interface_Messages_Object$proportion(_p13),
-								_merivale$victor$Interface_Messages_Object$haystack(_p13))));
+								_merivale$victor$Interface_Model_Messages$proportion(_p13),
+								_merivale$victor$Interface_Model_Messages$haystack(_p13))));
 			}
 		}
 	});
-var _merivale$victor$Interface_Messages_Object$plain = F4(
+var _merivale$victor$Interface_Model_Messages$plain = F4(
 	function (object, verbality, status, balances) {
-		return _merivale$victor$Interface_Messages_Object$verbalityEmpty(verbality) ? _elm_lang$core$Result$Err('please enter a verb for the verbality') : (_merivale$victor$Interface_Messages_Object$propertyEmpty(status) ? _elm_lang$core$Result$Err('please enter an adjective for the status') : _elm_lang$core$Result$Ok(
+		return _merivale$victor$Interface_Model_Messages$verbalityEmpty(verbality) ? _elm_lang$core$Result$Err('please enter a verb for the verbality') : (_merivale$victor$Interface_Model_Messages$propertyEmpty(status) ? _elm_lang$core$Result$Err('please enter an adjective for the status') : _elm_lang$core$Result$Ok(
 			_merivale$victor$Theory_Object_Messages$Plain(
 				{
 					ctor: '_Tuple2',
@@ -9640,1049 +9631,12 @@ var _merivale$victor$Interface_Messages_Object$plain = F4(
 					}
 				})));
 	});
-var _merivale$victor$Interface_Messages_Object$message = function (model) {
+var _merivale$victor$Interface_Model_Messages$message = function (model) {
 	return A2(
 		_elm_lang$core$Result$andThen,
-		_merivale$victor$Interface_Messages_Object$elaborate(model.elaborations),
-		A4(_merivale$victor$Interface_Messages_Object$plain, model.object, model.verbality, model.status, model.balances));
+		_merivale$victor$Interface_Model_Messages$elaborate(model.elaborations),
+		A4(_merivale$victor$Interface_Model_Messages$plain, model.object, model.verbality, model.status, model.balances));
 };
-
-var _merivale$victor$Interface_Model_Examples$elaboration = {plus: false, recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE, string1: _elm_lang$core$Maybe$Nothing, string2: _elm_lang$core$Maybe$Nothing, string3: _elm_lang$core$Maybe$Nothing, displacer: _elm_lang$core$Maybe$Nothing, target: -1, pointer: _merivale$victor$Theory_Object_Pseudo$The, quantifier: _elm_lang$core$Maybe$Nothing, other: false};
-var _merivale$victor$Interface_Model_Examples$objectFirst = {
-	plus: false,
-	object: A3(
-		_merivale$victor$Theory_Plain_Nucleus$Other,
-		false,
-		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-		_elm_lang$core$Maybe$Nothing),
-	verbality: _merivale$victor$Theory_Plain_Nucleus$Be(false),
-	status: _elm_lang$core$Maybe$Just(
-		_merivale$victor$Theory_Plain_Nucleus$Absolute('bald')),
-	balances: {ctor: '[]'},
-	elaborations: {
-		ctor: '::',
-		_0: _elm_lang$core$Native_Utils.update(
-			_merivale$victor$Interface_Model_Examples$elaboration,
-			{
-				recipe: _merivale$victor$Interface_Model_Types$MakeINDIRECT,
-				string1: _elm_lang$core$Maybe$Just('king'),
-				string3: _elm_lang$core$Maybe$Just('of France')
-			}),
-		_1: {ctor: '[]'}
-	}
-};
-var _merivale$victor$Interface_Model_Examples$objectExamples = {
-	ctor: '::',
-	_0: _merivale$victor$Interface_Model_Examples$objectFirst,
-	_1: {
-		ctor: '::',
-		_0: {
-			plus: false,
-			object: A3(
-				_merivale$victor$Theory_Plain_Nucleus$Other,
-				false,
-				_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-				_elm_lang$core$Maybe$Nothing),
-			verbality: _merivale$victor$Theory_Plain_Nucleus$Be(false),
-			status: _elm_lang$core$Maybe$Just(
-				_merivale$victor$Theory_Plain_Nucleus$Absolute('insane')),
-			balances: {ctor: '[]'},
-			elaborations: {
-				ctor: '::',
-				_0: _elm_lang$core$Native_Utils.update(
-					_merivale$victor$Interface_Model_Examples$elaboration,
-					{
-						recipe: _merivale$victor$Interface_Model_Types$MakeINDIRECT,
-						pointer: _merivale$victor$Theory_Object_Pseudo$RelatedTo(
-							A3(
-								_merivale$victor$Theory_Plain_Nucleus$Other,
-								false,
-								_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-								_elm_lang$core$Maybe$Just('Smith'))),
-						string1: _elm_lang$core$Maybe$Just('murderer')
-					}),
-				_1: {ctor: '[]'}
-			}
-		},
-		_1: {ctor: '[]'}
-	}
-};
-var _merivale$victor$Interface_Model_Examples$longFirst = {
-	plus: false,
-	object: A3(
-		_merivale$victor$Theory_Plain_Nucleus$Other,
-		false,
-		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-		_elm_lang$core$Maybe$Nothing),
-	verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'see', false, false),
-	status: _elm_lang$core$Maybe$Nothing,
-	balances: {
-		ctor: '::',
-		_0: {
-			ctor: '_Tuple2',
-			_0: _elm_lang$core$Maybe$Nothing,
-			_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-				A3(
-					_merivale$victor$Theory_Plain_Nucleus$Other,
-					false,
-					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-					_elm_lang$core$Maybe$Nothing))
-		},
-		_1: {ctor: '[]'}
-	},
-	elaborations: {
-		ctor: '::',
-		_0: _elm_lang$core$Native_Utils.update(
-			_merivale$victor$Interface_Model_Examples$elaboration,
-			{
-				recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
-				displacer: _elm_lang$core$Maybe$Just(
-					_merivale$victor$Theory_Long_Displacers$Primary(
-						{
-							ctor: '_Tuple2',
-							_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'go', true, false),
-							_1: _elm_lang$core$Maybe$Nothing
-						}))
-			}),
-		_1: {ctor: '[]'}
-	}
-};
-var _merivale$victor$Interface_Model_Examples$longExamples = {
-	ctor: '::',
-	_0: _merivale$victor$Interface_Model_Examples$longFirst,
-	_1: {
-		ctor: '::',
-		_0: {
-			plus: false,
-			object: A3(
-				_merivale$victor$Theory_Plain_Nucleus$Other,
-				false,
-				_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-				_elm_lang$core$Maybe$Nothing),
-			verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'see', false, false),
-			status: _elm_lang$core$Maybe$Nothing,
-			balances: {
-				ctor: '::',
-				_0: {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Maybe$Nothing,
-					_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-						A3(
-							_merivale$victor$Theory_Plain_Nucleus$Other,
-							false,
-							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-							_elm_lang$core$Maybe$Nothing))
-				},
-				_1: {ctor: '[]'}
-			},
-			elaborations: {
-				ctor: '::',
-				_0: _elm_lang$core$Native_Utils.update(
-					_merivale$victor$Interface_Model_Examples$elaboration,
-					{
-						recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
-						displacer: _elm_lang$core$Maybe$Just(
-							_merivale$victor$Theory_Long_Displacers$Primary(
-								{
-									ctor: '_Tuple2',
-									_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'go', true, false),
-									_1: _elm_lang$core$Maybe$Nothing
-								}))
-					}),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$core$Native_Utils.update(
-						_merivale$victor$Interface_Model_Examples$elaboration,
-						{
-							recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-							string1: _elm_lang$core$Maybe$Just('tomorrow')
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		_1: {
-			ctor: '::',
-			_0: {
-				plus: false,
-				object: A3(
-					_merivale$victor$Theory_Plain_Nucleus$Other,
-					false,
-					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-					_elm_lang$core$Maybe$Nothing),
-				verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'see', false, false),
-				status: _elm_lang$core$Maybe$Nothing,
-				balances: {
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Maybe$Nothing,
-						_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-							A3(
-								_merivale$victor$Theory_Plain_Nucleus$Other,
-								false,
-								_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-								_elm_lang$core$Maybe$Nothing))
-					},
-					_1: {ctor: '[]'}
-				},
-				elaborations: {
-					ctor: '::',
-					_0: _elm_lang$core$Native_Utils.update(
-						_merivale$victor$Interface_Model_Examples$elaboration,
-						{
-							recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-							string1: _elm_lang$core$Maybe$Just('tomorrow'),
-							displacer: _elm_lang$core$Maybe$Just(
-								_merivale$victor$Theory_Long_Displacers$Primary(
-									{
-										ctor: '_Tuple2',
-										_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'go', true, false),
-										_1: _elm_lang$core$Maybe$Nothing
-									}))
-						}),
-					_1: {ctor: '[]'}
-				}
-			},
-			_1: {
-				ctor: '::',
-				_0: {
-					plus: false,
-					object: A3(
-						_merivale$victor$Theory_Plain_Nucleus$Other,
-						false,
-						_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-						_elm_lang$core$Maybe$Just('Victor')),
-					verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'know', false, false),
-					status: _elm_lang$core$Maybe$Nothing,
-					balances: {ctor: '[]'},
-					elaborations: {
-						ctor: '::',
-						_0: _elm_lang$core$Native_Utils.update(
-							_merivale$victor$Interface_Model_Examples$elaboration,
-							{
-								recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
-								displacer: _elm_lang$core$Maybe$Just(
-									_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Yes1))
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				_1: {
-					ctor: '::',
-					_0: {
-						plus: false,
-						object: A3(
-							_merivale$victor$Theory_Plain_Nucleus$Other,
-							false,
-							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-							_elm_lang$core$Maybe$Just('Victor')),
-						verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'know', false, false),
-						status: _elm_lang$core$Maybe$Nothing,
-						balances: {ctor: '[]'},
-						elaborations: {
-							ctor: '::',
-							_0: _elm_lang$core$Native_Utils.update(
-								_merivale$victor$Interface_Model_Examples$elaboration,
-								{
-									recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
-									displacer: _elm_lang$core$Maybe$Just(
-										_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Yes1))
-								}),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$core$Native_Utils.update(
-									_merivale$victor$Interface_Model_Examples$elaboration,
-									{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							plus: false,
-							object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'rain', false, false),
-							status: _elm_lang$core$Maybe$Nothing,
-							balances: {ctor: '[]'},
-							elaborations: {
-								ctor: '::',
-								_0: _elm_lang$core$Native_Utils.update(
-									_merivale$victor$Interface_Model_Examples$elaboration,
-									{
-										recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-										string1: _elm_lang$core$Maybe$Just('tomorrow'),
-										displacer: _elm_lang$core$Maybe$Just(
-											_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Yes1))
-									}),
-								_1: {ctor: '[]'}
-							}
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								plus: false,
-								object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-								verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'rain', false, false),
-								status: _elm_lang$core$Maybe$Nothing,
-								balances: {ctor: '[]'},
-								elaborations: {
-									ctor: '::',
-									_0: _elm_lang$core$Native_Utils.update(
-										_merivale$victor$Interface_Model_Examples$elaboration,
-										{
-											recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-											string1: _elm_lang$core$Maybe$Just('tomorrow'),
-											displacer: _elm_lang$core$Maybe$Just(
-												_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Maybe1))
-										}),
-									_1: {ctor: '[]'}
-								}
-							},
-							_1: {
-								ctor: '::',
-								_0: {
-									plus: false,
-									object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-									verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'rain', false, false),
-									status: _elm_lang$core$Maybe$Nothing,
-									balances: {ctor: '[]'},
-									elaborations: {
-										ctor: '::',
-										_0: _elm_lang$core$Native_Utils.update(
-											_merivale$victor$Interface_Model_Examples$elaboration,
-											{
-												recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-												string1: _elm_lang$core$Maybe$Just('tomorrow'),
-												displacer: _elm_lang$core$Maybe$Just(
-													_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Maybe3))
-											}),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$core$Native_Utils.update(
-												_merivale$victor$Interface_Model_Examples$elaboration,
-												{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
-											_1: {ctor: '[]'}
-										}
-									}
-								},
-								_1: {
-									ctor: '::',
-									_0: {
-										plus: false,
-										object: _merivale$victor$Theory_Plain_Nucleus$Hearer(false),
-										verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'hurt', false, false),
-										status: _elm_lang$core$Maybe$Nothing,
-										balances: {
-											ctor: '::',
-											_0: {
-												ctor: '_Tuple2',
-												_0: _elm_lang$core$Maybe$Nothing,
-												_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-													A3(
-														_merivale$victor$Theory_Plain_Nucleus$Other,
-														false,
-														_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-														_elm_lang$core$Maybe$Nothing))
-											},
-											_1: {ctor: '[]'}
-										},
-										elaborations: {
-											ctor: '::',
-											_0: _elm_lang$core$Native_Utils.update(
-												_merivale$victor$Interface_Model_Examples$elaboration,
-												{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$core$Native_Utils.update(
-													_merivale$victor$Interface_Model_Examples$elaboration,
-													{
-														recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
-														displacer: _elm_lang$core$Maybe$Just(
-															_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Maybe1))
-													}),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$core$Native_Utils.update(
-														_merivale$victor$Interface_Model_Examples$elaboration,
-														{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									},
-									_1: {
-										ctor: '::',
-										_0: {
-											plus: false,
-											object: _merivale$victor$Theory_Plain_Nucleus$Hearer(false),
-											verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'hurt', false, false),
-											status: _elm_lang$core$Maybe$Nothing,
-											balances: {
-												ctor: '::',
-												_0: {
-													ctor: '_Tuple2',
-													_0: _elm_lang$core$Maybe$Nothing,
-													_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-														A3(
-															_merivale$victor$Theory_Plain_Nucleus$Other,
-															false,
-															_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-															_elm_lang$core$Maybe$Nothing))
-												},
-												_1: {ctor: '[]'}
-											},
-											elaborations: {
-												ctor: '::',
-												_0: _elm_lang$core$Native_Utils.update(
-													_merivale$victor$Interface_Model_Examples$elaboration,
-													{
-														recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-														displacer: _elm_lang$core$Maybe$Just(
-															_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Maybe1))
-													}),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$core$Native_Utils.update(
-														_merivale$victor$Interface_Model_Examples$elaboration,
-														{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$core$Native_Utils.update(
-															_merivale$victor$Interface_Model_Examples$elaboration,
-															{recipe: _merivale$victor$Interface_Model_Types$MakePRIOR}),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										},
-										_1: {
-											ctor: '::',
-											_0: {
-												plus: false,
-												object: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
-												verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'try', false, false),
-												status: _elm_lang$core$Maybe$Nothing,
-												balances: {
-													ctor: '::',
-													_0: {
-														ctor: '_Tuple2',
-														_0: _elm_lang$core$Maybe$Nothing,
-														_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-															A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
-													},
-													_1: {ctor: '[]'}
-												},
-												elaborations: {
-													ctor: '::',
-													_0: _elm_lang$core$Native_Utils.update(
-														_merivale$victor$Interface_Model_Examples$elaboration,
-														{
-															recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR,
-															string1: _elm_lang$core$Maybe$Just('sometimes'),
-															displacer: _elm_lang$core$Maybe$Just(
-																_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Yes1))
-														}),
-													_1: {ctor: '[]'}
-												}
-											},
-											_1: {
-												ctor: '::',
-												_0: {
-													plus: false,
-													object: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
-													verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'try', false, false),
-													status: _elm_lang$core$Maybe$Nothing,
-													balances: {
-														ctor: '::',
-														_0: {
-															ctor: '_Tuple2',
-															_0: _elm_lang$core$Maybe$Nothing,
-															_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-																A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
-														},
-														_1: {ctor: '[]'}
-													},
-													elaborations: {
-														ctor: '::',
-														_0: _elm_lang$core$Native_Utils.update(
-															_merivale$victor$Interface_Model_Examples$elaboration,
-															{
-																recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR,
-																string1: _elm_lang$core$Maybe$Just('occasionally'),
-																displacer: _elm_lang$core$Maybe$Just(
-																	_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Maybe1))
-															}),
-														_1: {ctor: '[]'}
-													}
-												},
-												_1: {
-													ctor: '::',
-													_0: {
-														plus: false,
-														object: A3(
-															_merivale$victor$Theory_Plain_Nucleus$Other,
-															false,
-															_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-															_elm_lang$core$Maybe$Nothing),
-														verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'eat', false, false),
-														status: _elm_lang$core$Maybe$Just(
-															_merivale$victor$Theory_Plain_Nucleus$Relative(_merivale$victor$Theory_Plain_Nucleus$Out)),
-														balances: {ctor: '[]'},
-														elaborations: {
-															ctor: '::',
-															_0: _elm_lang$core$Native_Utils.update(
-																_merivale$victor$Interface_Model_Examples$elaboration,
-																{
-																	recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR,
-																	displacer: _elm_lang$core$Maybe$Just(
-																		_merivale$victor$Theory_Long_Displacers$Primary(
-																			{
-																				ctor: '_Tuple2',
-																				_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'tend', false, false),
-																				_1: _elm_lang$core$Maybe$Nothing
-																			}))
-																}),
-															_1: {ctor: '[]'}
-														}
-													},
-													_1: {
-														ctor: '::',
-														_0: {
-															plus: false,
-															object: A3(
-																_merivale$victor$Theory_Plain_Nucleus$Other,
-																false,
-																_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-																_elm_lang$core$Maybe$Nothing),
-															verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'eat', false, false),
-															status: _elm_lang$core$Maybe$Just(
-																_merivale$victor$Theory_Plain_Nucleus$Relative(_merivale$victor$Theory_Plain_Nucleus$Out)),
-															balances: {ctor: '[]'},
-															elaborations: {
-																ctor: '::',
-																_0: _elm_lang$core$Native_Utils.update(
-																	_merivale$victor$Interface_Model_Examples$elaboration,
-																	{
-																		recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR,
-																		displacer: _elm_lang$core$Maybe$Just(
-																			_merivale$victor$Theory_Long_Displacers$Primary(
-																				{
-																					ctor: '_Tuple2',
-																					_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'use', false, false),
-																					_1: _elm_lang$core$Maybe$Nothing
-																				}))
-																	}),
-																_1: {
-																	ctor: '::',
-																	_0: _elm_lang$core$Native_Utils.update(
-																		_merivale$victor$Interface_Model_Examples$elaboration,
-																		{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
-																	_1: {ctor: '[]'}
-																}
-															}
-														},
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-};
-var _merivale$victor$Interface_Model_Examples$shortFirst = {
-	plus: false,
-	object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-	verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'get', true, false),
-	status: _elm_lang$core$Maybe$Just(
-		_merivale$victor$Theory_Plain_Nucleus$Absolute('married')),
-	balances: {ctor: '[]'},
-	elaborations: {
-		ctor: '::',
-		_0: _elm_lang$core$Native_Utils.update(
-			_merivale$victor$Interface_Model_Examples$elaboration,
-			{
-				recipe: _merivale$victor$Interface_Model_Types$MakePAST,
-				string1: _elm_lang$core$Maybe$Just('yesterday')
-			}),
-		_1: {ctor: '[]'}
-	}
-};
-var _merivale$victor$Interface_Model_Examples$shortExamples = {
-	ctor: '::',
-	_0: _merivale$victor$Interface_Model_Examples$shortFirst,
-	_1: {
-		ctor: '::',
-		_0: {
-			plus: false,
-			object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-			verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'get', true, false),
-			status: _elm_lang$core$Maybe$Just(
-				_merivale$victor$Theory_Plain_Nucleus$Absolute('married')),
-			balances: {ctor: '[]'},
-			elaborations: {
-				ctor: '::',
-				_0: _elm_lang$core$Native_Utils.update(
-					_merivale$victor$Interface_Model_Examples$elaboration,
-					{recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED}),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$core$Native_Utils.update(
-						_merivale$victor$Interface_Model_Examples$elaboration,
-						{
-							recipe: _merivale$victor$Interface_Model_Types$MakePAST,
-							string1: _elm_lang$core$Maybe$Just('yesterday')
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		_1: {
-			ctor: '::',
-			_0: {
-				plus: false,
-				object: A3(
-					_merivale$victor$Theory_Plain_Nucleus$Other,
-					false,
-					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-					_elm_lang$core$Maybe$Just('Claire')),
-				verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'drink', false, false),
-				status: _elm_lang$core$Maybe$Nothing,
-				balances: {ctor: '[]'},
-				elaborations: {
-					ctor: '::',
-					_0: _elm_lang$core$Native_Utils.update(
-						_merivale$victor$Interface_Model_Examples$elaboration,
-						{recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR}),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$core$Native_Utils.update(
-							_merivale$victor$Interface_Model_Examples$elaboration,
-							{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			_1: {
-				ctor: '::',
-				_0: {
-					plus: false,
-					object: A3(
-						_merivale$victor$Theory_Plain_Nucleus$Other,
-						false,
-						_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-						_elm_lang$core$Maybe$Just('Claire')),
-					verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'drink', false, false),
-					status: _elm_lang$core$Maybe$Nothing,
-					balances: {ctor: '[]'},
-					elaborations: {
-						ctor: '::',
-						_0: _elm_lang$core$Native_Utils.update(
-							_merivale$victor$Interface_Model_Examples$elaboration,
-							{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$core$Native_Utils.update(
-								_merivale$victor$Interface_Model_Examples$elaboration,
-								{recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR}),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				_1: {
-					ctor: '::',
-					_0: {
-						plus: false,
-						object: A3(
-							_merivale$victor$Theory_Plain_Nucleus$Other,
-							false,
-							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-							_elm_lang$core$Maybe$Just('Victor')),
-						verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'see', false, false),
-						status: _elm_lang$core$Maybe$Nothing,
-						balances: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: _elm_lang$core$Maybe$Nothing,
-								_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-									A3(
-										_merivale$victor$Theory_Plain_Nucleus$Other,
-										false,
-										_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-										_elm_lang$core$Maybe$Just('Grannie')))
-							},
-							_1: {ctor: '[]'}
-						},
-						elaborations: {
-							ctor: '::',
-							_0: _elm_lang$core$Native_Utils.update(
-								_merivale$victor$Interface_Model_Examples$elaboration,
-								{
-									recipe: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
-									string1: _elm_lang$core$Maybe$Just('for two hours')
-								}),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$core$Native_Utils.update(
-									_merivale$victor$Interface_Model_Examples$elaboration,
-									{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$core$Native_Utils.update(
-										_merivale$victor$Interface_Model_Examples$elaboration,
-										{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							plus: false,
-							object: A3(
-								_merivale$victor$Theory_Plain_Nucleus$Other,
-								false,
-								_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-								_elm_lang$core$Maybe$Just('Victor')),
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'see', false, false),
-							status: _elm_lang$core$Maybe$Nothing,
-							balances: {
-								ctor: '::',
-								_0: {
-									ctor: '_Tuple2',
-									_0: _elm_lang$core$Maybe$Nothing,
-									_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-										A3(
-											_merivale$victor$Theory_Plain_Nucleus$Other,
-											false,
-											_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-											_elm_lang$core$Maybe$Just('Grannie')))
-								},
-								_1: {ctor: '[]'}
-							},
-							elaborations: {
-								ctor: '::',
-								_0: _elm_lang$core$Native_Utils.update(
-									_merivale$victor$Interface_Model_Examples$elaboration,
-									{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$core$Native_Utils.update(
-										_merivale$victor$Interface_Model_Examples$elaboration,
-										{
-											recipe: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
-											string1: _elm_lang$core$Maybe$Just('for two hours')
-										}),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$core$Native_Utils.update(
-											_merivale$victor$Interface_Model_Examples$elaboration,
-											{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								plus: false,
-								object: A3(
-									_merivale$victor$Theory_Plain_Nucleus$Other,
-									false,
-									_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-									_elm_lang$core$Maybe$Just('Grannie')),
-								verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'fall', false, false),
-								status: _elm_lang$core$Maybe$Just(
-									_merivale$victor$Theory_Plain_Nucleus$Relative(_merivale$victor$Theory_Plain_Nucleus$Over)),
-								balances: {ctor: '[]'},
-								elaborations: {
-									ctor: '::',
-									_0: _elm_lang$core$Native_Utils.update(
-										_merivale$victor$Interface_Model_Examples$elaboration,
-										{
-											recipe: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
-											string1: _elm_lang$core$Maybe$Just('fifteen times')
-										}),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$core$Native_Utils.update(
-											_merivale$victor$Interface_Model_Examples$elaboration,
-											{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$core$Native_Utils.update(
-												_merivale$victor$Interface_Model_Examples$elaboration,
-												{
-													recipe: _merivale$victor$Interface_Model_Types$MakePAST,
-													string1: _elm_lang$core$Maybe$Just('yesterday')
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							},
-							_1: {
-								ctor: '::',
-								_0: {
-									plus: false,
-									object: A3(
-										_merivale$victor$Theory_Plain_Nucleus$Other,
-										false,
-										_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-										_elm_lang$core$Maybe$Just('Grannie')),
-									verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'fall', false, false),
-									status: _elm_lang$core$Maybe$Just(
-										_merivale$victor$Theory_Plain_Nucleus$Relative(_merivale$victor$Theory_Plain_Nucleus$Over)),
-									balances: {ctor: '[]'},
-									elaborations: {
-										ctor: '::',
-										_0: _elm_lang$core$Native_Utils.update(
-											_merivale$victor$Interface_Model_Examples$elaboration,
-											{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$core$Native_Utils.update(
-												_merivale$victor$Interface_Model_Examples$elaboration,
-												{
-													recipe: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
-													string1: _elm_lang$core$Maybe$Just('fifteen times')
-												}),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$core$Native_Utils.update(
-													_merivale$victor$Interface_Model_Examples$elaboration,
-													{
-														recipe: _merivale$victor$Interface_Model_Types$MakePAST,
-														string1: _elm_lang$core$Maybe$Just('yesterday')
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								},
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-};
-var _merivale$victor$Interface_Model_Examples$plainFirst = {
-	plus: false,
-	object: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
-	verbality: _merivale$victor$Theory_Plain_Nucleus$Be(false),
-	status: _elm_lang$core$Maybe$Nothing,
-	balances: {
-		ctor: '::',
-		_0: {
-			ctor: '_Tuple2',
-			_0: _elm_lang$core$Maybe$Nothing,
-			_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-				A3(
-					_merivale$victor$Theory_Plain_Nucleus$Other,
-					false,
-					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-					_elm_lang$core$Maybe$Just('Victor')))
-		},
-		_1: {ctor: '[]'}
-	},
-	elaborations: {ctor: '[]'}
-};
-var _merivale$victor$Interface_Model_Examples$plainExamples = {
-	ctor: '::',
-	_0: _merivale$victor$Interface_Model_Examples$plainFirst,
-	_1: {
-		ctor: '::',
-		_0: {
-			plus: false,
-			object: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
-			verbality: _merivale$victor$Theory_Plain_Nucleus$Be(false),
-			status: _elm_lang$core$Maybe$Just(
-				_merivale$victor$Theory_Plain_Nucleus$Absolute('happy')),
-			balances: {
-				ctor: '::',
-				_0: {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$For),
-					_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-						_merivale$victor$Theory_Plain_Nucleus$Hearer(false))
-				},
-				_1: {ctor: '[]'}
-			},
-			elaborations: {ctor: '[]'}
-		},
-		_1: {
-			ctor: '::',
-			_0: {
-				plus: false,
-				object: A3(
-					_merivale$victor$Theory_Plain_Nucleus$Other,
-					false,
-					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-					_elm_lang$core$Maybe$Nothing),
-				verbality: _merivale$victor$Theory_Plain_Nucleus$Be(false),
-				status: _elm_lang$core$Maybe$Just(
-					_merivale$victor$Theory_Plain_Nucleus$Relative(_merivale$victor$Theory_Plain_Nucleus$Out)),
-				balances: {
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$With),
-						_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-							A3(
-								_merivale$victor$Theory_Plain_Nucleus$Other,
-								false,
-								_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
-								_elm_lang$core$Maybe$Just('Fred')))
-					},
-					_1: {ctor: '[]'}
-				},
-				elaborations: {ctor: '[]'}
-			},
-			_1: {
-				ctor: '::',
-				_0: {
-					plus: false,
-					object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-					verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'look', false, false),
-					status: _elm_lang$core$Maybe$Just(
-						_merivale$victor$Theory_Plain_Nucleus$Relative(_merivale$victor$Theory_Plain_Nucleus$Up)),
-					balances: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$To),
-							_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-								A3(
-									_merivale$victor$Theory_Plain_Nucleus$Other,
-									false,
-									_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
-									_elm_lang$core$Maybe$Nothing))
-						},
-						_1: {ctor: '[]'}
-					},
-					elaborations: {ctor: '[]'}
-				},
-				_1: {
-					ctor: '::',
-					_0: {
-						plus: false,
-						object: _merivale$victor$Theory_Plain_Nucleus$Speaker(true),
-						verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'like', false, false),
-						status: _elm_lang$core$Maybe$Nothing,
-						balances: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: _elm_lang$core$Maybe$Nothing,
-								_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-									A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
-							},
-							_1: {ctor: '[]'}
-						},
-						elaborations: {ctor: '[]'}
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							plus: false,
-							object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'live', false, false),
-							status: _elm_lang$core$Maybe$Nothing,
-							balances: {
-								ctor: '::',
-								_0: {
-									ctor: '_Tuple2',
-									_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$In),
-									_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-										A3(
-											_merivale$victor$Theory_Plain_Nucleus$Other,
-											false,
-											_elm_lang$core$Maybe$Nothing,
-											_elm_lang$core$Maybe$Just('France')))
-								},
-								_1: {ctor: '[]'}
-							},
-							elaborations: {ctor: '[]'}
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								plus: false,
-								object: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
-								verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'sing', true, false),
-								status: _elm_lang$core$Maybe$Nothing,
-								balances: {ctor: '[]'},
-								elaborations: {ctor: '[]'}
-							},
-							_1: {
-								ctor: '::',
-								_0: {
-									plus: false,
-									object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-									verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'laugh', true, false),
-									status: _elm_lang$core$Maybe$Nothing,
-									balances: {ctor: '[]'},
-									elaborations: {ctor: '[]'}
-								},
-								_1: {
-									ctor: '::',
-									_0: {
-										plus: false,
-										object: _merivale$victor$Theory_Plain_Nucleus$Speaker(true),
-										verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'leave', true, false),
-										status: _elm_lang$core$Maybe$Nothing,
-										balances: {
-											ctor: '::',
-											_0: {
-												ctor: '_Tuple2',
-												_0: _elm_lang$core$Maybe$Nothing,
-												_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-													A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
-											},
-											_1: {
-												ctor: '::',
-												_0: {
-													ctor: '_Tuple2',
-													_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$To),
-													_1: _merivale$victor$Theory_Plain_Nucleus$Different(
-														A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
-												},
-												_1: {ctor: '[]'}
-											}
-										},
-										elaborations: {ctor: '[]'}
-									},
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-};
-var _merivale$victor$Interface_Model_Examples$allExamples = A2(
-	_elm_lang$core$Basics_ops['++'],
-	_merivale$victor$Interface_Model_Examples$plainExamples,
-	A2(
-		_elm_lang$core$Basics_ops['++'],
-		_merivale$victor$Interface_Model_Examples$shortExamples,
-		A2(_elm_lang$core$Basics_ops['++'], _merivale$victor$Interface_Model_Examples$longExamples, _merivale$victor$Interface_Model_Examples$objectExamples)));
 
 var _merivale$victor$Interface_Model_State$toggleElaborationOther = function (elaboration) {
 	return _elm_lang$core$Native_Utils.update(
@@ -11099,29 +10053,6 @@ var _merivale$victor$Interface_Model_State$update = F2(
 	function (signal, model) {
 		var _p24 = signal;
 		switch (_p24.ctor) {
-			case 'LoadExample':
-				var examples = function () {
-					var _p25 = _p24._0;
-					switch (_p25.ctor) {
-						case 'PlainTheory':
-							return _merivale$victor$Interface_Model_Examples$plainExamples;
-						case 'ShortTheory':
-							return _merivale$victor$Interface_Model_Examples$shortExamples;
-						case 'LongTheory':
-							return _merivale$victor$Interface_Model_Examples$longExamples;
-						case 'ObjectTheory':
-							return _merivale$victor$Interface_Model_Examples$objectExamples;
-						default:
-							return _merivale$victor$Interface_Model_Examples$allExamples;
-					}
-				}();
-				var _p26 = _elm_lang$core$List$head(
-					A2(_elm_lang$core$List$drop, _p24._1, examples));
-				if (_p26.ctor === 'Nothing') {
-					return model;
-				} else {
-					return _p26._0;
-				}
 			case 'TogglePlus':
 				var allMinus = _merivale$victor$Interface_Model_State$minusAll(model);
 				return _elm_lang$core$Native_Utils.update(
@@ -11132,15 +10063,15 @@ var _merivale$victor$Interface_Model_State$update = F2(
 					model,
 					{object: _p24._0});
 			case 'SetObjectString':
-				var _p27 = model.object;
-				if (_p27.ctor === 'Other') {
+				var _p25 = model.object;
+				if (_p25.ctor === 'Other') {
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
 							object: A3(
 								_merivale$victor$Theory_Plain_Nucleus$Other,
-								_p27._0,
-								_p27._1,
+								_p25._0,
+								_p25._1,
 								_merivale$victor$Interface_Model_State$maybe(_p24._0))
 						});
 				} else {
@@ -11151,38 +10082,38 @@ var _merivale$victor$Interface_Model_State$update = F2(
 					model,
 					{verbality: _p24._0});
 			case 'SetVerbalityString':
-				var _p28 = model.verbality;
-				if (_p28.ctor === 'Do') {
+				var _p26 = model.verbality;
+				if (_p26.ctor === 'Do') {
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p24._0, _p28._1, _p28._2)
+							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p24._0, _p26._1, _p26._2)
 						});
 				} else {
 					return model;
 				}
 			case 'ToggleVerbalityOngoing':
-				var _p29 = model.verbality;
-				if (_p29.ctor === 'Be') {
+				var _p27 = model.verbality;
+				if (_p27.ctor === 'Be') {
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							verbality: _merivale$victor$Theory_Plain_Nucleus$Be(!_p29._0)
+							verbality: _merivale$victor$Theory_Plain_Nucleus$Be(!_p27._0)
 						});
 				} else {
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p29._0, !_p29._1, _p29._2)
+							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p27._0, !_p27._1, _p27._2)
 						});
 				}
 			case 'ToggleVerbalityPassive':
-				var _p30 = model.verbality;
-				if (_p30.ctor === 'Do') {
+				var _p28 = model.verbality;
+				if (_p28.ctor === 'Do') {
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p30._0, _p30._1, !_p30._2)
+							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p28._0, _p28._1, !_p28._2)
 						});
 				} else {
 					return model;
@@ -11472,20 +10403,26 @@ var _merivale$victor$Interface_Model_State$update = F2(
 					});
 		}
 	});
-var _merivale$victor$Interface_Model_State$initial = function (theoryLayer) {
-	var _p31 = theoryLayer;
-	switch (_p31.ctor) {
-		case 'PlainTheory':
-			return _merivale$victor$Interface_Model_Examples$plainFirst;
-		case 'ShortTheory':
-			return _merivale$victor$Interface_Model_Examples$shortFirst;
-		case 'LongTheory':
-			return _merivale$victor$Interface_Model_Examples$longFirst;
-		case 'ObjectTheory':
-			return _merivale$victor$Interface_Model_Examples$objectFirst;
-		default:
-			return _merivale$victor$Interface_Model_Examples$plainFirst;
-	}
+var _merivale$victor$Interface_Model_State$initial = {
+	plus: false,
+	object: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
+	verbality: _merivale$victor$Theory_Plain_Nucleus$Be(false),
+	status: _elm_lang$core$Maybe$Nothing,
+	balances: {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Maybe$Nothing,
+			_1: _merivale$victor$Theory_Plain_Nucleus$Different(
+				A3(
+					_merivale$victor$Theory_Plain_Nucleus$Other,
+					false,
+					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
+					_elm_lang$core$Maybe$Just('Victor')))
+		},
+		_1: {ctor: '[]'}
+	},
+	elaborations: {ctor: '[]'}
 };
 
 var _merivale$victor$Interface_View_Buttons$iconButton = function (_p0) {
@@ -11564,202 +10501,81 @@ var _merivale$victor$Interface_View_Buttons$addElaboration = F2(
 						' Elaboration'))
 			});
 	});
-var _merivale$victor$Interface_View_Buttons$elaborationButtons = F3(
-	function (theoryLayer, index, plus) {
+var _merivale$victor$Interface_View_Buttons$elaborationButtons = F2(
+	function (index, plus) {
 		var $class = plus ? 'elaborations active' : 'elaborations';
-		var _p4 = theoryLayer;
-		switch (_p4.ctor) {
-			case 'PlainTheory':
-				return A2(
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class($class),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
 					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class($class),
-						_1: {ctor: '[]'}
-					},
-					{ctor: '[]'});
-			case 'ShortTheory':
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class($class),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							A2(
-								_elm_lang$core$List$map,
-								_merivale$victor$Interface_View_Buttons$addElaboration(index),
-								{
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$List$map,
+						_merivale$victor$Interface_View_Buttons$addElaboration(index),
+						{
+							ctor: '::',
+							_0: _merivale$victor$Interface_Model_Types$MakeNEGATIVE,
+							_1: {
+								ctor: '::',
+								_0: _merivale$victor$Interface_Model_Types$MakePAST,
+								_1: {
 									ctor: '::',
-									_0: _merivale$victor$Interface_Model_Types$MakeNEGATIVE,
+									_0: _merivale$victor$Interface_Model_Types$MakePRIOR,
 									_1: {
 										ctor: '::',
-										_0: _merivale$victor$Interface_Model_Types$MakePAST,
+										_0: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
 										_1: {
 											ctor: '::',
-											_0: _merivale$victor$Interface_Model_Types$MakePRIOR,
+											_0: _merivale$victor$Interface_Model_Types$MakeREGULAR,
 											_1: {
 												ctor: '::',
-												_0: _merivale$victor$Interface_Model_Types$MakeREGULAR,
-												_1: {
-													ctor: '::',
-													_0: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-													_1: {
-														ctor: '::',
-														_0: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
-														_1: {
-															ctor: '::',
-															_0: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
-															_1: {ctor: '[]'}
-														}
-													}
-												}
-											}
-										}
-									}
-								})),
-						_1: {ctor: '[]'}
-					});
-			case 'LongTheory':
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class($class),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							A2(
-								_elm_lang$core$List$map,
-								_merivale$victor$Interface_View_Buttons$addElaboration(index),
-								{
-									ctor: '::',
-									_0: _merivale$victor$Interface_Model_Types$MakeNEGATIVE,
-									_1: {
-										ctor: '::',
-										_0: _merivale$victor$Interface_Model_Types$MakePAST,
-										_1: {
-											ctor: '::',
-											_0: _merivale$victor$Interface_Model_Types$MakePRIOR,
-											_1: {
-												ctor: '::',
-												_0: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
+												_0: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
 												_1: {ctor: '[]'}
 											}
 										}
 									}
-								})),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{ctor: '[]'},
-								A2(
-									_elm_lang$core$List$map,
-									_merivale$victor$Interface_View_Buttons$addElaboration(index),
-									{
-										ctor: '::',
-										_0: _merivale$victor$Interface_Model_Types$MakeREGULAR,
-										_1: {
-											ctor: '::',
-											_0: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-											_1: {
-												ctor: '::',
-												_0: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
-												_1: {
-													ctor: '::',
-													_0: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									})),
-							_1: {ctor: '[]'}
-						}
-					});
-			default:
-				return A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class($class),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							A2(
-								_elm_lang$core$List$map,
-								_merivale$victor$Interface_View_Buttons$addElaboration(index),
-								{
+								}
+							}
+						})),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$List$map,
+							_merivale$victor$Interface_View_Buttons$addElaboration(index),
+							{
+								ctor: '::',
+								_0: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
+								_1: {
 									ctor: '::',
-									_0: _merivale$victor$Interface_Model_Types$MakeNEGATIVE,
+									_0: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
 									_1: {
 										ctor: '::',
-										_0: _merivale$victor$Interface_Model_Types$MakePAST,
+										_0: _merivale$victor$Interface_Model_Types$MakeINDIRECT,
 										_1: {
 											ctor: '::',
-											_0: _merivale$victor$Interface_Model_Types$MakePRIOR,
+											_0: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
 											_1: {
 												ctor: '::',
-												_0: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
-												_1: {
-													ctor: '::',
-													_0: _merivale$victor$Interface_Model_Types$MakeREGULAR,
-													_1: {
-														ctor: '::',
-														_0: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
-														_1: {ctor: '[]'}
-													}
-												}
+												_0: _merivale$victor$Interface_Model_Types$MakeAMASSED,
+												_1: {ctor: '[]'}
 											}
 										}
 									}
-								})),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{ctor: '[]'},
-								A2(
-									_elm_lang$core$List$map,
-									_merivale$victor$Interface_View_Buttons$addElaboration(index),
-									{
-										ctor: '::',
-										_0: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
-										_1: {
-											ctor: '::',
-											_0: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
-											_1: {
-												ctor: '::',
-												_0: _merivale$victor$Interface_Model_Types$MakeINDIRECT,
-												_1: {
-													ctor: '::',
-													_0: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
-													_1: {
-														ctor: '::',
-														_0: _merivale$victor$Interface_Model_Types$MakeAMASSED,
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									})),
-							_1: {ctor: '[]'}
-						}
-					});
-		}
+								}
+							})),
+					_1: {ctor: '[]'}
+				}
+			});
 	});
 var _merivale$victor$Interface_View_Buttons$toggleElaborations = F2(
 	function (index, plus) {
@@ -13158,44 +11974,28 @@ var _merivale$victor$Interface_View_Nucleus$heading = F2(
 			},
 			A2(_elm_lang$core$Basics_ops['++'], left, right));
 	});
-var _merivale$victor$Interface_View_Nucleus$nucleus = F2(
-	function (theoryLayer, model) {
-		return _elm_lang$core$Native_Utils.eq(theoryLayer, _merivale$victor$Interface_Model_Types$PlainTheory) ? A2(
-			_elm_lang$html$Html$div,
-			{
+var _merivale$victor$Interface_View_Nucleus$nucleus = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('nucleus'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(_merivale$victor$Interface_View_Nucleus$heading, true, model),
+			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('nucleus'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(_merivale$victor$Interface_View_Nucleus$heading, false, model),
+				_0: A2(_merivale$victor$Interface_View_Buttons$elaborationButtons, -1, model.plus),
 				_1: {
 					ctor: '::',
 					_0: _merivale$victor$Interface_View_Nucleus$body(model),
 					_1: {ctor: '[]'}
 				}
-			}) : A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('nucleus'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(_merivale$victor$Interface_View_Nucleus$heading, true, model),
-				_1: {
-					ctor: '::',
-					_0: A3(_merivale$victor$Interface_View_Buttons$elaborationButtons, theoryLayer, -1, model.plus),
-					_1: {
-						ctor: '::',
-						_0: _merivale$victor$Interface_View_Nucleus$body(model),
-						_1: {ctor: '[]'}
-					}
-				}
-			});
-	});
+			}
+		});
+};
 
 var _merivale$victor$Interface_View_Elaborations$other = F2(
 	function (index, checked) {
@@ -13755,8 +12555,8 @@ var _merivale$victor$Interface_View_Elaborations$pastTime = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _merivale$victor$Interface_View_Elaborations$elaborationBody = F5(
-	function (theoryLayer, balanceCount, index, elaboration, subContent) {
+var _merivale$victor$Interface_View_Elaborations$elaborationBody = F4(
+	function (balanceCount, index, elaboration, subContent) {
 		var _p6 = elaboration.recipe;
 		switch (_p6.ctor) {
 			case 'MakePAST':
@@ -13793,22 +12593,7 @@ var _merivale$victor$Interface_View_Elaborations$elaborationBody = F5(
 							_1: {ctor: '[]'}
 						}));
 			case 'MakePREORDAINED':
-				return _elm_lang$core$Native_Utils.eq(theoryLayer, _merivale$victor$Interface_Model_Types$ShortTheory) ? A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('body'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Elaborations$preordainedTime, index, elaboration),
-						_1: {
-							ctor: '::',
-							_0: subContent,
-							_1: {ctor: '[]'}
-						}
-					}) : A2(
+				return A2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
@@ -13828,22 +12613,7 @@ var _merivale$victor$Interface_View_Elaborations$elaborationBody = F5(
 							}
 						}));
 			case 'MakeREGULAR':
-				return _elm_lang$core$Native_Utils.eq(theoryLayer, _merivale$victor$Interface_Model_Types$ShortTheory) ? A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('body'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(_merivale$victor$Interface_View_Elaborations$frequency, index, elaboration),
-						_1: {
-							ctor: '::',
-							_0: subContent,
-							_1: {ctor: '[]'}
-						}
-					}) : A2(
+				return A2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
@@ -14024,8 +12794,8 @@ var _merivale$victor$Interface_View_Elaborations$elaborationHeading = F2(
 				}
 			});
 	});
-var _merivale$victor$Interface_View_Elaborations$elaborationInput = F5(
-	function (theoryLayer, balanceCount, index, elaboration, subContent) {
+var _merivale$victor$Interface_View_Elaborations$elaborationInput = F4(
+	function (balanceCount, index, elaboration, subContent) {
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -14038,275 +12808,39 @@ var _merivale$victor$Interface_View_Elaborations$elaborationInput = F5(
 				_0: A2(_merivale$victor$Interface_View_Elaborations$elaborationHeading, index, elaboration),
 				_1: {
 					ctor: '::',
-					_0: A3(_merivale$victor$Interface_View_Buttons$elaborationButtons, theoryLayer, index, elaboration.plus),
+					_0: A2(_merivale$victor$Interface_View_Buttons$elaborationButtons, index, elaboration.plus),
 					_1: {
 						ctor: '::',
-						_0: A5(_merivale$victor$Interface_View_Elaborations$elaborationBody, theoryLayer, balanceCount, index, elaboration, subContent),
+						_0: A4(_merivale$victor$Interface_View_Elaborations$elaborationBody, balanceCount, index, elaboration, subContent),
 						_1: {ctor: '[]'}
 					}
 				}
 			});
 	});
-var _merivale$victor$Interface_View_Elaborations$input = F3(
-	function (theoryLayer, elaborations, model) {
+var _merivale$victor$Interface_View_Elaborations$input = F2(
+	function (elaborations, model) {
 		var _p7 = _elm_lang$core$List$head(elaborations);
 		if (_p7.ctor === 'Nothing') {
-			return A2(_merivale$victor$Interface_View_Nucleus$nucleus, theoryLayer, model);
+			return _merivale$victor$Interface_View_Nucleus$nucleus(model);
 		} else {
-			var subContent = A3(
+			var subContent = A2(
 				_merivale$victor$Interface_View_Elaborations$input,
-				theoryLayer,
 				A2(_elm_lang$core$List$drop, 1, elaborations),
 				model);
 			var index = _elm_lang$core$List$length(elaborations) - 1;
-			return A5(
+			return A4(
 				_merivale$victor$Interface_View_Elaborations$elaborationInput,
-				theoryLayer,
 				_elm_lang$core$List$length(model.balances),
 				index,
 				_p7._0,
 				subContent);
 		}
 	});
-var _merivale$victor$Interface_View_Elaborations$elaborations = F2(
-	function (theoryLayer, model) {
-		return A3(
-			_merivale$victor$Interface_View_Elaborations$input,
-			theoryLayer,
-			_elm_lang$core$List$reverse(model.elaborations),
-			model);
-	});
-
-var _merivale$victor$Interface_View_Examples$objectExamples = {
-	ctor: '::',
-	_0: 'INDIRECT -1 ( The, \"king\", \"of France\") ( Male, ( Be, \"bald\" ) )',
-	_1: {
-		ctor: '::',
-		_0: 'INDIRECT -1 ( RelatedTo (Male \"Smith\"), \"murderer\") ( Male, ( Be, \"insane\" ) )',
-		_1: {ctor: '[]'}
-	}
-};
-var _merivale$victor$Interface_View_Examples$longExamples = {
-	ctor: '::',
-	_0: 'DISPLACED (Do \"go\" Ongoing) ( Female, Do \"see\", [ Male ] )',
-	_1: {
-		ctor: '::',
-		_0: 'PREORDAINED \"tomorrow\" (DISPLACED (Do \"go\" Ongoing) ( Female, Do \"see\", [ Male ] ))',
-		_1: {
-			ctor: '::',
-			_0: 'PREORDAINED (Do \"go\" Ongoing) ( Female, Do \"see\", [ Male ] )',
-			_1: {
-				ctor: '::',
-				_0: 'DISPLACED Yes1 ( Male \"Victor\", Do \"know\" )',
-				_1: {
-					ctor: '::',
-					_0: 'PAST (DISPLACED Yes1 ( Male \"Victor\", Do \"know\" ))',
-					_1: {
-						ctor: '::',
-						_0: 'PREORDAINED Yes1 \"tomorrow\" ( Other, Do \"rain\" )',
-						_1: {
-							ctor: '::',
-							_0: 'PREORDAINED Maybe1 \"tomorrow\" ( Other, Do \"rain\" )',
-							_1: {
-								ctor: '::',
-								_0: 'PAST (PREORDAINED Maybe3 \"tomorrow\" ( Other, Do \"rain\" ))',
-								_1: {
-									ctor: '::',
-									_0: 'PAST (DISPLACED Maybe1 (PAST ( Hearer, Do \"hurt\", [ Male ] )))',
-									_1: {
-										ctor: '::',
-										_0: 'PRIOR (PAST (PREORDAINED Maybe1 ( Hearer, Do \"hurt\", [ Male ] )))',
-										_1: {
-											ctor: '::',
-											_0: 'REGULAR Yes1 \"sometimes\" ( Speaker, Do \"try\", [ Other ] )',
-											_1: {
-												ctor: '::',
-												_0: 'REGULAR Maybe1 \"occasionally\" ( Speaker, Do \"try\", [ Other ] )',
-												_1: {
-													ctor: '::',
-													_0: 'REGULAR (Do \"tend\") ( Male, ( Do \"eat\", Out ) )',
-													_1: {
-														ctor: '::',
-														_0: 'PAST (REGULAR (Do \"use\") ( Male, ( Do \"eat\", Out ) ))',
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-};
-var _merivale$victor$Interface_View_Examples$shortExamples = {
-	ctor: '::',
-	_0: 'PAST \"yesterday\" ( Others, ( Do \"get\" Ongoing, \"married\" ) )',
-	_1: {
-		ctor: '::',
-		_0: 'PAST \"yesterday\" (PREORDAINED ( Others, ( Do \"get\" Ongoing, \"married\" ) ))',
-		_1: {
-			ctor: '::',
-			_0: 'NEGATIVE (REGULAR ( Female \"Claire\", Do \"drink\" ))',
-			_1: {
-				ctor: '::',
-				_0: 'REGULAR (NEGATIVE ( Female \"Claire\", Do \"drink\" ))',
-				_1: {
-					ctor: '::',
-					_0: 'PAST (NEGATIVE (EXTENDED \"for two hours\" ( Male \"Victor\", Do \"see\", [ Female \"Grannie\" ] )))',
-					_1: {
-						ctor: '::',
-						_0: 'PAST (EXTENDED \"for two hours\" (NEGATIVE ( Male \"Victor\", Do \"see\", [ Female \"Grannie\" ] )))',
-						_1: {
-							ctor: '::',
-							_0: 'PAST (NEGATIVE (SCATTERED \"fifteen times\" ( Female \"Grannie\", ( Do \"fall\", Over ) )))',
-							_1: {
-								ctor: '::',
-								_0: 'PAST (SCATTERED \"fifteen times\" (NEGATIVE ( Female \"Grannie\", ( Do \"fall\", Over ) )))',
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-};
-var _merivale$victor$Interface_View_Examples$plainExamples = {
-	ctor: '::',
-	_0: '( Speaker, Be, [ Male \"Victor\" ] )',
-	_1: {
-		ctor: '::',
-		_0: '( Speaker, ( Be, \"happy\" ), [ ( For, Hearer ) ] )',
-		_1: {
-			ctor: '::',
-			_0: '( Female, ( Be, Out ), [ ( With, Male \"Fred\" ) ] )',
-			_1: {
-				ctor: '::',
-				_0: '( Others, ( Do \"look\", Up ), [ ( To, Female ) ] )',
-				_1: {
-					ctor: '::',
-					_0: '( Speakers, Do \"like\", [ Others ] )',
-					_1: {
-						ctor: '::',
-						_0: '( Others, Do \"live\", [ ( In, Other \"France\" ) ] )',
-						_1: {
-							ctor: '::',
-							_0: '( Speaker, Do \"sing\" Ongoing )',
-							_1: {
-								ctor: '::',
-								_0: '( Others, Do \"laugh\" Ongoing )',
-								_1: {
-									ctor: '::',
-									_0: '( Speakers, Do \"leave\", [ Other, ( To, Others ) ] )',
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-};
-var _merivale$victor$Interface_View_Examples$allExamples = A2(
-	_elm_lang$core$Basics_ops['++'],
-	_merivale$victor$Interface_View_Examples$plainExamples,
-	A2(
-		_elm_lang$core$Basics_ops['++'],
-		_merivale$victor$Interface_View_Examples$shortExamples,
-		A2(_elm_lang$core$Basics_ops['++'], _merivale$victor$Interface_View_Examples$longExamples, _merivale$victor$Interface_View_Examples$objectExamples)));
-var _merivale$victor$Interface_View_Examples$examplesToString = F2(
-	function (theoryLayer, index) {
-		var list = function () {
-			var _p0 = theoryLayer;
-			switch (_p0.ctor) {
-				case 'FullTheory':
-					return _merivale$victor$Interface_View_Examples$allExamples;
-				case 'PlainTheory':
-					return _merivale$victor$Interface_View_Examples$plainExamples;
-				case 'ShortTheory':
-					return _merivale$victor$Interface_View_Examples$shortExamples;
-				case 'LongTheory':
-					return _merivale$victor$Interface_View_Examples$longExamples;
-				default:
-					return _merivale$victor$Interface_View_Examples$objectExamples;
-			}
-		}();
-		return A2(
-			_elm_lang$core$Maybe$withDefault,
-			'example index out of range',
-			_elm_lang$core$List$head(
-				A2(_elm_lang$core$List$drop, index, list)));
-	});
-var _merivale$victor$Interface_View_Examples$examplesRange = function (theoryLayer) {
-	var _p1 = theoryLayer;
-	switch (_p1.ctor) {
-		case 'FullTheory':
-			return A2(
-				_elm_lang$core$List$range,
-				0,
-				_elm_lang$core$List$length(_merivale$victor$Interface_View_Examples$allExamples) - 1);
-		case 'PlainTheory':
-			return A2(
-				_elm_lang$core$List$range,
-				0,
-				_elm_lang$core$List$length(_merivale$victor$Interface_View_Examples$plainExamples) - 1);
-		case 'ShortTheory':
-			return A2(
-				_elm_lang$core$List$range,
-				0,
-				_elm_lang$core$List$length(_merivale$victor$Interface_View_Examples$shortExamples) - 1);
-		case 'LongTheory':
-			return A2(
-				_elm_lang$core$List$range,
-				0,
-				_elm_lang$core$List$length(_merivale$victor$Interface_View_Examples$longExamples) - 1);
-		default:
-			return A2(
-				_elm_lang$core$List$range,
-				0,
-				_elm_lang$core$List$length(_merivale$victor$Interface_View_Examples$objectExamples) - 1);
-	}
-};
-var _merivale$victor$Interface_View_Examples$examples = function (theoryLayer) {
+var _merivale$victor$Interface_View_Elaborations$elaborations = function (model) {
 	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('examples'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$label,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Examples'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: _merivale$victor$Interface_View_Input$select(
-					{
-						value: 0,
-						options: _merivale$victor$Interface_View_Examples$examplesRange(theoryLayer),
-						equivalent: F2(
-							function (x, y) {
-								return _elm_lang$core$Native_Utils.eq(x, y);
-							}),
-						signal: _merivale$victor$Interface_Model_Types$LoadExample(theoryLayer),
-						toLabel: _merivale$victor$Interface_View_Examples$examplesToString(theoryLayer)
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
+		_merivale$victor$Interface_View_Elaborations$input,
+		_elm_lang$core$List$reverse(model.elaborations),
+		model);
 };
 
 var _merivale$victor$Interface_View_Output$format = function (sentence) {
@@ -14353,11 +12887,6 @@ var _merivale$victor$Interface_View_Output$output = function (result) {
 				_1: {ctor: '[]'}
 			});
 	}
-};
-
-var _merivale$victor$Theory_Words_Prepositions$preposition = function (relator) {
-	return _elm_lang$core$String$toLower(
-		_elm_lang$core$Basics$toString(relator));
 };
 
 var _merivale$victor$Theory_Words_Pronouns$relative2 = function (object) {
@@ -14516,6 +13045,34 @@ var _merivale$victor$Theory_Words_Pronouns$direct1 = function (object) {
 	}
 };
 
+var _merivale$victor$Theory_Words_Articles$article = F2(
+	function (plural, pointer) {
+		var _p0 = {ctor: '_Tuple2', _0: pointer, _1: plural};
+		switch (_p0._0.ctor) {
+			case 'The':
+				return 'the';
+			case 'This':
+				if (_p0._1 === false) {
+					return 'this';
+				} else {
+					return 'these';
+				}
+			case 'That':
+				if (_p0._1 === false) {
+					return 'that';
+				} else {
+					return 'those';
+				}
+			default:
+				return _merivale$victor$Theory_Words_Pronouns$relative1(_p0._0._0);
+		}
+	});
+
+var _merivale$victor$Theory_Words_Prepositions$preposition = function (relator) {
+	return _elm_lang$core$String$toLower(
+		_elm_lang$core$Basics$toString(relator));
+};
+
 var _merivale$victor$Theory_Words_Counters$pronoun = F2(
 	function (mainObject, weight) {
 		var _p0 = weight;
@@ -14556,6 +13113,46 @@ var _merivale$victor$Theory_Words_Counters$counter = F2(
 				_merivale$victor$Theory_Words_Counters$prefix(_p3._0),
 				A2(_merivale$victor$Theory_Words_Counters$pronoun, object, _p3._1)));
 	});
+
+var _merivale$victor$Theory_Words_Determiners$integerToString = function ($int) {
+	return (_elm_lang$core$Native_Utils.cmp($int, 0) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'minus ',
+		_merivale$victor$Theory_Words_Determiners$integerToString(0 - $int)) : (_elm_lang$core$Native_Utils.eq($int, 0) ? 'zero' : (_elm_lang$core$Native_Utils.eq($int, 1) ? 'one' : (_elm_lang$core$Native_Utils.eq($int, 2) ? 'two' : (_elm_lang$core$Native_Utils.eq($int, 3) ? 'three' : (_elm_lang$core$Native_Utils.eq($int, 4) ? 'four' : (_elm_lang$core$Native_Utils.eq($int, 5) ? 'five' : (_elm_lang$core$Native_Utils.eq($int, 6) ? 'six' : (_elm_lang$core$Native_Utils.eq($int, 7) ? 'seven' : (_elm_lang$core$Native_Utils.eq($int, 8) ? 'eight' : (_elm_lang$core$Native_Utils.eq($int, 9) ? 'nine' : (_elm_lang$core$Native_Utils.eq($int, 10) ? 'ten' : (_elm_lang$core$Native_Utils.eq($int, 11) ? 'eleven' : (_elm_lang$core$Native_Utils.eq($int, 12) ? 'twelve' : (_elm_lang$core$Native_Utils.eq($int, 13) ? 'thirteen' : (_elm_lang$core$Native_Utils.eq($int, 14) ? 'fourteen' : (_elm_lang$core$Native_Utils.eq($int, 15) ? 'fifteen' : (_elm_lang$core$Native_Utils.eq($int, 16) ? 'sixteen' : (_elm_lang$core$Native_Utils.eq($int, 17) ? 'seventeen' : (_elm_lang$core$Native_Utils.eq($int, 18) ? 'eighteen' : (_elm_lang$core$Native_Utils.eq($int, 19) ? 'nineteen' : (_elm_lang$core$Native_Utils.eq($int, 20) ? 'twenty' : ((_elm_lang$core$Native_Utils.cmp($int, 30) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'twenty-',
+		_merivale$victor$Theory_Words_Determiners$integerToString($int - 20)) : (_elm_lang$core$Native_Utils.eq($int, 30) ? 'thirty' : ((_elm_lang$core$Native_Utils.cmp($int, 40) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'thirty-',
+		_merivale$victor$Theory_Words_Determiners$integerToString($int - 30)) : (_elm_lang$core$Native_Utils.eq($int, 40) ? 'fourty' : ((_elm_lang$core$Native_Utils.cmp($int, 50) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'fourty-',
+		_merivale$victor$Theory_Words_Determiners$integerToString($int - 40)) : (_elm_lang$core$Native_Utils.eq($int, 50) ? 'fifty' : ((_elm_lang$core$Native_Utils.cmp($int, 60) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'fifty-',
+		_merivale$victor$Theory_Words_Determiners$integerToString($int - 50)) : (_elm_lang$core$Native_Utils.eq($int, 60) ? 'sixty' : ((_elm_lang$core$Native_Utils.cmp($int, 70) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'sixty-',
+		_merivale$victor$Theory_Words_Determiners$integerToString($int - 60)) : (_elm_lang$core$Native_Utils.eq($int, 70) ? 'seventy' : ((_elm_lang$core$Native_Utils.cmp($int, 80) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'seventy-',
+		_merivale$victor$Theory_Words_Determiners$integerToString($int - 70)) : (_elm_lang$core$Native_Utils.eq($int, 80) ? 'eighty' : ((_elm_lang$core$Native_Utils.cmp($int, 90) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'eighty-',
+		_merivale$victor$Theory_Words_Determiners$integerToString($int - 80)) : (_elm_lang$core$Native_Utils.eq($int, 90) ? 'ninety' : ((_elm_lang$core$Native_Utils.cmp($int, 100) < 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'ninety-',
+		_merivale$victor$Theory_Words_Determiners$integerToString($int - 90)) : 'a hundred or more'))))))))))))))))))))))))))))))))))));
+};
+var _merivale$victor$Theory_Words_Determiners$determiner = function (quantifier) {
+	var _p0 = quantifier;
+	if (_p0.ctor === 'Integer') {
+		return _merivale$victor$Theory_Words_Determiners$integerToString(_p0._0);
+	} else {
+		return _elm_lang$core$String$toLower(
+			_elm_lang$core$Basics$toString(quantifier));
+	}
+};
 
 var _merivale$victor$Theory_Words_Verbs$verbs = _elm_lang$core$Dict$fromList(
 	{
@@ -17533,69 +16130,6 @@ var _merivale$victor$Theory_Words_Nouns$plural = function (noun) {
 		A2(_elm_lang$core$Dict$get, noun, _merivale$victor$Theory_Words_Nouns$nouns));
 };
 
-var _merivale$victor$Theory_Words_Articles$article = F2(
-	function (plural, pointer) {
-		var _p0 = {ctor: '_Tuple2', _0: pointer, _1: plural};
-		switch (_p0._0.ctor) {
-			case 'The':
-				return 'the';
-			case 'This':
-				if (_p0._1 === false) {
-					return 'this';
-				} else {
-					return 'these';
-				}
-			case 'That':
-				if (_p0._1 === false) {
-					return 'that';
-				} else {
-					return 'those';
-				}
-			default:
-				return _merivale$victor$Theory_Words_Pronouns$relative1(_p0._0._0);
-		}
-	});
-
-var _merivale$victor$Theory_Words_Determiners$integerToString = function ($int) {
-	return (_elm_lang$core$Native_Utils.cmp($int, 0) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'minus ',
-		_merivale$victor$Theory_Words_Determiners$integerToString(0 - $int)) : (_elm_lang$core$Native_Utils.eq($int, 0) ? 'zero' : (_elm_lang$core$Native_Utils.eq($int, 1) ? 'one' : (_elm_lang$core$Native_Utils.eq($int, 2) ? 'two' : (_elm_lang$core$Native_Utils.eq($int, 3) ? 'three' : (_elm_lang$core$Native_Utils.eq($int, 4) ? 'four' : (_elm_lang$core$Native_Utils.eq($int, 5) ? 'five' : (_elm_lang$core$Native_Utils.eq($int, 6) ? 'six' : (_elm_lang$core$Native_Utils.eq($int, 7) ? 'seven' : (_elm_lang$core$Native_Utils.eq($int, 8) ? 'eight' : (_elm_lang$core$Native_Utils.eq($int, 9) ? 'nine' : (_elm_lang$core$Native_Utils.eq($int, 10) ? 'ten' : (_elm_lang$core$Native_Utils.eq($int, 11) ? 'eleven' : (_elm_lang$core$Native_Utils.eq($int, 12) ? 'twelve' : (_elm_lang$core$Native_Utils.eq($int, 13) ? 'thirteen' : (_elm_lang$core$Native_Utils.eq($int, 14) ? 'fourteen' : (_elm_lang$core$Native_Utils.eq($int, 15) ? 'fifteen' : (_elm_lang$core$Native_Utils.eq($int, 16) ? 'sixteen' : (_elm_lang$core$Native_Utils.eq($int, 17) ? 'seventeen' : (_elm_lang$core$Native_Utils.eq($int, 18) ? 'eighteen' : (_elm_lang$core$Native_Utils.eq($int, 19) ? 'nineteen' : (_elm_lang$core$Native_Utils.eq($int, 20) ? 'twenty' : ((_elm_lang$core$Native_Utils.cmp($int, 30) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'twenty-',
-		_merivale$victor$Theory_Words_Determiners$integerToString($int - 20)) : (_elm_lang$core$Native_Utils.eq($int, 30) ? 'thirty' : ((_elm_lang$core$Native_Utils.cmp($int, 40) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'thirty-',
-		_merivale$victor$Theory_Words_Determiners$integerToString($int - 30)) : (_elm_lang$core$Native_Utils.eq($int, 40) ? 'fourty' : ((_elm_lang$core$Native_Utils.cmp($int, 50) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'fourty-',
-		_merivale$victor$Theory_Words_Determiners$integerToString($int - 40)) : (_elm_lang$core$Native_Utils.eq($int, 50) ? 'fifty' : ((_elm_lang$core$Native_Utils.cmp($int, 60) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'fifty-',
-		_merivale$victor$Theory_Words_Determiners$integerToString($int - 50)) : (_elm_lang$core$Native_Utils.eq($int, 60) ? 'sixty' : ((_elm_lang$core$Native_Utils.cmp($int, 70) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'sixty-',
-		_merivale$victor$Theory_Words_Determiners$integerToString($int - 60)) : (_elm_lang$core$Native_Utils.eq($int, 70) ? 'seventy' : ((_elm_lang$core$Native_Utils.cmp($int, 80) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'seventy-',
-		_merivale$victor$Theory_Words_Determiners$integerToString($int - 70)) : (_elm_lang$core$Native_Utils.eq($int, 80) ? 'eighty' : ((_elm_lang$core$Native_Utils.cmp($int, 90) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'eighty-',
-		_merivale$victor$Theory_Words_Determiners$integerToString($int - 80)) : (_elm_lang$core$Native_Utils.eq($int, 90) ? 'ninety' : ((_elm_lang$core$Native_Utils.cmp($int, 100) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'ninety-',
-		_merivale$victor$Theory_Words_Determiners$integerToString($int - 90)) : 'a hundred or more'))))))))))))))))))))))))))))))))))));
-};
-var _merivale$victor$Theory_Words_Determiners$determiner = function (quantifier) {
-	var _p0 = quantifier;
-	if (_p0.ctor === 'Integer') {
-		return _merivale$victor$Theory_Words_Determiners$integerToString(_p0._0);
-	} else {
-		return _elm_lang$core$String$toLower(
-			_elm_lang$core$Basics$toString(quantifier));
-	}
-};
-
 var _merivale$victor$Theory_Object_Sentences$negateDeterminer = function (determinerPhrase) {
 	var _p0 = _elm_lang$core$List$head(determinerPhrase);
 	_v0_4:
@@ -18033,7 +16567,7 @@ var _merivale$victor$Victor$view = function (model) {
 	var result = A2(
 		_elm_lang$core$Result$andThen,
 		_merivale$victor$Theory_Object_Sentences$sentence,
-		_merivale$victor$Interface_Messages_Object$message(model));
+		_merivale$victor$Interface_Model_Messages$message(model));
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -18042,21 +16576,13 @@ var _merivale$victor$Victor$view = function (model) {
 			_0: _merivale$victor$Interface_View_Output$output(result),
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Interface_View_Examples$examples(_merivale$victor$Interface_Model_Types$FullTheory),
-				_1: {
-					ctor: '::',
-					_0: A2(_merivale$victor$Interface_View_Elaborations$elaborations, _merivale$victor$Interface_Model_Types$FullTheory, model),
-					_1: {ctor: '[]'}
-				}
+				_0: _merivale$victor$Interface_View_Elaborations$elaborations(model),
+				_1: {ctor: '[]'}
 			}
 		});
 };
 var _merivale$victor$Victor$main = _elm_lang$html$Html$beginnerProgram(
-	{
-		model: _merivale$victor$Interface_Model_State$initial(_merivale$victor$Interface_Model_Types$FullTheory),
-		update: _merivale$victor$Interface_Model_State$update,
-		view: _merivale$victor$Victor$view
-	})();
+	{model: _merivale$victor$Interface_Model_State$initial, update: _merivale$victor$Interface_Model_State$update, view: _merivale$victor$Victor$view})();
 
 var Elm = {};
 Elm['Victor'] = Elm['Victor'] || {};

@@ -4,32 +4,23 @@ module Interface.Model.State exposing (initial, update)
 for updating the model in response to user input.
 -}
 
-import Interface.Model.Examples as Examples
 import Interface.Model.Types exposing (..)
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
 import Theory.Plain.Nucleus exposing (..)
 
 
-{-| The initial application state. Depends on the layer of the theory.
+{-| The initial application state.
 -}
-initial : TheoryLayer -> Model
-initial theoryLayer =
-    case theoryLayer of
-        PlainTheory ->
-            Examples.plainFirst
-
-        ShortTheory ->
-            Examples.shortFirst
-
-        LongTheory ->
-            Examples.longFirst
-
-        ObjectTheory ->
-            Examples.objectFirst
-
-        FullTheory ->
-            Examples.plainFirst
+initial : Model
+initial =
+    { plus = False
+    , object = Speaker False
+    , verbality = Be False
+    , status = Nothing
+    , balances = [ ( Nothing, Different (Other False (Just Male) (Just "Victor")) ) ]
+    , elaborations = []
+    }
 
 
 {-| Function for updating the application state in response to user input.
@@ -37,32 +28,6 @@ initial theoryLayer =
 update : Signal -> Model -> Model
 update signal model =
     case signal of
-        LoadExample theoryLayer index ->
-            let
-                examples =
-                    case theoryLayer of
-                        PlainTheory ->
-                            Examples.plainExamples
-
-                        ShortTheory ->
-                            Examples.shortExamples
-
-                        LongTheory ->
-                            Examples.longExamples
-
-                        ObjectTheory ->
-                            Examples.objectExamples
-
-                        FullTheory ->
-                            Examples.allExamples
-            in
-            case List.head (List.drop index examples) of
-                Nothing ->
-                    model
-
-                Just example ->
-                    example
-
         TogglePlus ->
             let
                 allMinus =

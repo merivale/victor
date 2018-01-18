@@ -17,16 +17,16 @@ import Theory.Plain.Nucleus exposing (..)
 
 {-| The elaboration input box.
 -}
-elaborations : TheoryLayer -> Model -> Html.Html Signal
-elaborations theoryLayer model =
-    input theoryLayer (List.reverse model.elaborations) model
+elaborations : Model -> Html.Html Signal
+elaborations model =
+    input (List.reverse model.elaborations) model
 
 
-input : TheoryLayer -> List Elaboration -> Model -> Html.Html Signal
-input theoryLayer elaborations model =
+input : List Elaboration -> Model -> Html.Html Signal
+input elaborations model =
     case List.head elaborations of
         Nothing ->
-            Nucleus.nucleus theoryLayer model
+            Nucleus.nucleus model
 
         Just elaboration ->
             let
@@ -34,23 +34,22 @@ input theoryLayer elaborations model =
                     List.length elaborations - 1
 
                 subContent =
-                    input theoryLayer (List.drop 1 elaborations) model
+                    input (List.drop 1 elaborations) model
             in
             elaborationInput
-                theoryLayer
                 (List.length model.balances)
                 index
                 elaboration
                 subContent
 
 
-elaborationInput : TheoryLayer -> Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
-elaborationInput theoryLayer balanceCount index elaboration subContent =
+elaborationInput : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
+elaborationInput balanceCount index elaboration subContent =
     Html.div
         [ Attr.class "elaboration" ]
         [ elaborationHeading index elaboration
-        , Buttons.elaborationButtons theoryLayer index elaboration.plus
-        , elaborationBody theoryLayer balanceCount index elaboration subContent
+        , Buttons.elaborationButtons index elaboration.plus
+        , elaborationBody balanceCount index elaboration subContent
         ]
 
 
@@ -66,8 +65,8 @@ elaborationHeading index elaboration =
         ]
 
 
-elaborationBody : TheoryLayer -> Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
-elaborationBody theoryLayer balanceCount index elaboration subContent =
+elaborationBody : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
+elaborationBody balanceCount index elaboration subContent =
     case elaboration.recipe of
         MakePAST ->
             Html.div
@@ -82,36 +81,22 @@ elaborationBody theoryLayer balanceCount index elaboration subContent =
                 (displacer True True index elaboration ++ [ subContent ])
 
         MakePREORDAINED ->
-            if theoryLayer == ShortTheory then
-                Html.div
-                    [ Attr.class "body" ]
-                    [ preordainedTime index elaboration
-                    , subContent
-                    ]
-            else
-                Html.div
-                    [ Attr.class "body" ]
-                    (displacer False False index elaboration
-                        ++ [ preordainedTime index elaboration
-                           , subContent
-                           ]
-                    )
+            Html.div
+                [ Attr.class "body" ]
+                (displacer False False index elaboration
+                    ++ [ preordainedTime index elaboration
+                       , subContent
+                       ]
+                )
 
         MakeREGULAR ->
-            if theoryLayer == ShortTheory then
-                Html.div
-                    [ Attr.class "body" ]
-                    [ frequency index elaboration
-                    , subContent
-                    ]
-            else
-                Html.div
-                    [ Attr.class "body" ]
-                    (displacer False True index elaboration
-                        ++ [ frequency index elaboration
-                           , subContent
-                           ]
-                    )
+            Html.div
+                [ Attr.class "body" ]
+                (displacer False True index elaboration
+                    ++ [ frequency index elaboration
+                       , subContent
+                       ]
+                )
 
         MakeEXTENDED ->
             Html.div
