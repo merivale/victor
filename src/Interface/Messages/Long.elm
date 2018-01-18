@@ -1,11 +1,14 @@
 module Interface.Messages.Long exposing (message)
 
+{-| This module converts the model into a (long) message.
+-}
+
+import Interface.Model.Types exposing (..)
 import Maybe
 import Result exposing (andThen)
-import Interface.Model.Types exposing (..)
-import Theory.Plain.Nucleus exposing (..)
 import Theory.Long.Displacers exposing (..)
 import Theory.Long.Messages exposing (..)
+import Theory.Plain.Nucleus exposing (..)
 
 
 {-| The main exposed function.

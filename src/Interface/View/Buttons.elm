@@ -1,11 +1,14 @@
 module Interface.View.Buttons
     exposing
-        ( toggleElaborations
+        ( addBalance
         , elaborationButtons
-        , removeElaboration
-        , addBalance
         , removeBalance
+        , removeElaboration
+        , toggleElaborations
         )
+
+{-| This module creates a few buttons used in the interface.
+-}
 
 import Html
 import Html.Attributes as Attr
@@ -22,18 +25,18 @@ toggleElaborations index plus =
             else
                 ToggleElaborationPlus index
     in
-        if plus then
-            iconButton
-                { label = "minus"
-                , signal = signal
-                , title = "Hide Elaborations"
-                }
-        else
-            iconButton
-                { label = "plus"
-                , signal = signal
-                , title = "Show Elaborations"
-                }
+    if plus then
+        iconButton
+            { label = "minus"
+            , signal = signal
+            , title = "Hide Elaborations"
+            }
+    else
+        iconButton
+            { label = "plus"
+            , signal = signal
+            , title = "Show Elaborations"
+            }
 
 
 elaborationButtons : TheoryLayer -> Int -> Bool -> Html.Html Signal
@@ -45,67 +48,67 @@ elaborationButtons theoryLayer index plus =
             else
                 "elaborations"
     in
-        case theoryLayer of
-            PlainTheory ->
-                Html.div [ Attr.class class ] []
+    case theoryLayer of
+        PlainTheory ->
+            Html.div [ Attr.class class ] []
 
-            ShortTheory ->
-                Html.div [ Attr.class class ]
-                    [ Html.div []
-                        (List.map (addElaboration index)
-                            [ MakeNEGATIVE
-                            , MakePAST
-                            , MakePRIOR
-                            , MakeREGULAR
-                            , MakePREORDAINED
-                            , MakeEXTENDED
-                            , MakeSCATTERED
-                            ]
-                        )
-                    ]
+        ShortTheory ->
+            Html.div [ Attr.class class ]
+                [ Html.div []
+                    (List.map (addElaboration index)
+                        [ MakeNEGATIVE
+                        , MakePAST
+                        , MakePRIOR
+                        , MakeREGULAR
+                        , MakePREORDAINED
+                        , MakeEXTENDED
+                        , MakeSCATTERED
+                        ]
+                    )
+                ]
 
-            LongTheory ->
-                Html.div [ Attr.class class ]
-                    [ Html.div []
-                        (List.map (addElaboration index)
-                            [ MakeNEGATIVE
-                            , MakePAST
-                            , MakePRIOR
-                            , MakeDISPLACED
-                            ]
-                        )
-                    , Html.div []
-                        (List.map (addElaboration index)
-                            [ MakeREGULAR
-                            , MakePREORDAINED
-                            , MakeEXTENDED
-                            , MakeSCATTERED
-                            ]
-                        )
-                    ]
+        LongTheory ->
+            Html.div [ Attr.class class ]
+                [ Html.div []
+                    (List.map (addElaboration index)
+                        [ MakeNEGATIVE
+                        , MakePAST
+                        , MakePRIOR
+                        , MakeDISPLACED
+                        ]
+                    )
+                , Html.div []
+                    (List.map (addElaboration index)
+                        [ MakeREGULAR
+                        , MakePREORDAINED
+                        , MakeEXTENDED
+                        , MakeSCATTERED
+                        ]
+                    )
+                ]
 
-            _ ->
-                Html.div [ Attr.class class ]
-                    [ Html.div []
-                        (List.map (addElaboration index)
-                            [ MakeNEGATIVE
-                            , MakePAST
-                            , MakePRIOR
-                            , MakeDISPLACED
-                            , MakeREGULAR
-                            , MakePREORDAINED
-                            ]
-                        )
-                    , Html.div []
-                        (List.map (addElaboration index)
-                            [ MakeEXTENDED
-                            , MakeSCATTERED
-                            , MakeINDIRECT
-                            , MakeENUMERATED
-                            , MakeAMASSED
-                            ]
-                        )
-                    ]
+        _ ->
+            Html.div [ Attr.class class ]
+                [ Html.div []
+                    (List.map (addElaboration index)
+                        [ MakeNEGATIVE
+                        , MakePAST
+                        , MakePRIOR
+                        , MakeDISPLACED
+                        , MakeREGULAR
+                        , MakePREORDAINED
+                        ]
+                    )
+                , Html.div []
+                    (List.map (addElaboration index)
+                        [ MakeEXTENDED
+                        , MakeSCATTERED
+                        , MakeINDIRECT
+                        , MakeENUMERATED
+                        , MakeAMASSED
+                        ]
+                    )
+                ]
 
 
 addElaboration : Int -> Recipe -> Html.Html Signal
@@ -113,7 +116,7 @@ addElaboration index recipe =
     button
         { label = String.dropLeft 4 (toString recipe)
         , signal = AddElaboration index recipe
-        , title = "Add " ++ (String.dropLeft 4 (toString recipe)) ++ " Elaboration"
+        , title = "Add " ++ String.dropLeft 4 (toString recipe) ++ " Elaboration"
         }
 
 

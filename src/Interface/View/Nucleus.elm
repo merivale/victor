@@ -1,15 +1,15 @@
 module Interface.View.Nucleus exposing (nucleus)
 
-{-| Module for generating HTML inputs for nucleus factors.
+{-| Module for generating HTML inputs for the nucleus of a message.
 -}
 
 import Html
 import Html.Attributes as Attr
-import Theory.Plain.Nucleus exposing (..)
 import Interface.Model.Types exposing (..)
-import Interface.View.Ideas as Ideas
 import Interface.View.Buttons as Buttons
+import Interface.View.Ideas as Ideas
 import Interface.View.Input as Input
+import Theory.Plain.Nucleus exposing (..)
 
 
 {-| The nucleus input box.
@@ -48,7 +48,7 @@ heading toggleButton model =
             else
                 [ Buttons.addBalance ]
     in
-        Html.div [ Attr.class "heading" ] (left ++ right)
+    Html.div [ Attr.class "heading" ] (left ++ right)
 
 
 body : Model -> Html.Html Signal
@@ -56,7 +56,7 @@ body model =
     Html.div
         [ Attr.class "body" ]
         ([ object model.object, verbality model.verbality, status model.status ]
-            ++ (List.indexedMap balance model.balances)
+            ++ List.indexedMap balance model.balances
         )
 
 
@@ -116,7 +116,7 @@ balance : Int -> Balance -> Html.Html Signal
 balance index ( relator, weight ) =
     case weight of
         SameAsMain ->
-            Input.factor ("Balance " ++ (toString (index + 1)))
+            Input.factor ("Balance " ++ toString (index + 1))
                 [ balanceRelatorSelect index relator
                 , balanceWeightSelect index weight
                 , Input.emptyInput
@@ -124,7 +124,7 @@ balance index ( relator, weight ) =
                 ]
 
         Different object ->
-            Input.factor ("Balance " ++ (toString (index + 1)))
+            Input.factor ("Balance " ++ toString (index + 1))
                 [ balanceRelatorSelect index relator
                 , balanceWeightSelect index weight
                 , balanceWeightObjectSelect index object

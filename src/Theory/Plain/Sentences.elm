@@ -9,7 +9,7 @@ import Theory.Words.Verbs as Verbs
 
 sentence : Nucleus.Nucleus -> Result String String
 sentence ( object, condition ) =
-    Ok (String.join " " ((subject object) :: (predicate object condition)))
+    Ok (String.join " " (subject object :: predicate object condition))
 
 
 subject : Nucleus.Object -> String
@@ -19,8 +19,8 @@ subject object =
 
 predicate : Nucleus.Object -> Nucleus.Condition -> List String
 predicate object ( pivot, balance ) =
-    (verbPhrase object pivot)
-        ++ (List.map (Counters.counter object) balance)
+    verbPhrase object pivot
+        ++ List.map (Counters.counter object) balance
 
 
 verbPhrase : Nucleus.Object -> Nucleus.Pivot -> List String
@@ -29,4 +29,4 @@ verbPhrase object pivot =
         ( base, rest ) =
             Fulcrums.fulcrum False pivot
     in
-        (Verbs.conjugate object False base) :: rest
+    Verbs.conjugate object False base :: rest

@@ -1,41 +1,23 @@
 module Interface.View.Input
     exposing
-        ( button
-        , iconButton
+        ( checkbox
+        , emptyInput
         , factor
-        , text
         , number
-        , checkbox
         , select
         , selectGroup
-        , emptyInput
+        , text
         )
+
+{-| This module generates various types of input, used by the Nucleus and
+Elaborations modules.
+-}
 
 import Html
 import Html.Attributes as Attr
 import Html.Events as Events
-import Json.Decode as Json
 import Interface.Model.Types exposing (..)
-
-
-button : ButtonProperties -> Html.Html Signal
-button { label, signal, title } =
-    Html.button
-        [ Events.onClick signal
-        , Attr.class "button"
-        , Attr.title title
-        ]
-        [ Html.text label ]
-
-
-iconButton : ButtonProperties -> Html.Html Signal
-iconButton { label, signal, title } =
-    Html.button
-        [ Events.onClick signal
-        , Attr.class ("button " ++ label)
-        , Attr.title title
-        ]
-        []
+import Json.Decode as Json
 
 
 factor : String -> List (Html.Html Signal) -> Html.Html Signal
@@ -133,7 +115,7 @@ fromId options =
                 Just a ->
                     a
     in
-        fromString
+    fromString
 
 
 onChange : (String -> Signal) -> Html.Attribute Signal

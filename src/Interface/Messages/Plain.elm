@@ -1,8 +1,11 @@
 module Interface.Messages.Plain exposing (message)
 
+{-| This module converts the model into a (plain) message.
+-}
+
+import Interface.Model.Types exposing (..)
 import Maybe
 import Result exposing (andThen)
-import Interface.Model.Types exposing (..)
 import Theory.Plain.Nucleus exposing (..)
 
 

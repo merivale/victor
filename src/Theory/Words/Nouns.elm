@@ -12,21 +12,21 @@ plural noun =
 guessPlural : String -> String
 guessPlural singular =
     if Utils.consontanty singular then
-        (String.dropRight 1 singular) ++ "ies"
+        String.dropRight 1 singular ++ "ies"
     else if List.member (String.right 2 singular) [ "ch", "sh", "ss" ] then
         singular ++ "es"
-    else if (String.right 3 singular) == "sis" then
-        (String.dropRight 3 singular) ++ "ses"
-    else if (String.right 3 singular) == "xis" then
-        (String.dropRight 3 singular) ++ "xes"
-    else if (String.right 1 singular) == "f" then
-        (String.dropRight 1 singular) ++ "ves"
-    else if (String.right 2 singular) == "fe" then
-        (String.dropRight 2 singular) ++ "fes"
-    else if (String.right 1 singular) == "o" then
-        (String.dropRight 1 singular) ++ "oes"
-    else if (String.right 2 singular) == "ix" then
-        (String.dropRight 2 singular) ++ "ices"
+    else if String.right 3 singular == "sis" then
+        String.dropRight 3 singular ++ "ses"
+    else if String.right 3 singular == "xis" then
+        String.dropRight 3 singular ++ "xes"
+    else if String.right 1 singular == "f" then
+        String.dropRight 1 singular ++ "ves"
+    else if String.right 2 singular == "fe" then
+        String.dropRight 2 singular ++ "fes"
+    else if String.right 1 singular == "o" then
+        String.dropRight 1 singular ++ "oes"
+    else if String.right 2 singular == "ix" then
+        String.dropRight 2 singular ++ "ices"
     else
         singular ++ "s"
 

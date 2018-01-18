@@ -6,8 +6,8 @@ module Interface.View.Output exposing (output)
 import Char
 import Html
 import Html.Attributes as Attr
-import Result
 import Interface.Model.Types exposing (..)
+import Result
 
 
 {-| Output.
@@ -26,6 +26,9 @@ output result =
                 [ Html.text (format sentence) ]
 
 
+{-| Format a sentence (i.e. capitalise the first letter and put a full stop at
+the end).
+-}
 format : String -> String
 format sentence =
     let
@@ -37,4 +40,4 @@ format sentence =
                 Just ( firstLetter, rest ) ->
                     String.cons (Char.toUpper firstLetter) rest
     in
-        String.append ucFirst "."
+    String.append ucFirst "."

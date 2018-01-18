@@ -1,20 +1,20 @@
 module Interface.Model.Types exposing (..)
 
-{-| Type definitions for the interface. The Model contains all of the
-ingredients necessary to make a Message. But to make changing those ingredients
-easier, they are not stored directly in Message form. For those familiar with
+{-| Type definitions for the interface. The model contains all of the
+ingredients necessary to make a message. But to make changing those ingredients
+easier, they are not stored directly in message form. For those familiar with
 Elm standard practices, note the use of `Signal` instead of `Msg` for the type
 sent to the update function; this is to avoid confusion with `Message`, a key
 term of art within my theory.
 -}
 
 import Html
-import Theory.Plain.Nucleus exposing (..)
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
+import Theory.Plain.Nucleus exposing (..)
 
 
-{-| The Model (and its component types).
+{-| The model (and its component types).
 -}
 type alias Model =
     { plus : Bool

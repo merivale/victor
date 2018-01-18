@@ -25,10 +25,10 @@ direct1 object =
         Nucleus.Other False Nothing Nothing ->
             "it"
 
-        Nucleus.Other False (Just (Nucleus.Male)) Nothing ->
+        Nucleus.Other False (Just Nucleus.Male) Nothing ->
             "he"
 
-        Nucleus.Other False (Just (Nucleus.Female)) Nothing ->
+        Nucleus.Other False (Just Nucleus.Female) Nothing ->
             "she"
 
         Nucleus.Other True sex Nothing ->
@@ -53,10 +53,10 @@ direct2 object =
         Nucleus.Other False Nothing Nothing ->
             "it"
 
-        Nucleus.Other False (Just (Nucleus.Male)) Nothing ->
+        Nucleus.Other False (Just Nucleus.Male) Nothing ->
             "him"
 
-        Nucleus.Other False (Just (Nucleus.Female)) Nothing ->
+        Nucleus.Other False (Just Nucleus.Female) Nothing ->
             "her"
 
         Nucleus.Other True sex Nothing ->
@@ -84,10 +84,10 @@ direct3 object =
         Nucleus.Other False Nothing string ->
             "itself"
 
-        Nucleus.Other False (Just (Nucleus.Male)) string ->
+        Nucleus.Other False (Just Nucleus.Male) string ->
             "himself"
 
-        Nucleus.Other False (Just (Nucleus.Female)) string ->
+        Nucleus.Other False (Just Nucleus.Female) string ->
             "herself"
 
         Nucleus.Other True sex string ->
@@ -109,10 +109,10 @@ relative1 object =
         Nucleus.Other False Nothing Nothing ->
             "its"
 
-        Nucleus.Other False (Just (Nucleus.Male)) Nothing ->
+        Nucleus.Other False (Just Nucleus.Male) Nothing ->
             "his"
 
-        Nucleus.Other False (Just (Nucleus.Female)) Nothing ->
+        Nucleus.Other False (Just Nucleus.Female) Nothing ->
             "her"
 
         Nucleus.Other True sex Nothing ->
@@ -137,10 +137,10 @@ relative2 object =
         Nucleus.Other False Nothing Nothing ->
             "its"
 
-        Nucleus.Other False (Just (Nucleus.Male)) Nothing ->
+        Nucleus.Other False (Just Nucleus.Male) Nothing ->
             "his"
 
-        Nucleus.Other False (Just (Nucleus.Female)) Nothing ->
+        Nucleus.Other False (Just Nucleus.Female) Nothing ->
             "hers"
 
         Nucleus.Other True sex Nothing ->

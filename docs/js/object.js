@@ -9704,7 +9704,89 @@ var _merivale$victor$Interface_Model_Examples$objectExamples = {
 				_1: {ctor: '[]'}
 			}
 		},
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: {
+				plus: false,
+				object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+				verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'love', false, false),
+				status: _elm_lang$core$Maybe$Nothing,
+				balances: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Maybe$Nothing,
+						_1: _merivale$victor$Theory_Plain_Nucleus$Different(
+							A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+					},
+					_1: {ctor: '[]'}
+				},
+				elaborations: {
+					ctor: '::',
+					_0: _elm_lang$core$Native_Utils.update(
+						_merivale$victor$Interface_Model_Examples$elaboration,
+						{
+							recipe: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
+							quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Every),
+							string1: _elm_lang$core$Maybe$Just('one')
+						}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Native_Utils.update(
+							_merivale$victor$Interface_Model_Examples$elaboration,
+							{
+								recipe: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
+								target: 0,
+								quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Some),
+								string1: _elm_lang$core$Maybe$Just('one')
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					plus: false,
+					object: A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+					verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, 'love', false, false),
+					status: _elm_lang$core$Maybe$Nothing,
+					balances: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Maybe$Nothing,
+							_1: _merivale$victor$Theory_Plain_Nucleus$Different(
+								A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+						},
+						_1: {ctor: '[]'}
+					},
+					elaborations: {
+						ctor: '::',
+						_0: _elm_lang$core$Native_Utils.update(
+							_merivale$victor$Interface_Model_Examples$elaboration,
+							{
+								recipe: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
+								target: 0,
+								quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Some),
+								string1: _elm_lang$core$Maybe$Just('one')
+							}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Native_Utils.update(
+								_merivale$victor$Interface_Model_Examples$elaboration,
+								{
+									recipe: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
+									quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Every),
+									string1: _elm_lang$core$Maybe$Just('one')
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_1: {ctor: '[]'}
+			}
+		}
 	}
 };
 var _merivale$victor$Interface_Model_Examples$longFirst = {
@@ -12566,8 +12648,8 @@ var _merivale$victor$Interface_View_Input$fromId = function (options) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Interface.View.Input',
 				{
-					start: {line: 129, column: 13},
-					end: {line: 134, column: 22}
+					start: {line: 111, column: 13},
+					end: {line: 116, column: 22}
 				},
 				_p0)('select element is broken :(');
 		} else {
@@ -12803,49 +12885,6 @@ var _merivale$victor$Interface_View_Input$factor = F2(
 				}
 			});
 	});
-var _merivale$victor$Interface_View_Input$iconButton = function (_p18) {
-	var _p19 = _p18;
-	return A2(
-		_elm_lang$html$Html$button,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(_p19.signal),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class(
-					A2(_elm_lang$core$Basics_ops['++'], 'button ', _p19.label)),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$title(_p19.title),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		{ctor: '[]'});
-};
-var _merivale$victor$Interface_View_Input$button = function (_p20) {
-	var _p21 = _p20;
-	return A2(
-		_elm_lang$html$Html$button,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(_p21.signal),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('button'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$title(_p21.title),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(_p21.label),
-			_1: {ctor: '[]'}
-		});
-};
 
 var _merivale$victor$Interface_View_Nucleus$verbalityPassive = function (passive) {
 	return _merivale$victor$Interface_View_Input$checkbox(
@@ -14126,7 +14165,15 @@ var _merivale$victor$Interface_View_Examples$objectExamples = {
 	_1: {
 		ctor: '::',
 		_0: 'INDIRECT -1 ( RelatedTo (Male \"Smith\"), \"murderer\") ( Male, ( Be, \"insane\" ) )',
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: 'ENUMERATED 0 ( Some, \"one\" ) (ENUMERATED -1 ( Every, \"one\" ) ( Other, Do \"love\", [ Other ] ))',
+			_1: {
+				ctor: '::',
+				_0: 'ENUMERATED -1 ( Every, \"one\" ) (ENUMERATED 0 ( Some, \"one\" ) ( Other, Do \"love\", [ Other ] ))',
+				_1: {ctor: '[]'}
+			}
+		}
 	}
 };
 var _merivale$victor$Interface_View_Examples$longExamples = {

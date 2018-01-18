@@ -1,29 +1,29 @@
 module Theory.Object.Sentences exposing (sentence)
 
 import Result
-import Theory.Plain.Nucleus as Nucleus
 import Theory.Long.Displacers as Displacers
-import Theory.Object.Pseudo as Pseudo
 import Theory.Object.Messages as Messages
+import Theory.Object.Pseudo as Pseudo
+import Theory.Plain.Nucleus as Nucleus
+import Theory.Words.Articles as Articles
 import Theory.Words.Counters as Counters
+import Theory.Words.Determiners as Determiners
 import Theory.Words.Fulcrums as Fulcrums
-import Theory.Words.Pronouns as Pronouns
-import Theory.Words.Verbs as Verbs
 import Theory.Words.Modals as Modals
 import Theory.Words.Nouns as Nouns
-import Theory.Words.Articles as Articles
-import Theory.Words.Determiners as Determiners
+import Theory.Words.Pronouns as Pronouns
 import Theory.Words.Utils as Utils
+import Theory.Words.Verbs as Verbs
 
 
 sentence : Messages.Message -> Result String String
 sentence message =
-    Messages.explode message |> (Result.map implode)
+    Messages.explode message |> Result.map implode
 
 
 implode : Messages.Vars -> String
 implode vars =
-    String.join " " ((subject vars) ++ (predicate vars))
+    String.join " " (subject vars ++ predicate vars)
 
 
 subject : Messages.Vars -> List String
@@ -46,10 +46,10 @@ predicate : Messages.Vars -> List String
 predicate vars =
     case vars.modality of
         Nothing ->
-            (verbPhrase vars)
-                ++ (List.map (baseVerbPhrase True) vars.displaced)
-                ++ (List.map (nounPhrase vars.object) vars.balances)
-                ++ (List.reverse vars.post)
+            verbPhrase vars
+                ++ List.map (baseVerbPhrase True) vars.displaced
+                ++ List.map (nounPhrase vars.object) vars.balances
+                ++ List.reverse vars.post
 
         Just modality ->
             let
@@ -59,10 +59,10 @@ predicate vars =
                 displaced =
                     { prior = vars.prior, pre = vars.pre, pivot = vars.pivot }
             in
-                [ Modals.modal vars.past vars.negatedModality modality ]
-                    ++ (List.map (baseVerbPhrase addTo) (displaced :: vars.displaced))
-                    ++ (List.map (nounPhrase vars.object) vars.balances)
-                    ++ (List.reverse vars.post)
+            [ Modals.modal vars.past vars.negatedModality modality ]
+                ++ List.map (baseVerbPhrase addTo) (displaced :: vars.displaced)
+                ++ List.map (nounPhrase vars.object) vars.balances
+                ++ List.reverse vars.post
 
 
 verbPhrase : Messages.Vars -> List String
@@ -71,16 +71,16 @@ verbPhrase vars =
         ( base, rest ) =
             Fulcrums.fulcrum vars.prior vars.pivot
     in
-        if vars.prior || base == "be" then
-            (Verbs.conjugate vars.object vars.past base) :: (vars.pre ++ rest)
-        else if List.member "not" vars.pre then
-            let
-                ( newPre, newRest ) =
-                    Utils.splitAtNot vars.pre (base :: rest)
-            in
-                newPre ++ ((Verbs.conjugate vars.object vars.past "do") :: newRest)
-        else
-            vars.pre ++ ((Verbs.conjugate vars.object vars.past base) :: rest)
+    if vars.prior || base == "be" then
+        Verbs.conjugate vars.object vars.past base :: (vars.pre ++ rest)
+    else if List.member "not" vars.pre then
+        let
+            ( newPre, newRest ) =
+                Utils.splitAtNot vars.pre (base :: rest)
+        in
+        newPre ++ (Verbs.conjugate vars.object vars.past "do" :: newRest)
+    else
+        vars.pre ++ (Verbs.conjugate vars.object vars.past base :: rest)
 
 
 baseVerbPhrase : Bool -> Messages.Displaced -> String
@@ -95,7 +95,7 @@ baseVerbPhrase addTo { prior, pre, pivot } =
             else
                 pre
     in
-        String.join " " (newPre ++ (base :: rest))
+    String.join " " (newPre ++ (base :: rest))
 
 
 nounPhrase : Nucleus.Object -> Messages.PseudoBalance -> String
@@ -106,20 +106,20 @@ nounPhrase mainObject balance =
 
         Messages.IndirectBalance relator object description ->
             String.join " "
-                ((Counters.prefix relator)
-                    ++ (articlePhrase (Nucleus.isPlural object) description)
+                (Counters.prefix relator
+                    ++ articlePhrase (Nucleus.isPlural object) description
                 )
 
         Messages.EnumeratedBalance relator object negated multiplicity ->
             String.join " "
-                ((Counters.prefix relator)
-                    ++ (enumeratedDeterminerPhrase (Nucleus.isPlural object) negated multiplicity)
+                (Counters.prefix relator
+                    ++ enumeratedDeterminerPhrase (Nucleus.isPlural object) negated multiplicity
                 )
 
         Messages.AmassedBalance relator object negated proportion ->
             String.join " "
-                ((Counters.prefix relator)
-                    ++ (amassedDeterminerPhrase (Nucleus.isPlural object) negated proportion)
+                (Counters.prefix relator
+                    ++ amassedDeterminerPhrase (Nucleus.isPlural object) negated proportion
                 )
 
 
@@ -129,10 +129,10 @@ articlePhrase plural ( pointer, other, haystack ) =
         article =
             Articles.article plural pointer
     in
-        if other then
-            [ article, "other" ] ++ (haystackToString False plural haystack)
-        else
-            article :: (haystackToString False plural haystack)
+    if other then
+        [ article, "other" ] ++ haystackToString False plural haystack
+    else
+        article :: haystackToString False plural haystack
 
 
 enumeratedDeterminerPhrase : Bool -> Bool -> Pseudo.Multiplicity -> List String
@@ -157,13 +157,13 @@ determinerPhrase plural negated quantifier other haystack =
                 && not plural
 
         positive =
-            (determiner canAbbreviate quantifier other category)
-                ++ (haystackToString canAbbreviate plural haystack)
+            determiner canAbbreviate quantifier other category
+                ++ haystackToString canAbbreviate plural haystack
     in
-        if negated then
-            negateDeterminer positive
-        else
-            positive
+    if negated then
+        negateDeterminer positive
+    else
+        positive
 
 
 determiner : Bool -> Maybe Pseudo.Quantifier -> Bool -> String -> List String
@@ -175,20 +175,20 @@ determiner canAbbreviate quantifier other category =
             else
                 []
 
-        Just (Pseudo.A) ->
+        Just Pseudo.A ->
             if other then
-                [ (Determiners.determiner Pseudo.A) ++ "nother" ]
+                [ Determiners.determiner Pseudo.A ++ "nother" ]
             else if List.member (String.left 1 category) [ "a", "e", "i", "o", "u" ] then
-                [ (Determiners.determiner Pseudo.A) ++ "n" ]
+                [ Determiners.determiner Pseudo.A ++ "n" ]
             else
                 [ Determiners.determiner Pseudo.A ]
 
         Just q ->
             if canAbbreviate then
                 if other then
-                    [ (Determiners.determiner q) ++ category, "else" ]
+                    [ Determiners.determiner q ++ category, "else" ]
                 else
-                    [ (Determiners.determiner q) ++ category ]
+                    [ Determiners.determiner q ++ category ]
             else if other then
                 [ Determiners.determiner q, "other" ]
             else
@@ -198,32 +198,32 @@ determiner canAbbreviate quantifier other category =
 haystackToString : Bool -> Bool -> Pseudo.Haystack -> List String
 haystackToString canAbbreviate plural ( category, property, restriction ) =
     if canAbbreviate then
-        (Utils.splitMaybeString property)
-            ++ (Utils.splitMaybeString restriction)
+        Utils.splitMaybeString property
+            ++ Utils.splitMaybeString restriction
     else if plural then
-        (Utils.splitMaybeString property)
+        Utils.splitMaybeString property
             ++ [ Nouns.plural category ]
-            ++ (Utils.splitMaybeString restriction)
+            ++ Utils.splitMaybeString restriction
     else
-        (Utils.splitMaybeString property)
+        Utils.splitMaybeString property
             ++ [ category ]
-            ++ (Utils.splitMaybeString restriction)
+            ++ Utils.splitMaybeString restriction
 
 
 negateDeterminer : List String -> List String
 negateDeterminer determinerPhrase =
     case List.head determinerPhrase of
         Just "some" ->
-            "no" :: (List.drop 1 determinerPhrase)
+            "no" :: List.drop 1 determinerPhrase
 
         Just "someone" ->
-            "no one" :: (List.drop 1 determinerPhrase)
+            "no one" :: List.drop 1 determinerPhrase
 
         Just "somebody" ->
-            "nobody" :: (List.drop 1 determinerPhrase)
+            "nobody" :: List.drop 1 determinerPhrase
 
         Just "something" ->
-            "nothing" :: (List.drop 1 determinerPhrase)
+            "nothing" :: List.drop 1 determinerPhrase
 
         _ ->
             "not" :: determinerPhrase

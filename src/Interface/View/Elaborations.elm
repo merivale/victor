@@ -1,21 +1,21 @@
 module Interface.View.Elaborations exposing (elaborations)
 
-{-| Module for generating HTML inputs for elaboration factors.
+{-| Module for generating HTML inputs for message elaborations.
 -}
 
 import Html
 import Html.Attributes as Attr
 import Interface.Model.Types exposing (..)
-import Interface.View.Nucleus as Nucleus
+import Interface.View.Buttons as Buttons
 import Interface.View.Ideas as Ideas
 import Interface.View.Input as Input
-import Interface.View.Buttons as Buttons
-import Theory.Plain.Nucleus exposing (..)
+import Interface.View.Nucleus as Nucleus
 import Theory.Long.Displacers exposing (..)
 import Theory.Object.Pseudo exposing (..)
+import Theory.Plain.Nucleus exposing (..)
 
 
-{-| Display the message.
+{-| The elaboration input box.
 -}
 elaborations : TheoryLayer -> Model -> Html.Html Signal
 elaborations theoryLayer model =
@@ -31,17 +31,17 @@ input theoryLayer elaborations model =
         Just elaboration ->
             let
                 index =
-                    (List.length elaborations) - 1
+                    List.length elaborations - 1
 
                 subContent =
                     input theoryLayer (List.drop 1 elaborations) model
             in
-                elaborationInput
-                    theoryLayer
-                    (List.length model.balances)
-                    index
-                    elaboration
-                    subContent
+            elaborationInput
+                theoryLayer
+                (List.length model.balances)
+                index
+                elaboration
+                subContent
 
 
 elaborationInput : TheoryLayer -> Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal
@@ -79,7 +79,7 @@ elaborationBody theoryLayer balanceCount index elaboration subContent =
         MakeDISPLACED ->
             Html.div
                 [ Attr.class "body" ]
-                ((displacer True True index elaboration) ++ [ subContent ])
+                (displacer True True index elaboration ++ [ subContent ])
 
         MakePREORDAINED ->
             if theoryLayer == ShortTheory then
@@ -91,7 +91,7 @@ elaborationBody theoryLayer balanceCount index elaboration subContent =
             else
                 Html.div
                     [ Attr.class "body" ]
-                    ((displacer False False index elaboration)
+                    (displacer False False index elaboration
                         ++ [ preordainedTime index elaboration
                            , subContent
                            ]
@@ -107,7 +107,7 @@ elaborationBody theoryLayer balanceCount index elaboration subContent =
             else
                 Html.div
                     [ Attr.class "body" ]
-                    ((displacer False True index elaboration)
+                    (displacer False True index elaboration
                         ++ [ frequency index elaboration
                            , subContent
                            ]
@@ -501,7 +501,7 @@ stringText placeholder signal string =
 verbalityOngoing : Int -> Bool -> Html.Html Signal
 verbalityOngoing index ongoing =
     Input.checkbox
-        { id = "ongoing" ++ (toString index)
+        { id = "ongoing" ++ toString index
         , label = "Ongoing"
         , checked = ongoing
         , signal = ToggleElaborationDisplacerVerbalityOngoing index
@@ -511,7 +511,7 @@ verbalityOngoing index ongoing =
 verbalityPassive : Int -> Bool -> Html.Html Signal
 verbalityPassive index passive =
     Input.checkbox
-        { id = "passive" ++ (toString index)
+        { id = "passive" ++ toString index
         , label = "Passive"
         , checked = passive
         , signal = ToggleElaborationDisplacerVerbalityPassive index
@@ -521,7 +521,7 @@ verbalityPassive index passive =
 other : Int -> Bool -> Html.Html Signal
 other index checked =
     Input.checkbox
-        { id = "other" ++ (toString index)
+        { id = "other" ++ toString index
         , label = "Other"
         , checked = checked
         , signal = ToggleElaborationOther index

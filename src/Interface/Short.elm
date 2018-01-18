@@ -4,13 +4,13 @@ module Short exposing (main)
 -}
 
 import Html
-import Result
-import Interface.Model.Types exposing (..)
-import Interface.Model.State as State
 import Interface.Messages.Short as Messages
-import Interface.View.Output as Output
-import Interface.View.Examples as Examples
+import Interface.Model.State as State
+import Interface.Model.Types exposing (..)
 import Interface.View.Elaborations as Elaborations
+import Interface.View.Examples as Examples
+import Interface.View.Output as Output
+import Result
 import Theory.Short.Sentences as Sentences
 
 
@@ -33,8 +33,8 @@ view model =
         result =
             Messages.message model |> Result.andThen Sentences.sentence
     in
-        Html.div []
-            [ Output.output result
-            , Examples.examples ShortTheory
-            , Elaborations.elaborations ShortTheory model
-            ]
+    Html.div []
+        [ Output.output result
+        , Examples.examples ShortTheory
+        , Elaborations.elaborations ShortTheory model
+        ]
