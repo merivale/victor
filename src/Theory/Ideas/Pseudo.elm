@@ -1,6 +1,6 @@
-module Theory.Object.Pseudo exposing (..)
+module Theory.Ideas.Pseudo exposing (..)
 
-import Theory.Plain.Nucleus as Nucleus
+import Theory.Ideas.Nucleus as Nucleus
 
 
 type alias Description =

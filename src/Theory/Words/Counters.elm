@@ -1,6 +1,6 @@
 module Theory.Words.Counters exposing (counter, prefix)
 
-import Theory.Plain.Nucleus as Nucleus
+import Theory.Ideas.Nucleus as Nucleus
 import Theory.Words.Prepositions as Prepositions
 import Theory.Words.Pronouns as Pronouns
 

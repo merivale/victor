@@ -1,6 +1,6 @@
-module Theory.Long.Displacers exposing (..)
+module Theory.Ideas.Displacers exposing (..)
 
-import Theory.Plain.Nucleus as Nucleus
+import Theory.Ideas.Nucleus as Nucleus
 
 
 type Displacer

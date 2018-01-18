@@ -1,6 +1,6 @@
 module Theory.Words.Modals exposing (modal)
 
-import Theory.Long.Displacers as Displacers
+import Theory.Ideas.Displacers as Displacers
 
 
 modal : Bool -> Bool -> Displacers.Modality -> String

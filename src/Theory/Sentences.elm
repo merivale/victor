@@ -1,10 +1,9 @@
-module Theory.Object.Sentences exposing (sentence)
+module Theory.Sentences exposing (sentence)
 
 import Result
-import Theory.Long.Displacers as Displacers
-import Theory.Object.Messages as Messages
-import Theory.Object.Pseudo as Pseudo
-import Theory.Plain.Nucleus as Nucleus
+import Theory.Ideas.Displacers as Displacers
+import Theory.Ideas.Pseudo as Pseudo
+import Theory.Ideas.Nucleus as Nucleus
 import Theory.Words.Articles as Articles
 import Theory.Words.Counters as Counters
 import Theory.Words.Determiners as Determiners
@@ -14,6 +13,7 @@ import Theory.Words.Nouns as Nouns
 import Theory.Words.Pronouns as Pronouns
 import Theory.Words.Utils as Utils
 import Theory.Words.Verbs as Verbs
+import Theory.Messages as Messages
 
 
 sentence : Messages.Message -> Result String String

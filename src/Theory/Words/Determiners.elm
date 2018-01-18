@@ -1,6 +1,6 @@
 module Theory.Words.Determiners exposing (determiner)
 
-import Theory.Object.Pseudo as Pseudo
+import Theory.Ideas.Pseudo as Pseudo
 
 
 determiner : Pseudo.Quantifier -> String

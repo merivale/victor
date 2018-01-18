@@ -8260,7 +8260,7 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _merivale$victor$Theory_Plain_Nucleus$isPlural = function (object) {
+var _merivale$victor$Theory_Ideas_Nucleus$isPlural = function (object) {
 	var _p0 = object;
 	switch (_p0.ctor) {
 		case 'Speaker':
@@ -8271,7 +8271,7 @@ var _merivale$victor$Theory_Plain_Nucleus$isPlural = function (object) {
 			return _p0._0;
 	}
 };
-var _merivale$victor$Theory_Plain_Nucleus$isOther = function (object) {
+var _merivale$victor$Theory_Ideas_Nucleus$isOther = function (object) {
 	var _p1 = object;
 	if (_p1.ctor === 'Other') {
 		return true;
@@ -8279,7 +8279,7 @@ var _merivale$victor$Theory_Plain_Nucleus$isOther = function (object) {
 		return false;
 	}
 };
-var _merivale$victor$Theory_Plain_Nucleus$isSpeaker = function (object) {
+var _merivale$victor$Theory_Ideas_Nucleus$isSpeaker = function (object) {
 	var _p2 = object;
 	if (_p2.ctor === 'Speaker') {
 		return true;
@@ -8287,93 +8287,93 @@ var _merivale$victor$Theory_Plain_Nucleus$isSpeaker = function (object) {
 		return false;
 	}
 };
-var _merivale$victor$Theory_Plain_Nucleus$Other = F3(
+var _merivale$victor$Theory_Ideas_Nucleus$Other = F3(
 	function (a, b, c) {
 		return {ctor: 'Other', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Plain_Nucleus$Hearer = function (a) {
+var _merivale$victor$Theory_Ideas_Nucleus$Hearer = function (a) {
 	return {ctor: 'Hearer', _0: a};
 };
-var _merivale$victor$Theory_Plain_Nucleus$Speaker = function (a) {
+var _merivale$victor$Theory_Ideas_Nucleus$Speaker = function (a) {
 	return {ctor: 'Speaker', _0: a};
 };
-var _merivale$victor$Theory_Plain_Nucleus$Female = {ctor: 'Female'};
-var _merivale$victor$Theory_Plain_Nucleus$Male = {ctor: 'Male'};
-var _merivale$victor$Theory_Plain_Nucleus$Do = F3(
+var _merivale$victor$Theory_Ideas_Nucleus$Female = {ctor: 'Female'};
+var _merivale$victor$Theory_Ideas_Nucleus$Male = {ctor: 'Male'};
+var _merivale$victor$Theory_Ideas_Nucleus$Do = F3(
 	function (a, b, c) {
 		return {ctor: 'Do', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Plain_Nucleus$Be = function (a) {
+var _merivale$victor$Theory_Ideas_Nucleus$Be = function (a) {
 	return {ctor: 'Be', _0: a};
 };
-var _merivale$victor$Theory_Plain_Nucleus$Relative = function (a) {
+var _merivale$victor$Theory_Ideas_Nucleus$Relative = function (a) {
 	return {ctor: 'Relative', _0: a};
 };
-var _merivale$victor$Theory_Plain_Nucleus$Absolute = function (a) {
+var _merivale$victor$Theory_Ideas_Nucleus$Absolute = function (a) {
 	return {ctor: 'Absolute', _0: a};
 };
-var _merivale$victor$Theory_Plain_Nucleus$Different = function (a) {
+var _merivale$victor$Theory_Ideas_Nucleus$Different = function (a) {
 	return {ctor: 'Different', _0: a};
 };
-var _merivale$victor$Theory_Plain_Nucleus$SameAsMain = {ctor: 'SameAsMain'};
-var _merivale$victor$Theory_Plain_Nucleus$Without = {ctor: 'Without'};
-var _merivale$victor$Theory_Plain_Nucleus$With = {ctor: 'With'};
-var _merivale$victor$Theory_Plain_Nucleus$Up = {ctor: 'Up'};
-var _merivale$victor$Theory_Plain_Nucleus$Under = {ctor: 'Under'};
-var _merivale$victor$Theory_Plain_Nucleus$Towards = {ctor: 'Towards'};
-var _merivale$victor$Theory_Plain_Nucleus$To = {ctor: 'To'};
-var _merivale$victor$Theory_Plain_Nucleus$Through = {ctor: 'Through'};
-var _merivale$victor$Theory_Plain_Nucleus$Over = {ctor: 'Over'};
-var _merivale$victor$Theory_Plain_Nucleus$Outside = {ctor: 'Outside'};
-var _merivale$victor$Theory_Plain_Nucleus$Out = {ctor: 'Out'};
-var _merivale$victor$Theory_Plain_Nucleus$Opposite = {ctor: 'Opposite'};
-var _merivale$victor$Theory_Plain_Nucleus$On = {ctor: 'On'};
-var _merivale$victor$Theory_Plain_Nucleus$Off = {ctor: 'Off'};
-var _merivale$victor$Theory_Plain_Nucleus$Of = {ctor: 'Of'};
-var _merivale$victor$Theory_Plain_Nucleus$Like = {ctor: 'Like'};
-var _merivale$victor$Theory_Plain_Nucleus$Into = {ctor: 'Into'};
-var _merivale$victor$Theory_Plain_Nucleus$Inside = {ctor: 'Inside'};
-var _merivale$victor$Theory_Plain_Nucleus$In = {ctor: 'In'};
-var _merivale$victor$Theory_Plain_Nucleus$From = {ctor: 'From'};
-var _merivale$victor$Theory_Plain_Nucleus$For = {ctor: 'For'};
-var _merivale$victor$Theory_Plain_Nucleus$Down = {ctor: 'Down'};
-var _merivale$victor$Theory_Plain_Nucleus$By = {ctor: 'By'};
-var _merivale$victor$Theory_Plain_Nucleus$Beyond = {ctor: 'Beyond'};
-var _merivale$victor$Theory_Plain_Nucleus$Below = {ctor: 'Below'};
-var _merivale$victor$Theory_Plain_Nucleus$Behind = {ctor: 'Behind'};
-var _merivale$victor$Theory_Plain_Nucleus$Before = {ctor: 'Before'};
-var _merivale$victor$Theory_Plain_Nucleus$At = {ctor: 'At'};
-var _merivale$victor$Theory_Plain_Nucleus$Against = {ctor: 'Against'};
-var _merivale$victor$Theory_Plain_Nucleus$After = {ctor: 'After'};
-var _merivale$victor$Theory_Plain_Nucleus$Above = {ctor: 'Above'};
-var _merivale$victor$Theory_Plain_Nucleus$About = {ctor: 'About'};
+var _merivale$victor$Theory_Ideas_Nucleus$SameAsMain = {ctor: 'SameAsMain'};
+var _merivale$victor$Theory_Ideas_Nucleus$Without = {ctor: 'Without'};
+var _merivale$victor$Theory_Ideas_Nucleus$With = {ctor: 'With'};
+var _merivale$victor$Theory_Ideas_Nucleus$Up = {ctor: 'Up'};
+var _merivale$victor$Theory_Ideas_Nucleus$Under = {ctor: 'Under'};
+var _merivale$victor$Theory_Ideas_Nucleus$Towards = {ctor: 'Towards'};
+var _merivale$victor$Theory_Ideas_Nucleus$To = {ctor: 'To'};
+var _merivale$victor$Theory_Ideas_Nucleus$Through = {ctor: 'Through'};
+var _merivale$victor$Theory_Ideas_Nucleus$Over = {ctor: 'Over'};
+var _merivale$victor$Theory_Ideas_Nucleus$Outside = {ctor: 'Outside'};
+var _merivale$victor$Theory_Ideas_Nucleus$Out = {ctor: 'Out'};
+var _merivale$victor$Theory_Ideas_Nucleus$Opposite = {ctor: 'Opposite'};
+var _merivale$victor$Theory_Ideas_Nucleus$On = {ctor: 'On'};
+var _merivale$victor$Theory_Ideas_Nucleus$Off = {ctor: 'Off'};
+var _merivale$victor$Theory_Ideas_Nucleus$Of = {ctor: 'Of'};
+var _merivale$victor$Theory_Ideas_Nucleus$Like = {ctor: 'Like'};
+var _merivale$victor$Theory_Ideas_Nucleus$Into = {ctor: 'Into'};
+var _merivale$victor$Theory_Ideas_Nucleus$Inside = {ctor: 'Inside'};
+var _merivale$victor$Theory_Ideas_Nucleus$In = {ctor: 'In'};
+var _merivale$victor$Theory_Ideas_Nucleus$From = {ctor: 'From'};
+var _merivale$victor$Theory_Ideas_Nucleus$For = {ctor: 'For'};
+var _merivale$victor$Theory_Ideas_Nucleus$Down = {ctor: 'Down'};
+var _merivale$victor$Theory_Ideas_Nucleus$By = {ctor: 'By'};
+var _merivale$victor$Theory_Ideas_Nucleus$Beyond = {ctor: 'Beyond'};
+var _merivale$victor$Theory_Ideas_Nucleus$Below = {ctor: 'Below'};
+var _merivale$victor$Theory_Ideas_Nucleus$Behind = {ctor: 'Behind'};
+var _merivale$victor$Theory_Ideas_Nucleus$Before = {ctor: 'Before'};
+var _merivale$victor$Theory_Ideas_Nucleus$At = {ctor: 'At'};
+var _merivale$victor$Theory_Ideas_Nucleus$Against = {ctor: 'Against'};
+var _merivale$victor$Theory_Ideas_Nucleus$After = {ctor: 'After'};
+var _merivale$victor$Theory_Ideas_Nucleus$Above = {ctor: 'Above'};
+var _merivale$victor$Theory_Ideas_Nucleus$About = {ctor: 'About'};
 
-var _merivale$victor$Theory_Long_Displacers$Secondary = function (a) {
+var _merivale$victor$Theory_Ideas_Displacers$Secondary = function (a) {
 	return {ctor: 'Secondary', _0: a};
 };
-var _merivale$victor$Theory_Long_Displacers$Primary = function (a) {
+var _merivale$victor$Theory_Ideas_Displacers$Primary = function (a) {
 	return {ctor: 'Primary', _0: a};
 };
-var _merivale$victor$Theory_Long_Displacers$Maybe4 = {ctor: 'Maybe4'};
-var _merivale$victor$Theory_Long_Displacers$Maybe3 = {ctor: 'Maybe3'};
-var _merivale$victor$Theory_Long_Displacers$Maybe1 = {ctor: 'Maybe1'};
-var _merivale$victor$Theory_Long_Displacers$Yes3 = {ctor: 'Yes3'};
-var _merivale$victor$Theory_Long_Displacers$Yes2 = {ctor: 'Yes2'};
-var _merivale$victor$Theory_Long_Displacers$Yes1 = {ctor: 'Yes1'};
+var _merivale$victor$Theory_Ideas_Displacers$Maybe4 = {ctor: 'Maybe4'};
+var _merivale$victor$Theory_Ideas_Displacers$Maybe3 = {ctor: 'Maybe3'};
+var _merivale$victor$Theory_Ideas_Displacers$Maybe1 = {ctor: 'Maybe1'};
+var _merivale$victor$Theory_Ideas_Displacers$Yes3 = {ctor: 'Yes3'};
+var _merivale$victor$Theory_Ideas_Displacers$Yes2 = {ctor: 'Yes2'};
+var _merivale$victor$Theory_Ideas_Displacers$Yes1 = {ctor: 'Yes1'};
 
-var _merivale$victor$Theory_Object_Pseudo$RelatedTo = function (a) {
+var _merivale$victor$Theory_Ideas_Pseudo$RelatedTo = function (a) {
 	return {ctor: 'RelatedTo', _0: a};
 };
-var _merivale$victor$Theory_Object_Pseudo$That = {ctor: 'That'};
-var _merivale$victor$Theory_Object_Pseudo$This = {ctor: 'This'};
-var _merivale$victor$Theory_Object_Pseudo$The = {ctor: 'The'};
-var _merivale$victor$Theory_Object_Pseudo$Enough = {ctor: 'Enough'};
-var _merivale$victor$Theory_Object_Pseudo$Most = {ctor: 'Most'};
-var _merivale$victor$Theory_Object_Pseudo$Much = {ctor: 'Much'};
-var _merivale$victor$Theory_Object_Pseudo$All = {ctor: 'All'};
-var _merivale$victor$Theory_Object_Pseudo$Any = {ctor: 'Any'};
-var _merivale$victor$Theory_Object_Pseudo$Some = {ctor: 'Some'};
-var _merivale$victor$Theory_Object_Pseudo$isAmassing = function (quantifier) {
+var _merivale$victor$Theory_Ideas_Pseudo$That = {ctor: 'That'};
+var _merivale$victor$Theory_Ideas_Pseudo$This = {ctor: 'This'};
+var _merivale$victor$Theory_Ideas_Pseudo$The = {ctor: 'The'};
+var _merivale$victor$Theory_Ideas_Pseudo$Enough = {ctor: 'Enough'};
+var _merivale$victor$Theory_Ideas_Pseudo$Most = {ctor: 'Most'};
+var _merivale$victor$Theory_Ideas_Pseudo$Much = {ctor: 'Much'};
+var _merivale$victor$Theory_Ideas_Pseudo$All = {ctor: 'All'};
+var _merivale$victor$Theory_Ideas_Pseudo$Any = {ctor: 'Any'};
+var _merivale$victor$Theory_Ideas_Pseudo$Some = {ctor: 'Some'};
+var _merivale$victor$Theory_Ideas_Pseudo$isAmassing = function (quantifier) {
 	return A2(
 		_elm_lang$core$List$member,
 		quantifier,
@@ -8382,22 +8382,22 @@ var _merivale$victor$Theory_Object_Pseudo$isAmassing = function (quantifier) {
 			_0: _elm_lang$core$Maybe$Nothing,
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Some),
+				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Some),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Any),
+					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Any),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$All),
+						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$All),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Much),
+							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Much),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Most),
+								_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Most),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Enough),
+									_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Enough),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -8407,11 +8407,11 @@ var _merivale$victor$Theory_Object_Pseudo$isAmassing = function (quantifier) {
 			}
 		});
 };
-var _merivale$victor$Theory_Object_Pseudo$Both = {ctor: 'Both'};
-var _merivale$victor$Theory_Object_Pseudo$Every = {ctor: 'Every'};
-var _merivale$victor$Theory_Object_Pseudo$Each = {ctor: 'Each'};
-var _merivale$victor$Theory_Object_Pseudo$Many = {ctor: 'Many'};
-var _merivale$victor$Theory_Object_Pseudo$isNegatable = function (quantifier) {
+var _merivale$victor$Theory_Ideas_Pseudo$Both = {ctor: 'Both'};
+var _merivale$victor$Theory_Ideas_Pseudo$Every = {ctor: 'Every'};
+var _merivale$victor$Theory_Ideas_Pseudo$Each = {ctor: 'Each'};
+var _merivale$victor$Theory_Ideas_Pseudo$Many = {ctor: 'Many'};
+var _merivale$victor$Theory_Ideas_Pseudo$isNegatable = function (quantifier) {
 	var _p0 = quantifier;
 	if (_p0.ctor === 'Integer') {
 		return true;
@@ -8421,19 +8421,19 @@ var _merivale$victor$Theory_Object_Pseudo$isNegatable = function (quantifier) {
 			quantifier,
 			{
 				ctor: '::',
-				_0: _merivale$victor$Theory_Object_Pseudo$Many,
+				_0: _merivale$victor$Theory_Ideas_Pseudo$Many,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Object_Pseudo$Every,
+					_0: _merivale$victor$Theory_Ideas_Pseudo$Every,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Object_Pseudo$Both,
+						_0: _merivale$victor$Theory_Ideas_Pseudo$Both,
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Object_Pseudo$Some,
+							_0: _merivale$victor$Theory_Ideas_Pseudo$Some,
 							_1: {
 								ctor: '::',
-								_0: _merivale$victor$Theory_Object_Pseudo$Any,
+								_0: _merivale$victor$Theory_Ideas_Pseudo$Any,
 								_1: {ctor: '[]'}
 							}
 						}
@@ -8442,8 +8442,8 @@ var _merivale$victor$Theory_Object_Pseudo$isNegatable = function (quantifier) {
 			});
 	}
 };
-var _merivale$victor$Theory_Object_Pseudo$Several = {ctor: 'Several'};
-var _merivale$victor$Theory_Object_Pseudo$requiresPlural = function (quantifier) {
+var _merivale$victor$Theory_Ideas_Pseudo$Several = {ctor: 'Several'};
+var _merivale$victor$Theory_Ideas_Pseudo$requiresPlural = function (quantifier) {
 	var _p1 = quantifier;
 	if (_p1.ctor === 'Integer') {
 		return !_elm_lang$core$Native_Utils.eq(
@@ -8455,24 +8455,24 @@ var _merivale$victor$Theory_Object_Pseudo$requiresPlural = function (quantifier)
 			quantifier,
 			{
 				ctor: '::',
-				_0: _merivale$victor$Theory_Object_Pseudo$Several,
+				_0: _merivale$victor$Theory_Ideas_Pseudo$Several,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Object_Pseudo$Many,
+					_0: _merivale$victor$Theory_Ideas_Pseudo$Many,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Object_Pseudo$Both,
+						_0: _merivale$victor$Theory_Ideas_Pseudo$Both,
 						_1: {ctor: '[]'}
 					}
 				}
 			});
 	}
 };
-var _merivale$victor$Theory_Object_Pseudo$Integer = function (a) {
+var _merivale$victor$Theory_Ideas_Pseudo$Integer = function (a) {
 	return {ctor: 'Integer', _0: a};
 };
-var _merivale$victor$Theory_Object_Pseudo$A = {ctor: 'A'};
-var _merivale$victor$Theory_Object_Pseudo$isEnumerating = function (quantifier) {
+var _merivale$victor$Theory_Ideas_Pseudo$A = {ctor: 'A'};
+var _merivale$victor$Theory_Ideas_Pseudo$isEnumerating = function (quantifier) {
 	var _p2 = quantifier;
 	if (_p2.ctor === 'Integer') {
 		return true;
@@ -8482,28 +8482,28 @@ var _merivale$victor$Theory_Object_Pseudo$isEnumerating = function (quantifier) 
 			quantifier,
 			{
 				ctor: '::',
-				_0: _merivale$victor$Theory_Object_Pseudo$A,
+				_0: _merivale$victor$Theory_Ideas_Pseudo$A,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Object_Pseudo$Several,
+					_0: _merivale$victor$Theory_Ideas_Pseudo$Several,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Object_Pseudo$Many,
+						_0: _merivale$victor$Theory_Ideas_Pseudo$Many,
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Object_Pseudo$Each,
+							_0: _merivale$victor$Theory_Ideas_Pseudo$Each,
 							_1: {
 								ctor: '::',
-								_0: _merivale$victor$Theory_Object_Pseudo$Every,
+								_0: _merivale$victor$Theory_Ideas_Pseudo$Every,
 								_1: {
 									ctor: '::',
-									_0: _merivale$victor$Theory_Object_Pseudo$Both,
+									_0: _merivale$victor$Theory_Ideas_Pseudo$Both,
 									_1: {
 										ctor: '::',
-										_0: _merivale$victor$Theory_Object_Pseudo$Some,
+										_0: _merivale$victor$Theory_Ideas_Pseudo$Some,
 										_1: {
 											ctor: '::',
-											_0: _merivale$victor$Theory_Object_Pseudo$Any,
+											_0: _merivale$victor$Theory_Ideas_Pseudo$Any,
 											_1: {ctor: '[]'}
 										}
 									}
@@ -8772,7 +8772,7 @@ var _merivale$victor$Theory_Words_Utils$consontanty = function (base) {
 		}));
 };
 
-var _merivale$victor$Theory_Object_Messages$overrideBalancingObject = F3(
+var _merivale$victor$Theory_Messages$overrideBalancingObject = F3(
 	function (target, pseudoBalance, vars) {
 		var oldArray = _elm_lang$core$Array$fromList(vars.balances);
 		var newArray = A3(_elm_lang$core$Array$set, target, pseudoBalance, oldArray);
@@ -8782,13 +8782,13 @@ var _merivale$victor$Theory_Object_Messages$overrideBalancingObject = F3(
 				balances: _elm_lang$core$Array$toList(newArray)
 			});
 	});
-var _merivale$victor$Theory_Object_Messages$swapPastForPrior = function (vars) {
+var _merivale$victor$Theory_Messages$swapPastForPrior = function (vars) {
 	return (vars.past && vars.prior) ? _elm_lang$core$Result$Err('PRIOR PAST messages cannot be given a displacer') : (vars.past ? _elm_lang$core$Result$Ok(
 		_elm_lang$core$Native_Utils.update(
 			vars,
 			{past: false, prior: true})) : _elm_lang$core$Result$Ok(vars));
 };
-var _merivale$victor$Theory_Object_Messages$scattered = F2(
+var _merivale$victor$Theory_Messages$scattered = F2(
 	function (tally, vars) {
 		return _elm_lang$core$Native_Utils.update(
 			vars,
@@ -8796,7 +8796,7 @@ var _merivale$victor$Theory_Object_Messages$scattered = F2(
 				post: {ctor: '::', _0: tally, _1: vars.post}
 			});
 	});
-var _merivale$victor$Theory_Object_Messages$extended = F2(
+var _merivale$victor$Theory_Messages$extended = F2(
 	function (duration, vars) {
 		return _elm_lang$core$Native_Utils.update(
 			vars,
@@ -8804,17 +8804,17 @@ var _merivale$victor$Theory_Object_Messages$extended = F2(
 				post: {ctor: '::', _0: duration, _1: vars.post}
 			});
 	});
-var _merivale$victor$Theory_Object_Messages$prior = function (vars) {
+var _merivale$victor$Theory_Messages$prior = function (vars) {
 	return vars.prior ? _elm_lang$core$Result$Err('PRIOR messages cannot be made PRIOR') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && (!vars.past)) ? _elm_lang$core$Result$Err('messages with a modality can only be PRIOR if they are PAST') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && ((!vars.regularModality) && (!vars.preordainedModality))) ? _elm_lang$core$Result$Err('DISPLACED messages with a modality cannot be made PRIOR PAST') : _elm_lang$core$Result$Ok(
 		_elm_lang$core$Native_Utils.update(
 			vars,
 			{prior: true}))));
 };
-var _merivale$victor$Theory_Object_Messages$past = F2(
+var _merivale$victor$Theory_Messages$past = F2(
 	function (time, vars) {
 		return vars.past ? _elm_lang$core$Result$Err('PAST messages cannot be made PAST') : (_elm_lang$core$Native_Utils.eq(
 			vars.modality,
-			_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Long_Displacers$Maybe4)) ? _elm_lang$core$Result$Err('messages with the Maybe4 modality (\'dare\') cannot be made PAST') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && ((!vars.regularModality) && (!_elm_lang$core$Native_Utils.eq(time, _elm_lang$core$Maybe$Nothing)))) ? _elm_lang$core$Result$Err('DISPLACED and PREORDAINED messages with a modality cannot be given a PAST time') : _elm_lang$core$Result$Ok(
+			_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Displacers$Maybe4)) ? _elm_lang$core$Result$Err('messages with the Maybe4 modality (\'dare\') cannot be made PAST') : (((!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) && ((!vars.regularModality) && (!_elm_lang$core$Native_Utils.eq(time, _elm_lang$core$Maybe$Nothing)))) ? _elm_lang$core$Result$Err('DISPLACED and PREORDAINED messages with a modality cannot be given a PAST time') : _elm_lang$core$Result$Ok(
 			_elm_lang$core$Native_Utils.update(
 				vars,
 				{
@@ -8822,7 +8822,7 @@ var _merivale$victor$Theory_Object_Messages$past = F2(
 					post: A2(_merivale$victor$Theory_Words_Utils$maybeCons, time, vars.post)
 				}))));
 	});
-var _merivale$victor$Theory_Object_Messages$Vars = function (a) {
+var _merivale$victor$Theory_Messages$Vars = function (a) {
 	return function (b) {
 		return function (c) {
 			return function (d) {
@@ -8851,90 +8851,90 @@ var _merivale$victor$Theory_Object_Messages$Vars = function (a) {
 		};
 	};
 };
-var _merivale$victor$Theory_Object_Messages$Displaced = F3(
+var _merivale$victor$Theory_Messages$Displaced = F3(
 	function (a, b, c) {
 		return {prior: a, pre: b, pivot: c};
 	});
-var _merivale$victor$Theory_Object_Messages$AMASSED = F3(
+var _merivale$victor$Theory_Messages$AMASSED = F3(
 	function (a, b, c) {
 		return {ctor: 'AMASSED', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Object_Messages$ENUMERATED = F3(
+var _merivale$victor$Theory_Messages$ENUMERATED = F3(
 	function (a, b, c) {
 		return {ctor: 'ENUMERATED', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Object_Messages$INDIRECT = F3(
+var _merivale$victor$Theory_Messages$INDIRECT = F3(
 	function (a, b, c) {
 		return {ctor: 'INDIRECT', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Object_Messages$SCATTERED = F2(
+var _merivale$victor$Theory_Messages$SCATTERED = F2(
 	function (a, b) {
 		return {ctor: 'SCATTERED', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Object_Messages$EXTENDED = F2(
+var _merivale$victor$Theory_Messages$EXTENDED = F2(
 	function (a, b) {
 		return {ctor: 'EXTENDED', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Object_Messages$REGULAR = F3(
+var _merivale$victor$Theory_Messages$REGULAR = F3(
 	function (a, b, c) {
 		return {ctor: 'REGULAR', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Object_Messages$PREORDAINED = F3(
+var _merivale$victor$Theory_Messages$PREORDAINED = F3(
 	function (a, b, c) {
 		return {ctor: 'PREORDAINED', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Object_Messages$DISPLACED = F2(
+var _merivale$victor$Theory_Messages$DISPLACED = F2(
 	function (a, b) {
 		return {ctor: 'DISPLACED', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Object_Messages$PRIOR = function (a) {
+var _merivale$victor$Theory_Messages$PRIOR = function (a) {
 	return {ctor: 'PRIOR', _0: a};
 };
-var _merivale$victor$Theory_Object_Messages$PAST = F2(
+var _merivale$victor$Theory_Messages$PAST = F2(
 	function (a, b) {
 		return {ctor: 'PAST', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Object_Messages$NEGATIVE = function (a) {
+var _merivale$victor$Theory_Messages$NEGATIVE = function (a) {
 	return {ctor: 'NEGATIVE', _0: a};
 };
-var _merivale$victor$Theory_Object_Messages$Plain = function (a) {
+var _merivale$victor$Theory_Messages$Plain = function (a) {
 	return {ctor: 'Plain', _0: a};
 };
-var _merivale$victor$Theory_Object_Messages$NegateObject = {ctor: 'NegateObject'};
-var _merivale$victor$Theory_Object_Messages$overrideMainObject = F3(
+var _merivale$victor$Theory_Messages$NegateObject = {ctor: 'NegateObject'};
+var _merivale$victor$Theory_Messages$overrideMainObject = F3(
 	function (negateObject, pseudoObject, vars) {
 		return negateObject ? _elm_lang$core$Native_Utils.update(
 			vars,
-			{negationTarget: _merivale$victor$Theory_Object_Messages$NegateObject, pseudoObject: pseudoObject}) : _elm_lang$core$Native_Utils.update(
+			{negationTarget: _merivale$victor$Theory_Messages$NegateObject, pseudoObject: pseudoObject}) : _elm_lang$core$Native_Utils.update(
 			vars,
 			{pseudoObject: pseudoObject});
 	});
-var _merivale$victor$Theory_Object_Messages$NegateCondition = {ctor: 'NegateCondition'};
-var _merivale$victor$Theory_Object_Messages$primary = F2(
+var _merivale$victor$Theory_Messages$NegateCondition = {ctor: 'NegateCondition'};
+var _merivale$victor$Theory_Messages$primary = F2(
 	function (pivot, vars) {
 		var displaced = {prior: vars.prior, pre: vars.pre, pivot: vars.pivot};
 		return _elm_lang$core$Native_Utils.update(
 			vars,
 			{
-				negationTarget: _merivale$victor$Theory_Object_Messages$NegateCondition,
+				negationTarget: _merivale$victor$Theory_Messages$NegateCondition,
 				prior: false,
 				pre: {ctor: '[]'},
 				pivot: pivot,
 				displaced: {ctor: '::', _0: displaced, _1: vars.displaced}
 			});
 	});
-var _merivale$victor$Theory_Object_Messages$secondary = F4(
+var _merivale$victor$Theory_Messages$secondary = F4(
 	function (modality, preordainedModality, regularModality, vars) {
 		return _elm_lang$core$Native_Utils.update(
 			vars,
 			{
-				negationTarget: _merivale$victor$Theory_Object_Messages$NegateCondition,
+				negationTarget: _merivale$victor$Theory_Messages$NegateCondition,
 				modality: _elm_lang$core$Maybe$Just(modality),
 				preordainedModality: preordainedModality,
 				regularModality: regularModality
 			});
 	});
-var _merivale$victor$Theory_Object_Messages$displaced = F2(
+var _merivale$victor$Theory_Messages$displaced = F2(
 	function (displacer, vars) {
 		if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
 			return _elm_lang$core$Result$Err('messages with a modality cannot be DISPLACED');
@@ -8943,17 +8943,17 @@ var _merivale$victor$Theory_Object_Messages$displaced = F2(
 			if (_p0.ctor === 'Primary') {
 				return A2(
 					_elm_lang$core$Result$map,
-					_merivale$victor$Theory_Object_Messages$primary(_p0._0),
-					_merivale$victor$Theory_Object_Messages$swapPastForPrior(vars));
+					_merivale$victor$Theory_Messages$primary(_p0._0),
+					_merivale$victor$Theory_Messages$swapPastForPrior(vars));
 			} else {
 				return A2(
 					_elm_lang$core$Result$map,
-					A3(_merivale$victor$Theory_Object_Messages$secondary, _p0._0, false, false),
-					_merivale$victor$Theory_Object_Messages$swapPastForPrior(vars));
+					A3(_merivale$victor$Theory_Messages$secondary, _p0._0, false, false),
+					_merivale$victor$Theory_Messages$swapPastForPrior(vars));
 			}
 		}
 	});
-var _merivale$victor$Theory_Object_Messages$preordained = F3(
+var _merivale$victor$Theory_Messages$preordained = F3(
 	function (displacer, time, vars) {
 		if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
 			return _elm_lang$core$Result$Err('messages with a modality cannot be made PREORDAINED');
@@ -8970,18 +8970,18 @@ var _merivale$victor$Theory_Object_Messages$preordained = F3(
 				if (_p1._0.ctor === 'Primary') {
 					return A2(
 						_elm_lang$core$Result$map,
-						_merivale$victor$Theory_Object_Messages$primary(_p1._0._0),
-						_merivale$victor$Theory_Object_Messages$swapPastForPrior(varsWithPost));
+						_merivale$victor$Theory_Messages$primary(_p1._0._0),
+						_merivale$victor$Theory_Messages$swapPastForPrior(varsWithPost));
 				} else {
 					return A2(
 						_elm_lang$core$Result$map,
-						A3(_merivale$victor$Theory_Object_Messages$secondary, _p1._0._0, true, false),
-						_merivale$victor$Theory_Object_Messages$swapPastForPrior(varsWithPost));
+						A3(_merivale$victor$Theory_Messages$secondary, _p1._0._0, true, false),
+						_merivale$victor$Theory_Messages$swapPastForPrior(varsWithPost));
 				}
 			}
 		}
 	});
-var _merivale$victor$Theory_Object_Messages$regular = F3(
+var _merivale$victor$Theory_Messages$regular = F3(
 	function (displacer, frequency, vars) {
 		if (!_elm_lang$core$Native_Utils.eq(vars.modality, _elm_lang$core$Maybe$Nothing)) {
 			return _elm_lang$core$Result$Err('messages with a modality cannot be made REGULAR');
@@ -8998,26 +8998,26 @@ var _merivale$victor$Theory_Object_Messages$regular = F3(
 				if (_p2._0.ctor === 'Primary') {
 					return A2(
 						_elm_lang$core$Result$map,
-						_merivale$victor$Theory_Object_Messages$primary(_p2._0._0),
-						_merivale$victor$Theory_Object_Messages$swapPastForPrior(varsWithPre));
+						_merivale$victor$Theory_Messages$primary(_p2._0._0),
+						_merivale$victor$Theory_Messages$swapPastForPrior(varsWithPre));
 				} else {
 					return A2(
 						_elm_lang$core$Result$map,
-						A3(_merivale$victor$Theory_Object_Messages$secondary, _p2._0._0, false, true),
-						_merivale$victor$Theory_Object_Messages$swapPastForPrior(varsWithPre));
+						A3(_merivale$victor$Theory_Messages$secondary, _p2._0._0, false, true),
+						_merivale$victor$Theory_Messages$swapPastForPrior(varsWithPre));
 				}
 			}
 		}
 	});
-var _merivale$victor$Theory_Object_Messages$AmassedObject = F2(
+var _merivale$victor$Theory_Messages$AmassedObject = F2(
 	function (a, b) {
 		return {ctor: 'AmassedObject', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Object_Messages$EnumeratedObject = F2(
+var _merivale$victor$Theory_Messages$EnumeratedObject = F2(
 	function (a, b) {
 		return {ctor: 'EnumeratedObject', _0: a, _1: b};
 	});
-var _merivale$victor$Theory_Object_Messages$negative = function (vars) {
+var _merivale$victor$Theory_Messages$negative = function (vars) {
 	var _p3 = vars.negationTarget;
 	if (_p3.ctor === 'NegateCondition') {
 		var _p4 = vars.modality;
@@ -9056,51 +9056,51 @@ var _merivale$victor$Theory_Object_Messages$negative = function (vars) {
 					_elm_lang$core$Native_Utils.update(
 						vars,
 						{
-							negationTarget: _merivale$victor$Theory_Object_Messages$NegateCondition,
-							pseudoObject: A2(_merivale$victor$Theory_Object_Messages$EnumeratedObject, true, _p5._1)
+							negationTarget: _merivale$victor$Theory_Messages$NegateCondition,
+							pseudoObject: A2(_merivale$victor$Theory_Messages$EnumeratedObject, true, _p5._1)
 						}));
 			default:
 				return _p5._0 ? _elm_lang$core$Result$Err('amassed objects cannot be negated twice') : _elm_lang$core$Result$Ok(
 					_elm_lang$core$Native_Utils.update(
 						vars,
 						{
-							negationTarget: _merivale$victor$Theory_Object_Messages$NegateCondition,
-							pseudoObject: A2(_merivale$victor$Theory_Object_Messages$AmassedObject, true, _p5._1)
+							negationTarget: _merivale$victor$Theory_Messages$NegateCondition,
+							pseudoObject: A2(_merivale$victor$Theory_Messages$AmassedObject, true, _p5._1)
 						}));
 		}
 	}
 };
-var _merivale$victor$Theory_Object_Messages$IndirectObject = function (a) {
+var _merivale$victor$Theory_Messages$IndirectObject = function (a) {
 	return {ctor: 'IndirectObject', _0: a};
 };
-var _merivale$victor$Theory_Object_Messages$DirectObject = {ctor: 'DirectObject'};
-var _merivale$victor$Theory_Object_Messages$AmassedBalance = F4(
+var _merivale$victor$Theory_Messages$DirectObject = {ctor: 'DirectObject'};
+var _merivale$victor$Theory_Messages$AmassedBalance = F4(
 	function (a, b, c, d) {
 		return {ctor: 'AmassedBalance', _0: a, _1: b, _2: c, _3: d};
 	});
-var _merivale$victor$Theory_Object_Messages$amassed = F3(
+var _merivale$victor$Theory_Messages$amassed = F3(
 	function (target, proportion, vars) {
 		var _p6 = proportion;
 		var quantifier = _p6._0;
 		var other = _p6._1;
 		var haystack = _p6._2;
-		if (!_merivale$victor$Theory_Object_Pseudo$isAmassing(quantifier)) {
+		if (!_merivale$victor$Theory_Ideas_Pseudo$isAmassing(quantifier)) {
 			return _elm_lang$core$Result$Err('this quantifier cannot be used in AMASSED elaborations');
 		} else {
 			if (_elm_lang$core$Native_Utils.cmp(target, 0) < 0) {
 				var _p7 = vars.pseudoObject;
 				if (_p7.ctor === 'DirectObject') {
-					if (!_merivale$victor$Theory_Plain_Nucleus$isOther(vars.object)) {
+					if (!_merivale$victor$Theory_Ideas_Nucleus$isOther(vars.object)) {
 						return _elm_lang$core$Result$Err('only third person (other) objects can be overridden');
 					} else {
 						if (_elm_lang$core$Native_Utils.eq(
 							quantifier,
-							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Much)) && _merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object)) {
+							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Much)) && _merivale$victor$Theory_Ideas_Nucleus$isPlural(vars.object)) {
 							return _elm_lang$core$Result$Err('this quantifier cannot be used with plural objects');
 						} else {
-							var pseudoObject = A2(_merivale$victor$Theory_Object_Messages$AmassedObject, false, proportion);
+							var pseudoObject = A2(_merivale$victor$Theory_Messages$AmassedObject, false, proportion);
 							return _elm_lang$core$Result$Ok(
-								A3(_merivale$victor$Theory_Object_Messages$overrideMainObject, true, pseudoObject, vars));
+								A3(_merivale$victor$Theory_Messages$overrideMainObject, true, pseudoObject, vars));
 						}
 					}
 				} else {
@@ -9119,17 +9119,17 @@ var _merivale$victor$Theory_Object_Messages$amassed = F3(
 							return _elm_lang$core$Result$Err('only different objects can be overridden');
 						} else {
 							var _p9 = _p8._0._0._1._0;
-							if (!_merivale$victor$Theory_Plain_Nucleus$isOther(_p9)) {
+							if (!_merivale$victor$Theory_Ideas_Nucleus$isOther(_p9)) {
 								return _elm_lang$core$Result$Err('only third person (other) objects can be overridden');
 							} else {
 								if (_elm_lang$core$Native_Utils.eq(
 									quantifier,
-									_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Much)) && _merivale$victor$Theory_Plain_Nucleus$isPlural(_p9)) {
+									_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Much)) && _merivale$victor$Theory_Ideas_Nucleus$isPlural(_p9)) {
 									return _elm_lang$core$Result$Err('this quantifier cannot be used with plural objects');
 								} else {
-									var pseudoBalance = A4(_merivale$victor$Theory_Object_Messages$AmassedBalance, _p8._0._0._0, _p9, false, proportion);
+									var pseudoBalance = A4(_merivale$victor$Theory_Messages$AmassedBalance, _p8._0._0._0, _p9, false, proportion);
 									return _elm_lang$core$Result$Ok(
-										A3(_merivale$victor$Theory_Object_Messages$overrideBalancingObject, target, pseudoBalance, vars));
+										A3(_merivale$victor$Theory_Messages$overrideBalancingObject, target, pseudoBalance, vars));
 								}
 							}
 						}
@@ -9147,35 +9147,35 @@ var _merivale$victor$Theory_Object_Messages$amassed = F3(
 			}
 		}
 	});
-var _merivale$victor$Theory_Object_Messages$EnumeratedBalance = F4(
+var _merivale$victor$Theory_Messages$EnumeratedBalance = F4(
 	function (a, b, c, d) {
 		return {ctor: 'EnumeratedBalance', _0: a, _1: b, _2: c, _3: d};
 	});
-var _merivale$victor$Theory_Object_Messages$enumerated = F3(
+var _merivale$victor$Theory_Messages$enumerated = F3(
 	function (target, multiplicity, vars) {
 		var _p10 = multiplicity;
 		var quantifier = _p10._0;
 		var other = _p10._1;
 		var haystack = _p10._2;
-		if (!_merivale$victor$Theory_Object_Pseudo$isEnumerating(quantifier)) {
+		if (!_merivale$victor$Theory_Ideas_Pseudo$isEnumerating(quantifier)) {
 			return _elm_lang$core$Result$Err('this quantifier cannot be used in ENUMERATED elaborations');
 		} else {
 			if (_elm_lang$core$Native_Utils.cmp(target, 0) < 0) {
 				var _p11 = vars.pseudoObject;
 				if (_p11.ctor === 'DirectObject') {
-					if (!_merivale$victor$Theory_Plain_Nucleus$isOther(vars.object)) {
+					if (!_merivale$victor$Theory_Ideas_Nucleus$isOther(vars.object)) {
 						return _elm_lang$core$Result$Err('only third person (other) objects can be overridden');
 					} else {
-						if (_merivale$victor$Theory_Object_Pseudo$requiresPlural(quantifier) && (!_merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object))) {
+						if (_merivale$victor$Theory_Ideas_Pseudo$requiresPlural(quantifier) && (!_merivale$victor$Theory_Ideas_Nucleus$isPlural(vars.object))) {
 							return _elm_lang$core$Result$Err('your ENUMERATED quantifier requires a plural object');
 						} else {
-							if (_merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object) && (!_merivale$victor$Theory_Object_Pseudo$requiresPlural(quantifier))) {
+							if (_merivale$victor$Theory_Ideas_Nucleus$isPlural(vars.object) && (!_merivale$victor$Theory_Ideas_Pseudo$requiresPlural(quantifier))) {
 								return _elm_lang$core$Result$Err('your ENUMERATED quantifier requires a singular object');
 							} else {
-								var pseudoBalance = A2(_merivale$victor$Theory_Object_Messages$EnumeratedObject, false, multiplicity);
-								var negateObject = _merivale$victor$Theory_Object_Pseudo$isNegatable(quantifier);
+								var pseudoBalance = A2(_merivale$victor$Theory_Messages$EnumeratedObject, false, multiplicity);
+								var negateObject = _merivale$victor$Theory_Ideas_Pseudo$isNegatable(quantifier);
 								return _elm_lang$core$Result$Ok(
-									A3(_merivale$victor$Theory_Object_Messages$overrideMainObject, negateObject, pseudoBalance, vars));
+									A3(_merivale$victor$Theory_Messages$overrideMainObject, negateObject, pseudoBalance, vars));
 							}
 						}
 					}
@@ -9195,18 +9195,18 @@ var _merivale$victor$Theory_Object_Messages$enumerated = F3(
 							return _elm_lang$core$Result$Err('only different objects can be overridden');
 						} else {
 							var _p13 = _p12._0._0._1._0;
-							if (!_merivale$victor$Theory_Plain_Nucleus$isOther(_p13)) {
+							if (!_merivale$victor$Theory_Ideas_Nucleus$isOther(_p13)) {
 								return _elm_lang$core$Result$Err('only third person (other) objects can be overridden');
 							} else {
-								if (_merivale$victor$Theory_Object_Pseudo$requiresPlural(quantifier) && (!_merivale$victor$Theory_Plain_Nucleus$isPlural(_p13))) {
+								if (_merivale$victor$Theory_Ideas_Pseudo$requiresPlural(quantifier) && (!_merivale$victor$Theory_Ideas_Nucleus$isPlural(_p13))) {
 									return _elm_lang$core$Result$Err('your ENUMERATED quantifier requires a plural object');
 								} else {
-									if (_merivale$victor$Theory_Plain_Nucleus$isPlural(_p13) && (!_merivale$victor$Theory_Object_Pseudo$requiresPlural(quantifier))) {
+									if (_merivale$victor$Theory_Ideas_Nucleus$isPlural(_p13) && (!_merivale$victor$Theory_Ideas_Pseudo$requiresPlural(quantifier))) {
 										return _elm_lang$core$Result$Err('your ENUMERATED quantifier requires a singular object');
 									} else {
-										var pseudoBalance = A4(_merivale$victor$Theory_Object_Messages$EnumeratedBalance, _p12._0._0._0, _p13, false, multiplicity);
+										var pseudoBalance = A4(_merivale$victor$Theory_Messages$EnumeratedBalance, _p12._0._0._0, _p13, false, multiplicity);
 										return _elm_lang$core$Result$Ok(
-											A3(_merivale$victor$Theory_Object_Messages$overrideBalancingObject, target, pseudoBalance, vars));
+											A3(_merivale$victor$Theory_Messages$overrideBalancingObject, target, pseudoBalance, vars));
 									}
 								}
 							}
@@ -9225,20 +9225,20 @@ var _merivale$victor$Theory_Object_Messages$enumerated = F3(
 			}
 		}
 	});
-var _merivale$victor$Theory_Object_Messages$IndirectBalance = F3(
+var _merivale$victor$Theory_Messages$IndirectBalance = F3(
 	function (a, b, c) {
 		return {ctor: 'IndirectBalance', _0: a, _1: b, _2: c};
 	});
-var _merivale$victor$Theory_Object_Messages$indirect = F3(
+var _merivale$victor$Theory_Messages$indirect = F3(
 	function (target, description, vars) {
 		if (_elm_lang$core$Native_Utils.cmp(target, 0) < 0) {
 			var _p14 = vars.pseudoObject;
 			if (_p14.ctor === 'DirectObject') {
-				return (!_merivale$victor$Theory_Plain_Nucleus$isOther(vars.object)) ? _elm_lang$core$Result$Err('only third person (other) objects can be overridden') : _elm_lang$core$Result$Ok(
+				return (!_merivale$victor$Theory_Ideas_Nucleus$isOther(vars.object)) ? _elm_lang$core$Result$Err('only third person (other) objects can be overridden') : _elm_lang$core$Result$Ok(
 					A3(
-						_merivale$victor$Theory_Object_Messages$overrideMainObject,
+						_merivale$victor$Theory_Messages$overrideMainObject,
 						false,
-						_merivale$victor$Theory_Object_Messages$IndirectObject(description),
+						_merivale$victor$Theory_Messages$IndirectObject(description),
 						vars));
 			} else {
 				return _elm_lang$core$Result$Err('the main object cannot be overridden twice');
@@ -9256,12 +9256,12 @@ var _merivale$victor$Theory_Object_Messages$indirect = F3(
 						return _elm_lang$core$Result$Err('only different objects can be overridden');
 					} else {
 						var _p16 = _p15._0._0._1._0;
-						if (!_merivale$victor$Theory_Plain_Nucleus$isOther(_p16)) {
+						if (!_merivale$victor$Theory_Ideas_Nucleus$isOther(_p16)) {
 							return _elm_lang$core$Result$Err('only third person (other) objects can be overridden');
 						} else {
-							var pseudoBalance = A3(_merivale$victor$Theory_Object_Messages$IndirectBalance, _p15._0._0._0, _p16, description);
+							var pseudoBalance = A3(_merivale$victor$Theory_Messages$IndirectBalance, _p15._0._0._0, _p16, description);
 							return _elm_lang$core$Result$Ok(
-								A3(_merivale$victor$Theory_Object_Messages$overrideBalancingObject, target, pseudoBalance, vars));
+								A3(_merivale$victor$Theory_Messages$overrideBalancingObject, target, pseudoBalance, vars));
 						}
 					}
 				} else {
@@ -9277,15 +9277,15 @@ var _merivale$victor$Theory_Object_Messages$indirect = F3(
 			}
 		}
 	});
-var _merivale$victor$Theory_Object_Messages$DirectBalance = function (a) {
+var _merivale$victor$Theory_Messages$DirectBalance = function (a) {
 	return {ctor: 'DirectBalance', _0: a};
 };
-var _merivale$victor$Theory_Object_Messages$plain = function (_p17) {
+var _merivale$victor$Theory_Messages$plain = function (_p17) {
 	var _p18 = _p17;
 	return {
-		negationTarget: _merivale$victor$Theory_Object_Messages$NegateCondition,
+		negationTarget: _merivale$victor$Theory_Messages$NegateCondition,
 		object: _p18._0,
-		pseudoObject: _merivale$victor$Theory_Object_Messages$DirectObject,
+		pseudoObject: _merivale$victor$Theory_Messages$DirectObject,
 		past: false,
 		modality: _elm_lang$core$Maybe$Nothing,
 		negatedModality: false,
@@ -9298,90 +9298,90 @@ var _merivale$victor$Theory_Object_Messages$plain = function (_p17) {
 		balances: A2(
 			_elm_lang$core$List$map,
 			function (x) {
-				return _merivale$victor$Theory_Object_Messages$DirectBalance(x);
+				return _merivale$victor$Theory_Messages$DirectBalance(x);
 			},
 			_p18._1._1),
 		post: {ctor: '[]'}
 	};
 };
-var _merivale$victor$Theory_Object_Messages$explode = function (message) {
+var _merivale$victor$Theory_Messages$explode = function (message) {
 	var _p19 = message;
 	switch (_p19.ctor) {
 		case 'Plain':
 			return _elm_lang$core$Result$Ok(
-				_merivale$victor$Theory_Object_Messages$plain(_p19._0));
+				_merivale$victor$Theory_Messages$plain(_p19._0));
 		case 'NEGATIVE':
 			return A2(
 				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Object_Messages$negative,
-				_merivale$victor$Theory_Object_Messages$explode(_p19._0));
+				_merivale$victor$Theory_Messages$negative,
+				_merivale$victor$Theory_Messages$explode(_p19._0));
 		case 'PAST':
 			return A2(
 				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Object_Messages$past(_p19._0),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._1));
+				_merivale$victor$Theory_Messages$past(_p19._0),
+				_merivale$victor$Theory_Messages$explode(_p19._1));
 		case 'PRIOR':
 			return A2(
 				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Object_Messages$prior,
-				_merivale$victor$Theory_Object_Messages$explode(_p19._0));
+				_merivale$victor$Theory_Messages$prior,
+				_merivale$victor$Theory_Messages$explode(_p19._0));
 		case 'DISPLACED':
 			return A2(
 				_elm_lang$core$Result$andThen,
-				_merivale$victor$Theory_Object_Messages$displaced(_p19._0),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._1));
+				_merivale$victor$Theory_Messages$displaced(_p19._0),
+				_merivale$victor$Theory_Messages$explode(_p19._1));
 		case 'PREORDAINED':
 			return A2(
 				_elm_lang$core$Result$andThen,
-				A2(_merivale$victor$Theory_Object_Messages$preordained, _p19._0, _p19._1),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._2));
+				A2(_merivale$victor$Theory_Messages$preordained, _p19._0, _p19._1),
+				_merivale$victor$Theory_Messages$explode(_p19._2));
 		case 'REGULAR':
 			return A2(
 				_elm_lang$core$Result$andThen,
-				A2(_merivale$victor$Theory_Object_Messages$regular, _p19._0, _p19._1),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._2));
+				A2(_merivale$victor$Theory_Messages$regular, _p19._0, _p19._1),
+				_merivale$victor$Theory_Messages$explode(_p19._2));
 		case 'EXTENDED':
 			return A2(
 				_elm_lang$core$Result$map,
-				_merivale$victor$Theory_Object_Messages$extended(_p19._0),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._1));
+				_merivale$victor$Theory_Messages$extended(_p19._0),
+				_merivale$victor$Theory_Messages$explode(_p19._1));
 		case 'SCATTERED':
 			return A2(
 				_elm_lang$core$Result$map,
-				_merivale$victor$Theory_Object_Messages$scattered(_p19._0),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._1));
+				_merivale$victor$Theory_Messages$scattered(_p19._0),
+				_merivale$victor$Theory_Messages$explode(_p19._1));
 		case 'INDIRECT':
 			return A2(
 				_elm_lang$core$Result$andThen,
-				A2(_merivale$victor$Theory_Object_Messages$indirect, _p19._0, _p19._1),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._2));
+				A2(_merivale$victor$Theory_Messages$indirect, _p19._0, _p19._1),
+				_merivale$victor$Theory_Messages$explode(_p19._2));
 		case 'ENUMERATED':
 			return A2(
 				_elm_lang$core$Result$andThen,
-				A2(_merivale$victor$Theory_Object_Messages$enumerated, _p19._0, _p19._1),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._2));
+				A2(_merivale$victor$Theory_Messages$enumerated, _p19._0, _p19._1),
+				_merivale$victor$Theory_Messages$explode(_p19._2));
 		default:
 			return A2(
 				_elm_lang$core$Result$andThen,
-				A2(_merivale$victor$Theory_Object_Messages$amassed, _p19._0, _p19._1),
-				_merivale$victor$Theory_Object_Messages$explode(_p19._2));
+				A2(_merivale$victor$Theory_Messages$amassed, _p19._0, _p19._1),
+				_merivale$victor$Theory_Messages$explode(_p19._2));
 	}
 };
 
 var _merivale$victor$Interface_Model_Messages$amassed = F3(
 	function (elaboration, message, proportion) {
 		return _elm_lang$core$Result$Ok(
-			A3(_merivale$victor$Theory_Object_Messages$AMASSED, elaboration.target, proportion, message));
+			A3(_merivale$victor$Theory_Messages$AMASSED, elaboration.target, proportion, message));
 	});
 var _merivale$victor$Interface_Model_Messages$enumerated = F3(
 	function (elaboration, message, multiplicity) {
 		return _elm_lang$core$Result$Ok(
-			A3(_merivale$victor$Theory_Object_Messages$ENUMERATED, elaboration.target, multiplicity, message));
+			A3(_merivale$victor$Theory_Messages$ENUMERATED, elaboration.target, multiplicity, message));
 	});
 var _merivale$victor$Interface_Model_Messages$indirect = F3(
 	function (elaboration, message, description) {
 		return _elm_lang$core$Result$Ok(
-			A3(_merivale$victor$Theory_Object_Messages$INDIRECT, elaboration.target, description, message));
+			A3(_merivale$victor$Theory_Messages$INDIRECT, elaboration.target, description, message));
 	});
 var _merivale$victor$Interface_Model_Messages$proportion = F2(
 	function (elaboration, haystack) {
@@ -9419,7 +9419,7 @@ var _merivale$victor$Interface_Model_Messages$scattered = F2(
 			return _elm_lang$core$Result$Err('please enter a value for the tally');
 		} else {
 			return _elm_lang$core$Result$Ok(
-				A2(_merivale$victor$Theory_Object_Messages$SCATTERED, _p2._0, message));
+				A2(_merivale$victor$Theory_Messages$SCATTERED, _p2._0, message));
 		}
 	});
 var _merivale$victor$Interface_Model_Messages$extended = F2(
@@ -9429,21 +9429,21 @@ var _merivale$victor$Interface_Model_Messages$extended = F2(
 			return _elm_lang$core$Result$Err('please enter a value for the duration');
 		} else {
 			return _elm_lang$core$Result$Ok(
-				A2(_merivale$victor$Theory_Object_Messages$EXTENDED, _p3._0, message));
+				A2(_merivale$victor$Theory_Messages$EXTENDED, _p3._0, message));
 		}
 	});
 var _merivale$victor$Interface_Model_Messages$prior = function (message) {
 	return _elm_lang$core$Result$Ok(
-		_merivale$victor$Theory_Object_Messages$PRIOR(message));
+		_merivale$victor$Theory_Messages$PRIOR(message));
 };
 var _merivale$victor$Interface_Model_Messages$past = F2(
 	function (time, message) {
 		return _elm_lang$core$Result$Ok(
-			A2(_merivale$victor$Theory_Object_Messages$PAST, time, message));
+			A2(_merivale$victor$Theory_Messages$PAST, time, message));
 	});
 var _merivale$victor$Interface_Model_Messages$negative = function (message) {
 	return _elm_lang$core$Result$Ok(
-		_merivale$victor$Theory_Object_Messages$NEGATIVE(message));
+		_merivale$victor$Theory_Messages$NEGATIVE(message));
 };
 var _merivale$victor$Interface_Model_Messages$propertyEmpty = function (status) {
 	var _p4 = status;
@@ -9476,15 +9476,15 @@ var _merivale$victor$Interface_Model_Messages$displaced = F2(
 				var _p7 = _p6._0._0._1;
 				return _merivale$victor$Interface_Model_Messages$verbalityEmpty(_p8) ? _elm_lang$core$Result$Err('please enter a verb for the DISPLACED verbality') : (_merivale$victor$Interface_Model_Messages$propertyEmpty(_p7) ? _elm_lang$core$Result$Err('please enter an adjective for the DISPLACED status') : _elm_lang$core$Result$Ok(
 					A2(
-						_merivale$victor$Theory_Object_Messages$DISPLACED,
-						_merivale$victor$Theory_Long_Displacers$Primary(
+						_merivale$victor$Theory_Messages$DISPLACED,
+						_merivale$victor$Theory_Ideas_Displacers$Primary(
 							{ctor: '_Tuple2', _0: _p8, _1: _p7}),
 						message)));
 			} else {
 				return _elm_lang$core$Result$Ok(
 					A2(
-						_merivale$victor$Theory_Object_Messages$DISPLACED,
-						_merivale$victor$Theory_Long_Displacers$Secondary(_p6._0._0),
+						_merivale$victor$Theory_Messages$DISPLACED,
+						_merivale$victor$Theory_Ideas_Displacers$Secondary(_p6._0._0),
 						message));
 			}
 		}
@@ -9494,14 +9494,14 @@ var _merivale$victor$Interface_Model_Messages$preordained = F3(
 		var _p9 = displacer;
 		if (_p9.ctor === 'Nothing') {
 			return _elm_lang$core$Result$Ok(
-				A3(_merivale$victor$Theory_Object_Messages$PREORDAINED, displacer, string, message));
+				A3(_merivale$victor$Theory_Messages$PREORDAINED, displacer, string, message));
 		} else {
 			if (_p9._0.ctor === 'Primary') {
 				return _merivale$victor$Interface_Model_Messages$verbalityEmpty(_p9._0._0._0) ? _elm_lang$core$Result$Err('please enter a verb for the PREORDAINED verbality') : (_merivale$victor$Interface_Model_Messages$propertyEmpty(_p9._0._0._1) ? _elm_lang$core$Result$Err('please enter an adjective for the PREORDAINED status') : _elm_lang$core$Result$Ok(
-					A3(_merivale$victor$Theory_Object_Messages$PREORDAINED, displacer, string, message)));
+					A3(_merivale$victor$Theory_Messages$PREORDAINED, displacer, string, message)));
 			} else {
 				return _elm_lang$core$Result$Ok(
-					A3(_merivale$victor$Theory_Object_Messages$PREORDAINED, displacer, string, message));
+					A3(_merivale$victor$Theory_Messages$PREORDAINED, displacer, string, message));
 			}
 		}
 	});
@@ -9510,14 +9510,14 @@ var _merivale$victor$Interface_Model_Messages$regular = F3(
 		var _p10 = displacer;
 		if (_p10.ctor === 'Nothing') {
 			return _elm_lang$core$Result$Ok(
-				A3(_merivale$victor$Theory_Object_Messages$REGULAR, displacer, string, message));
+				A3(_merivale$victor$Theory_Messages$REGULAR, displacer, string, message));
 		} else {
 			if (_p10._0.ctor === 'Primary') {
 				return _merivale$victor$Interface_Model_Messages$verbalityEmpty(_p10._0._0._0) ? _elm_lang$core$Result$Err('please enter a verb for the REGULAR verbality') : (_merivale$victor$Interface_Model_Messages$propertyEmpty(_p10._0._0._1) ? _elm_lang$core$Result$Err('please enter an adjective for the REGULAR status') : _elm_lang$core$Result$Ok(
-					A3(_merivale$victor$Theory_Object_Messages$REGULAR, displacer, string, message)));
+					A3(_merivale$victor$Theory_Messages$REGULAR, displacer, string, message)));
 			} else {
 				return _elm_lang$core$Result$Ok(
-					A3(_merivale$victor$Theory_Object_Messages$REGULAR, displacer, string, message));
+					A3(_merivale$victor$Theory_Messages$REGULAR, displacer, string, message));
 			}
 		}
 	});
@@ -9620,7 +9620,7 @@ var _merivale$victor$Interface_Model_Messages$elaborate = F2(
 var _merivale$victor$Interface_Model_Messages$plain = F4(
 	function (object, verbality, status, balances) {
 		return _merivale$victor$Interface_Model_Messages$verbalityEmpty(verbality) ? _elm_lang$core$Result$Err('please enter a verb for the verbality') : (_merivale$victor$Interface_Model_Messages$propertyEmpty(status) ? _elm_lang$core$Result$Err('please enter an adjective for the status') : _elm_lang$core$Result$Ok(
-			_merivale$victor$Theory_Object_Messages$Plain(
+			_merivale$victor$Theory_Messages$Plain(
 				{
 					ctor: '_Tuple2',
 					_0: object,
@@ -9653,7 +9653,7 @@ var _merivale$victor$Interface_Model_State$setElaborationQuantifierInteger = F2(
 			elaboration,
 			{
 				quantifier: _elm_lang$core$Maybe$Just(
-					_merivale$victor$Theory_Object_Pseudo$Integer($int))
+					_merivale$victor$Theory_Ideas_Pseudo$Integer($int))
 			});
 	});
 var _merivale$victor$Interface_Model_State$setElaborationQuantifier = F2(
@@ -9667,7 +9667,7 @@ var _merivale$victor$Interface_Model_State$setElaborationPointerObject = F2(
 		return _elm_lang$core$Native_Utils.update(
 			elaboration,
 			{
-				pointer: _merivale$victor$Theory_Object_Pseudo$RelatedTo(object)
+				pointer: _merivale$victor$Theory_Ideas_Pseudo$RelatedTo(object)
 			});
 	});
 var _merivale$victor$Interface_Model_State$setElaborationPointer = F2(
@@ -9688,7 +9688,7 @@ var _merivale$victor$Interface_Model_State$setElaborationDisplacerModality = F2(
 			elaboration,
 			{
 				displacer: _elm_lang$core$Maybe$Just(
-					_merivale$victor$Theory_Long_Displacers$Secondary(modality))
+					_merivale$victor$Theory_Ideas_Displacers$Secondary(modality))
 			});
 	});
 var _merivale$victor$Interface_Model_State$setElaborationDisplacerStatusRelator = F2(
@@ -9699,12 +9699,12 @@ var _merivale$victor$Interface_Model_State$setElaborationDisplacerStatusRelator 
 				elaboration,
 				{
 					displacer: _elm_lang$core$Maybe$Just(
-						_merivale$victor$Theory_Long_Displacers$Primary(
+						_merivale$victor$Theory_Ideas_Displacers$Primary(
 							{
 								ctor: '_Tuple2',
 								_0: _p0._0._0._0,
 								_1: _elm_lang$core$Maybe$Just(
-									_merivale$victor$Theory_Plain_Nucleus$Relative(relator))
+									_merivale$victor$Theory_Ideas_Nucleus$Relative(relator))
 							}))
 				});
 		} else {
@@ -9719,12 +9719,12 @@ var _merivale$victor$Interface_Model_State$setElaborationDisplacerStatusString =
 				elaboration,
 				{
 					displacer: _elm_lang$core$Maybe$Just(
-						_merivale$victor$Theory_Long_Displacers$Primary(
+						_merivale$victor$Theory_Ideas_Displacers$Primary(
 							{
 								ctor: '_Tuple2',
 								_0: _p1._0._0._0,
 								_1: _elm_lang$core$Maybe$Just(
-									_merivale$victor$Theory_Plain_Nucleus$Absolute(string))
+									_merivale$victor$Theory_Ideas_Nucleus$Absolute(string))
 							}))
 				});
 		} else {
@@ -9739,7 +9739,7 @@ var _merivale$victor$Interface_Model_State$setElaborationDisplacerStatus = F2(
 				elaboration,
 				{
 					displacer: _elm_lang$core$Maybe$Just(
-						_merivale$victor$Theory_Long_Displacers$Primary(
+						_merivale$victor$Theory_Ideas_Displacers$Primary(
 							{ctor: '_Tuple2', _0: _p2._0._0._0, _1: status}))
 				});
 		} else {
@@ -9753,10 +9753,10 @@ var _merivale$victor$Interface_Model_State$toggleElaborationDisplacerVerbalityPa
 			elaboration,
 			{
 				displacer: _elm_lang$core$Maybe$Just(
-					_merivale$victor$Theory_Long_Displacers$Primary(
+					_merivale$victor$Theory_Ideas_Displacers$Primary(
 						{
 							ctor: '_Tuple2',
-							_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p3._0._0._0._0, _p3._0._0._0._1, !_p3._0._0._0._2),
+							_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, _p3._0._0._0._0, _p3._0._0._0._1, !_p3._0._0._0._2),
 							_1: _p3._0._0._1
 						}))
 			});
@@ -9772,10 +9772,10 @@ var _merivale$victor$Interface_Model_State$toggleElaborationDisplacerVerbalityOn
 				elaboration,
 				{
 					displacer: _elm_lang$core$Maybe$Just(
-						_merivale$victor$Theory_Long_Displacers$Primary(
+						_merivale$victor$Theory_Ideas_Displacers$Primary(
 							{
 								ctor: '_Tuple2',
-								_0: _merivale$victor$Theory_Plain_Nucleus$Be(!_p4._0._0._0._0),
+								_0: _merivale$victor$Theory_Ideas_Nucleus$Be(!_p4._0._0._0._0),
 								_1: _p4._0._0._1
 							}))
 				});
@@ -9784,10 +9784,10 @@ var _merivale$victor$Interface_Model_State$toggleElaborationDisplacerVerbalityOn
 				elaboration,
 				{
 					displacer: _elm_lang$core$Maybe$Just(
-						_merivale$victor$Theory_Long_Displacers$Primary(
+						_merivale$victor$Theory_Ideas_Displacers$Primary(
 							{
 								ctor: '_Tuple2',
-								_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p4._0._0._0._0, !_p4._0._0._0._1, _p4._0._0._0._2),
+								_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, _p4._0._0._0._0, !_p4._0._0._0._1, _p4._0._0._0._2),
 								_1: _p4._0._0._1
 							}))
 				});
@@ -9804,10 +9804,10 @@ var _merivale$victor$Interface_Model_State$setElaborationDisplacerVerbalityStrin
 				elaboration,
 				{
 					displacer: _elm_lang$core$Maybe$Just(
-						_merivale$victor$Theory_Long_Displacers$Primary(
+						_merivale$victor$Theory_Ideas_Displacers$Primary(
 							{
 								ctor: '_Tuple2',
-								_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, string, _p5._0._0._0._1, _p5._0._0._0._2),
+								_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, string, _p5._0._0._0._1, _p5._0._0._0._2),
 								_1: _p5._0._0._1
 							}))
 				});
@@ -9823,7 +9823,7 @@ var _merivale$victor$Interface_Model_State$setElaborationDisplacerVerbality = F2
 				elaboration,
 				{
 					displacer: _elm_lang$core$Maybe$Just(
-						_merivale$victor$Theory_Long_Displacers$Primary(
+						_merivale$victor$Theory_Ideas_Displacers$Primary(
 							{ctor: '_Tuple2', _0: verbality, _1: _p6._0._0._1}))
 				});
 		} else {
@@ -9848,9 +9848,9 @@ var _merivale$victor$Interface_Model_State$setElaborationPointerObjectString = F
 			return _elm_lang$core$Native_Utils.update(
 				elaboration,
 				{
-					pointer: _merivale$victor$Theory_Object_Pseudo$RelatedTo(
+					pointer: _merivale$victor$Theory_Ideas_Pseudo$RelatedTo(
 						A3(
-							_merivale$victor$Theory_Plain_Nucleus$Other,
+							_merivale$victor$Theory_Ideas_Nucleus$Other,
 							_p7._0._0,
 							_p7._0._1,
 							_merivale$victor$Interface_Model_State$maybe(string)))
@@ -9898,9 +9898,9 @@ var _merivale$victor$Interface_Model_State$setBalanceWeightObjectString = F2(
 			return {
 				ctor: '_Tuple2',
 				_0: _p11,
-				_1: _merivale$victor$Theory_Plain_Nucleus$Different(
+				_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
 					A3(
-						_merivale$victor$Theory_Plain_Nucleus$Other,
+						_merivale$victor$Theory_Ideas_Nucleus$Other,
 						_p10._0._0,
 						_p10._0._1,
 						_merivale$victor$Interface_Model_State$maybe(string)))
@@ -9919,7 +9919,7 @@ var _merivale$victor$Interface_Model_State$setBalanceWeightObject = F2(
 			return {
 				ctor: '_Tuple2',
 				_0: _p16,
-				_1: _merivale$victor$Theory_Plain_Nucleus$Different(object)
+				_1: _merivale$victor$Theory_Ideas_Nucleus$Different(object)
 			};
 		} else {
 			return {ctor: '_Tuple2', _0: _p16, _1: _p17};
@@ -9965,19 +9965,19 @@ var _merivale$victor$Interface_Model_State$addElaboration = F3(
 						string2: _elm_lang$core$Maybe$Nothing,
 						string3: _elm_lang$core$Maybe$Nothing,
 						displacer: _elm_lang$core$Maybe$Just(
-							_merivale$victor$Theory_Long_Displacers$Primary(
+							_merivale$victor$Theory_Ideas_Displacers$Primary(
 								{
 									ctor: '_Tuple2',
-									_0: _merivale$victor$Theory_Plain_Nucleus$Be(false),
+									_0: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
 									_1: _elm_lang$core$Maybe$Nothing
 								})),
 						target: -1,
-						pointer: _merivale$victor$Theory_Object_Pseudo$The,
+						pointer: _merivale$victor$Theory_Ideas_Pseudo$The,
 						quantifier: _elm_lang$core$Maybe$Nothing,
 						other: false
 					};
 				case 'MakeENUMERATED':
-					return {plus: false, recipe: recipe, string1: _elm_lang$core$Maybe$Nothing, string2: _elm_lang$core$Maybe$Nothing, string3: _elm_lang$core$Maybe$Nothing, displacer: _elm_lang$core$Maybe$Nothing, target: -1, pointer: _merivale$victor$Theory_Object_Pseudo$The, quantifier: _elm_lang$core$Maybe$Nothing, other: false};
+					return {plus: false, recipe: recipe, string1: _elm_lang$core$Maybe$Nothing, string2: _elm_lang$core$Maybe$Nothing, string3: _elm_lang$core$Maybe$Nothing, displacer: _elm_lang$core$Maybe$Nothing, target: -1, pointer: _merivale$victor$Theory_Ideas_Pseudo$The, quantifier: _elm_lang$core$Maybe$Nothing, other: false};
 				default:
 					return {
 						plus: false,
@@ -9987,8 +9987,8 @@ var _merivale$victor$Interface_Model_State$addElaboration = F3(
 						string3: _elm_lang$core$Maybe$Nothing,
 						displacer: _elm_lang$core$Maybe$Nothing,
 						target: -1,
-						pointer: _merivale$victor$Theory_Object_Pseudo$The,
-						quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Some),
+						pointer: _merivale$victor$Theory_Ideas_Pseudo$The,
+						quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Some),
 						other: false
 					};
 			}
@@ -10069,7 +10069,7 @@ var _merivale$victor$Interface_Model_State$update = F2(
 						model,
 						{
 							object: A3(
-								_merivale$victor$Theory_Plain_Nucleus$Other,
+								_merivale$victor$Theory_Ideas_Nucleus$Other,
 								_p25._0,
 								_p25._1,
 								_merivale$victor$Interface_Model_State$maybe(_p24._0))
@@ -10087,7 +10087,7 @@ var _merivale$victor$Interface_Model_State$update = F2(
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p24._0, _p26._1, _p26._2)
+							verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, _p24._0, _p26._1, _p26._2)
 						});
 				} else {
 					return model;
@@ -10098,13 +10098,13 @@ var _merivale$victor$Interface_Model_State$update = F2(
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							verbality: _merivale$victor$Theory_Plain_Nucleus$Be(!_p27._0)
+							verbality: _merivale$victor$Theory_Ideas_Nucleus$Be(!_p27._0)
 						});
 				} else {
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p27._0, !_p27._1, _p27._2)
+							verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, _p27._0, !_p27._1, _p27._2)
 						});
 				}
 			case 'ToggleVerbalityPassive':
@@ -10113,7 +10113,7 @@ var _merivale$victor$Interface_Model_State$update = F2(
 					return _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							verbality: A3(_merivale$victor$Theory_Plain_Nucleus$Do, _p28._0, _p28._1, !_p28._2)
+							verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, _p28._0, _p28._1, !_p28._2)
 						});
 				} else {
 					return model;
@@ -10127,14 +10127,14 @@ var _merivale$victor$Interface_Model_State$update = F2(
 					model,
 					{
 						status: _elm_lang$core$Maybe$Just(
-							_merivale$victor$Theory_Plain_Nucleus$Absolute(_p24._0))
+							_merivale$victor$Theory_Ideas_Nucleus$Absolute(_p24._0))
 					});
 			case 'SetStatusRelator':
 				return _elm_lang$core$Native_Utils.update(
 					model,
 					{
 						status: _elm_lang$core$Maybe$Just(
-							_merivale$victor$Theory_Plain_Nucleus$Relative(_p24._0))
+							_merivale$victor$Theory_Ideas_Nucleus$Relative(_p24._0))
 					});
 			case 'AddBalance':
 				return _elm_lang$core$Native_Utils.update(
@@ -10145,7 +10145,7 @@ var _merivale$victor$Interface_Model_State$update = F2(
 							model.balances,
 							{
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _merivale$victor$Theory_Plain_Nucleus$SameAsMain},
+								_0: {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _merivale$victor$Theory_Ideas_Nucleus$SameAsMain},
 								_1: {ctor: '[]'}
 							})
 					});
@@ -10405,19 +10405,19 @@ var _merivale$victor$Interface_Model_State$update = F2(
 	});
 var _merivale$victor$Interface_Model_State$initial = {
 	plus: false,
-	object: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
-	verbality: _merivale$victor$Theory_Plain_Nucleus$Be(false),
+	object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
+	verbality: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
 	status: _elm_lang$core$Maybe$Nothing,
 	balances: {
 		ctor: '::',
 		_0: {
 			ctor: '_Tuple2',
 			_0: _elm_lang$core$Maybe$Nothing,
-			_1: _merivale$victor$Theory_Plain_Nucleus$Different(
+			_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
 				A3(
-					_merivale$victor$Theory_Plain_Nucleus$Other,
+					_merivale$victor$Theory_Ideas_Nucleus$Other,
 					false,
-					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
+					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
 					_elm_lang$core$Maybe$Just('Victor')))
 		},
 		_1: {ctor: '[]'}
@@ -10611,22 +10611,22 @@ var _merivale$victor$Interface_View_Ideas$listQuantifiers = function (amassed) {
 		_0: _elm_lang$core$Maybe$Nothing,
 		_1: {
 			ctor: '::',
-			_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Some),
+			_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Some),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Any),
+				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Any),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$All),
+					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$All),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Much),
+						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Much),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Most),
+							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Most),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Enough),
+								_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Enough),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -10636,32 +10636,32 @@ var _merivale$victor$Interface_View_Ideas$listQuantifiers = function (amassed) {
 		}
 	} : {
 		ctor: '::',
-		_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$A),
+		_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$A),
 		_1: {
 			ctor: '::',
 			_0: _elm_lang$core$Maybe$Just(
-				_merivale$victor$Theory_Object_Pseudo$Integer(0)),
+				_merivale$victor$Theory_Ideas_Pseudo$Integer(0)),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Several),
+				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Several),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Many),
+					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Many),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Each),
+						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Each),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Every),
+							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Every),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Both),
+								_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Both),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Some),
+									_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Some),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Any),
+										_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Any),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -10721,17 +10721,17 @@ var _merivale$victor$Interface_View_Ideas$equatePointers = F2(
 	});
 var _merivale$victor$Interface_View_Ideas$listPointers = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Object_Pseudo$The,
+	_0: _merivale$victor$Theory_Ideas_Pseudo$The,
 	_1: {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Object_Pseudo$This,
+		_0: _merivale$victor$Theory_Ideas_Pseudo$This,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Object_Pseudo$That,
+			_0: _merivale$victor$Theory_Ideas_Pseudo$That,
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Object_Pseudo$RelatedTo(
-					_merivale$victor$Theory_Plain_Nucleus$Speaker(false)),
+				_0: _merivale$victor$Theory_Ideas_Pseudo$RelatedTo(
+					_merivale$victor$Theory_Ideas_Nucleus$Speaker(false)),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -10766,19 +10766,19 @@ var _merivale$victor$Interface_View_Ideas$displayModality = function (modality) 
 var _merivale$victor$Interface_View_Ideas$listModalities = function (limited) {
 	return limited ? {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Long_Displacers$Yes1,
+		_0: _merivale$victor$Theory_Ideas_Displacers$Yes1,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Long_Displacers$Yes2,
+			_0: _merivale$victor$Theory_Ideas_Displacers$Yes2,
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Long_Displacers$Yes3,
+				_0: _merivale$victor$Theory_Ideas_Displacers$Yes3,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Long_Displacers$Maybe1,
+					_0: _merivale$victor$Theory_Ideas_Displacers$Maybe1,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Long_Displacers$Maybe3,
+						_0: _merivale$victor$Theory_Ideas_Displacers$Maybe3,
 						_1: {ctor: '[]'}
 					}
 				}
@@ -10786,22 +10786,22 @@ var _merivale$victor$Interface_View_Ideas$listModalities = function (limited) {
 		}
 	} : {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Long_Displacers$Yes1,
+		_0: _merivale$victor$Theory_Ideas_Displacers$Yes1,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Long_Displacers$Yes2,
+			_0: _merivale$victor$Theory_Ideas_Displacers$Yes2,
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Long_Displacers$Yes3,
+				_0: _merivale$victor$Theory_Ideas_Displacers$Yes3,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Long_Displacers$Maybe1,
+					_0: _merivale$victor$Theory_Ideas_Displacers$Maybe1,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Long_Displacers$Maybe3,
+						_0: _merivale$victor$Theory_Ideas_Displacers$Maybe3,
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Long_Displacers$Maybe4,
+							_0: _merivale$victor$Theory_Ideas_Displacers$Maybe4,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -10845,11 +10845,11 @@ var _merivale$victor$Interface_View_Ideas$equateWeights = F2(
 	});
 var _merivale$victor$Interface_View_Ideas$listWeights = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Plain_Nucleus$SameAsMain,
+	_0: _merivale$victor$Theory_Ideas_Nucleus$SameAsMain,
 	_1: {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Plain_Nucleus$Different(
-			_merivale$victor$Theory_Plain_Nucleus$Speaker(false)),
+		_0: _merivale$victor$Theory_Ideas_Nucleus$Different(
+			_merivale$victor$Theory_Ideas_Nucleus$Speaker(false)),
 		_1: {ctor: '[]'}
 	}
 };
@@ -10861,97 +10861,97 @@ var _merivale$victor$Interface_View_Ideas$displayMaybeRelator = function (relato
 };
 var _merivale$victor$Interface_View_Ideas$listRelators = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Plain_Nucleus$About,
+	_0: _merivale$victor$Theory_Ideas_Nucleus$About,
 	_1: {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Plain_Nucleus$Above,
+		_0: _merivale$victor$Theory_Ideas_Nucleus$Above,
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Plain_Nucleus$After,
+			_0: _merivale$victor$Theory_Ideas_Nucleus$After,
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Plain_Nucleus$Against,
+				_0: _merivale$victor$Theory_Ideas_Nucleus$Against,
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Plain_Nucleus$At,
+					_0: _merivale$victor$Theory_Ideas_Nucleus$At,
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Plain_Nucleus$Before,
+						_0: _merivale$victor$Theory_Ideas_Nucleus$Before,
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Plain_Nucleus$Behind,
+							_0: _merivale$victor$Theory_Ideas_Nucleus$Behind,
 							_1: {
 								ctor: '::',
-								_0: _merivale$victor$Theory_Plain_Nucleus$Below,
+								_0: _merivale$victor$Theory_Ideas_Nucleus$Below,
 								_1: {
 									ctor: '::',
-									_0: _merivale$victor$Theory_Plain_Nucleus$Beyond,
+									_0: _merivale$victor$Theory_Ideas_Nucleus$Beyond,
 									_1: {
 										ctor: '::',
-										_0: _merivale$victor$Theory_Plain_Nucleus$By,
+										_0: _merivale$victor$Theory_Ideas_Nucleus$By,
 										_1: {
 											ctor: '::',
-											_0: _merivale$victor$Theory_Plain_Nucleus$Down,
+											_0: _merivale$victor$Theory_Ideas_Nucleus$Down,
 											_1: {
 												ctor: '::',
-												_0: _merivale$victor$Theory_Plain_Nucleus$For,
+												_0: _merivale$victor$Theory_Ideas_Nucleus$For,
 												_1: {
 													ctor: '::',
-													_0: _merivale$victor$Theory_Plain_Nucleus$From,
+													_0: _merivale$victor$Theory_Ideas_Nucleus$From,
 													_1: {
 														ctor: '::',
-														_0: _merivale$victor$Theory_Plain_Nucleus$In,
+														_0: _merivale$victor$Theory_Ideas_Nucleus$In,
 														_1: {
 															ctor: '::',
-															_0: _merivale$victor$Theory_Plain_Nucleus$Inside,
+															_0: _merivale$victor$Theory_Ideas_Nucleus$Inside,
 															_1: {
 																ctor: '::',
-																_0: _merivale$victor$Theory_Plain_Nucleus$Into,
+																_0: _merivale$victor$Theory_Ideas_Nucleus$Into,
 																_1: {
 																	ctor: '::',
-																	_0: _merivale$victor$Theory_Plain_Nucleus$Like,
+																	_0: _merivale$victor$Theory_Ideas_Nucleus$Like,
 																	_1: {
 																		ctor: '::',
-																		_0: _merivale$victor$Theory_Plain_Nucleus$Of,
+																		_0: _merivale$victor$Theory_Ideas_Nucleus$Of,
 																		_1: {
 																			ctor: '::',
-																			_0: _merivale$victor$Theory_Plain_Nucleus$Off,
+																			_0: _merivale$victor$Theory_Ideas_Nucleus$Off,
 																			_1: {
 																				ctor: '::',
-																				_0: _merivale$victor$Theory_Plain_Nucleus$On,
+																				_0: _merivale$victor$Theory_Ideas_Nucleus$On,
 																				_1: {
 																					ctor: '::',
-																					_0: _merivale$victor$Theory_Plain_Nucleus$Opposite,
+																					_0: _merivale$victor$Theory_Ideas_Nucleus$Opposite,
 																					_1: {
 																						ctor: '::',
-																						_0: _merivale$victor$Theory_Plain_Nucleus$Out,
+																						_0: _merivale$victor$Theory_Ideas_Nucleus$Out,
 																						_1: {
 																							ctor: '::',
-																							_0: _merivale$victor$Theory_Plain_Nucleus$Outside,
+																							_0: _merivale$victor$Theory_Ideas_Nucleus$Outside,
 																							_1: {
 																								ctor: '::',
-																								_0: _merivale$victor$Theory_Plain_Nucleus$Over,
+																								_0: _merivale$victor$Theory_Ideas_Nucleus$Over,
 																								_1: {
 																									ctor: '::',
-																									_0: _merivale$victor$Theory_Plain_Nucleus$Through,
+																									_0: _merivale$victor$Theory_Ideas_Nucleus$Through,
 																									_1: {
 																										ctor: '::',
-																										_0: _merivale$victor$Theory_Plain_Nucleus$To,
+																										_0: _merivale$victor$Theory_Ideas_Nucleus$To,
 																										_1: {
 																											ctor: '::',
-																											_0: _merivale$victor$Theory_Plain_Nucleus$Towards,
+																											_0: _merivale$victor$Theory_Ideas_Nucleus$Towards,
 																											_1: {
 																												ctor: '::',
-																												_0: _merivale$victor$Theory_Plain_Nucleus$Under,
+																												_0: _merivale$victor$Theory_Ideas_Nucleus$Under,
 																												_1: {
 																													ctor: '::',
-																													_0: _merivale$victor$Theory_Plain_Nucleus$Up,
+																													_0: _merivale$victor$Theory_Ideas_Nucleus$Up,
 																													_1: {
 																														ctor: '::',
-																														_0: _merivale$victor$Theory_Plain_Nucleus$With,
+																														_0: _merivale$victor$Theory_Ideas_Nucleus$With,
 																														_1: {
 																															ctor: '::',
-																															_0: _merivale$victor$Theory_Plain_Nucleus$Without,
+																															_0: _merivale$victor$Theory_Ideas_Nucleus$Without,
 																															_1: {ctor: '[]'}
 																														}
 																													}
@@ -11045,11 +11045,11 @@ var _merivale$victor$Interface_View_Ideas$listStatuses = {
 	_1: {
 		ctor: '::',
 		_0: _elm_lang$core$Maybe$Just(
-			_merivale$victor$Theory_Plain_Nucleus$Absolute('')),
+			_merivale$victor$Theory_Ideas_Nucleus$Absolute('')),
 		_1: {
 			ctor: '::',
 			_0: _elm_lang$core$Maybe$Just(
-				_merivale$victor$Theory_Plain_Nucleus$Relative(_merivale$victor$Theory_Plain_Nucleus$About)),
+				_merivale$victor$Theory_Ideas_Nucleus$Relative(_merivale$victor$Theory_Ideas_Nucleus$About)),
 			_1: {ctor: '[]'}
 		}
 	}
@@ -11089,10 +11089,10 @@ var _merivale$victor$Interface_View_Ideas$equateVerbalities = F2(
 	});
 var _merivale$victor$Interface_View_Ideas$listVerbalities = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Plain_Nucleus$Be(false),
+	_0: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
 	_1: {
 		ctor: '::',
-		_0: A3(_merivale$victor$Theory_Plain_Nucleus$Do, '', false, false),
+		_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, '', false, false),
 		_1: {ctor: '[]'}
 	}
 };
@@ -11145,16 +11145,16 @@ var _merivale$victor$Interface_View_Ideas$listDisplacers = function (compulsory)
 	return compulsory ? {
 		ctor: '::',
 		_0: _elm_lang$core$Maybe$Just(
-			_merivale$victor$Theory_Long_Displacers$Primary(
+			_merivale$victor$Theory_Ideas_Displacers$Primary(
 				{
 					ctor: '_Tuple2',
-					_0: _merivale$victor$Theory_Plain_Nucleus$Be(false),
+					_0: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
 					_1: _elm_lang$core$Maybe$Nothing
 				})),
 		_1: {
 			ctor: '::',
 			_0: _elm_lang$core$Maybe$Just(
-				_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Yes1)),
+				_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Yes1)),
 			_1: {ctor: '[]'}
 		}
 	} : {
@@ -11163,16 +11163,16 @@ var _merivale$victor$Interface_View_Ideas$listDisplacers = function (compulsory)
 		_1: {
 			ctor: '::',
 			_0: _elm_lang$core$Maybe$Just(
-				_merivale$victor$Theory_Long_Displacers$Primary(
+				_merivale$victor$Theory_Ideas_Displacers$Primary(
 					{
 						ctor: '_Tuple2',
-						_0: _merivale$victor$Theory_Plain_Nucleus$Be(false),
+						_0: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
 						_1: _elm_lang$core$Maybe$Nothing
 					})),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$core$Maybe$Just(
-					_merivale$victor$Theory_Long_Displacers$Secondary(_merivale$victor$Theory_Long_Displacers$Yes1)),
+					_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Yes1)),
 				_1: {ctor: '[]'}
 			}
 		}
@@ -11257,27 +11257,27 @@ var _merivale$victor$Interface_View_Ideas$listObjectGroups = {
 		_0: 'Singular',
 		_1: {
 			ctor: '::',
-			_0: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
+			_0: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Plain_Nucleus$Hearer(false),
+				_0: _merivale$victor$Theory_Ideas_Nucleus$Hearer(false),
 				_1: {
 					ctor: '::',
 					_0: A3(
-						_merivale$victor$Theory_Plain_Nucleus$Other,
+						_merivale$victor$Theory_Ideas_Nucleus$Other,
 						false,
-						_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
+						_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
 						_elm_lang$core$Maybe$Nothing),
 					_1: {
 						ctor: '::',
 						_0: A3(
-							_merivale$victor$Theory_Plain_Nucleus$Other,
+							_merivale$victor$Theory_Ideas_Nucleus$Other,
 							false,
-							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
+							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
 							_elm_lang$core$Maybe$Nothing),
 						_1: {
 							ctor: '::',
-							_0: A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+							_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -11292,13 +11292,13 @@ var _merivale$victor$Interface_View_Ideas$listObjectGroups = {
 			_0: 'Plural',
 			_1: {
 				ctor: '::',
-				_0: _merivale$victor$Theory_Plain_Nucleus$Speaker(true),
+				_0: _merivale$victor$Theory_Ideas_Nucleus$Speaker(true),
 				_1: {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Plain_Nucleus$Hearer(true),
+					_0: _merivale$victor$Theory_Ideas_Nucleus$Hearer(true),
 					_1: {
 						ctor: '::',
-						_0: A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+						_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -11309,36 +11309,36 @@ var _merivale$victor$Interface_View_Ideas$listObjectGroups = {
 };
 var _merivale$victor$Interface_View_Ideas$listObjects = {
 	ctor: '::',
-	_0: _merivale$victor$Theory_Plain_Nucleus$Speaker(false),
+	_0: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
 	_1: {
 		ctor: '::',
-		_0: _merivale$victor$Theory_Plain_Nucleus$Hearer(false),
+		_0: _merivale$victor$Theory_Ideas_Nucleus$Hearer(false),
 		_1: {
 			ctor: '::',
 			_0: A3(
-				_merivale$victor$Theory_Plain_Nucleus$Other,
+				_merivale$victor$Theory_Ideas_Nucleus$Other,
 				false,
-				_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Male),
+				_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
 				_elm_lang$core$Maybe$Nothing),
 			_1: {
 				ctor: '::',
 				_0: A3(
-					_merivale$victor$Theory_Plain_Nucleus$Other,
+					_merivale$victor$Theory_Ideas_Nucleus$Other,
 					false,
-					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Plain_Nucleus$Female),
+					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
 					_elm_lang$core$Maybe$Nothing),
 				_1: {
 					ctor: '::',
-					_0: A3(_merivale$victor$Theory_Plain_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+					_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
 					_1: {
 						ctor: '::',
-						_0: _merivale$victor$Theory_Plain_Nucleus$Speaker(true),
+						_0: _merivale$victor$Theory_Ideas_Nucleus$Speaker(true),
 						_1: {
 							ctor: '::',
-							_0: _merivale$victor$Theory_Plain_Nucleus$Hearer(true),
+							_0: _merivale$victor$Theory_Ideas_Nucleus$Hearer(true),
 							_1: {
 								ctor: '::',
-								_0: A3(_merivale$victor$Theory_Plain_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+								_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -15734,7 +15734,7 @@ var _merivale$victor$Theory_Words_Verbs$finite1 = function (base) {
 };
 var _merivale$victor$Theory_Words_Verbs$conjugate = F3(
 	function (object, past, base) {
-		return (past && _elm_lang$core$Native_Utils.eq(base, 'be')) ? (((_merivale$victor$Theory_Plain_Nucleus$isSpeaker(object) || _merivale$victor$Theory_Plain_Nucleus$isOther(object)) && (!_merivale$victor$Theory_Plain_Nucleus$isPlural(object))) ? 'was' : 'were') : (_elm_lang$core$Native_Utils.eq(base, 'be') ? ((_merivale$victor$Theory_Plain_Nucleus$isSpeaker(object) && (!_merivale$victor$Theory_Plain_Nucleus$isPlural(object))) ? 'am' : ((_merivale$victor$Theory_Plain_Nucleus$isOther(object) && (!_merivale$victor$Theory_Plain_Nucleus$isPlural(object))) ? 'is' : 'are')) : (past ? _merivale$victor$Theory_Words_Verbs$finite2(base) : ((_merivale$victor$Theory_Plain_Nucleus$isOther(object) && (!_merivale$victor$Theory_Plain_Nucleus$isPlural(object))) ? _merivale$victor$Theory_Words_Verbs$finite1(base) : base)));
+		return (past && _elm_lang$core$Native_Utils.eq(base, 'be')) ? (((_merivale$victor$Theory_Ideas_Nucleus$isSpeaker(object) || _merivale$victor$Theory_Ideas_Nucleus$isOther(object)) && (!_merivale$victor$Theory_Ideas_Nucleus$isPlural(object))) ? 'was' : 'were') : (_elm_lang$core$Native_Utils.eq(base, 'be') ? ((_merivale$victor$Theory_Ideas_Nucleus$isSpeaker(object) && (!_merivale$victor$Theory_Ideas_Nucleus$isPlural(object))) ? 'am' : ((_merivale$victor$Theory_Ideas_Nucleus$isOther(object) && (!_merivale$victor$Theory_Ideas_Nucleus$isPlural(object))) ? 'is' : 'are')) : (past ? _merivale$victor$Theory_Words_Verbs$finite2(base) : ((_merivale$victor$Theory_Ideas_Nucleus$isOther(object) && (!_merivale$victor$Theory_Ideas_Nucleus$isPlural(object))) ? _merivale$victor$Theory_Words_Verbs$finite1(base) : base)));
 	});
 
 var _merivale$victor$Theory_Words_Fulcrums$complement = function (status) {
@@ -16130,7 +16130,7 @@ var _merivale$victor$Theory_Words_Nouns$plural = function (noun) {
 		A2(_elm_lang$core$Dict$get, noun, _merivale$victor$Theory_Words_Nouns$nouns));
 };
 
-var _merivale$victor$Theory_Object_Sentences$negateDeterminer = function (determinerPhrase) {
+var _merivale$victor$Theory_Sentences$negateDeterminer = function (determinerPhrase) {
 	var _p0 = _elm_lang$core$List$head(determinerPhrase);
 	_v0_4:
 	do {
@@ -16169,7 +16169,7 @@ var _merivale$victor$Theory_Object_Sentences$negateDeterminer = function (determ
 	} while(false);
 	return {ctor: '::', _0: 'not', _1: determinerPhrase};
 };
-var _merivale$victor$Theory_Object_Sentences$haystackToString = F3(
+var _merivale$victor$Theory_Sentences$haystackToString = F3(
 	function (canAbbreviate, plural, _p1) {
 		var _p2 = _p1;
 		var _p5 = _p2._2;
@@ -16200,7 +16200,7 @@ var _merivale$victor$Theory_Object_Sentences$haystackToString = F3(
 				},
 				_merivale$victor$Theory_Words_Utils$splitMaybeString(_p5))));
 	});
-var _merivale$victor$Theory_Object_Sentences$determiner = F4(
+var _merivale$victor$Theory_Sentences$determiner = F4(
 	function (canAbbreviate, quantifier, other, category) {
 		var _p6 = quantifier;
 		if (_p6.ctor === 'Nothing') {
@@ -16215,7 +16215,7 @@ var _merivale$victor$Theory_Object_Sentences$determiner = F4(
 					ctor: '::',
 					_0: A2(
 						_elm_lang$core$Basics_ops['++'],
-						_merivale$victor$Theory_Words_Determiners$determiner(_merivale$victor$Theory_Object_Pseudo$A),
+						_merivale$victor$Theory_Words_Determiners$determiner(_merivale$victor$Theory_Ideas_Pseudo$A),
 						'nother'),
 					_1: {ctor: '[]'}
 				} : (A2(
@@ -16245,12 +16245,12 @@ var _merivale$victor$Theory_Object_Sentences$determiner = F4(
 					ctor: '::',
 					_0: A2(
 						_elm_lang$core$Basics_ops['++'],
-						_merivale$victor$Theory_Words_Determiners$determiner(_merivale$victor$Theory_Object_Pseudo$A),
+						_merivale$victor$Theory_Words_Determiners$determiner(_merivale$victor$Theory_Ideas_Pseudo$A),
 						'n'),
 					_1: {ctor: '[]'}
 				} : {
 					ctor: '::',
-					_0: _merivale$victor$Theory_Words_Determiners$determiner(_merivale$victor$Theory_Object_Pseudo$A),
+					_0: _merivale$victor$Theory_Words_Determiners$determiner(_merivale$victor$Theory_Ideas_Pseudo$A),
 					_1: {ctor: '[]'}
 				});
 			} else {
@@ -16289,7 +16289,7 @@ var _merivale$victor$Theory_Object_Sentences$determiner = F4(
 			}
 		}
 	});
-var _merivale$victor$Theory_Object_Sentences$determinerPhrase = F5(
+var _merivale$victor$Theory_Sentences$determinerPhrase = F5(
 	function (plural, negated, quantifier, other, haystack) {
 		var _p8 = haystack;
 		var category = _p8._0;
@@ -16300,13 +16300,13 @@ var _merivale$victor$Theory_Object_Sentences$determinerPhrase = F5(
 			quantifier,
 			{
 				ctor: '::',
-				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Every),
+				_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Every),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Some),
+					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Some),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Object_Pseudo$Any),
+						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Any),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -16332,27 +16332,27 @@ var _merivale$victor$Theory_Object_Sentences$determinerPhrase = F5(
 			}) && (!plural));
 		var positive = A2(
 			_elm_lang$core$Basics_ops['++'],
-			A4(_merivale$victor$Theory_Object_Sentences$determiner, canAbbreviate, quantifier, other, category),
-			A3(_merivale$victor$Theory_Object_Sentences$haystackToString, canAbbreviate, plural, haystack));
-		return negated ? _merivale$victor$Theory_Object_Sentences$negateDeterminer(positive) : positive;
+			A4(_merivale$victor$Theory_Sentences$determiner, canAbbreviate, quantifier, other, category),
+			A3(_merivale$victor$Theory_Sentences$haystackToString, canAbbreviate, plural, haystack));
+		return negated ? _merivale$victor$Theory_Sentences$negateDeterminer(positive) : positive;
 	});
-var _merivale$victor$Theory_Object_Sentences$amassedDeterminerPhrase = F3(
+var _merivale$victor$Theory_Sentences$amassedDeterminerPhrase = F3(
 	function (plural, negated, _p9) {
 		var _p10 = _p9;
-		return A5(_merivale$victor$Theory_Object_Sentences$determinerPhrase, plural, negated, _p10._0, _p10._1, _p10._2);
+		return A5(_merivale$victor$Theory_Sentences$determinerPhrase, plural, negated, _p10._0, _p10._1, _p10._2);
 	});
-var _merivale$victor$Theory_Object_Sentences$enumeratedDeterminerPhrase = F3(
+var _merivale$victor$Theory_Sentences$enumeratedDeterminerPhrase = F3(
 	function (plural, negated, _p11) {
 		var _p12 = _p11;
 		return A5(
-			_merivale$victor$Theory_Object_Sentences$determinerPhrase,
+			_merivale$victor$Theory_Sentences$determinerPhrase,
 			plural,
 			negated,
 			_elm_lang$core$Maybe$Just(_p12._0),
 			_p12._1,
 			_p12._2);
 	});
-var _merivale$victor$Theory_Object_Sentences$articlePhrase = F2(
+var _merivale$victor$Theory_Sentences$articlePhrase = F2(
 	function (plural, _p13) {
 		var _p14 = _p13;
 		var _p15 = _p14._2;
@@ -16368,13 +16368,13 @@ var _merivale$victor$Theory_Object_Sentences$articlePhrase = F2(
 					_1: {ctor: '[]'}
 				}
 			},
-			A3(_merivale$victor$Theory_Object_Sentences$haystackToString, false, plural, _p15)) : {
+			A3(_merivale$victor$Theory_Sentences$haystackToString, false, plural, _p15)) : {
 			ctor: '::',
 			_0: article,
-			_1: A3(_merivale$victor$Theory_Object_Sentences$haystackToString, false, plural, _p15)
+			_1: A3(_merivale$victor$Theory_Sentences$haystackToString, false, plural, _p15)
 		};
 	});
-var _merivale$victor$Theory_Object_Sentences$nounPhrase = F2(
+var _merivale$victor$Theory_Sentences$nounPhrase = F2(
 	function (mainObject, balance) {
 		var _p16 = balance;
 		switch (_p16.ctor) {
@@ -16391,8 +16391,8 @@ var _merivale$victor$Theory_Object_Sentences$nounPhrase = F2(
 						_elm_lang$core$Basics_ops['++'],
 						_merivale$victor$Theory_Words_Counters$prefix(_p16._0),
 						A2(
-							_merivale$victor$Theory_Object_Sentences$articlePhrase,
-							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p16._1),
+							_merivale$victor$Theory_Sentences$articlePhrase,
+							_merivale$victor$Theory_Ideas_Nucleus$isPlural(_p16._1),
 							_p16._2)));
 			case 'EnumeratedBalance':
 				return A2(
@@ -16402,8 +16402,8 @@ var _merivale$victor$Theory_Object_Sentences$nounPhrase = F2(
 						_elm_lang$core$Basics_ops['++'],
 						_merivale$victor$Theory_Words_Counters$prefix(_p16._0),
 						A3(
-							_merivale$victor$Theory_Object_Sentences$enumeratedDeterminerPhrase,
-							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p16._1),
+							_merivale$victor$Theory_Sentences$enumeratedDeterminerPhrase,
+							_merivale$victor$Theory_Ideas_Nucleus$isPlural(_p16._1),
 							_p16._2,
 							_p16._3)));
 			default:
@@ -16414,13 +16414,13 @@ var _merivale$victor$Theory_Object_Sentences$nounPhrase = F2(
 						_elm_lang$core$Basics_ops['++'],
 						_merivale$victor$Theory_Words_Counters$prefix(_p16._0),
 						A3(
-							_merivale$victor$Theory_Object_Sentences$amassedDeterminerPhrase,
-							_merivale$victor$Theory_Plain_Nucleus$isPlural(_p16._1),
+							_merivale$victor$Theory_Sentences$amassedDeterminerPhrase,
+							_merivale$victor$Theory_Ideas_Nucleus$isPlural(_p16._1),
 							_p16._2,
 							_p16._3)));
 		}
 	});
-var _merivale$victor$Theory_Object_Sentences$baseVerbPhrase = F2(
+var _merivale$victor$Theory_Sentences$baseVerbPhrase = F2(
 	function (addTo, _p17) {
 		var _p18 = _p17;
 		var _p20 = _p18.pre;
@@ -16436,7 +16436,7 @@ var _merivale$victor$Theory_Object_Sentences$baseVerbPhrase = F2(
 				newPre,
 				{ctor: '::', _0: base, _1: rest}));
 	});
-var _merivale$victor$Theory_Object_Sentences$verbPhrase = function (vars) {
+var _merivale$victor$Theory_Sentences$verbPhrase = function (vars) {
 	var _p21 = A2(_merivale$victor$Theory_Words_Fulcrums$fulcrum, vars.prior, vars.pivot);
 	var base = _p21._0;
 	var rest = _p21._1;
@@ -16474,29 +16474,29 @@ var _merivale$victor$Theory_Object_Sentences$verbPhrase = function (vars) {
 		}
 	}
 };
-var _merivale$victor$Theory_Object_Sentences$predicate = function (vars) {
+var _merivale$victor$Theory_Sentences$predicate = function (vars) {
 	var _p23 = vars.modality;
 	if (_p23.ctor === 'Nothing') {
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
-			_merivale$victor$Theory_Object_Sentences$verbPhrase(vars),
+			_merivale$victor$Theory_Sentences$verbPhrase(vars),
 			A2(
 				_elm_lang$core$Basics_ops['++'],
 				A2(
 					_elm_lang$core$List$map,
-					_merivale$victor$Theory_Object_Sentences$baseVerbPhrase(true),
+					_merivale$victor$Theory_Sentences$baseVerbPhrase(true),
 					vars.displaced),
 				A2(
 					_elm_lang$core$Basics_ops['++'],
 					A2(
 						_elm_lang$core$List$map,
-						_merivale$victor$Theory_Object_Sentences$nounPhrase(vars.object),
+						_merivale$victor$Theory_Sentences$nounPhrase(vars.object),
 						vars.balances),
 					_elm_lang$core$List$reverse(vars.post))));
 	} else {
 		var _p24 = _p23._0;
 		var displaced = {prior: vars.prior, pre: vars.pre, pivot: vars.pivot};
-		var addTo = _elm_lang$core$Native_Utils.eq(_p24, _merivale$victor$Theory_Long_Displacers$Yes3) && ((!vars.negatedModality) && vars.past);
+		var addTo = _elm_lang$core$Native_Utils.eq(_p24, _merivale$victor$Theory_Ideas_Displacers$Yes3) && ((!vars.negatedModality) && vars.past);
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
 			{
@@ -16508,18 +16508,18 @@ var _merivale$victor$Theory_Object_Sentences$predicate = function (vars) {
 				_elm_lang$core$Basics_ops['++'],
 				A2(
 					_elm_lang$core$List$map,
-					_merivale$victor$Theory_Object_Sentences$baseVerbPhrase(addTo),
+					_merivale$victor$Theory_Sentences$baseVerbPhrase(addTo),
 					{ctor: '::', _0: displaced, _1: vars.displaced}),
 				A2(
 					_elm_lang$core$Basics_ops['++'],
 					A2(
 						_elm_lang$core$List$map,
-						_merivale$victor$Theory_Object_Sentences$nounPhrase(vars.object),
+						_merivale$victor$Theory_Sentences$nounPhrase(vars.object),
 						vars.balances),
 					_elm_lang$core$List$reverse(vars.post))));
 	}
 };
-var _merivale$victor$Theory_Object_Sentences$subject = function (vars) {
+var _merivale$victor$Theory_Sentences$subject = function (vars) {
 	var _p25 = vars.pseudoObject;
 	switch (_p25.ctor) {
 		case 'DirectObject':
@@ -16530,43 +16530,43 @@ var _merivale$victor$Theory_Object_Sentences$subject = function (vars) {
 			};
 		case 'IndirectObject':
 			return A2(
-				_merivale$victor$Theory_Object_Sentences$articlePhrase,
-				_merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object),
+				_merivale$victor$Theory_Sentences$articlePhrase,
+				_merivale$victor$Theory_Ideas_Nucleus$isPlural(vars.object),
 				_p25._0);
 		case 'EnumeratedObject':
 			return A3(
-				_merivale$victor$Theory_Object_Sentences$enumeratedDeterminerPhrase,
-				_merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object),
+				_merivale$victor$Theory_Sentences$enumeratedDeterminerPhrase,
+				_merivale$victor$Theory_Ideas_Nucleus$isPlural(vars.object),
 				_p25._0,
 				_p25._1);
 		default:
 			return A3(
-				_merivale$victor$Theory_Object_Sentences$amassedDeterminerPhrase,
-				_merivale$victor$Theory_Plain_Nucleus$isPlural(vars.object),
+				_merivale$victor$Theory_Sentences$amassedDeterminerPhrase,
+				_merivale$victor$Theory_Ideas_Nucleus$isPlural(vars.object),
 				_p25._0,
 				_p25._1);
 	}
 };
-var _merivale$victor$Theory_Object_Sentences$implode = function (vars) {
+var _merivale$victor$Theory_Sentences$implode = function (vars) {
 	return A2(
 		_elm_lang$core$String$join,
 		' ',
 		A2(
 			_elm_lang$core$Basics_ops['++'],
-			_merivale$victor$Theory_Object_Sentences$subject(vars),
-			_merivale$victor$Theory_Object_Sentences$predicate(vars)));
+			_merivale$victor$Theory_Sentences$subject(vars),
+			_merivale$victor$Theory_Sentences$predicate(vars)));
 };
-var _merivale$victor$Theory_Object_Sentences$sentence = function (message) {
+var _merivale$victor$Theory_Sentences$sentence = function (message) {
 	return A2(
 		_elm_lang$core$Result$map,
-		_merivale$victor$Theory_Object_Sentences$implode,
-		_merivale$victor$Theory_Object_Messages$explode(message));
+		_merivale$victor$Theory_Sentences$implode,
+		_merivale$victor$Theory_Messages$explode(message));
 };
 
 var _merivale$victor$Victor$view = function (model) {
 	var result = A2(
 		_elm_lang$core$Result$andThen,
-		_merivale$victor$Theory_Object_Sentences$sentence,
+		_merivale$victor$Theory_Sentences$sentence,
 		_merivale$victor$Interface_Model_Messages$message(model));
 	return A2(
 		_elm_lang$html$Html$div,

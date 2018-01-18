@@ -1,4 +1,4 @@
-module Theory.Object.Messages exposing (..)
+module Theory.Messages exposing (..)
 
 import Array
 import Result

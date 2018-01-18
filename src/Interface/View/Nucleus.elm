@@ -9,7 +9,7 @@ import Interface.Model.Types exposing (..)
 import Interface.View.Buttons as Buttons
 import Interface.View.Ideas as Ideas
 import Interface.View.Input as Input
-import Theory.Plain.Nucleus exposing (..)
+import Theory.Ideas.Nucleus exposing (..)
 
 
 {-| The nucleus input box.

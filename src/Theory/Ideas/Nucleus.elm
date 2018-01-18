@@ -1,4 +1,4 @@
-module Theory.Plain.Nucleus exposing (..)
+module Theory.Ideas.Nucleus exposing (..)
 
 
 type alias Nucleus =

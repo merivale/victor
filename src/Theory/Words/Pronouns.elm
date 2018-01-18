@@ -7,7 +7,7 @@ module Theory.Words.Pronouns
         , relative2
         )
 
-import Theory.Plain.Nucleus as Nucleus
+import Theory.Ideas.Nucleus as Nucleus
 
 
 direct1 : Nucleus.Object -> String

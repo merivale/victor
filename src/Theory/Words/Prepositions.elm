@@ -1,6 +1,6 @@
 module Theory.Words.Prepositions exposing (preposition)
 
-import Theory.Plain.Nucleus as Nucleus
+import Theory.Ideas.Nucleus as Nucleus
 
 
 preposition : Nucleus.Relator -> String

@@ -1,6 +1,6 @@
 module Theory.Words.Fulcrums exposing (fulcrum)
 
-import Theory.Plain.Nucleus as Nucleus
+import Theory.Ideas.Nucleus as Nucleus
 import Theory.Words.Prepositions as Prepositions
 import Theory.Words.Verbs as Verbs
 

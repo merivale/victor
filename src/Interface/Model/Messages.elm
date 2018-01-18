@@ -5,10 +5,10 @@ module Interface.Model.Messages exposing (message)
 
 import Interface.Model.Types exposing (..)
 import Result
-import Theory.Long.Displacers exposing (..)
-import Theory.Object.Messages exposing (..)
-import Theory.Object.Pseudo exposing (..)
-import Theory.Plain.Nucleus exposing (..)
+import Theory.Ideas.Displacers exposing (..)
+import Theory.Ideas.Pseudo exposing (..)
+import Theory.Ideas.Nucleus exposing (..)
+import Theory.Messages exposing (..)
 
 
 {-| The main exposed function.

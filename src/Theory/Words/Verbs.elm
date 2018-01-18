@@ -7,7 +7,7 @@ module Theory.Words.Verbs
 
 import Dict
 import Maybe
-import Theory.Plain.Nucleus as Nucleus
+import Theory.Ideas.Nucleus as Nucleus
 import Theory.Words.Utils as Utils
 
 

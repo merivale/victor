@@ -10,9 +10,9 @@ import Interface.View.Buttons as Buttons
 import Interface.View.Ideas as Ideas
 import Interface.View.Input as Input
 import Interface.View.Nucleus as Nucleus
-import Theory.Long.Displacers exposing (..)
-import Theory.Object.Pseudo exposing (..)
-import Theory.Plain.Nucleus exposing (..)
+import Theory.Ideas.Displacers exposing (..)
+import Theory.Ideas.Pseudo exposing (..)
+import Theory.Ideas.Nucleus exposing (..)
 
 
 {-| The elaboration input box.

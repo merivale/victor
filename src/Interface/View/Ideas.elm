@@ -5,9 +5,9 @@ toString functions. These are used to generate select dropdown menus.
 -}
 
 import Maybe
-import Theory.Long.Displacers exposing (..)
-import Theory.Object.Pseudo exposing (..)
-import Theory.Plain.Nucleus exposing (..)
+import Theory.Ideas.Displacers exposing (..)
+import Theory.Ideas.Pseudo exposing (..)
+import Theory.Ideas.Nucleus exposing (..)
 
 
 {-| Objects.

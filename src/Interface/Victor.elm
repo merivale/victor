@@ -10,7 +10,7 @@ import Interface.Model.Types exposing (..)
 import Interface.View.Elaborations as Elaborations
 import Interface.View.Output as Output
 import Result
-import Theory.Object.Sentences as Sentences
+import Theory.Sentences as Sentences
 
 
 {-| Run the application.

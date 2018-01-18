@@ -1,6 +1,6 @@
 module Theory.Words.Articles exposing (article)
 
-import Theory.Object.Pseudo as Pseudo
+import Theory.Ideas.Pseudo as Pseudo
 import Theory.Words.Pronouns as Pronouns
 
 
