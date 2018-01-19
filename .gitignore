@@ -1,8 +1,10 @@
-# node modules
+# node
 node_modules/
-# elm-package generated files
+
+# elm
 elm-stuff/
-# elm-repl generated files
 repl-temp-*
-# sass
-.sass-cache/
+
+# jekyll
+docs/.sass-cache/
+docs/_site/

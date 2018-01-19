@@ -1,0 +1,10 @@
+title: "Victor"
+description: "A computational model of the English language."
+permalink: /:title
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+sass:
+  style: compressed

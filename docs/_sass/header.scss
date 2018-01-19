@@ -1,0 +1,24 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: $blue;
+  color: #fff;
+  padding: .5em;
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    a {
+      display: block;
+      text-decoration: none;
+      padding: 0 .5em;
+      &.active {
+        text-decoration: underline;
+      }
+    }
+    &:first-child {
+      a {
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+.docs {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1em;
+  h1,
+  h2 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  h2 {
+    font-size: 1.25em;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+  }
+  em {
+    font-style: italic;
+  }
+  table {
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    th,
+    td {
+      border: 1px solid silver;
+      padding: .25em .75em;
+    }
+    th {
+      font-weight: 600;
+      text-align: left;
+    }
+  }
+  code, pre {
+    font-family: consolas, monospace;
+  }
+  code {
+    background: $lightgray;
+    padding: 0 .25em;
+  }
+  pre {
+    margin-bottom: 1em;
+    padding: .5em 1em;
+    background: $lightgray;
+    border-radius: .25em;
+    overflow: auto;
+    code {
+      background: transparent;
+      padding: 0;
+    }
+  }
+  .highlight {
+    .c { color: $gray; } /* Comment */
+    .k { color: $red; } /* Keyword */
+    .kr { color: $red; } /* Keyword.Reserved */
+    .kt { color: $blue; } /* Keyword.Type */
+    .o { color: $red; } /* Operator */
+    .m { color: $blue; } /* Literal.Number */
+    .s { color: $green; } /* Literal.String */
+    .n { color: $yellow; } /* Name */
+    .p { color: $gray; } /* punctuation */
+  }
+}
