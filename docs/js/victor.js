@@ -8694,6 +8694,1125 @@ var _merivale$victor$Interface_Model_Types$SetObject = function (a) {
 };
 var _merivale$victor$Interface_Model_Types$TogglePlus = {ctor: 'TogglePlus'};
 
+var _merivale$victor$Interface_Model_Examples$elaboration = {plus: false, recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE, string1: _elm_lang$core$Maybe$Nothing, string2: _elm_lang$core$Maybe$Nothing, string3: _elm_lang$core$Maybe$Nothing, displacer: _elm_lang$core$Maybe$Nothing, target: -1, pointer: _merivale$victor$Theory_Ideas_Pseudo$The, quantifier: _elm_lang$core$Maybe$Nothing, other: false};
+var _merivale$victor$Interface_Model_Examples$objectFirst = {
+	plus: false,
+	object: A3(
+		_merivale$victor$Theory_Ideas_Nucleus$Other,
+		false,
+		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+		_elm_lang$core$Maybe$Nothing),
+	verbality: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
+	status: _elm_lang$core$Maybe$Just(
+		_merivale$victor$Theory_Ideas_Nucleus$Absolute('bald')),
+	balances: {ctor: '[]'},
+	elaborations: {
+		ctor: '::',
+		_0: _elm_lang$core$Native_Utils.update(
+			_merivale$victor$Interface_Model_Examples$elaboration,
+			{
+				recipe: _merivale$victor$Interface_Model_Types$MakeINDIRECT,
+				string1: _elm_lang$core$Maybe$Just('king'),
+				string3: _elm_lang$core$Maybe$Just('of France')
+			}),
+		_1: {ctor: '[]'}
+	}
+};
+var _merivale$victor$Interface_Model_Examples$objectExamples = {
+	ctor: '::',
+	_0: _merivale$victor$Interface_Model_Examples$objectFirst,
+	_1: {
+		ctor: '::',
+		_0: {
+			plus: false,
+			object: A3(
+				_merivale$victor$Theory_Ideas_Nucleus$Other,
+				false,
+				_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+				_elm_lang$core$Maybe$Nothing),
+			verbality: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
+			status: _elm_lang$core$Maybe$Just(
+				_merivale$victor$Theory_Ideas_Nucleus$Absolute('insane')),
+			balances: {ctor: '[]'},
+			elaborations: {
+				ctor: '::',
+				_0: _elm_lang$core$Native_Utils.update(
+					_merivale$victor$Interface_Model_Examples$elaboration,
+					{
+						recipe: _merivale$victor$Interface_Model_Types$MakeINDIRECT,
+						pointer: _merivale$victor$Theory_Ideas_Pseudo$RelatedTo(
+							A3(
+								_merivale$victor$Theory_Ideas_Nucleus$Other,
+								false,
+								_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+								_elm_lang$core$Maybe$Just('Smith'))),
+						string1: _elm_lang$core$Maybe$Just('murderer')
+					}),
+				_1: {ctor: '[]'}
+			}
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				plus: false,
+				object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+				verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'love', false, false),
+				status: _elm_lang$core$Maybe$Nothing,
+				balances: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Maybe$Nothing,
+						_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+							A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+					},
+					_1: {ctor: '[]'}
+				},
+				elaborations: {
+					ctor: '::',
+					_0: _elm_lang$core$Native_Utils.update(
+						_merivale$victor$Interface_Model_Examples$elaboration,
+						{
+							recipe: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
+							quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Every),
+							string1: _elm_lang$core$Maybe$Just('one')
+						}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Native_Utils.update(
+							_merivale$victor$Interface_Model_Examples$elaboration,
+							{
+								recipe: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
+								target: 0,
+								quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Some),
+								string1: _elm_lang$core$Maybe$Just('one')
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					plus: false,
+					object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+					verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'love', false, false),
+					status: _elm_lang$core$Maybe$Nothing,
+					balances: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Maybe$Nothing,
+							_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+								A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+						},
+						_1: {ctor: '[]'}
+					},
+					elaborations: {
+						ctor: '::',
+						_0: _elm_lang$core$Native_Utils.update(
+							_merivale$victor$Interface_Model_Examples$elaboration,
+							{
+								recipe: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
+								target: 0,
+								quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Some),
+								string1: _elm_lang$core$Maybe$Just('one')
+							}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Native_Utils.update(
+								_merivale$victor$Interface_Model_Examples$elaboration,
+								{
+									recipe: _merivale$victor$Interface_Model_Types$MakeENUMERATED,
+									quantifier: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Pseudo$Every),
+									string1: _elm_lang$core$Maybe$Just('one')
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_1: {ctor: '[]'}
+			}
+		}
+	}
+};
+var _merivale$victor$Interface_Model_Examples$longFirst = {
+	plus: false,
+	object: A3(
+		_merivale$victor$Theory_Ideas_Nucleus$Other,
+		false,
+		_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+		_elm_lang$core$Maybe$Nothing),
+	verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'see', false, false),
+	status: _elm_lang$core$Maybe$Nothing,
+	balances: {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Maybe$Nothing,
+			_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+				A3(
+					_merivale$victor$Theory_Ideas_Nucleus$Other,
+					false,
+					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+					_elm_lang$core$Maybe$Nothing))
+		},
+		_1: {ctor: '[]'}
+	},
+	elaborations: {
+		ctor: '::',
+		_0: _elm_lang$core$Native_Utils.update(
+			_merivale$victor$Interface_Model_Examples$elaboration,
+			{
+				recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
+				displacer: _elm_lang$core$Maybe$Just(
+					_merivale$victor$Theory_Ideas_Displacers$Primary(
+						{
+							ctor: '_Tuple2',
+							_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'go', true, false),
+							_1: _elm_lang$core$Maybe$Nothing
+						}))
+			}),
+		_1: {ctor: '[]'}
+	}
+};
+var _merivale$victor$Interface_Model_Examples$longExamples = {
+	ctor: '::',
+	_0: _merivale$victor$Interface_Model_Examples$longFirst,
+	_1: {
+		ctor: '::',
+		_0: {
+			plus: false,
+			object: A3(
+				_merivale$victor$Theory_Ideas_Nucleus$Other,
+				false,
+				_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+				_elm_lang$core$Maybe$Nothing),
+			verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'see', false, false),
+			status: _elm_lang$core$Maybe$Nothing,
+			balances: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Maybe$Nothing,
+					_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+						A3(
+							_merivale$victor$Theory_Ideas_Nucleus$Other,
+							false,
+							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+							_elm_lang$core$Maybe$Nothing))
+				},
+				_1: {ctor: '[]'}
+			},
+			elaborations: {
+				ctor: '::',
+				_0: _elm_lang$core$Native_Utils.update(
+					_merivale$victor$Interface_Model_Examples$elaboration,
+					{
+						recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
+						displacer: _elm_lang$core$Maybe$Just(
+							_merivale$victor$Theory_Ideas_Displacers$Primary(
+								{
+									ctor: '_Tuple2',
+									_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'go', true, false),
+									_1: _elm_lang$core$Maybe$Nothing
+								}))
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Native_Utils.update(
+						_merivale$victor$Interface_Model_Examples$elaboration,
+						{
+							recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
+							string1: _elm_lang$core$Maybe$Just('tomorrow')
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				plus: false,
+				object: A3(
+					_merivale$victor$Theory_Ideas_Nucleus$Other,
+					false,
+					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+					_elm_lang$core$Maybe$Nothing),
+				verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'see', false, false),
+				status: _elm_lang$core$Maybe$Nothing,
+				balances: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Maybe$Nothing,
+						_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+							A3(
+								_merivale$victor$Theory_Ideas_Nucleus$Other,
+								false,
+								_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+								_elm_lang$core$Maybe$Nothing))
+					},
+					_1: {ctor: '[]'}
+				},
+				elaborations: {
+					ctor: '::',
+					_0: _elm_lang$core$Native_Utils.update(
+						_merivale$victor$Interface_Model_Examples$elaboration,
+						{
+							recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
+							string1: _elm_lang$core$Maybe$Just('tomorrow'),
+							displacer: _elm_lang$core$Maybe$Just(
+								_merivale$victor$Theory_Ideas_Displacers$Primary(
+									{
+										ctor: '_Tuple2',
+										_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'go', true, false),
+										_1: _elm_lang$core$Maybe$Nothing
+									}))
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					plus: false,
+					object: A3(
+						_merivale$victor$Theory_Ideas_Nucleus$Other,
+						false,
+						_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+						_elm_lang$core$Maybe$Just('Victor')),
+					verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'know', false, false),
+					status: _elm_lang$core$Maybe$Nothing,
+					balances: {ctor: '[]'},
+					elaborations: {
+						ctor: '::',
+						_0: _elm_lang$core$Native_Utils.update(
+							_merivale$victor$Interface_Model_Examples$elaboration,
+							{
+								recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
+								displacer: _elm_lang$core$Maybe$Just(
+									_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Yes1))
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						plus: false,
+						object: A3(
+							_merivale$victor$Theory_Ideas_Nucleus$Other,
+							false,
+							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+							_elm_lang$core$Maybe$Just('Victor')),
+						verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'know', false, false),
+						status: _elm_lang$core$Maybe$Nothing,
+						balances: {ctor: '[]'},
+						elaborations: {
+							ctor: '::',
+							_0: _elm_lang$core$Native_Utils.update(
+								_merivale$victor$Interface_Model_Examples$elaboration,
+								{
+									recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
+									displacer: _elm_lang$core$Maybe$Just(
+										_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Yes1))
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$core$Native_Utils.update(
+									_merivale$victor$Interface_Model_Examples$elaboration,
+									{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							plus: false,
+							object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+							verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'rain', false, false),
+							status: _elm_lang$core$Maybe$Nothing,
+							balances: {ctor: '[]'},
+							elaborations: {
+								ctor: '::',
+								_0: _elm_lang$core$Native_Utils.update(
+									_merivale$victor$Interface_Model_Examples$elaboration,
+									{
+										recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
+										string1: _elm_lang$core$Maybe$Just('tomorrow'),
+										displacer: _elm_lang$core$Maybe$Just(
+											_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Yes1))
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								plus: false,
+								object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+								verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'rain', false, false),
+								status: _elm_lang$core$Maybe$Nothing,
+								balances: {ctor: '[]'},
+								elaborations: {
+									ctor: '::',
+									_0: _elm_lang$core$Native_Utils.update(
+										_merivale$victor$Interface_Model_Examples$elaboration,
+										{
+											recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
+											string1: _elm_lang$core$Maybe$Just('tomorrow'),
+											displacer: _elm_lang$core$Maybe$Just(
+												_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Maybe1))
+										}),
+									_1: {ctor: '[]'}
+								}
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									plus: false,
+									object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+									verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'rain', false, false),
+									status: _elm_lang$core$Maybe$Nothing,
+									balances: {ctor: '[]'},
+									elaborations: {
+										ctor: '::',
+										_0: _elm_lang$core$Native_Utils.update(
+											_merivale$victor$Interface_Model_Examples$elaboration,
+											{
+												recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
+												string1: _elm_lang$core$Maybe$Just('tomorrow'),
+												displacer: _elm_lang$core$Maybe$Just(
+													_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Maybe3))
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Native_Utils.update(
+												_merivale$victor$Interface_Model_Examples$elaboration,
+												{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										plus: false,
+										object: _merivale$victor$Theory_Ideas_Nucleus$Hearer(false),
+										verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'hurt', false, false),
+										status: _elm_lang$core$Maybe$Nothing,
+										balances: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: _elm_lang$core$Maybe$Nothing,
+												_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+													A3(
+														_merivale$victor$Theory_Ideas_Nucleus$Other,
+														false,
+														_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+														_elm_lang$core$Maybe$Nothing))
+											},
+											_1: {ctor: '[]'}
+										},
+										elaborations: {
+											ctor: '::',
+											_0: _elm_lang$core$Native_Utils.update(
+												_merivale$victor$Interface_Model_Examples$elaboration,
+												{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$core$Native_Utils.update(
+													_merivale$victor$Interface_Model_Examples$elaboration,
+													{
+														recipe: _merivale$victor$Interface_Model_Types$MakeDISPLACED,
+														displacer: _elm_lang$core$Maybe$Just(
+															_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Maybe1))
+													}),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$core$Native_Utils.update(
+														_merivale$victor$Interface_Model_Examples$elaboration,
+														{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											plus: false,
+											object: _merivale$victor$Theory_Ideas_Nucleus$Hearer(false),
+											verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'hurt', false, false),
+											status: _elm_lang$core$Maybe$Nothing,
+											balances: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: _elm_lang$core$Maybe$Nothing,
+													_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+														A3(
+															_merivale$victor$Theory_Ideas_Nucleus$Other,
+															false,
+															_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+															_elm_lang$core$Maybe$Nothing))
+												},
+												_1: {ctor: '[]'}
+											},
+											elaborations: {
+												ctor: '::',
+												_0: _elm_lang$core$Native_Utils.update(
+													_merivale$victor$Interface_Model_Examples$elaboration,
+													{
+														recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED,
+														displacer: _elm_lang$core$Maybe$Just(
+															_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Maybe1))
+													}),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$core$Native_Utils.update(
+														_merivale$victor$Interface_Model_Examples$elaboration,
+														{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$core$Native_Utils.update(
+															_merivale$victor$Interface_Model_Examples$elaboration,
+															{recipe: _merivale$victor$Interface_Model_Types$MakePRIOR}),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												plus: false,
+												object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
+												verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'try', false, false),
+												status: _elm_lang$core$Maybe$Nothing,
+												balances: {
+													ctor: '::',
+													_0: {
+														ctor: '_Tuple2',
+														_0: _elm_lang$core$Maybe$Nothing,
+														_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+															A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+													},
+													_1: {ctor: '[]'}
+												},
+												elaborations: {
+													ctor: '::',
+													_0: _elm_lang$core$Native_Utils.update(
+														_merivale$victor$Interface_Model_Examples$elaboration,
+														{
+															recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR,
+															string1: _elm_lang$core$Maybe$Just('sometimes'),
+															displacer: _elm_lang$core$Maybe$Just(
+																_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Yes1))
+														}),
+													_1: {ctor: '[]'}
+												}
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													plus: false,
+													object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
+													verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'try', false, false),
+													status: _elm_lang$core$Maybe$Nothing,
+													balances: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: _elm_lang$core$Maybe$Nothing,
+															_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+																A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+														},
+														_1: {ctor: '[]'}
+													},
+													elaborations: {
+														ctor: '::',
+														_0: _elm_lang$core$Native_Utils.update(
+															_merivale$victor$Interface_Model_Examples$elaboration,
+															{
+																recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR,
+																string1: _elm_lang$core$Maybe$Just('occasionally'),
+																displacer: _elm_lang$core$Maybe$Just(
+																	_merivale$victor$Theory_Ideas_Displacers$Secondary(_merivale$victor$Theory_Ideas_Displacers$Maybe1))
+															}),
+														_1: {ctor: '[]'}
+													}
+												},
+												_1: {
+													ctor: '::',
+													_0: {
+														plus: false,
+														object: A3(
+															_merivale$victor$Theory_Ideas_Nucleus$Other,
+															false,
+															_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+															_elm_lang$core$Maybe$Nothing),
+														verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'eat', false, false),
+														status: _elm_lang$core$Maybe$Just(
+															_merivale$victor$Theory_Ideas_Nucleus$Relative(_merivale$victor$Theory_Ideas_Nucleus$Out)),
+														balances: {ctor: '[]'},
+														elaborations: {
+															ctor: '::',
+															_0: _elm_lang$core$Native_Utils.update(
+																_merivale$victor$Interface_Model_Examples$elaboration,
+																{
+																	recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR,
+																	displacer: _elm_lang$core$Maybe$Just(
+																		_merivale$victor$Theory_Ideas_Displacers$Primary(
+																			{
+																				ctor: '_Tuple2',
+																				_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'tend', false, false),
+																				_1: _elm_lang$core$Maybe$Nothing
+																			}))
+																}),
+															_1: {ctor: '[]'}
+														}
+													},
+													_1: {
+														ctor: '::',
+														_0: {
+															plus: false,
+															object: A3(
+																_merivale$victor$Theory_Ideas_Nucleus$Other,
+																false,
+																_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+																_elm_lang$core$Maybe$Nothing),
+															verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'eat', false, false),
+															status: _elm_lang$core$Maybe$Just(
+																_merivale$victor$Theory_Ideas_Nucleus$Relative(_merivale$victor$Theory_Ideas_Nucleus$Out)),
+															balances: {ctor: '[]'},
+															elaborations: {
+																ctor: '::',
+																_0: _elm_lang$core$Native_Utils.update(
+																	_merivale$victor$Interface_Model_Examples$elaboration,
+																	{
+																		recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR,
+																		displacer: _elm_lang$core$Maybe$Just(
+																			_merivale$victor$Theory_Ideas_Displacers$Primary(
+																				{
+																					ctor: '_Tuple2',
+																					_0: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'use', false, false),
+																					_1: _elm_lang$core$Maybe$Nothing
+																				}))
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$core$Native_Utils.update(
+																		_merivale$victor$Interface_Model_Examples$elaboration,
+																		{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														},
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _merivale$victor$Interface_Model_Examples$shortFirst = {
+	plus: false,
+	object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+	verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'get', true, false),
+	status: _elm_lang$core$Maybe$Just(
+		_merivale$victor$Theory_Ideas_Nucleus$Absolute('married')),
+	balances: {ctor: '[]'},
+	elaborations: {
+		ctor: '::',
+		_0: _elm_lang$core$Native_Utils.update(
+			_merivale$victor$Interface_Model_Examples$elaboration,
+			{
+				recipe: _merivale$victor$Interface_Model_Types$MakePAST,
+				string1: _elm_lang$core$Maybe$Just('yesterday')
+			}),
+		_1: {ctor: '[]'}
+	}
+};
+var _merivale$victor$Interface_Model_Examples$shortExamples = {
+	ctor: '::',
+	_0: _merivale$victor$Interface_Model_Examples$shortFirst,
+	_1: {
+		ctor: '::',
+		_0: {
+			plus: false,
+			object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+			verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'get', true, false),
+			status: _elm_lang$core$Maybe$Just(
+				_merivale$victor$Theory_Ideas_Nucleus$Absolute('married')),
+			balances: {ctor: '[]'},
+			elaborations: {
+				ctor: '::',
+				_0: _elm_lang$core$Native_Utils.update(
+					_merivale$victor$Interface_Model_Examples$elaboration,
+					{recipe: _merivale$victor$Interface_Model_Types$MakePREORDAINED}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Native_Utils.update(
+						_merivale$victor$Interface_Model_Examples$elaboration,
+						{
+							recipe: _merivale$victor$Interface_Model_Types$MakePAST,
+							string1: _elm_lang$core$Maybe$Just('yesterday')
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				plus: false,
+				object: A3(
+					_merivale$victor$Theory_Ideas_Nucleus$Other,
+					false,
+					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+					_elm_lang$core$Maybe$Just('Claire')),
+				verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'drink', false, false),
+				status: _elm_lang$core$Maybe$Nothing,
+				balances: {ctor: '[]'},
+				elaborations: {
+					ctor: '::',
+					_0: _elm_lang$core$Native_Utils.update(
+						_merivale$victor$Interface_Model_Examples$elaboration,
+						{recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Native_Utils.update(
+							_merivale$victor$Interface_Model_Examples$elaboration,
+							{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					plus: false,
+					object: A3(
+						_merivale$victor$Theory_Ideas_Nucleus$Other,
+						false,
+						_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+						_elm_lang$core$Maybe$Just('Claire')),
+					verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'drink', false, false),
+					status: _elm_lang$core$Maybe$Nothing,
+					balances: {ctor: '[]'},
+					elaborations: {
+						ctor: '::',
+						_0: _elm_lang$core$Native_Utils.update(
+							_merivale$victor$Interface_Model_Examples$elaboration,
+							{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Native_Utils.update(
+								_merivale$victor$Interface_Model_Examples$elaboration,
+								{recipe: _merivale$victor$Interface_Model_Types$MakeREGULAR}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						plus: false,
+						object: A3(
+							_merivale$victor$Theory_Ideas_Nucleus$Other,
+							false,
+							_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+							_elm_lang$core$Maybe$Just('Victor')),
+						verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'see', false, false),
+						status: _elm_lang$core$Maybe$Nothing,
+						balances: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Maybe$Nothing,
+								_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+									A3(
+										_merivale$victor$Theory_Ideas_Nucleus$Other,
+										false,
+										_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+										_elm_lang$core$Maybe$Just('Grannie')))
+							},
+							_1: {ctor: '[]'}
+						},
+						elaborations: {
+							ctor: '::',
+							_0: _elm_lang$core$Native_Utils.update(
+								_merivale$victor$Interface_Model_Examples$elaboration,
+								{
+									recipe: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
+									string1: _elm_lang$core$Maybe$Just('for two hours')
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$core$Native_Utils.update(
+									_merivale$victor$Interface_Model_Examples$elaboration,
+									{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$core$Native_Utils.update(
+										_merivale$victor$Interface_Model_Examples$elaboration,
+										{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							plus: false,
+							object: A3(
+								_merivale$victor$Theory_Ideas_Nucleus$Other,
+								false,
+								_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+								_elm_lang$core$Maybe$Just('Victor')),
+							verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'see', false, false),
+							status: _elm_lang$core$Maybe$Nothing,
+							balances: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Maybe$Nothing,
+									_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+										A3(
+											_merivale$victor$Theory_Ideas_Nucleus$Other,
+											false,
+											_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+											_elm_lang$core$Maybe$Just('Grannie')))
+								},
+								_1: {ctor: '[]'}
+							},
+							elaborations: {
+								ctor: '::',
+								_0: _elm_lang$core$Native_Utils.update(
+									_merivale$victor$Interface_Model_Examples$elaboration,
+									{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$core$Native_Utils.update(
+										_merivale$victor$Interface_Model_Examples$elaboration,
+										{
+											recipe: _merivale$victor$Interface_Model_Types$MakeEXTENDED,
+											string1: _elm_lang$core$Maybe$Just('for two hours')
+										}),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$core$Native_Utils.update(
+											_merivale$victor$Interface_Model_Examples$elaboration,
+											{recipe: _merivale$victor$Interface_Model_Types$MakePAST}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								plus: false,
+								object: A3(
+									_merivale$victor$Theory_Ideas_Nucleus$Other,
+									false,
+									_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+									_elm_lang$core$Maybe$Just('Grannie')),
+								verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'fall', false, false),
+								status: _elm_lang$core$Maybe$Just(
+									_merivale$victor$Theory_Ideas_Nucleus$Relative(_merivale$victor$Theory_Ideas_Nucleus$Over)),
+								balances: {ctor: '[]'},
+								elaborations: {
+									ctor: '::',
+									_0: _elm_lang$core$Native_Utils.update(
+										_merivale$victor$Interface_Model_Examples$elaboration,
+										{
+											recipe: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
+											string1: _elm_lang$core$Maybe$Just('fifteen times')
+										}),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$core$Native_Utils.update(
+											_merivale$victor$Interface_Model_Examples$elaboration,
+											{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Native_Utils.update(
+												_merivale$victor$Interface_Model_Examples$elaboration,
+												{
+													recipe: _merivale$victor$Interface_Model_Types$MakePAST,
+													string1: _elm_lang$core$Maybe$Just('yesterday')
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									plus: false,
+									object: A3(
+										_merivale$victor$Theory_Ideas_Nucleus$Other,
+										false,
+										_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+										_elm_lang$core$Maybe$Just('Grannie')),
+									verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'fall', false, false),
+									status: _elm_lang$core$Maybe$Just(
+										_merivale$victor$Theory_Ideas_Nucleus$Relative(_merivale$victor$Theory_Ideas_Nucleus$Over)),
+									balances: {ctor: '[]'},
+									elaborations: {
+										ctor: '::',
+										_0: _elm_lang$core$Native_Utils.update(
+											_merivale$victor$Interface_Model_Examples$elaboration,
+											{recipe: _merivale$victor$Interface_Model_Types$MakeNEGATIVE}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Native_Utils.update(
+												_merivale$victor$Interface_Model_Examples$elaboration,
+												{
+													recipe: _merivale$victor$Interface_Model_Types$MakeSCATTERED,
+													string1: _elm_lang$core$Maybe$Just('fifteen times')
+												}),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$core$Native_Utils.update(
+													_merivale$victor$Interface_Model_Examples$elaboration,
+													{
+														recipe: _merivale$victor$Interface_Model_Types$MakePAST,
+														string1: _elm_lang$core$Maybe$Just('yesterday')
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								},
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _merivale$victor$Interface_Model_Examples$plainFirst = {
+	plus: false,
+	object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
+	verbality: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
+	status: _elm_lang$core$Maybe$Nothing,
+	balances: {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Maybe$Nothing,
+			_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+				A3(
+					_merivale$victor$Theory_Ideas_Nucleus$Other,
+					false,
+					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+					_elm_lang$core$Maybe$Just('Victor')))
+		},
+		_1: {ctor: '[]'}
+	},
+	elaborations: {ctor: '[]'}
+};
+var _merivale$victor$Interface_Model_Examples$plainExamples = {
+	ctor: '::',
+	_0: _merivale$victor$Interface_Model_Examples$plainFirst,
+	_1: {
+		ctor: '::',
+		_0: {
+			plus: false,
+			object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
+			verbality: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
+			status: _elm_lang$core$Maybe$Just(
+				_merivale$victor$Theory_Ideas_Nucleus$Absolute('happy')),
+			balances: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$For),
+					_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+						_merivale$victor$Theory_Ideas_Nucleus$Hearer(false))
+				},
+				_1: {ctor: '[]'}
+			},
+			elaborations: {ctor: '[]'}
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				plus: false,
+				object: A3(
+					_merivale$victor$Theory_Ideas_Nucleus$Other,
+					false,
+					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+					_elm_lang$core$Maybe$Nothing),
+				verbality: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
+				status: _elm_lang$core$Maybe$Just(
+					_merivale$victor$Theory_Ideas_Nucleus$Relative(_merivale$victor$Theory_Ideas_Nucleus$Out)),
+				balances: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$With),
+						_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+							A3(
+								_merivale$victor$Theory_Ideas_Nucleus$Other,
+								false,
+								_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
+								_elm_lang$core$Maybe$Just('Fred')))
+					},
+					_1: {ctor: '[]'}
+				},
+				elaborations: {ctor: '[]'}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					plus: false,
+					object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+					verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'look', false, false),
+					status: _elm_lang$core$Maybe$Just(
+						_merivale$victor$Theory_Ideas_Nucleus$Relative(_merivale$victor$Theory_Ideas_Nucleus$Up)),
+					balances: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$To),
+							_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+								A3(
+									_merivale$victor$Theory_Ideas_Nucleus$Other,
+									false,
+									_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Female),
+									_elm_lang$core$Maybe$Nothing))
+						},
+						_1: {ctor: '[]'}
+					},
+					elaborations: {ctor: '[]'}
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						plus: false,
+						object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(true),
+						verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'like', false, false),
+						status: _elm_lang$core$Maybe$Nothing,
+						balances: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Maybe$Nothing,
+								_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+									A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+							},
+							_1: {ctor: '[]'}
+						},
+						elaborations: {ctor: '[]'}
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							plus: false,
+							object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+							verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'live', false, false),
+							status: _elm_lang$core$Maybe$Nothing,
+							balances: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$In),
+									_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+										A3(
+											_merivale$victor$Theory_Ideas_Nucleus$Other,
+											false,
+											_elm_lang$core$Maybe$Nothing,
+											_elm_lang$core$Maybe$Just('France')))
+								},
+								_1: {ctor: '[]'}
+							},
+							elaborations: {ctor: '[]'}
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								plus: false,
+								object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
+								verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'sing', true, false),
+								status: _elm_lang$core$Maybe$Nothing,
+								balances: {ctor: '[]'},
+								elaborations: {ctor: '[]'}
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									plus: false,
+									object: A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+									verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'laugh', true, false),
+									status: _elm_lang$core$Maybe$Nothing,
+									balances: {ctor: '[]'},
+									elaborations: {ctor: '[]'}
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										plus: false,
+										object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(true),
+										verbality: A3(_merivale$victor$Theory_Ideas_Nucleus$Do, 'leave', true, false),
+										status: _elm_lang$core$Maybe$Nothing,
+										balances: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: _elm_lang$core$Maybe$Nothing,
+												_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+													A3(_merivale$victor$Theory_Ideas_Nucleus$Other, false, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: _elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$To),
+													_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
+														A3(_merivale$victor$Theory_Ideas_Nucleus$Other, true, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing))
+												},
+												_1: {ctor: '[]'}
+											}
+										},
+										elaborations: {ctor: '[]'}
+									},
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _merivale$victor$Interface_Model_Examples$examples = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_merivale$victor$Interface_Model_Examples$plainExamples,
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		_merivale$victor$Interface_Model_Examples$shortExamples,
+		A2(_elm_lang$core$Basics_ops['++'], _merivale$victor$Interface_Model_Examples$longExamples, _merivale$victor$Interface_Model_Examples$objectExamples)));
+
 var _merivale$victor$Theory_Words_Utils$splitMaybeString = function (string) {
 	return A2(
 		_elm_lang$core$Maybe$withDefault,
@@ -9368,21 +10487,6 @@ var _merivale$victor$Theory_Messages$explode = function (message) {
 	}
 };
 
-var _merivale$victor$Interface_Model_Messages$amassed = F3(
-	function (elaboration, message, proportion) {
-		return _elm_lang$core$Result$Ok(
-			A3(_merivale$victor$Theory_Messages$AMASSED, elaboration.target, proportion, message));
-	});
-var _merivale$victor$Interface_Model_Messages$enumerated = F3(
-	function (elaboration, message, multiplicity) {
-		return _elm_lang$core$Result$Ok(
-			A3(_merivale$victor$Theory_Messages$ENUMERATED, elaboration.target, multiplicity, message));
-	});
-var _merivale$victor$Interface_Model_Messages$indirect = F3(
-	function (elaboration, message, description) {
-		return _elm_lang$core$Result$Ok(
-			A3(_merivale$victor$Theory_Messages$INDIRECT, elaboration.target, description, message));
-	});
 var _merivale$victor$Interface_Model_Messages$proportion = F2(
 	function (elaboration, haystack) {
 		return _elm_lang$core$Result$Ok(
@@ -9412,6 +10516,21 @@ var _merivale$victor$Interface_Model_Messages$haystack = function (elaboration) 
 			{ctor: '_Tuple3', _0: _p1._0, _1: elaboration.string2, _2: elaboration.string3});
 	}
 };
+var _merivale$victor$Interface_Model_Messages$amassed = F3(
+	function (elaboration, message, proportion) {
+		return _elm_lang$core$Result$Ok(
+			A3(_merivale$victor$Theory_Messages$AMASSED, elaboration.target, proportion, message));
+	});
+var _merivale$victor$Interface_Model_Messages$enumerated = F3(
+	function (elaboration, message, multiplicity) {
+		return _elm_lang$core$Result$Ok(
+			A3(_merivale$victor$Theory_Messages$ENUMERATED, elaboration.target, multiplicity, message));
+	});
+var _merivale$victor$Interface_Model_Messages$indirect = F3(
+	function (elaboration, message, description) {
+		return _elm_lang$core$Result$Ok(
+			A3(_merivale$victor$Theory_Messages$INDIRECT, elaboration.target, description, message));
+	});
 var _merivale$victor$Interface_Model_Messages$scattered = F2(
 	function (tally, message) {
 		var _p2 = tally;
@@ -10403,27 +11522,7 @@ var _merivale$victor$Interface_Model_State$update = F2(
 					});
 		}
 	});
-var _merivale$victor$Interface_Model_State$initial = {
-	plus: false,
-	object: _merivale$victor$Theory_Ideas_Nucleus$Speaker(false),
-	verbality: _merivale$victor$Theory_Ideas_Nucleus$Be(false),
-	status: _elm_lang$core$Maybe$Nothing,
-	balances: {
-		ctor: '::',
-		_0: {
-			ctor: '_Tuple2',
-			_0: _elm_lang$core$Maybe$Nothing,
-			_1: _merivale$victor$Theory_Ideas_Nucleus$Different(
-				A3(
-					_merivale$victor$Theory_Ideas_Nucleus$Other,
-					false,
-					_elm_lang$core$Maybe$Just(_merivale$victor$Theory_Ideas_Nucleus$Male),
-					_elm_lang$core$Maybe$Just('Victor')))
-		},
-		_1: {ctor: '[]'}
-	},
-	elaborations: {ctor: '[]'}
-};
+var _merivale$victor$Interface_Model_State$initial = _merivale$victor$Interface_Model_Examples$plainFirst;
 
 var _merivale$victor$Interface_View_Buttons$iconButton = function (_p0) {
 	var _p1 = _p0;

@@ -5,6 +5,8 @@
         "scss": "^0.2.4"
     },
     "scripts": {
-        "compile": "scss --sourcemap=none scss/screen.scss docs/css/screen.css && elm-format --yes src/ && elm-make src/Interface/Victor.elm --output docs/js/victor.js"
+        "scss": "scss --sourcemap=none scss/screen.scss docs/css/screen.css",
+        "format": "elm-format --yes src/",
+        "elm": "elm-make src/Interface/Victor.elm --output docs/js/victor.js"
     }
 }

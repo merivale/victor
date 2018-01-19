@@ -5,6 +5,7 @@ for updating the model in response to user input.
 -}
 
 import Interface.Model.Types exposing (..)
+import Interface.Model.Examples as Examples
 import Theory.Ideas.Displacers exposing (..)
 import Theory.Ideas.Pseudo exposing (..)
 import Theory.Ideas.Nucleus exposing (..)
@@ -14,13 +15,7 @@ import Theory.Ideas.Nucleus exposing (..)
 -}
 initial : Model
 initial =
-    { plus = False
-    , object = Speaker False
-    , verbality = Be False
-    , status = Nothing
-    , balances = [ ( Nothing, Different (Other False (Just Male) (Just "Victor")) ) ]
-    , elaborations = []
-    }
+    Examples.plainFirst
 
 
 {-| Function for updating the application state in response to user input.
