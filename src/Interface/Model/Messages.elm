@@ -51,7 +51,7 @@ propertyEmpty status =
             False
 
 
-{-| Elaborate a message recusrively.
+{-| Elaborate a message recursively.
 -}
 elaborate : List Elaboration -> Message -> Result String Message
 elaborate elaborations message =
@@ -203,6 +203,23 @@ scattered tally message =
             Ok (SCATTERED str message)
 
 
+indirect : Elaboration -> Message -> Description -> Result String Message
+indirect elaboration message description =
+    Ok (INDIRECT elaboration.target description message)
+
+
+enumerated : Elaboration -> Message -> Multiplicity -> Result String Message
+enumerated elaboration message multiplicity =
+    Ok (ENUMERATED elaboration.target multiplicity message)
+
+
+amassed : Elaboration -> Message -> Proportion -> Result String Message
+amassed elaboration message proportion =
+    Ok (AMASSED elaboration.target proportion message)
+
+
+{-| Functions for creating descriptions, multiplicities, and proportions.
+-}
 haystack : Elaboration -> Result String Haystack
 haystack elaboration =
     case elaboration.string1 of
@@ -231,18 +248,3 @@ multiplicity elaboration haystack =
 proportion : Elaboration -> Haystack -> Result String Proportion
 proportion elaboration haystack =
     Ok ( elaboration.quantifier, elaboration.other, haystack )
-
-
-indirect : Elaboration -> Message -> Description -> Result String Message
-indirect elaboration message description =
-    Ok (INDIRECT elaboration.target description message)
-
-
-enumerated : Elaboration -> Message -> Multiplicity -> Result String Message
-enumerated elaboration message multiplicity =
-    Ok (ENUMERATED elaboration.target multiplicity message)
-
-
-amassed : Elaboration -> Message -> Proportion -> Result String Message
-amassed elaboration message proportion =
-    Ok (AMASSED elaboration.target proportion message)
