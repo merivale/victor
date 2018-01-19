@@ -32,7 +32,7 @@ view model =
         result =
             Messages.message model |> Result.andThen Sentences.sentence
     in
-    Html.div []
-        [ Output.output result
-        , Elaborations.elaborations model
-        ]
+        Html.div []
+            [ Output.output result
+            , Elaborations.elaborations model
+            ]

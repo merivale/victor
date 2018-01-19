@@ -1,8 +1,8 @@
 {
     "version": "1.0.0",
-    "summary": "A model the English language, based on the work of V. H. Dudman.",
+    "summary": "A model of the English language, inspired by the work of V. H. Dudman.",
+    "license": "BSD3",
     "repository": "https://github.com/merivale/victor.git",
-    "license": "MIT",
     "source-directories": [
         "src"
     ],

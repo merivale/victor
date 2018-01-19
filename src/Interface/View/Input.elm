@@ -115,7 +115,7 @@ fromId options =
                 Just a ->
                     a
     in
-    fromString
+        fromString
 
 
 onChange : (String -> Signal) -> Html.Attribute Signal

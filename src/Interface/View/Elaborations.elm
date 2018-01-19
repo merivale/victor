@@ -36,11 +36,11 @@ input elaborations model =
                 subContent =
                     input (List.drop 1 elaborations) model
             in
-            elaborationInput
-                (List.length model.balances)
-                index
-                elaboration
-                subContent
+                elaborationInput
+                    (List.length model.balances)
+                    index
+                    elaboration
+                    subContent
 
 
 elaborationInput : Int -> Int -> Elaboration -> Html.Html Signal -> Html.Html Signal

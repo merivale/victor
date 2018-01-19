@@ -59,10 +59,10 @@ predicate vars =
                 displaced =
                     { prior = vars.prior, pre = vars.pre, pivot = vars.pivot }
             in
-            [ Modals.modal vars.past vars.negatedModality modality ]
-                ++ List.map (baseVerbPhrase addTo) (displaced :: vars.displaced)
-                ++ List.map (nounPhrase vars.object) vars.balances
-                ++ List.reverse vars.post
+                [ Modals.modal vars.past vars.negatedModality modality ]
+                    ++ List.map (baseVerbPhrase addTo) (displaced :: vars.displaced)
+                    ++ List.map (nounPhrase vars.object) vars.balances
+                    ++ List.reverse vars.post
 
 
 verbPhrase : Messages.Vars -> List String
@@ -71,16 +71,16 @@ verbPhrase vars =
         ( base, rest ) =
             Fulcrums.fulcrum vars.prior vars.pivot
     in
-    if vars.prior || base == "be" then
-        Verbs.conjugate vars.object vars.past base :: (vars.pre ++ rest)
-    else if List.member "not" vars.pre then
-        let
-            ( newPre, newRest ) =
-                Utils.splitAtNot vars.pre (base :: rest)
-        in
-        newPre ++ (Verbs.conjugate vars.object vars.past "do" :: newRest)
-    else
-        vars.pre ++ (Verbs.conjugate vars.object vars.past base :: rest)
+        if vars.prior || base == "be" then
+            Verbs.conjugate vars.object vars.past base :: (vars.pre ++ rest)
+        else if List.member "not" vars.pre then
+            let
+                ( newPre, newRest ) =
+                    Utils.splitAtNot vars.pre (base :: rest)
+            in
+                newPre ++ (Verbs.conjugate vars.object vars.past "do" :: newRest)
+        else
+            vars.pre ++ (Verbs.conjugate vars.object vars.past base :: rest)
 
 
 baseVerbPhrase : Bool -> Messages.Displaced -> String
@@ -95,7 +95,7 @@ baseVerbPhrase addTo { prior, pre, pivot } =
             else
                 pre
     in
-    String.join " " (newPre ++ (base :: rest))
+        String.join " " (newPre ++ (base :: rest))
 
 
 nounPhrase : Nucleus.Object -> Messages.PseudoBalance -> String
@@ -129,10 +129,10 @@ articlePhrase plural ( pointer, other, haystack ) =
         article =
             Articles.article plural pointer
     in
-    if other then
-        [ article, "other" ] ++ haystackToString False plural haystack
-    else
-        article :: haystackToString False plural haystack
+        if other then
+            [ article, "other" ] ++ haystackToString False plural haystack
+        else
+            article :: haystackToString False plural haystack
 
 
 enumeratedDeterminerPhrase : Bool -> Bool -> Pseudo.Multiplicity -> List String
@@ -160,10 +160,10 @@ determinerPhrase plural negated quantifier other haystack =
             determiner canAbbreviate quantifier other category
                 ++ haystackToString canAbbreviate plural haystack
     in
-    if negated then
-        negateDeterminer positive
-    else
-        positive
+        if negated then
+            negateDeterminer positive
+        else
+            positive
 
 
 determiner : Bool -> Maybe Pseudo.Quantifier -> Bool -> String -> List String

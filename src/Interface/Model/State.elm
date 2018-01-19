@@ -33,7 +33,7 @@ update signal model =
                 allMinus =
                     minusAll model
             in
-            { allMinus | plus = not model.plus }
+                { allMinus | plus = not model.plus }
 
         SetObject object ->
             { model | object = object }
@@ -90,10 +90,10 @@ update signal model =
                 lastIndex =
                     List.length model.balances - 1
             in
-            { model
-                | balances = List.take lastIndex model.balances
-                , elaborations = List.filter (doesNotTarget lastIndex) model.elaborations
-            }
+                { model
+                    | balances = List.take lastIndex model.balances
+                    , elaborations = List.filter (doesNotTarget lastIndex) model.elaborations
+                }
 
         SetBalanceRelator index relator ->
             { model | balances = modifyItem index (setBalanceRelator relator) model.balances }
@@ -112,7 +112,7 @@ update signal model =
                 allMinus =
                     minusAll model
             in
-            { allMinus | elaborations = addElaboration index recipe allMinus.elaborations }
+                { allMinus | elaborations = addElaboration index recipe allMinus.elaborations }
 
         RemoveElaboration index ->
             { model | elaborations = removeFromList index model.elaborations }
@@ -274,7 +274,7 @@ addElaboration index recipe elaborations =
                     , other = False
                     }
     in
-    before ++ (elaboration :: after)
+        before ++ (elaboration :: after)
 
 
 {-| Modify an item within a list at the given index, using the given modifying
@@ -475,7 +475,7 @@ setElaborationQuantifierInteger string elaboration =
         int =
             Result.withDefault 0 (String.toInt string)
     in
-    { elaboration | quantifier = Just (Integer int) }
+        { elaboration | quantifier = Just (Integer int) }
 
 
 toggleElaborationOther : Elaboration -> Elaboration

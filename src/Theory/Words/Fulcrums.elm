@@ -28,10 +28,10 @@ fulcrum prior ( verbality, status ) =
                 Nucleus.Do string False False ->
                     ( string, complement status )
     in
-    if prior then
-        ( "have", Verbs.participle2 base :: rest )
-    else
-        ( base, rest )
+        if prior then
+            ( "have", Verbs.participle2 base :: rest )
+        else
+            ( base, rest )
 
 
 complement : Maybe Nucleus.Status -> List String

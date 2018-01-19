@@ -25,18 +25,18 @@ toggleElaborations index plus =
             else
                 ToggleElaborationPlus index
     in
-    if plus then
-        iconButton
-            { label = "minus"
-            , signal = signal
-            , title = "Hide Elaborations"
-            }
-    else
-        iconButton
-            { label = "plus"
-            , signal = signal
-            , title = "Show Elaborations"
-            }
+        if plus then
+            iconButton
+                { label = "minus"
+                , signal = signal
+                , title = "Hide Elaborations"
+                }
+        else
+            iconButton
+                { label = "plus"
+                , signal = signal
+                , title = "Show Elaborations"
+                }
 
 
 elaborationButtons : Int -> Bool -> Html.Html Signal

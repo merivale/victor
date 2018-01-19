@@ -1,0 +1,10 @@
+{
+    "devDependencies": {
+        "elm": "^0.18.0",
+        "elm-format": "^0.6.1-alpha",
+        "scss": "^0.2.4"
+    },
+    "scripts": {
+        "compile": "scss --sourcemap=none scss/screen.scss docs/css/screen.css && elm-format --yes src/ && elm-make src/Interface/Victor.elm --output docs/js/victor.js"
+    }
+}

@@ -234,18 +234,18 @@ preordained displacer time vars =
             varsWithPost =
                 { vars | post = Utils.maybeCons time vars.post }
         in
-        case displacer of
-            Nothing ->
-                if vars.past then
-                    Err "PAST messages cannot be made PREORDAINED without a displacer"
-                else
-                    Ok varsWithPost
+            case displacer of
+                Nothing ->
+                    if vars.past then
+                        Err "PAST messages cannot be made PREORDAINED without a displacer"
+                    else
+                        Ok varsWithPost
 
-            Just (Displacers.Primary pivot) ->
-                swapPastForPrior varsWithPost |> Result.map (primary pivot)
+                Just (Displacers.Primary pivot) ->
+                    swapPastForPrior varsWithPost |> Result.map (primary pivot)
 
-            Just (Displacers.Secondary modality) ->
-                swapPastForPrior varsWithPost |> Result.map (secondary modality True False)
+                Just (Displacers.Secondary modality) ->
+                    swapPastForPrior varsWithPost |> Result.map (secondary modality True False)
 
 
 {-| REGULAR messages.
@@ -259,18 +259,18 @@ regular displacer frequency vars =
             varsWithPre =
                 { vars | pre = Utils.maybeCons frequency vars.pre }
         in
-        case displacer of
-            Nothing ->
-                if vars.past then
-                    Err "PAST messages cannot be made REGULAR without a displacer"
-                else
-                    Ok varsWithPre
+            case displacer of
+                Nothing ->
+                    if vars.past then
+                        Err "PAST messages cannot be made REGULAR without a displacer"
+                    else
+                        Ok varsWithPre
 
-            Just (Displacers.Primary pivot) ->
-                swapPastForPrior varsWithPre |> Result.map (primary pivot)
+                Just (Displacers.Primary pivot) ->
+                    swapPastForPrior varsWithPre |> Result.map (primary pivot)
 
-            Just (Displacers.Secondary modality) ->
-                swapPastForPrior varsWithPre |> Result.map (secondary modality False True)
+                Just (Displacers.Secondary modality) ->
+                    swapPastForPrior varsWithPre |> Result.map (secondary modality False True)
 
 
 {-| EXTENDED messages.
@@ -317,7 +317,7 @@ indirect target description vars =
                         pseudoBalance =
                             IndirectBalance relator object description
                     in
-                    Ok (overrideBalancingObject target pseudoBalance vars)
+                        Ok (overrideBalancingObject target pseudoBalance vars)
 
             _ ->
                 Err ("balancing object " ++ toString (target + 1) ++ " cannot be overridden twice")
@@ -331,53 +331,53 @@ enumerated target multiplicity vars =
         ( quantifier, other, haystack ) =
             multiplicity
     in
-    if not (Pseudo.isEnumerating quantifier) then
-        Err "this quantifier cannot be used in ENUMERATED elaborations"
-    else if target < 0 then
-        case vars.pseudoObject of
-            DirectObject ->
-                if not (Nucleus.isOther vars.object) then
-                    Err "only third person (other) objects can be overridden"
-                else if Pseudo.requiresPlural quantifier && not (Nucleus.isPlural vars.object) then
-                    Err "your ENUMERATED quantifier requires a plural object"
-                else if Nucleus.isPlural vars.object && not (Pseudo.requiresPlural quantifier) then
-                    Err "your ENUMERATED quantifier requires a singular object"
-                else
-                    let
-                        negateObject =
-                            Pseudo.isNegatable quantifier
+        if not (Pseudo.isEnumerating quantifier) then
+            Err "this quantifier cannot be used in ENUMERATED elaborations"
+        else if target < 0 then
+            case vars.pseudoObject of
+                DirectObject ->
+                    if not (Nucleus.isOther vars.object) then
+                        Err "only third person (other) objects can be overridden"
+                    else if Pseudo.requiresPlural quantifier && not (Nucleus.isPlural vars.object) then
+                        Err "your ENUMERATED quantifier requires a plural object"
+                    else if Nucleus.isPlural vars.object && not (Pseudo.requiresPlural quantifier) then
+                        Err "your ENUMERATED quantifier requires a singular object"
+                    else
+                        let
+                            negateObject =
+                                Pseudo.isNegatable quantifier
 
-                        pseudoBalance =
-                            EnumeratedObject False multiplicity
-                    in
-                    Ok (overrideMainObject negateObject pseudoBalance vars)
+                            pseudoBalance =
+                                EnumeratedObject False multiplicity
+                        in
+                            Ok (overrideMainObject negateObject pseudoBalance vars)
 
-            _ ->
-                Err "the main object cannot be overridden twice"
-    else
-        case Array.get target (Array.fromList vars.balances) of
-            Nothing ->
-                Err "target index out of range"
+                _ ->
+                    Err "the main object cannot be overridden twice"
+        else
+            case Array.get target (Array.fromList vars.balances) of
+                Nothing ->
+                    Err "target index out of range"
 
-            Just (DirectBalance ( relator, Nucleus.SameAsMain )) ->
-                Err "only different objects can be overridden"
+                Just (DirectBalance ( relator, Nucleus.SameAsMain )) ->
+                    Err "only different objects can be overridden"
 
-            Just (DirectBalance ( relator, Nucleus.Different object )) ->
-                if not (Nucleus.isOther object) then
-                    Err "only third person (other) objects can be overridden"
-                else if Pseudo.requiresPlural quantifier && not (Nucleus.isPlural object) then
-                    Err "your ENUMERATED quantifier requires a plural object"
-                else if Nucleus.isPlural object && not (Pseudo.requiresPlural quantifier) then
-                    Err "your ENUMERATED quantifier requires a singular object"
-                else
-                    let
-                        pseudoBalance =
-                            EnumeratedBalance relator object False multiplicity
-                    in
-                    Ok (overrideBalancingObject target pseudoBalance vars)
+                Just (DirectBalance ( relator, Nucleus.Different object )) ->
+                    if not (Nucleus.isOther object) then
+                        Err "only third person (other) objects can be overridden"
+                    else if Pseudo.requiresPlural quantifier && not (Nucleus.isPlural object) then
+                        Err "your ENUMERATED quantifier requires a plural object"
+                    else if Nucleus.isPlural object && not (Pseudo.requiresPlural quantifier) then
+                        Err "your ENUMERATED quantifier requires a singular object"
+                    else
+                        let
+                            pseudoBalance =
+                                EnumeratedBalance relator object False multiplicity
+                        in
+                            Ok (overrideBalancingObject target pseudoBalance vars)
 
-            _ ->
-                Err ("balancing object " ++ toString (target + 1) ++ " cannot be overridden twice")
+                _ ->
+                    Err ("balancing object " ++ toString (target + 1) ++ " cannot be overridden twice")
 
 
 {-| AMASSED messages.
@@ -388,46 +388,46 @@ amassed target proportion vars =
         ( quantifier, other, haystack ) =
             proportion
     in
-    if not (Pseudo.isAmassing quantifier) then
-        Err "this quantifier cannot be used in AMASSED elaborations"
-    else if target < 0 then
-        case vars.pseudoObject of
-            DirectObject ->
-                if not (Nucleus.isOther vars.object) then
-                    Err "only third person (other) objects can be overridden"
-                else if quantifier == Just Pseudo.Much && Nucleus.isPlural vars.object then
-                    Err "this quantifier cannot be used with plural objects"
-                else
-                    let
-                        pseudoObject =
-                            AmassedObject False proportion
-                    in
-                    Ok (overrideMainObject True pseudoObject vars)
+        if not (Pseudo.isAmassing quantifier) then
+            Err "this quantifier cannot be used in AMASSED elaborations"
+        else if target < 0 then
+            case vars.pseudoObject of
+                DirectObject ->
+                    if not (Nucleus.isOther vars.object) then
+                        Err "only third person (other) objects can be overridden"
+                    else if quantifier == Just Pseudo.Much && Nucleus.isPlural vars.object then
+                        Err "this quantifier cannot be used with plural objects"
+                    else
+                        let
+                            pseudoObject =
+                                AmassedObject False proportion
+                        in
+                            Ok (overrideMainObject True pseudoObject vars)
 
-            _ ->
-                Err "the main object cannot be overridden twice"
-    else
-        case Array.get target (Array.fromList vars.balances) of
-            Nothing ->
-                Err "target index out of range"
+                _ ->
+                    Err "the main object cannot be overridden twice"
+        else
+            case Array.get target (Array.fromList vars.balances) of
+                Nothing ->
+                    Err "target index out of range"
 
-            Just (DirectBalance ( relator, Nucleus.SameAsMain )) ->
-                Err "only different objects can be overridden"
+                Just (DirectBalance ( relator, Nucleus.SameAsMain )) ->
+                    Err "only different objects can be overridden"
 
-            Just (DirectBalance ( relator, Nucleus.Different object )) ->
-                if not (Nucleus.isOther object) then
-                    Err "only third person (other) objects can be overridden"
-                else if quantifier == Just Pseudo.Much && Nucleus.isPlural object then
-                    Err "this quantifier cannot be used with plural objects"
-                else
-                    let
-                        pseudoBalance =
-                            AmassedBalance relator object False proportion
-                    in
-                    Ok (overrideBalancingObject target pseudoBalance vars)
+                Just (DirectBalance ( relator, Nucleus.Different object )) ->
+                    if not (Nucleus.isOther object) then
+                        Err "only third person (other) objects can be overridden"
+                    else if quantifier == Just Pseudo.Much && Nucleus.isPlural object then
+                        Err "this quantifier cannot be used with plural objects"
+                    else
+                        let
+                            pseudoBalance =
+                                AmassedBalance relator object False proportion
+                        in
+                            Ok (overrideBalancingObject target pseudoBalance vars)
 
-            _ ->
-                Err ("balancing object " ++ toString (target + 1) ++ " cannot be overridden twice")
+                _ ->
+                    Err ("balancing object " ++ toString (target + 1) ++ " cannot be overridden twice")
 
 
 {-| Functions used by the DISPLACED, PREORDAINED, and REGULAR elaborations.
@@ -448,13 +448,13 @@ primary pivot vars =
         displaced =
             { prior = vars.prior, pre = vars.pre, pivot = vars.pivot }
     in
-    { vars
-        | negationTarget = NegateCondition
-        , prior = False
-        , pre = []
-        , pivot = pivot
-        , displaced = displaced :: vars.displaced
-    }
+        { vars
+            | negationTarget = NegateCondition
+            , prior = False
+            , pre = []
+            , pivot = pivot
+            , displaced = displaced :: vars.displaced
+        }
 
 
 secondary : Displacers.Modality -> Bool -> Bool -> Vars -> Vars
@@ -486,4 +486,4 @@ overrideBalancingObject target pseudoBalance vars =
         newArray =
             Array.set target pseudoBalance oldArray
     in
-    { vars | balances = Array.toList newArray }
+        { vars | balances = Array.toList newArray }

@@ -40,4 +40,4 @@ format sentence =
                 Just ( firstLetter, rest ) ->
                     String.cons (Char.toUpper firstLetter) rest
     in
-    String.append ucFirst "."
+        String.append ucFirst "."

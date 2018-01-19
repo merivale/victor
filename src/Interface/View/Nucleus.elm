@@ -41,7 +41,7 @@ heading toggleButton model =
             else
                 [ Buttons.addBalance ]
     in
-    Html.div [ Attr.class "heading" ] (left ++ right)
+        Html.div [ Attr.class "heading" ] (left ++ right)
 
 
 body : Model -> Html.Html Signal
