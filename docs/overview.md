@@ -20,7 +20,9 @@ For example, and using some very crude representations of objects and conditions
 ```haskell
 ( Victor, love Grannie )
   -> "Victor loves Grannie."
+```
 
+```haskell
 ( Grannie, live at Cockroach Lane )
   -> "Grannie lives at Cockroach Lane."
 ```
@@ -57,7 +59,6 @@ In messages with elaborate conditions, we can distinguish the *outermost* condit
 
 ```haskell
 "He is going to see her next week."
-
 "He was going to see her next week."
 ```
 

@@ -1,0 +1,28 @@
+nav {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 14rem;
+  margin-right: -14rem;
+  transition: .5s;
+  background: $black;
+  color: #fff;
+  button {
+    float: right;
+    background: transparent !important;
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    padding: .5em 1em;
+    &.active,
+    &:hover {
+      background-color: $darkgray;
+    }
+  }
+  &.open {
+    margin-right: 0;
+  }
+}

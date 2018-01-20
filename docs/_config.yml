@@ -1,5 +1,6 @@
 title: "Victor"
 description: "A computational model of the English language."
+baseurl: /victor
 permalink: /:title
 defaults:
   - scope:

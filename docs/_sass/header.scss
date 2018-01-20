@@ -1,24 +1,19 @@
 header {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
-  background-color: $blue;
+  background-color: $black;
   color: #fff;
   padding: .5em;
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    a {
-      display: block;
-      text-decoration: none;
-      padding: 0 .5em;
-      &.active {
-        text-decoration: underline;
-      }
-    }
+  a {
+    display: block;
+    text-decoration: none;
+    padding: 0 .5em;
     &:first-child {
-      a {
-        font-weight: 600;
-      }
+      font-weight: 600;
     }
   }
 }

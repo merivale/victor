@@ -8,28 +8,29 @@ layout: compress
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="english, grammar, logic, dudman">
     <meta name="description" content="A computational model of the English language.">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/screen.css">
+    <link rel="shortcut icon" href="{{ site.baseurl }}{% link favicon.ico %}">
+    <link rel="stylesheet" href="{{ site.baseurl }}{% link css/screen.scss %}">
     <title>Victor</title>
   </head>
   <body>
     <header>
-      <nav>
-        <a href="/">Victor</a>
-      </nav>
-      <nav>
-        <a class="{% if page.id == 'about' %}active{% endif %}" href="/about">About</a>
-        <a class="{% if page.id == 'overview' %}active{% endif %}" href="/overview">Overview</a>
-        <a class="{% if page.id == 'plain' %}active{% endif %}" href="/plain">Plain Messages</a>
-        <a class="{% if page.id == 'elaborations' %}active{% endif %}" href="/elaborations">Elaborations</a>
-        <a class="{% if page.id == 'displacers' %}active{% endif %}" href="/displacers">Displacers</a>
-        <a class="{% if page.id == 'quantifiers' %}active{% endif %}" href="/quantifiers">Quantifiers</a>
-      </nav>
+      <a href="{{ site.baseurl }}{% link index.md %}">Victor</a>
+      <a href="{{ site.baseurl }}{% link about.md %}" data-action="toggle-menu">Docs</a>
     </header>
+    <nav>
+      <button class="close" data-action="toggle-menu"></button>
+      <a class="{% if page.id == 'about' %}active{% endif %}" href="{{ site.baseurl }}{% link about.md %}">1. Background</a>
+      <a class="{% if page.id == 'overview' %}active{% endif %}" href="{{ site.baseurl }}{% link overview.md %}">2. Overview</a>
+      <a class="{% if page.id == 'plain' %}active{% endif %}" href="{{ site.baseurl }}{% link plain.md %}">3. Plain Messages</a>
+      <a class="{% if page.id == 'elaborations' %}active{% endif %}" href="{{ site.baseurl }}{% link elaborations.md %}">4. Elaborations</a>
+      <a class="{% if page.id == 'displacers' %}active{% endif %}" href="{{ site.baseurl }}{% link displacers.md %}">5. Displacers</a>
+      <a class="{% if page.id == 'quantifiers' %}active{% endif %}" href="{{ site.baseurl }}{% link quantifiers.md %}">6. Quantifiers</a>
+      <a class="{% if page.id == 'compounds' %}active{% endif %}" href="{{ site.baseurl }}{% link compounds.md %}">7. Compounds</a>
+    </nav>
     <main class="{{ page.class }}">
       {{ content | smartify }}
     </main>
-    <script src="/js/victor.js"></script>
-    <script src="/js/bootstrap.js"></script>
+    <script src="{{ site.baseurl }}{% link js/victor.js %}"></script>
+    <script src="{{ site.baseurl }}{% link js/bootstrap.js %}"></script>
   </body>
 </html>

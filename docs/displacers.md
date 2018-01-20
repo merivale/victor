@@ -6,80 +6,64 @@ class: docs
 
 ## 1. Introduction
 
-By now, readers should be familiar with my theory of plain messages (chapter 3), and my theory of short elaborations (chapter 4). The purpose of this chapter is to introduce *long* elaborations, which are those elaborations that result in an additional verb phrase or modal at the start of the predicate. This entails an expansion of the definitions of the `PREORDAINED` and `REGULAR` elaborations, and the introduction of a new `DISPLACED` elaboration, as follows:
+By now, readers should be familiar with my [theory of plain messages]({{ site.baseurl }}{% link plain.md %}), and the basics of my [theory of elaborations]({{ site.baseurl }}{% link elaborations.md %}). On this page I will introduced *displacers*, which are informational ingredients responsible for the introduction of auxiliary verb phrases or modals at the start of the predicate. The point of the label, to be clear, is that this variable *displaces* the pivot in the nucleus of the message.
+
+The introduction of displacers entails an expansion of the definitions of the `PREORDAINED` and `REGULAR` elaborations, and the introduction of a new `DISPLACED` elaboration, as follows:
 
 ```haskell
 type Message
-= ...
-| DISPLACED Displacer Message
-| PREORDAINED (Maybe Displacer) (Maybe Time) Message
-| REGULAR (Maybe Displacer) (Maybe Frequency) Message
-| ...
+  = ...
+  | DISPLACED Displacer Message
+  | PREORDAINED (Maybe Displacer) (Maybe Time) Message
+  | REGULAR (Maybe Displacer) (Maybe Frequency) Message
+  | ...
 
 type Displacer
-= Primary Pivot
-| Secondary Modality
+  = Primary Pivot
+  | Secondary Modality
 
 type Modality
-= Yes1 -- "will"
-| Yes2 -- "shall"
-| Yes3 -- "must"/"ought"/"need"
-| Maybe1 -- "may"
-| Maybe3 -- "can"
-| Maybe4 -- "dare"
+  = Yes1 -- "will"
+  | Yes2 -- "shall"
+  | Yes3 -- "must"/"ought"/"need"
+  | Maybe1 -- "may"
+  | Maybe3 -- "can"
+  | Maybe4 -- "dare"
 ```
 
-Thus far, our examples have been limited to sentences with just one verb phrase, and no modal. The displacer variable, and these three elaborations that make room for it, account for the generation of sentences with modals or more than one verb phrase. The point of the label, to be clear, is that this variable *displaces* the pivot in the nucleus of the message.
-
-When the `PREORDAINED` or `REGULAR` elaborations have no displacer variable, I will refer to them as *conservative*. Conservative `PREORDAINED` and `REGULAR` messages are thus short elaborations, and were already introduced in the previous layer. When either of these elaborations has a primary or a secondary displacer, I will refer to them instead as *primary* or *secondary* respectively; and likewise with the `DISPLACED` elaboration, which is never conservative.
+When the `PREORDAINED` or `REGULAR` elaborations have no displacer variable, I will refer to them as *conservative*. Conservative `PREORDAINED` and `REGULAR` messages are examined in the page on my [theory of elaborations]({{ site.baseurl }}{% link elaborations.md %}). When either of these elaborations has a primary or a secondary displacer, I will refer to them instead as *primary* or *secondary* respectively; and likewise with the `DISPLACED` elaboration, which is never conservative.
 
 (The reason the `DISPLACED` elaboration is never conservative is because a conservative `DISPLACED` message is essentially just a plain message. Unlike the `PREORDAINED` and `REGULAR` elaborations, which have semantic significance over and above any displacer that they might introduce, the `DISPLACED` elaboration has no informational value in its own right, and serves merely to introduce a displacer. All of this will become clearer when we have seen and compared these elaborations in action.)
 
-Here is a quick taste of the sorts of things we’ll be dealing with:
+Here is a quick taste of the sorts of things we'll be dealing with:
 
 ```haskell
 "She is happy to see him."
-
 "She is hoping to see him."
-
 "She is going to see him."
-
 "It is going to rain."
-
 "It is about to rain."
-
 "It is likely to rain."
-
 "It seems likely to rain."
-
 "He seems to be upset."
-
 "He must be upset."
-
 "He might be upset."
-
 "He will be upset."
-
 "Victor tends to tease Grannie."
-
 "Victor likes to tease Grannie."
-
 "Grannie wants to eat out."
-
 ...
 ```
 
 I will tackle the data here in two stages, starting with primary displacers (i.e. pivots, which are responsible for additional verb phrases) in [section 2](#2-primary-displaced-preordained-and-regular-messages), and moving on to secondary displacers (i.e. modalities, which are encoded in the English modals) in [section 3](#3-secondary-displaced-messages) and [section 4](#4-secondary-preordained-and-regular-messages).
 
-First, however, some more general remarks are called for. I have already advertised that there is no future tense in my model of English, and that sentences like `"He will see her next week"` encode present tensed messages, messages affirming the present satisfaction of an elaborate condition which, in turn, concerns the later satisfaction of its underlying condition (recall [section 2 of the README in the `src/Theory` directory](https://github.com/merivale/victor/tree/master/src/Theory#2-tense-and-time)). This, indeed, is the way of the `PREORDAINED` elaboration quite generally. We have already seen as much in the case of conservative `PREORDAINED` messages (discussed in [section 3 of the README in the `src/Theory/Short` directory](https://github.com/merivale/victor/tree/master/src/Theory/Short#3-preordained-messages)); the following sections will argue the same in the case of primary and secondary `PREORDAINED` messages. To make way for this account, I will start by (very briefly) calling into question the popular alternative view: that `"will"` is a marker of the future tense.
+First, however, some more general remarks are called for. I have already advertised, in the [theoretical overview]({{ site.baseurl }}{% link overview.md %}), that there is no future tense in my model of English, and that sentences like `"He will see her next week"` encode present messages, messages affirming the present satisfaction of an elaborate condition. This elaborate condition, in turn, concerns the later satisfaction of the underlying condition. This, indeed, is the way of the `PREORDAINED` elaboration quite generally. We have seen as much in the case of conservative `PREORDAINED` messages; the following sections will argue the same in the case of primary and secondary `PREORDAINED` messages. To make way for this account, I will start by (very briefly) calling into question the popular alternative view: that `"will"` is a marker of the future tense.
 
-On this future tense hypothesis, the natural interpretations of the following three sentences differ only in the time of the condition’s satisfaction by the object:
+On this future tense hypothesis, the natural interpretations of the following three sentences differ only in the time of the condition's satisfaction by the object:
 
 ```haskell
 "It will be sunny in Paris tomorrow."
-
 "It is sunny in Paris at the moment."
-
 "It was sunny in Paris yesterday."
 ```
 
@@ -89,27 +73,21 @@ There are several reasons for rejecting this hypothesis. I have promised to be b
 
 ```haskell
 "It will be sunny in Paris tomorrow."
-
 "It will be sunny in Paris at the moment."
-
 "It will have been sunny in Paris yesterday."
 ```
 
-As a first stab, what these messages seem to have in common is that they reflect the speaker’s *best guess* in the absence of concrete observation. The speaker in Paris, looking up at the sky, may opine that it *is* sunny; but the speaker in London, armed only with knowledge of the time of year and the general way of these things, will more likely venture the judgement that it *will be* sunny there. The claim that it will be sunny in Paris *tomorrow*, meanwhile, is surely much more like the Londoner’s guess than the Parisian’s report. We make use of the same words to convey it, and we say such things—necessarily—in the absence of observational confirmation.
+As a first stab, what these messages seem to have in common is that they reflect the speaker's *best guess* in the absence of concrete observation. The speaker in Paris, looking up at the sky, may opine that it *is* sunny; but the speaker in London, armed only with knowledge of the time of year and the general way of these things, will more likely venture the judgement that it *will be* sunny there. The claim that it will be sunny in Paris *tomorrow*, meanwhile, is surely much more like the Londoner's guess than the Parisian's report. We make use of the same words to convey it, and we say such things---necessarily---in the absence of observational confirmation.
 
-Secondly, the behaviour of `"will"` in reported speech is difficult to square with the future tense hypothesis. Having said on Monday that it *is* sunny in Paris, I may be correctly reported on Tuesday as having said that it *was* sunny yesterday. This is to be expected, since the `PAST` elaboration does nothing but change the time of the condition’s satisfaction. But having said on Wednesday that it *will be* sunny in Paris tomorrow, the correct report on Thursday is that I said it *would be* sunny in Paris today. If my claim on Wednesday was the result of a `FUTURE` elaboration that merely located the condition’s satisfaction in the future, the correct report on Thursday should be that I said it *is* sunny in Paris today (since that future satisfaction is now present). But that is plainly *not* what I said. Following on from the first point above, that sounds like an observational report, whereas what I affirmed on Wednesday was not based on a magical observation of the future; it was my best guess given the epistemic circumstances. (What reported speech suggests is the hypothesis that `"will be"`, in these cases, encodes something like a *present* guess, where `"would be"` encodes the corresponding *past* guess. On my view, this is indeed exactly the case.)
+Secondly, the behaviour of `"will"` in reported speech is difficult to square with the future tense hypothesis. Having said on Monday that it *is* sunny in Paris, I may be correctly reported on Tuesday as having said that it *was* sunny yesterday. This is to be expected, since the `PAST` elaboration does nothing but change the time of the condition's satisfaction. But having said on Wednesday that it *will be* sunny in Paris tomorrow, the correct report on Thursday is that I said it *would be* sunny in Paris today. If my claim on Wednesday was the result of a `FUTURE` elaboration that merely located the condition's satisfaction in the future, the correct report on Thursday should be that I said it *is* sunny in Paris today (since that future satisfaction is now present). But that is plainly *not* what I said. Following on from the first point above, that sounds like an observational report, whereas what I affirmed on Wednesday was not based on a magical observation of the future; it was my best guess given the epistemic circumstances. (What reported speech suggests is the hypothesis that `"will be"`, in these cases, encodes something like a *present* guess, where `"would be"` encodes the corresponding *past* guess. On my view, as we will see, this is indeed exactly the case.)
 
-Thirdly, wherever `"will"` shows up encoding a claim about the future, it is just one option among many, the other options being—in the first instance—the other modals:
+Thirdly, wherever `"will"` shows up encoding a claim about the future, it is just one option among many, the other options being---in the first instance---the other modals:
 
 ```haskell
 "It will be sunny in Paris tomorrow."
-
 "It may be sunny in Paris tomorrow."
-
 "It ought to be sunny in Paris tomorrow."
-
 "It needn’t be sunny in Paris tomorrow."
-
 ...
 ```
 
@@ -119,11 +97,8 @@ I said that the other modals are the alternatives only in the first instance. In
 
 ```haskell
 "It is going to be sunny in Paris tomorrow."
-
 "It has to be sunny in Paris tomorrow."
-
 "It is likely to be sunny in Paris tomorrow."
-
 ...
 ```
 
@@ -137,39 +112,27 @@ Consider again the examples listed at the start of the previous section, though 
 
 ```haskell
 "She is happy to see him."
-
 "She is hoping to see him."
-
 "She is going to see him."
-
 "It is going to rain."
-
 "It is about to rain."
-
 "It is likely to rain."
-
 "It seems likely to rain."
-
 "He seems to be upset."
-
 "Victor tends to tease Grannie."
-
 "Victor likes to tease Grannie."
-
 "Grannie wants to eat out."
-
 ...
 ```
 
 The first thing to note here is that the `"to"` in these sentences is not used in the sense of `"in order to"`. We can also say things like, `"He went out to go to the shops"`, but the message here is that he went out *in order to* go to the shops. Sentences like these, I suggest, must be the result of an altogether different elaboration, which I do not yet have in my model. That elaboration, whatever it is, introduces the *second* of the two verb phrases, elaborating the simpler message that he went out. The primary `DISPLACED` elaboration, in contrast, and the `PREORDAINED` and `REGULAR` elaborations when they too have a primary displacer, introduce the *first* of the two verb phrases: `"He seems to be upset"` encodes an elaboration of the plain message encoded as `"He is upset"`.
 
-The next thing to note is that not every pivot can act as a primary displacer in this way. `"It is red to rain"` is not a sentence of English, for example. And while `"He sings to laugh"` has an interpretation, the interpretation is that he sings *in order to* laugh; the `Do "sing"` pivot cannot be used as a primary displacer. In fact the vast majority of pivots cannot be used as primary displacers, and it would be far simpler to list the ones that can than the ones that can’t. However, since more research is necessary before I can venture anything like a complete list, I have for the time being simply allowed *any* pivot to act in this role. Consequently it is possible, in my system, to generate nonsense strings like `"It is red to rain"`. This is a hole that will have to be plugged at a later date.
+The next thing to note is that not every pivot can act as a primary displacer in this way. `"It is red to rain"` is not a sentence of English, for example. And while `"He sings to laugh"` has an interpretation, the interpretation is that he sings *in order to* laugh; the `Do "sing"` pivot cannot be used as a primary displacer. In fact the vast majority of pivots cannot be used as primary displacers, and it would be far simpler to list the ones that can than the ones that can't. However, since more research is necessary before I can venture anything like a complete list, I have for the time being simply allowed *any* pivot to act in this role. Consequently it is possible, in my system, to generate nonsense strings like `"It is red to rain"`. This is a hole that will have to be plugged at a later date.
 
 The English codebreaker faces a number of intriguing puzzles, among them how to account for the two strikingly different uses of the `"be going to"` construction, as illustrated in the following pair of sentences:
 
 ```haskell
 "She is going to France."
-
 "She is going to leave."
 ```
 
@@ -179,10 +142,10 @@ The first of these sentences is ambiguous between a plain reading (she is en rou
 
 ```haskell
 ( Female, Do "go" Ongoing, [ To, Other "France" ] )
--> "She is going to France."
+  -> "She is going to France."
 
 PREORDAINED ( Female, Do "go" Ongoing, [ To, Other "France" ] )
--> "She is going to France." -- e.g. next month
+  -> "She is going to France." -- e.g. next month
 ```
 
 Either way, this is what we might call the *basic* use of `"be going to"`; it simply arises from the `Do "go" Ongoing` verbality, and encodes the idea of going in the literal sense of moving from one place to another. Notice that neither of these messages can include any specification of the time at which she arrives. `"She is going to France tomorrow"` only has a `PREORDAINED` interpretation, and `"tomorrow"` here serves to encode the time at which she leaves, not the time at which she gets there. Thus, while the idea of going somewhere naturally invites thoughts of a later arrival, the verbality itself cannot support any specification of that later time.
@@ -193,13 +156,13 @@ These two messages do not contain any displacer. The `"be going to"`, in both ca
 "She is going to see him."
 ```
 
-There are now *three* relevant interpretations. On the first, she is on the way to see him as we speak. On the second, there is a prearrangement in place for her to go and see him at some unspecified time in the future. These two messages correspond to the two just examined, the second being a conservative `PREORDAINED` version of the first. But there is now also a third interpretation, unlike any we have seen before, according to which she herself needn’t be going anywhere. On this reading, her seeing him in the future is expected, but it might perfectly well be because he is coming to see her.
+There are now *three* relevant interpretations. On the first, she is on the way to see him as we speak. On the second, there is a prearrangement in place for her to go and see him at some unspecified time in the future. These two messages correspond to the two just examined, the second being a conservative `PREORDAINED` version of the first. But there is now also a third interpretation, unlike any we have seen before, according to which she herself needn't be going anywhere. On this reading, her seeing him in the future is expected, but it might perfectly well be because he is coming to see her.
 
-I diagnose the first of these three interpretations—she is on the way to his location as we speak—as a (merely) `DISPLACED` message. Thus:
+I diagnose the first of these three interpretations---she is on the way to his location as we speak---as a (merely) `DISPLACED` message. Thus:
 
 ```haskell
 DISPLACED ( Do "go" Ongoing ) ( Female, Do "see", [ Male ] )
--> "She is going to see him."
+  -> "She is going to see him."
 ```
 
 The `DISPLACED` elaboration, when introducing a primary displacer, has the effect of modifying the underlying condition. The displacer itself contributes to the message just what it would contribute were it directly in the nucleus. Going to see him, in this sense, is no different from going to France, except of course for the different endpoint of the journey.
@@ -208,7 +171,7 @@ The second of the three interpretations is a conservative `PREORDAINED DISPLACED
 
 ```haskell
 PREORDAINED (DISPLACED ( Do "go" Ongoing ) ( Female, Do "see", [ Male ] ))
--> "She is going to see him."
+  -> "She is going to see him."
 ```
 
 There is nothing unusual here. What the first interpretation alleges to be happening right now, the second alleges to be prearranged for some later time. This is exactly the way of conservative `PREORDAINED` messages in general.
@@ -217,16 +180,16 @@ The interesting case is the third interpretation, which I diagnose, not as a `PR
 
 ```haskell
 PREORDAINED ( Do "go" Ongoing ) ( Female, Do "see", [ Male ] )
--> "She is going to see him."
+  -> "She is going to see him."
 ```
 
-The difference between the second and third interpretations is that, where the former applies the idea of prearrangement to the previously displaced condition, the latter builds the displacer into the idea of the prearrangement itself. The result is a prearrangement with the metaphorical character of a journey: the plans being what they are, she is currently “on the way” to a state of affairs in which the two of them meet. This is consistent with him being the one who will do the actual moving.
+The difference between the second and third interpretations is that, where the former applies the idea of prearrangement to the previously displaced condition, the latter builds the displacer into the idea of the prearrangement itself. The result is a prearrangement with the metaphorical character of a journey: the plans being what they are, she is currently "on the way" to a state of affairs in which the two of them meet. This is consistent with him being the one who will do the actual moving.
 
 We have been considering an example of prearrangement. But the `PREORDAINED` elaboration with the `Do "go" Ongoing` pivot admits of uncoloured uses as well, just like the conservative `PREORDAINED` elaboration. `"It is going to rain"`, for example, conveys nothing about any prearrangements, but rather concerns present predeterminations for the future. The fact that the coloured/uncoloured distinction applies in both primary and conservative `PREORDAINED` messages, and moreover in exactly the same way, is additional evidence that what we have here is the work of a single elaboration.
 
-The `DISPLACED` elaboration takes no arguments besides the displacer and the underlying message. In particular, it takes no additional argument specifying the time of the underlying condition’s satisfaction. The sentence, `"She is going to see him tomorrow"`, for example, has two interpretations, a conservative `PREORDAINED DISPLACED` message and a primary `PREORDAINED` message. Either way, however, `"tomorrow"` can only be coming from the `PREORDAINED` elaboration. Just as the condition of *going to France* cannot include any specification of the time of arrival, so the more elaborate `DISPLACED` condition of *going to see him* cannot include any specification of the time of the meeting.
+The `DISPLACED` elaboration takes no arguments besides the displacer and the underlying message. In particular, it takes no additional argument specifying the time of the underlying condition's satisfaction. The sentence, `"She is going to see him tomorrow"`, for example, has two interpretations, a conservative `PREORDAINED DISPLACED` message and a primary `PREORDAINED` message. Either way, however, `"tomorrow"` can only be coming from the `PREORDAINED` elaboration. Just as the condition of *going to France* cannot include any specification of the time of arrival, so the more elaborate `DISPLACED` condition of *going to see him* cannot include any specification of the time of the meeting.
 
-This point is helpful in distinguishing primary `DISPLACED` messages from primary `PREORDAINED` messages. All `PREORDAINED` messages necessarily concern a later satisfaction of the underlying condition. With primary `DISPLACED` messages, some do and some do not. Even when they do, however, there is a simple test to see whether a primary displacer has come from the `DISPLACED` elaboration or from the `PREORDAINED` elaboration: consider whether the message can include a specification of the time of the underlying condition’s satisfaction. For example, one might have thought that `"It is about to rain"`, like `"It is going to rain"`, comes from the `PREORDAINED` elaboration, on the grounds that the imminent rain is future. I submit that it comes from the `DISPLACED` elaboration, however, since—unlike with `"It is going to rain"`—no specification of *when* it rains is possible in this case. `"It is about to rain in five minutes"` is not English. Nor is this anything to do with the immediacy conveyed by `"about to"`; `"It is about to rain in one second"` is no less permissible.
+This point is helpful in distinguishing primary `DISPLACED` messages from primary `PREORDAINED` messages. All `PREORDAINED` messages necessarily concern a later satisfaction of the underlying condition. With primary `DISPLACED` messages, some do and some do not. Even when they do, however, there is a simple test to see whether a primary displacer has come from the `DISPLACED` elaboration or from the `PREORDAINED` elaboration: consider whether the message can include a specification of the time of the underlying condition's satisfaction. For example, one might have thought that `"It is about to rain"`, like `"It is going to rain"`, comes from the `PREORDAINED` elaboration, on the grounds that the rain in both cases is future. I submit that it comes from the `DISPLACED` elaboration, however, since---unlike with `"It is going to rain"`---no specification of *when* it rains is possible in this case. `"It is about to rain in five minutes"` is not English. Nor is this anything to do with the immediacy conveyed by `"about to"`; `"It is about to rain in one second"` is no less permissible.
 
 I said that, with primary `DISPLACED` messages, some concern a later satisfaction of the underlying condition and some do not. That is not a very satisfactory general remark. I submit that they concern the present satisfaction of the underlying condition by default, and concern its later satisfaction only if the nature of the displacer forces this upon us. The `Do "go" Ongoing` and `( Be, About )` displacers *do* force this upon us. But many other primary displacers do not, as we will see in a moment. That the present is the default here chimes with my corresponding proposal for plain messages, and with the use of the base form for encoding any displaced pivots following the displacer.
 
@@ -234,22 +197,22 @@ The primary displacer `( Be, "likely" )` shows up in both `DISPLACED` and `PREOR
 
 ```haskell
 DISPLACED ( Be, "likely" ) ( Male, ( Be, [ In, Other "Spain" ] ) )
--> "He is likely to be in Spain." -- right now
+  -> "He is likely to be in Spain." -- right now
 
 PREORDAINED ( Be, "likely" ) ( Male, ( Be, [ In, Other "Spain" ] ) )
--> "He is likely to be in Spain." -- next week
+  -> "He is likely to be in Spain." -- next week
 ```
 
-In keeping with the general principle just proposed (that `DISPLACED` messages concern the *present* satisfaction of the underlying condition by default), the first of these messages must concern the likelihood that he is in Spain at the point of speech. In the second of these messages, meanwhile, the claim is not that there are plans for next week’s likelihood to be high (that would be a `PREORDAINED DISPLACED` message), but that the plans are such that the *present* likelihood is high. The likelihood itself is not preordained; rather, the likelihood and the idea of preordainment work together to say something jointly about the prospect of his being in Spain next week. This is exactly analogous to the difference, examined above, between `PREORDAINED (DISPLACED (Do "go" Ongoing))` messages and `PREORDAINED (Do "go" Ongoing)` messages.
+In keeping with the general principle just proposed (that `DISPLACED` messages concern the *present* satisfaction of the underlying condition by default), the first of these messages must concern the likelihood that he is in Spain at the point of speech. In the second of these messages, meanwhile, the claim is not that there are plans for next week's likelihood to be high (that would be a `PREORDAINED DISPLACED` message). Rather, the claims is that the plans are such that the *present* likelihood is high. The likelihood itself is not preordained; instead, the likelihood and the idea of preordainment work together to say something jointly about the prospect of his being in Spain next week. This is exactly analogous to the difference, examined a moment ago, between `PREORDAINED (DISPLACED (Do "go" Ongoing))` messages and `PREORDAINED (Do "go" Ongoing)` messages.
 
 The very same dichotomy is observable with displacers concerning intentional attitudes that can be directed either at the present or the future. For example:
 
 ```haskell
 DISPLACED ( Do "want" ) ( Speaker, Do "live", [ In, Other "Portugal" ] )
--> "I want to live in Portugal." -- right now
+  -> "I want to live in Portugal." -- right now
 
 PREORDAINED ( Do "want" ) ( Speaker, Do "live", [ In, Other "Portugal" ] )
--> "I want to live in Portugal." -- when I retire
+  -> "I want to live in Portugal." -- when I retire
 ```
 
 In the second of these messages, it is not that I plan now to have, when I retire, a desire to live in Portugal (which would be a `PREORDAINED DISPLACED` message). Rather, I have a desire now to live there when I retire. Again, the wanting and the idea of preordainment combine to form a desire for something future. In this way, we see once again that the two uses of `"be going to"` are part of a more general pattern, an eminently more satisfying explanation than one that simply resorts to lexical ambiguity.
@@ -258,40 +221,40 @@ Having seen some examples of the difference between primary `DISPLACED` and prim
 
 ```haskell
 REGULAR ( Do "like" ) ( Male "Victor", Do "tease", [ Other "Grannie" ] )
--> "Victor likes to tease Grannie."
+  -> "Victor likes to tease Grannie."
 
 REGULAR (Do "tend" ) ( Male "Victor", Do "tease", [ Other "Grannie" ] )
--> "Victor tends to tease Grannie."
+  -> "Victor tends to tease Grannie."
 
 PAST (REGULAR (Do "use" ) ( Male "Victor", Do "tease", [ Other "Grannie" ] ))
--> "Victor used to tease Grannie."
+  -> "Victor used to tease Grannie."
 ```
 
 In the second of these examples, it is hard to think of an equivalent message in which the optional frequency argument is also present. The frequency seems already to be covered (albeit vaguely) by the primary displacer. The third example represents a very curious puzzle that I confess I have not yet been able to solve. Why does this construction only occur in the past? What relationship does this use of `"use"` have with its other uses? Perhaps none; but as with the two uses of `"be going to"`, that would be a most disappointing admission. Perhaps the way in which the `REGULAR` elaboration deploys its displacer argument can form the basis of a more satisfying account.
 
-(Part of the solution to this puzzle does appeal to a lexical ambiguity. There are two English verbs spelt `"use"`, but pronounced differently. The first—as in `"He used my hammer"`—is pronounced with a long `"u"`; the second—as in `"He is used to it by now"`—is pronounced with a short `"u"`. It is this second verb that we discover in sentences like `"Victor used to tease Grannie"`, and I assume that it is the result of a single unambiguous informational trigger. This informational trigger has a somewhat different import when introduced as the displacer for a `REGULAR` elaboration. What remains a mystery to me is why this verb only ever shows up in its second finite or second participle forms.)
+(Part of the solution to this puzzle does appeal to a lexical ambiguity. There are two English verbs spelt `"use"`, but pronounced differently. The first---as in `"He used my hammer"`---is pronounced with a long `"u"`; the second---as in `"He is used to it by now"`---is pronounced with a short `"u"`. It is this second verb that we discover in sentences like `"Victor used to tease Grannie"`, and I assume that it is the result of a single unambiguous informational trigger. This informational trigger has a somewhat different import when introduced as the displacer for a `REGULAR` elaboration. What remains a mystery to me is why this verb only ever shows up in its second finite or second participle form.)
 
 Messages with a primary displacer can of course be made `PAST` or `PRIOR` (or both) in all the usual ways, giving rise to sentences like, `"It was about to rain"`, `"He has had to leave"`, or `"I had hoped to see you"`. The `DISPLACED` elaboration can also be applied on top of the `PRIOR` elaboration, with predictable results:
 
 ```haskell
 PRIOR ( Male, Do "leave" )
--> "He has left."
+  -> "He has left."
 
 DISPLACED ( Do "seem" ) (PRIOR ( Male, Do "leave" ))
--> "He seems to have left."
+  -> "He seems to have left."
 ```
 
-Less obviously, I suggest that the `DISPLACED` elaboration can also be applied on top of the `PAST` elaboration, with similar syntactic results. That is to say, I suggest that sentences like, `"He seems to have left"` are ambiguous between `DISPLACED PRIOR` interpretations (it seems that he has left) and `DISPLACED PAST` interpretations (it seems that he left). The distinction here reveals itself when we include the optional time argument to the `PAST` elaboration:
+Less obviously, I suggest that the `DISPLACED` elaboration can also be applied on top of the `PAST` elaboration, with similar syntactic results. That is to say, I suggest that sentences like, `"He seems to have left"` are ambiguous between `DISPLACED PRIOR` interpretations (it seems that he *has* left) and `DISPLACED PAST` interpretations (it seems that he *left*). The distinction here reveals itself when we include the optional time argument to the `PAST` elaboration:
 
 ```haskell
 DISPLACED ( Do "seem" ) (PRIOR ( Male, Do "leave" ))
--> "He seems to have left."
+  -> "He seems to have left."
 
 DISPLACED ( Do "seem" ) (PAST "yesterday" ( Male, Do "leave" ))
--> "He seems to have left yesterday."
+  -> "He seems to have left yesterday."
 ```
 
-The second sentence here cannot be the result of a `DISPLACED PRIOR` message, since `PRIOR` messages cannot take an additional time argument; `"He has left yesterday"` is not a sentence of English. That it is a `DISPLACED PAST` message—an elaboration of the message encoded as `"He left yesterday"`—therefore seems the only plausible diagnosis.
+The second sentence here cannot be the result of a `DISPLACED PRIOR` message, since `PRIOR` messages cannot take an additional time argument; `"He has left yesterday"` is not a sentence of English. That it is a `DISPLACED PAST` message---an elaboration of the message encoded as `"He left yesterday"`---therefore seems the only plausible diagnosis.
 
 ## 3. Secondary DISPLACED Messages
 
@@ -299,12 +262,12 @@ Where primary displacers are pivots, secondary displacers are *modalities*, whic
 
 ```haskell
 type Modality
-= Yes1 -- "will"
-| Yes2 -- "shall"
-| Yes3 -- "must"/"ought"/"need"
-| Maybe1 -- "may"
-| Maybe3 -- "can"
-| Maybe4 -- "dare"
+  = Yes1 -- "will"
+  | Yes2 -- "shall"
+  | Yes3 -- "must"/"ought"/"need"
+  | Maybe1 -- "may"
+  | Maybe3 -- "can"
+  | Maybe4 -- "dare"
 ```
 
 As this type definition indicates, I divide the English modalities into two logical categories, *yes* and *maybe*. This logical distinction will be made clearer as we proceed. Each of these two fundamental types then comes in four different *flavours* (though flavours 2 and 4 each exist in only one of the logical categories). I begin with the examination of modalities in `DISPLACED` messages, turning to their contribution to `PREORDAINED` and `REGULAR` messages in [section 4](#4-secondary-preordained-and-regular-messages) below.

@@ -6,7 +6,7 @@ class: docs
 
 ## 1. Introduction
 
-As explained in the [Theoretical Overview](/overview), the nucleus of every English message is an ordered pair, containing an *object* and a *condition*:
+As explained in the [theoretical overview](/overview), the nucleus of every English message is an ordered pair, containing an *object* and a *condition*:
 
 ```haskell
 type alias Nucleus =

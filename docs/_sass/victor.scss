@@ -1,94 +1,11 @@
 .victor {
   max-width: 60rem;
-  margin: 0 auto;
-  padding: 1em;
-}
-
-button {
-    background: $lightgray;
-    border: 0;
-    cursor: pointer;
-    display: inline-block;
-    min-width: 2.5rem;
-    padding: .5em .25em;
-    &:hover,
-    &:focus {
-        outline: 0;
-    }
-    &:before {
-        color: #fff;
-        font-weight: 600;
-    }
-    &.plus,
-    &.minus {
-        background: $green;
-    }
-    &.close {
-        background: $red;
-        &:before {
-            content: "×";
-        }
-    }
-    &.plus {
-        &:before {
-            content: "+";
-        }
-    }
-    &.minus {
-        &:before {
-            content: "-";
-        }
-    }
-}
-
-label {
-    white-space: nowrap;
-}
-
-label, input[type="text"], input[type="number"], select, .checkbox {
-    height: 2.5em;
-}
-
-label, select {
-    padding: .5em .25em;
-}
-
-input[type="text"], input[type="number"], .checkbox {
-    padding: .5em;
-}
-
-input[type="text"], input[type="number"], select, .checkbox {
-    border: 1px solid $gray;
-    display: block;
-    width: 100%;
-}
-
-input[type="text"] {
-    background: $lightyellow;
-}
-
-input[type="text"], input[type="number"], select {
-    &[disabled] {
-        background: $lightred;
-        cursor: not-allowed;
-        opacity: .5;
-    }
-}
-
-.checkbox {
-    cursor: pointer;
-    input {
-        margin-right: .25em;
-    }
-}
-
-.starting {
+  .starting {
     border: 1px solid $darkgray;
     padding: 5em 0;
     text-align: center;
-}
-
-.output {
+  }
+  .output {
     background: $lightgreen;
     border: 1px solid $green;
     color: $green;
@@ -96,83 +13,76 @@ input[type="text"], input[type="number"], select {
     padding: 1em;
     text-align: center;
     &.error {
-        background: $lightred;
-        border-color: $red;
-        color: $red;
+      background: $lightred;
+      border-color: $red;
+      color: $red;
     }
-}
-
-.examples {
+  }
+  .examples {
     display: flex;
-    border: 1px solid $blue;
+    border: 1px solid $darkgray;
     margin-bottom: 1em;
     label {
-        background: $lightblue;
-        border-right: 1px solid $blue;
-        color: $blue;
-        padding: .5em;
+      background: $lightblue;
+      border-right: 1px solid $darkgray;
+      padding: .5em;
     }
     select {
-        flex: 1;
-        border: 0;
+      flex: 1;
+      border: 0;
     }
-}
-
-.elaboration,
-.nucleus {
-    border: 1px solid $blue;
-}
-
-.heading {
+  }
+  .elaboration,
+  .nucleus {
+    border: 1px solid $darkgray;
+  }
+  .heading {
     background: $lightblue;
-    border-bottom: 1px solid $blue;
-    color: $blue;
+    border-bottom: 1px solid $darkgray;
     display: flex;
     font-weight: 600;
     .title {
-        padding: .5em;
-        flex: 1;
+      padding: .5em;
+      flex: 1;
     }
-}
-
-.elaborations {
-    border-bottom: 1px solid $blue;
+  }
+  .elaborations {
+    border-bottom: 1px solid $darkgray;
     display: none;
     padding: .25em;
     div {
-        display: flex;
-        .button {
-            flex: 1;
-            margin: .25em;
-            &:hover {
-                background: $darkgray;
-                color: #fff;
-            }
+      display: flex;
+      .button {
+        flex: 1;
+        margin: .25em;
+        &:hover {
+          background: $darkgray;
+          color: #fff;
         }
+      }
     }
     &.active {
-        display: block;
+      display: block;
     }
-}
-
-.body {
+  }
+  .body {
     .factor, .elaboration, .nucleus {
-        margin: .25em;
+      margin: .25em;
     }
-}
-
-.factor {
+  }
+  .factor {
     display: flex;
     .label {
-        flex: 0 0 6em;
-        font-weight: 600;
+      flex: 0 0 6em;
+      font-weight: 600;
     }
     .inputs {
-        display: flex;
-        flex: 1;
+      display: flex;
+      flex: 1;
     }
     .input {
-        flex: 1;
-        margin-left: .25em;
+      flex: 1;
+      margin-left: .25em;
     }
+  }
 }

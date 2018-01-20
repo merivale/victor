@@ -2,11 +2,11 @@
 id: about
 class: docs
 ---
-# About Victor
+# Victor: A Model of the English Code
+
+Victor is a computational model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). It was inspired by the work of the philosopher and grammarian Victor Howard Dudman.
 
 ## 1. Context
-
-Victor is a computational model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). It was inspired by the work of Victor Howard Dudman.
 
 The idea that languages can be modelled as codes for processing messages into sentences has a homely intuitive appeal, reflecting the commonsensical belief that they are tools for putting our thoughts into words. It also has a suitably rigourous analytical origin, in the form of Claude Shannon's information theory, the mathematical basis of communications engineering. To the best of my knowledge it was Shannon's colleague Warren Weaver who first suggested this model could also be applied to natural languages, in his popularising introduction to Shannon's work. The analogy was subsequently picked up by several linguisticians, and still holds sway in that field today. But linguisticians, I contend, have yet to take the analogy sufficiently seriously, in a sense that I will explain presently.
 
@@ -14,7 +14,7 @@ More worryingly, the analogy has come under attack from philosophers, largely (I
 
 > Philosophers before Frege assumed ... that what a speaker knows [when he knows a language] is a kind of code. Concepts are coded into words and thoughts, which are compounded out of concepts, into sentences, whose structure mirrors, by and large, the complexity of the thoughts. We need language, on this view, only because we happen to lack the faculty of telepathy, that is, of the direct transmission of thoughts. Communication is thus essentially like the use of a telephone: the speaker codes his thought in a transmissible medium, which is then decoded by the hearer. The whole analytical school of philosophy is founded on the rejection of this conception, first clearly repudiated by Frege.
 
-I happen to think that Frege's arguments on this score were rather weak, or at the very least that he and his successors are guilty of having thrown the baby out with the bathwater. For present purposes, however, it suffices to point out that the code analogy itself does not entail anything about the metaphysics of linguistic information, beyond the fact that it exists, and that it is logically distinct from the signals that are used to transmit it, both points that Frege himself accepted. (What Frege denied was that information was a psychological phenomenon, insisting that "thoughts" were mind-independent abstract entities belonging neither to the physical nor to the mental world. On another occasion, the more naturalistic view of information as a fundamentally psychological affair would merit serious reconsideration. But for now, happily, I can set aside any such controversy.) While these are admittedly substantial claims, and as such the potential subject of philosophical dispute, they are comparatively uncontroversial. If some argument in support of them is wanted, meanwhile, I offer the standard Quinean defence: the theory is effective, and the postulation of messages as distinct from sentences is necessary for the theory.
+I happen to think that Frege's arguments on this score were rather weak, or at the very least that he and his successors are guilty of having thrown the baby out with the bathwater. For present purposes, however, it suffices to point out that the code analogy itself does not entail anything about the metaphysics of linguistic information, beyond the fact that it exists, and that it is logically distinct from the signals that are used to transmit it, both points that Frege himself accepted. While these are admittedly substantial claims, and as such the potential subject of philosophical dispute, they are comparatively uncontroversial. If some argument in support of them is wanted, meanwhile, I offer the standard Quinean defence: the theory is effective, and the postulation of messages as distinct from sentences is necessary for the theory.
 
 What is most significant about the code analogy, from a philosophical point of view, is not so much the distinction between signal and information, between sentence and message, as the relationship that it posits between these two sides of the communicative coin. The standard formal approach in contemporary philosophy is to model natural languages---like the artificial logical languages of Frege and his successors---as functions from signs to what is signified. As David Lewis puts it:
 
@@ -26,9 +26,9 @@ And so I return, in a roundabout way, to what I mean by taking the code analogy 
 
 Both my model and my method are heavily informed by the work of the late 20th century theoretician V. H. Dudman. More than anyone else that I know of, he took the code analogy seriously in the sense that I have in mind here. He did not go so far as to implement his model algorithmically, but though his discussions were informal, he very rigorously described significant parts of the English encoding function as he saw it. The function I have implemented is rather different from his, and we differ in particular on the matter of message structure. Nevertheless, my theory retains the spirit (if not the form) of some of his most significant claims. With his work to build on, moreover, I have been able to move the collective endeavour further forward, most notably by incorporating articles and determiners (`"the"`, `"this"`, `"that"`, `"all"`, `"any"`, `"every"`, `"some"`, etc.) into my model.
 
-Dudman started life as a philosopher and logician (and more specifically a Frege scholar), but upon embracing the code analogy he abandoned his Fregean roots, writing that “it is the key to Frege’s philosophy of language that he got the relationship between the sentence and its informational burden back to front”. From then on he styled himself as a grammarian bent on persuading philosophers of logic and language to approach their subject grammatically. “Grammar is a necessary preliminary to semantics,” he wrote. From a purely marketing point of view, this was perhaps not the best decision, for it obscures the fact that the codebreaker’s methodology is scarcely less radical in grammatical circles than it is in philosophical ones. His philosophical antagonists, it seems to me, never really understood what Dudman meant by “grammar”, and thereby missed the full force of his arguments. To make matters worse, there is a venerable tradition in analytic philosophy, going right back to Bertrand Russell, of viewing “surface” grammar as positively at odds with the “deeper” logical realities. Insofar as there was ever any truth to these worries, it seems to me, they simply reflected bad grammatical theory; and insofar as the grammar was sound, they reflected dubious logical and semantic speculation lazily divorced from grammatical fact. For the codebreaker, grammar, logic, and semantics are all facets of one and the same scientific enterprise.
+Dudman started life as a philosopher and logician (and more specifically a Frege scholar), but upon embracing the code analogy he abandoned his Fregean roots, writing that "it is the key to Frege's philosophy of language that he got the relationship between the sentence and its informational burden back to front". From then on he styled himself as a grammarian bent on persuading philosophers of logic and language to approach their subject grammatically. "Grammar is a necessary preliminary to semantics," he wrote. From a purely marketing point of view, this was perhaps not the best decision, for it obscures the fact that the codebreaker's methodology is scarcely less radical in grammatical circles than it is in philosophical ones. His philosophical antagonists, it seems to me, never really understood what Dudman meant by "grammar", and thereby missed the full force of his arguments. To make matters worse, there is a venerable tradition in analytic philosophy, going right back to Bertrand Russell, of viewing "surface" grammar as positively at odds with the "deeper" logical realities. Insofar as there was ever any truth to these worries, it seems to me, they simply reflected bad grammatical theory; and insofar as the grammar was sound, they reflected dubious logical and semantic speculation lazily divorced from grammatical fact. For the codebreaker, grammar, logic, and semantics are all facets of one and the same scientific enterprise.
 
-The strength of my methodological case ultimately rests with the predictive and explanatory power of the theory itself. In other words, the methodology is justified by its results, not by any abstract reasoning *a priori*. At this juncture, therefore, the reader may prefer to move straight on to the [Theoretical Overview](/overview). For those who would like some additional context, however, I offer below some general motivations for my project. The main argument is that there are some important linguistic phenomena that have, I believe, yet to be adequately explained by either grammarians or philosophers working in the current paradigm, but that submit to elegant and satisfying explanations when we reverse the direction of semantic enquiry.
+The strength of my methodological case ultimately rests with the predictive and explanatory power of the theory itself. In other words, the methodology is justified by its results, not by any abstract reasoning *a priori*. At this juncture, therefore, the reader may prefer to move straight on to the [theoretical overview](/overview). For those who would like some additional context, however, I offer below some general motivations for my project. The main argument is that there are some important linguistic phenomena that have, I believe, yet to be adequately explained by either grammarians or philosophers working in the current paradigm, but that submit to elegant and satisfying explanations when we reverse the direction of semantic enquiry.
 
 ## 2. The Science of Language
 
@@ -38,7 +38,7 @@ In the light of this, the codebreaker's methodology represents something of a pa
 
 This last point will be clearer if illustrated with a particular example. According to standard semantic theory, the sentence `"If Socrates was a man, Socrates was mortal"`, conveys a compound message, whose two component messages are conveyed by the sentences `"Socrates was a man"` and `"Socrates was mortal"`. I agree, and in partial confirmation of this diagnosis we may observe---straightforwardly enough---that these two shorter sentences are both found inside the longer one. But now consider the sentence `"If it rains, we will get wet"`. Standard semantic theory likewise diagnoses this sentence as conveying a compound message, whose two component messages are conveyed by the sentences `"It will rain"` and `"We will get wet"`. I do *not* agree, for several reasons that I won't go into here. But *one* of those reasons, very simply, is that the string `"It will rain"` does not occur anywhere in the larger sentence.
 
-The point of this example is not to argue that the standard analysis of the second `"if"`-sentence is wrong; that is a much longer argument for another day. The point is rather to illustrate the change in perspective that my proposal entails. Thus far, the standard analysis has been maintained on the basis of logical and semantic intuitions alone, *in spite of* the very obvious syntactic evidence to the contrary. This latter evidence is simply dismissed as a quite separate problem for English grammar, and I have never seen a defender of the standard analysis attempt to explain it. Now I am certainly not suggesting that logical and semantic intuitions are irrelevant in the science of language. Far from it, they are absolutely essential to our enquiry. But for the codebreaker, these intuitions need to be backed up and potentially modified by a hard look at the empirical data, and by a rigorous attempt to specify how the information as we model it fetches up in the sentences as we see them. Making claims about the structure of our messages based solely on intuition is, it seems to me, like making claims about the structure of chemical compounds based solely on taste. The codebreaker's methodology is spectroscopy for semantics, and no linguistic scientist can afford to ignore it.
+The point of this example is not to argue that the standard analysis of the second conditional message is wrong; that is a much longer argument for another day. The point is rather to illustrate the change in perspective that my proposal entails. Thus far, the standard analysis has been maintained on the basis of logical and semantic intuitions alone, *in spite of* the very obvious syntactic evidence to the contrary. This latter evidence is simply dismissed as a quite separate problem for English grammar, and I have never seen a defender of the standard analysis attempt to explain it. Now I am certainly not suggesting that logical and semantic intuitions are irrelevant in the science of language. Far from it, they are absolutely essential to our enquiry. But for the codebreaker, these intuitions need to be backed up and potentially modified by a hard look at the empirical data, and by a rigorous attempt to specify how the information as we model it fetches up in the sentences as we see them. Making claims about the structure of our messages based solely on intuition is, it seems to me, like making claims about the structure of chemical compounds based solely on taste. The codebreaker's methodology is spectroscopy for semantics, and no linguistic scientist can afford to ignore it.
 
 This, in a nutshell, is what Dudman meant by his insistence that philosophers of language approach semantics more grammatically. As I have already said, however, this remark invites misunderstanding, since the codebreaker's methodology is as unfamiliar to grammarians as it is to philosophers. If philosophers of language need to approach their subject more grammatically, grammarians need to approach their subject more philosophically. For where philosophical theories of semantics are general in nature, with little regard paid to the syntactic particularities, grammatical theories of semantics are sensitive to those particulars, but frustratingly refuse to generalise. Grammarians seem content to catalogue the several different uses of a given syntactic device, while showing little interest in speculation about any deeper regularities that might underlie the surface variety.
 
@@ -56,7 +56,7 @@ Semantic ambiguity, finally, is the phenomenon of one sentence having more than 
 
 The decision to treat the message as a function of the sentence forces us into an uncomfortable position, whereby semantic ambiguity, in the sense just described, becomes a theoretical impossibility. This is for the simple reason that functions, by definition, must assign a unique output to every input. Admittedly, the diagnosis of any given ambiguity as syntactic, semantic, or pragmatic is a matter for theoretical debate. Suppose the example I gave just now is not really a genuine case of semantic ambiguity, but turns out to be better explained in either syntactic or pragmatic terms. If that's the case, then maybe there are after all *no* genuine cases of semantic ambiguity. I myself, of course, would argue that there are; indeed, I *will* argue that there are in the course of expounding my theory. For now, however, the first thing to note is simply that the mainstream approach gives a hostage to fortune in this respect, and for no apparent reason. Codebreakers can offer syntactic and pragmatic explanations of ambiguity like anyone else; and we can also, should the need arise, offer semantic explanations.
 
-The obverse of semantic ambiguity is the phenomenon of *stylistic variance*, whereby the same information is encoded in more than one sentence. Stylistic variance includes optional abbreviations (`"She is not hungry"`/`"She’s not hungry"`/`"She isn’t hungry"`), word order (`"He left yesterday"`/`"Yesterday he left"`), and a few other things besides. On the face of it, this phenomenon poses an exactly analogous threat to the codebreaker's methodology that semantic ambiguity poses to the mainstream alternative. This way around, however, the problem is easily solved, and its solution is obvious: we must simply build stylistic as well as informational choices into our model.
+The obverse of semantic ambiguity is the phenomenon of *stylistic variance*, whereby the same information is encoded in more than one sentence. Stylistic variance includes optional abbreviations (`"She is not hungry"`/`"She's not hungry"`/`"She isn't hungry"`), word order (`"He left yesterday"`/`"Yesterday he left"`), and a few other things besides. On the face of it, this phenomenon poses an exactly analogous threat to the codebreaker's methodology that semantic ambiguity poses to the mainstream alternative. This way around, however, the problem is easily solved, and its solution is obvious: we must simply build stylistic as well as informational choices into our model.
 
 The present incarnation of my model does not include any options for stylistic variance, allowing just one "canonic" output for every informational combination. In the interests of completeness, I do intend to add stylistic choices in due course. In the first instance, however, I felt it would make both the theory and the code easier to understand if I restricted my model exclusively to informational factors. I trust it is obvious that the simplification this entails is harmless, and easily remedied.
 
@@ -66,8 +66,10 @@ Philosophers traditionally divide non-pragmatic ambiguities into *lexical* and *
 
 ```haskell
 "Donald is dangerous and mad or just plain stupid."
+```
 
-"I didn’t eat for four hours."
+```haskell
+"I didn't eat for four hours."
 ```
 
 The first of these sentences is ambiguous between a conjunctive claim (he is dangerous, and he is either mad or just plain stupid) and a disjunctive claim (either he is dangerous and mad, or he is just plain stupid). The second is ambiguous between a denial that I ate for four hours (it was three and a half at most) and an assertion that, for four hours, no food passed my lips.
@@ -79,9 +81,11 @@ Returning to the two examples just given, we can attribute the ambiguity in thes
 ```haskell
 "Donald is: [dangerous] and [mad or just plain stupid]."
 "Donald is: [dangerous and mad] or [just plain stupid]."
+```
 
-"I didn’t-[eat for four hours]."
-"I didn’t-[eat] for four hours."
+```haskell
+"I didn't-[eat for four hours]."
+"I didn't-[eat] for four hours."
 ```
 
 These structural explanations have the appearance of being satisfactory. Indeed I believe that, at their core, they *are* satisfactory; it is just that for me the structural differences are to be sought in the underlying messages themselves, not in the postulated syntactically structured items.
@@ -98,7 +102,9 @@ Nor is this the end of their difficulties. Consider, for example, the following 
 
 ```haskell
 "They are getting married."
+```
 
+```haskell
 "Grannie enjoyed a spliff."
 ```
 
@@ -109,9 +115,13 @@ Self-evidently, the ambiguities here cannot be explained in structural terms. Th
 Nor can we stop here. A fully accurate theory of English must also accommodate the habitual-futurate and the futurate-habitual uses:
 
 ```haskell
-"They are always getting married in July (and every year some excuse is found to postpone it again)."
+"They are always getting married in July."
+-- and every year some excuse is found to postpone it again
+```
 
-"Cannabis just doesn’t do it for her any more; starting tomorrow, Grannie gets her kicks from harder stuff."
+```haskell
+-- cannabis just doesn't do it for her any more:
+"Starting tomorrow, Grannie gets her kicks from harder stuff."
 ```
 
 Apparently, then, English verbs are lexically ambiguous in at least *five* different ways: direct, habitual, futurate, habitual-futurate, and futurate-habitual. This is a most unwelcome consequence. Aside from the fact that it is not in nature of lexical ambiguities to be systematic in this way, it should anyway be clear that this is really no explanation at all. For the careful theoretician, lexical ambiguity is the account of last resort, tantamount to the postulation of a brute, inexplicable coincidence.

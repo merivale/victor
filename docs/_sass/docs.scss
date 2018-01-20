@@ -1,7 +1,5 @@
 .docs {
-  max-width: 48rem;
-  margin: 0 auto;
-  padding: 1em;
+  max-width: 44rem;
   h1,
   h2 {
     font-weight: 600;
@@ -12,37 +10,47 @@
   }
   h2 {
     font-size: 1.25em;
+    border-bottom: 1px dashed $darkgray;
   }
   p {
     margin-bottom: 1em;
   }
   blockquote {
     padding: 0 1em;
-    color: #6a737d;
-    border-left: 0.25em solid #dfe2e5;
+    color: $darkgray;
+    border-left: 0.25em solid $gray;
   }
   em {
     font-style: italic;
+  }
+  strong {
+    font-weight: 600;
+  }
+  a {
+    color: $blue;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   table {
     border-collapse: collapse;
     margin-bottom: 1em;
     th,
     td {
-      border: 1px solid silver;
       padding: .25em .75em;
+      border: 1px solid $gray;
     }
     th {
       font-weight: 600;
       text-align: left;
     }
   }
-  code, pre {
-    font-family: consolas, monospace;
-  }
   code {
+    font-family: consolas, monospace;
+    font-size: .875em;
     background: $lightgray;
-    padding: 0 .25em;
+    padding: 0 .25rem;
   }
   pre {
     margin-bottom: 1em;
@@ -51,12 +59,11 @@
     border-radius: .25em;
     overflow: auto;
     code {
-      background: transparent;
       padding: 0;
     }
   }
   .highlight {
-    .c { color: $gray; } /* Comment */
+    .c1 { color: $darkgray; } /* Comment */
     .k { color: $red; } /* Keyword */
     .kr { color: $red; } /* Keyword.Reserved */
     .kt { color: $blue; } /* Keyword.Type */
@@ -64,6 +71,6 @@
     .m { color: $blue; } /* Literal.Number */
     .s { color: $green; } /* Literal.String */
     .n { color: $yellow; } /* Name */
-    .p { color: $gray; } /* punctuation */
+    .p { color: $darkgray; } /* punctuation */
   }
 }
