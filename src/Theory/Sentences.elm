@@ -4,6 +4,8 @@ import Result
 import Theory.Ideas.Displacers as Displacers
 import Theory.Ideas.Pseudo as Pseudo
 import Theory.Ideas.Nucleus as Nucleus
+import Theory.Messages as Messages
+import Theory.Utils as Utils
 import Theory.Words.Articles as Articles
 import Theory.Words.Counters as Counters
 import Theory.Words.Determiners as Determiners
@@ -11,9 +13,7 @@ import Theory.Words.Fulcrums as Fulcrums
 import Theory.Words.Modals as Modals
 import Theory.Words.Nouns as Nouns
 import Theory.Words.Pronouns as Pronouns
-import Theory.Words.Utils as Utils
 import Theory.Words.Verbs as Verbs
-import Theory.Messages as Messages
 
 
 sentence : Messages.Message -> Result String String

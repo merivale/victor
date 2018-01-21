@@ -15,17 +15,18 @@ layout: compress
   <body>
     <header>
       <a href="{{ site.baseurl }}{% link index.md %}">Victor</a>
-      <a href="{{ site.baseurl }}{% link about.md %}" data-action="toggle-menu">Docs</a>
+      <a href="{{ site.baseurl }}{% link background.md %}" data-action="toggle-menu">Docs</a>
     </header>
     <nav>
       <button class="close" data-action="toggle-menu"></button>
-      <a class="{% if page.id == 'about' %}active{% endif %}" href="{{ site.baseurl }}{% link about.md %}">1. Background</a>
+      <a class="{% if page.id == 'background' %}active{% endif %}" href="{{ site.baseurl }}{% link background.md %}">1. Background</a>
       <a class="{% if page.id == 'overview' %}active{% endif %}" href="{{ site.baseurl }}{% link overview.md %}">2. Overview</a>
-      <a class="{% if page.id == 'plain' %}active{% endif %}" href="{{ site.baseurl }}{% link plain.md %}">3. Plain Messages</a>
-      <a class="{% if page.id == 'elaborations' %}active{% endif %}" href="{{ site.baseurl }}{% link elaborations.md %}">4. Elaborations</a>
-      <a class="{% if page.id == 'displacers' %}active{% endif %}" href="{{ site.baseurl }}{% link displacers.md %}">5. Displacers</a>
-      <a class="{% if page.id == 'quantifiers' %}active{% endif %}" href="{{ site.baseurl }}{% link quantifiers.md %}">6. Quantifiers</a>
-      <a class="{% if page.id == 'compounds' %}active{% endif %}" href="{{ site.baseurl }}{% link compounds.md %}">7. Compounds</a>
+      <a class="{% if page.id == 'terminology' %}active{% endif %}" href="{{ site.baseurl }}{% link terminology.md %}">3. Terminology</a>
+      <a class="{% if page.id == 'plain' %}active{% endif %}" href="{{ site.baseurl }}{% link plain.md %}">4. Plain Messages</a>
+      <a class="{% if page.id == 'elaborations' %}active{% endif %}" href="{{ site.baseurl }}{% link elaborations.md %}">5. Elaborations</a>
+      <a class="{% if page.id == 'displacers' %}active{% endif %}" href="{{ site.baseurl }}{% link displacers.md %}">6. Displacers</a>
+      <a class="{% if page.id == 'quantifiers' %}active{% endif %}" href="{{ site.baseurl }}{% link quantifiers.md %}">7. Quantifiers</a>
+      <a class="{% if page.id == 'compounds' %}active{% endif %}" href="{{ site.baseurl }}{% link compounds.md %}">8. Compounds</a>
     </nav>
     <main class="{{ page.class }}">
       {{ content | smartify }}

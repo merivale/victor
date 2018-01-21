@@ -9813,13 +9813,13 @@ var _merivale$victor$Interface_Model_Examples$examples = A2(
 		_merivale$victor$Interface_Model_Examples$shortExamples,
 		A2(_elm_lang$core$Basics_ops['++'], _merivale$victor$Interface_Model_Examples$longExamples, _merivale$victor$Interface_Model_Examples$objectExamples)));
 
-var _merivale$victor$Theory_Words_Utils$splitMaybeString = function (string) {
+var _merivale$victor$Theory_Utils$splitMaybeString = function (string) {
 	return A2(
 		_elm_lang$core$Maybe$withDefault,
 		{ctor: '[]'},
 		A2(_elm_lang$core$Maybe$map, _elm_lang$core$String$words, string));
 };
-var _merivale$victor$Theory_Words_Utils$splitAtNot = F2(
+var _merivale$victor$Theory_Utils$splitAtNot = F2(
 	function (pre, rest) {
 		var splitAtNot_ = F3(
 			function (index, pre, rest) {
@@ -9853,7 +9853,7 @@ var _merivale$victor$Theory_Words_Utils$splitAtNot = F2(
 			});
 		return A3(splitAtNot_, 0, pre, rest);
 	});
-var _merivale$victor$Theory_Words_Utils$maybeCons = F2(
+var _merivale$victor$Theory_Utils$maybeCons = F2(
 	function (toAdd, list) {
 		var _p1 = toAdd;
 		if (_p1.ctor === 'Nothing') {
@@ -9862,7 +9862,7 @@ var _merivale$victor$Theory_Words_Utils$maybeCons = F2(
 			return {ctor: '::', _0: _p1._0, _1: list};
 		}
 	});
-var _merivale$victor$Theory_Words_Utils$consontanty = function (base) {
+var _merivale$victor$Theory_Utils$consontanty = function (base) {
 	var penultimate = A3(_elm_lang$core$String$slice, -2, -1, base);
 	var ultimate = A2(_elm_lang$core$String$right, 1, base);
 	return _elm_lang$core$Native_Utils.eq(ultimate, 'y') && (!A2(
@@ -9938,7 +9938,7 @@ var _merivale$victor$Theory_Messages$past = F2(
 				vars,
 				{
 					past: true,
-					post: A2(_merivale$victor$Theory_Words_Utils$maybeCons, time, vars.post)
+					post: A2(_merivale$victor$Theory_Utils$maybeCons, time, vars.post)
 				}))));
 	});
 var _merivale$victor$Theory_Messages$Vars = function (a) {
@@ -10080,7 +10080,7 @@ var _merivale$victor$Theory_Messages$preordained = F3(
 			var varsWithPost = _elm_lang$core$Native_Utils.update(
 				vars,
 				{
-					post: A2(_merivale$victor$Theory_Words_Utils$maybeCons, time, vars.post)
+					post: A2(_merivale$victor$Theory_Utils$maybeCons, time, vars.post)
 				});
 			var _p1 = displacer;
 			if (_p1.ctor === 'Nothing') {
@@ -10108,7 +10108,7 @@ var _merivale$victor$Theory_Messages$regular = F3(
 			var varsWithPre = _elm_lang$core$Native_Utils.update(
 				vars,
 				{
-					pre: A2(_merivale$victor$Theory_Words_Utils$maybeCons, frequency, vars.pre)
+					pre: A2(_merivale$victor$Theory_Utils$maybeCons, frequency, vars.pre)
 				});
 			var _p2 = displacer;
 			if (_p2.ctor === 'Nothing') {
@@ -16761,13 +16761,13 @@ var _merivale$victor$Theory_Words_Verbs$guessParticiple1 = function (base) {
 var _merivale$victor$Theory_Words_Verbs$guessFinite2 = function (base) {
 	return _elm_lang$core$Native_Utils.eq(
 		A2(_elm_lang$core$String$right, 1, base),
-		'e') ? A2(_elm_lang$core$Basics_ops['++'], base, 'd') : (_merivale$victor$Theory_Words_Utils$consontanty(base) ? A2(
+		'e') ? A2(_elm_lang$core$Basics_ops['++'], base, 'd') : (_merivale$victor$Theory_Utils$consontanty(base) ? A2(
 		_elm_lang$core$Basics_ops['++'],
 		A2(_elm_lang$core$String$dropRight, 1, base),
 		'ied') : A2(_elm_lang$core$Basics_ops['++'], base, 'ed'));
 };
 var _merivale$victor$Theory_Words_Verbs$guessFinite1 = function (base) {
-	return _merivale$victor$Theory_Words_Utils$consontanty(base) ? A2(
+	return _merivale$victor$Theory_Utils$consontanty(base) ? A2(
 		_elm_lang$core$Basics_ops['++'],
 		A2(_elm_lang$core$String$dropRight, 1, base),
 		'ies') : (A2(
@@ -17172,7 +17172,7 @@ var _merivale$victor$Theory_Words_Nouns$nouns = _elm_lang$core$Dict$fromList(
 		}
 	});
 var _merivale$victor$Theory_Words_Nouns$guessPlural = function (singular) {
-	return _merivale$victor$Theory_Words_Utils$consontanty(singular) ? A2(
+	return _merivale$victor$Theory_Utils$consontanty(singular) ? A2(
 		_elm_lang$core$Basics_ops['++'],
 		A2(_elm_lang$core$String$dropRight, 1, singular),
 		'ies') : (A2(
@@ -17276,10 +17276,10 @@ var _merivale$victor$Theory_Sentences$haystackToString = F3(
 		var _p3 = _p2._0;
 		return canAbbreviate ? A2(
 			_elm_lang$core$Basics_ops['++'],
-			_merivale$victor$Theory_Words_Utils$splitMaybeString(_p4),
-			_merivale$victor$Theory_Words_Utils$splitMaybeString(_p5)) : (plural ? A2(
+			_merivale$victor$Theory_Utils$splitMaybeString(_p4),
+			_merivale$victor$Theory_Utils$splitMaybeString(_p5)) : (plural ? A2(
 			_elm_lang$core$Basics_ops['++'],
-			_merivale$victor$Theory_Words_Utils$splitMaybeString(_p4),
+			_merivale$victor$Theory_Utils$splitMaybeString(_p4),
 			A2(
 				_elm_lang$core$Basics_ops['++'],
 				{
@@ -17287,9 +17287,9 @@ var _merivale$victor$Theory_Sentences$haystackToString = F3(
 					_0: _merivale$victor$Theory_Words_Nouns$plural(_p3),
 					_1: {ctor: '[]'}
 				},
-				_merivale$victor$Theory_Words_Utils$splitMaybeString(_p5))) : A2(
+				_merivale$victor$Theory_Utils$splitMaybeString(_p5))) : A2(
 			_elm_lang$core$Basics_ops['++'],
-			_merivale$victor$Theory_Words_Utils$splitMaybeString(_p4),
+			_merivale$victor$Theory_Utils$splitMaybeString(_p4),
 			A2(
 				_elm_lang$core$Basics_ops['++'],
 				{
@@ -17297,7 +17297,7 @@ var _merivale$victor$Theory_Sentences$haystackToString = F3(
 					_0: _p3,
 					_1: {ctor: '[]'}
 				},
-				_merivale$victor$Theory_Words_Utils$splitMaybeString(_p5))));
+				_merivale$victor$Theory_Utils$splitMaybeString(_p5))));
 	});
 var _merivale$victor$Theory_Sentences$determiner = F4(
 	function (canAbbreviate, quantifier, other, category) {
@@ -17548,7 +17548,7 @@ var _merivale$victor$Theory_Sentences$verbPhrase = function (vars) {
 	} else {
 		if (A2(_elm_lang$core$List$member, 'not', vars.pre)) {
 			var _p22 = A2(
-				_merivale$victor$Theory_Words_Utils$splitAtNot,
+				_merivale$victor$Theory_Utils$splitAtNot,
 				vars.pre,
 				{ctor: '::', _0: base, _1: rest});
 			var newPre = _p22._0;

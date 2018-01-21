@@ -1,10 +1,14 @@
-module Theory.Words.Utils exposing (..)
+module Theory.Utils exposing (..)
+
+{-| Assorted utility functions.
+-}
+
+-- no imports
+
 
 {-| Check if a word ends in a consonant followed by a "y". Used by the Nouns
 and Verbs modules to guess the different forms of words.
 -}
-
-
 consontanty : String -> Bool
 consontanty base =
     let

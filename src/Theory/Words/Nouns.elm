@@ -1,7 +1,7 @@
 module Theory.Words.Nouns exposing (plural)
 
 import Dict
-import Theory.Words.Utils as Utils
+import Theory.Utils as Utils
 
 
 plural : String -> String

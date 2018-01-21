@@ -8,7 +8,7 @@ module Theory.Words.Verbs
 import Dict
 import Maybe
 import Theory.Ideas.Nucleus as Nucleus
-import Theory.Words.Utils as Utils
+import Theory.Utils as Utils
 
 
 conjugate : Nucleus.Object -> Bool -> String -> String

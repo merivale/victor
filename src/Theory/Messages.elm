@@ -5,7 +5,7 @@ import Result
 import Theory.Ideas.Displacers as Displacers
 import Theory.Ideas.Pseudo as Pseudo
 import Theory.Ideas.Nucleus as Nucleus
-import Theory.Words.Utils as Utils
+import Theory.Utils as Utils
 
 
 type Message
