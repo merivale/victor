@@ -2,7 +2,7 @@
 id: background
 class: docs
 ---
-# Victor: A Model of the English Code
+# 1. Background
 
 Victor is a computational model of the English language, thought of as a code for processing *messages* (structured arrangements of informational choices) into *sentences* (strings of words). It was inspired by the work of the philosopher and grammarian Victor Howard Dudman.
 

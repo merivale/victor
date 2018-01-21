@@ -2,7 +2,7 @@
 id: quantifiers
 class: docs
 ---
-# Determiners and Quantifiers
+# 7. Determiners and Quantifiers
 
 ## 1. Introduction
 

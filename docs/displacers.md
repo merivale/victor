@@ -2,7 +2,7 @@
 id: displacers
 class: docs
 ---
-# Displacers
+# 6. Displacers
 
 ## 1. Introduction
 

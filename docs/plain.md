@@ -2,7 +2,7 @@
 id: plain
 class: docs
 ---
-# Plain Messages
+# 4. Plain Messages
 
 ## 1. Introduction
 

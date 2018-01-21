@@ -2,7 +2,7 @@
 id: elaborations
 class: docs
 ---
-# Elaborations
+# 5. Elaborations
 
 ## 1. Introduction
 
