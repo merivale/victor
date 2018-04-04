@@ -6,7 +6,7 @@ class: docs
 
 Most of my semantic terminology will be introduced as needed, in the context of explaining my theory. Syntactic terms, however, together with some fine-grained semantic terms, are more easily introduced up front. An understanding of these terms may be solidified by inspecting the modules in [the `Words` subdirectory of the source code](https://github.com/merivale/victor/tree/master/src/Theory/Words).
 
-Notably absent from the list below are *adjectives*, which encode what I call *properties*. Properties are currently unearthed variables in my model (in the sense explained in the page on [plain messages, section 4]({{ site.baseurl }}{% link plain.md %}}}#4-limitations)). This means that users must encode properties for themselves, inputting the resulting adjectives directly into the system. Consequently I have no use at present for an `Adjectives` module.
+Notably absent from the list below are *adjectives*, which encode what I call *properties*. Properties are currently unearthed variables in my model (in the sense explained in the page on [plain messages, section 4]({{ site.baseurl }}{% link plain.md %}#4-limitations)). This means that users must encode properties for themselves, inputting the resulting adjectives directly into the system. Consequently I have no use at present for an `Adjectives` module.
 
 ## 1. Nouns and Pronouns
 

@@ -6,7 +6,7 @@ class: docs
 
 ## 1. Introduction
 
-As explained in the [theoretical overview](/overview), the nucleus of every English message is an ordered pair, containing an *object* and a *condition*:
+As explained in the [overview, section 2]({{ site.baseurl }}{% link overview.md %}#2-plain-messages-and-elaborate-messages), the nucleus of every English message is an ordered pair, containing an *object* and a *condition*:
 
 ```haskell
 type alias Nucleus =
@@ -155,7 +155,7 @@ When referring to objects in what follows, I will adopt the following abbreviati
 
 I hope these conventions are all intuitive and easy to understand. The point of adopting them is to make the examples that follow easier on all of us.
 
-Objects occur in two places in the nucleus: as the *main* object which satisfies the condition, or as a *balancing* object inside the condition itself. The main object is encoded in the first direct form of the pronoun (`"I"`, `"you"`, `"they"`, etc.). Balancing objects are normally encoded in the second direct form (`"me"`, `"you"`, `"them"`, etc.).
+Objects can occur in two places in the nucleus: as the *main* object which satisfies the condition, or as a *balancing* object inside the condition itself. The main object is encoded in the first direct form of the pronoun (`"I"`, `"you"`, `"they"`, etc.). Balancing objects are normally encoded in the second direct form (`"me"`, `"you"`, `"them"`, etc.).
 
 A balance consists of a *weight*, optionally preceded by a *relator*:
 
@@ -171,7 +171,7 @@ type Relator
   | At
   | Before
   | Behind
-...
+  | ...
 
 type Weight
   = SameAsMain
@@ -191,7 +191,7 @@ Some more abbreviating conventions relating to balances: Whenever a relator is a
 
 If it wasn't clear before, I trust this table illustrates the benefits of conventions like these. I adopt them not just to save space, but to make my examples easier to read and understand. Brackets and `Just`s and `False`s all over the place are necessary for compilers, but for human readers they very often serve to obscure more than to illuminate.
 
-Objects are always encoded in either pronouns or proper names. Nouns and noun phrases---`"water"`, `"some water"`, `"a glass of water"`, `"that glass of water"`, `"her glass of water"`, etc.---are accounted for by my theory of elaborations. See the section on [Quantifiers](/quantifiers) for details.
+Objects are always encoded in either pronouns or proper names. Nouns and noun phrases---`"water"`, `"some water"`, `"a glass of water"`, `"that glass of water"`, `"her glass of water"`, etc.---are accounted for by my theory of elaborations. See the section on [pointers and quantifiers](/quantifiers) for details.
 
 ## 3. Pivots
 
@@ -296,7 +296,7 @@ Rather more `Do` verbalities can pair up with relators; for example:
 
 Many `Do` verbalities, as we will see in a moment, support balances as well. In general, there is little to say about the semantics of `Do` verbalities. They are considerably varied. There are tens of thousands of them, and the study of them is an enormous subject in its own right (not attempted here).
 
-One thing to say in general is that the satisfaction of some conditions with `Do` verbalities necessarily *takes time*, and that for this reason the `Ongoing` flag is typically called for when these verbalities occur in unelaborated messages: `"They are eating out"` rather than `"They eat out"`. The latter sentence has a perfectly sound interpretation (concerning their general eating habits), but it is an elaborated message; see the section on [Elaborations](/elaborations).
+One thing to say in general is that the satisfaction of some conditions with `Do` verbalities necessarily *takes time*, and that for this reason the `Ongoing` flag is typically called for when these verbalities occur in unelaborated messages: `"They are eating out"` rather than `"They eat out"`. The latter sentence has a perfectly sound interpretation (concerning their general eating habits), but it is an elaborated message; see the page on [elaborations, section 4]({{ site.baseurl }}{% link elaborations.md %}#4-regular-extended-and-scattered-messages).
 
 There is a degree of fluidity between `Be` verbalities and `Do` verbalities when the latter are either ongoing or passive. For example, the message encoded as `"It is interesting"` could be the result either of the `Be` verbality followed by a property encoded as `"interesting"`, or of the `Do "interest" Ongoing` verbality. Similarly, `"It is allowed"` could be the result either of the `Be` verbality followed by a property encoded as `"allowed"`, or of the `Do "allow" Passive` verbality. I suggest it doesn't much matter which analysis we opt for. Since my model only allows for one status following the verbality, however, a sentence like `"They are allowed in"` can only be the result of a passive `Do` verbality; the status generates the preposition `"in"`, and so `"allowed"` must be coming directly from the verbality in this case.
 
@@ -347,7 +347,7 @@ Balances of all kinds are common with other `Do` verbalities:
 
 It should go without saying that my theory is incomplete, a work in progress that stands in need of significant expansion and refinement. My theory of plain messages in particular---more specifically my theory of English *conditions*---is perhaps the most strikingly incomplete aspect of the whole. My aim in this section is to get out in front of any criticisms on this score, by acknowledging the most egregious of these inadequacies, and explaining why I am in no great hurry to address them. The main point, by way of headline, is that I am more interested in the theory of elaborations, and I expect that any philosophers who are likely to take an interest in my work will share this bias. My theory of plain messages is not intended to make any very great headway into that field, then, but rather to provide just enough to serve as the basis for my main project, the theory of elaborations.
 
-There are two immediately obvious inadequacies, namely that my theory does not cover all of the ground (there are sentences that it cannot account for), and that, even in the ground that it does cover, it leaves some things unearthed (the properties and verbalities that users are currently obliged to encode for themselves). Both of these inadequacies are relatively untroubling. If you-ll excuse the change of metaphor, neither of them indicates that I am on the wrong track; they merely remined us that---of course---I have yet to reach the end of that track. While I am here, I may add that precisely the same limitations apply to my theory of elaborations too: there are many elaborate messages that my system cannot encode, and with the ones that it does encode, it still relies on users encoding certain unearthed variables for themselves.
+There are two immediately obvious inadequacies, namely that my theory does not cover all of the ground (there are sentences that it cannot account for), and that, even in the ground that it does cover, it leaves some things unearthed (the properties and verbalities that users are currently obliged to encode for themselves). Both of these inadequacies are relatively untroubling. If you'll excuse the change of metaphor, neither of them indicates that I am on the wrong track; they merely remind us that---of course---I have yet to reach the end of that track. While I am here, I may add that precisely the same limitations apply to my theory of elaborations too: there are many elaborate messages that my system cannot encode, and with the ones that it does encode, it still relies on users encoding certain unearthed variables for themselves.
 
 In developing my theory in the future, I will naturally want to dig up some of the presently unearthed variables. In some cases, however, I will be in no great hurry to do so. It seems to me that there is nothing particularly puzzling or intriguing, from a theoretical point of view, about properties and the way in which they are encoded into adjectives, and uncovering this variable would simply be a matter of giving my system an enormous dictionary. The same is true of what I call *categories* (which are encoded into nouns), another unearthed variable that we will meet in my theory of elaborations. And the same is mostly true of verbalities, except that in their case at least a degree of excavation would be necessary for the implementation of any validation checks on conditions (see the end of this section).
 

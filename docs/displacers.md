@@ -6,7 +6,7 @@ class: docs
 
 ## 1. Introduction
 
-By now, readers should be familiar with my [theory of plain messages]({{ site.baseurl }}{% link plain.md %}), and the basics of my [theory of elaborations]({{ site.baseurl }}{% link elaborations.md %}). On this page I will introduced *displacers*, which are informational ingredients responsible for the introduction of auxiliary verb phrases or modals at the start of the predicate. The point of the label, to be clear, is that this variable *displaces* the pivot in the nucleus of the message.
+By now, readers should be familiar with my theory of [plain messages]({{ site.baseurl }}{% link plain.md %}), and the basics of my theory of [elaborations]({{ site.baseurl }}{% link elaborations.md %}). On this page I will introduce *displacers*, which are informational ingredients responsible for the introduction of auxiliary verb phrases or modals at the start of the predicate. The point of the label, to be clear, is that this variable *displaces* the pivot in the nucleus of the message.
 
 The introduction of displacers entails an expansion of the definitions of the `PREORDAINED` and `REGULAR` elaborations, and the introduction of a new `DISPLACED` elaboration, as follows:
 
@@ -31,9 +31,9 @@ type Modality
   | Maybe4 -- "dare"
 ```
 
-When the `PREORDAINED` or `REGULAR` elaborations have no displacer variable, I will refer to them as *conservative*. Conservative `PREORDAINED` and `REGULAR` messages are examined in the page on my [theory of elaborations]({{ site.baseurl }}{% link elaborations.md %}). When either of these elaborations has a primary or a secondary displacer, I will refer to them instead as *primary* or *secondary* respectively; and likewise with the `DISPLACED` elaboration, which is never conservative.
+When the `PREORDAINED` or `REGULAR` elaborations have no displacer variable, I will refer to them as *conservative*. Conservative `PREORDAINED` and `REGULAR` messages were examined in the page on [elaborations, sections 3 and 4]({{ site.baseurl }}{% link elaborations.md %}#3-preordained-messages). When either of these elaborations has a primary or a secondary displacer, I will refer to them instead as *primary* or *secondary* respectively; and likewise with the `DISPLACED` elaboration, which is never conservative.
 
-(The reason the `DISPLACED` elaboration is never conservative is because a conservative `DISPLACED` message is essentially just a plain message. Unlike the `PREORDAINED` and `REGULAR` elaborations, which have semantic significance over and above any displacer that they might introduce, the `DISPLACED` elaboration has no informational value in its own right, and serves merely to introduce a displacer. All of this will become clearer when we have seen and compared these elaborations in action.)
+(The reason the `DISPLACED` elaboration is never conservative is because a conservative `DISPLACED` message would in effect just be a plain message. Unlike the `PREORDAINED` and `REGULAR` elaborations, which have semantic significance over and above any displacer that they might introduce, the `DISPLACED` elaboration has no informational value in its own right, and serves merely to introduce a displacer. All of this will become clearer when we have seen and compared these elaborations in action.)
 
 Here is a quick taste of the sorts of things we'll be dealing with:
 
@@ -57,7 +57,7 @@ Here is a quick taste of the sorts of things we'll be dealing with:
 
 I will tackle the data here in two stages, starting with primary displacers (i.e. pivots, which are responsible for additional verb phrases) in [section 2](#2-primary-displaced-preordained-and-regular-messages), and moving on to secondary displacers (i.e. modalities, which are encoded in the English modals) in [section 3](#3-secondary-displaced-messages) and [section 4](#4-secondary-preordained-and-regular-messages).
 
-First, however, some more general remarks are called for. I have already advertised, in the [theoretical overview]({{ site.baseurl }}{% link overview.md %}), that there is no future tense in my model of English, and that sentences like `"He will see her next week"` encode present messages, messages affirming the present satisfaction of an elaborate condition. This elaborate condition, in turn, concerns the later satisfaction of the underlying condition. This, indeed, is the way of the `PREORDAINED` elaboration quite generally. We have seen as much in the case of conservative `PREORDAINED` messages; the following sections will argue the same in the case of primary and secondary `PREORDAINED` messages. To make way for this account, I will start by (very briefly) calling into question the popular alternative view: that `"will"` is a marker of the future tense.
+First, however, some more general remarks are called for. I have already advertised, in the [overview, section 3]({{ site.baseurl }}{% link overview.md %}#3-tense-and-time), that there is no future tense in my model of English, and that sentences like `"He will see her next week"` encode present messages, messages affirming the present satisfaction of an elaborate condition. This elaborate condition, in turn, concerns the later satisfaction of the underlying condition. This, indeed, is the way of the `PREORDAINED` elaboration quite generally. We have seen as much in the case of conservative `PREORDAINED` messages; the following sections will argue the same in the case of primary and secondary `PREORDAINED` messages. To make way for this account, I will start by (very briefly) calling into question the popular alternative view: that `"will"` is a marker of the future tense.
 
 On this future tense hypothesis, the natural interpretations of the following three sentences differ only in the time of the condition's satisfaction by the object:
 
@@ -244,7 +244,7 @@ DISPLACED ( Do "seem" ) (PRIOR ( Male, Do "leave" ))
   -> "He seems to have left."
 ```
 
-Less obviously, I suggest that the `DISPLACED` elaboration can also be applied on top of the `PAST` elaboration, with similar syntactic results. That is to say, I suggest that sentences like, `"He seems to have left"` are ambiguous between `DISPLACED PRIOR` interpretations (it seems that he *has* left) and `DISPLACED PAST` interpretations (it seems that he *left*). The distinction here reveals itself when we include the optional time argument to the `PAST` elaboration:
+Less obviously, I suggest that the `DISPLACED` elaboration can also be applied on top of the `PAST` elaboration, with the same syntactic result. That is to say, I suggest that sentences like, `"He seems to have left"` are ambiguous between `DISPLACED PRIOR` interpretations (it seems that he *has* left) and `DISPLACED PAST` interpretations (it seems that he *left*). The distinction here reveals itself when we include the optional time argument to the `PAST` elaboration:
 
 ```haskell
 DISPLACED ( Do "seem" ) (PRIOR ( Male, Do "leave" ))
@@ -270,7 +270,7 @@ type Modality
   | Maybe4 -- "dare"
 ```
 
-As this type definition indicates, I divide the English modalities into two logical categories, *yes* and *maybe*. This logical distinction will be made clearer as we proceed. Each of these two fundamental types then comes in four different *flavours* (though flavours 2 and 4 each exist in only one of the logical categories). I begin with the examination of modalities in `DISPLACED` messages, turning to their contribution to `PREORDAINED` and `REGULAR` messages in [section 4](#4-secondary-preordained-and-regular-messages) below.
+As this type definition indicates, I divide the English modalities into two logical categories, *yes* and *maybe*. This distinction will be made clearer as we proceed. Each of these two fundamental types then comes in four different *flavours* (though flavours 2 and 4 each exist in only one of the logical categories). I begin with the examination of modalities in `DISPLACED` messages, turning to their contribution to `PREORDAINED` and `REGULAR` messages in [section 4](#4-secondary-preordained-and-regular-messages) below.
 
 In the first instance, secondary `DISPLACED` messages are speculations about matters of present fact. Thus suppose, for example, that we are considering whether or not James knows Claire. There are two possible factual claims here, a plain one and a `NEGATIVE` one, encoded respectively in the following two sentences:
 
@@ -340,21 +340,16 @@ PAST (DISPLACED Yes1 ( Male "James", Do "know", [ Other "the result of the footb
 -> "James would know the result of the football."
 ```
 
-The first sentence here encodes a speculation based on *up to the minute* information. It is likely on the lips of someone who may or may not know James very well, but has seen that he has been watching the television in the pub all afternoon. The second sentence, in contrast, encodes a speculation which *waives* such recent information, drawing on more well established evidence. It is likely on the lips of someone who has no idea what James has been up to today, but knows he is an avid fan who rarely misses a game. To make this more precise, let us say that the satisfaction of a secondary `DISPLACED` condition at a given point in time concerns the satisfaction of its underlying condition *based on evidence up to and including that point*.
+The first sentence here encodes a speculation based on *up to the minute* information. It is likely on the lips of someone who may or may not know James very well, but has seen that he has been watching the television in the pub all afternoon. The second sentence, in contrast, encodes a speculation which *waives* such recent information, drawing on more well-established evidence. It is likely on the lips of someone who has no idea what James has been up to today, but knows he is an avid fan who rarely misses a game. To make this more precise, let us say that the satisfaction of a secondary `DISPLACED` condition at a given point in time concerns the satisfaction of its underlying condition *based on evidence up to and including that point*.
 
 Let us now broaden our investigation to include the other flavours of English modalities. Consider:
 
 ```haskell
 "James must know the result of the football."
-
 "James ought to know the result of the football."
-
 "James needn’t know the result of the football."
-
 "James should know the result of the football."
-
 "James can’t know the result of the football."
-
 "James daren’t know the result of the football."
 ```
 
@@ -376,7 +371,7 @@ While `"James can’t know"` encodes a `NEGATIVE DISPLACED` claim, `"James must 
 
 ```haskell
 NEGATIVE (DISPLACED Yes3 ( Male "James", Do "know", [ Other "the result of the football" ] ))
--> James needn’t know the result of the football."
+-> "James needn’t know the result of the football."
 ```
 
 This hypothesis has several things to recommend it. First, it is gratifyingly simple, since it does not require us to posit any additional modality responsible exclusively for the modal `"need"`; the one responsible for `"must"` already suffices. Secondly, it explains why the modal `"need"` only ever occurs in `NEGATIVE` messages (`"James need know the result of the football"` is not a sentence of English). Thirdly, and related to these first two points, on this hypothesis we do not need to build any extra constraints into the code. If there was an additional modality responsible for `"need"` but not responsible for `"must"`, then we would have to add in that the latter can never be negated, while the former must always be.
@@ -416,7 +411,7 @@ In other words, the string `"James needn’t know"` encodes both a denial of the
 
 The first and third flavours of English modalities—at least if I am right about the relationship between `"must"`, `"need"`, and `"ought"`—exhibit a fairly tidy pattern. There are two more flavours, however, that make things a little messier. The first is responsible for the modal **`"shall"`**, and it is logically a *yes* modality. The second is responsible for the modal `"dare"`, and it is logically a *maybe* modality. These are clearly different flavours, however, and do not relate to each other in the same way that the other two flavours do: where **`"will"`** has **`"may"`**, **`"shall"`** has nothing; and where **`"can"`** has `"must"`/`"need"`/`"ought"`, `"dare"` has nothing. Thus I use different number suffixes for the underlying modalities here, writing them as `Yes2` and `Maybe4` respectively.
 
-Like `"need"`, `"dare"` seems—with one possible exception—only ever to occur in negated contexts: `"James dare know the result of the football"` is not English. Why this might be, however, I cannot say. All I can think is that it has something to do with the nature of `Maybe4` itself, that something in this informational choice precludes its occurence in positive form. But perhaps even this vague assertion is wrong, because there is arguably one exception to the general rule: `"I dare say"`. If this sentence is not *sui generis*, if it is not merely a fixed, hard-coded expression, then it must be the result of a non-negative `DISPLACED` message with the `Maybe4` modality for a displacer. For this reason, I have not (yet) ruled out the possibility of non-negative `Maybe4` messages in my model, though perhaps I should. Not only does `Maybe4` have no logical *yes* counterpart, it also refuses to succumb to the `PAST` elaboration; the closest English allows here is to switch to the verb **`"dare"`**, and venture a past judgement with the `Yes1` modality: `"He wouldn’t dare"`. There is no getting away from it: the `Maybe4` modality is peculiar.
+Like `"need"`, `"dare"` seems—with one possible exception—only ever to occur in negated contexts: `"James dare know the result of the football"` is not English. Why this might be, however, I cannot say. All I can think is that it has something to do with the nature of `Maybe4` itself, that something in this informational choice precludes its occurence in positive form. But perhaps even this vague assertion is wrong, because there is arguably one exception to the general rule: `"I dare say"`. If this sentence is not *sui generis*, if it is not merely a fixed, hard-coded expression, then it must be the result of a non-negative `DISPLACED` message with the `Maybe4` modality for a displacer. For this reason, I have not (yet) ruled out the possibility of non-negative `Maybe4` messages in my model, though perhaps I should. In addition to its lack of a logical *yes* counterpart, the `Maybe4` modality also refuses to succumb to the `PAST` elaboration; the closest English allows here is to switch to the verb **`"dare"`**, and venture a past judgement with the `Yes1` modality: `"He wouldn’t dare"`. There is no getting away from it: the `Maybe4` modality is peculiar.
 
 The modal **`"shall"`**, together with its underlying modality `Yes2`, is also somewhat atypical. The first thing to note is that this modality is not available in `DISPLACED` messages unless that message is elaborated further. `"James shall know the result of the football"` has an interpretation, but it is a message insisting that James be told at some point in the future, not a speculation concerning whether or not he knows at present. We will examine its ilk in the next section. For now, we may note that the `PAST` elaboration makes this modality possible in `DISPLACED` messages:
 
@@ -427,7 +422,7 @@ PAST (DISPLACED Yes3 ( Male "James", Do "know", [ Other "the result of the footb
 
 Intuitively, this message is almost identical to the corresponding message involving the `Yes3` modality: `"James should know"` and `"James ought to know"` are virtually synonymous. (On the assumption that `"should"` is indeed the result of the `PAST` elaboration—which it certainly *appears* to be—this fact is some more small support for my claim that `"ought"` is likewise the result of this elaboration.) The claim as a whole evokes a more distant kind of necessity than the claim that he *must* know. It must be, then, that `Yes2` and `Yes3` are informationally very close, such that in the present context their difference becomes vanishingly small. In other contexts, however, `Yes2` appears to have a closer affinity with `Yes1` (as we will see in the next section). And in general, if I want to deny that he *should* know, should I say that he *needn’t* know or that he *might not* know? It is hard to choose. Overall, I suggest that `Yes2` lies informationally *between* `Yes1` and `Yes3`. And that, belatedly, is the reason for the numbering, which might at first have looked a little odd.
 
-## 4. Secondary PREORDAINED and REGULAR Messages
+## 4. Secondary PREORDAINED Messages
 
 The secondary `DISPLACED` elaboration can be applied on top of the conservative `PREORDAINED` and conservative `REGULAR` elaborations. The result, in either case, is nothing particularly remarkable, but needs mentioning in order to clear the way for some more interesting messages that I will examine in this section. In both cases, the result is a judgement just like the ones met in the previous section, concerning the satsifaction of the underlying condition; it is simply that the underlying condition is either a conservative `PREORDAINED` or a conservative `REGULAR` one. For example, `"They will be getting married next month"` can be read as a speculation concerning their present plans; while `"She may take the bus to work"` may encode a speculation concerning her present commuting habits. Matters are considerably more intriguing when the `PREORDAINED` and `REGULAR` *themselves* incorporate a secondary displacer.
 
@@ -437,8 +432,8 @@ Where secondary `DISPLACED` messages (otherwise unelaborated) are judgements con
 PREORDAINED Yes1 "tomorrow" ( Other, Be, "sunny", [ In, Other "Paris" ] )
 -> "It will be sunny in Paris tomorrow."
 
-PREORDAINED Maybe1 "next year" ( Others, Do "get" Ongoing, "married" )
--> "They may get married next year."
+PREORDAINED Maybe1 "later today" ( Other, Do "rain" )
+-> "It may rain later today."
 ```
 
 These examples are naturally taken as uncoloured messages, the speaker’s distinterested predictions for the future. As with `PREORDAINED` messages in general however, there is also the possibility of colour. But where conservative and primary `PREORDAINED` messages have only one colour (that of a prearrangement), secondary `PREORDAINED` messages come with a positive explosion of colour possibilities. The most common colourings for the `Yes1` and `Maybe1` modalities are *intentionality* and *permission* respectively. Thus the first message below is naturally taken as a statement of intent, if not a promise, while the second is most plausibly understood as allowing something rather than merely stating a possibility:
@@ -473,7 +468,7 @@ The first has (or can have) the colour of personal resolve, while the second has
 
 The first has a range of colours of broadly the same hue: it would be a bad idea to tell you, a breach of trust, I am legally or morally bound to remain silent, and so on. The second might be taken in either a moral or a pragmatic shade. The third has a clear colour of command.
 
-The `Yes1` and `Yes2` modalities (encoded in **`"will"`** and **`"shall"`** respectively) can both take on the colour of intent, and both the colour of command. There is however a tendency for `Yes1` to attract the former, and for `Yes2` to attract the latter. In the first finite form, indeed, `"shall"` is almost always taken in a commanding colour, unless the main object is in the first person. (For reasons I cannot fathom, there used to be a prescriptive rule in certain circles insisting on `"shall"` in the first person, and `"will"` in the second and third. But there is no discernible basis for this rule in actual usage.) Somewhat similarly, the `Maybe1` and `Maybe3` modalities (encoded in **`"may"`** and **`"can"`** respectively) can both take on the colour of permission, and both the colour of possibility; though there is a tendency for `Maybe1` to attract the former, and `Maybe3` to attract the latter. Thus the familiar and irritating joke, `"Can I leave now?"`: `"You can, but you may not"`.
+The `Yes1` and `Yes2` modalities (encoded in **`"will"`** and **`"shall"`** respectively) can both take on the colour of intent, and both the colour of command. There is however a tendency for `Yes1` to attract the former, and for `Yes2` to attract the latter. In the first finite form, indeed, `"shall"` is almost always taken in a commanding colour, unless the main object is in the first person. (For reasons I cannot fathom, there used to be a prescriptive rule in certain circles insisting on `"shall"` in the first person, and `"will"` in the second and third. But there is no discernible basis for this rule in actual usage.) Somewhat similarly, the `Maybe1` and `Maybe3` modalities (encoded in **`"may"`** and **`"can"`** respectively) can both take on the colour of permission, and both the colour of possibility; though there is a tendency for `Maybe1` to attract the former, and `Maybe3` to attract the latter. Thus the familiar and irritating joke, `"Can I leave now?"`---`"You can, but you may not"`.
 
 The satisfaction of a secondary `PREORDAINED` condition at a given point in time, like the satisfaction of a secondary `DISPLACED` condition, concerns the satisfaction of the underlying condition *based on evidence up to and including that point*. Consider the contrast exhibited in the following pair of messages:
 
@@ -517,15 +512,10 @@ The case of secondary `PRIOR PAST PREORDAINED` messages provide the clearest evi
 
 ```haskell
 "I wouldn’t have done that."
-
 "I shouldn’t have done that."
-
 "I couldn’t have done that."
-
 "I might not have done that."
-
 "I needn’t have done that."
-
 "I ought not to have done that."
 ```
 
@@ -551,7 +541,7 @@ REGULAR Maybe3 ( Female "Susan", Do "speak", [ Other "four languages" ] )
 -> "Susan can speak four languages."
 ```
 
-While secondary `DISPLACED` and `PREORDAINED` messages are judgements about the unobserved, secondary `REGULAR` messages are rather more straightforward factual claims (albeit general ones). In particular, they do not exhibit the very striking behaviour of the other two with regard to tense, where the time of the outermost condition’s satisfaction reflects the time of the latest evidence that the speaker takes to be bearing on the question of the underlying condition’s satisfaction. With secondary `REGULAR` messages, consequently, it is considerably more obvious that the second form of the fulcrum simply encodes past time:
+While secondary `DISPLACED` and `PREORDAINED` messages are judgements about the unobserved, secondary `REGULAR` messages are rather more straightforward factual claims (albeit general ones). In particular, they do not exhibit the very striking behaviour of the other two with regard to tense, where the time of the outermost condition’s satisfaction reflects the time of the latest evidence that the speaker takes to be bearing on the question of the underlying condition’s satisfaction. With secondary `REGULAR` messages, consequently, it is considerably more obvious that the past tense encodes past time:
 
 ```haskell
 PAST (REGULAR Yes1 "often" ( Male "Norman", Do "walk", [ To, Other "work" ] ))
